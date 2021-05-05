@@ -1,0 +1,189 @@
+## Cancer Genetics
+
+Read in the data. The load() function reads in a dataset that has 20532 columns and may take some time. You may want to save and clear your environment (or open a new RStudio window) if you have other work open.
+
+```{r}
+load('LAdata/geneCancerUCI.RData')
+table(cancerlabels$Class)
+```
+
+Original Source: _The cancer genome atlas pan-cancer analysis project_
+
+- BRCA = Breast Invasive Carcinoma
+- COAD = Colon Adenocarcinoma
+- KIRC = Kidney Renal clear cell Carcinoma
+- LUAD = Lung Adenocarcinoma
+- PRAD = Prostate Adenocarcinoma
+
+We are going to want to plot the data points according to their different classification labels. We should pick out a nice color palette for categorical attributes. We chose to assign palette ```Dark2``` but feel free to choose any categorical palette that attracts you in the code below!
+
+```{r eval=F}
+library(RColorBrewer)
+display.brewer.all()
+palette(brewer.pal(n = 8, name = "Dark2"))
+```
+
+The first step is typically to explore the data. Obviously we can't look at ALL the scatter plots of input variables. For the fun of it, let's look at a few of these scatter plots which we'll pick at random. First pick two column numbers at random, then draw the plot, coloring by the label. You could repeat this chunk several times to explore different combinations. Can you find one that does a good job of separating any of the types of cancer?
+
+```{r fig=T, fig.cap = 'Random 2-Dimensional Projections of Cancer Data', fig.align='center'}
+par(mfrow=c(2,3))
+for(i in 1:6){
+randomColumns = sample(2:20532,2)
+plot(cancer[,randomColumns],col = cancerlabels$Class)
+}
+```
+To restore our plot window from that 3-by-2 grid, we run ``dev.off()``
+```{r fig=T, fig.cap = 'Random 2-Dimensional Projection of Cancer Data', fig.align='center'}
+dev.off()
+```
+
+### Computing the PCA
+
+ The \blue{prcomp()} function is the one I most often recommend for reasonably sized principal component calculations in R. This function returns a list with class "prcomp" containing the following components (from help prcomp):
+
+
+1. \red{sdev}: the standard deviations of the principal components (i.e., the square roots of the eigenvalues of the covariance/correlation matrix, though the calculation is actually done with the singular values of the data matrix).
+2. \red{rotation}: the matrix of _variable loadings_ (i.e., a matrix whose columns contain the eigenvectors). The function princomp returns this in the element loadings.
+3. \red{x}:  if retx is true _the value of the rotated data (i.e. the scores)_ (the centred (and scaled if requested) data multiplied by the rotation matrix) is returned. Hence, cov(x) is the diagonal matrix $diag(sdev^2)$. For the formula method, napredict() is applied to handle the treatment of values omitted by the na.action.
+4. \red{center, scale}: the centering and scaling used, or FALSE.
+
+
+The option \blue{scale = TRUE} inside the \blue{prcomp()} function instructs the program to use **correlation PCA**. The **default is covariance PCA**. 
+
+Now let's compute the _first three_ principal components and examine the data projected onto the first 2 axes. We can then look in 3 dimensions.
+```{r echo=F}
+load('LAdata/cancerpca.RData')
+```
+
+```{r eval=F}
+pcaOut = prcomp(cancer,rank = 3, scale = F)
+```
+
+```{r fig=T, fig.cap = 'Covariance PCA of genetic data', fig.align='center'}
+
+plot(pcaOut$x[,1], pcaOut$x[,2], 
+     col = cancerlabels$Class, 
+     xlab = "Principal Component 1",
+     ylab = "Principal Component 2", 
+     main = 'Genetic Samples Projected into 2-dimensions \n using COVARIANCE PCA')
+```
+
+### 3D plot with \blue{plotly} package 
+
+Make sure the plotly package is installed for the 3d plot. To get the plot points colored by group, we need to execute the following command that creates a vector of colors (specifying a color for each observation).
+
+```{r}
+colors = factor(palette())
+colors = colors[cancerlabels$Class]
+table(colors, cancerlabels$Class)
+```
+
+```{r eval=F}
+library(plotly)
+graph = plot_ly(x = pcaOut$x[,1], 
+                y = pcaOut$x[,2],
+                z= pcaOut$x[,3],
+                type='scatter3d', 
+                mode="markers",
+                marker = list(color=colors))
+graph
+```
+
+### 3D plot with \blue{rgl} package
+```{r, setup}
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+Make sure the rgl package is installed for the 3d plot.
+
+```{r, webgl=TRUE}
+plot3d(x = pcaOut$x[,1],
+       y = pcaOut$x[,2],
+       z= pcaOut$x[,3],
+       col = colors, 
+       xlab = "Principal Component 1", 
+       ylab = "Principal Component 2", 
+       zlab = "Principal Component 3")
+```
+
+
+### Variance explained
+
+Proportion of Variance explained by 2,3 components:
+```{r}
+summary(pcaOut)
+# Alternatively, if you had computed the ALL the principal components (omitted the rank=3 option) then 
+# you could directly compute the proportions of variance explained using what we know about the 
+# eigenvalues:
+
+# sum(pcaOut$sdev[1:2]^2)/sum(pcaOut$sdev^2)
+# sum(pcaOut$sdev[1:3]^2)/sum(pcaOut$sdev^2)
+```
+
+### Using Correlation PCA
+
+The data involved in this exercise are actually on the same scale, and normalizing them may not be in your best interest because of this. However, it's always a good idea to explore both decompositions if you have time. 
+
+```{r, eval=F}
+pca.cor = prcomp(cancer, rank=3, scale =T)
+```
+
+An error message! Cannot rescale a constant/zero column to unit variance. Solution: check for columns with zero variance and remove them. Then, re-check dimensions of the matrix to see how many columns we lost.
+
+```{r fig=T, fig.cap = 'Correlation PCA of genetic data', fig.align='center'}
+cancer = cancer[,apply(cancer, 2, sd)>0 ]
+dim(cancer)
+```
+```{r, echo=F}
+load('LAdata/cancerpcacor.RData')
+```
+
+Once we've taken care of those zero-variance columns, we can proceed to compute the correlation PCA:
+
+```{r, eval=F}
+pca.cor = prcomp(cancer, rank=3, scale =T)
+```
+
+```{r fig=T, fig.cap = 'Correlation PCA of genetic data', fig.align='center'}
+plot(pca.cor$x[,1], pca.cor$x[,2], 
+     col = cancerlabels$Class, 
+     xlab = "Principal Component 1",
+     ylab = "Principal Component 2", 
+     main = 'Genetic Samples Projected into 2-dimensions \n using CORRELATION PCA')
+```
+
+And it's clear just from the 2-dimensional projection that correlation PCA does not seem to work as well as covariance PCA when it comes to separating the 4 different types of cancer. 
+
+Indeed, we can confirm this from the proportion of variance explained, which is substantially lower than that of covariance PCA:
+```{r}
+summary(pca.cor)
+```
+
+### Range standardization as an alternative to covariance PCA
+
+We can also put all the variables on a scale of 0 to 1 if we're concerned about issues with scale (in this case, scale wasn't an issue - but the following approach still might be provide interesting projections in some datasets). This transformation would be as follows for each variable $\mathbf{x}$:
+$$\frac{\mathbf{x} - \min(\mathbf{x})}{\max(\mathbf{x})-\min(\mathbf{x})}$$
+
+
+```{r}
+cancer = cancer[,apply(cancer,2,sd)>0]
+
+min = apply(cancer,2,min)
+range =   apply(cancer,2, function(x){max(x)-min(x)})
+minmax.cancer=scale(cancer,center=min,scale=range)  
+```
+
+```{r, echo=F}
+load('LAdata/cancerpcaminmax.RData')
+```
+
+Then we can compute the covariance PCA of that range-standardized data without concern:
+
+```{r, eval=F}
+minmax.pca = prcomp(minmax.cancer, rank=3, scale=F )  
+```
+
+```{r fig=T, fig.cap = 'Covariance PCA of range standardized genetic data', fig.align='center'}
+plot(minmax.pca$x[,1],minmax.pca$x[,2],col = cancerlabels$Class, xlab = "Principal Component 1", ylab = "Principal Component 2")
+```

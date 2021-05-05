@@ -1,0 +1,51 @@
+ bike=read.csv("/Users/shaina/Desktop/Data Sets/BikeShare/day.csv")
+ # To run a multiple linear regression predicting casual rentals:
+ # Convert the normalized celsius temperature (which was divided by a max of 41)
+ # to unnormalized degrees F
+ bike$tempF = (bike$temp*41)*(9/5)+32
+
+ # Try a quadratic term on temperature. Center variables first.
+ bike$tempFcentered = bike$tempF - mean(bike$tempF)
+ bike$tempsquared=bike$tempFcentered^2
+
+
+
+ model = lm(casual ~ windspeed+hum+tempFcentered+tempsquared+workingday+mnth+yr,data=bike)
+ summary(model)
+
+
+ # So the quadratic is significant and the vertex of that quadratic graph
+ # (where the effect of temperature flattens and begins to decline)
+ # happens at -b/2a = 16 degrees (of centered data)
+ # Thus, since the mean is almost 69 degrees, the decline in demand happens when
+ # temperatures reach 85 degrees Fahrenheit.
+
+%' # Check some diagnostic plots:
+%'
+%' layout(matrix(c(1,2,3,4),2,2)) # optional 4 graphs/page
+%' plot(model)
+%'
+%' # These plots show issues with heteroskedasticity and bias - a quadratic pattern may be missing?
+%' # Check out the bikeDataModeling.R code for further play with this data set...
+%'
+%' # The R^2 of this model is 0.7115, adjusted to 0.7087
+%' # F-stat: 254.8, p-value < 2.2e-16
+%' # Residual standard error: 370.6
+%'
+%' #Residuals:
+%' #    Min      1Q  Median      3Q     Max
+%' #-969.01 -216.56  -32.29  173.46 1450.44
+%'
+%' # What happens if we instead use principal components in our model? Do the fit of the model change?
+%' attach(bike)
+%' modeldata=data.frame(windspeed,hum, tempFcentered,tempsquared,workingday,mnth,yr)
+%' bikePC = princomp(modeldata)
+%'
+%' model2=lm(bike$casual ~ bikePC$scores)
+%' summary(model2)
+%' # And you'll notice that all the fit statistics are identical to the original model.
+%' # We haven't changed anything, we've just rotated our input variables so that
+%' # they are no longer interpretable along the original axes! Same data, new representation.
+%'
+%'
+%' ```

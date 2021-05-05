@@ -1,0 +1,138 @@
+## Image Compression {#rappasvd}
+
+```{r, echo=F}
+thmcounter=0
+excounter=0
+cid='rappasvd'
+```
+
+### Image data in R
+
+Let's take an image of a leader that we all know and respect:
+
+```{r fig.align='center', fig.cap = 'Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State', echo=F, fig.width=10}
+knitr::include_graphics('LAdata/rappa.jpg')
+```
+This image can be downloaded from the IAA website, after clicking on the link on the left hand side "Michael Rappa / Founding Director."
+
+Let's read this image into R. You'll need to install the pixmap package:
+```{r}
+#install.packages("pixmap")
+library(pixmap)
+```
+Download the image to your computer and then set your working directory in R as the same place you have saved the image:
+```{r eval=F}
+setwd("/Users/shaina/Desktop/lin-alg")
+```
+The first thing we will do is examine the image as an [R,G,B] (extension .ppm) and as a grayscale (extension .pgm). Let's start with the [R,G,B] image and see what the data looks like in R:
+```{r id='rgbrappa'}
+rappa = read.pnm("LAdata/rappa.ppm")
+#Show the type of the information contained in our data:
+str(rappa)
+```
+You can see we have 3 matrices - one for each of the colors: red, green, and blue.
+Rather than a traditional data frame, when working with an image, we have to refer to the elements in this data set with @ rather than with $.
+```{r}
+rappa@size
+```
+We can then display a heat map showing the intensity of each individual color in each pixel:
+```{r, fig.align='center', fig.cap = 'Intensity of green in each pixel of the original image'}
+rappa.red=rappa@red
+rappa.green=rappa@green
+rappa.blue=rappa@blue
+image(rappa.green)
+```
+
+Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that ``` nrow(rappa.green)``` gives the number of columns in the transposed matrix)
+
+```{r fig.align= 'center' }
+rappa.green=t(rappa.green)[,nrow(rappa.green):1]
+image(rappa.green)
+```
+
+Rather than compressing the colors individually, let's work with the grayscale image:
+
+```{r id='greyrappa'}
+greyrappa = read.pnm("LAdata/rappa.pgm")
+str(greyrappa)
+rappa.grey=greyrappa@grey
+#again, rotate 90 degrees
+rappa.grey=t(rappa.grey)[,nrow(rappa.grey):1]
+```
+
+```{r fig.cap = 'Greyscale representation of original image'}
+image(rappa.grey, col=grey((0:1000)/1000))
+```
+
+### Computing the SVD of Dr. Rappa
+
+Now, let's use what we know about the SVD to compress this image. First, let's compute the SVD and save the individual components. Remember that the rows of $\mathbf{v}^T$ are the right singular vectors. R outputs the matrix $\mathbf{v}$ which has the singular vectors in columns.
+
+```{r }
+rappasvd=svd(rappa.grey)
+U=rappasvd$u
+d=rappasvd$d
+Vt=t(rappasvd$v)
+```
+
+Now let's compute some approximations of rank 3, 10 and 50:
+```{r,fig.align='center', fig.cap = 'Rank 3 approximation of the image data'}
+rappaR3=U[ ,1:3]%*%diag(d[1:3])%*%Vt[1:3, ]
+image(rappaR3, col=grey((0:1000)/1000))
+```
+```{r,fig.align='center', fig.cap = 'Rank 10 approximation of the image data'}
+rappaR10=U[ ,1:10]%*%diag(d[1:10])%*%Vt[1:10, ]
+image(rappaR10, col=grey((0:1000)/1000))
+```
+```{r,fig.align='center', fig.cap = 'Rank 50 approximation of the image data'}
+rappaR25=U[ ,1:25]%*%diag(d[1:25])%*%Vt[1:25, ]
+image(rappaR25, col=grey((0:1000)/1000))
+```
+
+How many singular vectors does it take to recognize Dr. Rappa? Certainly 25 is sufficient. Can you recognize him with even fewer? You can play around with this and see how the image changes.
+
+### The Noise
+
+One of the main benefits of the SVD is that the _signal-to-noise_ ratio of each component decreases as we move towards the right end of the SVD sum. If $\mathbf{x}$ is our data matrix (in this example, it is a matrix of pixel data to create an image) then,
+
+\begin{equation}
+\mathbf{X}= \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T + \sigma_3\mathbf{u}_3\mathbf{v}_3^T + \dots + \sigma_r\mathbf{u}_r\mathbf{v}_r^T
+(\#eq:svdsum)
+\end{equation}
+
+where $r$ is the rank of the matrix. Our image matrix is full rank, $r=160$. This is the number of nonzero singular values, $\sigma_i$. But, upon examinination, we see many of the singular values are nearly 0. Let's examine the last 20 singular values:
+
+```{r}
+d[140:160]
+```
+
+We can think of these values as the amount of ``information'' directed along those last 20 singular components. If we assume the noise in the image or data is uniformly distributed along each orthogonal component $\mathbf{u}_i\mathbf{v}_i^T$, then there is just as much noise in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$ as there is in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$. But, as we've just shown, there is far less information in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$ than there is in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$. This means that the later components are primarily noise. Let's see if we can illustrate this using our image. We'll construct the parts of the image that are represented on the last few singular components
+
+(ref:last25) The last 25 components, or the sum of the last 25 terms in equation \@ref(eq:svdsum)
+
+```{r,fig.align='center', fig.cap = '(ref:last25)', fig.align='center' }
+# Using the last 25 components:
+
+rappa_bad25=U[ ,135:160]%*%diag(d[135:160])%*%Vt[135:160, ]
+image(rappa_bad25, col=grey((0:1000)/1000))
+```
+
+(ref:last50) The last 50 components, or the sum of the last 50 terms in equation \@ref(eq:svdsum)
+
+```{r,fig.align='center', fig.cap = '(ref:last50)', fig.align='center' }
+# Using the last 50 components:
+
+rappa_bad50=U[ ,110:160]%*%diag(d[110:160])%*%Vt[110:160, ]
+image(rappa_bad50, col=grey((0:1000)/1000))
+```
+
+(ref:last100) The last 100 components, or the sum of the last 100 terms in equation \@ref(eq:svdsum)
+
+```{r,fig.align='center', fig.cap = '(ref:last100)', fig.align='center' }
+# Using the last 100 components: (4 times as many components as it took us to recognize the face on the front end)
+
+rappa_bad100=U[ ,61:160]%*%diag(d[61:160])%*%Vt[61:160, ]
+image(rappa_bad100, col=grey((0:1000)/1000))
+```
+
+Mostly noise. In the last of these images, we see the outline of Dr. Rappa. One of the first things to go when images are compressed are the crisp outlines of objects. This is something you may have witnessed in your own experience, particularly when changing the format of a picture to one that compresses the size.

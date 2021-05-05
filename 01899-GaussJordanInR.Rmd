@@ -1,0 +1,37 @@
+## Gauss-Jordan Elimination in R
+
+It is important that you understand what is happening in the process of Gauss-Jordan Elimination. Once you have a handle on how the procedure works, it is no longer necessary to do every calculation by hand. We can skip to the reduced row echelon form of a matrix using the ```pracma``` package in R. \\
+
+We'll start by creating our matrix as a variable in R.  Matrices are entered in as one vector, which R then breaks apart into rows and columns in they way that you specify (with nrow/ncol). The default way that R reads a vector into a matrix is down the columns. To read the data in across the rows, use the byrow=TRUE option). Once a matrix is created, it is stored under the variable name you give it (below, we call our matrices $\Y$ and $\X$). We can then print out the stored matrix by simply typing $\Y$ or $\X$ at the prompt:
+
+```{r}
+(Y=matrix(c(1,2,3,4),nrow=2,ncol=2))
+(X=matrix(c(1,2,3,4),nrow=2,ncol=2,byrow=TRUE))
+```
+
+To perform Gauss-Jordan elimination, we need to install the ```pracma``` package which contains the code for this procedure. 
+
+```{r eval=F}
+install.packages("pracma")
+```
+
+After installing a package in R, you must always add it to your library (so that you can actually use it in the current session). This is done with the library command:
+
+```{r}
+library("pracma")
+```
+
+Now that the library is accessible, we can use the \textbf{rref} command to get the reduced row echelon form of an augmented matrix, $\A$:
+```{r}
+A= matrix(c(1,1,1,1,-1,-1,1,1,1,-1,-1,1,1,2,3,4), nrow=4, ncol=4)
+A
+rref(A)
+```
+And we have the reduced row echelon form for one of the problems from the worksheets! You can see this system of equations is inconsistent because the bottom row amounts to the equation
+$$0\x_1+0\x_2+0\x_3 = 1.$$
+This should save you some time and energy by skipping the arithmetic steps in Gauss-Jordan Elimination.
+  
+  
+  
+  
+

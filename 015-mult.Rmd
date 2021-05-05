@@ -1,0 +1,488 @@
+# Matrix Arithmetic {#mult}
+
+```{r, echo=F} 
+thmcounter=0
+excounter=0
+cid='mult'
+```
+
+## Matrix Addition, Subtraction, and Scalar Multiplication
+
+
+Addition, subtraction, and scalar multiplication are the only operations which act *element-wise* on matrices - they are performed in a way you might expect given your previous studies. 
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+
+```{def title='Addition, Subtraction, and Scalar Multiplication', id='addsub', num=thmcounter,cid=cid}
+Two matrices can be added or subtracted only when they have the same dimensions. If $\A$ and $\B$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $\A _-^+ \B)_{ij}$ is:
+
+$$(\A+\B)_{ij}=A_{ij}+B_{ij}$$
+similarly,
+$$(\A-\B)_{ij}=A_{ij}-B_{ij}$$
+Multiplying a scalar by a matrix or vector also works element-wise:
+$$(\alpha\A)_{ij}=\alpha A_{ij}$$
+```
+
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+
+```{ex title='Addition, Subtraction, and Scalar Multiplication', id='addsub', num=excounter,cid=cid}
+
+
+a. Compute $\A+\B$, if possible: $$\A=\pm 2 & 3 & -1\\1&-1&1\\2&2&1 \mp \quad \B=\pm 4 & 5 & 6\\-1&0&4\\3&4&3 \mp$$
+*We can add the matrices because they have the same size.*
+$$\A+\B = \pm 6 & 8 & 5\\0&-1&5\\5&6&4\mp$$
+b. Compute $\A-\bo{H}$, if possible:
+$$\A=\pm 1 & 2\\3&5 \mp \qquad \bo{H}= \pm 6 & 5& 10\\0.1 & 0.5 & 0.9 \mp$$
+*We cannot subtract these matrices because they don't have the same size.*
+
+c. Compute $2\A$:
+$$\A=\pm 2 & 3 & -1\\1&-1&1\\2&2&1 \mp$$
+ *We simply multiply every element in $\A$ by 2,*
+$$2\A=\pm 4 & 6 & -2\\2&-2&2\\4&4&2 \mp$$
+
+```
+
+```{exer title='Addition, Subtraction, and Scalar Multiplication',id='addsub'}
+
+a.  Compute $\v-\y$, if possible: $$\v=\pm 2\\-3\\4 \mp \quad \y=\pm 1\\4\\1 \mp$$
+
+b. Compute $\v+\bo{h}$, if possible:
+$$\v=\pm 4\\-5\\3 \mp \quad \bo{h}=\pm -1\\-4\\1\\2 \mp$$
+
+
+c. Compute $\frac{1}{\sqrt{2}}\v$:
+$$\v=\pm 4\\-5\\3 \mp$$
+
+
+```
+
+## Geometry of Vector Addition and Scalar Multiplication {#sec:vectoradd}
+
+You've already learned how vector addition works algebraically: it occurs element-wise between two vectors of the same length:
+$$
+ \a+\b =\pm a_1\\ a_2\\ a_3\\ \vdots \\ a_n \mp +\pm b_1\\ b_2\\ b_3\\ \vdots \\ b_n \mp = \pm a_1+b_1\\a_2+b_2\\a_3+b_3\\ \vdots \\a_n+b_n \mp
+$$
+
+Geometrically, vector addition is witnessed by placing the two vectors, $\a$ and $\b$, _tail-to-head_. The result, $\a+\b$, is the vector from the open tail to the open head. This is called the parallelogram law and is demonstrated in Figure \ref{vectoradd}.
+
+
+![](figs/vectoradd.pdf)     | ![](figs/vectorsub.pdf)
+:-------------------------:|:-------------------------:
+Addition of vectors  |  Subtraction of Vectors
+
+
+
+When subtracting vectors as $\a-\b$ we simply add $-\b$ to $\a$. The vector $-\b$ has the same length as $\b$ but points in the opposite direction. This vector has the same length as the one which connects the two heads of $\a$ and $\b$ as shown in Figure \ref{vectorsub}. 
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Vector Subtraction: Centering Data', id='ex:centering', num=excounter,cid=cid}
+One thing we will do frequently in this course is consider centered and/or standardized data. To center a group of variables, we merely subtract the mean of each variable from each observation. Geometrically, this amounts to a *translation* (shift) of the data so that it's center (or mean) is at the origin. The following graphic illustrates this process using 4 data points.
+
+<center>
+<img src=figs/centerall.pdf width=50%/>
+</center>
+```
+
+Scalar multiplication is another operation which acts element-wise:
+$$\alpha \a = \alpha \pm a_1\\a_2\\a_3\\ \vdots \\a_n \mp = \pm \alpha a_1 \\ \alpha a_2\\ \alpha a_3 \\ \vdots \\ \alpha a_n\mp $$
+
+Scalar multiplication changes the length of a vector but not the overall direction (although a negative scalar will scale the vector in the opposite direction through the origin). We can see this geometric interpretation of scalar multiplication in Figure \@ref{vectormult}.
+
+(ref:vectormult) Geometric Effect of Scalar Multiplication
+
+```{r fig=T, fig.width=1000, echo=F,fig.align='center', id='vectormult', fig.cap='(ref:vectormult)'} 
+knitr::include_graphics('figs/vectormult.pdf')
+```
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Vector Scaling: Standardizing Data', id='ex:scaling', num=excounter,cid=cid}
+Once data has been centered, it is also common to then scale the variables according to their standard deviation (or some other normalization factor). Geometrically this amounts to a proportional shrinking of the data. The following graphic illustrates this process using the same 4 data points from Example \@ref{ex:centering}.
+<center>
+<img src=figs/scaleall.pdf width=50% />
+</center>
+```
+
+
+## Linear Combinations
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+
+```{def title='Linear Combination', id='lincomb', num=thmcounter,cid=cid}
+A **linear combination** is constructed from a set of terms $\v_1, \v_2, \dots, \v_n$ by multiplying each term by a scalar constant and adding the result:
+$$\bo{c}=\alpha_1\v_1+\alpha_2 \v_2+ \dots+ \alpha_n\v_n = \sum_{i=1}^n \alpha_i \v_n$$
+The coefficients $\alpha_i$ are scalar constants and the terms, $\{\v_i\}$ can be scalars, vectors, or matrices. Most often, we will consider linear combinations where the terms $\{\v_i\}$ are vectors. 
+```
+
+Linear combinations are quite simple to understand. Once the equation is written, we can consider the expression as a breakdown into parts. 
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Linear Combination', id='ex:lincomb', num=excounter,cid=cid}
+The simplest linear combination might involve columns of the identity matrix:
+$$\pm 3 \\ -2\\4 \mp = 3\pm 1\\0\\0 \mp -2 \pm 0\\1\\0 \mp +4 \pm 0\\0\\1 \mp$$
+We can easily picture this linear combination as a ``breakdown into parts'' where the parts give directions along the 3 coordinate axis with which we are all familiar.
+```
+
+
+We don't necessarily have to use vectors as the terms for a linear combination. Example \@ref{ex:matrixlincomb} shows how we can write any $m\times n$ matrix as a linear combination of $nm$ elementary matrices.
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Linear Combination of Matrices', id='ex:matrixlincomb', num=excounter,cid=cid}
+Write the matrix $\A=\pm 1 & 3\\4&2 \mp$ as a linear combination of the following matrices:
+$$\left\lbrace \pm 1 & 0\\0&0 \mp,\pm 0 & 1\\0&0 \mp,\pm 0 & 0\\1&0 \mp,\pm 0 & 0\\0&1 \mp \right\rbrace$$
+Solution:
+$$\A=\pm 1 & 3\\4&2 \mp = 1\pm 1 & 0\\0&0 \mp+3\pm 0 & 1\\0&0 \mp+4\pm 0 & 0\\1&0 \mp+2\pm 0 & 0\\0&1 \mp$$
+```
+
+
+
+## Matrix Multiplication
+
+When we multiply matrices, we do not perform the operation element-wise as we did with addition and scalar multiplication. Matrix multiplication is, in itself, a very powerful tool for summarizing information. In fact, many of the analytical tools we will focus on in this course, like Markov Chains, Principal Components Analysis, Factor Analysis, and the Singular Value Decomposition, can all be understood more clearly with a firm grasp on matrix multiplication. Because this operation is so important, we will spend a considerable amount of energy breaking it down in many ways. 
+
+### The Inner Product
+We'll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the _dot product_ in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if $\x$ is a column vector,
+$$\x=\pm x_1\\x_2\\\vdots\\ x_n\mp$$
+then we can automatically assume that $\x^T$ is a row vector:
+$$\x^T = \pm x_1&x_2&\dots&x_n\mp.$$
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Inner Product', id='innerprod', num=thmcounter,cid=cid}
+The **inner product** of two vectors, $\x$ and $\y$, written $\x^T\y$, is defined as the sum of the product of corresponding elements in $\x$ and $\y$:
+
+$$\x^T\y = \sum_{i=1}^n x_i y_i.$$
+If we write this out for two vectors with 4 elements each, we'd have:
+
+$$\x^T\y=\pm x_1 & x_2 & x_3 & x_4 \mp \pm y_1\\y_2\\y_3\\y_4 \mp = x_1y_1+x_2y_2+x_3y_3+x_4y_4$$
+
+*Note: The inner product between vectors is only possible when the two vectors have the same number of elements!*
+```
+
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Vector Inner Product', id='innerprod', num=excounter,cid=cid}
+Let $$\x=\pm -1 \\2\\4\\0 \mp \quad \y=\pm 3 \\5\\1\\7 \mp \quad \v=\pm -3 \\-2\\5\\3\\-2 \mp \quad \u= \pm 2\\-1\\3\\-3\\-2 \mp$$
+
+If possible, compute the following inner products:
+
+a. $\x^T\y$
+\begin{eqnarray}
+\x^T\y &=&\pm -1 &2&4&0 \mp \pm 3 \\5\\1\\7 \mp \cr &=& (-1)(3)+(2)(5)+(4)(1)+(0)(7) \cr &=& -3+10+4=\framebox{11}
+\end{eqnarray}
+b. $\x^T\v$
+This is not possible because $\x$ and $\v$ do not have the same number of elements
+c. $\v^T\u$
+\begin{eqnarray}
+\v^T\u &=& \pm -3 &-2&5&3&-2 \mp \pm 2\\-1\\3\\-3\\-2 \mp  \cr &=& (-3)(2)+(-2)(-1)+(5)(3)+(3)(-3)+(-2)(-2) \cr &=& -6+2+15-9+4 = \framebox{6}
+\end{eqnarray}
+
+
+```
+
+```{exer title='Vector Inner Product',id='innerprod'}
+Let $$\bo{v}=\pm 1 \\2\\3\\4\\5 \mp \quad \e=\pm 1 \\1\\1\\1\\1 \mp \quad \bo{p}=\pm 0.5 \\0.1\\0.2\\0\\0.2 \mp \quad \u= \pm 10\\4\\3\\2\\1 \mp \quad \bo{s} = \pm 2\\2\\-3 \mp$$
+
+If possible, compute the following inner products:
+
+a. $\bo{v}^T\e$
+b. $\bo{e}^T\bo{v}$
+c. $\bo{v}^T\bo{s}$
+d. $\bo{p}^T\u$
+e. $\bo{v}^T\bo{v}$
+```
+
+It should be clear from the definition and from the previous exercise, that for all vectors $\x$ and $\y$,
+$$\x^T\y = \y^T\x.$$
+Also, if we take the inner product of a vector with itself, the result is the sum of squared elements in that vector:
+$$\x^T\x = \sum_{i=1}^n x_i^2 = x_1^2 + x_2^2+ \dots + x_n^2.$$
+
+Now that we are comfortable multiplying a row vector ($\x^T$ in the definition) and a column vector ($\y$ in the definition), we can define multiplication for matrices in general.
+
+
+### Matrix Product
+
+Matrix multiplication is nothing more than a collection of inner products done simultaneously in one operation. We must be careful when multiplying matrices because, as with vectors, the operation is not always possible. Unlike the vector inner product, the order in which you multiply matrices makes a big difference!
+
+```{def title='Matrix Multiplication', id='matmult', num=thmcounter,cid=cid}
+Let $\A_{m\times n}$ and $\B_{k\times p}$ be matrices. The matrix product $\A\B$ is possible if and only if $n=k$; that is, when the number of columns in $\A$ is the same as the number of rows in $\B$. If this condition holds, then the dimension of the product, $\A\B$ is $m\times p$ and the (ij)-entry of the product $\A\B$ is the inner product of the $i^{th}$ row of $\A$ and the $j^{th}$ column of $\B$:
+
+$$(\A\B)_{ij} = \A_{i\star}\B_{\star j}$$
+```
+
+This definition may be easier to dissect using an example:
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Steps to Compute a Matrix Product', id='matmult', num=excounter,cid=cid}
+Let $$\A=\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp \quad \mbox{and} \quad \B=\pm  0 & -2 \\ 2 & -3 \mp$$
+
+When we first get started with matrix multiplication, we often follow a few simple steps:
+
+1. Write down the matrices and their dimensions. Make sure the ``inside'' dimensions match - those corresponding to the columns of the first matrix and the rows of the second matrix:
+$$\underset{(3\times \red{2})}{\A} \underset{(\red{2} \times 2)}{\B}$$
+If these dimensions match, then we can multiply the matrices. If they don't, we stop right there - multiplication is not possible.
+2. Now, look at the ``outer'' dimensions - this will tell you the size of the resulting matrix.
+$$\underset{(\blue{3}\times 2)}{\A} \underset{(2\times \blue{2})}{\B}$$
+So the product $\A\B$ is a $3\times 2$ matrix.
+3. Finally, we compute the product of the matrices by multiplying each row of $\A$ by each column of $\B$ using inner products. The element in the first row and first column of the product (written $(\A\B)_{11}$) will be the inner product of the first row of $\A$ and the first column of $\B$. Then, $(\A\B)_{12}$ will be the inner product of the first row of $\A$ and the second column of $\B$, etc.
+
+\begin{eqnarray}
+\A\B &=&\pm (2)(0)+(3)(2) & (2)(-2)+(3)(-3)\\
+ 			 (-1)(0)+(4)(2) & (-1)(-2)+(4)(-3)\\
+ 			  (5)(0)+(1)(2) & (5)(-2)+(1)(-3) \mp \cr
+ 	&=& \pm 6&-13\\8 & -10\\2&-13\mp
+\end{eqnarray}
+
+```
+
+Matrix multiplication is incredibly important for data analysis. You may not see why all these multiplications and additions are so useful at this point, but we will visit some basic applications shortly. For now, let's practice so that we are prepared for the applications!
+
+```{exer title='Matrix Multiplication', id='matmult'}
+Suppose we have $$\A_{4\times 6} \quad \B_{5\times 5} \quad \M_{5\times 4} \quad \bP_{6\times 5}$$
+Circle the matrix products that are possible to compute and write the dimension of the result.
+$$\A\M \qquad \M\A \qquad \B\M  \qquad \M\B \qquad \bP\A \qquad \bP\M \qquad \A\bP \qquad \A^T\bP \qquad \M^T\B$$
+\vspace{0.75cm}
+
+Let 
+$$
+\A=\pm 1&1&0&1\\0&1&1&1\\1&0&1&0\mp \quad \M = \pm -2&1&-1&2&-2\\1&-2&0&-1&2\\2&1&-3&-2&3 \\ 1&3&2&-1&2\mp $$
+$$\C=\pm -1&0&1&0\\1&-1&0&0\\0&0&1&-1 \mp$$
+
+
+
+Determine the following matrix products, if possible:
+
+a $\A\C$
+
+b $\A\M$
+
+c. $\A^T\C$
+
+```
+
+One very important thing to keep in mind is this:
+ <p font-color:red><strong> matrix multiplication is NOT commutative! </strong></p>
+ As we see from the previous exercises, it's quite common to be able to compute a product $\A\B$ where the reverse product, $\B\A$ is not even possible to compute. Even if both products are possible it is almost _never_ the case that $\A\B$ equals $\B\A$.
+ 
+#### Multiplication by a Diagonal Matrix
+ 
+ As we will see in the next example, multiplication by a diagonal matrix causes a very specific effect on a matrix.
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Multiplication by a Diagonal Matrix', id='ex:diagmult',num=excounter,cid=cid}
+ Compute the following matrix product and comment on what you find in the results:
+ $$\D=\pm 2&0&0\\0&3&0\\0&0&-2 \mp \A= \pm 1&2&3\\1&1&2\\2&1&3 \mp$$
+ $$\D\A=\pm 2&4&6\\3&3&6\\-4&-2&-6 \mp$$
+ In doing this multiplication, we see that the effect of multiplying the matrix $\A$ by a diagonal matrix on the left is that the rows of the matrix $\A$ are simply scaled by the entries in the diagonal matrix. You should work this computation out by hand to convince yourself that this effect will happen every time. Diagonal scaling can be important, and from now on when you see a matrix product like $\D\A$ where $\D$ is diagonal, you should automatically put together that the result is just a row-scaled version of $\A$.
+```
+ 
+```{exer title='Multiplication by a Diagonal Matrix', id='exer:diagmult'}
+ What happens if we were to compute the product from Example \ref{ex:diagmult} in the reversed order, with the diagonal matrix on the right:
+ $$\A\D?$$
+ Would we expect the same result? Is multiplication by a diagonal matrix commutative? Work out the calculation and comment on what you've found.
+```
+
+### Matrix-Vector Product
+
+A matrix-vector product works exactly the same way as matrix multiplication; after all, a vector $\x$ is nothing but an $n\times 1$ matrix. In order to multiply a matrix by a vector, again we must match the dimensions to make sure they line up correctly. For example, if we have an $m\times n$ matrix $\A$, we can multiply by a $1\times m$ row vector $\v^T$ on the left:
+$$\v^T\A \quad \mbox{works because } \underset{ (1\times \red{m})}{\v^T} \underset{(\red{m}\times n)}{\A}$$
+$$\Longrightarrow \mbox{The result will be a   } 1 \times n \mbox{ row vector.}$$
+or we can multiply by an $n\times 1$ column vector $\x$ on the right:
+
+$$\A\x \quad \mbox{works because } \underset{(m\times \red{n})}{\A}\underset{(\red{n}\times 1)}{\x} $$
+$$\Longrightarrow \mbox{The result will be a   } m\times 1 \mbox{ column vector.}$$
+
+Matrix-vector multiplication works the same way as matrix multiplication: we simply multiply rows by columns until we've completed the answer. In the case of $\v^T\A$, we'd multiply the row $\v$ by each of the $n$ columns of $\A$, carving out our solution, one entry at a time :
+
+$$\v^T\A = \pm \v^T\A_{*1} & \v^T\acol{2} & \dots & \v^T\acol{n} \mp.$$
+
+In the case of $\A\x$, we'd multiply each of the $m$ rows of $\A$ by the column $\x$:
+
+$$\A\x = \pm \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \mp.$$
+
+Let's see an example of this:
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Matrix-Vector Products', id='ex:matvecprod',cid=cid}
+Let $$\A=\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp  \quad \v=\pm 3\\2 \mp \quad \bo{q}=\pm 2\\-1\\3\mp$$
+
+Determine whether the following matrix-vector products are possible. When possible, compute the product.
+
+a. $\A\bo{q}$ 
+$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(3\times \red{2})}{\A}\underset{(\red{3}\times 1)}{\bo{q}}$$
+b. $\A\v$
+$$
+\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp \pm 3\\2 \mp = \pm 2(3)+3(2) \\  -1(3)+4(2)\\5(3)+1(2) \mp = \pm 12\\5\\17\mp
+$$
+c. $\bo{q}^T\A$
+<center>Rather than write out the entire calculation, the blue text highlights one of the two inner products required:</center>
+$$
+\pm \blue{2} & \blue{-1} & \blue{3}\mp \pm \blue{2} & 3 \\ \blue{-1} & 4 \\ \blue{5} & 1 \mp  =  \pm \blue{20} & 5  \mp
+$$
+
+d. $\v^T\A$
+$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(1\times \red{2})}{\v^T}\underset{(\red{3}\times 2)}{\A}$$
+```
+
+```{exer title='Matrix-Vector Products', id='exer:matvecprod'}
+Let
+$$ \A=\pm 1&1&0&1\\0&1&1&1\\1&0&1&0\mp \quad \B=\pm  0 & -2 \\ 1 & -3 \mp $$ $$ \x=\pm 2\\1\\3 \mp \quad \y = \pm 1\\1 \mp \quad \z = \pm 3\\1\\2\\3 \mp$$
+Determine whether the following matrix-vector products are possible. When possible, compute the product.
+
+a. $\A\z$
+
+b. $\z^T\A$
+
+c. $\y^T\B$
+
+d. $\B\y$
+
+e. $\x^T\A$
+```
+
+
+## Vector Outer Products
+
+Whereas inner products were the product of a row vector with a column vector (think $\x^T\y$),  **outer products**  are the product of a *column* vector with a *row* vector (think $\x\y^T$).
+Let's first consider the dimensions of the outcome:
+
+$$\underset{(m\times \red{1})}{\x} \underset{(\red{1} \times n)}{\y^T} = \bo{M}_{m\times n}$$
+
+So the result is a matrix! We'll want to treat this product in the same way we treat any matrix product, by multiplying row $\times$ column until we've run out of rows and columns. Let's take a look at an example:
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Vector Outer Product', id='ex:outerprod', num=excounter,cid=cid}
+Let $\x = \pm 3\\4\\-2 \mp$ and $\y=\pm 1\\5\\3 \mp$. Then,
+$$\x\y^T = \pm \red{3}\\4\\-2 \mp \pm \red{1}&5&3 \mp = \pm \red{3}&15&9\\4&20&12\\-2&-10&-3\mp$$
+As you can see by performing this calculation, a vector outer product will _always_ produce a matrix whose rows are multiples of each other!
+```
+
+## The Identity and the Matrix Inverse
+
+The *identity matrix*, introduced in Section \ref{special}, is to matrices as the number `1' is to scalars. It is the **multiplicative identity**. For any matrix (or vector) $\A$, multiplying $\A$ by the identity matrix on either side does not change $\A$:
+\begin{align*}
+\A\I&=\A \\
+\I\A &= \A 
+\end{align*}
+
+This fact is easy to verify in light of Example \ref{ex:diagmult}. Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1.  The size of the identity matrix is generally implied in context. If $\A$ is $m\times n$ then writing $\A\I$ implies that $\I$ is $n \times n$, where as writing $\I\A$ implies $\I$ is $m\times m$.
+
+For *certain* square matrices $\A$, an inverse matrix, written $\A^{-1}$, exists such that
+$$\A\A^{-1} = \I$$
+$$\A^{-1}\A = \I$$
+It is very important to understand that not all matrices have inverses. There are 2 very important conditions that must be satisfied:
+\begin{itemize}
+\item The matrix $\A$ must be square
+\item The matrix $\A$ must be full-rank. 
+\end{itemize}
+
+We have not yet discussed the notion of matrix rank, so the present discussion is aimed only at defining the concept of a matrix inverse rather than defining when it exists or how it is determined. For now, we want to see the analogy of the matrix inverse to our previous understanding of scalar algebra. Recall that the inverse of a non-zero scalar number is its reciprocal:
+$$a^{-1} = \frac{1}{a}$$
+Multiplying a scalar by its inverse yields the multiplicative identity, 1:
+$$(a)(a^{-1}) = (a)(\frac{1}{a}) = 1$$
+All scalars have an inverse with the exception of 0. For matrices, the idea of an inverse is quite the same - multiply a matrix on the left or right by its inverse to get the multiplicative identity, $\I$. However, as previously stated, the matrix inverse only exists for a small subset of matrices, those that are square and full rank. Such matrices are equivalently called **invertible** or **non-singular**. 
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+(ref:canceltitle) Don't Cancel That!!
+```{ex title='(ref:canceltitle)', id='ex:dontcancel', num=excounter,cid=cid}
+We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
+$$\A\x=\lambda\x$$
+We <font-folor:red><strong> CANNOT </strong> <font-folor:black>cancel terms from both sides. Mathematically, this operation amounts to multiplying both sides by an inverse. When the term we are canceling is a non-zero scalar, then we can proceed as usual. However, we must be careful not to assume that a matrix/vector quantity has an inverse. For example, the following operation is **nonsense:** 
+$$\require{cancel} \A\cancel{\x}=\lambda\cancel{\x}$$
+Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, $\A$, with a scalar, $\lambda$.
+```
+
+
+
+## Exercises
+
+__1.__ On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b ``tail-to-head''.
+2. Use the following vectors to answer the questions:
+$$
+\v=\pm 6\\-1\mp \quad \bo{u}=\pm -2\\1\mp \quad \x=\pm 4\\2\\1\mp \quad \y=\pm-1\\-2\\-3\mp \quad \e=\pm 1\\1\\1\mp
+$$
+    __a.__ Compute the following linear combinations, if possible:
+      - $2\u+3\v=$ 
+      - $\x-2\y+\e=$ 
+      - $-2\u-\v+\e=$ 
+      - $\u+\e=$
+    __b.__ Compute the following inner products, if possible:
+      - $\u^T\v=$ 
+      - $\x^T\x=$ 
+      - $\e^T\y=$ 
+      - $\x^T\u=$
+      - $\x^T\e=$ 
+      - $\y^T\e=$
+      - $\v^T\x=$ 
+      - $\e^T\v=$
+    __c.__ What happens when you take the inner product of a vector with $\e$?
+    __d.__ What happens when you take the inner product of a vector with itself (as in $\x^T\x$)?
+__3.__ Use the following matrices to answer the questions:
+$$\A=\pm 1&3&8\\3&0&-2\\8&-2&-3 \mp \quad \bo{M}=\pm 1&8&-2&5\\2&8&1&7 \mp \quad 
+\D = \pm 1&0&0\\0&5&0\\0&0&3\mp $$ 
+$$
+\bo{H}=\pm 2&-1\\1&3 \mp \quad \bo{W}=\pm 1&1&1&1\\2&2&2&2\\3&3&3&3\mp
+$$
+    __a.__ Circle the matrix products that are possible and specify their resulting dimensions:
+
+      - $\A\M$ 
+      - $\A\bo{W}$ 
+      - $\bo{W}\D$
+      - $\bo{W}^T\D$
+      - $\bo{H}\M$
+      - $\bo{M}\bo{H}$
+      - $\bo{M}^T\bo{H}^T$
+      - $\D\bo{W}$
+    __b.__ Compute the following matrix products:
+$$\bo{H}\M\quad \mbox{and} \quad \A\D$$
+    __c.__ From the previous computation, $\A\D$, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (*Hint:* see Example \ref{ex:diagmult} and Exercise \ref{exer:diagmult}).
+__4.__ Is matrix multiplication commutative?
+__5.__ **Different Views of Matrix Multiplication:** Consider the matrix product 
+$\A\B$ where $$\A = \pm 1 & 2\\3&4 \mp \quad \B = \pm 2&5\\1&3\mp$$
+Let $\C=\A\B$.
+    __a.__ Compute the matrix product $\C$.
+    __b.__ Compute the matrix-vector product $\A\B_{\star 1}$ and show that this is the first column of $\C$. (Likewise, $\A\B_{\star 2}$ is the second column of $\C$.) (_Matrix multiplication can be viewed as a collection of matrix-vector products._)
+    __c.__ Compute the two outer products using columns of $\A$ and rows of $\B$ and show that
+$$\acol{1}\brow{1} + \acol{2}\brow{2} = \C$$ (_Matrix multiplication can be viewed as the sum of outer products._)
+    __d.__ Since $\A\B_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\A$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
+    __e.__ Finally, note that $\arow{1}\B$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
+
+## List of Key Terms {-}
+
+- addition
+- subtraction
+- equal matrices
+- scalar multiplication
+- inner product
+- matrix product
+- linear combination
+- outer product
+- multiplicative identity
+- matrix inverse
+

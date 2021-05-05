@@ -1,0 +1,199 @@
+## FIFA Soccer Players
+
+#### Explore the Data
+
+We begin by loading in the data and taking a quick look at the variables that we'll be using in our PCA for this exercise. You may need to install the packages from the following ```library()``` statements.
+
+```{r results='hide'}
+library(reshape2) #melt correlation matrix into 3 columns
+library(ggplot2) #correlation heatmap
+library(ggfortify) #autoplot bi-plot
+library(viridis) # magma palette
+library(plotrix) # color.legend
+```
+
+Now we'll read the data directly from the web, take a peek at the first 5 rows, and explore some summary statistics.
+
+```{r echo=F}
+load("LAdata/fifa.RData")
+head(fifa)
+summary(fifa[,13:46])
+```
+
+These variables are scores on the scale of [0,100] that measure 34 key abilities of soccer players. No player has ever earned a score of 100 on any of these attributes - no player is _perfect_!
+
+It would be natural to assume some correlation between these variables and indeed, we see lots of it in the following heatmap visualization of the correlation matrix.
+
+```{r fig = T, fig.align='center', fig.cap='Heatmap of correlation matrix for 34 variables of interest'}
+cor.matrix = cor(fifa[,13:46])
+cor.matrix = melt(cor.matrix)
+ggplot(data = cor.matrix, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile(color = "white")+
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+   midpoint = 0, limit = c(-1,1), space = "Lab", 
+    name="Correlation") +  theme_minimal()+ 
+      theme(axis.title.x = element_blank(),axis.title.y = element_blank(),
+            axis.text.x = element_text(angle = 45, vjust = 1, 
+        size = 9, hjust = 1))+coord_fixed()
+```
+
+
+
+What jumps out right away are the "GK" (Goal Keeping) abilities - these attributes have _very_ strong positive correlation with one another and negative correlation with the other abilities. After all, goal keepers are not traditionally well known for their dribbling, passing, and finishing abilities!
+
+Outside of that, we see a lot of red in this correlation matrix -- many attributes share a lot of information. This is the type of situation where PCA shines.
+
+
+#### Principal Components Analysis
+
+Let's take a look at the principal components analysis. Since the variables are on the same scale, I'll start with **covariance PCA** (the default in R's ```prcomp()``` function). 
+
+```{r echo=F}
+load('LAdata/fifapca.RData')
+```
+```{r eval=F }
+fifa.pca = prcomp(fifa[,13:46] )
+```
+
+We can then print the summary of variance explained and the loadings on the first 3 components:
+
+```{r}
+summary(fifa.pca)
+fifa.pca$rotation[,1:3]
+```
+
+It's clear we can capture a large amount of the variance in this data with just a few components. In fact **just 2 components yield 76% of the variance!**
+
+Now let's look at some projections of the players onto those 2 principal components. The scores are located in the ```fifa.pca$x``` matrix.
+
+```{r fig=T, fig.align='center', fig.cap="Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident." }
+plot(fifa.pca$x[,1],fifa.pca$x[,2], col=alpha(c('red','blue','green','black')[as.factor(fifa$position)],0.4), pch=16, xlab = 'Principal Component 1', ylab='Principal Component 2', main = 'Projection of Players onto 2 PCs, Colored by Position')
+legend(175,-50, c('Forward','Defense','Midfield','GoalKeeper'), c('red','blue','green','black'), bty = 'n', cex=1.1)
+```
+
+The plot easily separates the field players from the goal keepers, and the forwards from the defenders. As one might expect, midfielders are sandwiched by the forwards and defenders, as they play both roles on the field. The labeling of player position was imperfect and done using a list of the players' preferred positions, and it's likely we are seeing that in some of the players labeled as midfielders that appear above the cloud of red points. 
+
+We can also attempt a 3-dimensional projection of this data:
+
+```{r fig=T, fig.align='center', fig.cap="Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident."}
+library(plotly)
+colors=alpha(c('red','blue','green','black')[as.factor(fifa$position)],0.4)
+graph = plot_ly(x = fifa.pca$x[,1], 
+                y = fifa.pca$x[,2],
+                z= fifa.pca$x[,3],
+                type='scatter3d', 
+                mode="markers",
+                marker = list(color=colors))
+graph
+```
+
+#### The BiPlot
+
+BiPlots can be tricky when we have so much data and so many variables. As you will see, the default image leaves much to be desired, and will motivate our move to the ```ggfortify``` library to use the ```autoplot()``` function. The image takes too long to render and is practically unreadable with the whole dataset, so I demonstrate the default ```biplot()``` function with a sample of the observations.
+
+(ref:fifabadplot) The default biplot function leaves much to be desired here
+
+```{r fig=T, fig.align='center',fig.cap='(ref:fifabadplot)'}
+biplot(fifa.pca$x[sample(1:16501,2000),],fifa.pca$rotation[,1:2], cex=0.5, arrow.len = 0.1)
+```
+
+
+
+The autoplot function uses the `ggplot2``` package and is superior when we have more data.
+
+(ref:fifagoodplot) The ```autoplot()``` biplot has many more options for readability.
+
+```{r fig=T,fig.align='center',fig.cap='(ref:fifagoodplot)'}
+autoplot(fifa.pca, data = fifa, 
+         colour = alpha(c('red','blue','green','orange')[as.factor(fifa$pos)],0.4),
+         loadings = TRUE, loadings.colour = 'black',
+         loadings.label = TRUE, loadings.label.size = 3.5, loadings.label.alpha = 1,
+         loadings.label.fontface='bold',
+         loadings.label.colour = 'black', 
+         loadings.label.repel=T)
+```
+
+
+Many expected conclusions can be drawn from this biplot. The defenders tend to have stronger skills of _interception, slide tackling, standing tackling,_ and _marking_, while forwards are generally stronger when it comes to _finishing, long.shots, volleys, agility_ etc. Midfielders are likely to be stronger with _crossing, passing, ball.control,_ and _stamina._ 
+
+#### Further Exploration
+
+Let's see what happens if we color by the variable 'overall' which is designed to rank a player's overall quality of play.
+
+(ref:fifaoverall) Projection of Players onto 2 PCs, Colored by "Overall" Ability
+
+```{r fig=T, fig.align='center', fig.cap='(ref:fifaoverall)'}
+palette(alpha(magma(100),0.6))
+
+plot(fifa.pca$x[,1],fifa.pca$x[,2], col=fifa$Overall,pch=16, xlab = 'Principal Component 1', ylab='Principal Component 2')
+
+color.legend(130,-100,220,-90,seq(0,100,50),alpha(magma(100),0.6),gradient="x")
+```
+
+We can attempt to label some of the outliers, too. First, we'll look at the 0.001 and 0.999 quantiles to get a sense of what coordinates we want to highlight. Then we'll label any players outside of those bounds and surely find some familiar names.
+
+```{r fig=T, fig.align='center'}
+# This first chunk is identical to the chunk above. I have to reproduce the plot to label it.
+palette(alpha(magma(100),0.6))
+plot(fifa.pca$x[,1], fifa.pca$x[,2], col=fifa$Overall,pch=16, xlab = 'Principal Component 1', ylab='Principal Component 2',
+     xlim=c(-175,250), ylim = c(-150,150))
+color.legend(130,-100,220,-90,seq(0,100,50),alpha(magma(100),0.6),gradient="x")
+
+# Identify quantiles (high/low) for each PC
+(quant1h = quantile(fifa.pca$x[,1],0.9997))
+(quant1l = quantile(fifa.pca$x[,1],0.0003))
+
+(quant2h = quantile(fifa.pca$x[,2],0.9997))
+(quant2l = quantile(fifa.pca$x[,2],0.0003))
+# Next I create a logical vector which identifies the outliers 
+# (i.e. TRUE = outlier, FALSE = not outlier)
+outliers = fifa.pca$x[,1] > quant1h | fifa.pca$x[,1] < quant1l |
+                  fifa.pca$x[,2] > quant2h | fifa.pca$x[,2] < quant2l
+# Here I label them by name, jittering the coordinates of the text so it's more readable
+text(jitter(fifa.pca$x[outliers,1],factor=1), jitter(fifa.pca$x[outliers,2],factor=600), fifa$Name[outliers], cex=0.7)
+```
+
+
+
+What about by wage? First we need to convert their salary, denominated in Euros, to a numeric variable.
+
+```{r fig=T, fig.align='center', fig.cap = 'Projection of Players onto 2 Principal Components, Colored by Wage'}
+# First, observe the problem with the Wage column as it stands
+head(fifa$Wage)
+# Use regular expressions to remove the Euro sign and K from the wage column
+# then covert to numeric
+fifa$Wage = as.numeric(gsub('[€K]', '', fifa$Wage))
+# new data:
+head(fifa$Wage)
+
+palette(alpha(magma(100),0.6))
+
+plot(fifa.pca$x[,1], fifa.pca$x[,2], col=fifa$Wage,pch=16, xlab = 'Principal Component 1', ylab='Principal Component 2')
+
+color.legend(130,-100,220,-90,c(min(fifa$Wage),max(fifa$Wage)),alpha(magma(100),0.6),gradient="x")
+```
+
+
+#### Rotations of Principal Components
+
+We might be able to align our axes more squarely with groups of original variables that are strongly correlated and tell a story. Perhaps we might be able to find latent variables that indicate the position specific ability of players. Let's see what falls out after varimax and quartimax rotation. Recall that in order to employ rotations, we have to first decide on a number of components. A quick look at a screeplot or cumulative proportion variance explained should help to that aim.
+ 
+```{r fig.align='center', fig.cap = 'Cumulative proportion of variance explained by rank of the decomposition (i.e. the number of components)' }
+plot(cumsum(fifa.pca$sdev^2)/sum(fifa.pca$sdev^2),
+     type = 'b',
+     cex=.75,
+     xlab = "# of components",
+     ylab = "% variance explained")
+```
+
+Let's use 3 components, since the marginal benefit of using additional components seems small. Once we rotate the loadings, we can try to use a heatmap to visualize what they might represent.
+
+```{r fig.align='center'}
+vmax = varimax(fifa.pca$rotation[,1:3])
+loadings = fifa.pca$rotation[,1:3]%*%vmax$rotmat
+melt.loadings = melt(loadings)
+ggplot(data = melt.loadings, aes(x=Var2, y=Var1, fill=value)) + 
+  geom_tile(color = "white")+
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+   midpoint = 0, limit = c(-1,1))
+```

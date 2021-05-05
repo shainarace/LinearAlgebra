@@ -1,0 +1,104 @@
+# R Programming Basics
+
+Before we get started, you will need to know the basics of matrix manipulation in the R programming language:
+
+- Generally matrices are entered in as one vector, which R then breaks apart into rows and columns in they way that you specify (with nrow/ncol). The default way that R reads a vector into a matrix is down the columns. To read the data in across the rows, use the byrow=TRUE option). This is only relevant if you're entering matrices from scratch.
+
+```{r}
+Y=matrix(c(1,2,3,4),nrow=2,ncol=2)
+Y
+X=matrix(c(1,2,3,4),nrow=2,ncol=2,byrow=TRUE)
+X
+```
+
+- The standard multiplication symbol, '\*', will unfortunately provide unexpected results if you are looking for matrix multiplication. '\*' will multiply matrices _elementwise_.  In order to do matrix multiplication, the function is '%\*%'.
+
+```{r}
+X*X
+X%*%X
+```
+
+- To transpose a matrix or a vector $\X$, use the function t($\X$).
+```{r}
+t(X)
+```
+
+- R indexes vectors and matrices starting with $i=1$ (as opposed to $i=0$ in python).
+- X[i,j] gives element $\X_{ij}$. You can alter individual elements this way.
+
+```{r}
+X[2,1]
+X[2,1]=100
+X
+```
+
+- To create a vector of all ones, $\e$, use the ```  rep()``` function
+
+```{r}
+e=rep(1,5)
+e
+```
+
+- To compute the mean of a vector, use the mean function. To compute the column means of a matrix (or data frame), use the ```  colMeans() ```  function. You can also use the ``` apply``` function, which is necessary if you want column standard deviations (```  sd() ``` function). ```  apply(X,dim,function)``` applies the specified function to the specified dimension ```  dim``` (1 for rows, 2 for columns) of the matrix or data frame X.
+```{r}
+# Start by generating random ~N(0,1) data:
+A=replicate(2,rnorm(5))
+colMeans(A)
+# (Why aren't the means close to zero?)
+A=replicate(2,rnorm(100))
+colMeans(A)
+#LawOfLargeNumbers.
+
+apply(A,2,sd)
+# To apply a "homemade function" you must create it as a function
+# Here we apply a sum of squares function for the first 5 rows of A:
+apply(A[1:5, ],1,function(x) x%*%x)
+# Here we center the data by subtracting the mean vector:
+B=apply(A,2,function(x) x-mean(x))
+colMeans(B)
+# R doesn't tell you when things are zero to machine precision. "Machine zero" in
+# R is given by the internal variable .Machine$double.eps
+colMeans(B) < .Machine$double.eps
+```
+
+- To invert a matrix, use the ```  solve()``` command.
+
+```{r}
+Xinv=solve(X)
+X%*%Xinv
+```
+
+- To determine size of a matrix, use the ```  dim()``` function. The result is a vector with two values: ```  dim(x)[1]``` provides the number of rows and ```  dim(x)[2]``` provides the number of columns. You can label rows/columns of a matrix using the ```  rownames()``` or ```  colnames()``` functions.
+
+```{r}
+dim(A)
+nrows=dim(A)[1]
+ncols=dim(A)[2]
+colnames(A)=c("This","That")
+A[1:5, ]
+```
+
+- Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
+
+```{r}
+# Add a column containing the square of the second column
+A=cbind(A,A[ ,2]^2)
+colnames(A)
+colnames(A)[3]="That Squared"
+colnames(A)
+```
+
+- You can compute vector norms using the ```  norm() ``` function. Unfortunately, the default norm is _not_ the $2$-norm (it should be!) so we must specify the ``` type="2" ``` as the second argument to the function.
+
+```{r}
+x=c(1,1,1)
+y=c(1,0,0)
+norm(x,type="2")
+# It's actually fewer characters to work from the equivalent definition:
+sqrt(x%*%x)
+norm(y,type="2")
+norm(x-y,type="2")
+```
+
+You'll learn many additional R techniques throughout this course, but our strategy in this text will be to pick them up as we go as opposed to trying to remember them from the beginning.
+
