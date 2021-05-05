@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 15 Dimension Reduction for Visualization |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 15 Dimension Reduction for Visualization |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 15 Dimension Reduction for Visualization |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="factor-analysis.html"/>
+<link rel="next" href="social-network-analysis.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,110 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="dimension-reduction-for-visualization" class="section level1" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Dimension Reduction for Visualization</h1>
+<div id="multidimensional-scaling" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Multidimensional Scaling</h2>
+<p>Multidimensional scaling is a technique which aims to represent higher-dimensional data in a lower-dimensional space while keeping the pairwise distances between points as close to their original distances as possible. It takes as input a distance matrix, <span class="math inline">\(\D\)</span> where <span class="math inline">\(\D_{ij}\)</span> is some measure of distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> (most often Euclidean distance). The original observations may involve many variables and thus exist in a high-dimensional space. The output of MDS is a set of coordinates, usually in 2-dimensions for the purposes of visualization, such that the Euclidean distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> in the new lower-dimensional representation is an approximation to <span class="math inline">\(\D_{ij}\)</span>.</p>
+<p>One of the outputs in R will be a measure that is akin to the “percentage of variation explained” by PCs. The difference is that the matrix we are representing is not a covariance matrix, so this ratio is not exactly a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the <code>GOF</code> vector (presumably standing for <em>Goodness of Fit</em>). The first entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of only the positive eigenvalues.</p>
+<p><span class="math display">\[GOF[1] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n |\lambda_i|}\]</span>
+and
+<span class="math display">\[GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}\]</span>
+### MDS of Iris Data</p>
+<p>Let’s take a dataset we’ve already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="dimension-reduction-for-visualization.html#cb278-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">dist</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb278-2"><a href="dimension-reduction-for-visualization.html#cb278-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">cmdscale</span>(D, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>) <span class="co"># k is the number of dimensions desired</span></span>
+<span id="cb278-3"><a href="dimension-reduction-for-visualization.html#cb278-3" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># view first dozen eigenvalues</span></span></code></pre></div>
+<pre><code>##  [1] 6.3001e+02 3.6158e+01 1.1653e+01 3.5514e+00 3.4866e-13 3.1863e-13
+##  [7] 2.0112e-13 1.3770e-13 7.7470e-14 3.2881e-14 3.0740e-14 2.1786e-14</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="dimension-reduction-for-visualization.html#cb280-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF <span class="co"># view the Goodness of Fit measures</span></span></code></pre></div>
+<pre><code>## [1] 0.97769 0.97769</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="dimension-reduction-for-visualization.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the solution, colored by iris species:</span></span>
+<span id="cb282-2"><a href="dimension-reduction-for-visualization.html#cb282-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb282-3"><a href="dimension-reduction-for-visualization.html#cb282-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb282-4"><a href="dimension-reduction-for-visualization.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
+<span id="cb282-5"><a href="dimension-reduction-for-visualization.html#cb282-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
+<span id="cb282-6"><a href="dimension-reduction-for-visualization.html#cb282-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-266"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-266-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
+<p class="caption">
+Figure 15.1: Multidimensional Scaling of the Iris Data
+</p>
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<p>We can tell from the eigenvalues alone that two dimensions should be relatively sufficient to summarize this data. After two large eigenvalues, the remainder drop off and become small, signifying a lack of further information. Indeed, the Goodness of Fit measurements back up this intuition: values close to 1 indicate a good fit with minimal error.</p>
+<div id="mds-of-leukemia-dataset" class="section level3" number="15.1.1">
+<h3><span class="header-section-number">15.1.1</span> MDS of Leukemia dataset</h3>
+<p>Let’s take a look at another example, this time using the Leukemia dataset which has 5000 variables. It is unreasonable to expect that we can get as good of a fit of this data using only two dimensions! There will obviously be much more error. However, we can still get a visualization that should at least show us which observations are close to each other and which are far away.</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="dimension-reduction-for-visualization.html#cb283-1" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/Code/leukemia.csv&#39;</span>)</span></code></pre></div>
+<p>As you may recall, this data has some variables with 0 variance; those entire columns are constant. To determine which ones, we first remove the last column which is a character vector that identifies the type of leukemia.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="dimension-reduction-for-visualization.html#cb284-1" aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> leuk[ , <span class="dv">5001</span>]</span>
+<span id="cb284-2"><a href="dimension-reduction-for-visualization.html#cb284-2" aria-hidden="true" tabindex="-1"></a>leuk <span class="ot">=</span> leuk[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
+<span id="cb284-3"><a href="dimension-reduction-for-visualization.html#cb284-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, could supply names of columns that have 0 variance with</span></span>
+<span id="cb284-4"><a href="dimension-reduction-for-visualization.html#cb284-4" aria-hidden="true" tabindex="-1"></a><span class="co"># names(leuk[, sapply(leuk, function(v) var(v, na.rm=TRUE)==0)])</span></span>
+<span id="cb284-5"><a href="dimension-reduction-for-visualization.html#cb284-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The na.rm=T would allow us to keep any missing information and still compute</span></span>
+<span id="cb284-6"><a href="dimension-reduction-for-visualization.html#cb284-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the variance using the non-missing values. In this instance, it is not necessary</span></span>
+<span id="cb284-7"><a href="dimension-reduction-for-visualization.html#cb284-7" aria-hidden="true" tabindex="-1"></a><span class="co"># because we have no missing values.</span></span>
+<span id="cb284-8"><a href="dimension-reduction-for-visualization.html#cb284-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-9"><a href="dimension-reduction-for-visualization.html#cb284-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We can remove these columns from the data with:</span></span>
+<span id="cb284-10"><a href="dimension-reduction-for-visualization.html#cb284-10" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span>leuk[,<span class="fu">apply</span>(leuk, <span class="dv">2</span>, var, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">0</span>]</span>
+<span id="cb284-11"><a href="dimension-reduction-for-visualization.html#cb284-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-12"><a href="dimension-reduction-for-visualization.html#cb284-12" aria-hidden="true" tabindex="-1"></a><span class="co"># compute distances matrix</span></span>
+<span id="cb284-13"><a href="dimension-reduction-for-visualization.html#cb284-13" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="fu">dist</span>(leuk)</span>
+<span id="cb284-14"><a href="dimension-reduction-for-visualization.html#cb284-14" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">=</span><span class="fu">cmdscale</span>(t,<span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb284-15"><a href="dimension-reduction-for-visualization.html#cb284-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-16"><a href="dimension-reduction-for-visualization.html#cb284-16" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF</span></code></pre></div>
+<pre><code>## [1] 0.35822 0.35822</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="dimension-reduction-for-visualization.html#cb286-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb286-2"><a href="dimension-reduction-for-visualization.html#cb286-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb286-3"><a href="dimension-reduction-for-visualization.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb286-4"><a href="dimension-reduction-for-visualization.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb286-5"><a href="dimension-reduction-for-visualization.html#cb286-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb286-6"><a href="dimension-reduction-for-visualization.html#cb286-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
+<span id="cb286-7"><a href="dimension-reduction-for-visualization.html#cb286-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-269"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-269-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<p class="caption">
+Figure 15.2: Multidimensional Scaling of the Leukemia Data
+</p>
+</div>
+<p>What if we standardize our data before running the MDS procedure? Will that effect our results? Let’s see how it looks on the standardized version of the leukemia data.</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="dimension-reduction-for-visualization.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can experiment with standardization to see how it</span></span>
+<span id="cb287-2"><a href="dimension-reduction-for-visualization.html#cb287-2" aria-hidden="true" tabindex="-1"></a><span class="co"># effects our results:</span></span>
+<span id="cb287-3"><a href="dimension-reduction-for-visualization.html#cb287-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb287-4"><a href="dimension-reduction-for-visualization.html#cb287-4" aria-hidden="true" tabindex="-1"></a>leuk2<span class="ot">=</span><span class="fu">scale</span>(leuk,<span class="at">center=</span><span class="cn">TRUE</span>, <span class="at">scale=</span><span class="cn">TRUE</span>)</span>
+<span id="cb287-5"><a href="dimension-reduction-for-visualization.html#cb287-5" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">dist</span>(leuk2)</span>
+<span id="cb287-6"><a href="dimension-reduction-for-visualization.html#cb287-6" aria-hidden="true" tabindex="-1"></a>fit2<span class="ot">=</span><span class="fu">cmdscale</span>(t2,<span class="at">eig=</span><span class="cn">TRUE</span>,<span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb287-7"><a href="dimension-reduction-for-visualization.html#cb287-7" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span>GOF</span></code></pre></div>
+<pre><code>## [1] 0.21287 0.21287</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="dimension-reduction-for-visualization.html#cb289-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb289-2"><a href="dimension-reduction-for-visualization.html#cb289-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb289-3"><a href="dimension-reduction-for-visualization.html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb289-4"><a href="dimension-reduction-for-visualization.html#cb289-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y2,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb289-5"><a href="dimension-reduction-for-visualization.html#cb289-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb289-6"><a href="dimension-reduction-for-visualization.html#cb289-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
+<span id="cb289-7"><a href="dimension-reduction-for-visualization.html#cb289-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-270-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="a-note-on-standardization" class="section level3 unnumbered">
+<h3>A note on standardization</h3>
+<p>Clearly, things have changed substantially. We shouldn’t give to much creedence to the decreased Goodness of Fit statistics. I don’t necessarily believe that we are explaining less information just because we scaled our data, the fact that this number has changed should likely be attributed to the fact that we have significantly decreased all of the eigenvalues of the matrix, and not in any predictable or meaningful way. It’s more important to focus on what we are trying to represent and that is differences between samples. Perhaps if there are some genes for which values vary wildly between the different leukemia types, and other genes which don’t show much variation, then we should keep this information in the data. By standardizing the data, we’re making the variation of every gene equal to 1 - which stands to wash out some of the bigger, more discriminating factors in the distance calculations. This consideration is something that will need to be made for each dataset on a case-by-case basis. If our dataset had variables with wide scale variations (like income and number of cars) then standardization is a much more reasonable approach!</p>
+<p>There are several things to keep in mind when studying an MDS map.</p>
+<ol style="list-style-type: decimal">
+<li>The axis are, by themselves, meaningless.</li>
+<li>The orientation of the picture is completely arbitrary.</li>
+<li>All that matters is the relative proximity of the points in the map. Are they close? Are they far apart?</li>
+</ol>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="factor-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="social-network-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +522,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/06-OtherDimRed.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +530,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/06-OtherDimRed.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

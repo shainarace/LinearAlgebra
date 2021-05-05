@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 9 Linear Independence |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 9 Linear Independence |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 9 Linear Independence |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="lsapp.html"/>
+<link rel="next" href="pca.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,211 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="linind" class="section level1" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Linear Independence</h1>
+<p>One of the most central ideas in all of Linear Algebra is that of <strong>linear independence</strong>. For regression problems, it is repeatedly stressed that <em>multicollinearity</em> is problematic. Multicollinearity is simply a statistical term for linear dependence. It’s bad. Having a firm understanding of linear combinations, we can develop the important concept of linear independence.</p>
+<div id="linear-independence" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Linear Independence</h2>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition @ref().1: Linear Dependence and Linear Independence
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<div class="Stext">
+<p>A set of vectors <span class="math inline">\(\{\v_1,\v_2,\dots, \v_n\}\)</span> is <strong>linearly dependent</strong> if we can express the zero vector, <span class="math inline">\(\bo{0}\)</span>, as non-trivial linear combination of the vectors. In other words there exist some constants <span class="math inline">\(\alpha_1,\alpha_2,\dots \alpha_n\)</span> (non-trivial means that these constants are not <em>all</em> zero) for which
+<span class="math display">\[\begin{equation}
+\alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}.
+\label{triv}
+\end{equation}\]</span></p>
+A set of terms is <strong>linearly independent</strong> if Equation  has only the trivial solution (<span class="math inline">\(\alpha_1=\alpha_2=\dots=\alpha_n = 0\)</span>).
+</div>
+</div>
+</div>
+<p>Another way to express linear dependence is to say that we can write one of the vectors as a linear combination of the others. If there exists a non-trivial set of coefficients <span class="math inline">\(\alpha_1,\alpha_2, \dots, \alpha_n\)</span> for which
+<span class="math display">\[\alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}\]</span>
+then for <span class="math inline">\(\alpha_j \neq 0\)</span> we could write
+<span class="math display">\[\v_j=-\frac{1}{\alpha_j} \sum_{\substack{i=1\\i \neq j}}^n \alpha_i \v_i\]</span></p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().1: Linearly Dependent Vectors
+</div>
+<div class="S2text">
+The vectors <span class="math inline">\(\v_1 =\pm 1\\2\\2 \mp, \v_2 = \pm 1\\2\\3 \mp, \mbox{ and } \v_3 = \pm 3\\6\\7 \mp\)</span> are linearly dependent because
+<span class="math display">\[\v_3 = 2\v_1+\v_2\]</span>
+or, equivalently, because
+<span class="math display">\[2\v_1+\v_2-\v_3 = \bo{0}\]</span>
+</div>
+</div>
+</div>
+<div id="determining-linear-independence" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Determining Linear Independence</h3>
+<p>You should realize that the linear combination expressed Definition  can be written as a matrix vector product. Let <span class="math inline">\(\A_{m\times n} = (\A_1|\A_2|\dots|\A_n)\)</span> be a matrix. Then by Definition , the columns of <span class="math inline">\(\A\)</span> are linearly independent if and only if the equation
+<span class="math display">\[\begin{equation}
+\label{eq:homo}
+\A\x = \bo{0}
+\end{equation}\]</span>
+has only the trivial solution, <span class="math inline">\(\x=0\)</span>. Equation  is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix <span class="math inline">\((\A|\bo{0})\)</span> reduces to <span class="math inline">\((\bo{I}|0)\)</span>. We have already seen this condition in our discussion about matrix inverses - if a square matrix <span class="math inline">\(\A\)</span> reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called <em>full rank, nonsingular, or invertible</em>. Now we add an additional condition equivalent to the others - the matrix <span class="math inline">\(\A\)</span> has linearly independent columns (<em>and rows</em>).</p>
+<p>In Theorem  a important list of equivalent conditions regarding linear independence and invertibility is given.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem @ref().2: Equivalent Conditions for Matrix Invertibility
+</div>
+<div class="Stext">
+<p>Let <span class="math inline">\(\A\)</span> be an <span class="math inline">\(n\times n\)</span> matrix - a <em>square</em> matrix. Then the following statements are <em>equivalent</em>. (If one these statements is true, then all of these statements are true)</p>
+<ul>
+<li><span class="math inline">\(\A\)</span> is invertible (<span class="math inline">\(\A^{-1} exists\)</span>)</li>
+<li><span class="math inline">\(\A\)</span> has full rank (<span class="math inline">\(rank(\A)=n\)</span>)</li>
+<li>The columns of <span class="math inline">\(\A\)</span> are linearly independent</li>
+<li>The rows of <span class="math inline">\(\A\)</span> are linearly independent</li>
+<li>The system <span class="math inline">\(\A\x=\b\)</span>, <span class="math inline">\(\b\neq \bo{0}\)</span> has a unique solution</li>
+<li><span class="math inline">\(\A\x=\bo{0} \Longrightarrow \x=\bo{0}\)</span></li>
+<li><span class="math inline">\(\A\)</span> is nonsingular</li>
+<li><span class="math inline">\(\A \xrightarrow{Gauss-Jordan} \bo{I}\)</span>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="span" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Span of Vectors</h2>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition @ref().3: Vector Span
+</div>
+<div class="Stext">
+<p>The <strong>span</strong> of a single vector <span class="math inline">\(\v\)</span> is the set of all scalar multiples of <span class="math inline">\(\v\)</span>:
+<span class="math display">\[span(\v)=\{\alpha\v\ \mbox{  for any constant  } \alpha\}\]</span>
+The <strong>span</strong> of a collection of vectors, <span class="math inline">\(\V=\{\v_1,\v_2,\dots,\v_n\}\)</span> is the set of all linear combinations of these vectors:
+<span class="math display">\[span(\V)=\{\alpha_1\v_1+\alpha_2\v_2+\dots+\alpha_n\v_n \mbox{ for any constants }\alpha_1,\dots,\alpha_n\}\]</span>
+\end{mydef}
+
+Recall that addition of vectors can be done geometrically using the <em>head-to-tail</em> method shown in .</p>
+<figure>
+<center>
+<img src=figs/vectoradd.png width=300 />
+<figcaption>
+Geometrical addition of vectors: Head-to-tail
+</figcaption>
+</center>
+</figure>
+<p>If we have two linearly independent vectors on a coordinate plane, then any third vector can be written as a linear combination of them. This is because two vectors is sufficient to <em>span</em> the entire 2-dimensional plane. You should take a moment to convince yourself of this geometrically.</p>
+In 3-space, two linearly independent vectors can still only span a plane.  depicts this situation. The set of all linearly combinations of the two vectors <span class="math inline">\(\a\)</span> and <span class="math inline">\(\b\)</span> (i.e. the <span class="math inline">\(span(\a,\b)\)</span>) carves out a plane. We call this a two-dimensional collection of vectors a <strong>subspace</strong> of <span class="math inline">\(\Re^3\)</span>. A subspace is formally defined in Definition .
+<figure>
+<center>
+<img src=figs/span.png width=300 />
+<figcaption>
+The <span class="math inline">\(span(\a,\b)\)</span> in <span class="math inline">\(\Re^3\)</span> creates a plane (a 2-dimensional <em>subspace</em>)
+</figcaption>
+</center>
+</figure>
+</div>
+</div>
+</div>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition @ref().4: Subspace
+</div>
+<div class="Stext">
+<p>A <strong>subspace</strong>, <span class="math inline">\(\mathcal{S}\)</span> of <span class="math inline">\(\Re^n\)</span> is thought of as a ``flat’’ (having no curvature) surface within <span class="math inline">\(\Re^n\)</span>. It is a collection of vectors which satisfies the following conditions:</p>
+<ol style="list-style-type: decimal">
+<li>The origin (<span class="math inline">\(\bo{0}\)</span> vector) is contained in <span class="math inline">\(\mathcal{S}\)</span></li>
+<li>If <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are in <span class="math inline">\(\mathcal{S}\)</span> then the sum <span class="math inline">\(\x+\y\)</span> is also in <span class="math inline">\(\mathcal{S}\)</span></li>
+<li>If <span class="math inline">\(\x\)</span> is in <span class="math inline">\(\mathcal{S}\)</span> and <span class="math inline">\(\alpha\)</span> is a constant then <span class="math inline">\(\alpha\x\)</span> is also in <span class="math inline">\(\mathcal{S}\)</span>
+</div></li>
+</ol>
+</div>
+</div>
+<p>The span of two vectors <span class="math inline">\(\a\)</span> and <span class="math inline">\(\b\)</span> is a subspace because it satisfies these three conditions. (Can you prove it? See exercise 4).</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().1: Span
+</div>
+<div class="S2text">
+<p>Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>. Explain why or why not each of the following vectors is contained in the <span class="math inline">\(span(\a,\b)\)</span>?</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\x=\pm 5\\6\\9 \mp\)</span></li>
+</ol>
+<ul>
+<li>To determine if <span class="math inline">\(\x\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span> we need to find coefficients <span class="math inline">\(\alpha_1, \alpha_2\)</span> such that <span class="math display">\[\alpha_1\a+\alpha_2\b=\x.\]</span> Thus, we attempt to solve the system
+<span class="math display">\[\pm 1&amp;3\\3&amp;0\\4&amp;1 \mp \pm \alpha_1\\ \alpha_2 \mp = \pm 5\\6\\9\mp.\]</span>
+After Gaussian Elimination, we find that the system is consistent with the solution
+<span class="math display">\[\pm\alpha_1\\ \alpha_2 \mp=\pm 2\\1\mp\]</span>
+and so <span class="math inline">\(\x\)</span> is in fact in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\y=\pm 2\\4\\6 \mp\)</span></li>
+</ol>
+<ul>
+<li>We could follow the same procedure as we did in part (a) to learn that the corresponding system is <em>not</em> consistent and thus that <span class="math inline">\(\y\)</span> is not in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="exercises-3" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><strong>Six views of matrix multiplication:</strong> Let <span class="math inline">\(\A_{m\times k}\)</span>, <span class="math inline">\(\B_{k\times n}\)</span>, and <span class="math inline">\(\C_{m\times n}\)</span> be matrices such that
+<span class="math display">\[\A\B=\C.\]</span></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Express the first column of <span class="math inline">\(\C\)</span> as a linear combination of the columns of <span class="math inline">\(\A\)</span>.</li>
+<li>Express the first column of <span class="math inline">\(\C\)</span> as a matrix-vector product.</li>
+<li>Express <span class="math inline">\(\C\)</span> as a sum of outer products.</li>
+<li>Express the first row of <span class="math inline">\(\C\)</span> as a linear combination of the rows of <span class="math inline">\(\B\)</span>.</li>
+<li>Express the first row of <span class="math inline">\(\C\)</span> as a matrix-vector product.</li>
+<li>Express the element <span class="math inline">\(\C_{ij}\)</span> as an inner product of row or column vectors from <span class="math inline">\(\A\)</span> and <span class="math inline">\(\B\)</span>.</li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>Determine whether or not the vectors <span class="math display">\[\x_1=\pm 1\\3\\1\mp,\x_2=\pm 0\\1\\1\mp,\x_3=\pm 2\\1\\0\mp\]</span> are linearly independent.</li>
+<li>Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Show that the zero vector, <span class="math inline">\(\pm 0\\0\\0 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
+<li>Determine whether or not the vector <span class="math inline">\(\pm 1\\0\\1 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the span of the zero vector, <span class="math inline">\(\bo{0}=(0,0,\dots, 0)\)</span>?</li>
+<li>Draw the <span class="math inline">\(span(\a,\b)\)</span> if <span class="math inline">\(\a=\pm 1\\2 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\6 \mp\)</span>.</li>
+<li>Prove that the span of vectors is a subspace by showing that it satisfies the three conditions from Definition . To make a formal proof, the strategy should be as follows: (1) Take two arbitrary elements from the span and show that when you add them together, the resulting vector is also in the span. (2) Take one arbitrary vector from the span and show that when you multiply it by a constant, the resulting vector is also in the span. (3) Show that the zero vector is contained in the span. You can simply show this fact for the span of two vectors and notice how the concept will hold for more than two vectors.</li>
+<li><em>True/False</em> Mark each statement as true or false. Justify your response.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> can be written as a linear combination of the columns of <span class="math inline">\(\A\)</span>.</li>
+<li>If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> is in the span of the columns of <span class="math inline">\(\A\)</span>.</li>
+<li>If <span class="math inline">\(\v_1\)</span> is in the <span class="math inline">\(span(\v_2,\v_3)\)</span>, then <span class="math inline">\(\v_1, \v_2, \,\mbox{ and},\v_3\)</span> form a linearly independent set.</li>
+</ol>
+<ol start="8" style="list-style-type: decimal">
+<li>Two vectors are linearly independent only if they are not perfectly correlated, <span class="math inline">\(-1&lt;\rho&lt;1\)</span>, where <span class="math inline">\(\rho\)</span> is Pearson’s correlation coefficient.</li>
+</ol>
+</div>
+<div id="list-of-key-terms-3" class="section level2 unnumbered">
+<h2>List of Key Terms</h2>
+<ul>
+<li>linearly independent</li>
+<li>linearly dependent</li>
+<li>full rank</li>
+<li>perfect multicollinearity</li>
+<li>severe multicollinearity</li>
+<li>invertible</li>
+<li>nonsingular</li>
+</ul>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lsapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +623,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/025-linind.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +631,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/025-linind.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

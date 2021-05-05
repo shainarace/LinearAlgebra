@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Applications of Matrix Multiplication |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Applications of Matrix Multiplication |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="MSALogo.png" />
+  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="github-repo" content="rstudio/linalg-master" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Applications of Matrix Multiplication |  Linear Algebra for Data Science   with examples in R and Python" />
+  
+  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="twitter:image" content="MSALogo.png" />
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-05-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mult.html"/>
+<link rel="next" href="r-programming-basics.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R and Python </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>2.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>2.3</b> Describing Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>2.4</b> Vectors</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>2.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>2.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>2.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>2.9</b> List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>3</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>3.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>3.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>3.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="3.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>3.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="3.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>4</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>4.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="4.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>4.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>4.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="4.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>5</b> R Programming Basics</a></li>
+<li class="chapter" data-level="6" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>6</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>6.1</b> Gaussian Elimination</a></li>
+<li class="chapter" data-level="6.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>6.2</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>6.3</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="6.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
+<li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>9</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>9.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="9.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>9.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
+<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
+Linear Algebra for Data Science <br>
+with examples in R and Python</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multapp" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Applications of Matrix Multiplication</h1>
+<p>As we will begin to see here, matrix multiplication has a number of uses in data modeling and problem solving. It expresses a rather large number of operations in a surprisingly compact way. The more comfortable we can be with this compact notation and what it entails, the more understanding we can have with analytical tools like Principal Components Analysis, Factor Analysis, Markov Chains, and Optimization (to name a few).</p>
+<div id="systems-of-equations" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Systems of Equations</h2>
+<p>Matrix multiplication creates a <strong>system of equations</strong>, which is nothing more than a collection of equations which hold true simultaneously. Suppose we take the matrix-vector product:
+<span class="math display">\[\A\x=\b\]</span>
+Where
+<span class="math display">\[\A=\pm 1&amp;2&amp;3&amp;1\\0&amp;3&amp;2&amp;1\\1&amp;1&amp;1&amp;4\mp \quad \x=\pm x_1\\x_2\\x_3\\x_4 \mp \quad \mbox{and} \quad \b=\pm 10\\15\\6\mp\]</span>
+Let’s take a look at what happens when we write the equation <span class="math inline">\(\A\x=\b\)</span> the old-fashioned way, without matrices:
+<span class="math display">\[
+\pm 1&amp;2&amp;3&amp;1\\0&amp;3&amp;2&amp;1\\1&amp;1&amp;1&amp;4\mp\pm x_1\\x_2\\x_3\\x_4 \mp = \pm 10\\15\\6\mp 
+\]</span>
+<span class="math display">\[
+\Longrightarrow\begin{cases}\begin{align}
+x_1+2x_2+3x_3+x_4 = 10\\
+3x_2+2x_3+x_4 = 15\\
+x_1+x_2+x_3+4x_4 = 6\end{align}\end{cases}
+\]</span></p>
+<p>We get a system of three equations. In general, a system of equations is nothing more than a matrix equation, <span class="math inline">\(\A\x=\b\)</span> where the matrix <span class="math inline">\(\A\)</span> contains the coefficients on the parameters you wish you find, <span class="math inline">\(\x\)</span> is a vector containing those unknown parameters and <span class="math inline">\(\b\)</span> is a vector containing the right hand sides of the equations. These systems of equations pop-up in all types of data applications from regression analysis to optimization. Let’s consider a scenario which mimics the real-world and try to model it using a matrix-vector product.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.1: System of Equations
+</div>
+<div class="S2text">
+<p>A large manufacturing company has recently signed a deal to manufacture trail mix for a well-known food label. This label makes 3 versions of its product - one for airlines, one for grocery stores, and one for gas stations. Each version has a different mixture of peanuts, raisins, and chocolate which serves as the base of the trail mix. The base mixtures are made in 15 kg batches and sent to a second building for packaging.</p>
+<p>The following table contains the information about the mixes, each row containing the recipe for a 15 kg batch. There is also some additional information on the costs of the ingredients, the price the manufacturer can charge for the mixtures and the amount of storage allocated for each ingredient.</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+<col width="21%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">Raisins <br> (kg/batch)</th>
+<th align="center">Peanuts <br> (kg/batch)</th>
+<th align="center">Chocolate <br>(kg/batch)</th>
+<th align="center">Sale Price<br>($/kg)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Airline (a)</td>
+<td align="center">7</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">4.99</td>
+</tr>
+<tr class="even">
+<td align="center">Grocery (g)</td>
+<td align="center">2</td>
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center">6.50</td>
+</tr>
+<tr class="odd">
+<td align="center">Gas Station (s)</td>
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">5.50</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>|Storage (kg) | 380 | 500| 620| |
+|Cost ($/kg) | 2.55|4.65|4.80| |</p>
+<p><strong>a. If the manufacturer wanted to use up all the ingredients in storage each day, how many batches of each mixture (airline, gas station, and grocery) should be made? </strong></p>
+<p>We can gather from the table that 1 batch of the airline mixture contains 7 kgs of raisins. We want the total number of kgs of raisins from each of the 3 mixtures to match the storage capacity of raisins, which is 380 kg. We can set this up as a system of equations, one for each ingredient, where
+<span class="math display">\[\begin{eqnarray}
+a&amp;=&amp;\mbox{batches of airline mixture}\\
+g&amp;=&amp;\mbox{batches of grocery mixture}\\
+s&amp;=&amp;\mbox{batches of gas station mixture}\\
+a,g,s &amp;\geq &amp; 0 
+\end{eqnarray}\]</span>
+as follows:
+<span class="math display">\[\begin{cases}\begin{eqnarray}
+7 a+6 s+2g &amp;=&amp; 380 \quad \mbox{(Raisins)}\\
+6 a+4 s+5g &amp;=&amp; 500 \quad \mbox{(Peanuts)}\\
+2 a+5 s+8g &amp;=&amp; 620 \quad \mbox{(Chocolate)}\end{eqnarray}\end{cases}\]</span></p>
+<p>We can then transform this system of equations into matrix form:
+<span class="math display">\[\pm 7&amp;2&amp;6\\6&amp;5&amp;4\\2&amp;8&amp;5 \mp \pm a\\g\\s \mp = \pm 380\\500\\620 \mp\]</span></p>
+<p>While we haven’t yet discussed how to solve such a system of equations, you can verify that
+<span class="math display">\[a=20\,batches \quad g=60\,batches \quad s=20\,batches\]</span>
+is indeed a solution - in fact, it is the only possible solution. Determining solutions such as this, and establishing that they are unique (i.e. that they are the <em>only</em> possible solution) is one of the many tools that the study of linear algebra will provide.</p>
+<p><strong>b. Use matrix-vector multiplication to determine how much it costs the manufacturer to produce 1 batch of each mixture
+</strong></p>
+<p>For 1 batch of airline mixture, the manufacturer will spend <span class="math display">\[7 kg\times \$2.55/kg = \$17.85\,\,\mbox{ on raisins.}\]</span></p>
+<p>Of course, we need to add in the cost of peanuts and chocolate and then repeat this calculation for both grocery and gas station mixtures.</p>
+<p>This is conveniently done in one matrix-vector multiplication:
+<span class="math display">\[\pm 7&amp;6&amp;2\\2&amp;5&amp;8 \\6&amp;4&amp;5 \mp \pm 2.55\\4.65\\4.80 \mp = \pm 55.35\\66.75\\57.90\mp\]</span>
+Thus, the cost of 1 batch of each type of mixture is:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Mixture</th>
+<th align="center">Cost ($/batch)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">airline</td>
+<td align="center">55.35</td>
+</tr>
+<tr class="even">
+<td align="left">grocery</td>
+<td align="center">66.75</td>
+</tr>
+<tr class="odd">
+<td align="left">gas station</td>
+<td align="center">57.90</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="big-systems-of-equations" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> <em>Big</em> Systems of Equations</h3>
+<p>When we expand our minds to the possibilities associated with matrix-matrix products, the systems that we can generate get very large very quickly.</p>
+<p>For example, let’s consider a <span class="math inline">\(2\times 2\)</span> example, <span class="math display">\[\A\X=\B\]</span> where <span class="math display">\[\A=\pm 2&amp;3\\1&amp;4 \mp \qquad \X=\pm x_{11} &amp; x_{12} \\x_{21} &amp; x_{22} \mp \qquad \B=\pm 7 &amp; 6 \\ 5&amp; 9 \mp\]</span></p>
+<p>Let’s take a look at what the simple equation <span class="math inline">\(\A\X=\B\)</span> is really saying in terms of all the matrix values that we have. All we have to do is write out the multiplication ``the long way’’. For example, to get the element in the first row and first column of <span class="math inline">\(\B\)</span> (in this case, 7) we would compute the inner product of the first row of <span class="math inline">\(\A\)</span> with the first column of <span class="math inline">\(\X\)</span>:</p>
+<p><span class="math display">\[\pm 2 &amp; 3 \mp \pm x_{11} \\ x_{21} \mp = \red{2x_{11}+3x_{21} = 7}\]</span></p>
+<p>Now the equation in red above is just one of 4. We have one equation for each element of <span class="math inline">\(\B\)</span>!. Let’s make sure we understand how to get all 4 of these equations:
+<span class="math display">\[\begin{eqnarray}
+2x_{11}+3x_{21} &amp;=&amp; 7 \\
+2x_{12}+3x_{22} &amp;=&amp;6\\
+1x_{11}+4x_{21} &amp;=&amp; 5 \\
+1x_{12}+4x_{22} &amp;=&amp;9\\
+\end{eqnarray}\]</span></p>
+<p>Now, a list of 4 equations does not seem that big. But what if the dimensions of the matrix <span class="math inline">\(\B\)</span> were <span class="math inline">\(9\times10\)</span>? By now you should be able to see that we’d have a system of 90 equations! The number of equations generated will always equal the number of elements in the right hand side matrix <span class="math inline">\(\B\)</span>.</p>
+</div>
+</div>
+<div id="regression-analysis" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Regression Analysis</h2>
+<p>In statistics, the solution to these systems of equations is exactly what we are trying to find when we do regression analysis. Take, for example, a regression analysis with some dependent variable, <span class="math inline">\(\y\)</span>, and two independent variables, <span class="math inline">\(\h,\w\)</span>. The preliminary goal of this analysis is to find unknown parameters <span class="math inline">\(\beta_0, \beta_1, \dots\)</span> such that
+<span class="math display">\[\begin{equation}
+\label{hwmodel}
+\y= \beta_0+\beta_1\h+\beta_2\w
+\end{equation}\]</span></p>
+<p>This is the single equation we usually consider when talking about regression analysis - but what about all those data points? Suppose, for simplicity, we have only 4 observations as listed in the following table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(\h\)</span></th>
+<th align="center"><span class="math inline">\(\w\)</span></th>
+<th align="center"><span class="math inline">\(\y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">9</td>
+</tr>
+</tbody>
+</table>
+<p>When we write the model from Equation , what we are really saying is that the equation holds true for each of the 4 observations in our dataset. So rather than 1 single equation, what we really have here is 4 equations - 1 for each observation:</p>
+<p><span class="math display">\[\begin{eqnarray}
+\beta_0 + 3 \beta_1 + 3 \beta_2 &amp;=&amp; 6 \quad \mbox{(obs. 1)}\\
+\beta_0 + 2 \beta_1 + 3 \beta_2 &amp;=&amp; 6 \quad \mbox{(obs. 2)}\\
+\beta_0 + 5 \beta_1 + 6 \beta_2 &amp;=&amp; 10 \,\,\, \mbox{(obs. 3)}\\
+\beta_0 + 6 \beta_1 + 5 \beta_2 &amp;=&amp; 9 \quad \mbox{(obs. 4)}\\
+\end{eqnarray}\]</span></p>
+<p>Rather than writing all these equations out, we instead represent the situation in matrix format as
+<span class="math display">\[\X\boldsymbol\Beta = \y,\]</span>
+Where
+<span class="math display">\[\X=\pm 1&amp;3&amp;3\\1&amp;2&amp;3\\1&amp;5&amp;6\\1&amp;6&amp;5 \mp \quad \bbeta = \pm \beta_0 \\\beta_1 \\ \beta_2 \mp \quad \mbox{and}\quad \y = \pm 6 \\6 \\10\\9\mp\]</span></p>
+<p>We know from our experiences with data that this situation will not have an exact solution: our data does not fall exactly on some straight line or surface. Instead, we have to consider some error, <span class="math inline">\(\boldsymbol\epsilon\)</span> and try to minimize it:
+<span class="math display">\[\X\bbeta + \boldsymbol\epsilon = \y,\]</span>
+where
+<span class="math display">\[\boldsymbol\epsilon = \pm \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \epsilon_4 \mp\]</span> is a vector containing the <em>residuals.</em> We will get into the exact details of this shortly, but for now it is important that we see how to set up the regression equation in terms of matrices and vectors. The typical regression equation with the intercept will always involve adding a column of 1’s to the matrix of independent variables, as seen in the previous example.</p>
+</div>
+<div id="linear-combinations-1" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Linear Combinations</h2>
+<p>Let’s revisit the second part of Example , where the task was to use matrix-vector multiplication to determine how much it would cost for the manufacturer to produce 1 batch of each mixture.</p>
+<p>Essentially what we want to do is take a linear combination of the amounts of raisins, peanuts, and chocolate where the scalar weights are the cost of each ingredient:
+<span class="math display">\[\bordermatrix{~&amp; \mbox{Cost of 1kg}}{}{\begin{pmatrix}\mbox{airline}\\ \mbox{grocery}\\ \mbox{gas station} \end{pmatrix}} = \$2.55 \bordermatrix{~&amp; raisins}{}{ \begin{pmatrix} 7\\ 2\\ 6\end{pmatrix}} + \$4.65 \bordermatrix{~&amp; peanuts}{}{ \begin{pmatrix} 6\\ 5\\ 4\end{pmatrix}}  + \$4.80 \bordermatrix{~&amp; chocolate}{}{ \begin{pmatrix} 2\\ 8\\ 5\end{pmatrix}}\]</span>
+This linear combination is exactly the same as the matrix-vector product originally used:
+<span class="math display">\[\pm 7&amp;6&amp;2\\2&amp;5&amp;8 \\6&amp;4&amp;5 \mp \pm 2.55\\4.65\\4.80 \mp = \pm 55.35\\66.75\\57.90\mp\]</span></p>
+<p>Matrix multiplication is nothing more than a series of linear combinations. Let’s develop another quick example.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().: Linear Combinations of Variables
+</div>
+<div class="S2text">
+<p>Suppose we have data for 100 postal packages using 3 variables: height <span class="math inline">\(\bo{h}\)</span>, weight <span class="math inline">\(\bo{w}\)</span>, and volume <span class="math inline">\(\bo{v}\)</span>. If we create a data matrix, <span class="math inline">\(\X\)</span>, the size of the matrix will be <span class="math inline">\(100\times 3\)</span> and the three columns will be composed of the variables height, weight, and volume. The previous sentence is written mathematically by creating a partitioned matrix:
+<span class="math display">\[\X = \left( \bo{h} | \bo{w} | \v \right)\]</span></p>
+<p>If we wanted to create a new variable vector, <span class="math inline">\(\bo{c}\)</span>, which equaled the height plus twice the weight of the package, we’d want to compute the following linear combination:
+<span class="math display">\[\bo{c} = \bo{h} + 2\bo{w} + 0\v\]</span></p>
+<p>This could be accomplished by multiplying our whole data matrix by the vector <span class="math inline">\(\pm 1\\2\\0\mp\)</span>.</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\bo{c}&amp;=&amp;\underset{(100\times 3)}{\X}\pm 1\\2\\0\mp \cr
+&amp;=&amp;\left( \bo{h} | \bo{w} | \v \right)\pm 1\\2\\0\mp \cr
+&amp;=&amp; \bo{h} + 2\bo{w} + 0\v
+\end{eqnarray*}\]</span></p>
+If this example confuses you, you ought to write out a smaller matrix of values for the three variables, height, weight and volume. Write down 3 observations or so and see how the linear combination of these columns is precisely the same as the matrix-vector product. Being able to think of these two ideas as interchangeable will be fundamental when we start talking about factor analysis and principal components analysis.
+</div>
+</div>
+</div>
+<p>If we dissect our formula for a system of linear equations, <span class="math inline">\(\A\x=\bo{b}\)</span>, we will find that the right-hand side vector <span class="math inline">\(\bo{b}\)</span> can be expressed as a linear combination of the columns in the coefficient matrix, <span class="math inline">\(\A\)</span>.</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\bo{b}&amp;=&amp; \A\x\\
+\bo{b}&amp;=&amp; (\A_1|\A_2|\dots|\A_n)\pm x_1\\x_2\\ \vdots\\x_3 \mp  \\
+\bo{b}&amp;=&amp; x_1\A_1 + x_2\A_2 + \dots + x_n\A_n 
+\end{eqnarray*}\]</span>
+A concrete example of this expression is given in Example .</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().: Systems of Equations as Linear Combinations
+</div>
+<div class="S2text">
+Consider the following system of equations:
+<span class="math display">\[\begin{eqnarray}
+3x_1 + 2x_2 + 9x_3 &amp;=&amp; 1\\
+4x_1 + 2x_2 + 3x_3 &amp;=&amp; 5\\
+2x_1 + 7x_2 + \,x_3 &amp;=&amp; 0
+\end{eqnarray}\]</span>
+We can write this as a matrix vector product <span class="math inline">\(\A\x=\bo{b}\)</span> where
+<span class="math display">\[\A=\pm 3 &amp; 2 &amp; 9\\4 &amp; 2 &amp; 3\\2 &amp;7&amp;1\mp \,\,\,\x=\pm x_1\\x_2\\x_3\mp \mbox{   and   } \bo{b}=\pm 1\\5\\0 \mp\]</span>
+We can also write <span class="math inline">\(\bo{b}\)</span> as a linear combination of columns of <span class="math inline">\(\A\)</span>:
+<span class="math display">\[x_1 \pm 3\\4\\2 \mp +x_2 \pm 2\\2\\7\mp + x_3 \pm9\\3\\1 \mp = \pm 1\\5\\0 \mp\]</span>
+</div>
+</div>
+</div>
+<p>Similarly, if we have a matrix-matrix product, we can write each column of the result as a linear combination of columns of the first matrix. Let <span class="math inline">\(\A_{m\times n}\)</span>, <span class="math inline">\(\X_{n\times p}\)</span>, and <span class="math inline">\(\B_{m\times p}\)</span> be matrices. If we have <span class="math inline">\(\A\X=\B\)</span> then
+<span class="math display">\[
+(\A_1 | \A_2 | \dots | \A_n) \pm x_{11} &amp; x_{12} &amp; \dots &amp; x_{1p} \\x_{21} &amp; x_{22} &amp; \dots &amp; x_{2n}\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ x_{n1} &amp; x_{n2}&amp;\dots &amp;x_{np} \mp = (\B_1 | \B_2 | \dots | \B_n) 
+\]</span></p>
+<p>and we can write
+<span class="math display">\[\B_j = \A\X_j = x_{1j}\A_1 + x_{2j}\A_2 + x_{3j}\A_3 + \dots + x_{nj}\A_n.\]</span>
+A concrete example of this expression is given in Example .</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.4: Linear Combinations in Matrix-Matrix Products
+</div>
+<div class="S2text">
+<p>Suppose we have the following matrix formula:
+<span class="math display">\[\A\X=\B\]</span>
+Where <span class="math inline">\(\A=\pm 2 &amp; 1 &amp; 3\\1 &amp; 4 &amp; 2\\ 3 &amp; 2 &amp; 1 \mp\)</span>, <span class="math inline">\(\X=\pm 5&amp;6\\9&amp;5\\7&amp;8 \mp\)</span>.
+Then
+<span class="math display">\[\begin{eqnarray}
+\B &amp;=&amp;\pm 2 &amp; 1 &amp; 3\\1 &amp; 4 &amp; 2\\ 3 &amp; 2 &amp; 1 \mp \pm 5&amp;6\\9&amp;5\\7&amp;8 \mp \\
+~   &amp;=&amp; \pm 2(5)+1(9)+3(7)&amp;2(6) +1(5)+3(8)\\1(5)+4(9)+2(7)&amp;1(6)+4(5)+2(8)\\3(5)+2(9)+1(7)&amp;3(6)+2(5)+1(8) \mp 
+\end{eqnarray}\]</span>
+and we can immediately notice that the columns of <span class="math inline">\(\B\)</span> are linear combinations of columns of <span class="math inline">\(\A\)</span>:
+<span class="math display">\[\B_1 = 5\pm 2\\1\\3\mp+9\pm 1\\4\\2 \mp + 7 \pm 3\\2\\1 \mp\]</span>
+<span class="math display">\[\B_2 = 6\pm 2\\1\\3\mp+5\pm 1\\4\\2 \mp + 8 \pm 3\\2\\1 \mp\]</span></p>
+<p>We may also notice that the <em>rows</em> of <span class="math inline">\(\B\)</span> can be expressed as a linear combination of <em>rows</em> of <span class="math inline">\(\X\)</span>:</p>
+<p><span class="math display">\[\B_{1\star} = 2\pm 5&amp; 6 \mp +  1\pm 9&amp; 5 \mp + 3\pm 7&amp; 8 \mp \]</span>
+<span class="math display">\[\B_{2\star} = 1\pm 5&amp; 6 \mp +  4\pm 9&amp; 5 \mp + 2\pm 7&amp; 8 \mp \]</span>
+<span class="math display">\[\B_{3\star} = 3\pm 5&amp; 6 \mp +  2\pm 9&amp; 5 \mp + 1\pm 7&amp; 8 \mp \]</span></p>
+<p>Linear combinations are everywhere, and they can provide subtle but important meaning in the sense that they can break data down into a sum of parts.</p>
+You should convince yourself of one final view of matrix multiplication, as the <em>sum of outer products</em>. In this case <span class="math inline">\(\B\)</span> is the sum of 3 outer products (3 matrices of rank 1) involving the columns of <span class="math inline">\(\A\)</span> and corresponding rows of <span class="math inline">\(\X\)</span>:
+<span class="math display">\[\B=\acol{1}\X_{1\star}+\acol{2}\X_{2\star}+\acol{3}\X_{3\star}.\]</span>
+</div>
+</div>
+</div>
+<p>Example  turns out to have important implications for our interpretation of matrix factorizations. In this context we’d call <span class="math inline">\(\A\X\)</span> a <em>factorization</em> of the matrix <span class="math inline">\(\B\)</span>. We will see how to use these expressions to our advantage in later chapters.</p>
+</div>
+<div id="multapp-ex" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Exercises</h2>
+<p><strong>1.</strong> A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.</p>
+<table>
+<tr>
+<td style="text-align: center">
+<td style="text-align: center">
+<strong>Roses</strong>
+<td style="text-align: center">
+<strong>Daisies</strong>
+<td style="text-align: center">
+<strong>Chrys.</strong>
+<td style="text-align: center">
+<strong>Price</strong>
+</td>
+<tr>
+<td >
+Small
+<td style="text-align: center">
+1
+<td style="text-align: center">
+3
+<td style="text-align: center">
+3
+<td style="text-align: center">
+$10
+</td>
+<tr>
+<td >
+Medium
+<td style="text-align: center">
+2
+<td style="text-align: center">
+4
+<td style="text-align: center">
+6
+<td style="text-align: center">
+$15
+</td>
+<tr>
+<td>
+Large
+<td style="text-align: center">
+4
+<td style="text-align: center">
+8
+<td style="text-align: center">
+6
+<td style="text-align: center">
+$20
+</td>
+<tr >
+<td style="border-top: double">
+Cost
+<td style="text-align: center; border-top: double">
+$0.50
+<td style="text-align: center; border-top: double">
+$0.25
+<td style="text-align: center; border-top: double">
+$0.10
+<td style="text-align: center; border-top: double">
+</td>
+</tr>
+</table>
+<p>Let <span class="math display">\[\A = \pm 1 &amp;3 &amp; 3\\2&amp; 4&amp; 6\\4&amp; 8&amp;6 \mp \quad \bo{p}= \pm 10\\15\\20 \mp \quad \bo{c} = \pm 0.50\\0.25\\0.10 \mp.\]</span></p>
+<p><strong>a.</strong> Determine the matrix-vector product that produces a vector, <span class="math inline">\(\y\)</span> which gives the total cost of creating each size arrangement (small, medium, and large).
+<strong>b.</strong> Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let <span class="math display">\[\bo{v} = \pm 2\\0\\2 \mp\]</span>
+Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist.</p>
+<p><strong>2.</strong> Write the following system of equations as a matrix-vector product <span class="math inline">\(\A\x=\b\)</span>:
+<span class="math display">\[\begin{eqnarray}
+2x_2 +3x_3&amp;=&amp; 8,
+2x_1+3x_2+1x_3 &amp;=&amp; 5,
+x_1-x_2-2x_3 &amp;=&amp;-5
+\end{eqnarray}\]</span></p>
+<p><strong>3.</strong> A model is being developed to predict a student’s SAT score based upon some numeric attributes. The data being used for this model is provided below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Observation</th>
+<th align="center">PSAT score</th>
+<th align="center">Mother’s SAT score</th>
+<th align="center">SAT Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1600</td>
+<td align="center">1700</td>
+<td align="center">1750</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1800</td>
+<td align="center">1250</td>
+<td align="center">1750</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">1750</td>
+<td align="center">1300</td>
+<td align="center">1600</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1200</td>
+<td align="center">1800</td>
+<td align="center">1450</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">1350</td>
+<td align="center">1950</td>
+<td align="center">1500</td>
+</tr>
+</tbody>
+</table>
+<p>If our regression model is
+<span class="math display">\[SAT\_score = \beta_0 + \beta_1* PSAT\_score + \beta_2* Mothers\_SAT\_Score + \epsilon\]</span>
+Show how we’d set up the underlying matrix equation for regression analysis,
+<span class="math display">\[\y = \X\bbeta \]</span>
+by defining the matrices/vectors <span class="math inline">\(\X, \bbeta, \mbox{ and } \y\)</span>.</p>
+<p><strong>4.</strong> Suppose a company collected daily data regarding the sales and revenue of particular products for which prices fluctuate daily:</p>
+<table>
+<tr>
+<td>
+</td>
+<td colspan="2" style="text-align: center">
+Monday
+</td>
+<td colspan="2" style="text-align: center">
+Tuesday
+</td>
+<td colspan="2" style="text-align: center">
+Wednesday
+</td>
+<td colspan="2" style="text-align: center">
+Thursday
+</td>
+<td colspan="2" style="text-align: center">
+Friday
+</td>
+</tr>
+<tr>
+<td>
+Product
+</td>
+<td style="text-align: center">
+Sales
+</td>
+<td style="text-align: center">
+Rev.
+</td>
+<td style="text-align: center">
+Sales
+</td>
+<td style="text-align: center">
+Rev.
+</td>
+<td style="text-align: center">
+Sales
+</td>
+<td style="text-align: center">
+Rev.
+</td>
+<td style="text-align: center">
+Sales
+</td>
+<td style="text-align: center">
+Rev.
+</td>
+<td style="text-align: center">
+Sales
+</td>
+<td style="text-align: center">
+Rev.
+</td>
+</tr>
+<tr>
+<td>
+Widgets
+<td style="text-align: center">
+1
+<td style="text-align: center">
+195
+<td style="text-align: center">
+5
+<td style="text-align: center">
+945
+<td style="text-align: center">
+2
+<td style="text-align: center">
+400
+<td style="text-align: center">
+2
+<td style="text-align: center">
+450
+<td style="text-align: center">
+5
+<td style="text-align: center">
+790
+</td>
+</tr>
+<tr>
+<td>
+Gadgets
+<td style="text-align: center">
+35
+<td style="text-align: center">
+350
+<td style="text-align: center">
+13
+<td style="text-align: center">
+110
+<td style="text-align: center">
+25
+<td style="text-align: center">
+300
+<td style="text-align: center">
+45
+<td style="text-align: center">
+497
+<td style="text-align: center">
+90
+<td style="text-align: center">
+789
+</td>
+</tr>
+</table>
+<p><strong>a.</strong> Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
+<strong>b.</strong> Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in $19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.</p>
+<p><strong>5.</strong> Let</p>
+<p><span class="math display">\[\A=\pm 3 &amp; 2 &amp; 9\\4 &amp; 2 &amp; 3\\2 &amp;7&amp;1\mp \quad\]</span></p>
+<p><strong>6.</strong> For a general matrix <span class="math inline">\(\A_{m\times n}\)</span> describe what the following products will provide. Also give the size of the result (i.e. “<span class="math inline">\(n\times 1\)</span> vector” or “scalar”).</p>
+<p><strong>a.</strong> <span class="math inline">\(\A\e_j\)</span><br />
+<strong>b.</strong> <span class="math inline">\(\e_i^T\A\)</span><br />
+<strong>c.</strong> <span class="math inline">\(\e_i^T\A\e_j\)</span><br />
+<strong>d.</strong> <span class="math inline">\(\A\e\)</span><br />
+<strong>e.</strong> <span class="math inline">\(\e^T\A\)</span><br />
+<strong>f.</strong> <span class="math inline">\(\frac{1}{n}\e^T\A\)</span></p>
+<p><strong>7.</strong> Let <span class="math inline">\(\bo{D}_{n\times n}\)</span> be a diagonal matrix with diagonal elements <span class="math inline">\(D_{ii}\)</span>. What effect does multiplying a matrix <span class="math inline">\(\A_{n\times m}\)</span> on the left by <span class="math inline">\(\bo{D}\)</span> have? What effect does multiplying a matrix <span class="math inline">\(\A_{m\times n}\)</span> on the right by <span class="math inline">\(\bo{D}\)</span> have? If you cannot see this effect in a general sense, try writing out a simple <span class="math inline">\(3\times 3\)</span> matrix as an example first.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mult.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-programming-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/016-multapp.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/016-multapp.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

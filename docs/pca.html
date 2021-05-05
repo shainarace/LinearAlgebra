@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 10 Principal Components Analysis |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 10 Principal Components Analysis |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 10 Principal Components Analysis |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="linind.html"/>
+<link rel="next" href="pca-in-r.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,122 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="pca" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Principal Components Analysis</h1>
+<p>We now have the tools necessary to discuss one of the most important concepts in mathematical statistics: <strong>Principal Components Analysis (PCA)</strong>. PCA involves the analysis of eigenvalues and eigenvectors of the covariance or correlation matrix. Its development relies on the following important facts:</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem @ref().1: Diagonalization of Symmetric Matrices
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<div class="Stext">
+<p>All <span class="math inline">\(n\times n\)</span> real valued symmetric matrices (like the covariance and correlation matrix) have two very important properties:</p>
+<ol style="list-style-type: decimal">
+<li>They have a complete set of <span class="math inline">\(n\)</span> linearly independent eigenvectors, <span class="math inline">\(\{\v_1,\dots,\v_n\}\)</span>, corresponding to eigenvalues <span class="math display">\[\lambda_1 \geq \lambda_2 \geq\dots\geq \lambda_n.\]</span></li>
+<li>Furthermore, these eigenvectors can be chosen to be <em>orthonormal</em> so that if <span class="math inline">\(\V=[\v_1|\dots|\v_n]\)</span> then
+<span class="math display">\[\V^{T}\V=\bo{I}\]</span>
+or equivalently, <span class="math inline">\(\V^{-1}=\V^{T}\)</span>.</li>
+</ol>
+Letting <span class="math inline">\(\D\)</span> be a diagonal matrix with <span class="math inline">\(D_{ii}=\lambda_i\)</span>, by the definition of eigenvalues and eigenvectors we have for any symmetric matrix <span class="math inline">\(\bo{S}\)</span>,
+<span class="math display">\[\bo{S}\V=\V\D\]</span>
+Thus, any symmetric matrix <span class="math inline">\(\bo{S}\)</span> can be diagonalized in the following way:
+<span class="math display">\[\V^{T}\bo{S}\V=\D\]</span>
+Covariance and Correlation matrices (when there is no perfect multicollinearity in variables) have the additional property that all of their eigenvalues are positive (nonzero). They are <em>positive definite</em> matrices.
+</div>
+</div>
+</div>
+<p>Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use <span class="math inline">\((\lambda_1,\v_1)\)</span> to represent the <strong>largest</strong> eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the <strong>first principal component</strong> and points in the direction for which the variance of the data is maximal. Example @ref{ex:coveigs} illustrates this point.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().: Eigenvectors of the Covariance Matrix
+</div>
+<div class="S2text">
+<p>Suppose we have a matrix of data for 10 individuals on 2 variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>. Plotted on a plane, the data appears as follows:</p>
+<center>
+<img src=figs/pcpoints.pdf width=50%/>
+</center>
+Our data matrix for these points is:
+<span class="math display">\[\X=\pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp\]</span>
+the means of the variables in <span class="math inline">\(\X\)</span> are:
+<span class="math display">\[\bar{\x}=\pm 4.4 \\ 3.7 \mp. \]</span>
+When thinking about variance directions, our first step should be to center the data so that it has mean zero. Eigenvectors measure the spread of data around the origin. Variance measures spread of data around the mean. Thus, we need to equate the mean with the origin. To center the data, we simply compute
+<span class="math display">\[\X_c=\X-\e\bar{\x}^T = \pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp - \pm 4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7  \mp = \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3\mp.\]</span>
+Examining the new centered data, we find that we’ve only translated our data in the plane - we haven’t distorted it in any fashion.
+<center>
+<img src=figs/pcpointscenter.pdf eidth=50%/>
+</center>
+<p>Thus the covariance matrix is:
+<span class="math display">\[\ssigma=\frac{1}{9}(\X_c^T\X_c)= \pm 5.6 &amp; 4.8\\4.8&amp;6.0111 \mp \]</span>
+The eigenvalue and eigenvector pairs of <span class="math inline">\(\ssigma\)</span> are (rounded to 2 decimal places) as follows:
+<span class="math display">\[(\lambda_1,\v_1)=\left( 10.6100 ,  \begin{bmatrix} 0.69 \\ 0.72 \end{bmatrix}\right) \mbox{  and  } (\lambda_2,\v_2)= \left( 1.0012,\begin{bmatrix}-0.72\\0.69 \end{bmatrix}\right)\]</span>
+Let’s plot the eigenvector directions on the same graph:</p>
+<center>
+<img src=figs/pcpointspc.pdf width=50% />
+</center>
+The eigenvector <span class="math inline">\(\v_1\)</span> is called the <strong>first principal component</strong>. It is the direction along which the variance of the data is maximal. The eigenvector <span class="math inline">\(\v_2\)</span> is the <strong>second principal component</strong>. In general, the second principal component is the direction, orthogonal to the first, along which the variance of the data is maximal (in two dimensions, there is only one direction possible.)
+</div>
+</div>
+</div>
+<p>Why is this important? Let’s consider what we’ve just done. We started with two variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>, which appeared to be correlated. We then derived <em>new variables</em>, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, which are linear combinations of the original variables:
+<span class="math display">\[\begin{eqnarray}
+\label{pcacomb1}
+\v_1 &amp;=&amp; 0.69\x_1 + 0.72\x_2 \\
+\label{pcacomb2}
+\v_2 &amp;=&amp; -0.72\x_1 + 0.69\x_2
+\end{eqnarray}\]</span>
+These new variables are completely uncorrelated. To see this, let’s represent our data according to the new variables - i.e. let’s change the basis from <span class="math inline">\(\mathcal{B}_1=[\x_1,\x_2]\)</span> to <span class="math inline">\(\mathcal{B}_2=[\v_1,\v_2]\)</span>.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().2: The Principal Component Basis
+</div>
+<div class="S2text">
+<p>Let’s express our data in the basis defined by the principal components. We want to find coordinates (in a <span class="math inline">\(2\times 10\)</span> matrix <span class="math inline">\(\A\)</span>) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for <span class="math inline">\(\A\)</span> in the following equation (see Chapter  and note that the <em>rows</em> of <span class="math inline">\(\X\)</span> define the points rather than the columns):
+<span class="math display">\[\begin{eqnarray}
+ \X_c &amp;=&amp; \A \V^T \\
+ \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3 \mp &amp;=&amp;  \pm a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \\ a_{31} &amp; a_{32}\\ a_{41} &amp; a_{42}\\ a_{51} &amp; a_{52}\\ a_{61} &amp; a_{62}\\ a_{71} &amp; a_{72}\\ a_{81} &amp; a_{82}\\ a_{91} &amp; a_{92}\\ a_{10,1} &amp; a_{10,2} \mp \pm \v_1^T \\ \v_2^T \mp
+\end{eqnarray}\]</span></p>
+Conveniently, our new basis is orthonormal meaning that <span class="math inline">\(\V\)</span> is an orthogonal matrix, so
+<span class="math display">\[\A=\X\V .\]</span>
+The new data coordinates reflect a simple rotation of the data around the origin:
+<center>
+<img src=figs/pcpointsrotate.pdf width=50%>
+</center>
+Visually, we can see that the new variables are uncorrelated. You may wish to confirm this by calculating the covariance. In fact, we can do this in a general sense. If <span class="math inline">\(\A=\X_c\V\)</span> is our new data, then the covariance matrix is diagonal:
+<span class="math display">\[\begin{eqnarray*}
+\ssigma_A &amp;=&amp; \frac{1}{n-1}\A^T\A  \\ 
+    &amp;=&amp; \frac{1}{n-1}(\X_c\V)^T(\X_c\V) \\
+    &amp;=&amp; \frac{1}{n-1}\V^T((\X_c^T\X_c)\V\\
+    &amp;=&amp;\frac{1}{n-1}\V^T((n-1)\ssigma_X)\V\\
+    &amp;=&amp;\V^T(\ssigma_X)\V\\
+    &amp;=&amp;\V^T(\V\D\V^T)\V\\
+    &amp;=&amp; \D
+\end{eqnarray*}\]</span>
+Where <span class="math inline">\(\ssigma_X=\V\D\V^T\)</span> comes from the diagonalization in Theorem .
+By changing our variables to principal components, we have managed to <strong>“hide”</strong> the correlation between <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> while keeping the spacial relationships between data points in tact. Transformation <em>back</em> to variables <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> is easily done by using the linear relationships in Equations  and .
+</div>
+</div>
+</div>
+<div id="geometrical-comparison-with-least-squares" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Geometrical comparison with Least Squares</h2>
+<p>In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example  points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared <em>orthogonal</em> distances between the points and the line. Regressing <span class="math inline">\(\x_2\)</span> on <span class="math inline">\(\x_1\)</span>, on the other hand, provides a line which minimizes the sum of squared <em>vertical</em> distances between points and the line. This is illustrated in Figure .</p>
+<p><strong>The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. In contrast, linear least squares tries to minimize the distance in the y direction only. Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.</strong></p>
+</div>
+<div id="covariance-or-correlation-matrix" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Covariance or Correlation Matrix?</h2>
+<p>Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is <em>standardizing</em> the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.</p>
+The covariance matrix is the default for . The correlation matrix is the default in SAS. The covariance matrix method is invoked by the option:
+<p>Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component. The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don’t we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter  will give those who always default to the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linind.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pca-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +534,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/03-PCA.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +542,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/03-PCA.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 8 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 8 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 8 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="leastsquares.html"/>
+<link rel="next" href="linind.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,162 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="lsapp" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Applications of Least Squares</h1>
+<div id="simple-linear-regression" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Simple Linear Regression</h2>
+<div id="cars-data" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Cars Data</h3>
+<p>The `cars’ dataset is included in the datasets package. This dataset contains observations of speed and stopping distance for 50 cars. We can take a look at the summary statistics by using the <strong>summary</strong> function.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lsapp.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cars)</span></code></pre></div>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>We can plot these two variables as follows:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="lsapp.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-139-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<div id="setting-up-the-normal-equations" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Setting up the Normal Equations</h3>
+<p>Let’s set up a system of equations
+<span class="math display">\[\mathbf{X}\boldsymbol\beta=\mathbf{y}\]</span>
+to create the model
+<span class="math display">\[stopping\_distance=\beta_0+\beta_1speed.\]</span></p>
+<p>To do this, we need a design matrix <span class="math inline">\(\mathbf{X}\)</span> containing a column of ones for the intercept term and a column containing the speed variable. We also need a vector <span class="math inline">\(\mathbf{y}\)</span> containing the corresponding stopping distances. The <code>model.matrix()</code> function will be of use to us here. <code>model.matrix()</code> takes a formula and data matrix as input and exports the matrix that we represent as <span class="math inline">\(\mathbf{X}\)</span> in the normal equations. For datasets with categorical (factor) inputs, this function would also create dummy variables for each level, leaving out a reference level by default. You can override the default to leave out a reference level (when you override this default, you <strong>one-hot-encode</strong> your categorical variable) by including the following option as a third input to the function: <code>contrasts.arg = lapply(starwars[,sapply(starwars,is.factor) ], contrasts, contrasts=FALSE</code></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="lsapp.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create matrix X and label the columns</span></span>
+<span id="cb62-2"><a href="lsapp.html#cb62-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">=</span><span class="fu">model.matrix</span>(dist<span class="sc">~</span>speed, <span class="at">data=</span>cars)</span>
+<span id="cb62-3"><a href="lsapp.html#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="lsapp.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create vector y and label the column</span></span>
+<span id="cb62-5"><a href="lsapp.html#cb62-5" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span>cars<span class="sc">$</span>dist</span></code></pre></div>
+<p>Let’s print the first 10 rows of each to see what we did:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="lsapp.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first 10 rows, all columns. To show only observations 2,4, and 7, for</span></span>
+<span id="cb63-2"><a href="lsapp.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># example, the code would be X[c(2,4,7), ]</span></span>
+<span id="cb63-3"><a href="lsapp.html#cb63-3" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
+<pre><code>##    (Intercept) speed
+## 1            1     4
+## 2            1     4
+## 3            1     7
+## 4            1     7
+## 5            1     8
+## 6            1     9
+## 7            1    10
+## 8            1    10
+## 9            1    10
+## 10           1    11</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="lsapp.html#cb65-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##  [1]  2 10  4 22 16 10 18 26 34 17</code></pre>
+</div>
+<div id="solving-for-parameter-estimates-and-statistics" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Solving for Parameter Estimates and Statistics</h3>
+<p>Now lets find our parameter estimates by solving the normal equations,
+<span class="math display">\[\mathbf{X}^T\mathbf{X}\boldsymbol\beta = \mathbf{X}^T\mathbf{y}\]</span>
+using the built in <strong>solve</strong> function. To solve the system <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> we’d use <code>solve(A,b)</code>.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="lsapp.html#cb67-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">beta=</span><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X ,<span class="fu">t</span>(X)<span class="sc">%*%</span>y))</span></code></pre></div>
+<pre><code>##                   [,1]
+## (Intercept) -17.579095
+## speed         3.932409</code></pre>
+<p>At the same time we can compute the residuals,
+<span class="math display">\[\mathbf{r}=\mathbf{y}-\mathbf{\hat{y}}\]</span>
+the total sum of squares (SST),
+<span class="math display">\[\sum_{i=1}^n (y-\bar{y})^2=(\mathbf{y}-\mathbf{\bar{y}})^T(\mathbf{y}-\mathbf{\bar{y}})=\|\mathbf{y}-\mathbf{\bar{y}}\|^2\]</span>
+the regression sum of squares (SSR or SSM)
+<span class="math display">\[\sum_{i=1}^n (\hat{y}-\bar{y})^2=(\mathbf{\hat{y}}-\mathbf{\bar{y}})^T(\mathbf{\hat{y}}-\mathbf{\bar{y}})=\|\mathbf{\hat{y}}-\mathbf{\bar{y}}\|^2\]</span>
+the residual sum of squares (SSE)
+<span class="math display">\[\sum_{i=1}^n r_i =\mathbf{r}^T\mathbf{r}=\|\mathbf{r}\|^2\]</span>
+and the unbiased estimator of the variance of the residuals, using the model degrees of freedom which is <span class="math inline">\(n-2=48\)</span>:
+<span class="math display">\[\widehat{\sigma_{\epsilon}}^2 =\frac{SSE}{d.f.} = \frac{\|\mathbf{r}\|^2}{48}\]</span></p>
+<p>Then <span class="math inline">\(R^2\)</span>:
+<span class="math display">\[R^2 = \frac{SSR}{SST}\]</span></p>
+<p>We can also compute the standard error of <span class="math inline">\(\widehat{\boldsymbol\beta}\)</span> since</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\widehat{\boldsymbol\beta} &amp;=&amp; (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\\
+var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y})\\
+ &amp;=&amp;(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T var(\mathbf{y}) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
+ &amp;=&amp;(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T (\widehat{\sigma_{\epsilon}}^2) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
+  &amp;=&amp; \widehat{\sigma_{\epsilon}}^2 (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
+  &amp;=&amp; \widehat{\sigma_{\epsilon}}^2(\mathbf{X}^T\mathbf{X})^{-1}
+\end{eqnarray*}\]</span></p>
+<p>Thus, the variances of each <span class="math inline">\(\widehat\beta\)</span> are given by the diagonal elements of the covariance matrix, and the standard errors of each <span class="math inline">\(\widehat\beta\)</span> are given by the square roots of these diagonal elements:
+<span class="math display">\[s.e.(\widehat{\beta_i})=\sqrt{\widehat{\sigma_{\epsilon}}[(\mathbf{X}^T\mathbf{X})^{-1}]_{ii}}\]</span></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="lsapp.html#cb69-1" aria-hidden="true" tabindex="-1"></a>meany<span class="ot">=</span><span class="fu">mean</span>(y)</span>
+<span id="cb69-2"><a href="lsapp.html#cb69-2" aria-hidden="true" tabindex="-1"></a>XXinv<span class="ot">=</span><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)</span>
+<span id="cb69-3"><a href="lsapp.html#cb69-3" aria-hidden="true" tabindex="-1"></a>yhat<span class="ot">=</span>X<span class="sc">%*%</span>XXinv<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
+<span id="cb69-4"><a href="lsapp.html#cb69-4" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span>y<span class="sc">-</span>yhat</span>
+<span id="cb69-5"><a href="lsapp.html#cb69-5" aria-hidden="true" tabindex="-1"></a>SStotal<span class="ot">=</span><span class="fu">norm</span>(y<span class="sc">-</span>meany,<span class="at">type=</span><span class="st">&quot;2&quot;</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb69-6"><a href="lsapp.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="do">### OR  SStotal=t(y-meany)%*%(y-meany)</span></span>
+<span id="cb69-7"><a href="lsapp.html#cb69-7" aria-hidden="true" tabindex="-1"></a>SSreg<span class="ot">=</span><span class="fu">norm</span>(yhat<span class="sc">-</span>meany,<span class="at">type=</span><span class="st">&quot;2&quot;</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb69-8"><a href="lsapp.html#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="do">### OR  SSreg=t(yhat-meany)%*%(yhat-meany)</span></span>
+<span id="cb69-9"><a href="lsapp.html#cb69-9" aria-hidden="true" tabindex="-1"></a>SSresid<span class="ot">=</span><span class="fu">norm</span>(resid,<span class="at">type=</span><span class="st">&quot;2&quot;</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb69-10"><a href="lsapp.html#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="do">### OR SSresid=t(resid)%*%resid</span></span>
+<span id="cb69-11"><a href="lsapp.html#cb69-11" aria-hidden="true" tabindex="-1"></a>Rsquared<span class="ot">=</span>SSreg<span class="sc">/</span>SStotal</span>
+<span id="cb69-12"><a href="lsapp.html#cb69-12" aria-hidden="true" tabindex="-1"></a>StdErrorResiduals<span class="ot">=</span><span class="fu">norm</span>(resid<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">48</span>), <span class="at">type=</span><span class="st">&quot;2&quot;</span>) <span class="co">#=sqrt(SSresid/48)</span></span>
+<span id="cb69-13"><a href="lsapp.html#cb69-13" aria-hidden="true" tabindex="-1"></a>CovBeta<span class="ot">=</span>SSresid<span class="sc">*</span>XXinv<span class="sc">/</span><span class="dv">48</span></span>
+<span id="cb69-14"><a href="lsapp.html#cb69-14" aria-hidden="true" tabindex="-1"></a>StdErrorIntercept <span class="ot">=</span> <span class="fu">sqrt</span>(CovBeta[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb69-15"><a href="lsapp.html#cb69-15" aria-hidden="true" tabindex="-1"></a>StdErrorSlope <span class="ot">=</span> <span class="fu">sqrt</span>(CovBeta[<span class="dv">2</span>,<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;Rsquared: 0.651079380758252&quot;</code></pre>
+<pre><code>## [1] &quot;SSresid: 11353.5210510949&quot;</code></pre>
+<pre><code>## [1] &quot;SSmodel: 21185.4589489052&quot;</code></pre>
+<pre><code>## [1] &quot;StdErrorResiduals: 15.3795867488199&quot;</code></pre>
+<pre><code>## [1] &quot;StdErrorIntercept: 6.75844016937923&quot;</code></pre>
+<pre><code>## [1] &quot;StdErrorIntercept: 0.415512776657122&quot;</code></pre>
+<p>Let’s plot our regression line over the original data:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="lsapp.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
+<span id="cb76-2"><a href="lsapp.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(beta[<span class="dv">1</span>],beta[<span class="dv">2</span>],<span class="at">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
+</div>
+<div id="ols-in-r-via-lm" class="section level3" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> OLS in R via <code>lm()</code></h3>
+<p>Finally, let’s compare our results to the built in linear model solver, <code>lm()</code>:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="lsapp.html#cb77-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data=</span>cars)</span>
+<span id="cb77-2"><a href="lsapp.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="lsapp.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: dist
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## speed      1  21186 21185.5  89.567 1.49e-12 ***
+## Residuals 48  11354   236.5                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+</div>
+<div id="multiple-linear-regression" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Multiple Linear Regression</h2>
+<div id="bike-sharing-dataset" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Bike Sharing Dataset</h3>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="leastsquares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linind.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +574,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/02-OLS.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +582,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/02-OLS.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

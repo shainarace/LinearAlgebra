@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 PCA in R |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 PCA in R |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="MSALogo.png" />
+  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="github-repo" content="rstudio/linalg-master" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 PCA in R |  Linear Algebra for Data Science   with examples in R and Python" />
+  
+  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="twitter:image" content="MSALogo.png" />
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-05-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="pca.html"/>
+<link rel="next" href="pcaapp.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R and Python </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>2.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>2.3</b> Describing Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>2.4</b> Vectors</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>2.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>2.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>2.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>2.9</b> List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>3</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>3.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>3.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>3.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="3.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>3.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="3.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>4</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>4.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="4.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>4.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>4.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="4.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>5</b> R Programming Basics</a></li>
+<li class="chapter" data-level="6" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>6</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>6.1</b> Gaussian Elimination</a></li>
+<li class="chapter" data-level="6.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>6.2</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>6.3</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="6.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
+<li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>9</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>9.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="9.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>9.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
+<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
+Linear Algebra for Data Science <br>
+with examples in R and Python</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pca-in-r" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> PCA in R</h1>
+<p>Let’s find Principal Components using the iris dataset. This is a well-known dataset, often used to demonstrate the effect of clustering algorithms. It contains numeric measurements for 150 iris flowers along 4 dimensions. The fifth column in the dataset tells us what species of Iris the flower is. There are 3 species.</p>
+<ol style="list-style-type: decimal">
+<li>Sepal.Length</li>
+<li>Sepal.Width</li>
+<li>Petal.Length</li>
+<li>Petal.Width</li>
+<li>Species</li>
+</ol>
+<ul>
+<li>Setosa</li>
+<li>Versicolor</li>
+<li>Virginica</li>
+</ul>
+<p>Let’s first take a look at the scatterplot matrix:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="pca-in-r.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span>Sepal.Length<span class="sc">+</span>Sepal.Width<span class="sc">+</span>Petal.Length<span class="sc">+</span>Petal.Width,<span class="at">data=</span>iris,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species])</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-166-1.png" width="864" /></p>
+<p>It is apparent that some of our variables are correlated. We can confirm this by computing the correlation matrix with the <code>{r echo=T, eval=F} cor()</code> function. We can also check out the individual variances of the variables and the covariances between variables by examining the covariance matrix (<code>{r echo=T, eval=F} cov()</code> function). Remember - when looking at covariances, we can really only interpret the <em>sign</em> of the number and not the magnitude as we can with the correlations.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="pca-in-r.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    1.0000000  -0.1175698    0.8717538   0.8179411
+## Sepal.Width    -0.1175698   1.0000000   -0.4284401  -0.3661259
+## Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
+## Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="pca-in-r.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##              Sepal.Length Sepal.Width Petal.Length Petal.Width
+## Sepal.Length    0.6856935  -0.0424340    1.2743154   0.5162707
+## Sepal.Width    -0.0424340   0.1899794   -0.3296564  -0.1216394
+## Petal.Length    1.2743154  -0.3296564    3.1162779   1.2956094
+## Petal.Width     0.5162707  -0.1216394    1.2956094   0.5810063</code></pre>
+<p>We have relatively strong positive correlation between Petal Length, Petal Width and Sepal Length. It is also clear that Petal Length has more than 3 times the variance of the other 3 variables. How will this effect our analysis?</p>
+<p>The scatter plots and correlation matrix provide useful information, but they don’t give us a true sense for how the data looks when all 4 attributes are considered simultaneously.</p>
+<p>We will compute the principal components, using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let’s start with the covariance matrix which is the default setting in R.</p>
+<div id="covariance-pca" class="section level3" number="11.0.1">
+<h3><span class="header-section-number">11.0.1</span> Covariance PCA</h3>
+</div>
+<div id="principal-components-loadings-and-variance-explained" class="section level3" number="11.0.2">
+<h3><span class="header-section-number">11.0.2</span> Principal Components, Loadings, and Variance Explained</h3>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="pca-in-r.html#cb86-1" aria-hidden="true" tabindex="-1"></a>covM <span class="ot">=</span> <span class="fu">cov</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb86-2"><a href="pca-in-r.html#cb86-2" aria-hidden="true" tabindex="-1"></a>eig<span class="ot">=</span><span class="fu">eigen</span>(covM,<span class="at">symmetric=</span><span class="cn">TRUE</span>,<span class="at">only.values=</span><span class="cn">FALSE</span>)</span>
+<span id="cb86-3"><a href="pca-in-r.html#cb86-3" aria-hidden="true" tabindex="-1"></a>c<span class="ot">=</span><span class="fu">colnames</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb86-4"><a href="pca-in-r.html#cb86-4" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>values</span></code></pre></div>
+<pre><code>## [1] 4.22824171 0.24267075 0.07820950 0.02383509</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="pca-in-r.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(eig<span class="sc">$</span>vectors)<span class="ot">=</span><span class="fu">c</span>(<span class="fu">colnames</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]))</span>
+<span id="cb88-2"><a href="pca-in-r.html#cb88-2" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>vectors</span></code></pre></div>
+<pre><code>##                     [,1]        [,2]        [,3]       [,4]
+## Sepal.Length  0.36138659 -0.65658877 -0.58202985  0.3154872
+## Sepal.Width  -0.08452251 -0.73016143  0.59791083 -0.3197231
+## Petal.Length  0.85667061  0.17337266  0.07623608 -0.4798390
+## Petal.Width   0.35828920  0.07548102  0.54583143  0.7536574</code></pre>
+<p>The eigenvalues tell us how much of the total variance in the data is directed along each eigenvector. Thus, the amount of variance along <span class="math inline">\(\mathbf{v}_1\)</span> is <span class="math inline">\(\lambda_1\)</span> and the <em>proportion</em> of variance explained by the first principal component is
+<span class="math display">\[\frac{\lambda_1}{\lambda_1+\lambda_2+\lambda_3+\lambda_4}\]</span></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="pca-in-r.html#cb90-1" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>values[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(eig<span class="sc">$</span>values)</span></code></pre></div>
+<pre><code>## [1] 0.9246187</code></pre>
+<p>Thus 92% of the variation in the Iris data is explained by the first component alone. What if we consider the first and second principal component directions? Using this two dimensional representation (approximation/projection) we can capture the following proportion of variance:
+<span class="math display">\[\frac{\lambda_1+\lambda_2}{\lambda_1+\lambda_2+\lambda_3+\lambda_4}\]</span></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="pca-in-r.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(eig<span class="sc">$</span>values[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(eig<span class="sc">$</span>values)</span></code></pre></div>
+<pre><code>## [1] 0.9776852</code></pre>
+<p>With two dimensions, we explain 97.8% of the variance in these 4 variables! The entries in each eigenvector are called the <strong>loadings</strong> of the variables on the component. The loadings give us an idea how important each variable is to each component. For example, it seems that the third variable in our dataset (Petal Length) is dominating the first principal component. This should not come as too much of a shock - that variable had (by far) the largest amount of variation of the four. In order to capture the most amount of variance in a single dimension, we should certainly be considering this variable strongly. The variable with the next largest variance, Sepal Length, dominates the second principal component.</p>
+<p><strong>Note:</strong> <em>Had Petal Length and Sepal Length been correlated, they would not have dominated separate principal components, they would have shared one. These two variables are not correlated and thus their variation cannot be captured along the same direction.</em></p>
+</div>
+<div id="scores-and-pca-projection" class="section level3" number="11.0.3">
+<h3><span class="header-section-number">11.0.3</span> Scores and PCA Projection</h3>
+<p>Lets plot the <em>projection</em> of the four-dimensional iris data onto the two dimensional space spanned by the first 2 principal components. To do this, we need coordinates. These coordinates are commonly called <strong>scores</strong> in statistical texts. We can find the coordinates of the data on the principal components by solving the system
+<span class="math display">\[\mathbf{X}=\mathbf{A}\mathbf{V}^T\]</span>
+where <span class="math inline">\(\mathbf{X}\)</span> is our original iris data <strong>(centered to have mean = 0)</strong> and <span class="math inline">\(\mathbf{A}\)</span> is a matrix of coordinates in the new principal component space, spanned by the eigenvectors in <span class="math inline">\(\mathbf{V}\)</span>.</p>
+<p>Solving this system is simple enough - since <span class="math inline">\(\mathbf{V}\)</span> is an orthogonal matrix. Let’s confirm this:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="pca-in-r.html#cb94-1" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>vectors <span class="sc">%*%</span> <span class="fu">t</span>(eig<span class="sc">$</span>vectors)</span></code></pre></div>
+<pre><code>##               Sepal.Length  Sepal.Width  Petal.Length   Petal.Width
+## Sepal.Length  1.000000e+00 4.163336e-17 -2.775558e-17 -2.775558e-17
+## Sepal.Width   4.163336e-17 1.000000e+00  1.665335e-16  1.942890e-16
+## Petal.Length -2.775558e-17 1.665335e-16  1.000000e+00 -2.220446e-16
+## Petal.Width  -2.775558e-17 1.942890e-16 -2.220446e-16  1.000000e+00</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="pca-in-r.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(eig<span class="sc">$</span>vectors) <span class="sc">%*%</span> eig<span class="sc">$</span>vectors</span></code></pre></div>
+<pre><code>##               [,1]          [,2]         [,3]          [,4]
+## [1,]  1.000000e+00 -2.289835e-16 0.000000e+00 -1.110223e-16
+## [2,] -2.289835e-16  1.000000e+00 2.775558e-17 -1.318390e-16
+## [3,]  0.000000e+00  2.775558e-17 1.000000e+00  1.110223e-16
+## [4,] -1.110223e-16 -1.318390e-16 1.110223e-16  1.000000e+00</code></pre>
+<p>We’ll have to settle for precision at 15 decimal places. Close enough!</p>
+<p>So to find the scores, we simply subtract the means from our original variables to create the data matrix <span class="math inline">\(\mathbf{X}\)</span> and compute
+<span class="math display">\[\mathbf{A}=\mathbf{X}\mathbf{V}\]</span></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="pca-in-r.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The scale function centers and scales by default</span></span>
+<span id="cb98-2"><a href="pca-in-r.html#cb98-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">=</span><span class="fu">scale</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="at">center=</span><span class="cn">TRUE</span>,<span class="at">scale=</span><span class="cn">FALSE</span>)</span>
+<span id="cb98-3"><a href="pca-in-r.html#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data.frame from matrix for plotting purposes.</span></span>
+<span id="cb98-4"><a href="pca-in-r.html#cb98-4" aria-hidden="true" tabindex="-1"></a>scores<span class="ot">=</span><span class="fu">data.frame</span>(X <span class="sc">%*%</span> eig<span class="sc">$</span>vectors)</span>
+<span id="cb98-5"><a href="pca-in-r.html#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Change default variable names</span></span>
+<span id="cb98-6"><a href="pca-in-r.html#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(scores)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Prin1&quot;</span>,<span class="st">&quot;Prin2&quot;</span>,<span class="st">&quot;Prin3&quot;</span>,<span class="st">&quot;Prin4&quot;</span>)</span>
+<span id="cb98-7"><a href="pca-in-r.html#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print coordinates/scores of first 10 observations</span></span>
+<span id="cb98-8"><a href="pca-in-r.html#cb98-8" aria-hidden="true" tabindex="-1"></a>scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
+<pre><code>##        Prin1       Prin2       Prin3        Prin4
+## 1  -2.684126 -0.31939725 -0.02791483  0.002262437
+## 2  -2.714142  0.17700123 -0.21046427  0.099026550
+## 3  -2.888991  0.14494943  0.01790026  0.019968390
+## 4  -2.745343  0.31829898  0.03155937 -0.075575817
+## 5  -2.728717 -0.32675451  0.09007924 -0.061258593
+## 6  -2.280860 -0.74133045  0.16867766 -0.024200858
+## 7  -2.820538  0.08946138  0.25789216 -0.048143106
+## 8  -2.626145 -0.16338496 -0.02187932 -0.045297871
+## 9  -2.886383  0.57831175  0.02075957 -0.026744736
+## 10 -2.672756  0.11377425 -0.19763272 -0.056295401</code></pre>
+<p>To this point, we have simply computed coordinates (scores) on a new set of axis (principal components, eigenvectors, loadings). These axis are orthogonal and are aligned with the directions of maximal variance in the data. When we consider only a subset of principal components (like 2 components accounting for 97% of the variance), then we are projecting the data onto a lower dimensional space. Generally, this is one of the primary goals of PCA: Project the data down into a lower dimensional space (<em>onto the span of the principal components</em>) while keeping the maximum amount of information (i.e. variance).</p>
+<p>Thus, we know that almost 98% of the data’s variance can be seen in two-dimensions using the first two principal components. Let’s go ahead and see what this looks like:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="pca-in-r.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(scores<span class="sc">$</span>Prin1, scores<span class="sc">$</span>Prin2, </span>
+<span id="cb100-2"><a href="pca-in-r.html#cb100-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Data Projected on First 2 Principal Components&quot;</span>,</span>
+<span id="cb100-3"><a href="pca-in-r.html#cb100-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;First Principal Component&quot;</span>, </span>
+<span id="cb100-4"><a href="pca-in-r.html#cb100-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Second Principal Component&quot;</span>, </span>
+<span id="cb100-5"><a href="pca-in-r.html#cb100-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species])</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-173-1.png" width="480" /></p>
+</div>
+<div id="pca-functions-in-r" class="section level3" number="11.0.4">
+<h3><span class="header-section-number">11.0.4</span> PCA functions in R</h3>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="pca-in-r.html#cb101-1" aria-hidden="true" tabindex="-1"></a>irispca<span class="ot">=</span><span class="fu">princomp</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb101-2"><a href="pca-in-r.html#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance Explained</span></span>
+<span id="cb101-3"><a href="pca-in-r.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(irispca)</span></code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1     Comp.2     Comp.3      Comp.4
+## Standard deviation     2.0494032 0.49097143 0.27872586 0.153870700
+## Proportion of Variance 0.9246187 0.05306648 0.01710261 0.005212184
+## Cumulative Proportion  0.9246187 0.97768521 0.99478782 1.000000000</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="pca-in-r.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvectors:</span></span>
+<span id="cb103-2"><a href="pca-in-r.html#cb103-2" aria-hidden="true" tabindex="-1"></a>irispca<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##              Comp.1 Comp.2 Comp.3 Comp.4
+## Sepal.Length  0.361  0.657  0.582  0.315
+## Sepal.Width          0.730 -0.598 -0.320
+## Petal.Length  0.857 -0.173        -0.480
+## Petal.Width   0.358        -0.546  0.754
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## Proportion Var   0.25   0.25   0.25   0.25
+## Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="pca-in-r.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordinates of data along PCs:</span></span>
+<span id="cb105-2"><a href="pca-in-r.html#cb105-2" aria-hidden="true" tabindex="-1"></a>irispca<span class="sc">$</span>scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
+<pre><code>##          Comp.1      Comp.2      Comp.3       Comp.4
+##  [1,] -2.684126  0.31939725  0.02791483  0.002262437
+##  [2,] -2.714142 -0.17700123  0.21046427  0.099026550
+##  [3,] -2.888991 -0.14494943 -0.01790026  0.019968390
+##  [4,] -2.745343 -0.31829898 -0.03155937 -0.075575817
+##  [5,] -2.728717  0.32675451 -0.09007924 -0.061258593
+##  [6,] -2.280860  0.74133045 -0.16867766 -0.024200858
+##  [7,] -2.820538 -0.08946138 -0.25789216 -0.048143106
+##  [8,] -2.626145  0.16338496  0.02187932 -0.045297871
+##  [9,] -2.886383 -0.57831175 -0.02075957 -0.026744736
+## [10,] -2.672756 -0.11377425  0.19763272 -0.056295401</code></pre>
+<p>All of the information we just computed is correct. One additional feature that R users have created is the <strong>biplot</strong>. The PCA biplot allows us to see where our original variables fall in the space of the principal components. Highly correlated variables will fall along the same direction (or exactly opposite directions) as a change in one of these variables correlates to a change in the other. Uncorrelated variables will appear further apart. The length of the variable vectors on the biplot tell us the degree to which variability in variable is explained in that direction. Shorter vectors have less variability than longer vectors. So in the biplot below, petal width and petal length point in the same direction indicating that these variables share a relatively high degree of correlation. However, the vector for petal width is much shorter than that of petal length, which means you can expect a higher degree of change in petal length as you proceed to the right along PC1. PC1 explains more of the variance in petal length than it does petal width. If we were to imagine a third PC orthogonal to the plane shown, petal width is likely to exist at much larger angle off the plane - here, it is being projected down from that 3-dimensional picture.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="pca-in-r.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(irispca, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-175-1.png" width="960" /></p>
+<p>We can examine some of the outlying observations to see how they align with these projected variable directions. It helps to compare them to the quartiles of the data. Also keep in mind the direction of the arrows in the plot. If the arrow points down then the positive direction is down - indicating observations which are greater than the mean. Let’s pick out observations 42 and 132 and see what the actual data points look like in comparison to the rest of the sample population.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="pca-in-r.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code></pre></div>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="pca-in-r.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Consider orientation of outlying observations:</span></span>
+<span id="cb110-2"><a href="pca-in-r.html#cb110-2" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">42</span>, ]</span></code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 42          4.5         2.3          1.3         0.3  setosa</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="pca-in-r.html#cb112-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">132</span>, ]</span></code></pre></div>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 132          7.9         3.8          6.4           2 virginica</code></pre>
+</div>
+<div id="variable-clustering-with-pca" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Variable Clustering with PCA</h2>
+<p>The direction arrows on the biplot are merely the coefficients of the original variables when combined to make principal components. Don’t forget that principal components are simply linear combinations of the original variables.</p>
+<p>For example, here we have the first principal component (the first column of <span class="math inline">\(\V\)</span>), <span class="math inline">\(\mathbf{v}_1\)</span> as:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="pca-in-r.html#cb114-1" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>vectors[,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##   0.36138659  -0.08452251   0.85667061   0.35828920</code></pre>
+<p>This means that
+<span class="math display">\[comp_1 = 0.36Sepal.Length-0.08Sepal.Width+0.85Petal.Length +0.35Petal.Width\]</span>
+the same equation could be written for each of the principal components, <span class="math inline">\(comp_1,\dots, comp_4\)</span>.</p>
+<p>Essentially, we have a system of equations telling us that the rows of <span class="math inline">\(\V^T\)</span> (i.e. the columns of <span class="math inline">\(\V\)</span>) give us the weights of each variable for each principal component:
+<span class="math display">\[\begin{bmatrix} comp_1\\comp_2\\comp_3\\comp_4\end{bmatrix} = \mathbf{V}^T\begin{bmatrix}Sepal.Length\\Sepal.Width\\Petal.Length\\Petal.Width\end{bmatrix}\]</span></p>
+<p>Thus, if want the coordinates of our original variables in terms of Principal Components (so that we can plot them as we do in the biplot) we need to look no further than the rows of the matrix <span class="math inline">\(\mathbf{V}\)</span> as
+<span class="math display">\[\begin{bmatrix}Sepal.Length\\Sepal.Width\\Petal.Length\\Petal.Width\end{bmatrix} =\mathbf{V}\begin{bmatrix} comp_1\\comp_2\\comp_3\\comp_4\end{bmatrix}\]</span>
+means that the rows of <span class="math inline">\(\mathbf{V}\)</span> give us the coordinates of our original variables in the PCA space.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="pca-in-r.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First entry in each eigenvectors give coefficients for Variable 1:</span></span>
+<span id="cb116-2"><a href="pca-in-r.html#cb116-2" aria-hidden="true" tabindex="-1"></a>eig<span class="sc">$</span>vectors[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## [1]  0.3613866 -0.6565888 -0.5820299  0.3154872</code></pre>
+<p><span class="math display">\[Sepal.Length = 0.361 comp_1 - 0.657 comp_2 - 0.582 comp_3 + 0.315 comp_4\]</span>
+You can see this on the biplot. The vector shown for Sepal.Length is (0.361, -0.656), which is the two dimensional projection formed by throwing out components 3 and 4.</p>
+<p>Variables which lie upon similar directions in the PCA space tend to change in a similar fashion. We’d consider Petal.Width and Petal.Length as a cluster of variables. It does not appear that we need both in our model.</p>
+<div id="correlation-pca" class="section level3" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Correlation PCA</h3>
+<p>We can complete the same analysis using the correlation matrix. I’ll leave it as an exercise to compute the Principal Component loadings and scores and variance explained directly from eigenvectors and eigenvalues. You should do this and compare your results to the R output. <em>(Beware: you must transform your data before solving for the scores. With the covariance version, this meant centering - for the correlation version, this means standardization as well)</em></p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="pca-in-r.html#cb118-1" aria-hidden="true" tabindex="-1"></a>irispca2<span class="ot">=</span><span class="fu">princomp</span>(iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">cor=</span><span class="cn">TRUE</span>)</span>
+<span id="cb118-2"><a href="pca-in-r.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(irispca2)</span></code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1    Comp.2     Comp.3      Comp.4
+## Standard deviation     1.7083611 0.9560494 0.38308860 0.143926497
+## Proportion of Variance 0.7296245 0.2285076 0.03668922 0.005178709
+## Cumulative Proportion  0.7296245 0.9581321 0.99482129 1.000000000</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="pca-in-r.html#cb120-1" aria-hidden="true" tabindex="-1"></a>irispca2<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##              Comp.1 Comp.2 Comp.3 Comp.4
+## Sepal.Length  0.521  0.377  0.720  0.261
+## Sepal.Width  -0.269  0.923 -0.244 -0.124
+## Petal.Length  0.580        -0.142 -0.801
+## Petal.Width   0.565        -0.634  0.524
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## Proportion Var   0.25   0.25   0.25   0.25
+## Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="pca-in-r.html#cb122-1" aria-hidden="true" tabindex="-1"></a>irispca2<span class="sc">$</span>scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,]</span></code></pre></div>
+<pre><code>##          Comp.1     Comp.2      Comp.3      Comp.4
+##  [1,] -2.264703  0.4800266  0.12770602  0.02416820
+##  [2,] -2.080961 -0.6741336  0.23460885  0.10300677
+##  [3,] -2.364229 -0.3419080 -0.04420148  0.02837705
+##  [4,] -2.299384 -0.5973945 -0.09129011 -0.06595556
+##  [5,] -2.389842  0.6468354 -0.01573820 -0.03592281
+##  [6,] -2.075631  1.4891775 -0.02696829  0.00660818
+##  [7,] -2.444029  0.0476442 -0.33547040 -0.03677556
+##  [8,] -2.232847  0.2231481  0.08869550 -0.02461210
+##  [9,] -2.334640 -1.1153277 -0.14507686 -0.02685922
+## [10,] -2.184328 -0.4690136  0.25376557 -0.03989929</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="pca-in-r.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(irispca2<span class="sc">$</span>scores[,<span class="dv">1</span>],irispca2<span class="sc">$</span>scores[,<span class="dv">2</span>],</span>
+<span id="cb124-2"><a href="pca-in-r.html#cb124-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Data Projected on First 2  Principal Components&quot;</span>,</span>
+<span id="cb124-3"><a href="pca-in-r.html#cb124-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;First Principal Component&quot;</span>,</span>
+<span id="cb124-4"><a href="pca-in-r.html#cb124-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Second Principal Component&quot;</span>,</span>
+<span id="cb124-5"><a href="pca-in-r.html#cb124-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species])</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="pca-in-r.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(irispca2)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<p>Here you can see the direction vectors of the original variables are relatively uniform in length in the PCA space. This is due to the standardization in the correlation matrix. However, the general message is the same: Petal.Width and Petal.Length Cluster together, and many of the same observations appear “on the fray” on the PCA space - although not all of them!</p>
+</div>
+<div id="which-projection-is-better" class="section level3" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Which Projection is Better?</h3>
+<p>What do you think? It depends on the task, and it depends on the data. One flavor of PCA is not “better” than the other. Correlation PCA is appropriate when the scales of your attributes differ wildly, and covariance PCA would be inappropriate in that situation. But in all other scenarios, when the scales of our attributes are roughly the same, we should always consider both dimension reductions and make a decision based upon the resulting output (variance explained, projection plots, loadings).</p>
+<p>For the iris data, The results in terms of variable clustering are pretty much the same. For clustering/classifying the 3 species of flowers, we can see better separation in the covariance version.</p>
+</div>
+<div id="beware-of-biplots" class="section level3" number="11.1.3">
+<h3><span class="header-section-number">11.1.3</span> Beware of biplots</h3>
+<p>Be careful not to draw improper conclusions from biplots. Particularly, be careful about situations where the first two principal components do not summarize the majority of the variance. If a large amount of variance is captured by the 3rd or 4th (or higher) principal components, then we must keep in mind that the variable projections on the first two principal components are flattened out versions of a higher dimensional picture. If a variable vector appears short in the 2-dimensional projection, it means one of two things:</p>
+<ul>
+<li>That variable has small variance</li>
+<li>That variable appears to have small variance when depicted in the space of the first two principal components, but truly has a larger variance which is represented by 3rd or higher principal components.</li>
+</ul>
+<p>Let’s take a look at an example of this. We’ll generate 500 rows of data on 4 nearly independent normal random variables. Since these variables are uncorrelated, we might expect that the 4 orthogonal principal components will line up relatively close to the original variables. If this doesn’t happen, then at the very least we can expect the biplot to show little to no correlation between the variables. We’ll give variables <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span> the largest variance. Multiple runs of this code will generate different results with similar implications.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="pca-in-r.html#cb126-1" aria-hidden="true" tabindex="-1"></a>means<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb126-2"><a href="pca-in-r.html#cb126-2" aria-hidden="true" tabindex="-1"></a>sigmas<span class="ot">=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">8</span>)</span>
+<span id="cb126-3"><a href="pca-in-r.html#cb126-3" aria-hidden="true" tabindex="-1"></a>sample.size<span class="ot">=</span><span class="dv">500</span></span>
+<span id="cb126-4"><a href="pca-in-r.html#cb126-4" aria-hidden="true" tabindex="-1"></a>data<span class="ot">=</span><span class="fu">mapply</span>(<span class="cf">function</span>(mu,sig){<span class="fu">rnorm</span>(mu,sig, <span class="at">n=</span>sample.size)},<span class="at">mu=</span>means,<span class="at">sig=</span>sigmas)</span>
+<span id="cb126-5"><a href="pca-in-r.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span></code></pre></div>
+<pre><code>##             [,1]       [,2]         [,3]         [,4]
+## [1,]  1.00000000 0.07045802 -0.064760105  0.059654159
+## [2,]  0.07045802 1.00000000  0.045090062  0.129466634
+## [3,] -0.06476010 0.04509006  1.000000000 -0.005407589
+## [4,]  0.05965416 0.12946663 -0.005407589  1.000000000</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="pca-in-r.html#cb128-1" aria-hidden="true" tabindex="-1"></a>pc<span class="ot">=</span><span class="fu">princomp</span>(data,<span class="at">scale=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: In princomp.default(data, scale = TRUE) :
+##  extra argument &#39;scale&#39; will be disregarded</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="pca-in-r.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pc)</span></code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1    Comp.2    Comp.3    Comp.4
+## Standard deviation     9.5037345 9.0263258 7.7954681 6.5557633
+## Proportion of Variance 0.3277928 0.2956874 0.2205440 0.1559758
+## Cumulative Proportion  0.3277928 0.6234802 0.8440242 1.0000000</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="pca-in-r.html#cb132-1" aria-hidden="true" tabindex="-1"></a>pc<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##      Comp.1 Comp.2 Comp.3 Comp.4
+## [1,]         0.161         0.985
+## [2,] -0.280  0.786 -0.540 -0.108
+## [3,] -0.955 -0.269              
+## [4,]         0.533  0.837       
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## Proportion Var   0.25   0.25   0.25   0.25
+## Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="pca-in-r.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pc)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-181"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-181-1.png" alt="BiPlot of Iris Data" width="672" />
+<p class="caption">
+Figure 11.1: BiPlot of Iris Data
+</p>
+</div>
+<p>Obviously, the wrong conclusion to make from this biplot is that Variables 1 and 4 are correlated. Variables 1 and 4 do not load highly on the first two principal components - in the <em>whole</em> 4-dimensional principal component space they are nearly orthogonal to each other and to variables 1 and 2. Thus, their orthogonal projections appear near the origin of this 2-dimensional subspace.</p>
+<p>The moral of the story: Always corroborate your results using the variable loadings and the amount of variation explained by each variable.</p>
+</div>
+</div>
+<div id="pca-as-svd" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> PCA as SVD</h2>
+<p>Let’s demonstrate the fact that PCA and SVD are equivalent by computing the SVD of the centered iris data:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="pca-in-r.html#cb135-1" aria-hidden="true" tabindex="-1"></a>X<span class="ot">=</span><span class="fu">scale</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="at">center=</span><span class="cn">TRUE</span>,<span class="at">scale=</span><span class="cn">FALSE</span>)</span>
+<span id="cb135-2"><a href="pca-in-r.html#cb135-2" aria-hidden="true" tabindex="-1"></a>irisSVD<span class="ot">=</span><span class="fu">svd</span>(X)</span>
+<span id="cb135-3"><a href="pca-in-r.html#cb135-3" aria-hidden="true" tabindex="-1"></a>u<span class="ot">=</span>irisSVD<span class="sc">$</span>u</span>
+<span id="cb135-4"><a href="pca-in-r.html#cb135-4" aria-hidden="true" tabindex="-1"></a>d<span class="ot">=</span><span class="fu">diag</span>(irisSVD<span class="sc">$</span>d)</span>
+<span id="cb135-5"><a href="pca-in-r.html#cb135-5" aria-hidden="true" tabindex="-1"></a>SVDpcs<span class="ot">=</span>irisSVD<span class="sc">$</span>v</span>
+<span id="cb135-6"><a href="pca-in-r.html#cb135-6" aria-hidden="true" tabindex="-1"></a>SVDscores<span class="ot">=</span>u<span class="sc">%*%</span>d</span>
+<span id="cb135-7"><a href="pca-in-r.html#cb135-7" aria-hidden="true" tabindex="-1"></a>irisPCA<span class="ot">=</span><span class="fu">princomp</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb135-8"><a href="pca-in-r.html#cb135-8" aria-hidden="true" tabindex="-1"></a>irisPCA<span class="sc">$</span>scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,]</span></code></pre></div>
+<pre><code>##         Comp.1      Comp.2      Comp.3       Comp.4
+## [1,] -2.684126  0.31939725  0.02791483  0.002262437
+## [2,] -2.714142 -0.17700123  0.21046427  0.099026550
+## [3,] -2.888991 -0.14494943 -0.01790026  0.019968390
+## [4,] -2.745343 -0.31829898 -0.03155937 -0.075575817
+## [5,] -2.728717  0.32675451 -0.09007924 -0.061258593
+## [6,] -2.280860  0.74133045 -0.16867766 -0.024200858
+## [7,] -2.820538 -0.08946138 -0.25789216 -0.048143106
+## [8,] -2.626145  0.16338496  0.02187932 -0.045297871</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="pca-in-r.html#cb137-1" aria-hidden="true" tabindex="-1"></a>SVDscores[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,]</span></code></pre></div>
+<pre><code>##           [,1]        [,2]        [,3]         [,4]
+## [1,] -2.684126 -0.31939725  0.02791483  0.002262437
+## [2,] -2.714142  0.17700123  0.21046427  0.099026550
+## [3,] -2.888991  0.14494943 -0.01790026  0.019968390
+## [4,] -2.745343  0.31829898 -0.03155937 -0.075575817
+## [5,] -2.728717 -0.32675451 -0.09007924 -0.061258593
+## [6,] -2.280860 -0.74133045 -0.16867766 -0.024200858
+## [7,] -2.820538  0.08946138 -0.25789216 -0.048143106
+## [8,] -2.626145 -0.16338496  0.02187932 -0.045297871</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="pca-in-r.html#cb139-1" aria-hidden="true" tabindex="-1"></a>irisPCA<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##              Comp.1 Comp.2 Comp.3 Comp.4
+## Sepal.Length  0.361  0.657  0.582  0.315
+## Sepal.Width          0.730 -0.598 -0.320
+## Petal.Length  0.857 -0.173        -0.480
+## Petal.Width   0.358        -0.546  0.754
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## Proportion Var   0.25   0.25   0.25   0.25
+## Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="pca-in-r.html#cb141-1" aria-hidden="true" tabindex="-1"></a>SVDpcs</span></code></pre></div>
+<pre><code>##             [,1]        [,2]        [,3]       [,4]
+## [1,]  0.36138659 -0.65658877  0.58202985  0.3154872
+## [2,] -0.08452251 -0.73016143 -0.59791083 -0.3197231
+## [3,]  0.85667061  0.17337266 -0.07623608 -0.4798390
+## [4,]  0.35828920  0.07548102 -0.54583143  0.7536574</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pca.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pcaapp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/03-PCA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/03-PCA.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 7 Least Squares |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 7 Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 7 Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="solvesys.html"/>
+<link rel="next" href="lsapp.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,107 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="leastsquares" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Least Squares</h1>
+<p>The least squares problem arises in almost all areas where mathematics is applied. Statistically, the idea is to find an approximate mathematical relationship between predictor and target variables such that the sum of squared errors between the true value and the approximation is minimized. In two dimensions, the goal would be to develop a line as depicted in  such that the sum of squared vertical distances (the residuals, in green) between the true data (in red) and the mathematical prediction (in blue) is minimized.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
+<img src="figs/lsreg.pdf" alt="Least Squares Illustrated in 2 dimensions"  />
+<p class="caption">
+Figure 7.1: Least Squares Illustrated in 2 dimensions
+</p>
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<p>If we let <span class="math inline">\(\bo{r}\)</span> be a vector containing the residual values <span class="math inline">\((r_1,r_2,\dots,r_n)\)</span> then the sum of squared residuals can be written in linear algebraic notation as
+<span class="math display">\[\sum_{i=1}^n r_i^2 = \bo{r}^T\bo{r}=(\y-\hat{\y})^T(\y-\hat{\y}) = \|\y-\hat{\y}\|^2\]</span></p>
+<p>Suppose we want to regress our target variable <span class="math inline">\(\y\)</span> on <span class="math inline">\(p\)</span> predictor variables, <span class="math inline">\(\x_1,\x_2,\dots,\x_p\)</span>. If we have <span class="math inline">\(n\)</span> observations, then the ideal situation would be to find a vector of parameters <span class="math inline">\(\boldsymbol\beta\)</span> containing an intercept, <span class="math inline">\(\beta_0\)</span> along with <span class="math inline">\(p\)</span> slope parameters, <span class="math inline">\(\beta_1,\dots,\beta_p\)</span> such that
+<span class="math display">\[\begin{equation}
+\underbrace{\bordermatrix{1&amp;\x_1 &amp; \x_2 &amp; \dots &amp; \x_p}{obs_1\\obs_2\\ \vdots \\ obs_n}{\left(\begin{matrix}
+                      1 &amp;  x_{11} &amp; x_{12} &amp; \dots &amp; x_{1p}\\
+                     1 &amp; x_{21} &amp; x_{22} &amp; \dots &amp; x_{2p}\\
+                      \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp;\vdots\\
+                     1 &amp; x_{n1} &amp; x_{n2} &amp; \dots &amp; x_{np} \end{matrix}\right) }}_{\LARGE\mathbf{X}}
+                      \underbrace{\left(\begin{matrix} \beta_0\\ \beta_1\\  \vdots \\ \beta_p \end{matrix}\right)}_{\LARGE $\boldsymbol\beta$} 
+                      =  \underbrace{\pm y_0\\ y_1 \\ \vdots \\ y_n \mp}_{\LARGE $\y$} 
+\end{equation}\]</span></p>
+<p>With many more observations than variables, this system of equations will not, in practice, have a solution. Thus, our goal becomes finding a vector of parameters <span class="math inline">\(\hat{\bbeta}\)</span> such that <span class="math inline">\(\X\hat{\bbeta}=\hat{\y}\)</span> comes as close to <span class="math inline">\(\y\)</span> as possible.
+Using the design matrix, <span class="math inline">\(\X\)</span>, the least squares solution <span class="math inline">\(\hat{\boldsymbol\beta}\)</span> is the one for which
+<span class="math display">\[\|\y-\X\hat{\boldsymbol\beta} \|^2=\|\y-\hat{\y}\|^2\]</span> is minimized. Theorem  characterizes the solution to the least squares problem.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem @ref().6: Least Squares Problem and Solution
+</div>
+<div class="Stext">
+<p>For an <span class="math inline">\(n\times m\)</span> matrix <span class="math inline">\(\X\)</span> and <span class="math inline">\(n\times 1\)</span> vector <span class="math inline">\(\y\)</span>, let <span class="math inline">\(\bo{r} = \X\widehat{\boldsymbol\beta} - \y\)</span>. The least squares problem is to find a vector <span class="math inline">\(\widehat{\boldsymbol\beta}\)</span> that minimizes the quantity
+<span class="math display">\[\sum_{i=1}^n r_i^2 = \|\y-\X\widehat{\boldsymbol\beta} \|^2.\]</span></p>
+<p>Any vector <span class="math inline">\(\widehat{\bbeta}\)</span> which provides a minimum value for this expression is called a <em>least-squares solution</em>.</p>
+<ul>
+<li>The set of all least squares solutions is precisely the set of solutions to the so-called <strong>normal equations</strong>, <span class="math display">\[\X^T\X\widehat{\bbeta} = \X^T\y.\]</span></li>
+<li>There is a unique least squares solution if and only if <span class="math inline">\(rank(\X)=m\)</span> (i.e. linear independence of variables or no perfect multicollinearity!), in which case <span class="math inline">\(\X^T\X\)</span> is invertible and the solution is given by
+<span class="math display">\[\widehat{\bbeta} = (\X^T\X)^{-1}\X^T\y\]</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example @ref().8: Solving a Least Squares Problem
+</div>
+<div class="S2text">
+In 2014, data was collected regarding the percentage of linear algebra exercises done by students and the grade they received on their examination. Based on this data, what is the expected effect of completing an additional 10% of the exercises on a students exam grade?\
+<p>To find the least squares regression line, we want to solve the equation <span class="math inline">\(\X\bbeta = \y\)</span>:
+<span class="math display">\[
+\pm 1 &amp; 20\\
+ 1 &amp; 100\\
+  1 &amp; 90\\
+   1 &amp; 70\\
+    1 &amp; 50\\
+     1 &amp; 10\\
+      1 &amp; 30\mp \pm \beta_0 \\ \beta_1 \mp = \pm 55\\100\\100\\70\\75\\25\\60 \mp
+      \]</span></p>
+<p>This system is obviously inconsistent. Thus, we want to find the least squares solution <span class="math inline">\(\hat{\bbeta}\)</span> by solving <span class="math inline">\(\X^T\X\hat{\bbeta}=\X^T\y\)</span>:</p>
+<p><span class="math display">\[\begin{eqnarray}
+\small
+\pm 1&amp;1&amp;1&amp;1&amp;1&amp;1&amp;1 \\20&amp;100&amp;90&amp;70&amp;50&amp;10&amp;30 \mp\pm 1 &amp; 20\\
+ 1 &amp; 100\\
+  1 &amp; 90\\
+   1 &amp; 70\\
+    1 &amp; 50\\
+     1 &amp; 10\\
+      1 &amp; 30\mp \pm \beta_0 \\ \beta_1 \mp &amp;=&amp;\pm 1&amp;1&amp;1&amp;1&amp;1&amp;1&amp;1 \\20&amp;100&amp;90&amp;70&amp;50&amp;10&amp;30 \mp \pm 55\\100\\100\\70\\75\\25\\60 \mp \cr
+ $$\pm 7 &amp; 370\\370&amp;26900 \mp     \pm \beta_0 \\ \beta_1 \mp = \pm 485 \\ 30800\mp$$
+\end{eqnarray}\]</span></p>
+<p>Now, since multicollinearity was not a problem, we can simply find the inverse of <span class="math inline">\(\X^T\X\)</span> and multiply it on both sides of the equation:
+<span class="math display">\[\pm 7 &amp; 370\\370&amp;26900 \mp^{-1}= \pm 0.5233 &amp;  -0.0072\\ -0.0072 &amp; 0.0001 \mp\]</span>
+and so <span class="math display">\[\pm \beta_0 \\ \beta_1 \mp = \pm  0.5233 &amp;  -0.0072\\ -0.0072 &amp; 0.0001 \mp \pm  485 \\ 30800\mp = \pm 32.1109 \\0.7033\mp\]</span></p>
+<p>Thus, for each additional 10% of exercises completed, exam grades are expected to increase by about 7 points. The data along with the regression line <span class="math display">\[grade=32.1109+0.7033percent\_exercises\]</span> is shown below.</p>
+<center>
+<img src=figs/grades.jpf width=50%/>
+</center>
+</div>
+</div>
+</div>
+<p>The solution of the normal equations has a nice geometrical interpretation. It involves the idea of orthogonal projection, a concept which will be useful for understanding future topics.</p>
+<p>In order for a system of equations, <span class="math inline">\(\A\x=\b\)</span> to have a solution, <span class="math inline">\(\b\)</span> must be a linear combination of columns of <span class="math inline">\(\A\)</span>. That is simply the definition of matrix multiplication and equality. If <span class="math inline">\(\A\)</span> is <span class="math inline">\(m\times n\)</span> then
+<span class="math display">\[\A\x=\b \Longrightarrow \b = x_1\A_1+x_2\A_2+\dots+x_n\A_n.\]</span>
+As discussed in Chapter , another way to say this is that <span class="math inline">\(\b\)</span> is in the <span class="math inline">\(span\)</span> of the columns of <span class="math inline">\(\A\)</span>. The <span class="math inline">\(span\)</span> of the columns of <span class="math inline">\(\A\)</span> is called the <strong>column space</strong> of <span class="math inline">\(\A\)</span>. In Least-Squares applications, the problem is that <span class="math inline">\(\b\)</span> is <em>not</em> in the column space of <span class="math inline">\(\A\)</span>. In essence, we want to find the vector <span class="math inline">\(\hat{\b}\)</span> that is <em>closest</em> to <span class="math inline">\(\b\)</span> but exists in the column space of <span class="math inline">\(\A\)</span>. Then we know that <span class="math inline">\(\A\hat{\x}=\hat{\b}\)</span> <em>does</em> have a unique solution, and that the right hand side of the equation comes as close to the original data as possible. By multiplying both sides of the original equation by <span class="math inline">\(\A^T\)</span> what we are really doing is <em>projecting</em> <span class="math inline">\(\b\)</span> orthogonally onto the column space of <span class="math inline">\(\A\)</span>. We should think of the column space as a flat surface (perhaps a plane) in space, and <span class="math inline">\(\b\)</span> as a point that exists off of that flat surface. There are many ways to draw a line from a point to plane, but the shortest distance would always be travelled perpendicular (orthogonal) to the plane. You may recall from undergraduate calculus or physics that a <em>normal</em> vector to a plane is a vector that is orthogonal to that plane. The normal equations, <span class="math inline">\(\A^T\A\x=\A^T\b\)</span>, help us find the closest point to <span class="math inline">\(\b\)</span> that belongs to the column space of <span class="math inline">\(\A\)</span> by means of an orthogonal projection. This geometrical development is depicted in Figure .</p>
+<figure id="lsproj">
+<center>
+<img src=figs/lsproj.pdf width=0.43%/>
+<figcaption>
+The normal equations yield the vector <span class="math inline">\(\hat{\b}\)</span> in the column space of <span class="math inline">\(\A\)</span> which is closest to the original right hand side <span class="math inline">\(\b\)</span> vector.
+</figcaption>
+</center>
+</figure>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="solvesys.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lsapp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +519,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/019-OLStext.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +527,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/019-OLStext.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

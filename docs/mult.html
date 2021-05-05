@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Matrix Arithmetic |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Matrix Arithmetic |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="MSALogo.png" />
+  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="github-repo" content="rstudio/linalg-master" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Matrix Arithmetic |  Linear Algebra for Data Science   with examples in R and Python" />
+  
+  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="twitter:image" content="MSALogo.png" />
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-05-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="multapp.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R and Python </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>2.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>2.3</b> Describing Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>2.4</b> Vectors</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>2.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>2.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>2.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>2.9</b> List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>3</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>3.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>3.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>3.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="3.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>3.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="3.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>4</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>4.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="4.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>4.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>4.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="4.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>5</b> R Programming Basics</a></li>
+<li class="chapter" data-level="6" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>6</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>6.1</b> Gaussian Elimination</a></li>
+<li class="chapter" data-level="6.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>6.2</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>6.3</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="6.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
+<li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>9</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>9.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="9.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>9.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
+<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
+Linear Algebra for Data Science <br>
+with examples in R and Python</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mult" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Matrix Arithmetic</h1>
+<div id="matrix-addition-subtraction-and-scalar-multiplication" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Matrix Addition, Subtraction, and Scalar Multiplication</h2>
+<p>Addition, subtraction, and scalar multiplication are the only operations which act <em>element-wise</em> on matrices - they are performed in a way you might expect given your previous studies.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="mult.html#mult">3</a>.1: Addition, Subtraction, and Scalar Multiplication
+</div>
+<div class="Stext">
+<p>Two matrices can be added or subtracted only when they have the same dimensions. If <span class="math inline">\(\A\)</span> and <span class="math inline">\(\B\)</span> are both <span class="math inline">\(m\times n\)</span> matrices then the (i,j) element of the sum (or difference), written <span class="math inline">\(\A _-^+ \B)_{ij}\)</span> is:</p>
+<span class="math display">\[(\A+\B)_{ij}=A_{ij}+B_{ij}\]</span>
+similarly,
+<span class="math display">\[(\A-\B)_{ij}=A_{ij}-B_{ij}\]</span>
+Multiplying a scalar by a matrix or vector also works element-wise:
+<span class="math display">\[(\alpha\A)_{ij}=\alpha A_{ij}\]</span>
+</div>
+</div>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.1: Addition, Subtraction, and Scalar Multiplication
+</div>
+<div class="S2text">
+<ol style="list-style-type: lower-alpha">
+<li><p>Compute <span class="math inline">\(\A+\B\)</span>, if possible: <span class="math display">\[\A=\pm 2 &amp; 3 &amp; -1\\1&amp;-1&amp;1\\2&amp;2&amp;1 \mp \quad \B=\pm 4 &amp; 5 &amp; 6\\-1&amp;0&amp;4\\3&amp;4&amp;3 \mp\]</span>
+<em>We can add the matrices because they have the same size.</em>
+<span class="math display">\[\A+\B = \pm 6 &amp; 8 &amp; 5\\0&amp;-1&amp;5\\5&amp;6&amp;4\mp\]</span></p></li>
+<li><p>Compute <span class="math inline">\(\A-\bo{H}\)</span>, if possible:
+<span class="math display">\[\A=\pm 1 &amp; 2\\3&amp;5 \mp \qquad \bo{H}= \pm 6 &amp; 5&amp; 10\\0.1 &amp; 0.5 &amp; 0.9 \mp\]</span>
+<em>We cannot subtract these matrices because they don’t have the same size.</em></p></li>
+<li><p>Compute <span class="math inline">\(2\A\)</span>:
+<span class="math display">\[\A=\pm 2 &amp; 3 &amp; -1\\1&amp;-1&amp;1\\2&amp;2&amp;1 \mp\]</span>
+<em>We simply multiply every element in <span class="math inline">\(\A\)</span> by 2,</em>
+<span class="math display">\[2\A=\pm 4 &amp; 6 &amp; -2\\2&amp;-2&amp;2\\4&amp;4&amp;2 \mp\]</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="sec:vectoradd" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Geometry of Vector Addition and Scalar Multiplication</h2>
+<p>You’ve already learned how vector addition works algebraically: it occurs element-wise between two vectors of the same length:
+<span class="math display">\[
+ \a+\b =\pm a_1\\ a_2\\ a_3\\ \vdots \\ a_n \mp +\pm b_1\\ b_2\\ b_3\\ \vdots \\ b_n \mp = \pm a_1+b_1\\a_2+b_2\\a_3+b_3\\ \vdots \\a_n+b_n \mp
+\]</span></p>
+<p>Geometrically, vector addition is witnessed by placing the two vectors, <span class="math inline">\(\a\)</span> and <span class="math inline">\(\b\)</span>, <em>tail-to-head</em>. The result, <span class="math inline">\(\a+\b\)</span>, is the vector from the open tail to the open head. This is called the parallelogram law and is demonstrated in Figure .</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"><embed src="figs/vectoradd.pdf" /></th>
+<th align="center"><embed src="figs/vectorsub.pdf" /></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Addition of vectors</td>
+<td align="center">Subtraction of Vectors</td>
+</tr>
+</tbody>
+</table>
+<p>When subtracting vectors as <span class="math inline">\(\a-\b\)</span> we simply add <span class="math inline">\(-\b\)</span> to <span class="math inline">\(\a\)</span>. The vector <span class="math inline">\(-\b\)</span> has the same length as <span class="math inline">\(\b\)</span> but points in the opposite direction. This vector has the same length as the one which connects the two heads of <span class="math inline">\(\a\)</span> and <span class="math inline">\(\b\)</span> as shown in Figure .</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.2: Vector Subtraction: Centering Data
+</div>
+<div class="S2text">
+<p>One thing we will do frequently in this course is consider centered and/or standardized data. To center a group of variables, we merely subtract the mean of each variable from each observation. Geometrically, this amounts to a <em>translation</em> (shift) of the data so that it’s center (or mean) is at the origin. The following graphic illustrates this process using 4 data points.</p>
+<center>
+<img src=figs/centerall.pdf width=50%/>
+</center>
+</div>
+</div>
+</div>
+<p>Scalar multiplication is another operation which acts element-wise:
+<span class="math display">\[\alpha \a = \alpha \pm a_1\\a_2\\a_3\\ \vdots \\a_n \mp = \pm \alpha a_1 \\ \alpha a_2\\ \alpha a_3 \\ \vdots \\ \alpha a_n\mp \]</span></p>
+<p>Scalar multiplication changes the length of a vector but not the overall direction (although a negative scalar will scale the vector in the opposite direction through the origin). We can see this geometric interpretation of scalar multiplication in Figure @ref{vectormult}.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-54"></span>
+<img src="figs/vectormult.pdf" alt="Geometric Effect of Scalar Multiplication"  />
+<p class="caption">
+Figure 3.1: Geometric Effect of Scalar Multiplication
+</p>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.3: Vector Scaling: Standardizing Data
+</div>
+<div class="S2text">
+Once data has been centered, it is also common to then scale the variables according to their standard deviation (or some other normalization factor). Geometrically this amounts to a proportional shrinking of the data. The following graphic illustrates this process using the same 4 data points from Example @ref{ex:centering}.
+<center>
+<img src=figs/scaleall.pdf width=50% />
+</center>
+</div>
+</div>
+</div>
+</div>
+<div id="linear-combinations" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Linear Combinations</h2>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="mult.html#mult">3</a>.2: Linear Combination
+</div>
+<div class="Stext">
+A <strong>linear combination</strong> is constructed from a set of terms <span class="math inline">\(\v_1, \v_2, \dots, \v_n\)</span> by multiplying each term by a scalar constant and adding the result:
+<span class="math display">\[\bo{c}=\alpha_1\v_1+\alpha_2 \v_2+ \dots+ \alpha_n\v_n = \sum_{i=1}^n \alpha_i \v_n\]</span>
+The coefficients <span class="math inline">\(\alpha_i\)</span> are scalar constants and the terms, <span class="math inline">\(\{\v_i\}\)</span> can be scalars, vectors, or matrices. Most often, we will consider linear combinations where the terms <span class="math inline">\(\{\v_i\}\)</span> are vectors.
+</div>
+</div>
+</div>
+<p>Linear combinations are quite simple to understand. Once the equation is written, we can consider the expression as a breakdown into parts.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.4: Linear Combination
+</div>
+<div class="S2text">
+The simplest linear combination might involve columns of the identity matrix:
+<span class="math display">\[\pm 3 \\ -2\\4 \mp = 3\pm 1\\0\\0 \mp -2 \pm 0\\1\\0 \mp +4 \pm 0\\0\\1 \mp\]</span>
+We can easily picture this linear combination as a ``breakdown into parts’’ where the parts give directions along the 3 coordinate axis with which we are all familiar.
+</div>
+</div>
+</div>
+<p>We don’t necessarily have to use vectors as the terms for a linear combination. Example @ref{ex:matrixlincomb} shows how we can write any <span class="math inline">\(m\times n\)</span> matrix as a linear combination of <span class="math inline">\(nm\)</span> elementary matrices.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.5: Linear Combination of Matrices
+</div>
+<div class="S2text">
+Write the matrix <span class="math inline">\(\A=\pm 1 &amp; 3\\4&amp;2 \mp\)</span> as a linear combination of the following matrices:
+<span class="math display">\[\left\lbrace \pm 1 &amp; 0\\0&amp;0 \mp,\pm 0 &amp; 1\\0&amp;0 \mp,\pm 0 &amp; 0\\1&amp;0 \mp,\pm 0 &amp; 0\\0&amp;1 \mp \right\rbrace\]</span>
+Solution:
+<span class="math display">\[\A=\pm 1 &amp; 3\\4&amp;2 \mp = 1\pm 1 &amp; 0\\0&amp;0 \mp+3\pm 0 &amp; 1\\0&amp;0 \mp+4\pm 0 &amp; 0\\1&amp;0 \mp+2\pm 0 &amp; 0\\0&amp;1 \mp\]</span>
+</div>
+</div>
+</div>
+</div>
+<div id="matrix-multiplication" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Matrix Multiplication</h2>
+<p>When we multiply matrices, we do not perform the operation element-wise as we did with addition and scalar multiplication. Matrix multiplication is, in itself, a very powerful tool for summarizing information. In fact, many of the analytical tools we will focus on in this course, like Markov Chains, Principal Components Analysis, Factor Analysis, and the Singular Value Decomposition, can all be understood more clearly with a firm grasp on matrix multiplication. Because this operation is so important, we will spend a considerable amount of energy breaking it down in many ways.</p>
+<div id="the-inner-product" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> The Inner Product</h3>
+<p>We’ll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the <em>dot product</em> in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if <span class="math inline">\(\x\)</span> is a column vector,
+<span class="math display">\[\x=\pm x_1\\x_2\\\vdots\\ x_n\mp\]</span>
+then we can automatically assume that <span class="math inline">\(\x^T\)</span> is a row vector:
+<span class="math display">\[\x^T = \pm x_1&amp;x_2&amp;\dots&amp;x_n\mp.\]</span></p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="mult.html#mult">3</a>.3: Inner Product
+</div>
+<div class="Stext">
+<p>The <strong>inner product</strong> of two vectors, <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>, written <span class="math inline">\(\x^T\y\)</span>, is defined as the sum of the product of corresponding elements in <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>:</p>
+<p><span class="math display">\[\x^T\y = \sum_{i=1}^n x_i y_i.\]</span>
+If we write this out for two vectors with 4 elements each, we’d have:</p>
+<p><span class="math display">\[\x^T\y=\pm x_1 &amp; x_2 &amp; x_3 &amp; x_4 \mp \pm y_1\\y_2\\y_3\\y_4 \mp = x_1y_1+x_2y_2+x_3y_3+x_4y_4\]</span></p>
+<em>Note: The inner product between vectors is only possible when the two vectors have the same number of elements!</em>
+</div>
+</div>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.6: Vector Inner Product
+</div>
+<div class="S2text">
+<p>Let <span class="math display">\[\x=\pm -1 \\2\\4\\0 \mp \quad \y=\pm 3 \\5\\1\\7 \mp \quad \v=\pm -3 \\-2\\5\\3\\-2 \mp \quad \u= \pm 2\\-1\\3\\-3\\-2 \mp\]</span></p>
+<p>If possible, compute the following inner products:</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\x^T\y\)</span>
+<span class="math display">\[\begin{eqnarray}
+\x^T\y &amp;=&amp;\pm -1 &amp;2&amp;4&amp;0 \mp \pm 3 \\5\\1\\7 \mp \cr &amp;=&amp; (-1)(3)+(2)(5)+(4)(1)+(0)(7) \cr &amp;=&amp; -3+10+4=\framebox{11}
+\end{eqnarray}\]</span></li>
+<li><span class="math inline">\(\x^T\v\)</span>
+This is not possible because <span class="math inline">\(\x\)</span> and <span class="math inline">\(\v\)</span> do not have the same number of elements</li>
+<li><span class="math inline">\(\v^T\u\)</span>
+<span class="math display">\[\begin{eqnarray}
+\v^T\u &amp;=&amp; \pm -3 &amp;-2&amp;5&amp;3&amp;-2 \mp \pm 2\\-1\\3\\-3\\-2 \mp  \cr &amp;=&amp; (-3)(2)+(-2)(-1)+(5)(3)+(3)(-3)+(-2)(-2) \cr &amp;=&amp; -6+2+15-9+4 = \framebox{6}
+\end{eqnarray}\]</span></li>
+</ol>
+</div>
+</div>
+</div>
+<p>It should be clear from the definition and from the previous exercise, that for all vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>,
+<span class="math display">\[\x^T\y = \y^T\x.\]</span>
+Also, if we take the inner product of a vector with itself, the result is the sum of squared elements in that vector:
+<span class="math display">\[\x^T\x = \sum_{i=1}^n x_i^2 = x_1^2 + x_2^2+ \dots + x_n^2.\]</span></p>
+<p>Now that we are comfortable multiplying a row vector (<span class="math inline">\(\x^T\)</span> in the definition) and a column vector (<span class="math inline">\(\y\)</span> in the definition), we can define multiplication for matrices in general.</p>
+</div>
+<div id="matrix-product" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Matrix Product</h3>
+<p>Matrix multiplication is nothing more than a collection of inner products done simultaneously in one operation. We must be careful when multiplying matrices because, as with vectors, the operation is not always possible. Unlike the vector inner product, the order in which you multiply matrices makes a big difference!</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="mult.html#mult">3</a>.3: Matrix Multiplication
+</div>
+<div class="Stext">
+<p>Let <span class="math inline">\(\A_{m\times n}\)</span> and <span class="math inline">\(\B_{k\times p}\)</span> be matrices. The matrix product <span class="math inline">\(\A\B\)</span> is possible if and only if <span class="math inline">\(n=k\)</span>; that is, when the number of columns in <span class="math inline">\(\A\)</span> is the same as the number of rows in <span class="math inline">\(\B\)</span>. If this condition holds, then the dimension of the product, <span class="math inline">\(\A\B\)</span> is <span class="math inline">\(m\times p\)</span> and the (ij)-entry of the product <span class="math inline">\(\A\B\)</span> is the inner product of the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(\A\)</span> and the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\B\)</span>:</p>
+<span class="math display">\[(\A\B)_{ij} = \A_{i\star}\B_{\star j}\]</span>
+</div>
+</div>
+</div>
+<p>This definition may be easier to dissect using an example:</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.7: Steps to Compute a Matrix Product
+</div>
+<div class="S2text">
+<p>Let <span class="math display">\[\A=\pm 2 &amp; 3 \\ -1 &amp; 4 \\ 5 &amp; 1 \mp \quad \mbox{and} \quad \B=\pm  0 &amp; -2 \\ 2 &amp; -3 \mp\]</span></p>
+<p>When we first get started with matrix multiplication, we often follow a few simple steps:</p>
+<ol style="list-style-type: decimal">
+<li>Write down the matrices and their dimensions. Make sure the ``inside’’ dimensions match - those corresponding to the columns of the first matrix and the rows of the second matrix:
+<span class="math display">\[\underset{(3\times \red{2})}{\A} \underset{(\red{2} \times 2)}{\B}\]</span>
+If these dimensions match, then we can multiply the matrices. If they don’t, we stop right there - multiplication is not possible.</li>
+<li>Now, look at the ``outer’’ dimensions - this will tell you the size of the resulting matrix.
+<span class="math display">\[\underset{(\blue{3}\times 2)}{\A} \underset{(2\times \blue{2})}{\B}\]</span>
+So the product <span class="math inline">\(\A\B\)</span> is a <span class="math inline">\(3\times 2\)</span> matrix.</li>
+<li>Finally, we compute the product of the matrices by multiplying each row of <span class="math inline">\(\A\)</span> by each column of <span class="math inline">\(\B\)</span> using inner products. The element in the first row and first column of the product (written <span class="math inline">\((\A\B)_{11}\)</span>) will be the inner product of the first row of <span class="math inline">\(\A\)</span> and the first column of <span class="math inline">\(\B\)</span>. Then, <span class="math inline">\((\A\B)_{12}\)</span> will be the inner product of the first row of <span class="math inline">\(\A\)</span> and the second column of <span class="math inline">\(\B\)</span>, etc.</li>
+</ol>
+<p><span class="math display">\[\begin{eqnarray}
+\A\B &amp;=&amp;\pm (2)(0)+(3)(2) &amp; (2)(-2)+(3)(-3)\\
+             (-1)(0)+(4)(2) &amp; (-1)(-2)+(4)(-3)\\
+              (5)(0)+(1)(2) &amp; (5)(-2)+(1)(-3) \mp \cr
+    &amp;=&amp; \pm 6&amp;-13\\8 &amp; -10\\2&amp;-13\mp
+\end{eqnarray}\]</span></p>
+</div>
+</div>
+</div>
+<p>Matrix multiplication is incredibly important for data analysis. You may not see why all these multiplications and additions are so useful at this point, but we will visit some basic applications shortly. For now, let’s practice so that we are prepared for the applications!</p>
+One very important thing to keep in mind is this:
+<p font-color:red>
+<strong> matrix multiplication is NOT commutative! </strong>
+</p>
+<p>As we see from the previous exercises, it’s quite common to be able to compute a product <span class="math inline">\(\A\B\)</span> where the reverse product, <span class="math inline">\(\B\A\)</span> is not even possible to compute. Even if both products are possible it is almost <em>never</em> the case that <span class="math inline">\(\A\B\)</span> equals <span class="math inline">\(\B\A\)</span>.</p>
+<div id="multiplication-by-a-diagonal-matrix" class="section level4" number="3.4.2.1">
+<h4><span class="header-section-number">3.4.2.1</span> Multiplication by a Diagonal Matrix</h4>
+<p>As we will see in the next example, multiplication by a diagonal matrix causes a very specific effect on a matrix.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.8: Multiplication by a Diagonal Matrix
+</div>
+<div class="S2text">
+Compute the following matrix product and comment on what you find in the results:
+<span class="math display">\[\D=\pm 2&amp;0&amp;0\\0&amp;3&amp;0\\0&amp;0&amp;-2 \mp \A= \pm 1&amp;2&amp;3\\1&amp;1&amp;2\\2&amp;1&amp;3 \mp\]</span>
+<span class="math display">\[\D\A=\pm 2&amp;4&amp;6\\3&amp;3&amp;6\\-4&amp;-2&amp;-6 \mp\]</span>
+In doing this multiplication, we see that the effect of multiplying the matrix <span class="math inline">\(\A\)</span> by a diagonal matrix on the left is that the rows of the matrix <span class="math inline">\(\A\)</span> are simply scaled by the entries in the diagonal matrix. You should work this computation out by hand to convince yourself that this effect will happen every time. Diagonal scaling can be important, and from now on when you see a matrix product like <span class="math inline">\(\D\A\)</span> where <span class="math inline">\(\D\)</span> is diagonal, you should automatically put together that the result is just a row-scaled version of <span class="math inline">\(\A\)</span>.
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="matrix-vector-product" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Matrix-Vector Product</h3>
+<p>A matrix-vector product works exactly the same way as matrix multiplication; after all, a vector <span class="math inline">\(\x\)</span> is nothing but an <span class="math inline">\(n\times 1\)</span> matrix. In order to multiply a matrix by a vector, again we must match the dimensions to make sure they line up correctly. For example, if we have an <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span>, we can multiply by a <span class="math inline">\(1\times m\)</span> row vector <span class="math inline">\(\v^T\)</span> on the left:
+<span class="math display">\[\v^T\A \quad \mbox{works because } \underset{ (1\times \red{m})}{\v^T} \underset{(\red{m}\times n)}{\A}\]</span>
+<span class="math display">\[\Longrightarrow \mbox{The result will be a   } 1 \times n \mbox{ row vector.}\]</span>
+or we can multiply by an <span class="math inline">\(n\times 1\)</span> column vector <span class="math inline">\(\x\)</span> on the right:</p>
+<p><span class="math display">\[\A\x \quad \mbox{works because } \underset{(m\times \red{n})}{\A}\underset{(\red{n}\times 1)}{\x} \]</span>
+<span class="math display">\[\Longrightarrow \mbox{The result will be a   } m\times 1 \mbox{ column vector.}\]</span></p>
+<p>Matrix-vector multiplication works the same way as matrix multiplication: we simply multiply rows by columns until we’ve completed the answer. In the case of <span class="math inline">\(\v^T\A\)</span>, we’d multiply the row <span class="math inline">\(\v\)</span> by each of the <span class="math inline">\(n\)</span> columns of <span class="math inline">\(\A\)</span>, carving out our solution, one entry at a time :</p>
+<p><span class="math display">\[\v^T\A = \pm \v^T\A_{*1} &amp; \v^T\acol{2} &amp; \dots &amp; \v^T\acol{n} \mp.\]</span></p>
+<p>In the case of <span class="math inline">\(\A\x\)</span>, we’d multiply each of the <span class="math inline">\(m\)</span> rows of <span class="math inline">\(\A\)</span> by the column <span class="math inline">\(\x\)</span>:</p>
+<p><span class="math display">\[\A\x = \pm \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \mp.\]</span></p>
+<p>Let’s see an example of this:</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.: Matrix-Vector Products
+</div>
+<div class="S2text">
+<p>Let <span class="math display">\[\A=\pm 2 &amp; 3 \\ -1 &amp; 4 \\ 5 &amp; 1 \mp  \quad \v=\pm 3\\2 \mp \quad \bo{q}=\pm 2\\-1\\3\mp\]</span></p>
+<p>Determine whether the following matrix-vector products are possible. When possible, compute the product.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(\A\bo{q}\)</span>
+<span class="math display">\[\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(3\times \red{2})}{\A}\underset{(\red{3}\times 1)}{\bo{q}}\]</span></p></li>
+<li><p><span class="math inline">\(\A\v\)</span>
+<span class="math display">\[
+\pm 2 &amp; 3 \\ -1 &amp; 4 \\ 5 &amp; 1 \mp \pm 3\\2 \mp = \pm 2(3)+3(2) \\  -1(3)+4(2)\\5(3)+1(2) \mp = \pm 12\\5\\17\mp
+\]</span></p></li>
+<li><p><span class="math inline">\(\bo{q}^T\A\)</span></p>
+<center>
+<p>Rather than write out the entire calculation, the blue text highlights one of the two inner products required:</p>
+</center>
+<p><span class="math display">\[
+\pm \blue{2} &amp; \blue{-1} &amp; \blue{3}\mp \pm \blue{2} &amp; 3 \\ \blue{-1} &amp; 4 \\ \blue{5} &amp; 1 \mp  =  \pm \blue{20} &amp; 5  \mp
+\]</span></p></li>
+<li><p><span class="math inline">\(\v^T\A\)</span>
+<span class="math display">\[\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(1\times \red{2})}{\v^T}\underset{(\red{3}\times 2)}{\A}\]</span></p>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="vector-outer-products" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Vector Outer Products</h2>
+<p>Whereas inner products were the product of a row vector with a column vector (think <span class="math inline">\(\x^T\y\)</span>), <strong>outer products</strong> are the product of a <em>column</em> vector with a <em>row</em> vector (think <span class="math inline">\(\x\y^T\)</span>).
+Let’s first consider the dimensions of the outcome:</p>
+<p><span class="math display">\[\underset{(m\times \red{1})}{\x} \underset{(\red{1} \times n)}{\y^T} = \bo{M}_{m\times n}\]</span></p>
+<p>So the result is a matrix! We’ll want to treat this product in the same way we treat any matrix product, by multiplying row <span class="math inline">\(\times\)</span> column until we’ve run out of rows and columns. Let’s take a look at an example:</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.10: Vector Outer Product
+</div>
+<div class="S2text">
+Let <span class="math inline">\(\x = \pm 3\\4\\-2 \mp\)</span> and <span class="math inline">\(\y=\pm 1\\5\\3 \mp\)</span>. Then,
+<span class="math display">\[\x\y^T = \pm \red{3}\\4\\-2 \mp \pm \red{1}&amp;5&amp;3 \mp = \pm \red{3}&amp;15&amp;9\\4&amp;20&amp;12\\-2&amp;-10&amp;-3\mp\]</span>
+As you can see by performing this calculation, a vector outer product will <em>always</em> produce a matrix whose rows are multiples of each other!
+</div>
+</div>
+</div>
+</div>
+<div id="the-identity-and-the-matrix-inverse" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> The Identity and the Matrix Inverse</h2>
+<p>The <em>identity matrix</em>, introduced in Section , is to matrices as the number `1’ is to scalars. It is the <strong>multiplicative identity</strong>. For any matrix (or vector) <span class="math inline">\(\A\)</span>, multiplying <span class="math inline">\(\A\)</span> by the identity matrix on either side does not change <span class="math inline">\(\A\)</span>:
+<span class="math display">\[\begin{align*}
+\A\I&amp;=\A \\
+\I\A &amp;= \A 
+\end{align*}\]</span></p>
+<p>This fact is easy to verify in light of Example . Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1. The size of the identity matrix is generally implied in context. If <span class="math inline">\(\A\)</span> is <span class="math inline">\(m\times n\)</span> then writing <span class="math inline">\(\A\I\)</span> implies that <span class="math inline">\(\I\)</span> is <span class="math inline">\(n \times n\)</span>, where as writing <span class="math inline">\(\I\A\)</span> implies <span class="math inline">\(\I\)</span> is <span class="math inline">\(m\times m\)</span>.</p>
+For <em>certain</em> square matrices <span class="math inline">\(\A\)</span>, an inverse matrix, written <span class="math inline">\(\A^{-1}\)</span>, exists such that
+<span class="math display">\[\A\A^{-1} = \I\]</span>
+<span class="math display">\[\A^{-1}\A = \I\]</span>
+It is very important to understand that not all matrices have inverses. There are 2 very important conditions that must be satisfied:
+<p>We have not yet discussed the notion of matrix rank, so the present discussion is aimed only at defining the concept of a matrix inverse rather than defining when it exists or how it is determined. For now, we want to see the analogy of the matrix inverse to our previous understanding of scalar algebra. Recall that the inverse of a non-zero scalar number is its reciprocal:
+<span class="math display">\[a^{-1} = \frac{1}{a}\]</span>
+Multiplying a scalar by its inverse yields the multiplicative identity, 1:
+<span class="math display">\[(a)(a^{-1}) = (a)(\frac{1}{a}) = 1\]</span>
+All scalars have an inverse with the exception of 0. For matrices, the idea of an inverse is quite the same - multiply a matrix on the left or right by its inverse to get the multiplicative identity, <span class="math inline">\(\I\)</span>. However, as previously stated, the matrix inverse only exists for a small subset of matrices, those that are square and full rank. Such matrices are equivalently called <strong>invertible</strong> or <strong>non-singular</strong>.</p>
+
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="mult.html#mult">3</a>.11: Don’t Cancel That!!
+</div>
+<div class="S2text">
+We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
+<span class="math display">\[\A\x=\lambda\x\]</span>
+We <font-folor:red><strong> CANNOT </strong> <font-folor:black>cancel terms from both sides. Mathematically, this operation amounts to multiplying both sides by an inverse. When the term we are canceling is a non-zero scalar, then we can proceed as usual. However, we must be careful not to assume that a matrix/vector quantity has an inverse. For example, the following operation is <strong>nonsense:</strong>
+<span class="math display">\[\require{cancel} \A\cancel{\x}=\lambda\cancel{\x}\]</span>
+Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, <span class="math inline">\(\A\)</span>, with a scalar, <span class="math inline">\(\lambda\)</span>.
+</div>
+</div>
+</div>
+</div>
+<div id="exercises-1" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Exercises</h2>
+<p><strong>1.</strong> On a coordinate plane, draw the vectors <span class="math inline">\(\a = \pm 1\\2\mp\)</span> and <span class="math inline">\(\b=\pm 0\\1\mp\)</span> and then draw <span class="math inline">\(\bo{c}=\a+\b\)</span>. Make dotted lines which illustrate how the point/vector <span class="math inline">\(\bo{c}\)</span> can be reached by connecting the vectors a and b ``tail-to-head’’.
+2. Use the following vectors to answer the questions:
+<span class="math display">\[
+\v=\pm 6\\-1\mp \quad \bo{u}=\pm -2\\1\mp \quad \x=\pm 4\\2\\1\mp \quad \y=\pm-1\\-2\\-3\mp \quad \e=\pm 1\\1\\1\mp
+\]</span>
+<strong>a.</strong> Compute the following linear combinations, if possible:
+- <span class="math inline">\(2\u+3\v=\)</span>
+- <span class="math inline">\(\x-2\y+\e=\)</span>
+- <span class="math inline">\(-2\u-\v+\e=\)</span>
+- <span class="math inline">\(\u+\e=\)</span>
+<strong>b.</strong> Compute the following inner products, if possible:
+- <span class="math inline">\(\u^T\v=\)</span>
+- <span class="math inline">\(\x^T\x=\)</span>
+- <span class="math inline">\(\e^T\y=\)</span>
+- <span class="math inline">\(\x^T\u=\)</span>
+- <span class="math inline">\(\x^T\e=\)</span>
+- <span class="math inline">\(\y^T\e=\)</span>
+- <span class="math inline">\(\v^T\x=\)</span>
+- <span class="math inline">\(\e^T\v=\)</span>
+<strong>c.</strong> What happens when you take the inner product of a vector with <span class="math inline">\(\e\)</span>?
+<strong>d.</strong> What happens when you take the inner product of a vector with itself (as in <span class="math inline">\(\x^T\x\)</span>)?
+<strong>3.</strong> Use the following matrices to answer the questions:
+<span class="math display">\[\A=\pm 1&amp;3&amp;8\\3&amp;0&amp;-2\\8&amp;-2&amp;-3 \mp \quad \bo{M}=\pm 1&amp;8&amp;-2&amp;5\\2&amp;8&amp;1&amp;7 \mp \quad 
+\D = \pm 1&amp;0&amp;0\\0&amp;5&amp;0\\0&amp;0&amp;3\mp \]</span>
+<span class="math display">\[
+\bo{H}=\pm 2&amp;-1\\1&amp;3 \mp \quad \bo{W}=\pm 1&amp;1&amp;1&amp;1\\2&amp;2&amp;2&amp;2\\3&amp;3&amp;3&amp;3\mp
+\]</span>
+<strong>a.</strong> Circle the matrix products that are possible and specify their resulting dimensions:</p>
+<pre><code>  - $\A\M$ 
+  - $\A\bo{W}$ 
+  - $\bo{W}\D$
+  - $\bo{W}^T\D$
+  - $\bo{H}\M$
+  - $\bo{M}\bo{H}$
+  - $\bo{M}^T\bo{H}^T$
+  - $\D\bo{W}$
+__b.__ Compute the following matrix products:</code></pre>
+<p><span class="math display">\[\bo{H}\M\quad \mbox{and} \quad \A\D\]</span>
+<strong>c.</strong> From the previous computation, <span class="math inline">\(\A\D\)</span>, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (<em>Hint:</em> see Example  and Exercise ).
+<strong>4.</strong> Is matrix multiplication commutative?
+<strong>5.</strong> <strong>Different Views of Matrix Multiplication:</strong> Consider the matrix product
+<span class="math inline">\(\A\B\)</span> where <span class="math display">\[\A = \pm 1 &amp; 2\\3&amp;4 \mp \quad \B = \pm 2&amp;5\\1&amp;3\mp\]</span>
+Let <span class="math inline">\(\C=\A\B\)</span>.
+<strong>a.</strong> Compute the matrix product <span class="math inline">\(\C\)</span>.
+<strong>b.</strong> Compute the matrix-vector product <span class="math inline">\(\A\B_{\star 1}\)</span> and show that this is the first column of <span class="math inline">\(\C\)</span>. (Likewise, <span class="math inline">\(\A\B_{\star 2}\)</span> is the second column of <span class="math inline">\(\C\)</span>.) (<em>Matrix multiplication can be viewed as a collection of matrix-vector products.</em>)
+<strong>c.</strong> Compute the two outer products using columns of <span class="math inline">\(\A\)</span> and rows of <span class="math inline">\(\B\)</span> and show that
+<span class="math display">\[\acol{1}\brow{1} + \acol{2}\brow{2} = \C\]</span> (<em>Matrix multiplication can be viewed as the sum of outer products.</em>)
+<strong>d.</strong> Since <span class="math inline">\(\A\B_{\star 1}\)</span> is the first column of <span class="math inline">\(\C\)</span>, show how <span class="math inline">\(\C_{\star 1}\)</span> can be written as a linear combination of columns of <span class="math inline">\(\A\)</span>. (<em>Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix.</em>)
+<strong>e.</strong> Finally, note that <span class="math inline">\(\arow{1}\B\)</span> will give the first row of <span class="math inline">\(\C\)</span>. (<em>This amounts to a linear combination of rows - can you see that?</em>)</p>
+</div>
+<div id="list-of-key-terms-1" class="section level2 unnumbered">
+<h2>List of Key Terms</h2>
+<ul>
+<li>addition</li>
+<li>subtraction</li>
+<li>equal matrices</li>
+<li>scalar multiplication</li>
+<li>inner product</li>
+<li>matrix product</li>
+<li>linear combination</li>
+<li>outer product</li>
+<li>multiplicative identity</li>
+<li>matrix inverse</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multapp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/015-mult.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/015-mult.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

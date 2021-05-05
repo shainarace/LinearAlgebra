@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 13 Factor Analysis |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 13 Factor Analysis |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 13 Factor Analysis |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="pcaapp.html"/>
+<link rel="next" href="factor-analysis.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,24 +388,139 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-05</em></p>
+<div id="fa" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Factor Analysis</h1>
+<p>Factor Analysis is about looking for underlying <em>relationships</em> or <em>associations</em>. In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some <em>latent</em> factor, that is the individual’s <em>quantitative reasoning</em>. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.</p>
+<p>Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will ``figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.</p>
+<div id="assumptions-of-factor-analysis" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Assumptions of Factor Analysis</h2>
+<ol style="list-style-type: decimal">
+<li>No outliers in the data set</li>
+<li>Adequate sample size</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.</li>
+<li>You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table  for the details on this.</li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>No perfect multicollinearity</li>
+<li>Homoskedasticity <em>not</em> required between variables (all variances <em>not</em> required to be equal)</li>
+<li>Linearity of variables desired - only models linear correlation between variables</li>
+<li>Interval data (as opposed to nominal)</li>
+<li>Measurement error on the variables/observations has constant variance and is, on average, 0</li>
+<li>Normality is not required</li>
+</ol>
+<table>
+<caption>Factor loadings are the correlation of each variable and the factor. This table is a guide for the sample sizes necessary to consider a factor loading significant. For example, in a sample of 100, factor loadings of 0.55 are considered significant. In a sample size of 70, however, factor loadings must reach 0.65 to be considered significant. Significance based on 0.05 level, a power level of 80 percent. Source: <em>Computations made with SOLO Power Analysis, BMDP Statistical Software, Inc., 1993</em></caption>
+<thead>
+<tr class="header">
+<th align="center">Sample Size<br> Needed for Significance</th>
+<th align="center">Factor Loading</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">350</td>
+<td align="center">.30</td>
+</tr>
+<tr class="even">
+<td align="center">250</td>
+<td align="center">.35</td>
+</tr>
+<tr class="odd">
+<td align="center">200</td>
+<td align="center">.40</td>
+</tr>
+<tr class="even">
+<td align="center">150</td>
+<td align="center">.45</td>
+</tr>
+<tr class="odd">
+<td align="center">120</td>
+<td align="center">.50</td>
+</tr>
+<tr class="even">
+<td align="center">100</td>
+<td align="center">.55</td>
+</tr>
+<tr class="odd">
+<td align="center">85</td>
+<td align="center">.60</td>
+</tr>
+<tr class="even">
+<td align="center">70</td>
+<td align="center">.65</td>
+</tr>
+<tr class="odd">
+<td align="center">60</td>
+<td align="center">.70</td>
+</tr>
+<tr class="even">
+<td align="center">50</td>
+<td align="center">.75</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<div id="determining-factorability" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Determining Factorability</h2>
+<p>Before we even begin the process of factor analysis, we have to do some preliminary work to determine whether or not the data even lends itself to this technique. If none of our variables are correlated, then we cannot group them together in any meaningful way! Bartlett’s Sphericity Test and the KMO index are two statistical tests for whether or not a set of variables can be factored. These tests <em>do not</em> provide information about the appropriate number of factors, only whether or not such factors even exist.</p>
+<div id="visual-examination-of-correlation-matrix" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Visual Examination of Correlation Matrix</h3>
+<p>Depending on how many variables you are working with, you may be able to determine whether or not to proceed with factor analysis by simply examining the correlation matrix. With this examination, we are looking for two things:</p>
+<ol style="list-style-type: decimal">
+<li>Correlations that are significant at the 0.01 level of significance. At least half of the correlations should be significant in order to proceed to the next step.</li>
+<li>Correlations are ``sufficient’’ to justify applying factor analysis. As a rule of thumb, at least half of the correlations should be greater than 0.30.</li>
+</ol>
+</div>
+<div id="barletts-sphericity-test" class="section level3" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Barlett’s Sphericity Test</h3>
+<p>Barlett’s sphericity test checks if the observed correlation matrix is significantly different from the identity matrix. Recall that the correlation of two variables is equal to 0 if and only if they are orthogonal (and thus completely uncorrelated). When this is the case, we cannot reduce the number of variables any further, neither PCA nor Factor Analysis will be able to compress the information reliably into fewer dimensions. For Barlett’s test,
+<span class="math display">\[H_0 = \mbox{ The variables are orthogonal} \]</span>
+Which implies that there are no underlying factors to be uncovered. Obviously, we must be able to reject this hypothesis for a meaningful result in PCA.</p>
+</div>
+<div id="kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy" class="section level3" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</h3>
+<p>The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett’s test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of <em>partial correlation</em>. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high (<span class="math inline">\(\approx 1\)</span>), then PCA can act efficiently; if the KMO index is low (<span class="math inline">\(\approx 0\)</span>), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table  contains the information about interpretting KMO results that was provided in the original 1974 paper.</p>
+<p>So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.</p>
+</div>
+</div>
+<div id="communalities" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Communalities</h2>
+<p>You can think of <strong>communalities</strong> as multiple <span class="math inline">\(R^2\)</span> values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.</p>
+<p>Take for example the SAS output for factor analysis on the Iris dataset shown in Figure . The factor model (which settles on only one single factor) explains 98% of the variability in <em>petal length</em>. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated <span class="math inline">\(R^2\)</span> value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in <em>petal length, petal width, and sepal length</em>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-251"></span>
+<img src="figs/factorOUT.png" alt="SAS output for PROC FACTOR using Iris Dataset" width="203" />
+<p class="caption">
+Figure 13.1: SAS output for PROC FACTOR using Iris Dataset
+</p>
+</div>
+<p>One assessment of how well a factor model is doing can be obtained from the communalities. What you want to see is values that are close to one. This would indicate that the model explains most of the variation for those variables. In this case, the model does better for some variables than it does for others.</p>
+<p>If you take all of the communality values, <span class="math inline">\(c_i\)</span> and add them up you can get a total communality value:</p>
+<p><span class="math display">\[\sum_{i=1}^p \widehat{c_i} = \sum_{i=1}^k \widehat{\lambda_i}\]</span></p>
+<p>Here, the total communality is 2.918. The proportion of the total variation explained by the three factors is
+<span class="math display">\[\frac{2.918}{4}\approx 0.75.\]</span>
+The denominator in that fraction comes from the fact that the correlation matrix is used by default and our dataset has 4 variables. Standardized variables have variance of 1 so the total variance is 4. This gives us the percentage of variation explained in our model. This might be looked at as an overall assessment of the performance of the model. The individual communalities tell how well the model is working for the individual variables, and the total communality gives an overall assessment of performance.</p>
+</div>
+<div id="number-of-factors" class="section level2" number="13.4">
+<h2><span class="header-section-number">13.4</span> Number of Factors</h2>
+<p>A good rule of thumb for determining the number of factors is to only choose factors with associated eigenvalue (or variance) greater than 1. Since the correlation matrix is used for factor analysis, we want our factors to explain more variance than any individual variable from our dataset. If this rule of thumb produces too many factors, it is reasonable to raise that limiting condition only if the number of factors still explains a reasonable amount of the total variance.</p>
+</div>
+<div id="rotation-of-factors" class="section level2" number="13.5">
+<h2><span class="header-section-number">13.5</span> Rotation of Factors</h2>
+<p>The purpose of rotating factors is to make them more interpretable. If factor loadings are relatively constant across variables, they don’t help us find latent structure or clusters of variables. This will often happen in PCA when the goal is only to find directions of maximal variance. Thus, once the number of components/factors is fixed and a projection of the data onto a lower-dimensional subspace is done, we are free to rotate the axes of the result without losing any variance. The axes will no longer be principal components! The amount of variance explained by each factor will change, but the total amount of variance in the reduced data will stay the same because all we have done is rotate the basis. The goal is to rotate the factors in such a way that the loading matrix develops a more <em>sparse</em> structure. A sparse loading matrix (one with lots of very small entries and few large entries) is far easier to interpret in terms of finding latent variable groups.</p>
+<p>The two most common rotations are <strong>varimax</strong> and <strong>quartimax</strong>. The goal of <em>varimax</em> rotation is to maximize the squared factor loadings in each factor, i.e. to simplify the columns of the factor matrix. In each factor, the large loadings are increased and the small loadings are decreased so that each factor has only a few variables with large loadings. In contrast, the goal of <em>quartimax</em> rotation is to simply the rows of the factor matrix. In each variable the large loadings are increased and the small loadings are decreased so that each variable will only load on a few factors. Which of these factor rotations is appropriate</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pcaapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factor-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -436,7 +551,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/05-FA.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -444,7 +559,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/05-FA.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],
