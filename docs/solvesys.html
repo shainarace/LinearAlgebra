@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-05-05" />
+<meta name="date" content="2021-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -69,6 +69,8 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -313,7 +315,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
 <li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>7.1</b> Why the normal equations?</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
@@ -326,45 +331,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
 <li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<li class="chapter" data-level="10" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>10</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="10.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>10.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<li class="chapter" data-level="11" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>11</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="11.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>11.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="11.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>11.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<li class="chapter" data-level="12" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>12</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+<li class="chapter" data-level="12.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>12.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="12.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>12.2</b> PCA as SVD</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<li class="chapter" data-level="13" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>13</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
-<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="13.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>13.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="13.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>13.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="13.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>13.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="13.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>13.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="13.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>13.5</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="14.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>14.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="14.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>14.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="14.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>14.3</b> Communalities</a></li>
+<li class="chapter" data-level="14.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>14.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="14.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>14.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="15" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="15.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>15.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="15.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>15.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<li class="chapter" data-level="16" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>16</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="16.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>16.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>17</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>17.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="17.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>17.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -390,7 +399,7 @@ with examples in R and Python</p></a>
             <section class="normal" id="section-">
 <div id="solvesys" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Solving Systems of Equations</h1>
-<p>In this section we will learn about solving the systems of equations that were presented in Chapter @ref{multapp}. There are three general situations we may find ourselves in when attempting to solve systems of equations:</p>
+<p>In this section we will learn about solving the systems of equations that were presented in Chapter <a href="multapp.html#multapp">4</a>. There are three general situations we may find ourselves in when attempting to solve systems of equations:</p>
 <ol style="list-style-type: decimal">
 <li>The system could have one unique solution.</li>
 <li>The system could have infinitely many solutions (sometimes called <em>underdetermined</em>).</li>
@@ -419,38 +428,63 @@ x_1 &amp;=&amp; 1
 <ol style="list-style-type: decimal">
 <li>Interchanging the order of the equations.</li>
 <li>Multiplying both sides of one equation by a constant.</li>
-<li>Replace one equation by a combination of itself plus a multiple of another equation.</li>
+<li>Replace one equation by a linear combination of itself and of another equation.</li>
 </ol>
 <p>Taking our simple system from the previous example, we’ll examine these three operations concretely:</p>
 <p><span class="math display">\[\begin{cases}\begin{eqnarray}
 x_1+2x_2 &amp;=&amp; 11\\
 x_1+x_2 &amp;=&amp; 6\end{eqnarray}\end{cases}\]</span></p>
 <ol style="list-style-type: decimal">
-<li>Interchanging the order of the equations.</li>
+<li>Interchanging the order of the equations.
+<table style="width:auto; margin-left: auto; 
+  margin-right: auto; border:none;" >
+<tr>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{align}
+x_1+2x_2 &amp;= 11\\
+x_1+x_2 &amp;= 6\end{align}\end{cases}\]</span>
+<td style="text-align:center; vertical-align:center; width:10px">
+<span class="math inline">\(\Leftrightarrow\)</span>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{align}
+x_1+x_2 =&amp; 6\\
+x_1+2x_2 =&amp; 11\end{align}\end{cases}\]</span>
+</tr>
+</table></li>
+<li>Multiplying both sides of one equation by a constant. <em>(Multiply the second equation by -1)</em>.
+<table style="width:auto; margin-left: auto; 
+  margin-right: auto; border:none;" >
+<tr>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{align}
+x_1+2x_2 &amp;=&amp; 11\\
+x_1+x_2 &amp;=&amp; 6\end{align}\end{cases}\]</span>
+<td style="text-align:center; vertical-align:center; width:10px">
+<span class="math inline">\(\Leftrightarrow\)</span>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{align}
+x_1+2x_2 &amp;=&amp; 11\\
+-1x_1-1x_2 &amp;=&amp; -6\end{align}\end{cases}\]</span>
+</tr>
+</table></li>
+<li>Replace one equation by a linear combination of itself and of another equation. <em>(Replace the second equation by the first minus the second.)</em>
+<table style="width:auto; margin-left: auto; 
+  margin-right: auto; border:none;" >
+<tr>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{eqnarray}
+x_1+2x_2 &amp;=&amp; 11\\
+x_1+x_2 &amp;=&amp; 6\end{eqnarray}\end{cases}\]</span>
+<td style="text-align:center; vertical-align:center; width:10px">
+<span class="math inline">\(\Leftrightarrow\)</span>
+<td style="text-align:center; vertical-align:center">
+<span class="math display">\[\begin{cases}\begin{eqnarray}
+x_1+2x_2 &amp;=&amp; 11\\
+x_2 &amp;=&amp; 5\end{eqnarray}\end{cases}\]</span>
+</tr>
+</table></li>
 </ol>
-<p><span class="math display">\[ \begin{cases}\begin{eqnarray}
-x_1+2x_2 &amp;=&amp; 11\\
-x_1+x_2 &amp;=&amp; 6\end{eqnarray}\end{cases}
-\quad \Leftrightarrow \quad \begin{cases}\begin{eqnarray}
-x_1+x_2 &amp;=&amp; 6\\
-x_1+2x_2 &amp;=&amp; 11\end{eqnarray}\end{cases}\]</span></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Multiplying both sides of one equation by a constant.</li>
-</ol>
-<p><span class="math display">\[\begin{cases}\begin{eqnarray}
-x_1+2x_2 &amp;=&amp; 11\\
-x_1+x_2 &amp;=&amp; 6\end{eqnarray}\end{cases} \quad \Leftrightarrow \quad \begin{cases}\begin{eqnarray}
-x_1+2x_2 &amp;=&amp; 11\\
-2x_1+2x_2 &amp;=&amp; 12\end{eqnarray}\end{cases}\]</span></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Replace one equation by a combination of itself plus a multiple of another equation.</li>
-</ol>
-<p><span class="math display">\[\begin{cases}\begin{eqnarray}
-x_1+2x_2 &amp;=&amp; 11\\
-x_1+x_2 &amp;=&amp; 6\end{eqnarray}\end{cases} \quad \Leftrightarrow \quad \begin{cases}\begin{eqnarray}
-x_1+2x_2 &amp;=&amp; 11\\
-x_2 &amp;=&amp; 5\end{eqnarray}\end{cases}\]</span></p>
-<p>Using these 3 row operations, we can transform any system of equations into one that is <em>triangular</em>. A <strong>triangular system</strong> is one that can be solved by back substitution (backsolved). For example,
+<p>Using these 3 row operations, we can transform any system of equations into one that is <em>triangular</em>. A <strong>triangular system</strong> is one that can be solved by back substitution. For example,
 <span class="math display">\[\begin{cases}\begin{align}
 x_1+2x_2 +3x_3= 14\\
 x_2+x_3 =6\\
@@ -552,7 +586,7 @@ Definition @ref().2: Row Operations for Gaussian Elimination
 Example @ref().2: Row Operations on the Augmented Matrix
 </div>
 <div class="S2text">
-<p>We will solve the system of equations from Example  using the Augmented Matrix.
+<p>We will solve the system of equations from Example <a href="#ex:rowopeq"><strong>??</strong></a> using the Augmented Matrix.
 <span class="math display">\[\begin{cases}\begin{align}
 x_1+x_2 +x_3= 1\\
 x_1-2x_2+2x_3 =4\\
@@ -577,7 +611,7 @@ We can eliminate the circled elements by making combinations with those rows and
   \begin{am}{3}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
 \red{0} &amp; \red{-3} &amp; \red{1} &amp;\red{3}\\
- \textcircled{1}&amp;2&amp;-1 &amp;2
+ \enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}}&amp;2&amp;-1 &amp;2
  \end{am}
  \xrightarrow{R3&#39;=R3-R1} \begin{am}{3}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
@@ -590,12 +624,12 @@ Now that we have eliminated each of the circled elements below the current pivot
     \begin{am}{3}
 \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
 0 &amp; \fbox{-3} &amp; 1 &amp;3\\
-0&amp;\textcircled{1}&amp;-2&amp;1
+0&amp;\enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}}&amp;-2&amp;1
  \end{am}
  \xrightarrow{R2 \leftrightarrow R3}      \begin{am}{3}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
  0&amp;\fbox{1}&amp;-2&amp;1\\
-0 &amp; \textcircled{-3} &amp; 1 &amp;3
+0 &amp; \enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{-3}} &amp; 1 &amp;3
  \end{am}
 \]</span>
 Now that the current pivot is equal to 1, we can easily eliminate the circled entries below it by replacing rows with combinations using the pivot row. We finish the process once the last pivot is identified (the final pivot has no eliminations to make below it).
@@ -661,11 +695,11 @@ The solution is simply what’s left in the right hand column of the augmented m
 <h2><span class="header-section-number">6.2</span> Three Types of Systems</h2>
 <p>As was mentioned earlier, there are 3 situations that may arise when solving a system of equations:</p>
 <ul>
-<li><strong>Case 1</strong>: The system could have one unique solution (this is the case with the examples thus far).</li>
-<li><strong>Case 2</strong>: The system could have no solutions (sometimes called <em>overdetermined</em> or <em>inconsistent</em>).</li>
-<li><strong>Case 3</strong>: The system could have infinitely many solutions (sometimes called <em>underdetermined</em>).</li>
+<li>The system could have one <strong>unique solution</strong> (this is the situation of our examples thus far).</li>
+<li>The system could have no solutions (sometimes called <em>overdetermined</em> or <strong><em>inconsistent</em></strong>).</li>
+<li>The system could have <strong>infinitely many solutions</strong> (sometimes called <em>underdetermined</em>).</li>
 </ul>
-<div id="the-unique-solution-case" class="section level3" number="6.2.1">
+<div id="uniquesol" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> The Unique Solution Case</h3>
 <p>Based on our earlier examples, we already have a sense for systems which fall into the first case.</p>
 
@@ -686,7 +720,7 @@ In this case, we say that the matrix <span class="math inline">\(\A\)</span> is 
 </div>
 </div>
 </div>
-<div id="the-inconsistent-case" class="section level3" number="6.2.2">
+<div id="inconsistent" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> The Inconsistent Case</h3>
 <p>The second case scenario is a very specific one. In order for a system of equations to be <strong>inconsistent</strong> and have no solutions, it must be that after Gaussian elimination, a situation occurs where at least one equation reduces to <span class="math inline">\(0=\alpha\)</span> where <span class="math inline">\(\alpha\)</span> is nonzero. Such a situation would look as follows (using asterisks to denote any nonzero numbers):</p>
 <p><span class="math display">\[\begin{am}{3} *&amp;*&amp;*&amp;*\\0&amp;*&amp;*&amp;*\\0&amp;0&amp;0&amp;\alpha\end{am} \]</span></p>
@@ -710,7 +744,7 @@ In this final step, we see our contradiction equation, <span class="math inline"
 </div>
 </div>
 </div>
-<p>Sometimes inconsistent systems are referred to as <em>over-determined</em>. In this example, you can see that we had more equations than variables. This is a common characteristic of over-determined or inconsistent systems. You can think of it as holding too many demands for a small set of variables! In fact, this is precisely the situation in which we find ourselves when we approach linear regression. Regression systems do not have an exact solution: there are generally no set of <span class="math inline">\(\beta_i&#39;s\)</span> that we can find so that our regression equation exactly fits every observation in the dataset - the regression system is inconsistent. Thus, we need a way to get <em>as close as possible</em> to a solution; that is, we need to find a solution that minimizes the residual error. This is done using the Least Squares method, the subject of Chapter .</p>
+<p>Sometimes inconsistent systems are referred to as <em>over-determined</em>. In this example, you can see that we had more equations than variables. This is a common characteristic of over-determined or inconsistent systems. You can think of it as holding too many demands for a small set of variables! In fact, this is precisely the situation in which we find ourselves when we approach linear regression. Regression systems do not have an exact solution: there are generally no set of <span class="math inline">\(\beta_i&#39;s\)</span> that we can find so that our regression equation exactly fits every observation in the dataset - the regression system is inconsistent. Thus, we need a way to get <em>as close as possible</em> to a solution; that is, we need to find a solution that minimizes the residual error. This is done using the Least Squares method, the subject of Chapter <a href="leastsquares.html#leastsquares">7</a>.</p>
 </div>
 <div id="infinitesol" class="section level3" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> The Infinite Solutions Case</h3>
@@ -720,14 +754,18 @@ In this final step, we see our contradiction equation, <span class="math inline"
 <span class="math display">\[\begin{cases}\begin{align}
 x_1+x_3 = 0\\
 x_2+x_3= 0\end{align}\end{cases}\]</span>
-Clearly, our answer to this problem depends on the variable <span class="math inline">\(x_3\)</span>, which is considered <em>free</em> to take on any value. Suppose that <span class="math inline">\(x_3=\alpha\)</span>. Then our solution would be:
-<span class="math display">\[\pm x_1\\x_2\\x_3 \mp = \pm -\alpha \\ -\alpha \\ \alpha \mp = \alpha \pm -1\\-1\\1 \mp\]</span>
+Clearly, our answer to this problem depends on the variable <span class="math inline">\(x_3\)</span>, which is considered <em>free</em> to take on any value. Once we know the value of <span class="math inline">\(x_3\)</span> we can easily determine that
+<span class="math display">\[\begin{align}
+x_1 &amp;= -x_3 \\
+x_2 &amp;= -x_3 \end{align}\]</span></p>
+<p>Our convention here is to <strong>parameterize</strong> the solution and simply declare that <span class="math inline">\(x_3=s\)</span> (or any other placeholder variable for a constant). Then our solution becomes:
+<span class="math display">\[\pm x_1\\x_2\\x_3 \mp = \pm -s \\ -s \\ s \mp = s \pm -1\\-1\\1 \mp\]</span>
 What this means is that any scalar multiple of the vector <span class="math inline">\(\pm -1\\-1\\1 \mp\)</span> is a solution to the system. Thus there are infinitely many solutions!</p>
 
 <div class="Smain">
 <div class="Scontainer">
 <div class="Stext-header">
-Definition @ref().4: Case 3: Infinitely Many Solutions
+Definition <a href="solvesys.html#solvesys">6</a>.4: Case 3: Infinitely Many Solutions
 </div>
 <div class="Stext">
 <p>A system of equations <span class="math inline">\(\A\x=\b\)</span> has infinitely many solutions if the system is consistent and <em>any</em> of the following conditions hold:</p>
@@ -742,7 +780,7 @@ Definition @ref().4: Case 3: Infinitely Many Solutions
 <div class="S2main">
 <div class="S2container">
 <div class="S2text-header">
-Example @ref().: Infinitely Many Solutions
+Example <a href="solvesys.html#solvesys">6</a>.: Infinitely Many Solutions
 </div>
 <div class="S2text">
 <p>For the following reduced system of equations, characterize the set of solutions in the same fashion as the previous example.
@@ -823,7 +861,7 @@ If this is possible then the matrix on the right is the inverse of <span class="
 <div class="S2main">
 <div class="S2container">
 <div class="S2text-header">
-Example @ref().6: Finding a Matrix Inverse
+Example <a href="solvesys.html#solvesys">6</a>.6: Finding a Matrix Inverse
 </div>
 <div class="S2text">
 <p>Find the inverse of <span class="math display">\[\A = \pm -1&amp;2&amp;-1\\0&amp;-1&amp;1\\2&amp;-1&amp;0 \mp\]</span> using Gauss-Jordan Elimination.</p>
@@ -845,7 +883,7 @@ Finally, we have completed our task. The inverse of <span class="math inline">\(
 <div class="S2main">
 <div class="S2container">
 <div class="S2text-header">
-Example @ref().7: Inverse of a Diagonal Matrix
+Example <a href="solvesys.html#solvesys">6</a>.7: Inverse of a Diagonal Matrix
 </div>
 <div class="S2text">
 <p>A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix <span class="math inline">\(\D\)</span>,
@@ -863,7 +901,7 @@ As you can see, all we had to do is take the scalar inverse of each diagonal ele
 <div class="Smain">
 <div class="Scontainer">
 <div class="Stext-header">
-Definition @ref().5: Inverse of a Diagonal Matrix
+Definition <a href="solvesys.html#solvesys">6</a>.5: Inverse of a Diagonal Matrix
 </div>
 <div class="Stext">
 An <span class="math inline">\(n\times n\)</span> diagonal matrix <span class="math inline">\(\D = diag\{d_{11},d_{22},\dots,d_{nn}\}\)</span> with no nonzero diagonal elements is invertible with inverse
@@ -875,51 +913,83 @@ An <span class="math inline">\(n\times n\)</span> diagonal matrix <span class="m
 </div>
 <div id="exercises-2" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Exercises</h2>
-<ol style="list-style-type: decimal">
-<li>Using Gaussian Elimination on the augmented matrices, reduce each system of equations to a triangular form and solve using back-substitution.
-a.<span class="math display">\[\begin{cases}
+<ol>
+<li>
+Using Gaussian Elimination on the augmented matrices, reduce each system of equations to a triangular form and solve using back-substitution.
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math display">\[\begin{cases}
 x_1 +2x_2= 3\\
 -x_1+x_2=0\end{cases}\]</span>
-b.<span class="math display">\[\begin{cases}
+<li>
+<span class="math display">\[\begin{cases}
 x_1+x_2 +2x_3= 7\\
 x_1+x_3 = 4\\
--2x_1-2x_2 =-6\end{cases}\]</span></li>
-</ol>
-<ol start="3" style="list-style-type: lower-alpha">
-<li><span class="math display">\[\begin{cases}\begin{align}
+-2x_1-2x_2 =-6\end{cases}\]</span>
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
 2x_1-x_2 +x_3= 1\\
 -x_1+2x_2+3x_3 = 6\\
-x_2+4x_3 =6 \end{align}\end{cases}\]</span></li>
+x_2+4x_3 =6 \end{align}\end{cases}\]</span>
 </ol>
-<ol start="2" style="list-style-type: decimal">
-<li><p>Using Gauss-Jordan Elimination on the augmented matrices, reduce each system of equations from the previous exercise to reduced row-echelon form and give the solution as a vector.</p></li>
-<li><p>Use either Gaussian or Gauss-Jordan Elimination to solve the following systems of equations. Indicate whether the systems have a unique solution, no solution, or infinitely many solutions. If the system has infinitely many solutions, exhibit a general solution in vector form as we did in Section .</p></li>
+<li>
+<p>Using Gauss-Jordan Elimination on the augmented matrices, reduce each system of equations from the previous exercise to reduced row-echelon form and give the solution as a vector.</p>
+<li>
+Use either Gaussian or Gauss-Jordan Elimination to solve the following systems of equations. Indicate whether the systems have a unique solution, no solution, or infinitely many solutions. If the system has infinitely many solutions, exhibit a general solution in vector form as we did in Section <a href="solvesys.html#infinitesol">6.2.3</a>.
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+        2x_1+2x_2+6x_3=4\\
+        2x_1+x_2+7x_3=6\\
+        -2x_1-6x_2-7x_3=-1\end{align}\end{cases}\]</span>
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+        1x_1+2x_2+2x_3=0\\
+        2x_1+5x_2+7x_3=0\\
+        3x_1+6x_2+6x_3=0\end{align}\end{cases}\]</span><br />
+
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+        1x_1+3x_2-5x_3=0\\
+        1x_1-2x_2+4x_3=2\\
+        2x_1+1x_2-1x_3=0\end{align}\end{cases}\]</span><br />
+
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+w-h+l=1\\
+w-h-l=2\\
+w+h-l=3\\
+w+h+l=4\end{align}\end{cases}\]</span>
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+w-h+l=1\\
+w-h-l=2\\
+w+h-l=3\\
+w+h+l=2\end{align}\end{cases}\]</span>
+<li>
+<span class="math display">\[\begin{cases}\begin{align}
+x_1+2x_2+2x_3+3x_4=0\\
+2x_1+4x_2+x_3+3x_4=0\\
+3x_1+6x_2+x_3+4x_4=0\end{align}\end{cases}\]</span>
 </ol>
-<ol style="list-style-type: lower-alpha">
-<li><span class="math display">\[\begin{cases}\begin{align}
-   2x_1+2x_2+6x_3=4\\
-   2x_1+x_2+7x_3=6\\
-   -2x_1-6x_2-7x_3=-1\end{align}\end{cases}\]</span></li>
-<li><span class="math display">\[\begin{cases}\begin{align}
-   1x_1+2x_2+2x_3=0\\
-   2x_1+5x_2+7x_3=0\\
-   3x_1+6x_2+6x_3=0\end{align}\end{cases}\]</span><br />
-</li>
-<li><span class="math display">\[\begin{cases}\begin{align}
-   1x_1+3x_2-5x_3=0\\
-   1x_1-2x_2+4x_3=2\\
-   2x_1+1x_2-1x_3=0\end{align}\end{cases}\]</span><br />
-</li>
-<li><span class="math inline">\(\begin{cases}\begin{align} w-h+l=1\\ w-h-l=2\\ w+h-l=3\\ w+h+l=4\end{align}\end{cases}\)</span></li>
-<li><span class="math inline">\(\begin{cases}\begin{align} w-h+l=1\\ w-h-l=2\\ w+h-l=3\\ w+h+l=2\end{align}\end{cases}\)</span>
-<span class="math inline">\(\begin{cases}\begin{align} x_1+2x_2+2x_3+3x_4=0\\ 2x_1+4x_2+x_3+3x_4=0\\ 3x_1+6x_2+x_3+4x_4=0\end{align}\end{cases}\)</span></li>
-</ol>
-<p>\end{itemize}</p>
+<li>
 Use Gauss-Jordan Elimination to find the inverse of the following matrices, if possible.
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math inline">\(\A=\pm 2&amp;3\\2&amp;2\mp\)</span>
+<li>
+<span class="math inline">\(\B=\pm 1&amp;2\\2&amp;4\mp\)</span>
+<li>
+<span class="math inline">\(\C=\pm 1&amp;2&amp;3\\4&amp;5&amp;6\\7&amp;8&amp;9\mp\)</span>
+<li>
+<span class="math inline">\(\D=\pm 4&amp;0&amp;0\\0&amp;-4&amp;0\\0&amp;0&amp;2 \mp\)</span>
+</ol>
+<li>
 <p>What is the inverse of a diagonal matrix, <span class="math inline">\(\bo{D}=diag\{\sigma_{1},\sigma_{2}, \dots,\sigma_{n}\}\)</span>?</p>
-<p>Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
-<span class="math display">\[\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.\]</span> Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. <em>Hint: This problem connects Text Exercise  and Example </em>.</p>
-<p>\end{enumerate}</p>
+<li>
+Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
+<span class="math display">\[\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.\]</span> Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. <em>Hint: This problem connects Text Exercise <a href="#exer:diagmult"><strong>??</strong></a> and Example <a href="#ex:diaginverse"><strong>??</strong></a></em>.
+</ol>
 </div>
 <div id="list-of-key-terms-2" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> List of Key Terms</h2>
@@ -943,27 +1013,27 @@ Use Gauss-Jordan Elimination to find the inverse of the following matrices, if p
 <h2><span class="header-section-number">6.6</span> Gauss-Jordan Elimination in R</h2>
 <p>It is important that you understand what is happening in the process of Gauss-Jordan Elimination. Once you have a handle on how the procedure works, it is no longer necessary to do every calculation by hand. We can skip to the reduced row echelon form of a matrix using the <code>pracma</code> package in R. \</p>
 <p>We’ll start by creating our matrix as a variable in R. Matrices are entered in as one vector, which R then breaks apart into rows and columns in they way that you specify (with nrow/ncol). The default way that R reads a vector into a matrix is down the columns. To read the data in across the rows, use the byrow=TRUE option). Once a matrix is created, it is stored under the variable name you give it (below, we call our matrices <span class="math inline">\(\Y\)</span> and <span class="math inline">\(\X\)</span>). We can then print out the stored matrix by simply typing <span class="math inline">\(\Y\)</span> or <span class="math inline">\(\X\)</span> at the prompt:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="solvesys.html#cb49-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">Y=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="solvesys.html#cb47-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">Y=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="solvesys.html#cb51-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">X=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="solvesys.html#cb49-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">X=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    2
 ## [2,]    3    4</code></pre>
 <p>To perform Gauss-Jordan elimination, we need to install the <code>pracma</code> package which contains the code for this procedure.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="solvesys.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pracma&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="solvesys.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pracma&quot;</span>)</span></code></pre></div>
 <p>After installing a package in R, you must always add it to your library (so that you can actually use it in the current session). This is done with the library command:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="solvesys.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;pracma&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="solvesys.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;pracma&quot;</span>)</span></code></pre></div>
 <p>Now that the library is accessible, we can use the  command to get the reduced row echelon form of an augmented matrix, <span class="math inline">\(\A\)</span>:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="solvesys.html#cb55-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb55-2"><a href="solvesys.html#cb55-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="solvesys.html#cb53-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb53-2"><a href="solvesys.html#cb53-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1   -1    1    1
 ## [2,]    1   -1   -1    2
 ## [3,]    1    1   -1    3
 ## [4,]    1    1    1    4</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="solvesys.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rref</span>(A)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="solvesys.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rref</span>(A)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    0    0    0
 ## [2,]    0    1    0    0

@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-05-05" />
+<meta name="date" content="2021-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -69,6 +69,8 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -313,7 +315,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
 <li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>7.1</b> Why the normal equations?</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
@@ -326,45 +331,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
 <li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<li class="chapter" data-level="10" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>10</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="10.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>10.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<li class="chapter" data-level="11" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>11</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="11.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>11.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="11.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>11.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<li class="chapter" data-level="12" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>12</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+<li class="chapter" data-level="12.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>12.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="12.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>12.2</b> PCA as SVD</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<li class="chapter" data-level="13" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>13</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
-<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="13.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>13.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="13.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>13.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="13.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>13.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="13.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>13.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="13.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>13.5</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="14.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>14.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="14.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>14.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="14.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>14.3</b> Communalities</a></li>
+<li class="chapter" data-level="14.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>14.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="14.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>14.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="15" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="15.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>15.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="15.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>15.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<li class="chapter" data-level="16" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>16</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="16.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>16.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>17</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>17.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="17.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>17.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -573,7 +582,7 @@ Thus, the cost of 1 batch of each type of mixture is:</p>
 \beta_0 + 6 \beta_1 + 5 \beta_2 &amp;=&amp; 9 \quad \mbox{(obs. 4)}\\
 \end{eqnarray}\]</span></p>
 <p>Rather than writing all these equations out, we instead represent the situation in matrix format as
-<span class="math display">\[\X\boldsymbol\Beta = \y,\]</span>
+<span class="math display">\[\X\bbeta = \y,\]</span>
 Where
 <span class="math display">\[\X=\pm 1&amp;3&amp;3\\1&amp;2&amp;3\\1&amp;5&amp;6\\1&amp;6&amp;5 \mp \quad \bbeta = \pm \beta_0 \\\beta_1 \\ \beta_2 \mp \quad \mbox{and}\quad \y = \pm 6 \\6 \\10\\9\mp\]</span></p>
 <p>We know from our experiences with data that this situation will not have an exact solution: our data does not fall exactly on some straight line or surface. Instead, we have to consider some error, <span class="math inline">\(\boldsymbol\epsilon\)</span> and try to minimize it:
@@ -673,7 +682,9 @@ You should convince yourself of one final view of matrix multiplication, as the 
 </div>
 <div id="multapp-ex" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Exercises</h2>
-<p><strong>1.</strong> A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.</p>
+<ol type='1'>
+<li>
+<p>A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.</p>
 <table>
 <tr>
 <td style="text-align: center">
@@ -735,17 +746,23 @@ $0.10
 </td>
 </tr>
 </table>
-<p>Let <span class="math display">\[\A = \pm 1 &amp;3 &amp; 3\\2&amp; 4&amp; 6\\4&amp; 8&amp;6 \mp \quad \bo{p}= \pm 10\\15\\20 \mp \quad \bo{c} = \pm 0.50\\0.25\\0.10 \mp.\]</span></p>
-<p><strong>a.</strong> Determine the matrix-vector product that produces a vector, <span class="math inline">\(\y\)</span> which gives the total cost of creating each size arrangement (small, medium, and large).
-<strong>b.</strong> Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let <span class="math display">\[\bo{v} = \pm 2\\0\\2 \mp\]</span>
-Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist.</p>
-<p><strong>2.</strong> Write the following system of equations as a matrix-vector product <span class="math inline">\(\A\x=\b\)</span>:
+Let <span class="math display">\[\A = \pm 1 &amp;3 &amp; 3\\2&amp; 4&amp; 6\\4&amp; 8&amp;6 \mp \quad \bo{p}= \pm 10\\15\\20 \mp \quad \bo{c} = \pm 0.50\\0.25\\0.10 \mp.\]</span>
+<ol type='a'>
+<li>
+Determine the matrix-vector product that produces a vector, <span class="math inline">\(\y\)</span> which gives the total cost of creating each size arrangement (small, medium, and large).
+<li>
+Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let <span class="math display">\[\bo{v} = \pm 2\\0\\2 \mp\]</span>
+Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist.
+</ol>
+<li>
+<p>Write the following system of equations as a matrix-vector product <span class="math inline">\(\A\x=\b\)</span>:
 <span class="math display">\[\begin{eqnarray}
 2x_2 +3x_3&amp;=&amp; 8,
 2x_1+3x_2+1x_3 &amp;=&amp; 5,
 x_1-x_2-2x_3 &amp;=&amp;-5
 \end{eqnarray}\]</span></p>
-<p><strong>3.</strong> A model is being developed to predict a student’s SAT score based upon some numeric attributes. The data being used for this model is provided below:</p>
+<li>
+<p>A model is being developed to predict a student’s SAT score based upon some numeric attributes. The data being used for this model is provided below:</p>
 <table>
 <thead>
 <tr class="header">
@@ -793,7 +810,8 @@ x_1-x_2-2x_3 &amp;=&amp;-5
 Show how we’d set up the underlying matrix equation for regression analysis,
 <span class="math display">\[\y = \X\bbeta \]</span>
 by defining the matrices/vectors <span class="math inline">\(\X, \bbeta, \mbox{ and } \y\)</span>.</p>
-<p><strong>4.</strong> Suppose a company collected daily data regarding the sales and revenue of particular products for which prices fluctuate daily:</p>
+<li>
+<p>Suppose a company collected daily data regarding the sales and revenue of particular products for which prices fluctuate daily:</p>
 <table>
 <tr>
 <td>
@@ -900,18 +918,40 @@ Gadgets
 </td>
 </tr>
 </table>
-<p><strong>a.</strong> Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
-<strong>b.</strong> Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in $19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.</p>
-<p><strong>5.</strong> Let</p>
+<ol style="list-style-type:lower-alpha">
+<li>
+Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
+<li>
+Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in $19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.
+</ol>
+<li>
+<p>Let</p>
 <p><span class="math display">\[\A=\pm 3 &amp; 2 &amp; 9\\4 &amp; 2 &amp; 3\\2 &amp;7&amp;1\mp \quad\]</span></p>
-<p><strong>6.</strong> For a general matrix <span class="math inline">\(\A_{m\times n}\)</span> describe what the following products will provide. Also give the size of the result (i.e. “<span class="math inline">\(n\times 1\)</span> vector” or “scalar”).</p>
-<p><strong>a.</strong> <span class="math inline">\(\A\e_j\)</span><br />
-<strong>b.</strong> <span class="math inline">\(\e_i^T\A\)</span><br />
-<strong>c.</strong> <span class="math inline">\(\e_i^T\A\e_j\)</span><br />
-<strong>d.</strong> <span class="math inline">\(\A\e\)</span><br />
-<strong>e.</strong> <span class="math inline">\(\e^T\A\)</span><br />
-<strong>f.</strong> <span class="math inline">\(\frac{1}{n}\e^T\A\)</span></p>
-<p><strong>7.</strong> Let <span class="math inline">\(\bo{D}_{n\times n}\)</span> be a diagonal matrix with diagonal elements <span class="math inline">\(D_{ii}\)</span>. What effect does multiplying a matrix <span class="math inline">\(\A_{n\times m}\)</span> on the left by <span class="math inline">\(\bo{D}\)</span> have? What effect does multiplying a matrix <span class="math inline">\(\A_{m\times n}\)</span> on the right by <span class="math inline">\(\bo{D}\)</span> have? If you cannot see this effect in a general sense, try writing out a simple <span class="math inline">\(3\times 3\)</span> matrix as an example first.</p>
+<li>
+For a general matrix <span class="math inline">\(\A_{m\times n}\)</span> describe what the following products will provide. Also give the size of the result (i.e. “<span class="math inline">\(n\times 1\)</span> vector” or “scalar”).
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math inline">\(\A\e_j\)</span><br />
+
+<li>
+<span class="math inline">\(\e_i^T\A\)</span><br />
+
+<li>
+<span class="math inline">\(\e_i^T\A\e_j\)</span><br />
+
+<li>
+<span class="math inline">\(\A\e\)</span><br />
+
+<li>
+<span class="math inline">\(\e^T\A\)</span><br />
+
+<li>
+<span class="math inline">\(\frac{1}{n}\e^T\A\)</span><br />
+
+</ol>
+<li>
+<p>Let <span class="math inline">\(\bo{D}_{n\times n}\)</span> be a diagonal matrix with diagonal elements <span class="math inline">\(D_{ii}\)</span>. What effect does multiplying a matrix <span class="math inline">\(\A_{n\times m}\)</span> on the left by <span class="math inline">\(\bo{D}\)</span> have? What effect does multiplying a matrix <span class="math inline">\(\A_{m\times n}\)</span> on the right by <span class="math inline">\(\bo{D}\)</span> have? If you cannot see this effect in a general sense, try writing out a simple <span class="math inline">\(3\times 3\)</span> matrix as an example first.</p>
+</ol>
 
 </div>
 </div>

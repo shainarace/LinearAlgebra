@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 10 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 10 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 10 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="linind.html"/>
+<link rel="next" href="pca.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -397,24 +397,138 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-06</em></p>
+<div id="basis" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Basis and Change of Basis</h1>
+<p>When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-162"></span>
+<img src="figs/coordplane.jpg" alt="The Coordinate Plane" width="40%" />
+<p class="caption">
+Figure 10.1: The Coordinate Plane
+</p>
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
+<p>When we think of our data points this way, we are considering them as linear combinations of elementary <strong>basis vectors</strong>
+<span class="math display">\[\e_1 = \pm 1\\0\mp \mbox{  and  } \e_2=\pm 0\\1 \mp.\]</span>
+For example, the point <span class="math inline">\((2,3)\)</span> is written as
+<span class="math display">\[\begin{equation}
+\pm 2\\3 \mp = 2\pm 1\\0\mp+3\pm 0\\1\mp = 2\e_1+3\e_2.
+\label{eq:coord}
+\end{equation}\]</span></p>
+<p>We consider the coefficients (the scalars 2 and 3) in this linear combination as <strong>coordinates</strong> in the basis <span class="math inline">\(\mathcal{B}_1=\{\e_1,\e_2\}\)</span>. The coordinates, in essence, tell us how much ``information’’ from the vector/point <span class="math inline">\((2 ,3 )\)</span> lies along each basis direction: to create this point, we must travel 2 units along the direction of <span class="math inline">\(\e_1\)</span> and then 3 units along the direction of <span class="math inline">\(\e_2\)</span>.</p>
+<p>We can also view Equation <span class="math inline">\(\ref{eq:coord}\)</span> as a way to separate the vector <span class="math inline">\((2,3)\)</span> into orthogonal components. Each component is an <strong>orthogonal projection</strong> of the vector onto the span of the corresponding basis vector. The orthogonal projection of vector <span class="math inline">\(\bo{a}\)</span> onto the span another vector <span class="math inline">\(\v\)</span> is simply the closest point to <span class="math inline">\(\bo{a}\)</span> contained on the span(<span class="math inline">\(\v\)</span>), found by ``projecting’’ <span class="math inline">\(\bo{a}\)</span> toward <span class="math inline">\(\v\)</span> at a <span class="math inline">\(90^\circ\)</span> angle. Figure <a href="#orthogproj"><strong>??</strong></a> shows this explicitly for <span class="math inline">\(\bo{a}=(2,3)\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-163"></span>
+<img src="figs/orthogproj.jpg" alt="Orthogonal Projections onto basis vectors" width="40%" />
+<p class="caption">
+Figure 10.2: Orthogonal Projections onto basis vectors
+</p>
+</div>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.1: Elementary Basis
+</div>
+<div class="Stext">
+For any vector <span class="math inline">\(\a=(a_1,a_2,\dots, a_n)\)</span>, the basis <span class="math inline">\(\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}\)</span> (recall <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the identity matrix <span class="math inline">\(\bo{I}_n\)</span>) is the  and <span class="math inline">\(\a\)</span> can be written in this basis using the  <span class="math inline">\(a_1,a_2,\dots, a_n\)</span> as follows:
+<span class="math display">\[\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.\]</span>
+</div>
+</div>
+</div>
+<p>The elementary basis <span class="math inline">\(\mathcal{B}_1\)</span> is convenient for many reasons, one being its orthonormality:
+<span class="math display">\[\begin{eqnarray*}
+\e_1^T\e_1 &amp;=&amp; \e_2^T\e_2 = 1\\
+\e_1^T\e_2 &amp;=&amp; \e_2^T\e_1 = 0
+\end{eqnarray*}\]</span></p>
+<p>However, there are many (infinitely many, in fact) ways to represent the data points on different axes. If I wanted to view this data in a different way, I could use a different basis. Let’s consider, for example, the following orthonormal basis, drawn in green over the original grid in Figure <a href="#coordplaneB2"><strong>??</strong></a>:
+<span class="math display">\[\mathcal{B}_2 = \{\v_1,\v_2\}=\left\lbrace {\textstyle\frac{\sqrt{2}}{2}}\pm 1\\ 1\mp ,{\textstyle\frac{\sqrt{2}}{2}}\pm 1\\-1\mp\right\rbrace\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-166"></span>
+<img src="figs/coordplaneB2.jpg" alt="New basis vectors, \(\v_1\) and \(\v_2\), shown on original plane" width="40%" />
+<p class="caption">
+Figure 10.3: New basis vectors, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, shown on original plane
+</p>
+</div>
+<p>The scalar multipliers <span class="math inline">\(\frac{\sqrt{2}}{2}\)</span> are simply normalizing factors so that the basis vectors have unit length. You can convince yourself that this is an orthonormal basis by confirming that
+<span class="math display">\[\begin{eqnarray*}
+\v_1^T\v_1 &amp;=&amp; \v_2^T\v_2 = 1\\
+\v_1^T\v_2 &amp;=&amp; \v_2^T\v_1 = 0
+\end{eqnarray*}\]</span>
+
+If we want to <em>change the basis</em> from the elementary <span class="math inline">\(\mathcal{B}_1\)</span> to the new green basis vectors in <span class="math inline">\(\mathcal{B}_2\)</span>, we need to determine a new set of coordinates that direct us to the point using the green basis vectors as a frame of reference. In other words we need to determine <span class="math inline">\((\alpha_1,\alpha_2)\)</span> such that travelling <span class="math inline">\(\alpha_1\)</span> units along the direction <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(\alpha_2\)</span> units along the direction <span class="math inline">\(\v_2\)</span> will lead us to the point in question. For the point <span class="math inline">\((2,3)\)</span> that means
+<span class="math display">\[
+\pm 2\\3 \mp = \alpha_1\v_1+\alpha_2\v_2 = \alpha_1\pm \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\mp+\alpha_2\pm \frac{\sqrt{2}}{2}\\ -\frac{\sqrt{2}}{2}\mp .
+\]</span></p>
+<p>This is merely a system of equations <span class="math inline">\(\bo{V}\bo{a}=\b\)</span>:
+<span class="math display">\[
+{\textstyle\frac{\sqrt{2}}{2}}\pm 1&amp;1 \\1&amp; -1\mp \pm \alpha_1\\ \alpha_2 \mp = \pm 2\\3 \mp
+\]</span></p>
+<p>The <span class="math inline">\(2\times 2\)</span> matrix <span class="math inline">\(\V\)</span> on the left-hand side has linearly independent columns and thus has an inverse. In fact, <span class="math inline">\(\V\)</span> is an orthonormal matrix which means its inverse is its transpose. Multiplying both sides of the equation by <span class="math inline">\(\V^{-1}=\V^T\)</span> yields the solution
+<span class="math display">\[\bo{a} =\pm \alpha_1 \\ \alpha_2 \mp = \V^T\b= \pm \frac{5\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} \mp\]</span></p>
+<p>This result tells us that in order to reach the red point (formerly known as (2,3) in our previous basis), we should travel <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span> units along the direction of <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span> units along the direction <span class="math inline">\(\v_2\)</span> (Note that <span class="math inline">\(\v_2\)</span> points toward the southeast corner and we want to move northwest, hence the coordinate is negative). Another way (a more mathematical way) to say this is that <em>the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_1\)</span> is <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span>, and the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_2\)</span> is <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span></em>. While it may seem that these are difficult distances to plot, they work out quite well if we examine our drawing in Figure <a href="#coordplaneB2"><strong>??</strong></a>, because the diagonal of each square is <span class="math inline">\(\sqrt{2}\)</span>.</p>
+<p>In the same fashion, we can re-write all 3 of the red points on our graph in the new basis by solving the same system simultaneously for all the points. Let <span class="math inline">\(\B\)</span> be a matrix containing the original coordinates of the points and let <span class="math inline">\(\A\)</span> be a matrix containing the new coordinates:
+<span class="math display">\[\B=\pm -4 &amp; 2 &amp; 5 \\ -2 &amp; 3 &amp; 2 \mp\,\, \A=\pm \alpha_{11} &amp; \alpha_{12} &amp; \alpha_{13}\\ \alpha_{21} &amp; \alpha_{22} &amp; \alpha_{23} \mp\]</span></p>
+<p>Then the new data coordinates on the rotated plane can be found by solving:
+<span class="math display">\[\V\A=\B\]</span>
+And thus <span class="math display">\[\A=\V^T\B =\frac{\sqrt{2}}{2} \pm   -6 &amp; 5 &amp;7\\ -2&amp;-1&amp;3\mp\]</span></p>
+<p>Using our new basis vectors, our alternative view of the data is that in Figure <a href="#coordplaneB2rotate"><strong>??</strong></a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-167"></span>
+<img src="figs/coordplaneB2rotate.jpg" alt="Points plotted in the new basis, \(\mathcal{B}\)" width="50%" />
+<p class="caption">
+Figure 10.4: Points plotted in the new basis, <span class="math inline">\(\mathcal{B}\)</span>
+</p>
+</div>
+<p>In the above example, we changed our basis from the original elementary basis to a new orthogonal basis which provides a different view of the data. All of this amounts to a rotation of the data around the origin. No real information has been lost - the points maintain their distances from each other in nearly every distance metric. <strong>Our new variables, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span> are linear combinations of our original variables <span class="math inline">\(\e_1\)</span> and <span class="math inline">\(\e_2\)</span></strong>, thus we can transform the data <em>back</em> to its original coordinate system by again solving a linear system (in this example, we’d simply multiply the new coordinates again by <span class="math inline">\(\V\)</span>).</p>
+<p>In general, we can change bases using the procedure outlined in Theorem <a href="#thm:changebase"><strong>??</strong></a>.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem <a href="#0"><strong>??</strong></a>.2: Changing Bases
+</div>
+<div class="Stext">
+<p>Given a matrix of coordinates (in columns), <span class="math inline">\(\A\)</span>, in some basis, <span class="math inline">\(\mathcal{B}_1=\{\x_1,\x_2,\dots,\x_n\}\)</span>, we can change the basis to <span class="math inline">\(\mathcal{B}_2=\{\v_1,\v_2,\dots,\v_n\}\)</span> with the new set of coordinates in a matrix <span class="math inline">\(\B\)</span> by solving the system
+<span class="math display">\[\X\A=\V\B\]</span>
+where <span class="math inline">\(\X\)</span> and <span class="math inline">\(\V\)</span> are matrices containing (as columns) the basis vectors from <span class="math inline">\(\mathcal{B}_1\)</span> and <span class="math inline">\(\mathcal{B}_2\)</span> respectively.</p>
+<p>Note that when our original basis is the elementary basis, <span class="math inline">\(\X=\bo{I}\)</span>, our system reduces to
+<span class="math display">\[\A=\V\B.\]</span></p>
+When our new basis vectors are orthonormal, the solution to this system is simply
+<span class="math display">\[\B=\V^T\A.\]</span>
+</div>
+</div>
+</div>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem <a href="#0"><strong>??</strong></a>.3: Basis
+</div>
+<div class="Stext">
+<p>A <strong>basis</strong> for an arbitrary vector space <span class="math inline">\(\mathcal{V}\)</span> is any set of linearly independent vectors <span class="math inline">\(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}\)</span> such that <span class="math display">\[span(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}) = \mathcal{\mathbf{V}}.\]</span>
+<span class="math inline">\(r\)</span> is said to be the <strong>dimension</strong> of the vector space <span class="math inline">\(\Re^n\)</span>.</p>
+A <strong>basis</strong> for the vector space <span class="math inline">\(\Re^n\)</span> is then any set of <span class="math inline">\(n\)</span> linearly independent vectors in <span class="math inline">\(\Re^n\)</span>; <span class="math inline">\(n\)</span> is said to be the <strong>dimension</strong> of the vector space <span class="math inline">\(\Re^n\)</span>. When the basis vectors are orthonormal (as in our prior examples), the set is called an <strong>orthonormal basis</strong>.
+</div>
+</div>
+</div>
+<p>The preceding discussion dealt entirely with bases for <span class="math inline">\(\Re^n\)</span> (our example was for points in <span class="math inline">\(\Re^2\)</span>). However, we will need to consider bases for <em>subspaces</em> of <span class="math inline">\(\Re^n\)</span>. Recall that the span of two linearly independent vectors in <span class="math inline">\(\Re^3\)</span> is a plane. This plane is a 2-dimensional subspace of <span class="math inline">\(\Re^3\)</span>. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from <span class="math inline">\(\Re^3\)</span> can be written in this basis - only those points which exist on the plane. In the next chapter, we will discuss how to proceed in a situation where the point we’d like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.</p>
+<div id="exercises-4" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Exercises</h2>
+<ol>
+<li>
+Show that the vectors <span class="math inline">\(\v_1 = \pm 3 \\ 1\mp\)</span> and <span class="math inline">\(\v_2=\pm -2 \\6\mp\)</span> are orthogonal. Create an orthonormal basis for <span class="math inline">\(\Re^2\)</span> using these two direction vectors.
+<li>
+Consider <span class="math inline">\(\a_1=(1,1)\)</span> and <span class="math inline">\(\a_2=(0,1)\)</span> as coordinates for points in the elementary basis. Write the coordinates of <span class="math inline">\(\a_1\)</span> and <span class="math inline">\(\a_2\)</span> in the orthonormal basis found in exercise 1. Draw a picture which reflects the old and new basis vectors.
+<li>
+Write the orthonormal basis vectors from exercise 1 as linear combinations of the original elementary basis vectors.
+<li>
+What is the length of the orthogonal projection of <span class="math inline">\(\a_1\)</span> onto <span class="math inline">\(\v_1\)</span>?
+</ol>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linind.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -445,7 +559,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/026-basis.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -453,7 +567,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/026-basis.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

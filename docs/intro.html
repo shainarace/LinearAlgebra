@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-05-05" />
+<meta name="date" content="2021-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -69,6 +69,8 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -313,7 +315,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
 <li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>7.1</b> Why the normal equations?</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
@@ -326,45 +331,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
 <li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<li class="chapter" data-level="10" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>10</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="10.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>10.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<li class="chapter" data-level="11" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>11</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="11.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>11.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="11.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>11.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<li class="chapter" data-level="12" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>12</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+<li class="chapter" data-level="12.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>12.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="12.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>12.2</b> PCA as SVD</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<li class="chapter" data-level="13" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>13</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
-<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="13.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>13.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="13.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>13.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="13.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>13.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="13.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>13.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="13.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>13.5</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="14.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>14.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="14.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>14.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="14.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>14.3</b> Communalities</a></li>
+<li class="chapter" data-level="14.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>14.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="14.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>14.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="15" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="15.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>15.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="15.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>15.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<li class="chapter" data-level="16" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>16</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="16.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>16.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>17</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>17.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="17.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>17.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -542,7 +551,7 @@ Two matrices are <strong>equal</strong> if and only if they have the same size a
 <p>One advantage to using (i,j)-notation is that it allows us to define an entire matrix by describing one arbitrary element according to its row (<span class="math inline">\(i\)</span>) and column (<span class="math inline">\(j\)</span>). Let’s consider a classic example from network analysis. Suppose we have a group of 6 students and we want to examine how often they have worked together in teams. Rather than use the students names, let’s just number them Student 1 through Student 6. These students were put into teams in the summer semester and then reassigned to new teams for the fall and the spring semester:</p>
 <p>Now, we can define what is called an <em>adjacency</em> or <em>association</em> matrix for this data as follows:</p>
 <p><span class="math display">\[\A_{ij} =\left\{ \begin{array}{l}
-\mbox{ \# of times Student i has worked with Student j}\,\,\,\mbox{if } i\neq j\\
+\mbox{# of times Student i has worked with Student j}\,\,\,\mbox{if } i\neq j\\
 0 \,\,\,\mbox{ if } i=j 
 \end{array} \right.\]</span></p>
 <p>Breaking apart this matrix definition, we see both the rows (indexed by <span class="math inline">\(i\)</span>) and columns (indexed by <span class="math inline">\(j\)</span>) will correspond to students. For example, the element in the <span class="math inline">\(2^{nd}\)</span> row and <span class="math inline">\(3^{rd}\)</span> column, (<span class="math inline">\(A_{23}\)</span>), will be the number of times Student 2 has worked with Student 3. Thus,
@@ -552,9 +561,12 @@ When the row and column numbers are the same (<span class="math inline">\(i=j\)<
 We can quickly see that there is symmetry in this matrix because the number of times Students <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> worked together is, of course, the same as the number of times Students <span class="math inline">\(j\)</span> and <span class="math inline">\(i\)</span> worked together. Formally, a matrix is called <strong>symmetric</strong> if <span class="math inline">\(A_{ij}=A_{ji}\)</span> (this important concept will be defined again on page ). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.</p>
 <p>An adjacency matrix like the one listed above is often used to describe a <em>network</em> or <em>graph.</em> A <strong>graph</strong> is a collection of <strong>vertices</strong> (nodes) that each represent some entity, and <strong>edges</strong> which connect vertices that are related in some way.</p>
 <p>Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together.</p>
-<center>
-<img src=figs/studentgraph.pdf width=50%/>
-</center>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="figs/studentgraph.jpg" alt="Network of Student Team Membership" width="50%" />
+<p class="caption">
+Figure 2.1: Network of Student Team Membership
+</p>
+</div>
 <p>If we had chosen to put 3’s along the diagonal, each vertex in this graph would have a bold edge that loops back to itself. Graphs and the adjacency matrices which define them are at the heart of many problems in social network analysis. For example, websites like Facebook and LinkedIn are just enormous networks of nodes (individual users) connected by edges (“friendships” or “connections”). In the case of Twitter, the network is even more complicated because the relationships are <em>directed</em>: the “follower” connection is not symmetric, the people I “follow” do not have to follow me back. We may have a chance to discuss more of this later; in general, it makes the analysis much more difficult!</p>
 </div>
 <div id="introcorr" class="section level3" number="2.3.3">
@@ -591,8 +603,8 @@ Example <a href="intro.html#intro">2</a>.4: 2-space
 <div class="S2text">
 Whereas we once thought of ordered pairs as <em>points</em> in space, we can also consider the coordinates as defining <em>vectors</em>. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
 <center>
-<img src=figs/2spacePoints.pdf width=300 />
-<img src=figs/2space.pdf width=300 />
+<img src="figs/2spacePoints.pdf" width=300 />
+<img src="figs/2space.pdf" width=300 />
 </center>
 </div>
 </div>
@@ -784,7 +796,9 @@ If a matrix has zeros above the main diagonal, then it’s called <strong>lower 
 </div>
 <div id="exercises" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Exercises</h2>
-<p><strong>1.</strong> Use the following matrices or vectors to answer the following questions:
+<ol>
+<li>
+<p>Use the following matrices or vectors to answer the following questions:
 <span class="math display">\[\A=\left(\begin{matrix} 1&amp;3&amp;8\\3&amp;0&amp;-2\\4&amp;1&amp;-3 \end{matrix}\right) \quad \bo{M}=\left(\begin{matrix} 1&amp;8&amp;-2&amp;5\\2&amp;8&amp;1&amp;7 \end{matrix}\right) \quad 
 \D = \left(\begin{matrix} 1&amp;0&amp;0\\0&amp;5&amp;0\\0&amp;0&amp;3\end{matrix}\right) \]</span>
 <span class="math display">\[
@@ -792,66 +806,165 @@ If a matrix has zeros above the main diagonal, then it’s called <strong>lower 
 \bo{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
 \v=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \bo{u}=\left(\begin{matrix} 6&amp;4&amp;8&amp;1\end{matrix}\right)
 \]</span></p>
-<p><strong>a.</strong> Write the appropriate size/dimensions next to each matrix:</p>
-<pre><code>- $\A$ \underline{\hspace{2cm}} 
-- $\bo{M}$ \underline{\hspace{2cm}} 
-- $\D$ \underline{\hspace{2cm}} 
-- $\X$\underline{\hspace{2cm}} 
-- $\bo{t}$\underline{\hspace{2cm}} 
-- $\v$\underline{\hspace{2cm}} 
-- $\u$\underline{\hspace{2cm}} </code></pre>
-<p><strong>b.</strong> Which of these matrices are square? Which are rectangular?</p>
-<p><strong>c.</strong> Give the following quantities:
-- <span class="math inline">\(A_{12}=\)</span>
-- <span class="math inline">\(M_{21}=\)</span>
-- <span class="math inline">\(\D_{\star3}=\)</span>
-- <span class="math inline">\(\bo{M}_{2\star}=\)</span>
-- <span class="math inline">\(X_{42}=\)</span>
-- <span class="math inline">\(t_5=\)</span>
-- <span class="math inline">\(v_3=\)</span></p>
-<p><strong>d.</strong> What are the diagonal elements of <span class="math inline">\(\A\)</span>?</p>
-<p><strong>2.</strong> For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.</p>
-<p><strong>a.</strong> <span class="math display">\[\A=\left(\begin{matrix} 2 &amp; 3 &amp; -1\\1&amp;-1&amp;1\\2&amp;2&amp;1 \end{matrix}\right)\]</span>
-<strong>b.</strong> <span class="math display">\[\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)\]</span>
-<strong>c.</strong> <span class="math display">\[\B=\left(\begin{matrix} B_{11}&amp;B_{12}&amp;B_{13}\\B_{21}&amp;B_{22}&amp;B_{23}\\B_{31}&amp;B_{32}&amp;B_{33}\\B_{41}&amp;B_{42}&amp;B_{43}\end{matrix}\right)\]</span>
-<strong>d.</strong> <span class="math display">\[\C=\left(\begin{matrix} 1 &amp; 0.3 &amp; -0.9 &amp; 0.1\\0.3 &amp; 1 &amp; 0.8 &amp; -0.5\\-0.9&amp;0.8&amp;1&amp;-0.6\\0.1&amp;-0.5&amp;-0.6&amp;1 \end{matrix}\right)\]</span>
-<strong>e.</strong> <span class="math display">\[\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2\]</span></p>
-<p><strong>3.</strong> For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:</p>
-<p><strong>a.</strong> <span class="math inline">\(\bo{H}\)</span> 
-<strong>b.</strong> <span class="math inline">\(\bo{W}\)</span> 
-<strong>c.</strong> <span class="math inline">\(n\)</span>
-<strong>d.</strong> <span class="math inline">\(\v_2\)</span>
-<strong>e.</strong> <span class="math inline">\(v_2\)</span>
-<strong>f.</strong> <span class="math inline">\(\bo{M}_{\star 2}\)</span>
-<strong>g.</strong> <span class="math inline">\(\lambda\)</span>
-<strong>h.</strong> <span class="math inline">\(A_{ij}\)</span>
-<strong>i.</strong> <span class="math inline">\(\bo{r}\)</span></p>
-<p><strong>4.</strong> The matrix <span class="math inline">\(\C\)</span> from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of <span class="math inline">\(\C\)</span>? For any correlation matrix computed using <span class="math inline">\(p\)</span> variables, what should we expect the trace to be?</p>
-<p><strong>5.</strong> If <span class="math display">\[\v^T = \left(\begin{matrix} 1&amp;6&amp;-1&amp;\sqrt{2} \end{matrix}\right),\]</span> then what is <span class="math inline">\(\v\)</span>?</p>
-<p><strong>6.</strong> For each of the following, write the vector or matrix that is specified:</p>
-<p><strong>a.</strong> <span class="math inline">\(\e_3 \in \Re^4\)</span>
-<strong>b.</strong> <span class="math inline">\(\D=diag\{2, \sqrt{3}, -1\}\)</span>
-<strong>c.</strong> <span class="math inline">\(\e \in \Re^3\)</span>
-<strong>d.</strong> <span class="math inline">\(\I_2\)</span></p>
-<p><strong>7.</strong> How do you know if a matrix is symmetric? Give an example of a symmetric matrix.</p>
-<p><strong>8.</strong> Give an example of a <span class="math inline">\(4\times 4\)</span> upper triangular matrix and a <span class="math inline">\(3\times 3\)</span> lower triangular matrix.</p>
-<p><strong>9.</strong> Suppose we measure the heights of 10 people, <span class="math inline">\(person_1, person_2, \dots, person_{10}\)</span>.</p>
-<p><strong>a.</strong> If we create a matrix <span class="math inline">\(\S\)</span> where
+<ol style="list-style-type:lower-alpha">
+<li>
+Write the appropriate size/dimensions next to each matrix:
+<ol style="list-style-type:lower-roman">
+<li>
+$$<br />
+
+<li>
+$ $<br />
+
+<li>
+$$<br />
+
+<li>
+$$<br />
+
+<li>
+$ $<br />
+
+<li>
+$\v $<br />
+
+<li>
+$\u $<br />
+
+</ol>
+<li>
+<p>Which of these matrices are square? Which are rectangular?</p>
+<li>
+Give the following quantities:
+<ol style="list-style-type:lower-roman">
+<li>
+<span class="math inline">\(A_{12}=\)</span><br />
+
+<li>
+<span class="math inline">\(M_{21}=\)</span><br />
+
+<li>
+<span class="math inline">\(\D_{\star3}=\)</span><br />
+
+<li>
+<span class="math inline">\(\bo{M}_{2\star}=\)</span><br />
+
+<li>
+<span class="math inline">\(X_{42}=\)</span><br />
+
+<li>
+<span class="math inline">\(t_5=\)</span><br />
+
+<li>
+<span class="math inline">\(v_3=\)</span><br />
+
+</ol>
+<li>
+What are the diagonal elements of <span class="math inline">\(\A\)</span>?
+</ol>
+<li>
+For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math display">\[\A=\left(\begin{matrix} 2 &amp; 3 &amp; -1\\1&amp;-1&amp;1\\2&amp;2&amp;1 \end{matrix}\right)\]</span><br />
+
+<li>
+<span class="math display">\[\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)\]</span><br />
+
+<li>
+<span class="math display">\[\B=\left(\begin{matrix}   B_{11}&amp;B_{12}&amp;B_{13}\\B_{21}&amp;B_{22}&amp;B_{23}\\B_{31}&amp;B_{32}&amp;B_{33}\\B_{41}&amp;B_{42}&amp;B_{43}\end{matrix}\right)\]</span><br />
+
+<li>
+<span class="math display">\[\C=\left(\begin{matrix} 1 &amp; 0.3 &amp; -0.9 &amp; 0.1\\0.3 &amp; 1 &amp; 0.8 &amp; -0.5\\-0.9&amp;0.8&amp;1&amp;-0.6\\0.1&amp;-0.5&amp;-0.6&amp;1 \end{matrix}\right)\]</span><br />
+
+<li>
+<span class="math display">\[\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2\]</span><br />
+
+</ol>
+<li>
+For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math inline">\(\bo{H}\)</span><br />
+
+<li>
+<span class="math inline">\(\bo{W}\)</span><br />
+
+<li>
+<span class="math inline">\(n\)</span><br />
+
+<li>
+$\v_2 $<br />
+
+<li>
+$v_2 $<br />
+
+<li>
+$_{} $<br />
+
+<li>
+$$<br />
+
+<li>
+$A_{ij} $<br />
+
+<li>
+$ $<br />
+
+</ol>
+<li>
+<p>The matrix <span class="math inline">\(\C\)</span> from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of <span class="math inline">\(\C\)</span>? For any correlation matrix computed using <span class="math inline">\(p\)</span> variables, what should we expect the trace to be?</p>
+<li>
+<p>If <span class="math display">\[\v^T = \left(\begin{matrix} 1&amp;6&amp;-1&amp;\sqrt{2} \end{matrix}\right),\]</span> then what is <span class="math inline">\(\v\)</span>?</p>
+<li>
+For each of the following, write the vector or matrix that is specified:
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math inline">\(\e_3 \in \Re^4\)</span>
+<li>
+<span class="math inline">\(\D=diag\{2, \sqrt{3}, -1\}\)</span>
+<li>
+<span class="math inline">\(\e \in \Re^3\)</span>
+<li>
+<span class="math inline">\(\I_2\)</span>
+</ol>
+<li>
+<p>How do you know if a matrix is symmetric? Give an example of a symmetric matrix.</p>
+<li>
+<p>Give an example of a <span class="math inline">\(4\times 4\)</span> upper triangular matrix and a <span class="math inline">\(3\times 3\)</span> lower triangular matrix.</p>
+<li>
+Suppose we measure the heights of 10 people, <span class="math inline">\(person_1, person_2, \dots, person_{10}\)</span>.
+<ol style="list-style-type:lower-alpha">
+<li>
+If we define a matrix <span class="math inline">\(\S\)</span> as
 <span class="math display">\[S_{ij} = height(person_i) - height(person_j)\]</span>
-is the matrix <span class="math inline">\(\S\)</span> symmetric? What is the trace(<span class="math inline">\(\S\)</span>)?
-<strong>b.</strong> If instead we create a matrix <span class="math inline">\(\bo{G}\)</span> where
+is the matrix <span class="math inline">\(\S\)</span> symmetric? What is the trace(<span class="math inline">\(\S\)</span>)?<br />
+
+<li>
+If instead we create a matrix <span class="math inline">\(\bo{G}\)</span> where
 <span class="math display">\[G_{ij} = [height(person_i) - height(person_j)]^2\]</span>
-is the matrix <span class="math inline">\(\bo{G}\)</span> symmetric? What is the trace(<span class="math inline">\(\bo{G}\)</span>)?</p>
-<p><strong>10.</strong> Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.</p>
-<strong>11.</strong>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-45"></span>
-<img src="figs/graphex.pdf" alt="Graph (Network) for exercise 11"  />
+is the matrix <span class="math inline">\(\bo{G}\)</span> symmetric? What is the trace(<span class="math inline">\(\bo{G}\)</span>)?<br />
+
+</ol>
+<li>
+<p>Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.</p>
+<li>
+Use the network shown below to answer the following questions.<br />
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
+<img src="figs/graphex.jpg" alt="Graph (Network) for exercise 11" width="2914" />
 <p class="caption">
-Figure 2.1: Graph (Network) for exercise 11
+Figure 2.2: Graph (Network) for exercise 11
 </p>
 </div>
-<p><strong>a.</strong> Write down the adjacency matrix, <span class="math inline">\(\A\)</span>, for this graph where <span class="math inline">\(\A_{ij}\)</span> reflects the weight of the edge connecting vertex <span class="math inline">\(i\)</span> and vertex <span class="math inline">\(j\)</span>.<br />
-<strong>b.</strong> The <strong>degree</strong> of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector <span class="math inline">\(\bo{d}\)</span> such that <span class="math inline">\(d_i\)</span> is the degree of node <span class="math inline">\(i\)</span>.</p>
+<ol style="list-style-type:lower-alpha">
+<li>
+Write down the adjacency matrix, <span class="math inline">\(\A\)</span>, for this graph where <span class="math inline">\(\A_{ij}\)</span> reflects the weight of the edge connecting vertex <span class="math inline">\(i\)</span> and vertex <span class="math inline">\(j\)</span>.<br />
+
+<li>
+The <strong>degree</strong> of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector <span class="math inline">\(\bo{d}\)</span> such that <span class="math inline">\(d_i\)</span> is the degree of node <span class="math inline">\(i\)</span>.<br />
+
+</ol>
 </div>
 <div id="list-of-key-terms" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> List of Key Terms</h2>

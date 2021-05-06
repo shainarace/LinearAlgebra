@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-05-05" />
+<meta name="date" content="2021-05-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="lsapp.html"/>
-<link rel="next" href="pca.html"/>
+<link rel="next" href="basis.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -69,6 +69,8 @@ MathJax.Hub.Config({
   }
 });
 </script>
+
+<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -313,7 +315,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
 <li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>7.1</b> Why the normal equations?</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
@@ -326,45 +331,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
 <li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>10</b> Principal Components Analysis</a>
+<li class="chapter" data-level="10" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>10</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>10.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="10.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>10.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="10.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>10.1</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>11</b> PCA in R</a>
+<li class="chapter" data-level="11" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>11</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>11.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="11.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>11.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="11.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>11.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="11.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>11.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Principal Components</a>
+<li class="chapter" data-level="12" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>12</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>12.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="12.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>12.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>12.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="12.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>12.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="12.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>12.5</b> Image Compression</a></li>
+<li class="chapter" data-level="12.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>12.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="12.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>12.2</b> PCA as SVD</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>13</b> Factor Analysis</a>
+<li class="chapter" data-level="13" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>13</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>13.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="13.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>13.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="13.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>13.3</b> Communalities</a></li>
-<li class="chapter" data-level="13.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>13.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="13.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>13.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="13.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>13.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="13.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>13.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="13.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>13.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="13.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>13.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="13.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>13.5</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="factor-analysis.html"><a href="factor-analysis.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
+<li class="chapter" data-level="14" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>14</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="factor-analysis.html"><a href="factor-analysis.html#pca-rotations"><i class="fa fa-check"></i><b>14.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="14.2" data-path="factor-analysis.html"><a href="factor-analysis.html#ex-personality-tests"><i class="fa fa-check"></i><b>14.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="14.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>14.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="14.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>14.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="14.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>14.3</b> Communalities</a></li>
+<li class="chapter" data-level="14.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>14.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="14.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>14.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>15</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="15" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>15.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="15.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>15.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="15.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>15.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Social Network Analysis</a>
+<li class="chapter" data-level="16" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>16</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>16.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="16.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>16.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="16.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>16.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>17</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>17.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="17.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>17.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -537,39 +546,53 @@ and so <span class="math inline">\(\x\)</span> is in fact in the <span class="ma
 </div>
 <div id="exercises-3" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Exercises</h2>
-<ol style="list-style-type: decimal">
-<li><strong>Six views of matrix multiplication:</strong> Let <span class="math inline">\(\A_{m\times k}\)</span>, <span class="math inline">\(\B_{k\times n}\)</span>, and <span class="math inline">\(\C_{m\times n}\)</span> be matrices such that
-<span class="math display">\[\A\B=\C.\]</span></li>
+<ol>
+<li>
+<p><strong>Six views of matrix multiplication:</strong> <em>This notational exercise turns out to contain one of (well, six of) the most fundamentally important concepts to grasp for applied linear algebra. We must be able to intuitively create matrix multiplications from every angle in order for us to be strong practitioners. This is not something that we develop immediately. It comes through practice, visualization, and experience. Do not skip this exercise and keep it in your pocket as you proceed through this book. </em></p>
+Let <span class="math inline">\(\A_{m\times k}\)</span>, <span class="math inline">\(\B_{k\times n}\)</span>, and <span class="math inline">\(\C_{m\times n}\)</span> be matrices such that
+<span class="math display">\[\A\B=\C.\]</span>
+<ol style="list-style-type:lower-alpha">
+<li>
+Express the first column of <span class="math inline">\(\C\)</span> as a linear combination of the columns of <span class="math inline">\(\A\)</span>.
+<li>
+Express the first column of <span class="math inline">\(\C\)</span> as a matrix-vector product.
+<li>
+Express <span class="math inline">\(\C\)</span> as a sum of outer products.
+<li>
+Express the first row of <span class="math inline">\(\C\)</span> as a linear combination of the rows of <span class="math inline">\(\B\)</span>.
+<li>
+Express the first row of <span class="math inline">\(\C\)</span> as a matrix-vector product.
+<li>
+Express the element <span class="math inline">\(\C_{ij}\)</span> as an inner product of row or column vectors from <span class="math inline">\(\A\)</span> and <span class="math inline">\(\B\)</span>.
 </ol>
-<ol style="list-style-type: lower-alpha">
-<li>Express the first column of <span class="math inline">\(\C\)</span> as a linear combination of the columns of <span class="math inline">\(\A\)</span>.</li>
-<li>Express the first column of <span class="math inline">\(\C\)</span> as a matrix-vector product.</li>
-<li>Express <span class="math inline">\(\C\)</span> as a sum of outer products.</li>
-<li>Express the first row of <span class="math inline">\(\C\)</span> as a linear combination of the rows of <span class="math inline">\(\B\)</span>.</li>
-<li>Express the first row of <span class="math inline">\(\C\)</span> as a matrix-vector product.</li>
-<li>Express the element <span class="math inline">\(\C_{ij}\)</span> as an inner product of row or column vectors from <span class="math inline">\(\A\)</span> and <span class="math inline">\(\B\)</span>.</li>
+<li>
+Determine whether or not the vectors <span class="math display">\[\x_1=\pm 1\\3\\1\mp,\x_2=\pm 0\\1\\1\mp,\x_3=\pm 2\\1\\0\mp\]</span> are linearly independent.
+<li>
+Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>.
+<ol style="list-style-type:lower-alpha">
+<li>
+Show that the zero vector, <span class="math inline">\(\pm 0\\0\\0 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.
+<li>
+Determine whether or not the vector <span class="math inline">\(\pm 1\\0\\1 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.
 </ol>
-<ol start="2" style="list-style-type: decimal">
-<li>Determine whether or not the vectors <span class="math display">\[\x_1=\pm 1\\3\\1\mp,\x_2=\pm 0\\1\\1\mp,\x_3=\pm 2\\1\\0\mp\]</span> are linearly independent.</li>
-<li>Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>.</li>
+<li>
+What is the span of the zero vector, <span class="math inline">\(\bo{0}=(0,0,\dots, 0)\)</span>?
+<li>
+Draw the <span class="math inline">\(span(\a,\b)\)</span> if <span class="math inline">\(\a=\pm 1\\2 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\6 \mp\)</span>.
+<li>
+Prove that the span of vectors is a subspace by showing that it satisfies the three conditions from Definition <a href="#def:span"><strong>??</strong></a>. To make a formal proof, the strategy should be as follows: (1) Take two arbitrary elements from the span and show that when you add them together, the resulting vector is also in the span. (2) Take one arbitrary vector from the span and show that when you multiply it by a constant, the resulting vector is also in the span. (3) Show that the zero vector is contained in the span. You can simply show this fact for the span of two vectors and notice how the concept will hold for more than two vectors.
+<li>
+<em>True/False</em> Mark each statement as true or false. Justify your response.
+<ol style="list-style-type:lower-alpha">
+<li>
+If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> can be written as a linear combination of the columns of <span class="math inline">\(\A\)</span>.
+<li>
+If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> is in the span of the columns of <span class="math inline">\(\A\)</span>.
+<li>
+If <span class="math inline">\(\v_1\)</span> is in the <span class="math inline">\(span(\v_2,\v_3)\)</span>, then <span class="math inline">\(\v_1, \v_2, \,\mbox{ and},\v_3\)</span> form a linearly independent set.
 </ol>
-<ol style="list-style-type: lower-alpha">
-<li>Show that the zero vector, <span class="math inline">\(\pm 0\\0\\0 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
-<li>Determine whether or not the vector <span class="math inline">\(\pm 1\\0\\1 \mp\)</span> is in the <span class="math inline">\(span(\a,\b)\)</span>.</li>
-</ol>
-<ol start="4" style="list-style-type: decimal">
-<li>What is the span of the zero vector, <span class="math inline">\(\bo{0}=(0,0,\dots, 0)\)</span>?</li>
-<li>Draw the <span class="math inline">\(span(\a,\b)\)</span> if <span class="math inline">\(\a=\pm 1\\2 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\6 \mp\)</span>.</li>
-<li>Prove that the span of vectors is a subspace by showing that it satisfies the three conditions from Definition . To make a formal proof, the strategy should be as follows: (1) Take two arbitrary elements from the span and show that when you add them together, the resulting vector is also in the span. (2) Take one arbitrary vector from the span and show that when you multiply it by a constant, the resulting vector is also in the span. (3) Show that the zero vector is contained in the span. You can simply show this fact for the span of two vectors and notice how the concept will hold for more than two vectors.</li>
-<li><em>True/False</em> Mark each statement as true or false. Justify your response.</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> can be written as a linear combination of the columns of <span class="math inline">\(\A\)</span>.</li>
-<li>If <span class="math inline">\(\A\x=\b\)</span> has a solution then <span class="math inline">\(\b\)</span> is in the span of the columns of <span class="math inline">\(\A\)</span>.</li>
-<li>If <span class="math inline">\(\v_1\)</span> is in the <span class="math inline">\(span(\v_2,\v_3)\)</span>, then <span class="math inline">\(\v_1, \v_2, \,\mbox{ and},\v_3\)</span> form a linearly independent set.</li>
-</ol>
-<ol start="8" style="list-style-type: decimal">
-<li>Two vectors are linearly independent only if they are not perfectly correlated, <span class="math inline">\(-1&lt;\rho&lt;1\)</span>, where <span class="math inline">\(\rho\)</span> is Pearson’s correlation coefficient.</li>
+<li>
+Two vectors are linearly independent only if they are not perfectly correlated, <span class="math inline">\(-1&lt;\rho&lt;1\)</span>, where <span class="math inline">\(\rho\)</span> is Pearson’s correlation coefficient.
 </ol>
 </div>
 <div id="list-of-key-terms-3" class="section level2 unnumbered">
@@ -592,7 +615,7 @@ and so <span class="math inline">\(\x\)</span> is in fact in the <span class="ma
         </div>
       </div>
 <a href="lsapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="basis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
