@@ -1,4 +1,4 @@
-# Dimension Reduction for Visualization 
+# Dimension Reduction for Visualization {#otherdimred}
 
 ## Multidimensional Scaling
 

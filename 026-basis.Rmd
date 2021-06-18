@@ -1,0 +1,133 @@
+# Basis and Change of Basis {#basis}
+```{r, echo=F} 
+thmcounter=0
+cid='basis'
+```
+When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\\
+
+```{r id='studentgraph', fig.align='center', fig.cap = 'The Coordinate Plane', echo=F, out.width="40%"}
+knitr::include_graphics("figs/coordplane.jpg")
+```
+
+
+
+When we think of our data points this way, we are considering them as linear combinations of  elementary __basis vectors__
+$$\e_1 = \pm 1\\0\mp \mbox{  and  } \e_2=\pm 0\\1 \mp.$$
+For example, the point $(2,3)$ is written as
+\begin{equation}
+\pm 2\\3 \mp = 2\pm 1\\0\mp+3\pm 0\\1\mp = 2\e_1+3\e_2.
+  (\#eq:coord)
+\end{equation}
+
+We consider the coefficients (the scalars 2 and 3) in this linear combination as __coordinates__ in the basis $\mathcal{B}_1=\{\e_1,\e_2\}$.  The coordinates, in essence, tell us how much ``information'' from the vector/point $(2 ,3 )$ lies along each basis direction: to create this point, we must travel 2 units along the direction of $\e_1$ and then 3 units along the direction of $\e_2$. 
+
+We can also view Equation \@ref(eq:coord) as a way to separate the vector $(2,3)$ into orthogonal components. Each component is an __orthogonal projection__ of the vector onto the span of the corresponding basis vector. The orthogonal projection of vector $\bo{a}$ onto the span another vector $\v$ is simply the closest point to $\bo{a}$ contained on the span($\v$), found by ``projecting'' $\bo{a}$ toward $\v$ at a $90^\circ$ angle. Figure \@ref(orthogproj) shows this explicitly for $\bo{a}=(2,3)$.
+
+```{r id='orthogproj', fig.align='center', fig.cap = 'Orthogonal Projections onto basis vectors', echo=F, out.width="40%"}
+knitr::include_graphics("figs/orthogproj.jpg")
+```
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Elementary Basis', id = 'elembasis', num=thmcounter, cid=cid}
+For any vector $\a=(a_1,a_2,\dots, a_n)$, the basis $\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}$ (recall $\e_i$ is the $i^{th}$ column of the identity matrix $\bo{I}_n$) is the \textbf{elementary basis} and $\a$ can be written in this basis using the \textbf{coordinates} $a_1,a_2,\dots, a_n$ as follows:
+$$\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.$$
+```
+
+The elementary basis $\mathcal{B}_1$ is convenient for many reasons, one being its orthonormality:
+\begin{eqnarray*}
+\e_1^T\e_1 &=& \e_2^T\e_2 = 1\\
+\e_1^T\e_2 &=& \e_2^T\e_1 = 0
+\end{eqnarray*}
+
+However, there are many (infinitely many, in fact) ways to represent the data points on different axes. If I wanted to view this data in a different way, I could use a different basis. Let's consider, for example, the following orthonormal basis, drawn in green over the original grid in Figure \@ref(coordplaneB2):
+$$\mathcal{B}_2 = \{\v_1,\v_2\}=\left\lbrace {\textstyle\frac{\sqrt{2}}{2}}\pm 1\\ 1\mp ,{\textstyle\frac{\sqrt{2}}{2}}\pm 1\\-1\mp\right\rbrace$$
+
+(ref:coordcap) New basis vectors, $\v_1$ and $\v_2$, shown on original plane
+
+```{r id='coordplaneB2', fig.align='center', fig.cap = '(ref:coordcap)', echo=F, out.width="40%"}
+knitr::include_graphics("figs/coordplaneB2.jpg")
+```
+
+
+The scalar multipliers $\frac{\sqrt{2}}{2}$ are simply normalizing factors so that the basis vectors have unit length. You can convince yourself that this is an orthonormal basis by confirming that
+\begin{eqnarray*}
+\v_1^T\v_1 &=& \v_2^T\v_2 = 1\\
+\v_1^T\v_2 &=& \v_2^T\v_1 = 0
+\end{eqnarray*}
+\index{Basis!Change of}
+If we want to _change the basis_ from the elementary $\mathcal{B}_1$ to the new green basis vectors in $\mathcal{B}_2$, we need to determine a new set of coordinates that direct us to the point using the green basis vectors as a frame of reference. In other words we need to determine $(\alpha_1,\alpha_2)$ such that travelling $\alpha_1$ units along the direction $\v_1$ and then $\alpha_2$ units along the direction $\v_2$ will lead us to the point in question. For the point $(2,3)$ that means
+$$
+\pm 2\\3 \mp = \alpha_1\v_1+\alpha_2\v_2 = \alpha_1\pm \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\mp+\alpha_2\pm \frac{\sqrt{2}}{2}\\ -\frac{\sqrt{2}}{2}\mp .
+$$
+
+This is merely a system of equations $\bo{V}\bo{a}=\b$:
+$$
+{\textstyle\frac{\sqrt{2}}{2}}\pm 1&1 \\1& -1\mp \pm \alpha_1\\ \alpha_2 \mp = \pm 2\\3 \mp
+$$
+
+The $2\times 2$ matrix $\V$ on the left-hand side has linearly independent columns and thus has an inverse. In fact, $\V$ is an orthonormal matrix which means its inverse is its transpose. Multiplying both sides of the equation by $\V^{-1}=\V^T$ yields the solution
+$$\bo{a} =\pm \alpha_1 \\ \alpha_2 \mp = \V^T\b= \pm \frac{5\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} \mp$$
+
+This result tells us that in order to reach the red point (formerly known as (2,3) in our previous basis), we should travel $\frac{5\sqrt{2}}{2}$ units along the direction of $\v_1$ and then $-\frac{\sqrt{2}}{2}$ units along the direction $\v_2$ (Note that $\v_2$ points toward the southeast corner and we want to move northwest, hence the coordinate is negative). Another way (a more mathematical way) to say this is that _the length of the orthogonal projection of $\bo{a}$ onto the span of $\v_1$ is $\frac{5\sqrt{2}}{2}$, and the length of the orthogonal projection of $\bo{a}$ onto the span of $\v_2$ is $-\frac{\sqrt{2}}{2}$_. While it may seem that these are difficult distances to plot, they work out quite well if we examine our drawing in Figure \@ref(coordplaneB2), because the diagonal of each square is $\sqrt{2}$. 
+
+In the same fashion, we can re-write all 3 of the red points on our graph in the new basis by solving the same system simultaneously for all the points. Let $\B$ be a matrix containing the original coordinates of the points and let $\A$ be a matrix containing the new coordinates:
+$$\B=\pm -4 & 2 & 5 \\ -2 & 3 & 2 \mp\,\, \A=\pm \alpha_{11} & \alpha_{12} & \alpha_{13}\\ \alpha_{21} & \alpha_{22} & \alpha_{23} \mp$$
+
+Then the new data coordinates on the rotated plane can be found by solving:
+$$\V\A=\B$$
+And thus $$\A=\V^T\B =\frac{\sqrt{2}}{2} \pm   -6 & 5 &7\\ -2&-1&3\mp$$
+
+Using our new basis vectors, our alternative view of the data is that in Figure \@ref(coordplaneB2rotate).
+
+(ref:coordB2cap) Points plotted in the new basis, $\mathcal{B}$
+
+```{r id='coordplaneB2rotate', fig.align='center', fig.cap = '(ref:coordB2cap)', echo=F, out.width="50%"}
+knitr::include_graphics("figs/coordplaneB2rotate.jpg")
+```
+
+
+In the above example, we changed our basis from the original elementary basis to a new orthogonal basis which provides a different view of the data. All of this amounts to a rotation of the data around the origin. No real information has been lost - the points maintain their distances from each other in nearly every distance metric. __Our new variables, $\v_1$ and $\v_2$ are linear combinations of our original variables $\e_1$ and $\e_2$__, thus we can transform the data _back_ to its original coordinate system by again solving a linear system (in this example, we'd simply multiply the new coordinates again by $\V$).
+
+In general, we can change bases using the procedure outlined in Theorem \@ref(thm:changebase).
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{thm title='Changing Bases', id = 'changebase', num=thmcounter, cid=cid}
+Given a matrix of coordinates (in columns), $\A$, in some basis, $\mathcal{B}_1=\{\x_1,\x_2,\dots,\x_n\}$, we can change the basis to $\mathcal{B}_2=\{\v_1,\v_2,\dots,\v_n\}$ with the new set of coordinates in a matrix $\B$ by solving the system
+$$\X\A=\V\B$$
+where $\X$ and $\V$ are matrices containing (as columns) the basis vectors from $\mathcal{B}_1$ and $\mathcal{B}_2$ respectively.
+
+Note that when our original basis is the elementary basis, $\X=\bo{I}$, our system reduces to
+$$\A=\V\B.$$
+
+When our new basis vectors are orthonormal, the solution to this system is simply
+$$\B=\V^T\A.$$
+```
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+
+
+
+
+```{thm title='Basis', id = 'basis', num=thmcounter, cid=cid}
+A __basis__ for an arbitrary vector space $\mathcal{V}$ is any set of linearly independent vectors $\{\mathcal{B}_1,\dots, \mathcal{B}_r\}$ such that $$span(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}) = \mathcal{\mathbf{V}}.$$
+$r$ is said to be the __dimension__ of the vector space $\Re^n$.
+  
+A __basis__ for the vector space $\Re^n$ is then any set of $n$ linearly independent vectors in $\Re^n$; $n$ is said to be the __dimension__ of the vector space $\Re^n$. When the basis vectors are orthonormal (as in our prior examples), the set is called an __orthonormal basis__. 
+```
+
+The preceding discussion dealt entirely with bases for $\Re^n$ (our example was for points in $\Re^2$). However, we will need to consider bases for _subspaces_ of $\Re^n$. Recall that the span of two linearly independent vectors in $\Re^3$ is a plane. This plane is a 2-dimensional subspace of $\Re^3$. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from $\Re^3$ can be written in this basis - only those points which exist on the plane. In the next chapter, we will discuss how to proceed in a situation where the point we'd like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.
+
+## Exercises
+<ol>
+<li> Show that the vectors $\v_1 = \pm 3 \\ 1\mp$ and $\v_2=\pm -2 \\6\mp$ are orthogonal. Create an orthonormal basis for $\Re^2$ using these two direction vectors.
+<li> Consider $\a_1=(1,1)$ and $\a_2=(0,1)$ as coordinates for points in the elementary basis. Write the coordinates of $\a_1$ and $\a_2$ in the orthonormal basis found in exercise 1. Draw a picture which reflects the old and new basis vectors. 
+<li> Write the orthonormal basis vectors from exercise 1 as linear combinations of the original elementary basis vectors.
+<li> What is the length of the orthogonal projection of $\a_1$ onto $\v_1$?
+</ol>
+

@@ -13,14 +13,14 @@ One of the most central ideas in all of Linear Algebra is that of **linear indep
 ```{r, echo=F} 
 thmcounter=thmcounter+1
 ```
-```{def title="Linear Dependence and Linear Independence", id='linind', num=thmcounter}
+```{def title="Linear Dependence and Linear Independence", id='linind', num=thmcounter, cid=cid}
 A set of vectors $\{\v_1,\v_2,\dots, \v_n\}$ is **linearly dependent** if we can express the zero vector, $\bo{0}$, as non-trivial linear combination of the vectors.  In other words there exist some constants $\alpha_1,\alpha_2,\dots \alpha_n$  (non-trivial means that these constants are not _all_ zero) for which
 \begin{equation}
 \alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}.
-\label{triv}
+  (\#eq:triv)
 \end{equation}
 
-A set of terms is **linearly independent** if Equation \ref{triv} has only the trivial solution ($\alpha_1=\alpha_2=\dots=\alpha_n = 0$).
+A set of terms is **linearly independent** if Equation \@ref{eq:triv} has only the trivial solution ($\alpha_1=\alpha_2=\dots=\alpha_n = 0$).
 ```
 
 Another way to express linear dependence is to say that we can write one of the vectors as a linear combination of the others. If there exists a non-trivial set of coefficients $\alpha_1,\alpha_2, \dots, \alpha_n$ for which
@@ -31,7 +31,7 @@ $$\v_j=-\frac{1}{\alpha_j} \sum_{\substack{i=1\\i \neq j}}^n \alpha_i \v_i$$
 ```{r, echo=F} 
 excounter=excounter+1
 ```
-```{ex title='Linearly Dependent Vectors', id='lindep', num=excounter}
+```{ex title='Linearly Dependent Vectors', id='lindep', num=excounter, cid=cid}
 The vectors $\v_1 =\pm 1\\2\\2 \mp, \v_2 = \pm 1\\2\\3 \mp, \mbox{  and  } \v_3 = \pm 3\\6\\7 \mp$ are linearly dependent because 
 $$\v_3 = 2\v_1+\v_2$$
 or, equivalently, because
@@ -40,19 +40,19 @@ $$2\v_1+\v_2-\v_3 = \bo{0}$$
 
 ### Determining Linear Independence
 
-You should realize that the linear combination expressed Definition \ref{def:linind} can be written as a matrix vector product. Let $\A_{m\times n} = (\A_1|\A_2|\dots|\A_n)$ be a matrix. Then by Definition \ref{def:linind}, the columns of $\A$ are linearly independent if and only if the equation
+You should realize that the linear combination expressed Definition \@ref{def:linind} can be written as a matrix vector product. Let $\A_{m\times n} = (\A_1|\A_2|\dots|\A_n)$ be a matrix. Then by Definition \@ref{def:linind}, the columns of $\A$ are linearly independent if and only if the equation
 \begin{equation}
-\label{eq:homo}
 \A\x = \bo{0}
+(\#eq:homo)
 \end{equation}
-has only the trivial solution, $\x=0$. Equation \ref{eq:homo} is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix $(\A|\bo{0})$ reduces to $(\bo{I}|0)$. We have already seen this condition in our discussion about matrix inverses - if a square matrix $\A$ reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called _full rank, nonsingular, or invertible_. Now we add an additional condition equivalent to the others - the matrix $\A$ has linearly independent columns (_and rows_).
+has only the trivial solution, $\x=0$. Equation \@ref{eq:homo} is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix $(\A|\bo{0})$ reduces to $(\bo{I}|0)$. We have already seen this condition in our discussion about matrix inverses - if a square matrix $\A$ reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called _full rank, nonsingular, or invertible_. Now we add an additional condition equivalent to the others - the matrix $\A$ has linearly independent columns (_and rows_).
 
-In Theorem \ref{thm:equivcond} a important list of equivalent conditions regarding linear independence and invertibility is given.
+In Theorem \@ref{thm:equivcond} a important list of equivalent conditions regarding linear independence and invertibility is given.
 
 ```{r, echo=F} 
 thmcounter=thmcounter+1
 ```
-```{thm title='Equivalent Conditions for Matrix Invertibility', id='equivcond', num=thmcounter}
+```{thm title='Equivalent Conditions for Matrix Invertibility', id='equivcond', num=thmcounter, cid=cid}
 Let $\A$ be an $n\times n$ matrix - a _square_ matrix. Then the following statements are _equivalent_. (If one these statements is true, then all of these statements are true)
 
 - $\A$ is invertible ($\A^{-1} exists$)
@@ -70,7 +70,7 @@ Let $\A$ be an $n\times n$ matrix - a _square_ matrix. Then the following statem
 ```{r, echo=F} 
 thmcounter=thmcounter+1
 ```
-```{def title='Vector Span', id='span', num=thmcounter}
+```{def title='Vector Span', id='span', num=thmcounter, cid=cid}
 The **span** of a single vector $\v$ is the set of all scalar multiples of $\v$:
 $$span(\v)=\{\alpha\v\ \mbox{  for any constant  } \alpha\}$$
  The **span** of a collection of vectors, $\V=\{\v_1,\v_2,\dots,\v_n\}$ is the set of all linear combinations of these vectors:
@@ -89,7 +89,7 @@ Recall that addition of vectors can be done geometrically using the _head-to-tai
 
 If we have two linearly independent vectors on a coordinate plane, then any third vector can be written as a linear combination of them. This is because two vectors is sufficient to _span_ the entire 2-dimensional plane. You should take a moment to convince yourself of this geometrically.
 
-In 3-space, two linearly independent vectors can still only span a plane. \fref{span} depicts this situation. The set of all linearly combinations of the two vectors $\a$ and $\b$ (i.e. the $span(\a,\b)$) carves out a plane. We call this a two-dimensional collection of vectors a **subspace** of $\Re^3$. A subspace is formally defined in Definition \ref{def:subspace}.
+In 3-space, two linearly independent vectors can still only span a plane. \fref{span} depicts this situation. The set of all linearly combinations of the two vectors $\a$ and $\b$ (i.e. the $span(\a,\b)$) carves out a plane. We call this a two-dimensional collection of vectors a **subspace** of $\Re^3$. A subspace is formally defined in Definition \@ref{def:subspace}.
 <figure>
 <center>
 <img src=figs/span.png width=300 /> 
@@ -100,7 +100,7 @@ In 3-space, two linearly independent vectors can still only span a plane. \fref{
 ```{r, echo=F} 
 thmcounter=thmcounter+1
 ```  
-```{def title='Subspace', id='subspace', num=thmcounter}
+```{def title='Subspace', id='subspace', num=thmcounter, cid=cid}
 A **subspace**, $\mathcal{S}$ of $\Re^n$ is thought of as a ``flat''  (having no curvature) surface within $\Re^n$. It is a collection of vectors which satisfies the following conditions:
 
 1. The origin ($\bo{0}$ vector) is contained in $\mathcal{S}$
@@ -110,7 +110,7 @@ A **subspace**, $\mathcal{S}$ of $\Re^n$ is thought of as a ``flat''  (having no
 
 The span of two vectors $\a$ and $\b$ is a subspace because it satisfies these three conditions. (Can you prove it? See exercise 4).
 
-```{ex title='Span', id='ex-span',num=excounter}
+```{ex title='Span', id='ex-span',num=excounter, cid=cid}
 Let $\a=\pm 1\\3\\4 \mp$ and $\b=\pm 3\\0\\1 \mp$. Explain why or why not each of the following vectors is contained in the $span(\a,\b)$? 
 
 a. $\x=\pm 5\\6\\9 \mp$ 
@@ -129,29 +129,36 @@ b. $\y=\pm 2\\4\\6 \mp$
 ```
 
 ##  Exercises
+<ol>
+<li> **Six views of matrix multiplication:**  _This notational exercise turns out to contain one of (well, six of) the most fundamentally important concepts to grasp for applied linear algebra. We must be able to intuitively create matrix multiplications from every angle in order for us to be strong practitioners. This is not something that we develop immediately. It comes through practice, visualization, and experience. Do not skip this exercise and keep it in your pocket as you proceed through this book. _
 
-1. **Six views of matrix multiplication:** Let $\A_{m\times k}$, $\B_{k\times n}$, and $\C_{m\times n}$ be matrices such that
+Let $\A_{m\times k}$, $\B_{k\times n}$, and $\C_{m\times n}$ be matrices such that
 $$\A\B=\C.$$
-
-  a. Express the first column of $\C$ as a linear combination of the columns of $\A$.
-  b. Express the first column of $\C$ as a matrix-vector product.
-  c. Express $\C$ as a sum of outer products.
-  d. Express the first row of $\C$ as a linear combination of the rows of $\B$.
-  e. Express the first row of $\C$  as a matrix-vector product.
-  d. Express the element $\C_{ij}$ as an inner product of row or column vectors from $\A$ and $\B$.
-2. Determine whether or not the vectors $$\x_1=\pm 1\\3\\1\mp,\x_2=\pm 0\\1\\1\mp,\x_3=\pm 2\\1\\0\mp$$ are linearly independent.
-3. Let $\a=\pm 1\\3\\4 \mp$ and $\b=\pm 3\\0\\1 \mp$. 
-  a. Show that the zero vector, $\pm 0\\0\\0 \mp$ is in the $span(\a,\b)$. 
-  b. Determine whether or not the vector $\pm 1\\0\\1 \mp$ is in the $span(\a,\b)$.
-4. What is the span of the zero vector, $\bo{0}=(0,0,\dots, 0)$?
-5. Draw the $span(\a,\b)$ if $\a=\pm 1\\2 \mp$ and $\b=\pm 3\\6 \mp$.
-6. Prove that the span of vectors is a subspace by showing that it satisfies the three conditions from Definition \ref{def:span}. To make a formal proof, the strategy should be as follows: (1) Take two arbitrary elements from the span and show that when you add them together, the resulting vector is also in the span. (2) Take one arbitrary vector from the span and show that when you multiply it by a constant, the resulting vector is also in the span. (3) Show that the zero vector is contained in the span. You can simply show this fact for the span of two vectors and notice how the concept will hold for more than two vectors.
-7. _True/False_ Mark each statement as true or false. Justify your response.
-  a. If $\A\x=\b$ has a solution then $\b$ can be written as a linear combination of the columns of $\A$.
-  b. If $\A\x=\b$ has a solution then $\b$ is in the span of the columns of $\A$.
-  c. If  $\v_1$ is in the $span(\v_2,\v_3)$, then $\v_1, \v_2, \,\mbox{ and},\v_3$ form a linearly independent set.
-8. Two vectors are linearly independent only if they are not perfectly correlated, $-1<\rho<1$, where $\rho$ is Pearson's correlation coefficient.
-
+<ol style="list-style-type:lower-alpha">
+  <li> Express the first column of $\C$ as a linear combination of the columns of $\A$.
+  <li> Express the first column of $\C$ as a matrix-vector product.
+  <li> Express $\C$ as a sum of outer products.
+  <li> Express the first row of $\C$ as a linear combination of the rows of $\B$.
+  <li> Express the first row of $\C$  as a matrix-vector product.
+  <li> Express the element $\C_{ij}$ as an inner product of row or column vectors from $\A$ and $\B$.
+</ol>
+<li> Determine whether or not the vectors $$\x_1=\pm 1\\3\\1\mp,\x_2=\pm 0\\1\\1\mp,\x_3=\pm 2\\1\\0\mp$$ are linearly independent.
+<li> Let $\a=\pm 1\\3\\4 \mp$ and $\b=\pm 3\\0\\1 \mp$. 
+<ol style="list-style-type:lower-alpha">
+  <li> Show that the zero vector, $\pm 0\\0\\0 \mp$ is in the $span(\a,\b)$. 
+  <li> Determine whether or not the vector $\pm 1\\0\\1 \mp$ is in the $span(\a,\b)$.
+</ol>
+<li> What is the span of the zero vector, $\bo{0}=(0,0,\dots, 0)$?
+<li> Draw the $span(\a,\b)$ if $\a=\pm 1\\2 \mp$ and $\b=\pm 3\\6 \mp$.
+<li> Prove that the span of vectors is a subspace by showing that it satisfies the three conditions from Definition \@ref(def:span). To make a formal proof, the strategy should be as follows: (1) Take two arbitrary elements from the span and show that when you add them together, the resulting vector is also in the span. (2) Take one arbitrary vector from the span and show that when you multiply it by a constant, the resulting vector is also in the span. (3) Show that the zero vector is contained in the span. You can simply show this fact for the span of two vectors and notice how the concept will hold for more than two vectors.
+<li>  _True/False_ Mark each statement as true or false. Justify your response.
+<ol style="list-style-type:lower-alpha">
+  <li> If $\A\x=\b$ has a solution then $\b$ can be written as a linear combination of the columns of $\A$.
+  <li> If $\A\x=\b$ has a solution then $\b$ is in the span of the columns of $\A$.
+  <li> If  $\v_1$ is in the $span(\v_2,\v_3)$, then $\v_1, \v_2, \,\mbox{ and},\v_3$ form a linearly independent set.
+</ol>
+<li> Two vectors are linearly independent only if they are not perfectly correlated, $-1<\rho<1$, where $\rho$ is Pearson's correlation coefficient.
+</ol>
 
 
 ## List of Key Terms {-}

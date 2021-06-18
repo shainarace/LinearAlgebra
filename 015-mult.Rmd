@@ -67,7 +67,7 @@ $$
  \a+\b =\pm a_1\\ a_2\\ a_3\\ \vdots \\ a_n \mp +\pm b_1\\ b_2\\ b_3\\ \vdots \\ b_n \mp = \pm a_1+b_1\\a_2+b_2\\a_3+b_3\\ \vdots \\a_n+b_n \mp
 $$
 
-Geometrically, vector addition is witnessed by placing the two vectors, $\a$ and $\b$, _tail-to-head_. The result, $\a+\b$, is the vector from the open tail to the open head. This is called the parallelogram law and is demonstrated in Figure \ref{vectoradd}.
+Geometrically, vector addition is witnessed by placing the two vectors, $\a$ and $\b$, _tail-to-head_. The result, $\a+\b$, is the vector from the open tail to the open head. This is called the parallelogram law and is demonstrated in Figure \@ref(vectoradd).
 
 
 ![](figs/vectoradd.pdf)     | ![](figs/vectorsub.pdf)
@@ -76,7 +76,7 @@ Addition of vectors  |  Subtraction of Vectors
 
 
 
-When subtracting vectors as $\a-\b$ we simply add $-\b$ to $\a$. The vector $-\b$ has the same length as $\b$ but points in the opposite direction. This vector has the same length as the one which connects the two heads of $\a$ and $\b$ as shown in Figure \ref{vectorsub}. 
+When subtracting vectors as $\a-\b$ we simply add $-\b$ to $\a$. The vector $-\b$ has the same length as $\b$ but points in the opposite direction. This vector has the same length as the one which connects the two heads of $\a$ and $\b$ as shown in Figure \@ref(vectorsub). 
 
 ```{r, echo=F} 
 excounter=excounter+1
@@ -297,7 +297,7 @@ excounter=excounter+1
 ```
  
 ```{exer title='Multiplication by a Diagonal Matrix', id='exer:diagmult'}
- What happens if we were to compute the product from Example \ref{ex:diagmult} in the reversed order, with the diagonal matrix on the right:
+ What happens if we were to compute the product from Example \@ref(ex:diagmult) in the reversed order, with the diagonal matrix on the right:
  $$\A\D?$$
  Would we expect the same result? Is multiplication by a diagonal matrix commutative? Work out the calculation and comment on what you've found.
 ```
@@ -383,13 +383,13 @@ As you can see by performing this calculation, a vector outer product will _alwa
 
 ## The Identity and the Matrix Inverse
 
-The *identity matrix*, introduced in Section \ref{special}, is to matrices as the number `1' is to scalars. It is the **multiplicative identity**. For any matrix (or vector) $\A$, multiplying $\A$ by the identity matrix on either side does not change $\A$:
+The *identity matrix*, introduced in Section \@ref(special), is to matrices as the number `1' is to scalars. It is the **multiplicative identity**. For any matrix (or vector) $\A$, multiplying $\A$ by the identity matrix on either side does not change $\A$:
 \begin{align*}
 \A\I&=\A \\
 \I\A &= \A 
 \end{align*}
 
-This fact is easy to verify in light of Example \ref{ex:diagmult}. Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1.  The size of the identity matrix is generally implied in context. If $\A$ is $m\times n$ then writing $\A\I$ implies that $\I$ is $n \times n$, where as writing $\I\A$ implies $\I$ is $m\times m$.
+This fact is easy to verify in light of Example \@ref(ex:diagmult). Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1.  The size of the identity matrix is generally implied in context. If $\A$ is $m\times n$ then writing $\A\I$ implies that $\I$ is $n \times n$, where as writing $\I\A$ implies $\I$ is $m\times m$.
 
 For *certain* square matrices $\A$, an inverse matrix, written $\A^{-1}$, exists such that
 $$\A\A^{-1} = \I$$
@@ -421,57 +421,71 @@ Note that, while this equation made sense to begin with, after erroneously cance
 
 
 ## Exercises
-
-__1.__ On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b ``tail-to-head''.
-2. Use the following vectors to answer the questions:
+<ol>
+<li> On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b ``tail-to-head''.
+<li> Use the following vectors to answer the questions:
 $$
 \v=\pm 6\\-1\mp \quad \bo{u}=\pm -2\\1\mp \quad \x=\pm 4\\2\\1\mp \quad \y=\pm-1\\-2\\-3\mp \quad \e=\pm 1\\1\\1\mp
 $$
-    __a.__ Compute the following linear combinations, if possible:
-      - $2\u+3\v=$ 
-      - $\x-2\y+\e=$ 
-      - $-2\u-\v+\e=$ 
-      - $\u+\e=$
-    __b.__ Compute the following inner products, if possible:
-      - $\u^T\v=$ 
-      - $\x^T\x=$ 
-      - $\e^T\y=$ 
-      - $\x^T\u=$
-      - $\x^T\e=$ 
-      - $\y^T\e=$
-      - $\v^T\x=$ 
-      - $\e^T\v=$
-    __c.__ What happens when you take the inner product of a vector with $\e$?
-    __d.__ What happens when you take the inner product of a vector with itself (as in $\x^T\x$)?
-__3.__ Use the following matrices to answer the questions:
+  <ol style="list-style-type:lower-alpha">
+      <li> Compute the following linear combinations, if possible:
+        <ol style="list-style-type:lower-roman">
+          <li> $2\u+3\v=$ 
+          <li> $\x-2\y+\e=$ 
+          <li> $-2\u-\v+\e=$ 
+          <li> $\u+\e=$
+        </ol>  
+        
+<li> Compute the following inner products, if possible:
+  <ol style="list-style-type:lower-roman">
+    <li> $\u^T\v=$ 
+    <li> $\x^T\x=$ 
+    <li> $\e^T\y=$ 
+    <li> $\x^T\u=$
+    <li> $\x^T\e=$ 
+    <li> $\y^T\e=$
+    <li> $\v^T\x=$ 
+    <li> $\e^T\v=$  
+</ol>  
+<li> What happens when you take the inner product of a vector with $\e$?   
+<li> What happens when you take the inner product of a vector with itself (as in $\x^T\x$)?  
+</ol>  
+<li> Use the following matrices to answer the questions:
 $$\A=\pm 1&3&8\\3&0&-2\\8&-2&-3 \mp \quad \bo{M}=\pm 1&8&-2&5\\2&8&1&7 \mp \quad 
 \D = \pm 1&0&0\\0&5&0\\0&0&3\mp $$ 
 $$
 \bo{H}=\pm 2&-1\\1&3 \mp \quad \bo{W}=\pm 1&1&1&1\\2&2&2&2\\3&3&3&3\mp
 $$
-    __a.__ Circle the matrix products that are possible and specify their resulting dimensions:
-
-      - $\A\M$ 
-      - $\A\bo{W}$ 
-      - $\bo{W}\D$
-      - $\bo{W}^T\D$
-      - $\bo{H}\M$
-      - $\bo{M}\bo{H}$
-      - $\bo{M}^T\bo{H}^T$
-      - $\D\bo{W}$
-    __b.__ Compute the following matrix products:
+<ol style="list-style-type:lower-alpha">
+<li> Circle the matrix products that are possible and specify their resulting dimensions:
+<ol style="list-style-type:lower-roman">
+  <li> $\A\M$ 
+  <li> $\A\bo{W}$ 
+  <li> $\bo{W}\D$
+  <li> $\bo{W}^T\D$
+  <li> $\bo{H}\M$
+  <li> $\bo{M}\bo{H}$
+  <li> $\bo{M}^T\bo{H}^T$
+  <li> $\D\bo{W}$  
+</ol>  
+<li> Compute the following matrix products:  
+    
 $$\bo{H}\M\quad \mbox{and} \quad \A\D$$
-    __c.__ From the previous computation, $\A\D$, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (*Hint:* see Example \ref{ex:diagmult} and Exercise \ref{exer:diagmult}).
-__4.__ Is matrix multiplication commutative?
-__5.__ **Different Views of Matrix Multiplication:** Consider the matrix product 
+<li> From the previous computation, $\A\D$, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (*Hint:* see Example \@ref(ex:diagmult) and Exercise \@ref(exer:diagmult).  
+</ol>  
+<li> Is matrix multiplication commutative?
+<li> **Different Views of Matrix Multiplication:** Consider the matrix product 
 $\A\B$ where $$\A = \pm 1 & 2\\3&4 \mp \quad \B = \pm 2&5\\1&3\mp$$
 Let $\C=\A\B$.
-    __a.__ Compute the matrix product $\C$.
-    __b.__ Compute the matrix-vector product $\A\B_{\star 1}$ and show that this is the first column of $\C$. (Likewise, $\A\B_{\star 2}$ is the second column of $\C$.) (_Matrix multiplication can be viewed as a collection of matrix-vector products._)
-    __c.__ Compute the two outer products using columns of $\A$ and rows of $\B$ and show that
+<ol style="list-style-type:lower-roman">
+<li> Compute the matrix product $\C$.
+<li> Compute the matrix-vector product $\A\B_{\star 1}$ and show that this is the first column of $\C$. (Likewise, $\A\B_{\star 2}$ is the second column of $\C$.) (_Matrix multiplication can be viewed as a collection of matrix-vector products._)
+<li> Compute the two outer products using columns of $\A$ and rows of $\B$ and show that
 $$\acol{1}\brow{1} + \acol{2}\brow{2} = \C$$ (_Matrix multiplication can be viewed as the sum of outer products._)
-    __d.__ Since $\A\B_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\A$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
-    __e.__ Finally, note that $\arow{1}\B$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
+<li> Since $\A\B_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\A$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
+<li> Finally, note that $\arow{1}\B$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
+</ol>
+</ol>
 
 ## List of Key Terms {-}
 

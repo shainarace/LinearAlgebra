@@ -1,4 +1,4 @@
-# Social Network Analysis
+# Social Network Analysis {#sna}
 
 ## Working with Network Data
 

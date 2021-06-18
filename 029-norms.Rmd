@@ -1,0 +1,419 @@
+# Norms, Inner Products and Orthogonality {#norms}
+
+## Norms and Distances {#sec-norms}
+
+In applied mathematics, Norms are functions which measure the magnitude or length of a vector. They are commonly used to determine similarities between observations by measuring the distance between them. As we will see, there are many ways to define distance between two points. 
+```{r, echo=F} 
+thmcounter=0
+excounter=0
+cid=0
+thmcounter=thmcounter+1
+```
+```{def title='Vector Norms and Distance Metrics', id = 'norm', num=thmcounter, cid=cid}
+A Norm, or distance metric, is a function that takes a vector as input and returns a scalar quantity ($f: \Re^n \to \Re$). A vector norm is typically denoted by two vertical bars surrounding the input vector, $\|\bo{x}\|$, to signify that it is not just any function, but one that satisfies the following criteria:
+<ol>
+<li>  If $c$ is a scalar, then $$\|c\x\|=|c|\|x\|$$
+<li> The triangle inequality: $$\|\x+\bo{y}\| \leq \|\x\|+\|\bo{y}\|$$
+<li> $\|\x\|=0$ if and only if $\x=0$.
+<li> $\|\x\|\geq 0$ for any vector $\x$
+</ol>
+```
+
+We will not spend any time on these axioms or on the theoretical aspects of norms, but we will put a couple of these functions to good use in our studies, the first of which is the __Euclidean norm__ or __2-norm__.
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+
+(ref:norm2title) Euclidean Norm, $\|\star\|_2$
+
+```{def title='(ref:norm2title)', id = 'def-2norm', num=thmcounter, cid=cid}
+
+The __Euclidean Norm__, also known as the __2-norm__ simply measures the Euclidean length of a vector (i.e. a point's distance from the origin). Let $\x = (x_1,x_2,\dots,x_n)$. Then,
+$$\|\x\|_2 = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2} $$
+If $\x$ is a column vector, then $$\|\x\|_2= \sqrt{\x^T\x}.$$
+Often we will simply write $\|\star\|$ rather than $\|\star\|_2$ to denote the $2$-norm, as it is by far the most commonly used norm.
+```
+
+This is merely the distance formula from undergraduate mathematics, measuring the distance between the point $\x$ and the origin. To compute the distance between two different points, say $\x$ and $\y$, we'd calculate 
+$$\|\x-\y\|_2= \sqrt{(x_1-y_1)^2 + (x_2-y_2)^2 + \dots + (x_n-y_n)^2}$$
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Euclidean Norm and Distance', id = 'ex-2norm', num=thmcounter, cid=cid}
+Suppose I have two vectors in $3$-space: 
+$$\x=(1,1,1) \mbox{   and   } \bo{y}=(1,0,0)$$
+Then the magnitude of $\x$ (i.e. its length or distance from the origin) is
+$$\|\x\|_2=\sqrt{1^2+1^2+1^2}=\sqrt{3}$$
+and the magnitude of $\bo{y}$ is
+$$\|\bo{y}\|_2=\sqrt{1^2+0^2+0^2}=1$$
+and the distance between point $\x$ and point $\bo{y}$ is
+$$ \|\x-\bo{y}\|_2=\sqrt{(1-1)^2 + (1-0)^2 + (1-0)^2} =\sqrt{2}.$$
+The Euclidean norm is crucial to many methods in data analysis as it measures the closeness of two data points.
+```
+
+Thus, to turn any vector into a __unit vector__, a vector with a length of 1, we need only to divide each of the entries in the vector by its Euclidean norm. This is a simple form of standardization used in many areas of data analysis.  For a unit vector $\x$, $\x^T\x=1$. 
+
+Perhaps without knowing it, we've already seen many formulas involving the norm of a vector. Examples \@ref(ex-sdnorm) and \@ref(ex-lsreg) show how some of the most important concepts in statistics can be represented using vector norms.
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Standard Deviation and Variance', id = 'ex-sdnorm', num=thmcounter, cid=cid}
+Suppose a group of individuals has the following heights, measured in inches: (60, 70, 65, 50, 55). The mean height for this group is 60 inches. The formula for the __sample standard deviation__ is typically given as
+$$s = \frac{\sqrt{\sum_{i=1}^n (x_i-\bar{x})^2}}{\sqrt{n-1}}$$ 
+
+We want to subtract the mean from each observation, square the numbers, sum the result, take the square root and divide by $\sqrt{n-1}$.
+
+If we let $\bar{\x}=\bar{x}\e=(60,60,60,60,60)$ be a vector containing the mean, and $\x=(60, 70, 65, 50, 55)$ be the vector of data then the standard deviation in matrix notation is:
+$$s=\frac{1}{\sqrt{n-1}}\|\x-\bar{\x}\|_2=7.9$$
+
+The __sample variance__ of this data is merely the square of the sample standard deviation:
+$$s^2 = \frac{1}{n-1}\|\x-\bar{\x}\|_2^2$$
+```
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Residual Sums of Squares', id = 'ex-lsreg', num=thmcounter, cid=cid}
+Another place we've seen a similar calculation is in linear regression. You'll recall the objective of our regression line is to minimize the sum of squared residuals between the predicted value $\hat{y}$ and the observed value $y$:
+$$\sum_{i=1}^n (\hat{y}_i-y_i )^2.$$
+In vector notation, we'd let $\y$ be a vector containing the observed data and $\hat{\y}$ be a vector containing the corresponding predictions and write this summation as
+$$\|\hat{\y}-\y\|_2^2$$
+
+In fact, any situation where the phrase "sum of squares" is encountered, the $2$-norm is generally implicated.
+```
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+
+(ref:rsquaredtitle) Coefficient of Determination, $R^2$
+
+```{ex title='(ref:rsquaredtitle)', id = 'rsquared', num=thmcounter, cid=cid}
+Since variance can be expressed using the Euclidean norm, so can the __coefficient of determination__ or $R^2$. 
+$$R^2 = \frac{SS_{reg}}{SS_{tot}}= \frac{\sum_{i=1}^n (\hat{y_i}-\bar{y})^2}{\sum_{i=1}^n (y_i-\bar{y})^2} = \frac{\|\hat{\y}-\bar{\y}\|^2}{\|\y-\bar{\y}\|^2}$$
+```
+
+## Other useful norms and distances
+
+### 1-norm, $\|\star\|_1$.
+
+If $\x=\pm x_1 & x_2 & \dots &x_n \mp$ then the $1$-norm of $\X$ is
+$$\|\x\|_1 = \sum_{i=1}^n |x_i|.$$
+This metric is often referred to as _Manhattan distance_, _city block distance_, or _taxicab distance_ because it measures the distance between points along a rectangular grid (as a taxicab must travel on the streets of Manhattan, for example). When $\x$ and $\y$ are binary vectors, the $1$-norm is called the __Hamming Distance__, and simply measures the number of elements that are different between the two vectors.
+
+```{r id='fig-1norm', fig.align='center', fig.cap = 'The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm).', echo=F, out.width="50%"}
+knitr::include_graphics("figs/1norm.png")
+```
+
+
+### $\infty$-norm, $\|\star\|_{\infty}$.
+The infinity norm, also called the Supremum, or Max distance, is:
+$$\|\x\|_{\infty} =  \max\{|x_1|,|x_2|,\dots,|x_p|\}$$
+
+
+## Inner Products
+The inner product of vectors is a notion that we've already seen in Chapter \@ref(mult), it is what's called the _dot product_ in most physics and calculus text books.  
+
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Vector Inner Product', id = 'innerprod', num=thmcounter, cid=cid}
+ The inner product of two $n\times 1$ vectors $\x$ and $\y$ is written $\x^T\y$ (or sometimes as $\langle \x,\y \rangle$) and is the sum of the product of corresponding elements.
+$$\x^T\y = \pm x_1 & x_2 & \dots & x_n \mp \pm y_1 \\y_2 \\ \vdots \\ y_n \mp = x_1y_1+x_2y_2+\dots+x_ny_n=\sum_{i=1}^n x_i y_i.$$
+
+When we take the inner product of a vector with itself, we get the square of the 2-norm:
+$$\x^T\x=\|\x\|_2^2.$$
+```
+
+Inner products are at the heart of every matrix product. When we multiply two matrices, $\X_{m\times n}$ and $\bo{Y}_{n\times p}$, we can represent the individual elements of the result as inner products of rows of $\X$ and columns of $\Y$ as follows:
+
+$$
+\X\Y = \pm \xrow{1} \\ \xrow{2}    \\ \vdots \\ \xrow{m}   \mp 
+\pm \ycol{1}&\ycol{2}&\dots&\ycol{p}  \mp \\
+= \pm \xrow{1}\ycol{1} & \xrow{1}\ycol{2}   & \dots & \xrow{1}\ycol{p}  \\
+\xrow{2}\ycol{1} & \xrow{2}\ycol{2}    & \dots & \xrow{2}\ycol{p}  \\
+\xrow{3}\ycol{1}  &\xrow{3}\ycol{2}    &\dots & \xrow{3}\ycol{p}  \\
+\vdots & \vdots  & \ddots & \vdots \\
+\xrow{m}\ycol{1} & \dots & \ddots & \xrow{m}\ycol{p}  \mp 
+$$
+
+### Covariance
+Another important statistical measurement that is represented by an inner product is __covariance.__ Covariance is a measure of how much two random variables change together. The statistical formula for covariance is given as
+\begin{equation}
+Covariance(\x,\y)=E[(\x-E[\x])(\y-E[\y])]
+  (\#eq:cov)
+\end{equation}
+where $E[\star]$ is the expected value of the variable.
+ If larger values of one variable correspond to larger values of the other variable and at the same time smaller values of one correspond to smaller values of the other, then the covariance between the two variables is positive. In the opposite case, if larger values of one variable correspond to smaller values of the other and vice versa, then the covariance is negative. Thus, the _sign_ of the covariance shows the tendency of the linear relationship between variables, however the _magnitude_ of the covariance is not easy to interpret. Covariance is a population parameter - it is a property of the joint distribution of the random variables $\x$ and $\y$.  Definition \@ref(def:covariance) provides the mathematical formulation for the _sample_ covariance. This is our best estimate for the population parameter when we have data sampled from a population.
+
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Sample Covariance', id = 'covariance', num=thmcounter, cid=cid}
+If $\x$ and $\y$ are $n\times 1$ vectors containing $n$ observations for two different variables, then the __sample covariance__ of $\x$ and $\y$ is given by
+$$\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y}) = \frac{1}{n-1}(\x-\bar{\x})^T(\y-\bar{\y})$$
+Where again $\bar{\x}$ and $\bar{\y}$  are vectors that contain $\bar{x}$ and $\bar{y}$ repeated $n$ times. It should be clear from this formulation that $$cov(\x,\y)=cov(\y,\x).$$
+
+When we have $p$ vectors, $\v_1,\v_2,\dots,\v_p$, each containing $n$ observations for $p$ different variables, the sample covariances are most commonly given by the __sample covariance matrix__, $\ssigma$, where $$\ssigma_{ij}=cov(\v_i,\v_j).$$ This matrix is symmetric, since $\ssigma_{ij}=\ssigma_{ji}$. If we create a matrix $\V$ whose columns are the vectors $\v_1,\v_2,\dots \v_p$ _once the variables have been centered to have mean 0_, then the covariance matrix is given by:
+$$cov(\V)=\ssigma = \frac{1}{n-1}\V^T\V.$$
+The $j^{th}$ diagonal element of this matrix gives the variance $\v_j$ since
+\begin{eqnarray}
+\ssigma_{jj}=cov(\v_j,\v_j) &=&\frac{1}{n-1}(\v_j-\bar{\v}_j)^T(\v_j-\bar{\v}_j) \\
+&=&\frac{1}{n-1}\|\v_j-\bar{\v}_j\|_2^2\\
+&=& var(\v_j)
+\end{eqnarray}
+```
+
+When two variables are completely uncorrelated, their covariance is zero. This lack of correlation would be seen in a covariance matrix with a diagonal structure. That is, if $\v_1, \v_2,\dots, \v_p$ are uncorrelated with individual variances $\sigma_1^2,\sigma_2^2,\dots,\sigma_p^2$ respectively then the corresponding covariance matrix is:
+$$\ssigma = \pm \sigma_1^2 & 0 & 0& \dots & 0\\
+										0 & \sigma_2^2 & 0 & \dots & 0\\
+										0 & 0 & \ddots & \vdots & 0 \\
+										\vdots & \vdots &\vdots & \ddots & \vdots \\
+										0 & 0 & 0 & 0 & \sigma_p^2 \mp$$
+Furthermore, for variables which are independent and identically distributed (take for instance the error terms in a linear regression model, which are assumed to independent and normally distributed with mean 0 and constant variance $\sigma$), the covariance matrix is a multiple of the identity matrix:
+$$\ssigma = \pm \sigma^2 & 0 & 0& \dots & 0\\
+										0 & \sigma^2 & 0 & \dots & 0\\
+										0 & 0 & \ddots & \vdots & 0 \\
+										\vdots & \vdots &\vdots & \ddots & \vdots \\
+										0 & 0 & 0 & 0 & \sigma^2 \mp =\sigma^2\bo{I}$$
+										
+Transforming our variables in a such a way that their covariance matrix becomes diagonal will be our goal in Chapter \@ref(pca).
+
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{thm title='Properties of Covariance Matrices', id = 'propcov', num=thmcounter, cid=cid}
+
+The following mathematical properties stem from Equation \@ref(eq:cov). Let $\X_{n\times p}$ be a matrix of data containing $n$ observations on $p$ variables.  If $\A$ is a constant matrix (or vector, in the first case) then
+$$cov(\X\A)=\A^Tcov(\X)\A \quad \mbox{ and } \quad cov(\X+\A)=cov(\X)$$
+```
+
+
+### Mahalanobis Distance
+
+Mahalanobis Distance is similar to Euclidean distance, but takes into account the correlation of the variables. This metric is relatively common in data mining applications like classification. Suppose we have $p$ variables which have some covariance matrix, $\cov$. Then the Mahalanobis distance between two observations, $\x=\pm x_1& x_2 &\dots & x_p \mp^T$ and $\y = \pm y_1 & y_2 & \dots & y_p \mp^T$ is given by
+$$d(\x,\y)=\sqrt{(\x-\y)^T\cov^{-1}(\x-\y)}.$$
+If the covariance matrix is diagonal (meaning the variables are uncorrelated) then the Mahalanobis distance reduces to Euclidean distance normalized by the variance of each variable:
+$$d(\x,\y)=\sqrt{\sum_{i=1}^p\frac{(x_i-y_i)^2}{s_i^2}}=\|\cov^{-1/2}(\x-\y)\|_2.$$
+										
+
+### Angular Distance
+
+The inner product between two vectors can provide useful information about their relative orientation in space and about their similarity. For example, to find the cosine of the angle between two vectors in $n$-space, the inner product of their corresponding unit vectors will provide the result. This cosine is often used as a measure of similarity or correlation between two vectors.
+
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Cosine of Angle between Vectors', id = 'cosine', num=thmcounter, cid=cid}
+The cosine of the angle between two vectors in $n$-space is given by
+$$\cos(\theta)=\frac{\x^T\y}{\|\x\|_2\|\y\|_2}$$
+\begin{center}
+\includegraphics[scale=.3]{figs/cos.pdf}
+\end{center}
+```
+
+This angular distance is at the heart of __Pearson's correlation coefficient__.
+
+### Correlation
+
+Pearson's correlation is a normalized version of the covariance, so that not only the _sign_ of the coefficient is meaningful, but its _magnitude_ is meaningful in measuring the strength of the linear association.
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+
+(ref:cosinecorrtitle) Pearson's Correlation and Cosine Distance
+
+```{ex title='(ref:cosinecorrtitle)', id = 'cosinecorr', num=thmcounter, cid=cid}
+You may recall the formula for Pearson's correlation between variable $\x$ and $\y$ with a sample size of $n$ to be as follows:
+$$r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}$$
+If we let $\bar{\x}$ be a vector that contains $\bar{x}$ repeated $n$ times, like we did in \eref{ex:sdnorm}, and let $\bar{\y}$ be a vector that contains $\bar{y}$ then Pearson's coefficient can be written as:
+$$r=\frac{(\x-\bar{\x})^T(\y-\bar{\y})}{\|\x-\bar{\x}\|\|\y-\bar{\y}\|}$$
+In other words, it is just the cosine of the angle between the two vectors once they have been _centered_ to have mean 0.
+
+This makes sense: correlation is a measure of the extent to which the two variables share a line in space. If the cosine of the angle is positive or negative one, this means the angle between the two vectors is $0^{\circ}$ or $180^{\circ}$, thus, the two vectors are perfectly correlated or _collinear._ 
+```
+
+It is difficult to visualize the angle between two variable vectors because they exist in $n$-space, where $n$ is the number of observations in the dataset. Unless we have fewer than 3 observations, we cannot draw these vectors or even picture them in our minds. As it turns out, this angular measurement does translate into something we can conceptualize: Pearson's correlation coefficient is the angle formed between the two possible regression lines using the centered data: $\y$ regressed on $\x$ and $\x$ regressed on $\y$. This is illustrated in Figure \@ref(corrangle).
+
+(ref:corranglecap) Correlation Coefficient $r$ and Angle between Regression Lines
+
+```{r id='corrangle', fig.align='center', fig.cap = '(ref:corranglecap)', echo=F, out.width="40%"}
+knitr::include_graphics("figs/corrangle.jpg")
+```
+
+
+To compute the matrix of pairwise correlations between variables $\x_1,\x_2,\x_3,\dots,\x_p$ (columns containing $n$ observations for each variable), we'd first center them to have mean zero, then normalize them to have length $\|\x_i\|=1$ and then compose the matrix
+$$\X=[\x_1|\x_2|\x_3|\dots|\x_p].$$
+
+Using this centered and normalized data, the correlation matrix is simply
+$$\C=\X^T\X.$$
+
+
+## Orthogonality
+Orthogonal (or perpendicular) vectors have an angle between them of $90^{\circ}$, meaning that their cosine (and subsequently their inner product) is zero. 
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Orthogonality', id = 'def-orthog', num=thmcounter, cid=cid}
+Two vectors, $\x$ and $\y$, are __orthogonal__ in $n$-space if their inner product is zero:
+$$\x^T\y=0$$
+```
+
+Combining the notion of orthogonality and unit vectors we can define an orthonormal set of vectors, or an orthonormal matrix. Remember, for a unit vector, $\x^T\x = 1$.
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Orthonormal Set', id = 'def-orthset', num=thmcounter, cid=cid}
+The $n\times 1$ vectors $\{\x_1,\x_2,\x_3,\dots,\x_p\}$ form an __orthonormal set __if and only if
+<ol>
+<li> $\x_i^T\x_j = 0\,$  when $i \ne j$ and
+<li> $\x_i^T\x_i = 1\,$  (equivalently $ \|\x_i\|=1$)
+</ol>
+In other words, an orthonormal set is a collection of _unit vectors which are mutually orthogonal._
+```
+
+
+If we form a matrix, $\X=(\x_1|\x_2|\x_3|\dots|\x_p )$, having an orthonormal set of vectors as columns, we will find that multiplying the matrix by its transpose provides a nice result:
+
+$$
+\X^T\X = \pm \x_1^T \\ \x_2^T \\ \x_3^T \\ \vdots \\ \x_p^T  \mp 
+\pm \x_1&\x_2&\x_3&\dots&\x_p  \mp \\
+= \pm \x_1^T\x_1 & \x_1^T\x_2 & \x_1^T\x_3 & \dots & \x_1^T\x_p \\
+\x_2^T\x_1 & \x_2^T\x_2 & \x_2^T\x_3 & \dots & \x_2^T\x_p \\
+\x_3^T\x_1 & \x_3^T\x_2 & \x_3^T\x_3 &\dots & \x_3^T\x_p \\
+\vdots & \vdots & \ddots & \ddots & \vdots \\
+\x_p^T\x_1 & \dots & \dots & \ddots & \x_p^T\x_p \mp 
+=  \pm 1 & 0 & 0 & \dots & 0\\
+            0 & 1 & 0 & \dots & 0 \\
+             0 & 0 & 1 & \dots & 0 \\
+             \vdots & \vdots & \ddots & \ddots & \vdots \\
+            0 & 0 & 0 & \dots & 1 \mp 
+= \bo{I}_p 
+$$
+We will be particularly interested in these types of matrices when they are square. If $\X$ is a square matrix with orthonormal columns, the arithmetic above means that the inverse of $\X$ is $\X^T$ (i.e. $\X$ also has orthonormal rows):
+$$\X^T\X=\X\X^T = I.$$ 
+Square matrices with orthonormal columns are called orthogonal matrices.         
+
+```{r, echo=F} 
+thmcounter=thmcounter+1
+```
+```{def title='Orthogonal (or Orthonormal) Matrix', id = 'def-orthmat', num=thmcounter, cid=cid}
+
+A _square_ matrix, $\bo{U}$ with orthonormal columns also has orthonormal rows and is called an __orthogonal matrix__. Such a matrix has an inverse which is equal to it's transpose,
+$$\U^T\U=\U\U^T = \bo{I} $$
+```
+
+## Outer Products
+
+The outer product of two vectors $\x \in \Re^m$ and $\y \in \Re^n$, written $\x\y^T$, is an $m\times n $ matrix with rank 1. To see this basic fact, lets just look at an example.
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Outer Product', id = 'outerprod', num=thmcounter, cid=cid}
+Let $\x=\pm 1\\2\\3\\4\mp$ and let $\y=\pm2\\1\\3\mp$. Then the outer product of $\x$ and $\y$ is:
+$$\x\y^T = \pm 1\\2\\3\\4\mp \pm 2&1&3\mp = \pm 2&1&3\\4&2&6\\6&3&9\\8&4&12 \mp$$
+which clearly has rank 1.  It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.
+```
+
+```{r, echo=F} 
+excounter=excounter+1
+```
+```{ex title='Centering Data with an Outer Product', id = 'center', num=thmcounter, cid=cid}
+As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
+
+$$\A=\bm{ ~ & h & w & s \cr 
+			person_1 & 60 & 102 & 5.5 \cr
+			person_2 & 72 & 170 &  7.5 \cr
+			person_3 & 66 & 110 & 6.0\cr
+			person_4 & 69 & 128 & 6.5\cr
+			person_5 & 63 & 130 &  7.0\cr}$$
+			
+The average values for height, weight, and wrist size are as follows:
+\begin{eqnarray}
+\bar{h}&=&66\\
+\bar{w}&=&128\\
+\bar{s}&=&6.5
+\end{eqnarray}			
+
+To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:
+
+ $$\pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 & 128 & 6.5 \mp$$
+$$= \pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm  66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \mp$$
+
+$$= \pm    -6.0000 & -26.0000  & -1.0000\\
+    6.0000 &  42.0000   & 1.0000\\
+         0 & -18.0000 &  -0.5000\\
+    3.0000    &     0       &  0\\
+   -3.0000 &   2.0000 &   0.5000 \mp$$
+```
+
+
+## Exercises
+
+<ol>
+<li> Let $\u=\pm 1\\2\\-4\\-2\mp$ and $\v=\pm 1\\-1\\1\\-1\mp$. 
+<ol style="list-style-type:lower-alpha">
+<li>  Determine the Euclidean distance between $\u$ and $\v$.
+<li>  Find a vector of unit length in the direction of $\u$.
+<li>  Determine the cosine of the angle between $\u$ and $\v$.
+<li>  Find the 1- and $\infty$-norms of $\u$ and $\v$.
+<li>  Suppose these vectors are observations on four independent variables, which have the following covariance matrix:
+$$\cov=\pm 2&0&0&0\\0&1&0&0\\0&0&2&0\\0&0&0&1 \mp$$
+Determine the Mahalanobis distance between $\u$ and $\v$.
+</ol>
+<li>  Let $$\U=\frac{1}{3}\pm -1&2&0&-2\\2&2&0&1\\0&0&3&0\\-2&1&0&2\mp$$
+<ol style="list-style-type:lower-alpha">
+<li>  Show that $\U$ is an orthogonal matrix.
+<li>  Let $\bo{b}=\pm 1\\1\\1\\1\mp$. Solve the equation $\U\x=\bo{b}$.
+</ol>
+<li>  Write a matrix expression for the correlation matrix, $\C$,  for a matrix of _centered_ data, $\X$, where $\C_{ij}=r_{ij}$ is Pearson's correlation measure between variables $\x_i$ and $\x_j$. To do this, we need more than an inner product, we need to normalize the rows and columns by
+the norms $\|\x_i\|$. For a hint, revisit the exercises in Chapter \@ref(mult).
+
+<li>  Suppose you have a matrix of data, $\A_{n\times p}$, containing $n$ observations on $p$ variables. Develop a matrix formula for the standardized data (where the mean of each variable should be subtracted from the corresponding column before dividing by the standard deviation). _Hint: use Exercises 1(f) and 4 from Chapter \@ref(mult) along with Example \@ref(ex:center)._
+
+<li>  Explain why, for any norm or distance metric,
+$$\|\x-\y\|=\|\y-\x\|$$
+<li>  Find two vectors which are orthogonal to $\x=\pm 1\\1\\1\mp$
+<li>  __Pythagorean Theorem.__ Show that $\x$ and $\y$ are orthogonal if and only if
+$$\|\x+\y\|_2^2 = \|\x\|_2^2 + \|\y\|_2^2$$
+_(Hint: Recall that $\|\x\|_2^2 = \x^T\x$)_
+
+</ol>
+
+
+
+<!-- % -->
+<!-- % -->
+<!-- %\section{Homogeneous Linear Equations} -->
+<!-- % -->
+<!-- %Linear Algebra is the study of linear equations. As you may recall, a homogeneous linear equation is one in which the right hand side of the equation is 0 (whether it be the scalar 0, a vector of zeros, or a matrix of zeros). In two dimensions, the set of solutions to a linear equation is a one-dimensional line, something we are all familiar with, for example: -->
+<!-- % -->
+<!-- %$$3x_1 + 2x_2 = 0.$$ -->
+<!-- % -->
+<!-- %We can write this simple homogeneous equation in  matrix notation by letting $\bo{a}=\pm 3 \\ 2 \mp$ and $\x=\pm x_1 \\ x_2 \mp$ so our equation becomes -->
+<!-- %$$\bo{a}^T\x=\pm 3 & 2 \mp \pm x_1 \\x_2 \mp = 0.$$ -->
+<!-- % -->
+<!-- %This equation has infinitely many solutions - any point on the line will do. Gaussian Elimination will obviously not change this simple equation.  In this situation, $x_1$ is called a basic variable (because it corresponds to a basic column) and $x_2$ is called a free variable (because it does \textit{not} correspond to a basic column and it is free to take on any value). And so to represent the solution set, we have the following: -->
+<!-- %$$\pm -\frac{2}{3} x_1 \\ x_1 \mp = x_1 \pm -frac{2}{3} \\ 1 \mp = \alpha \pm -\\frac{2}{3} \\ 1 \mp = span \left\lbrace\pm -\frac{2}{3} \\ 1 \mp \right\rbrace$$  -->
+<!-- % -->
+
+
+
+

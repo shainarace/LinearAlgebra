@@ -23,7 +23,7 @@ We get a system of three equations. In general, a system of equations is nothing
 
 ```{r, echo=F} 
 excounter=0
-cid=0
+cid='multapp'
 excounter=excounter+1
 ```
 ```{ex title='System of Equations',id='ex-syseq',num=excounter,cid=cid}
@@ -118,8 +118,8 @@ Now, a list of 4 equations does not seem that big. But what if the dimensions of
 
 In statistics, the solution to these systems of equations is exactly what we are trying to find when we do regression analysis. Take, for example, a regression analysis with some dependent variable, $\y$, and two independent variables, $\h,\w$. The preliminary goal of this analysis is to find unknown parameters $\beta_0, \beta_1, \dots$ such that
 \begin{equation}
-\label{hwmodel}
 \y= \beta_0+\beta_1\h+\beta_2\w
+ (\#eq:hwmodel)
 \end{equation}
 
 This is the single equation we usually consider when talking about regression analysis - but what about all those data points? Suppose, for simplicity, we have only 4 observations as listed in the following table:
@@ -143,7 +143,7 @@ When we write the model from Equation \ref{hwmodel}, what we are really saying i
 \end{eqnarray}
 
 Rather than writing all these equations out, we instead represent the situation in matrix format as 
-$$\X\boldsymbol\Beta = \y,$$
+$$\X\bbeta = \y,$$
 Where
 $$\X=\pm 1&3&3\\1&2&3\\1&5&6\\1&6&5 \mp \quad \bbeta = \pm \beta_0 \\\beta_1 \\ \beta_2 \mp \quad \mbox{and}\quad \y = \pm 6 \\6 \\10\\9\mp$$
 
@@ -166,7 +166,7 @@ Matrix multiplication is nothing more than a series of linear combinations. Let'
 ```{r, echo=F} 
 excounter=excounter+1
 ```
-```{ex title='Linear Combinations of Variables',id='ex-lincombvar'}
+```{ex title='Linear Combinations of Variables',id='ex-lincombvar', cid=cid}
 Suppose we have data for 100 postal packages using 3 variables: height $\bo{h}$, weight $\bo{w}$, and volume $\bo{v}$. If we create a data matrix, $\X$, the size of the matrix will be $100\times 3$ and the three columns will be composed of the variables height, weight, and volume. The previous sentence is written mathematically by creating a partitioned matrix:
 $$\X = \left( \bo{h} | \bo{w} | \v \right)$$
 
@@ -198,7 +198,7 @@ A concrete example of this expression is given in Example \ref{ex:lincom}.
 ```{r, echo=F} 
 excounter=excounter+1
 ```
-```{ex title='Systems of Equations as Linear Combinations', id='ex-lincom'}
+```{ex title='Systems of Equations as Linear Combinations', id='ex-lincom', cid=cid}
 Consider the following system of equations:
 \begin{eqnarray}
 3x_1 + 2x_2 + 9x_3 &=& 1\\
@@ -252,8 +252,8 @@ $$\B=\acol{1}\X_{1\star}+\acol{2}\X_{2\star}+\acol{3}\X_{3\star}.$$
 Example \ref{ex:matmat} turns out to have important implications for our interpretation of matrix factorizations. In this context we'd call $\A\X$ a _factorization_ of the matrix $\B$. We will see how to use these expressions to our advantage in later chapters. 
 
 ## Exercises {#multapp-ex}
-
-__1.__ A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.
+<ol type='1'>
+<li>  A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.
 
 <table>
 <tr>
@@ -271,20 +271,21 @@ __1.__ A florist offers three sizes of flower arrangements (small, medium, large
 
 
 Let $$\A = \pm 1 &3 & 3\\2& 4& 6\\4& 8&6 \mp \quad \bo{p}= \pm 10\\15\\20 \mp \quad \bo{c} = \pm 0.50\\0.25\\0.10 \mp.$$
+  <ol type='a'>
+    <li> Determine the matrix-vector product that produces a vector, $\y$ which gives the total cost of creating       each size arrangement (small, medium, and large).
+    <li> Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let $$\bo{v} = \pm 2\\0\\2 \mp$$
+Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist. </ol>
 
-  __a.__ Determine the matrix-vector product that produces a vector, $\y$ which gives the total cost of creating       each size arrangement (small, medium, and large).
-  __b.__ Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let $$\bo{v} = \pm 2\\0\\2 \mp$$
-Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist. 
 
-
-__2.__ Write the following system of equations as a matrix-vector product $\A\x=\b$:
+<li> Write the following system of equations as a matrix-vector product $\A\x=\b$:
 \begin{eqnarray}
 2x_2 +3x_3&=& 8,
 2x_1+3x_2+1x_3 &=& 5,
 x_1-x_2-2x_3 &=&-5
 \end{eqnarray}
 
-__3.__ A model is being developed to predict a student's SAT score based upon some numeric attributes. The data being used for this model is provided below:
+
+<li> A model is being developed to predict a student's SAT score based upon some numeric attributes. The data being used for this model is provided below:
 
 |Observation | PSAT score | Mother's SAT score | SAT Score |
 |:----------:|:----------:|:------------------:|:---------:|
@@ -302,7 +303,7 @@ $$\y = \X\bbeta $$
 by defining the matrices/vectors $\X, \bbeta, \mbox{ and } \y$.
 
 
-__4.__ Suppose a company collected daily data regarding the sales and revenue of particular products for which prices fluctuate daily:
+<li> Suppose a company collected daily data regarding the sales and revenue of particular products for which prices fluctuate daily:
 
 
 <table>
@@ -335,24 +336,25 @@ __4.__ Suppose a company collected daily data regarding the sales and revenue of
   </tr>
 </table>
 
-
-  __a.__  Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
-  __b.__  Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in \$19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.
-
-__5.__ Let 
+<ol style="list-style-type:lower-alpha">
+  <li>  Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
+  <li>  Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in \$19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.
+</ol>
+<li> Let 
 
 $$\A=\pm 3 & 2 & 9\\4 & 2 & 3\\2 &7&1\mp \quad$$
 
 
-__6.__ For a general matrix $\A_{m\times n}$ describe what the following products will provide.  Also give the size of the result (i.e. "$n\times 1$ vector" or "scalar").
+<li> For a general matrix $\A_{m\times n}$ describe what the following products will provide.  Also give the size of the result (i.e. "$n\times 1$ vector" or "scalar").
+<ol style="list-style-type:lower-alpha">
+  <li> $\A\e_j$  
+  <li> $\e_i^T\A$  
+  <li> $\e_i^T\A\e_j$  
+  <li> $\A\e$  
+  <li> $\e^T\A$  
+  <li>  $\frac{1}{n}\e^T\A$  
+</ol>
+<li> Let $\bo{D}_{n\times n}$ be a diagonal matrix with diagonal elements $D_{ii}$. What effect does multiplying a matrix $\A_{n\times m}$ on the left by $\bo{D}$ have? What effect does multiplying a matrix $\A_{m\times n}$ on the right by $\bo{D}$ have? If you cannot see this effect in a general sense, try writing out a simple $3\times 3$ matrix as an example first.
 
-  __a.__ $\A\e_j$  
-  __b.__ $\e_i^T\A$  
-  __c.__ $\e_i^T\A\e_j$  
-  __d.__ $\A\e$  
-  __e.__ $\e^T\A$  
-  __f.__  $\frac{1}{n}\e^T\A$  
 
-__7.__ Let $\bo{D}_{n\times n}$ be a diagonal matrix with diagonal elements $D_{ii}$. What effect does multiplying a matrix $\A_{n\times m}$ on the left by $\bo{D}$ have? What effect does multiplying a matrix $\A_{m\times n}$ on the right by $\bo{D}$ have? If you cannot see this effect in a general sense, try writing out a simple $3\times 3$ matrix as an example first.
-
-
+</ol>

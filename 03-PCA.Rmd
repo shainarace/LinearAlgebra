@@ -3,6 +3,7 @@
 ```{r, echo=F} 
 thmcounter=0
 excounter=0
+cid = 'pca'
 ```
 
 We now have the tools necessary to discuss one of the most important concepts in mathematical statistics: **Principal Components Analysis (PCA)**. PCA involves the analysis of eigenvalues and eigenvectors of the covariance or correlation matrix. Its development relies on the following important facts:
@@ -10,7 +11,7 @@ We now have the tools necessary to discuss one of the most important concepts in
 ```{r, echo=F} 
 thmcounter=thmcounter+1
 ```
-```{thm title='Diagonalization of Symmetric Matrices', id='eigsym', num=thmcounter}
+```{thm title='Diagonalization of Symmetric Matrices', id='eigsym', num=thmcounter, cid=cid}
 All $n\times n$ real valued symmetric matrices (like the covariance and correlation matrix) have two very important properties:
 
 1. They have a complete set of $n$ linearly independent eigenvectors, $\{\v_1,\dots,\v_n\}$, corresponding to eigenvalues $$\lambda_1 \geq \lambda_2 \geq\dots\geq \lambda_n.$$
@@ -25,12 +26,12 @@ $$\V^{T}\bo{S}\V=\D$$
 Covariance and Correlation matrices (when there is no perfect multicollinearity in variables) have the additional property that all of their eigenvalues are positive (nonzero). They are _positive definite_ matrices.
 ```
 
-Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use $(\lambda_1,\v_1)$ to represent the __largest__ eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the **first principal component** and points in the direction for which the variance of the data is maximal.  Example \@ref{ex:coveigs} illustrates this point.
+Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use $(\lambda_1,\v_1)$ to represent the __largest__ eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the **first principal component** and points in the direction for which the variance of the data is maximal.  Example \@ref(ex:coveigs) illustrates this point.
 
 ```{r, echo=F} 
 excounter=excounter+1
 ```
-```{ex title='Eigenvectors of the Covariance Matrix', id='excoveigs'}
+```{ex title='Eigenvectors of the Covariance Matrix', id='excoveigs', cid=cid}
 Suppose we have a matrix of data for 10 individuals on 2 variables, $\x_1$ and $\x_2$. Plotted on a plane, the data appears as follows:
 
 <center>
@@ -63,18 +64,18 @@ The eigenvector $\v_1$ is called the **first principal component**. It is the di
 
 Why is this important? Let's consider what we've just done. We started with two variables, $\x_1$ and $\x_2$, which appeared to be correlated. We then derived *new variables*, $\v_1$ and $\v_2$, which are linear combinations of the original variables:
 \begin{eqnarray}
-\label{pcacomb1}
 \v_1 &=& 0.69\x_1 + 0.72\x_2 \\
-\label{pcacomb2}
+(\#eq:pcacomb1)
 \v_2 &=& -0.72\x_1 + 0.69\x_2
+(\#eq:pcacomb2)
 \end{eqnarray}
  These new variables are completely uncorrelated. To see this, let's represent our data according to the new variables - i.e. let's change the basis from $\mathcal{B}_1=[\x_1,\x_2]$ to $\mathcal{B}_2=[\v_1,\v_2]$.  
  
 ```{r, echo=F} 
 excounter=excounter+1
 ``` 
-```{ex title='The Principal Component Basis', id='pcabasis', num=excounter} 
-Let's express our data in the basis defined by the principal components. We want to find coordinates (in a $2\times 10$ matrix $\A$) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for $\A$ in the following equation (see Chapter \ref{basis} and note that the _rows_ of $\X$ define the points rather than the columns):
+```{ex title='The Principal Component Basis', id='pcabasis', num=excounter, cid=cid} 
+Let's express our data in the basis defined by the principal components. We want to find coordinates (in a $2\times 10$ matrix $\A$) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for $\A$ in the following equation (see Chapter \@ref(basis) and note that the _rows_ of $\X$ define the points rather than the columns):
 \begin{eqnarray}
  \X_c &=& \A \V^T \\
  \pm -3.4&-2.7\\-2.4&-2.7\\-2.4& 0.3\\-1.4&-2.7\\ -0.4&  0.3\\0.6&-1.7\\1.6& 0.3\\1.6& 2.3\\2.6& 2.3\\3.6&  4.3 \mp &=&  \pm a_{11} & a_{12} \\ a_{21} & a_{22} \\ a_{31} & a_{32}\\ a_{41} & a_{42}\\ a_{51} & a_{52}\\ a_{61} & a_{62}\\ a_{71} & a_{72}\\ a_{81} & a_{82}\\ a_{91} & a_{92}\\ a_{10,1} & a_{10,2} \mp \pm \v_1^T \\ \v_2^T \mp
@@ -97,23 +98,22 @@ Visually, we can see that the new variables are uncorrelated. You may wish to co
 	&=&\V^T(\V\D\V^T)\V\\
 	&=& \D
 \end{eqnarray*}
-Where $\ssigma_X=\V\D\V^T$ comes from the diagonalization in Theorem \ref{thm:eigsym}.
-By changing our variables to principal components, we have managed to **"hide"** the correlation between $\x_1$ and $\x_2$ while keeping the spacial relationships between data points in tact. Transformation _back_ to variables $\x_1$ and $\x_2$ is easily done by using the linear relationships in Equations \ref{pcacomb1} and \ref{pcacomb2}.
+Where $\ssigma_X=\V\D\V^T$ comes from the diagonalization in Theorem \@ref(thm:eigsym).
+By changing our variables to principal components, we have managed to **"hide"** the correlation between $\x_1$ and $\x_2$ while keeping the spacial relationships between data points in tact. Transformation _back_ to variables $\x_1$ and $\x_2$ is easily done by using the linear relationships in Equations \@ref(eqpcacomb1) and \@ref(pcacomb2).
 ```
  
 ## Geometrical comparison with Least Squares
 
- In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example \ref{ex:coveigs} points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared _orthogonal_ distances between the points and the line. Regressing $\x_2$ on $\x_1$, on the other hand, provides a line which minimizes the sum of squared _vertical_ distances between points and the line. This is illustrated in Figure \ref{pcvsreg}.
+ In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example \@ref(ex:coveigs) points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared _orthogonal_ distances between the points and the line. Regressing $\x_2$ on $\x_1$, on the other hand, provides a line which minimizes the sum of squared _vertical_ distances between points and the line. This is illustrated in Figure \@ref(pcvsreg).
  
- \begin{figure}[h!]
- \begin{center}
- \includegraphics[scale=.5]{figs/pcvsreg}
- \caption{Principal Components vs. Regression Lines}
- \label{pcvsreg}
- \end{center}
- \end{figure}
+ ```{r fig.align='center', fig.cap = 'Principal Components vs. Regression Lines', echo=F, fig.width=10, id='pcvsreg'}
+knitr::include_graphics('figs/pcvsreg.jpg')
+```
 
-**The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. In contrast, linear least squares tries to minimize the distance in the y direction only. Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.**
+
+**The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. In contrast, linear least squares tries to minimize the distance in the y direction only. Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.** 
+
+You might be tempted to conclude from Figure \@ref(pcvsreg) that the first principal component and the regression line "ought to be similar." This is a terrible conclusion if you consider a large multivariate dataset and the various regression lines that would predict each variable in that dataset. In PCA, there is no target variable and thus no single regression line that we'd be comparing to. 
 
 
 ## Covariance or Correlation Matrix?
@@ -121,13 +121,14 @@ By changing our variables to principal components, we have managed to **"hide"**
 Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is _standardizing_ the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.
 
 The covariance matrix is the default for \textsf{R}. The correlation matrix is the default in SAS. The covariance matrix method is invoked by the option:
-\begin{code}
-proc princomp data=X cov;
+
+```
+proc princomp data=X cov; 
 var x1--x10;
 run;
-\end{code}
+```
 
-Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component.  The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don't we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter \ref{chap:fa} will give those who always default to the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.  
+Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component.  The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don't we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter \@ref(fa) will give those who always default to the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.  
 
 
 # PCA in R
@@ -161,13 +162,13 @@ We have relatively strong positive correlation between Petal Length, Petal Width
 
 The scatter plots and correlation matrix provide useful information, but they don't give us a true sense for how the data looks when all 4 attributes are considered simultaneously.
 
-In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref{svd}, is generally a preferred route to computing principal components. In fact, the numerical computation of principal components is outside of the scope of this book. We recommend [@cite1,@cite2, or @cite3] for a treatment of the topic.__ using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the ```prcomp``` function in R.
+In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref(svd), is generally a preferred route to computing principal components. In fact, the numerical computation of principal components is outside of the scope of this book. We recommend [@cite1,@cite2, or @cite3] for a treatment of the topic.__ using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the ```prcomp``` function in R.
 
 ### Covariance PCA
 
  Let's start with the covariance matrix which is the default setting for the ```prcomp``` function in R. It's worth repeating that a dedicated principal component function like ```prcomp()``` is superior in numerical stability and efficiency to the lines of code in the next section. __The only reason for directly computing the covariance matrix and its eigenvalues and eigenvectors (as opposed to  ```prcomp()```) is for edification. Computing a PCA in this manner, just this once, will help us grasp the exact mathematics of the situation and discover the nuances of them.__
 
-### Principal Components, Loadings, and Variance Explained {PCAbyeigen}
+### Principal Components, Loadings, and Variance Explained 
 
 ```{r}
 covM = cov(iris[1:4])

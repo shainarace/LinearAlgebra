@@ -1,6 +1,11 @@
+# Factor Analysis {#fa-apps}
 
+```{r, echo=F}
+thmcounter=0
+excounter=0
+cid='fa-apps'
+```
 
-# Factor Analysis
 Factor Analysis is much like PCA in that it attempts to find some latent variables (linear combinations of original variables) which can describe large portions of the total variance in data. There are numerous ways to compute factors for factor analysis, the two most common methods are:
 
 1. The _principal axis_ method (i.e. PCA) and
@@ -75,36 +80,45 @@ rotatedpca$loadings
 
 In this example, we'll use a publicly available dataset that describes personality traits of nearly 
 Read in the Big5 Personality test dataset, which contains likert scale responses (five point scale where 1=Disagree, 3=Neutral, 5=Agree. 0 = missing) on 50 different questions in columns 8 through 57. The questions, labeled E1-E10 (E=extroversion), N1-N10 (N=neuroticism), A1-A10 (A=agreeableness), C1-C10 (C=conscientiousness), and O1-O10 (O=openness) all attempt to measure 5 key angles of human personality. The first 7 columns contain demographic information coded as follows:
-
-- **Race**	Chosen from a drop down menu. 
-  1=Mixed Race
-  2=Arctic (Siberian, Eskimo)
-  3=Caucasian (European)
-  4=Caucasian (Indian)
-  5=Caucasian (Middle East)
-  6=Caucasian (North African, Other)
-  7=Indigenous Australian
-  8=Native American
-  9=North East Asian (Mongol, Tibetan, Korean Japanese, etc)
-  10=Pacific (Polynesian, Micronesian, etc)
-  11=South East Asian (Chinese, Thai, Malay, Filipino, etc)
-  12=West African, Bushmen, Ethiopian
-  13=Other (0=missed)
-- **Age**	Entered as text (individuals reporting age < 13 were not recorded)
-- **Engnat**	Response to "is English your native language?"
-  1=yes
-  2=no
-  0=missing
-- **Gender**	Chosen from a drop down menu
-  1=Male
-  2=Female
-  3=Other
-  0=missing
-- **Hand**	"What hand do you use to write with?"
-  1=Right
-  2=Left
-  3=Both
-  0=missing
+<ol>
+<li> **Race**	Chosen from a drop down menu. 
+<ul>
+<li> 1=Mixed Race
+<li> 2=Arctic (Siberian, Eskimo)
+<li> 3=Caucasian (European)
+<li> 4=Caucasian (Indian)
+<li> 5=Caucasian (Middle East)
+<li> 6=Caucasian (North African, Other)
+<li> 7=Indigenous Australian
+<li> 8=Native American
+<li> 9=North East Asian (Mongol, Tibetan, Korean Japanese, etc)
+<li> 10=Pacific (Polynesian, Micronesian, etc)
+<li> 11=South East Asian (Chinese, Thai, Malay, Filipino, etc)
+<li> 12=West African, Bushmen, Ethiopian
+<li> 13=Other (0=missed)
+</ul>
+<li> **Age**	Entered as text (individuals reporting age < 13 were not recorded)
+<li> **Engnat**	Response to "is English your native language?"
+<ul>
+<li> 1=yes
+<li> 2=no
+<li> 0=missing
+</ul>
+<li> **Gender**	Chosen from a drop down menu
+<ul>
+<li> 1=Male
+<li> 2=Female
+<li> 3=Other
+<li> 0=missing
+</ul>
+<li> **Hand**	"What hand do you use to write with?"
+<ul>
+<li> 1=Right
+<li> 2=Left
+<li> 3=Both
+<li> 0=missing
+</ul>
+</ol>
 
 
 ```{r echo=F}
@@ -141,25 +155,16 @@ This should match the output from SAS and it does. Remember these columns are un
 
 (ref:loads) Default (Unrotated) Factor Loadings Output by SAS
 
-```{r fig.align='center', echo=F, fig.cap='(ref:loads)'}
+```{r fig.align='center', echo=F, fig.cap='(ref:loads)', out.width='100%'}
 knitr::include_graphics('factorOutput.png')
 ```
 
 (ref:scores) Default (Unrotated) Factor Scores Output by SAS
 
-```{r fig.align='center', echo=F, fig.cap='(ref:scores)'}
+```{r fig.align='center', echo=F, fig.cap='(ref:scores)', out.width='100%'}
 knitr::include_graphics('scoresOutput.png')
 ```
 
-<!-- \vspace{.5cm} -->
-<!-- \begin{figure*}[h!] -->
-<!-- \centering -->
-<!-- \includegraphics[width=10cm]{factorOutput.png} -->
-<!-- \caption{} -->
-<!-- \includegraphics[width=13cm]{scoresOutput.png} -->
-<!-- \caption{} -->
-<!-- \end{figure*} -->
-<!-- \vspace{.5cm} -->
 
 ### Rotated Principal Components
 
@@ -179,22 +184,16 @@ And again we can see that these line up with our SAS Rotated output, **however**
 
 (ref: rotloads) Rotated Factor Loadings Output by SAS
 
-```{r fig.align='center', echo=F, fig.cap='(ref: rotloads)'}
+```{r fig.align='center', echo=F, fig.cap='(ref: rotloads)', out.width='100%'}
 knitr::include_graphics('RotatedLoadings.png')
 ```
 
 (ref: rotscores) Rotated Factor Scores Output by SAS
 
-```{r fig.align='center', fig.cap='(ref: rotscores)'}
+```{r fig.align='center', fig.cap='(ref: rotscores)', out.width='100%'}
 knitr::include_graphics('RotatedScores.png')
 ```
-<!-- \begin{figure*}[h!] -->
-<!-- \centering -->
-<!-- \includegraphics[width=9cm]{RotatedLoadings.png} -->
-<!-- \caption{} -->
-<!-- \includegraphics[width=11cm]{RotatedScores.png} -->
-<!-- \caption{} -->
-<!-- \end{figure*} -->
+
 
 ### Visualizing Rotation via BiPlots
 
