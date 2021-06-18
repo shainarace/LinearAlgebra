@@ -102,7 +102,7 @@ $$\bo{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) 
 
 ### $(i,j)$ Notation
 
-Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example \ref{ex:dim} above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely _identifiers_. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index $i=\{1,2,3,4,5,6\}$ that corresponds to a row of the matrix for every person. As long as we don't reorder the rows of our matrix, we will know that the correspondence is as follows:
+Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example \@ref(ex:dim) above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely _identifiers_. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index $i=\{1,2,3,4,5,6\}$ that corresponds to a row of the matrix for every person. As long as we don't reorder the rows of our matrix, we will know that the correspondence is as follows:
 $$\left\lbrace \begin{array}{c}
 row 1\\ row 2\\ row 3\\ row 4\\ row 5\\ row 6
 \end{array}  \right\rbrace \Longleftrightarrow
@@ -237,7 +237,7 @@ Student 3 & Student 6 & Student 4& Student 6 & Student 1& Student 6\\
 Now, we can define what is called an _adjacency_ or _association_ matrix for this data as follows:
 
 $$\A_{ij} =\left\{ \begin{array}{l}
-\mbox{ \# of times Student i has worked with Student j}\,\,\,\mbox{if } i\neq j\\
+\mbox{# of times Student i has worked with Student j}\,\,\,\mbox{if } i\neq j\\
 0 \,\,\,\mbox{ if } i=j 
 \end{array} \right.$$
 
@@ -249,12 +249,12 @@ We can quickly see that there is symmetry in this matrix because the number of t
 
 An adjacency matrix like the one listed above is often used to describe a _network_ or _graph._ A **graph** is a collection of **vertices** (nodes) that each represent some entity, and **edges** which connect vertices that are related in some way.
 
-Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together. 
+Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together.  
 
-<center>
-<img src=figs/studentgraph.pdf width=50%/>
-</center>
 
+```{r id='studentgraph', fig.align='center', fig.cap = 'Network of Student Team Membership', echo=F, out.width="50%"}
+knitr::include_graphics("figs/studentgraph.jpg")
+```
 
 If we had chosen to put 3's along the diagonal, each vertex in this graph would have a bold edge that loops back to itself. Graphs and the adjacency matrices which define them are at the heart of many problems in social network analysis. For example, websites like Facebook and LinkedIn are just enormous networks of nodes (individual users) connected by edges ("friendships" or "connections"). In the case of Twitter, the network is even more complicated because the relationships are _directed_: the "follower" connection is not symmetric, the people I "follow" do not have to follow me back. We may have a chance to discuss more of this later; in general, it makes the analysis much more difficult!
 
@@ -308,8 +308,8 @@ excounter=excounter+1
 ```{ex title='2-space', id ='2space',num=excounter, cid=cid}
 Whereas we once thought of ordered pairs as _points_ in space, we can also consider the coordinates as defining _vectors_. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
 <center>
-<img src=figs/2spacePoints.pdf width=300 /> 
-<img src=figs/2space.pdf width=300 /> 
+<img src="figs/2spacePoints.pdf" width=300 /> 
+<img src="figs/2space.pdf" width=300 /> 
 </center>
 ```
 
@@ -321,7 +321,7 @@ $$\Re^n = \left\lbrace (x_1,x_2,\dots,x_n) : x_i \in \Re, i=1,\dots, n\right\rbr
 We will often use this notation to define the size of an arbitrary vector. For example, $\x \in \Re^p$ simply means that $\x$ is a vector with $p$ entries:
 $\x=(x_1,x_2,\dots,x_p)$.
 
-Many (all, really) of the concepts we have previously considered in $2$- or $3$-space extend naturally to $n$-space and a few new concepts become useful as well. One very important concept is that of a **norm** or distance metric, as we will see in Chapter \ref{norms}. Before we get into the details of the vector space model, let's continue with some of the basic definitions we will need on that journey.
+Many (all, really) of the concepts we have previously considered in $2$- or $3$-space extend naturally to $n$-space and a few new concepts become useful as well. One very important concept is that of a **norm** or distance metric, as we will see in Chapter \@ref(norms). Before we get into the details of the vector space model, let's continue with some of the basic definitions we will need on that journey.
 
 ## Matrix Operations
 
@@ -451,7 +451,7 @@ The vector $\bo{e}$ with no subscript refers to a vector of all ones. In some te
 $$\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
 ```			
 
-The elementary vectors described in Definition \ref{def:elemvectors} create the coordinate axes of $n$-space. For illustrative purposes, let's consider $2$-space. The elementary vectors in $2$-space are:
+The elementary vectors described in Definition \@ref(def:elemvectors) create the coordinate axes of $n$-space. For illustrative purposes, let's consider $2$-space. The elementary vectors in $2$-space are:
 $$\e_1 = \left(\begin{matrix} 1\\0\end{matrix}\right) \quad \mbox{and} \quad \e_2 = \left(\begin{matrix} 0\\1 \end{matrix}\right) $$
 These vectors correspond to the directions of the coordinate axes:
 <center>
@@ -522,7 +522,8 @@ $$Tr(\A)=\sum_{i=1}^n A_{ii}.$$
 ## Exercises
 
 
-__1.__ Use the following matrices or vectors to answer the following questions:
+<ol> 
+<li>Use the following matrices or vectors to answer the following questions:
 $$\A=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \quad \bo{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
 \D = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) $$ 
 $$
@@ -531,91 +532,94 @@ $$
 \v=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \bo{u}=\left(\begin{matrix} 6&4&8&1\end{matrix}\right)
 $$
 
+<ol style="list-style-type:lower-alpha">
+  <li> Write the appropriate size/dimensions next to each matrix:
+<ol style="list-style-type:lower-roman">
+  <li> $\A   $  
+  <li> $\bo{M}   $  
+  <li> $\D   $  
+  <li> $\X  $  
+  <li> $\bo{t}  $  
+  <li> $\v  $  
+  <li> $\u  $  
+</ol>
 
-  __a.__ Write the appropriate size/dimensions next to each matrix:
+  <li> Which of these matrices are square? Which are rectangular?
 
-    - $\A$ \underline{\hspace{2cm}} 
-    - $\bo{M}$ \underline{\hspace{2cm}} 
-    - $\D$ \underline{\hspace{2cm}} 
-    - $\X$\underline{\hspace{2cm}} 
-    - $\bo{t}$\underline{\hspace{2cm}} 
-    - $\v$\underline{\hspace{2cm}} 
-    - $\u$\underline{\hspace{2cm}} 
+  <li> Give the following quantities:
+ <ol style="list-style-type:lower-roman">   
+  <li> $A_{12}=$   
+  <li> $M_{21}=$   
+  <li> $\D_{\star3}=$  
+  <li> $\bo{M}_{2\star}=$   
+  <li> $X_{42}=$  
+  <li> $t_5=$   
+  <li> $v_3=$  
+</ol>
 
-  __b.__ Which of these matrices are square? Which are rectangular?
-
-  __c.__ Give the following quantities:
-    - $A_{12}=$ 
-    - $M_{21}=$ 
-    - $\D_{\star3}=$
-    - $\bo{M}_{2\star}=$ 
-    - $X_{42}=$
-    - $t_5=$ 
-    - $v_3=$
-
-
-  __d.__ What are the diagonal elements of $\A$?
-
-
-
-
-__2.__ For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.
-
-  __a.__ $$\A=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$
-  __b.__ $$\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$
-  __c.__ $$\B=\left(\begin{matrix} B_{11}&B_{12}&B_{13}\\B_{21}&B_{22}&B_{23}\\B_{31}&B_{32}&B_{33}\\B_{41}&B_{42}&B_{43}\end{matrix}\right)$$
-  __d.__ $$\C=\left(\begin{matrix} 1 & 0.3 & -0.9 & 0.1\\0.3 & 1 & 0.8 & -0.5\\-0.9&0.8&1&-0.6\\0.1&-0.5&-0.6&1 \end{matrix}\right)$$
-  __e.__ $$\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2$$
-
-__3.__ For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:
-
-  __a.__ $\bo{H}$ \underline{\hspace{2.4cm}} 
-  __b.__ $\bo{W}$ \underline{\hspace{2.4cm}} 
-  __c.__ $n$\underline{\hspace{2.4cm}} 
-  __d.__ $\v_2$\underline{\hspace{2.4cm}} 
-  __e.__ $v_2$\underline{\hspace{2.4cm}} 
-  __f.__ $\bo{M}_{\star 2}$\underline{\hspace{2.4cm}} 
-  __g.__ $\lambda$\underline{\hspace{2.4cm}} 
-  __h.__ $A_{ij}$\underline{\hspace{2.4cm}} 
-  __i.__ $\bo{r}$\underline{\hspace{2.4cm}} 
+  <li> What are the diagonal elements of $\A$?
+</ol>
 
 
-__4.__ The matrix $\C$ from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of $\C$? For any correlation matrix computed using $p$ variables, what should we expect the trace to be?
 
-__5.__ If $$\v^T = \left(\begin{matrix} 1&6&-1&\sqrt{2} \end{matrix}\right),$$ then what is $\v$?
+<li> For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.
+<ol style="list-style-type:lower-alpha">
+  <li>  $$\A=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$  
+  <li>  $$\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$  
+  <li>  $$\B=\left(\begin{matrix}   B_{11}&B_{12}&B_{13}\\B_{21}&B_{22}&B_{23}\\B_{31}&B_{32}&B_{33}\\B_{41}&B_{42}&B_{43}\end{matrix}\right)$$  
+  <li>  $$\C=\left(\begin{matrix} 1 & 0.3 & -0.9 & 0.1\\0.3 & 1 & 0.8 & -0.5\\-0.9&0.8&1&-0.6\\0.1&-0.5&-0.6&1 \end{matrix}\right)$$  
+  <li>  $$\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2$$  
+</ol>
+<li> For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:
+<ol style="list-style-type:lower-alpha">
+  <li> $\bo{H}$  
+  <li> $\bo{W}$  
+  <li> $n$  
+  <li> $\v_2  $  
+  <li> $v_2  $  
+  <li> $\bo{M}_{\star 2} $  
+  <li> $\lambda $  
+  <li> $A_{ij} $  
+  <li> $\bo{r} $  
+</ol>
 
-__6.__ For each of the following, write the vector or matrix that is specified:
+<li> The matrix $\C$ from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of $\C$? For any correlation matrix computed using $p$ variables, what should we expect the trace to be?
 
-  __a.__ $\e_3 \in \Re^4$
-  __b.__ $\D=diag\{2, \sqrt{3}, -1\}$
-  __c.__ $\e \in \Re^3$
-  __d.__ $\I_2$
+<li> If $$\v^T = \left(\begin{matrix} 1&6&-1&\sqrt{2} \end{matrix}\right),$$ then what is $\v$?
 
+<li> For each of the following, write the vector or matrix that is specified:
+<ol style="list-style-type:lower-alpha">
+  <li> $\e_3 \in \Re^4$
+  <li> $\D=diag\{2, \sqrt{3}, -1\}$
+  <li> $\e \in \Re^3$
+  <li> $\I_2$
+</ol>
 
-__7.__ How do you know if a matrix is symmetric? Give an example of a symmetric matrix.
+<li> How do you know if a matrix is symmetric? Give an example of a symmetric matrix.
 
-__8.__ Give an example of a $4\times 4$ upper triangular matrix and a $3\times 3$ lower triangular matrix.
+<li> Give an example of a $4\times 4$ upper triangular matrix and a $3\times 3$ lower triangular matrix.
 
-__9.__ Suppose we measure the heights of 10 people, $person_1, person_2, \dots, person_{10}$. 
-
-  __a.__ If we create a matrix $\S$ where
+<li> Suppose we measure the heights of 10 people, $person_1, person_2, \dots, person_{10}$. 
+<ol style="list-style-type:lower-alpha">
+  <li> If we define a matrix $\S$ as
 $$S_{ij} = height(person_i) - height(person_j)$$
-is the matrix $\S$ symmetric? What is the trace($\S$)?
-  __b.__ If instead we create a matrix $\bo{G}$ where
+is the matrix $\S$ symmetric? What is the trace($\S$)?  
+  <li> If instead we create a matrix $\bo{G}$ where
 $$G_{ij} = [height(person_i) - height(person_j)]^2$$
-is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?
+is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?  
+</ol>
 
 
+<li> Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.
 
-__10.__ Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.
-
-__11.__
-```{r fig.align='center', fig.cap = 'Graph (Network) for exercise 11', echo=F, fig.width=10}
-knitr::include_graphics('figs/graphex.pdf')
+<li> Use the network shown below to answer the following questions.  
+```{r fig.align='center', fig.cap = 'Graph (Network) for exercise 11', echo=F, fig.width=6}
+knitr::include_graphics('figs/graphex.jpg')
 ```
-  __a.__  Write down the adjacency matrix, $\A$, for this graph where $\A_{ij}$ reflects the weight of the edge connecting vertex $i$ and vertex $j$.   
-  __b.__  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\bo{d}$ such that $d_i$ is the degree of node $i$.
-
+<ol style="list-style-type:lower-alpha">  
+  <li>  Write down the adjacency matrix, $\A$, for this graph where $\A_{ij}$ reflects the weight of the edge connecting vertex $i$ and vertex $j$.   
+  <li>  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\bo{d}$ such that $d_i$ is the degree of node $i$.  
+</ol>
 
 
 ## List of Key Terms 

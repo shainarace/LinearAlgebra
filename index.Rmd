@@ -15,7 +15,7 @@ always_allow_html: true
 <img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /> 
 
  
-# Preface {#preface} 
+## Preface {#preface} 
 
 This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Factor Analysis, Collaborative Filtering, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we will need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is an introduction to the most important definitions and concepts that are needed to understand and effectively implement these important data mining methodologies. 
 
@@ -32,7 +32,7 @@ Shaina Race Bennett earned her PhD in Operations Research from NC State in 2014.
 
 ## Acknowledgements {-}
 
-The author would like to acknowledge and celebrate the work of Dr. Carl Meyer, who was forced to be her PhD advisor, and who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, I strongly suggest the book that contains all of them:
+The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, I strongly suggest the book that contains all of them:
 
 Meyer, Carl D. _Matrix analysis and applied linear algebra_. Vol. 71. Siam, 2000.
 

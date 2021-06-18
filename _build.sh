@@ -10,3 +10,4 @@ Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book')"
 Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::html_book')"
 
 
+browseURL('docs/index.html')
