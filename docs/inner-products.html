@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Inner Products |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Inner Products |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="MSALogo.png" />
+  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="github-repo" content="rstudio/linalg-master" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Inner Products |  Linear Algebra for Data Science   with examples in R and Python" />
+  
+  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
+  <meta name="twitter:image" content="MSALogo.png" />
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-05-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="norms.html"/>
+<link rel="next" href="outer-products.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R and Python </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i><b>1</b> Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>2.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>2.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>2.3</b> Describing Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>2.4</b> Vectors</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>2.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>2.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>2.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>2.8</b> Exercises</a></li>
+<li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>2.9</b> List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>3</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>3.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>3.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="3.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>3.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="3.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>3.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="3.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>3.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="3.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>4</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>4.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="4.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>4.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>4.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="4.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>5</b> R Programming Basics</a></li>
+<li class="chapter" data-level="6" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>6</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>6.1</b> Gaussian Elimination</a></li>
+<li class="chapter" data-level="6.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>6.2</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="6.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>6.3</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="6.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>6.5</b> List of Key Terms</a></li>
+<li class="chapter" data-level="6.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>6.6</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>7</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>7.1</b> Why the normal equations?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>8</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>8.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="8.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>8.2</b> Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>9</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>9.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="9.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>9.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="9.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>9.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>10</b> Basis and Change of Basis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>10.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>11</b> Eigenvalues and Eigenvectors</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>11.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="11.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>11.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="11.3" data-path="eigen.html"><a href="eigen.html#exercises-5"><i class="fa fa-check"></i><b>11.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>12</b> Norms, Inner Products and Orthogonality</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>12.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="12.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>12.2</b> Other useful norms and distances</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="inner-products.html"><a href="inner-products.html"><i class="fa fa-check"></i><b>13</b> Inner Products</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="inner-products.html"><a href="inner-products.html#orthogonality"><i class="fa fa-check"></i><b>13.1</b> Orthogonality</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="outer-products.html"><a href="outer-products.html"><i class="fa fa-check"></i><b>14</b> Outer Products</a></li>
+<li class="chapter" data-level="15" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>15</b> Exercises</a></li>
+<li class="chapter" data-level="16" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>16</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>16.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="16.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>16.2</b> Covariance or Correlation Matrix?</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>17</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>17.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="17.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>17.2</b> PCA as SVD</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>18</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>18.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="18.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>18.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="18.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>18.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="18.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>18.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="18.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>18.5</b> Image Compression</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>19.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="19.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>19.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="19.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>19.3</b> Communalities</a></li>
+<li class="chapter" data-level="19.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>19.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="19.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>19.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>20</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>20.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="20.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>20.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>21</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>21.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>22</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>22.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="22.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>22.2</b> Network Visualization - <code>igraph</code> package</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
+Linear Algebra for Data Science <br>
+with examples in R and Python</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inner-products" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Inner Products</h1>
+<p>The inner product of vectors is a notion that we’ve already seen in Chapter <a href="mult.html#mult">3</a>, it is what’s called the <em>dot product</em> in most physics and calculus text books.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.3: Vector Inner Product
+</div>
+<div class="Stext">
+<p>The inner product of two <span class="math inline">\(n\times 1\)</span> vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is written <span class="math inline">\(\x^T\y\)</span> (or sometimes as <span class="math inline">\(\langle \x,\y \rangle\)</span>) and is the sum of the product of corresponding elements.
+<span class="math display">\[\x^T\y = \pm x_1 &amp; x_2 &amp; \dots &amp; x_n \mp \pm y_1 \\y_2 \\ \vdots \\ y_n \mp = x_1y_1+x_2y_2+\dots+x_ny_n=\sum_{i=1}^n x_i y_i.\]</span></p>
+When we take the inner product of a vector with itself, we get the square of the 2-norm:
+<span class="math display">\[\x^T\x=\|\x\|_2^2.\]</span>
+</div>
+</div>
+</div>
+<p>Inner products are at the heart of every matrix product. When we multiply two matrices, <span class="math inline">\(\X_{m\times n}\)</span> and <span class="math inline">\(\bo{Y}_{n\times p}\)</span>, we can represent the individual elements of the result as inner products of rows of <span class="math inline">\(\X\)</span> and columns of <span class="math inline">\(\Y\)</span> as follows:</p>
+<p><span class="math display">\[
+\X\Y = \pm \xrow{1} \\ \xrow{2}    \\ \vdots \\ \xrow{m}   \mp 
+\pm \ycol{1}&amp;\ycol{2}&amp;\dots&amp;\ycol{p}  \mp \\
+= \pm \xrow{1}\ycol{1} &amp; \xrow{1}\ycol{2}   &amp; \dots &amp; \xrow{1}\ycol{p}  \\
+\xrow{2}\ycol{1} &amp; \xrow{2}\ycol{2}    &amp; \dots &amp; \xrow{2}\ycol{p}  \\
+\xrow{3}\ycol{1}  &amp;\xrow{3}\ycol{2}    &amp;\dots &amp; \xrow{3}\ycol{p}  \\
+\vdots &amp; \vdots  &amp; \ddots &amp; \vdots \\
+\xrow{m}\ycol{1} &amp; \dots &amp; \ddots &amp; \xrow{m}\ycol{p}  \mp 
+\]</span></p>
+<div id="covariance" class="section level3" number="13.0.1">
+<h3><span class="header-section-number">13.0.1</span> Covariance</h3>
+<p>Another important statistical measurement that is represented by an inner product is <strong>covariance.</strong> Covariance is a measure of how much two random variables change together. The statistical formula for covariance is given as
+<span class="math display">\[\begin{equation}
+Covariance(\x,\y)=E[(\x-E[\x])(\y-E[\y])]
+\label{eq-cov}
+\end{equation}\]</span>
+where <span class="math inline">\(E[\star]\)</span> is the expected value of the variable.
+If larger values of one variable correspond to larger values of the other variable and at the same time smaller values of one correspond to smaller values of the other, then the covariance between the two variables is positive. In the opposite case, if larger values of one variable correspond to smaller values of the other and vice versa, then the covariance is negative. Thus, the <em>sign</em> of the covariance shows the tendency of the linear relationship between variables, however the <em>magnitude</em> of the covariance is not easy to interpret. Covariance is a population parameter - it is a property of the joint distribution of the random variables <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>. Definition <a href="#def:covariance"><strong>??</strong></a> provides the mathematical formulation for the <em>sample</em> covariance. This is our best estimate for the population parameter when we have data sampled from a population.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.4: Sample Covariance
+</div>
+<div class="Stext">
+<p>If <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are <span class="math inline">\(n\times 1\)</span> vectors containing <span class="math inline">\(n\)</span> observations for two different variables, then the <strong>sample covariance</strong> of <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is given by
+<span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y}) = \frac{1}{n-1}(\x-\bar{\x})^T(\y-\bar{\y})\]</span>
+Where again <span class="math inline">\(\bar{\x}\)</span> and <span class="math inline">\(\bar{\y}\)</span> are vectors that contain <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> repeated <span class="math inline">\(n\)</span> times. It should be clear from this formulation that <span class="math display">\[cov(\x,\y)=cov(\y,\x).\]</span></p>
+When we have <span class="math inline">\(p\)</span> vectors, <span class="math inline">\(\v_1,\v_2,\dots,\v_p\)</span>, each containing <span class="math inline">\(n\)</span> observations for <span class="math inline">\(p\)</span> different variables, the sample covariances are most commonly given by the <strong>sample covariance matrix</strong>, <span class="math inline">\(\ssigma\)</span>, where <span class="math display">\[\ssigma_{ij}=cov(\v_i,\v_j).\]</span> This matrix is symmetric, since <span class="math inline">\(\ssigma_{ij}=\ssigma_{ji}\)</span>. If we create a matrix <span class="math inline">\(\V\)</span> whose columns are the vectors <span class="math inline">\(\v_1,\v_2,\dots \v_p\)</span> , then the covariance matrix is given by:
+<span class="math display">\[cov(\V)=\ssigma = \frac{1}{n-1}\V^T\V.\]</span>
+The <span class="math inline">\(j^{th}\)</span> diagonal element of this matrix gives the variance <span class="math inline">\(\v_j\)</span> since
+<span class="math display">\[\begin{eqnarray}
+\ssigma_{jj}=cov(\v_j,\v_j) &amp;=&amp;\frac{1}{n-1}(\v_j-\bar{\v}_j)^T(\v_j-\bar{\v}_j) \\
+&amp;=&amp;\frac{1}{n-1}\|\v_j-\bar{\v}_j\|_2^2\\
+&amp;=&amp; var(\v_j)
+\end{eqnarray}\]</span>
+</div>
+</div>
+</div>
+<p>When two variables are completely uncorrelated, their covariance is zero. This lack of correlation would be seen in a covariance matrix with a diagonal structure. That is, if <span class="math inline">\(\v_1, \v_2,\dots, \v_p\)</span> are uncorrelated with individual variances <span class="math inline">\(\sigma_1^2,\sigma_2^2,\dots,\sigma_p^2\)</span> respectively then the corresponding covariance matrix is:
+<span class="math display">\[\ssigma = \pm \sigma_1^2 &amp; 0 &amp; 0&amp; \dots &amp; 0\\
+                                        0 &amp; \sigma_2^2 &amp; 0 &amp; \dots &amp; 0\\
+                                        0 &amp; 0 &amp; \ddots &amp; \vdots &amp; 0 \\
+                                        \vdots &amp; \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\
+                                        0 &amp; 0 &amp; 0 &amp; 0 &amp; \sigma_p^2 \mp\]</span>
+Furthermore, for variables which are independent and identically distributed (take for instance the error terms in a linear regression model, which are assumed to independent and normally distributed with mean 0 and constant variance <span class="math inline">\(\sigma\)</span>), the covariance matrix is a multiple of the identity matrix:
+<span class="math display">\[\ssigma = \pm \sigma^2 &amp; 0 &amp; 0&amp; \dots &amp; 0\\
+                                        0 &amp; \sigma^2 &amp; 0 &amp; \dots &amp; 0\\
+                                        0 &amp; 0 &amp; \ddots &amp; \vdots &amp; 0 \\
+                                        \vdots &amp; \vdots &amp;\vdots &amp; \ddots &amp; \vdots \\
+                                        0 &amp; 0 &amp; 0 &amp; 0 &amp; \sigma^2 \mp =\sigma^2\bo{I}\]</span></p>
+<p>Transforming our variables in a such a way that their covariance matrix becomes diagonal will be our goal in Chapter <a href="pca.html#pca">16</a>.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Theorem <a href="#0"><strong>??</strong></a>.5: Properties of Covariance Matrices
+</div>
+<div class="Stext">
+The following mathematical properties stem from Equation <a href="#eq-cov"><strong>??</strong></a>. Let <span class="math inline">\(\X_{n\times p}\)</span> be a matrix of data containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. If <span class="math inline">\(\A\)</span> is a constant matrix (or vector, in the first case) then
+<span class="math display">\[cov(\X\A)=\A^Tcov(\X)\A \quad \mbox{ and } \quad cov(\X+\A)=cov(\X)\]</span>
+</div>
+</div>
+</div>
+</div>
+<div id="mahalanobis-distance" class="section level3" number="13.0.2">
+<h3><span class="header-section-number">13.0.2</span> Mahalanobis Distance</h3>
+<p>Mahalanobis Distance is similar to Euclidean distance, but takes into account the correlation of the variables. This metric is relatively common in data mining applications like classification. Suppose we have <span class="math inline">\(p\)</span> variables which have some covariance matrix, <span class="math inline">\(\cov\)</span>. Then the Mahalanobis distance between two observations, <span class="math inline">\(\x=\pm x_1&amp; x_2 &amp;\dots &amp; x_p \mp^T\)</span> and <span class="math inline">\(\y = \pm y_1 &amp; y_2 &amp; \dots &amp; y_p \mp^T\)</span> is given by
+<span class="math display">\[d(\x,\y)=\sqrt{(\x-\y)^T\cov^{-1}(\x-\y)}.\]</span>
+If the covariance matrix is diagonal (meaning the variables are uncorrelated) then the Mahalanobis distance reduces to Euclidean distance normalized by the variance of each variable:
+<span class="math display">\[d(\x,\y)=\sqrt{\sum_{i=1}^p\frac{(x_i-y_i)^2}{s_i^2}}=\|\cov^{-1/2}(\x-\y)\|_2.\]</span></p>
+</div>
+<div id="angular-distance" class="section level3" number="13.0.3">
+<h3><span class="header-section-number">13.0.3</span> Angular Distance</h3>
+<p>The inner product between two vectors can provide useful information about their relative orientation in space and about their similarity. For example, to find the cosine of the angle between two vectors in <span class="math inline">\(n\)</span>-space, the inner product of their corresponding unit vectors will provide the result. This cosine is often used as a measure of similarity or correlation between two vectors.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.6: Cosine of Angle between Vectors
+</div>
+<div class="Stext">
+The cosine of the angle between two vectors in <span class="math inline">\(n\)</span>-space is given by
+<span class="math display">\[\cos(\theta)=\frac{\x^T\y}{\|\x\|_2\|\y\|_2}\]</span>
+</div>
+</div>
+</div>
+<p>This angular distance is at the heart of <strong>Pearson’s correlation coefficient</strong>.</p>
+</div>
+<div id="correlation" class="section level3" number="13.0.4">
+<h3><span class="header-section-number">13.0.4</span> Correlation</h3>
+<p>Pearson’s correlation is a normalized version of the covariance, so that not only the <em>sign</em> of the coefficient is meaningful, but its <em>magnitude</em> is meaningful in measuring the strength of the linear association.</p>
+
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.6: Pearson’s Correlation and Cosine Distance
+</div>
+<div class="S2text">
+<p>You may recall the formula for Pearson’s correlation between variable <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> with a sample size of <span class="math inline">\(n\)</span> to be as follows:
+<span class="math display">\[r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}\]</span>
+If we let <span class="math inline">\(\bar{\x}\)</span> be a vector that contains <span class="math inline">\(\bar{x}\)</span> repeated <span class="math inline">\(n\)</span> times, like we did in , and let <span class="math inline">\(\bar{\y}\)</span> be a vector that contains <span class="math inline">\(\bar{y}\)</span> then Pearson’s coefficient can be written as:
+<span class="math display">\[r=\frac{(\x-\bar{\x})^T(\y-\bar{\y})}{\|\x-\bar{\x}\|\|\y-\bar{\y}\|}\]</span>
+In other words, it is just the cosine of the angle between the two vectors once they have been <em>centered</em> to have mean 0.</p>
+This makes sense: correlation is a measure of the extent to which the two variables share a line in space. If the cosine of the angle is positive or negative one, this means the angle between the two vectors is <span class="math inline">\(0^{\circ}\)</span> or <span class="math inline">\(180^{\circ}\)</span>, thus, the two vectors are perfectly correlated or <em>collinear.</em>
+</div>
+</div>
+</div>
+<p>It is difficult to visualize the angle between two variable vectors because they exist in <span class="math inline">\(n\)</span>-space, where <span class="math inline">\(n\)</span> is the number of observations in the dataset. Unless we have fewer than 3 observations, we cannot draw these vectors or even picture them in our minds. As it turns out, this angular measurement does translate into something we can conceptualize: Pearson’s correlation coefficient is the angle formed between the two possible regression lines using the centered data: <span class="math inline">\(\y\)</span> regressed on <span class="math inline">\(\x\)</span> and <span class="math inline">\(\x\)</span> regressed on <span class="math inline">\(\y\)</span>. This is illustrated in Figure <a href="#corrangle"><strong>??</strong></a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-213"></span>
+<img src="figs/corrangle.jpg" alt="Correlation Coefficient \(r\) and Angle between Regression Lines" width="40%" />
+<p class="caption">
+Figure 13.1: Correlation Coefficient <span class="math inline">\(r\)</span> and Angle between Regression Lines
+</p>
+</div>
+<p>To compute the matrix of pairwise correlations between variables <span class="math inline">\(\x_1,\x_2,\x_3,\dots,\x_p\)</span> (columns containing <span class="math inline">\(n\)</span> observations for each variable), we’d first center them to have mean zero, then normalize them to have length <span class="math inline">\(\|\x_i\|=1\)</span> and then compose the matrix
+<span class="math display">\[\X=[\x_1|\x_2|\x_3|\dots|\x_p].\]</span></p>
+<p>Using this centered and normalized data, the correlation matrix is simply
+<span class="math display">\[\C=\X^T\X.\]</span></p>
+</div>
+<div id="orthogonality" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Orthogonality</h2>
+<p>Orthogonal (or perpendicular) vectors have an angle between them of <span class="math inline">\(90^{\circ}\)</span>, meaning that their cosine (and subsequently their inner product) is zero.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.7: Orthogonality
+</div>
+<div class="Stext">
+Two vectors, <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>, are  in <span class="math inline">\(n\)</span>-space if their inner product is zero:
+<span class="math display">\[\x^T\y=0\]</span>
+</div>
+</div>
+</div>
+<p>Combining the notion of orthogonality and unit vectors we can define an orthonormal set of vectors, or an orthonormal matrix. Remember, for a unit vector, <span class="math inline">\(\x^T\x = 1\)</span>.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.8: Orthonormal Set
+</div>
+<div class="Stext">
+The <span class="math inline">\(n\times 1\)</span> vectors <span class="math inline">\(\{\x_1,\x_2,\x_3,\dots,\x_p\}\)</span> form an  if and only if
+<ol>
+<li>
+<span class="math inline">\(\x_i^T\x_j = 0\,\)</span> when <span class="math inline">\(i \ne j\)</span> and
+<li>
+<span class="math inline">\(\x_i^T\x_i = 1\,\)</span> (equivalently $ |_i|=1$)
+</ol>
+In other words, an orthonormal set is a collection of <em>unit vectors which are mutually orthogonal.</em>
+</div>
+</div>
+</div>
+<p>If we form a matrix, <span class="math inline">\(\X=(\x_1|\x_2|\x_3|\dots|\x_p )\)</span>, having an orthonormal set of vectors as columns, we will find that multiplying the matrix by its transpose provides a nice result:</p>
+<p><span class="math display">\[
+\X^T\X = \pm \x_1^T \\ \x_2^T \\ \x_3^T \\ \vdots \\ \x_p^T  \mp 
+\pm \x_1&amp;\x_2&amp;\x_3&amp;\dots&amp;\x_p  \mp \\
+= \pm \x_1^T\x_1 &amp; \x_1^T\x_2 &amp; \x_1^T\x_3 &amp; \dots &amp; \x_1^T\x_p \\
+\x_2^T\x_1 &amp; \x_2^T\x_2 &amp; \x_2^T\x_3 &amp; \dots &amp; \x_2^T\x_p \\
+\x_3^T\x_1 &amp; \x_3^T\x_2 &amp; \x_3^T\x_3 &amp;\dots &amp; \x_3^T\x_p \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \vdots \\
+\x_p^T\x_1 &amp; \dots &amp; \dots &amp; \ddots &amp; \x_p^T\x_p \mp 
+=  \pm 1 &amp; 0 &amp; 0 &amp; \dots &amp; 0\\
+            0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 \\
+             0 &amp; 0 &amp; 1 &amp; \dots &amp; 0 \\
+             \vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \vdots \\
+            0 &amp; 0 &amp; 0 &amp; \dots &amp; 1 \mp 
+= \bo{I}_p 
+\]</span>
+We will be particularly interested in these types of matrices when they are square. If <span class="math inline">\(\X\)</span> is a square matrix with orthonormal columns, the arithmetic above means that the inverse of <span class="math inline">\(\X\)</span> is <span class="math inline">\(\X^T\)</span> (i.e. <span class="math inline">\(\X\)</span> also has orthonormal rows):
+<span class="math display">\[\X^T\X=\X\X^T = I.\]</span>
+Square matrices with orthonormal columns are called orthogonal matrices.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.9: Orthogonal (or Orthonormal) Matrix
+</div>
+<div class="Stext">
+A <em>square</em> matrix, <span class="math inline">\(\bo{U}\)</span> with orthonormal columns also has orthonormal rows and is called an <strong>orthogonal matrix</strong>. Such a matrix has an inverse which is equal to it’s transpose,
+<span class="math display">\[\U^T\U=\U\U^T = \bo{I} \]</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="norms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="outer-products.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/029-norms.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/029-norms.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 10 Eigenvalues and Eigenvectors |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 10 Eigenvalues and Eigenvectors |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" Linear Algebra for Data Science with examples in R and Python |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 10 Eigenvalues and Eigenvectors |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="basis.html"/>
+<link rel="next" href="norms.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -412,58 +412,202 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></h1>
-<p class="author"><em>Shaina Race Bennett, PhD</em></p>
-<p class="date"><em>2021-05-11</em></p>
+<div id="eigen" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Eigenvalues and Eigenvectors</h1>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.1: Eigenvalues and Eigenvectors
 </div>
-<div id="section" class="section level1 unnumbered">
-<h1 class="unnumbered"></h1>
-<p><img src="MSALogo.png" style="position:absolute; top:0px; height:200px; align:center;" /></p>
-<div id="preface" class="section level2" number="0.1">
-<h2><span class="header-section-number">0.1</span> Preface</h2>
-<p>This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Factor Analysis, Collaborative Filtering, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we will need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is an introduction to the most important definitions and concepts that are needed to understand and effectively implement these important data mining methodologies.</p>
+<div class="Stext">
+For a square matrix <span class="math inline">\(\A_{n\times n}\)</span>, a scalar <span class="math inline">\(\lambda\)</span> is called an <strong>eigenvalue</strong> of <span class="math inline">\(\A\)</span> if there is a nonzero vector <span class="math inline">\(\x\)</span> such that <span class="math display">\[\A\x=\lambda\x.\]</span> Such a vector, <span class="math inline">\(\x\)</span> is called an <strong>eigenvector</strong> of <span class="math inline">\(\A\)</span> corresponding to the <strong>eigenvalue</strong> <span class="math inline">\(\lambda\)</span>. We sometimes refer to the pair <span class="math inline">\((\lambda,\x)\)</span> as an <strong>eigenpair.</strong>
 </div>
-<div id="structure-of-the-book" class="section level2 unnumbered">
-<h2>Structure of the book</h2>
-<p>This project is the fusion of a traditional textbook (with definitions, theorems, examples and exercises) with a collection of interactive programming exercises (designed for in-class demonstration) that was engineered to weave practicality and applied problem solving into the curriculum right from the start.</p>
-<p>This is a work in progress; please check back frequently for updates.</p>
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the author</h2>
-<p>Shaina Race Bennett earned her PhD in Operations Research from NC State in 2014. She is a teaching assistant professor at the Institute for Advanced Analytics.</p>
 </div>
-<div id="acknowledgements" class="section level2 unnumbered">
-<h2>Acknowledgements</h2>
-<p>The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most <em>thorough</em> and complete proof-based presentation of the material in this book. If you’re looking for more details, I strongly suggest the book that contains all of them:</p>
-<p>Meyer, Carl D. <em>Matrix analysis and applied linear algebra</em>. Vol. 71. Siam, 2000.</p>
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-<!-- ```{thm title='Boom. A Theorem.', num=thmcounter} -->
-<!-- Boom I just made a custom language interpreter chunk. can I number it though -->
-<!-- ``` -->
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-<!-- ```{def title='Boom again. A Definition too.', num=thmcounter} -->
-<!-- I made a definition too, and I numbered them.  -->
-<!-- Check! -->
-<!-- ``` -->
-<!-- ```{r echo=F} -->
-<!-- library(knitr) -->
-<!-- ``` -->
-<!-- ## ermehgerd -->
-<!-- ```{r,echo=F}  -->
-<!-- excounter=excounter+1 -->
-<!-- ``` -->
-<!-- ```{ex name = 'Cool Example, Girl', num=excounter} -->
-<!-- Insert-mind-blowing-example-text. -->
-<!-- Maybe an image for Good Measure: -->
-<!--   <img src="_book/iaaicon.png" width="140"> -->
-<!-- ``` -->
+<p>Eigenvalues and eigenvectors have numerous applications throughout mathematics, statistics and other fields. First, we must get a handle on the definition which we will do through some examples.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.1: Eigenvalues and Eigenvectors
+</div>
+<div class="S2text">
+<p>Determine whether <span class="math inline">\(\x=\pm 1\\1 \mp\)</span> is an eigenvector of <span class="math inline">\(\A=\pm 3 &amp; 1 \\1&amp;3 \mp\)</span> and if so, find the corresponding eigenvalue.\
+To determine whether <span class="math inline">\(\x\)</span> is an eigenvector, we want to compute <span class="math inline">\(\A\x\)</span> and observe whether the result is a multiple of <span class="math inline">\(\x\)</span>. If this is the case, then the multiplication factor is the corresponding eigenvalue:
+<span class="math display">\[\A\x=\pm  3 &amp; 1 \\1&amp;3 \mp \pm 1\\1 \mp =\pm 4\\4 \mp=4\pm 1\\1 \mp\]</span>
+From this it follows that <span class="math inline">\(\x\)</span> <em>is</em> an eigenvector of <span class="math inline">\(\A\)</span> and the corresponding eigenvalue is <span class="math inline">\(\lambda = 4\)</span>.\</p>
+Is the vector <span class="math inline">\(\y=\pm 2\\2 \mp\)</span> an eigenvector?
+<span class="math display">\[\A\y=\pm  3 &amp; 1 \\1&amp;3 \mp \pm 2\\2 \mp =\pm 8\\8 \mp=4\pm 2\\2 \mp = 4\y\]</span>
+Yes, it is and it corresponds to the <em>same</em> eigenvalue, <span class="math inline">\(\lambda=4\)</span>
+</div>
+</div>
+</div>
+<p>Example <a href="#ex-eig1"><strong>??</strong></a> shows a very important property of eigenvalue-eigenvector pairs. If <span class="math inline">\((\lambda,\x)\)</span> is an eigenpair then any scalar multiple of <span class="math inline">\(\x\)</span> is also an eigenvector corresponding to <span class="math inline">\(\lambda\)</span>. To see this, let <span class="math inline">\((\lambda,\x)\)</span> be an eigenpair for a matrix <span class="math inline">\(\A\)</span> (which means that <span class="math inline">\(\A\x=\lambda\x\)</span>) and let <span class="math inline">\(\y=\alpha\x\)</span> be any scalar multiple of <span class="math inline">\(\x\)</span>. Then we have,
+<span class="math display">\[\A\y = \A(\alpha\x)=\alpha(\A\x) = \alpha(\lambda\x) = \lambda(\alpha\x)=\lambda\y\]</span>
+which shows that <span class="math inline">\(\y\)</span> (or any scalar multiple of <span class="math inline">\(\x\)</span>) is also an eigenvector associated with the eigenvalue <span class="math inline">\(\lambda\)</span>.</p>
+<p>Thus, for each eigenvalue we have infinitely many eigenvectors. In the preceding example, the eigenvectors associated with <span class="math inline">\(\lambda = 4\)</span> will be scalar multiples of <span class="math inline">\(\x=\pm 1\\1 \mp\)</span>. You may recall from Chapter <a href="linind.html#linind">8</a> that the set of all scalar multiples of <span class="math inline">\(\x\)</span> is denoted <span class="math inline">\(span(\x)\)</span>. The <span class="math inline">\(span(\x)\)</span> in this example represents the <strong>eigenspace</strong> of <span class="math inline">\(\lambda\)</span>.
+<em>Note: when using software to compute eigenvectors, it is standard practice for the software to provide the normalized/unit eigenvector.</em></p>
+<p>In some situations, an eigenvalue can have multiple eigenvectors which are linearly independent. The number of linearly independent eigenvectors associated with an eigenvalue is called the <strong>geometric multiplicity</strong> of the eigenvalue. Example <a href="#ex-eig2"><strong>??</strong></a> clarifies this concept.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.2: Geometric Multiplicity
+</div>
+<div class="S2text">
+<p>Consider the matrix <span class="math inline">\(\A=\pm 3 &amp; 0 \\0 &amp; 3 \mp\)</span>. It should be straightforward to see that <span class="math inline">\(\x_1 =\pm 1 \\0 \mp\)</span> and <span class="math inline">\(\x_2=\pm 0\\1\mp\)</span> are both eigenvectors corresponding to the eigenvalue <span class="math inline">\(\lambda = 3\)</span>. <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> are linearly independent, therefore the geometric multiplicity of <span class="math inline">\(\lambda=3\)</span> is 2.\</p>
+<p>What happens if we take a linear combination of <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>? Is that also an eigenvector?
+Consider <span class="math inline">\(\y=\pm 2 \\ 3 \mp = 2\x_1+3\x_2\)</span>. Then
+<span class="math display">\[\A\y = \pm 3 &amp; 0 \\0 &amp; 3 \mp \pm 2 \\ 3 \mp = \pm 6 \\ 9 \mp = 3 \pm 2\\3\mp = 3\y\]</span>
+shows that <span class="math inline">\(\y\)</span> is also an eigenvector associated with <span class="math inline">\(\lambda=3\)</span>.</p>
+The <strong>eigenspace</strong> corresponding to <span class="math inline">\(\lambda=3\)</span> is the set of all linear combinations of <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>, i.e. the <span class="math inline">\(span(\x_1,\x_2)\)</span>.
+</div>
+</div>
+</div>
+<p>We can generalize the result that we saw in Example <a href="#ex-eig2"><strong>??</strong></a> for any square matrix and any geometric multiplicity. Let <span class="math inline">\(\A_{n\times n}\)</span> have an eigenvalue <span class="math inline">\(\lambda\)</span> with geometric multiplicity <span class="math inline">\(k\)</span>. This means there are <span class="math inline">\(k\)</span> linearly independent eigenvectors, <span class="math inline">\(\x_1,\x_2,\dots,\x_k\)</span> such that <span class="math inline">\(\A\x_i=\lambda\x_i\)</span> for each eigenvector <span class="math inline">\(\x_i\)</span>. Now if we let <span class="math inline">\(\y\)</span> be a vector in the <span class="math inline">\(span(\x_1,\x_2,\dots,\x_k)\)</span> then <span class="math inline">\(\y\)</span> is some linear combination of the <span class="math inline">\(\x_i\)</span>’s:
+<span class="math display">\[\y=\alpha_1\x_2+\alpha_2\x_2+\dots+\alpha_k\x_k\]</span>
+Observe what happens when we multiply <span class="math inline">\(\y\)</span> by <span class="math inline">\(\A\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+\A\y &amp;=&amp;\A(\alpha_1\x_2+\alpha_2\x_2+\dots+\alpha_k\x_k) \\  
+&amp;=&amp; \alpha_1(\A\x_1)+\alpha_2(\A\x_2)+\dots +\alpha_k(\A\x_k) \\ 
+&amp;=&amp; \alpha_1(\lambda\x_1)+\alpha_2(\lambda\x_2)+\dots +\alpha_k(\lambda\x_k) \\ 
+&amp;=&amp; \lambda(\alpha_1\x_2+\alpha_2\x_2+\dots+\alpha_k\x_k) \\
+&amp;=&amp; \lambda\y
+\end{eqnarray*}\]</span>
+which shows that <span class="math inline">\(\y\)</span> (or any vector in the <span class="math inline">\(span(\x_1,\x_2,\dots,\x_k)\)</span>) is an eigenvector of <span class="math inline">\(\A\)</span> corresponding to <span class="math inline">\(\lambda\)</span>.</p>
+<p>This proof allows us to formally define the concept of an eigenspace.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.2: Eigenspace
+</div>
+<div class="Stext">
+Let <span class="math inline">\(\A\)</span> be a square matrix and let <span class="math inline">\(\lambda\)</span> be an eigenvalue of <span class="math inline">\(\A\)</span>. The set of all eigenvectors corresponding to <span class="math inline">\(\lambda\)</span>, together with the zero vector, is called the <strong>eigenspace</strong> of <span class="math inline">\(\lambda\)</span>. The number of basis vectors required to form the eigenspace is called the <strong>geometric multiplicity</strong> of <span class="math inline">\(\lambda\)</span>.
+</div>
+</div>
+</div>
+<p>Now, let’s attempt the eigenvalue problem from the other side. Given an eigenvalue, we will find the corresponding eigenspace in Example <a href="#ex-eig3"><strong>??</strong></a>.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.2: Eigenvalues and Eigenvectors
+</div>
+<div class="S2text">
+<p>Show that <span class="math inline">\(\lambda=5\)</span> is an eigenvalue of <span class="math inline">\(\A=\pm 1 &amp; 2 \\4&amp;3 \mp\)</span> and determine the eigenspace of <span class="math inline">\(\lambda=5\)</span>.\</p>
+Attempting the problem from this angle requires slightly more work. We want to find a vector <span class="math inline">\(\x\)</span> such that <span class="math inline">\(\A\x=5\x\)</span>. Setting this up, we have:
+<span class="math display">\[\A\x = 5\x.\]</span>
+What we want to do is move both terms to one side and factor out the vector <span class="math inline">\(x\)</span>. In order to do this, we must use an identity matrix, otherwise the equation wouldn’t make sense (we’d be subtracting a constant from a matrix).
+<span class="math display">\[\begin{eqnarray*}
+\A\x-5\x &amp;=&amp; \bo{0}\\
+(\A-5\bo{I})\x &amp;=&amp; \bo{0} \\
+\left( \pm 1 &amp; 2 \\4&amp;3 \mp - \pm 5 &amp; 0 \\ 0 &amp; 5 \mp \right) \pm x_1 \\ x_2 \mp &amp;=&amp; \pm 0 \\0 \mp \\
+\pm -4 &amp; 2\\ 4 &amp; -2 \mp  \pm x_1 \\ x_2 \mp &amp;=&amp; \pm 0 \\0 \mp \\
+\end{eqnarray*}\]</span>
+Clearly, the matrix <span class="math inline">\(\A-\lambda\bo{I}\)</span> is singular (i.e. does not have linearly independent rows/columns). This will always be the case by the definition <span class="math inline">\(\A\x=\lambda\x\)</span>, and is often used as an alternative definition.\
+In order to solve this homogeneous system of equations, we use Gaussian elimination:
+<span class="math display">\[\begin{amatrix}{2} -4 &amp; 2 &amp; 0 \\4 &amp; -2 &amp; 0 \end{amatrix}\longrightarrow\begin{amatrix}{2} 1 &amp; -\frac{1}{2} &amp; 0 \\0 &amp; 0 &amp; 0 \end{amatrix}\]</span>
+This implies that any vector <span class="math inline">\(\x\)</span> for which <span class="math inline">\(x_1-\frac{1}{2}\x_2=0\)</span> satisfies the eigenvector equation. We can pick any such vector, for example <span class="math inline">\(\x=\pm 1\\2\mp\)</span>, and say that the eigenspace of <span class="math inline">\(\lambda=5\)</span> is
+<span class="math display">\[span\left\lbrace\pm 1\\2 \mp\right\rbrace\]</span>
+</div>
+</div>
+</div>
+<p>If we didn’t know either an eigenvalue or eigenvector of <span class="math inline">\(\A\)</span> and instead wanted to find both, we would first find eigenvalues by determining all possible <span class="math inline">\(\lambda\)</span> such that <span class="math inline">\(\A-\lambda\bo{I}\)</span> is singular and then find the associated eigenvectors. There are some tricks which allow us to do this by hand for <span class="math inline">\(2\times 2\)</span> and <span class="math inline">\(3\times 3\)</span> matrices, but after that the computation time is unworthy of the effort. Now that we have a good understanding of how to interpret eigenvalues and eigenvectors algebraically, let’s take a look at some of the things that they can do, starting with one important fact.</p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.3: Eigenvalues and the Trace of a Matrix
+</div>
+<div class="Stext">
+Let <span class="math inline">\(\A\)</span> be an <span class="math inline">\(n\times n\)</span> matrix with eigenvalues <span class="math inline">\(\lambda_1,\lambda_2,\dots,\lambda_n\)</span>. Then the sum of the eigenvalues is equal to the trace of the matrix (recall that the trace of a matrix is the sum of its diagonal elements).
+<span class="math display">\[Trace(\A)=\sum_{i=1}^n \lambda_i.\]</span>
+</div>
+</div>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.3: Trace of Covariance Matrix
+</div>
+<div class="S2text">
+<p>Suppose that we had a collection of <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables, <span class="math inline">\(\x_1,\x_2,\dots,\x_p\)</span>. After centering the data to have zero mean, we can compute the sample variances as:
+<span class="math display">\[var(\x_i)=\frac{1}{n-1}\x_i^T\x_i =\|\x_i\|^2\]</span>
+These variances form the diagonal elements of the sample covariance matrix,
+<span class="math display">\[\ssigma = \frac{1}{n-1}\X^T\X\]</span>
+Thus, the total variance of this data is
+<span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n \|\x_i\|^2 = Trace(\ssigma) = \sum_{i=1}^n \lambda_i.\]</span></p>
+In other words, the sum of the eigenvalues of a covariance matrix provides the total variance in the variables <span class="math inline">\(\x_1,\dots,\x_p\)</span>.
+</div>
+</div>
+</div>
+<div id="diagonalization" class="section level2" number="10.1">
+<h2><span class="header-section-number">10.1</span> Diagonalization</h2>
+<p>Let’s take another look at Example <a href="#ex-eig3"><strong>??</strong></a>. We already showed that <span class="math inline">\(\lambda_1=5\)</span> and <span class="math inline">\(\v_1=\pm 1\\2\mp\)</span> is an eigenpair for the matrix <span class="math inline">\(\A=\pm 1 &amp; 2 \\4&amp;3 \mp\)</span>. You may verify that <span class="math inline">\(\lambda_2=-1\)</span> and <span class="math inline">\(\v_2=\pm 1\\-1 \mp\)</span> is another eigenpair. Suppose we create a matrix of eigenvectors:
+<span class="math display">\[\V=(\v_1,\v_2) = \pm 1&amp;1\\2&amp;-1 \mp\]</span>
+and a diagonal matrix containing the corresponding eigenvalues:
+<span class="math display">\[\D=\pm 5 &amp; 0 \\ 0 &amp; -1 \mp\]</span>
+Then it is easy to verify that <span class="math inline">\(\A\V=\V\D\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+\A\V &amp;=&amp; \pm 1 &amp; 2 \\4&amp;3 \mp \pm 1&amp;1\\2&amp;-1 \mp\\
+        &amp;=&amp; \pm 5&amp;-1\\10&amp;1 \mp\\
+        &amp;=&amp;  \pm 1&amp;1\\2&amp;-1 \mp\pm 5 &amp; 0 \\ 0 &amp; -1 \mp\\
+        &amp;=&amp;\V\D
+\end{eqnarray*}\]</span>
+If the columns of <span class="math inline">\(\V\)</span> are linearly independent, which they are in this case, we can write:
+<span class="math display">\[\V^{-1}\A\V = \D\]</span></p>
+<p>What we have just done is develop a way to transform a matrix <span class="math inline">\(\A\)</span> into a diagonal matrix <span class="math inline">\(\D\)</span>. This is known as <strong>diagonalization.</strong></p>
+<div class="Smain">
+<div class="Scontainer">
+<div class="Stext-header">
+Definition <a href="#0"><strong>??</strong></a>.4: Diagonalizable
+</div>
+<div class="Stext">
+An <span class="math inline">\(n\times n\)</span> matrix <span class="math inline">\(\A\)</span> is said to be <strong>diagonalizable</strong> if there exists an invertible matrix <span class="math inline">\(\bP\)</span> and a diagonal matrix <span class="math inline">\(\D\)</span> such that
+<span class="math display">\[\bP^{-1}\A\bP=\D\]</span>
+This is possible if and only if the matrix <span class="math inline">\(\A\)</span> has <span class="math inline">\(n\)</span> linearly independent eigenvectors (known as a complete set of eigenvectors). The matrix <span class="math inline">\(\bP\)</span> is then the matrix of eigenvectors and the matrix <span class="math inline">\(\D\)</span> contains the corresponding eigenvalues on the diagonal.
+</div>
+</div>
+</div>
+<p>Determining whether or not a matrix <span class="math inline">\(\A_{n\times n}\)</span> is diagonalizable is a little tricky. Having <span class="math inline">\(rank(\A)=n\)</span> is <em>not</em> a sufficient condition for having <span class="math inline">\(n\)</span> linearly independent eigenvectors. The following matrix stands as a counter example:
+<span class="math display">\[\A=\pm -3&amp; 1 &amp; -3 \\20&amp; 3 &amp; 10 \\2&amp; -2 &amp; 4 \mp\]</span>
+This matrix has full rank but only two linearly independent eigenvectors. Fortunately, for our primary application of diagonalization, we will be dealing with a symmetric matrix, which can always be diagonalized. In fact, symmetric matrices have an additional property which makes this diagonalization particularly nice, as we will see in Chapter <a href="pca.html#pca">12</a>.</p>
+</div>
+<div id="geometric-interpretation-of-eigenvalues-and-eigenvectors" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Geometric Interpretation of Eigenvalues and Eigenvectors</h2>
+<p>Since any scalar multiple of an eigenvector is still an eigenvector, let’s consider for the present discussion unit eigenvectors <span class="math inline">\(\x\)</span> of a square matrix <span class="math inline">\(\A\)</span> - those with length <span class="math inline">\(\|\x\|=1\)</span>. By the definition, we know that
+<span class="math display">\[\A\x = \lambda\x\]</span>
+We know that geometrically, if we multiply <span class="math inline">\(\x\)</span> by <span class="math inline">\(\A\)</span>, the resulting vector points in the same direction as <span class="math inline">\(\x\)</span>. Geometrically, it turns out that multiplying the unit circle or unit sphere by a matrix <span class="math inline">\(\A\)</span> carves out an ellipse, or an ellipsoid. We can see eigenvectors visually by watching how multiplication by a matrix <span class="math inline">\(\A\)</span> changes the unit vectors. Figure <a href="#eigenarrows"><strong>??</strong></a> illustrates this. The blue arrows represent (a sampling of) the unit circle, all vectors <span class="math inline">\(\x\)</span> for which <span class="math inline">\(\|\x\|=1\)</span>. The red arrows represent the image of the blue arrows after multiplication by <span class="math inline">\(\A\)</span>, or <span class="math inline">\(\A\x\)</span> for each vector <span class="math inline">\(\x\)</span>. We can see how almost every vector changes direction when multiplied by <span class="math inline">\(\A\)</span>, except the eigenvector directions which are marked in black. Such a picture provides a nice geometrical interpretation of eigenvectors for a general matrix, but we will see in Chapter <a href="pca.html#pca">12</a> just how powerful these eigenvector directions are when we look at symmetric matrix.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-189"></span>
+<img src="figs/eigenarrows.jpg" alt="Visualizing eigenvectors (in black) using the image (in red) of the unit sphere (in blue) after multiplication by \(\A\)." width="36%" />
+<p class="caption">
+Figure 10.1: Visualizing eigenvectors (in black) using the image (in red) of the unit sphere (in blue) after multiplication by <span class="math inline">\(\A\)</span>.
+</p>
+</div>
+</div>
+<div id="exercises-5" class="section level2" number="10.3">
+<h2><span class="header-section-number">10.3</span> Exercises</h2>
+<ol>
+<li>
+Show that <span class="math inline">\(\v\)</span> is an eigenvector of <span class="math inline">\(\A\)</span> and find the corresponding eigenvalue:
+<ol style="list-style-type:lower-alpha">
+<li>
+$= &amp; 2 \2 &amp; 1 \-3 $
+<li>
+$= &amp; 1 \6 &amp; 0 \-2 $
+<li>
+$= &amp; -2 \5 &amp; -7 \2 $
+</ol>
+<li>
+Show that <span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(\A\)</span> and list two eigenvectors corresponding to this eigenvalue:
+<ol style="list-style-type:lower-alpha">
+<li>
+<span class="math inline">\(\A=\pm 0&amp; 4\\-1&amp;5\mp \quad \lambda = 4\)</span>
+<li>
+<span class="math inline">\(\A=\pm 0&amp; 4\\-1&amp;5\mp \quad \lambda = 1\)</span>
+</ol>
+<li>
+Based on the eigenvectors you found in exercises 2, can the matrix <span class="math inline">\(\A\)</span> be diagonalized? Why or why not? If diagonalization is possible, explain how it would be done.
+<li>
+Can a rectangular matrix have eigenvalues/eigenvectors?
+</ol>
 
 </div>
 </div>
@@ -472,8 +616,8 @@ with examples in R and Python</p></h1>
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="basis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="norms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -504,7 +648,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/027-eigen.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -512,7 +656,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/027-eigen.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

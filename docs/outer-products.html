@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Preface |  Linear Algebra for Data Science   with examples in R and Python</title>
+  <title>Chapter 14 Outer Products |  Linear Algebra for Data Science   with examples in R and Python</title>
   <meta name="description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Preface |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 14 Outer Products |  Linear Algebra for Data Science   with examples in R and Python" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="MSALogo.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Preface |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 14 Outer Products |  Linear Algebra for Data Science   with examples in R and Python" />
   
   <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
   <meta name="twitter:image" content="MSALogo.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="inner-products.html"/>
+<link rel="next" href="exercises-6.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -345,50 +345,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="12.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>12.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="12.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>12.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="12.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>12.3</b> Inner Products</a></li>
-<li class="chapter" data-level="12.4" data-path="norms.html"><a href="norms.html#orthogonality"><i class="fa fa-check"></i><b>12.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="12.5" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>12.5</b> Outer Products</a></li>
-<li class="chapter" data-level="12.6" data-path="norms.html"><a href="norms.html#exercises-6"><i class="fa fa-check"></i><b>12.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
+<li class="chapter" data-level="13" data-path="inner-products.html"><a href="inner-products.html"><i class="fa fa-check"></i><b>13</b> Inner Products</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.1" data-path="inner-products.html"><a href="inner-products.html#orthogonality"><i class="fa fa-check"></i><b>13.1</b> Orthogonality</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
+<li class="chapter" data-level="14" data-path="outer-products.html"><a href="outer-products.html"><i class="fa fa-check"></i><b>14</b> Outer Products</a></li>
+<li class="chapter" data-level="15" data-path="exercises-6.html"><a href="exercises-6.html"><i class="fa fa-check"></i><b>15</b> Exercises</a></li>
+<li class="chapter" data-level="16" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>16</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="14.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>14.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="16.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>16.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="16.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>16.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
+<li class="chapter" data-level="17" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>17</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="15.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>15.5</b> Image Compression</a></li>
+<li class="chapter" data-level="17.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>17.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="17.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>17.2</b> PCA as SVD</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>16</b> Factor Analysis</a>
+<li class="chapter" data-level="18" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>18</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>16.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="16.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>16.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="16.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>16.3</b> Communalities</a></li>
-<li class="chapter" data-level="16.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>16.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="16.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>16.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="18.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>18.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="18.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>18.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="18.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>18.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="18.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>18.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="18.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>18.5</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
+<li class="chapter" data-level="19" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>17.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="17.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>17.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="19.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>19.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="19.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>19.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="19.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>19.3</b> Communalities</a></li>
+<li class="chapter" data-level="19.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>19.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="19.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>19.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>18</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="20" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>20</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="20.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>20.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="20.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>20.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>19</b> Social Network Analysis</a>
+<li class="chapter" data-level="21" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>21</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="19.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="21.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>21.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>22</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>22.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="22.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>22.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -412,48 +414,58 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preface" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Preface</h1>
-<p>This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Factor Analysis, Collaborative Filtering, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we will need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is an introduction to the most important definitions and concepts that are needed to understand and effectively implement these important data mining methodologies.</p>
-<div id="structure-of-the-book" class="section level2 unnumbered">
-<h2>Structure of the book</h2>
-<p>This project is the fusion of a traditional textbook (with definitions, theorems, examples and exercises) with a collection of interactive programming exercises (designed for in-class demonstration) that was engineered to weave practicality and applied problem solving into the curriculum right from the start.</p>
-<p>This is a work in progress; please check back frequently for updates.</p>
+<div id="outer-products" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Outer Products</h1>
+<p>The outer product of two vectors <span class="math inline">\(\x \in \Re^m\)</span> and <span class="math inline">\(\y \in \Re^n\)</span>, written <span class="math inline">\(\x\y^T\)</span>, is an $mn $ matrix with rank 1. To see this basic fact, lets just look at an example.</p>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.9: Outer Product
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the author</h2>
-<p>Shaina Race Bennett earned her PhD in Operations Research from NC State in 2014. She is a teaching assistant professor at the Institute for Advanced Analytics.</p>
+<div class="S2text">
+Let <span class="math inline">\(\x=\pm 1\\2\\3\\4\mp\)</span> and let <span class="math inline">\(\y=\pm2\\1\\3\mp\)</span>. Then the outer product of <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is:
+<span class="math display">\[\x\y^T = \pm 1\\2\\3\\4\mp \pm 2&amp;1&amp;3\mp = \pm 2&amp;1&amp;3\\4&amp;2&amp;6\\6&amp;3&amp;9\\8&amp;4&amp;12 \mp\]</span>
+which clearly has rank 1. It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.
 </div>
-<div id="acknowledgements" class="section level2 unnumbered">
-<h2>Acknowledgements</h2>
-<p>The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most <em>thorough</em> and complete proof-based presentation of the material in this book. If you’re looking for more details, I strongly suggest the book that contains all of them:</p>
-<p>Meyer, Carl D. <em>Matrix analysis and applied linear algebra</em>. Vol. 71. Siam, 2000.</p>
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-<!-- ```{thm title='Boom. A Theorem.', num=thmcounter} -->
-<!-- Boom I just made a custom language interpreter chunk. can I number it though -->
-<!-- ``` -->
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-<!-- ```{def title='Boom again. A Definition too.', num=thmcounter} -->
-<!-- I made a definition too, and I numbered them.  -->
-<!-- Check! -->
-<!-- ``` -->
-<!-- ```{r echo=F} -->
-<!-- library(knitr) -->
-<!-- ``` -->
-<!-- ## ermehgerd -->
-<!-- ```{r,echo=F}  -->
-<!-- excounter=excounter+1 -->
-<!-- ``` -->
-<!-- ```{ex name = 'Cool Example, Girl', num=excounter} -->
-<!-- Insert-mind-blowing-example-text. -->
-<!-- Maybe an image for Good Measure: -->
-<!--   <img src="_book/iaaicon.png" width="140"> -->
-<!-- ``` -->
-
+</div>
+</div>
+<div class="S2main">
+<div class="S2container">
+<div class="S2text-header">
+Example <a href="#0"><strong>??</strong></a>.9: Centering Data with an Outer Product
+</div>
+<div class="S2text">
+<p>As we’ve seen in previous examples, many statistical formulas involve the <em>centered</em> data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals’ heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:</p>
+<p><span class="math display">\[\A=\bm{ ~ &amp; h &amp; w &amp; s \cr 
+            person_1 &amp; 60 &amp; 102 &amp; 5.5 \cr
+            person_2 &amp; 72 &amp; 170 &amp;  7.5 \cr
+            person_3 &amp; 66 &amp; 110 &amp; 6.0\cr
+            person_4 &amp; 69 &amp; 128 &amp; 6.5\cr
+            person_5 &amp; 63 &amp; 130 &amp;  7.0\cr}\]</span></p>
+<p>The average values for height, weight, and wrist size are as follows:
+<span class="math display">\[\begin{eqnarray}
+\bar{h}&amp;=&amp;66\\
+\bar{w}&amp;=&amp;128\\
+\bar{s}&amp;=&amp;6.5
+\end{eqnarray}\]</span></p>
+<p>To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:</p>
+<p><span class="math display">\[\pm 60 &amp; 102 &amp; 5.5 \cr
+             72 &amp; 170 &amp;  7.5 \cr
+            66 &amp; 110 &amp; 6.0\cr
+            69 &amp; 128 &amp; 6.5\cr
+            63 &amp; 130 &amp;  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 &amp; 128 &amp; 6.5 \mp\]</span>
+<span class="math display">\[= \pm 60 &amp; 102 &amp; 5.5 \cr
+             72 &amp; 170 &amp;  7.5 \cr
+            66 &amp; 110 &amp; 6.0\cr
+            69 &amp; 128 &amp; 6.5\cr
+            63 &amp; 130 &amp;  7.0\cr \mp - \pm  66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \mp\]</span></p>
+<span class="math display">\[= \pm    -6.0000 &amp; -26.0000  &amp; -1.0000\\
+    6.0000 &amp;  42.0000   &amp; 1.0000\\
+         0 &amp; -18.0000 &amp;  -0.5000\\
+    3.0000    &amp;     0       &amp;  0\\
+   -3.0000 &amp;   2.0000 &amp;   0.5000 \mp\]</span>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -461,8 +473,8 @@ with examples in R and Python</p></a>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="inner-products.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercises-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -493,7 +505,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/029-norms.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -501,7 +513,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/index.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/029-norms.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],
