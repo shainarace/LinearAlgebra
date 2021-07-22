@@ -5,9 +5,9 @@ bookdown::gitbook:
     toc:
       scroll_highlight: true
       before: |
-        <li><center><img src="figs/iaaicon.png" width="50"></center></li>
+        <li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
         <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-        <li><center><strong> with examples in R and Python </strong></center></li>
+        <li><center><strong> with examples in R </strong></center></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
@@ -16,43 +16,43 @@ bookdown::gitbook:
   search: yes
   sharing:
     all: ['facebook', 'twitter', 'linkedin']
-bookdown::pdf_book:
-  toc: yes
-  css: toc.css
-  split_by: chapter
-  includes:
-    in_header: 'preamble.tex'
-  latex_engine: xelatex
-  citation_package: natbib
-  keep_tex: yes
-bookdown::epub_book: default
-bookdown::tufte_html_book:
-  toc: true
-  toc_float: true
-  toc_depth: 1
-  css: toc.css
-  split_by: chapter
-  includes:
-    in_header: 'preamble.tex'
-bookdown::html_document:
-  toc: true
-  toc_float: true
-  toc_depth: 1
-  split_by: chapter
-  css: ["toc.css" ,"style.css"]
-  config:
-    toc:
-      before: |
-        <li><center><img src="_book/iaaicon.png" width="70"></center></li>
-        <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-        <li><center><strong> with examples in R and Python </strong></center></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
-    download: ["pdf", "epub"]
-  includes:
-    in_header:  mathjax-header.html
-  theme: cerulean
-pdf_document:
-  extra_dependencies: ["fancyvrb","tikz","tcolorbox","capt-of","mathrsfs","algorithm"]
+# bookdown::pdf_book:
+#   toc: yes
+#   css: toc.css
+#   split_by: chapter
+#   includes:
+#     in_header: 'preamble.tex'
+#   latex_engine: xelatex
+#   citation_package: natbib
+#   keep_tex: yes
+# bookdown::epub_book: default
+# bookdown::tufte_html_book:
+#   toc: true
+#   toc_float: true
+#   toc_depth: 1
+#   css: toc.css
+#   split_by: chapter
+#   includes:
+#     in_header: 'preamble.tex'
+# bookdown::html_document:
+#   toc: true
+#   toc_float: true
+#   toc_depth: 1
+#   split_by: chapter
+#   css: ["toc.css" ,"style.css"]
+#   config:
+#     toc:
+#       before: |
+#         <li><center><img src="_book/iaaicon.png" width="70"></center></li>
+#         <li><center><strong> Linear Algebra for Data Science </strong></center></li>
+#         <li><center><strong> with examples in R </strong></center></li>
+#       after: |
+#         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+#     edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+#     download: ["pdf", "epub"]
+#   includes:
+#     in_header:  mathjax-header.html
+#   theme: cerulean
+# pdf_document:
+#   extra_dependencies: ["fancyvrb","tikz","tcolorbox","capt-of","mathrsfs","algorithm"]
 

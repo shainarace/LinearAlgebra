@@ -1,0 +1,114 @@
+# The Singular Value Decomposition (SVD) {#svd}
+
+The Singular Value Decomposition (SVD) is one of the most important concepts in applied mathematics. It is used for a number of application including dimension reduction and data analysis. Principal Components Analysis (PCA) is a special case of the SVD. Let's start with the formal definition, and then see how PCA relates to that definition.
+
+:::{.definition name='Singular Value Decomposition' #svddef}
+For any $m\times n$ matrix $\A$ with $rank(\A)=r$, there are orthogonal matrices $\U_{m\times m}$ and $\V_{n\times n}$ and a diagonal matrix $\D_{r\times r}=diag(\sigma_1,\sigma_2,\dots,\sigma_r)$ such that
+\begin{equation}
+(\#eq:svd)
+\A = \U \underbrace{\pm \D & \bo{0} \\\bo{0}&\bo{0} \mp}_{\text{$m\times n$}} \V^T \quad \mbox{with}\quad \sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_r\geq 0
+\end{equation}
+The $\sigma_i$'s are called the nonzero \textbf{singular values} of $\A$. (When $r<p=\min\{m,n\}$ (i.e. when $\A$ is not full-rank), $\A$ is said to have an additional $p-r$ zero singular values). This factorization is called a \textbf{singular value decomposition} of $\A$, and the columns of $\U$ and $\V$ are called the left- and right-hand \textbf{singular vectors} for $\A$, respectively.\\
+
+\textbf{Properties of the SVD}
+1. The left-hand singular vectors are a set of orthonormal eigenvectors for $\A\A^T$.\
+2. The right-hand singular vectors are a set of orthonormal eigenvectors for $\A^T\A$.\
+3. The singular values are the square roots of the eigenvalues for $\A^T\A \mbox{  and  } \A\A^T$, as these matrices have the same eigenvalues.\
+:::
+
+When we studied PCA, one of the goals was to find the new coordinates, or \textit{scores}, of the data in the principal components basis. If our original (centered or standardized) data was contained in the matrix $\X$ and the eigenvectors of the covariance/correlation matrix ($\X^T\X$) were columns of a matrix $\V$, then to find the scores (call these $\mathbf{S}$) of the observations on the eigenvectors we used the following equation (which is the transpose of Equation \@ref(eq:cpc2)):
+$$\X=\mathbf{S}\V^T.$$
+This equation mimics Equation \@ref(eq:svd) because the matrix $\V^T$ in Equation \ref(eq:svd) is also a matrix of eigenvectors for $\A^T\A$. This means that the principal component scores $\mathbf{S}$ are actually a set of unit eigenvectors for $\A\A^T$ scaled by the singular values in $\D$:
+$$\mathbf{S}=\U \pm \D & \bo{0} \\ \bo{0}&\bo{0} \mp .$$
+
+## Resolving a Matrix into Components
+
+One of the primary goals of the singular value decomposition is to resolve the data in $\A$ into $r$ mutually orthogonal components by writing the matrix factorization as a sum of outer products using the corresponding columns of $\U$ and rows of $\V^T$:
+
+$$\A = \U \pm \D & \bo{0} \\\bo{0}&\bo{0} \mp\V^T = \pm \u_1 & \u_2 & \dots &\u_m \mp \pm \sigma_1 & 0 & \dots & 0 & 0 \\ 0 & \ddots & 0 & \vdots & 0 \\ \vdots & 0& \sigma_r  & 0 & \vdots \\ 0 & 0 & 0 & 0 &0\\ \vdots & \vdots & \vdots & \vdots & \vdots\\ 0 & 0 & 0 & 0 &0 \mp \pm \v_1^T \\ \v_2^T \\ \vdots \\ \v_n^T \mp$$
+
+$$= \sigma_1\u_1\v_1^T+\sigma_2\u_2\v_2^T+\dots+\sigma_r\u_r\v_r^T.$$
+$$\sigma_1 \geq \sigma_2 \geq \dots \sigma_r$$
+For simplicity, let $\Z_i=\u_i\v_i^T$ act as basis matrices for this expansion, so we have
+\begin{equation}
+(\#eq:svdsum)
+\A=\sum_{i=1}^r \sigma_i \Z_i.
+\end{equation}
+
+This representation can be regarded as a Fourier expansion. The coefficient (singular value) $\sigma_i$ can be interpreted as the proportion of $\A$ lying in the ``direction" of $\Z_i$. When $\sigma_i$ is small, omitting that term from the expansion will cause only a small amount of the information in $\A$ to be lost. This fact has important consequences for compression and noise reduction.
+
+##Data Compression
+
+We've already seen how PCA can be used to reduce the dimensions of our data while keeping the most amount of variance. The way this is done is by simply ignoring those components for which the proportion of variance is small. Supposing we keep $k$ principal components, this amounts to truncating the sum in Equation \@ref(eq:svdsum) after $k$ terms:
+\begin{equation}
+(\#eq:truncsvd)
+\A \approx \sum_{i=1}^{k} \sigma_i \Z_i.
+\end{equation}
+As it turns out, this truncation has important consequences in many applications. One example is that of image compression. An image is simply an array of pixels. Supposing the image size is $m$ pixels tall by $n$ pixels wide, we can capture this information in an $m\times n$ matrix if the image is in grayscale, or an $m\times 3n$ matrix for a [r,g,b] color image (we'd need 3 values for each pixel to recreate the pixel's color). These matrices can get very large (a 6 megapixel photo is 6 million pixels). 
+
+Rather than store the entire matrix, we can store an approximation to the matrix using only a few (well, more than a \textit{few}) singular values and singular vectors.
+
+This is the basis of image compression. An approximated photo will not be as crisp as the original - some information will be lost - but most of the time we can store much less than the original matrix and still get a good depiction of the image.
+
+## Noise Reduction
+Many applications arise where the relevant information contained in a matrix is contaminated by a certain level of noise. This is particularly common with video and audio signals, but also arises in text data and other types of (usually high dimensional) data. The \textbf{truncated SVD} (Equation \@ref(eq:truncsvd)) can actually reduce the amount of noise in data and increase the overall \textbf{signal-to-noise} ratio under certain conditions.
+
+Let's suppose, for instance, that our matrix $\A_{m\times n}$ contains data which is contaminated by noise.  If that noise is assumed to be random (or nondirectional) in the sense that the noise is distributed more or less uniformly across the components $\Z_i$, then there is just as much noise ``in the direction'' of one $\Z_i$ as there is in the other. If the amount of noise along each direction is approximately the same, and the $\sigma_i$'s tell us how much (relevant) information in $\A$ is directed along each component $\Z_i$, then it must be that the ratio of ``signal'' (relevant information) to noise is decreasing across the ordered components, since
+$$\sigma_1 \geq \sigma_2\geq \dots \geq \sigma_r$$
+implies that the signal is greater in earlier components. So letting $SNR(\sigma_i\Z_i)$ denote the signal-to-noise ratio of each component, we have
+$$SNR(\sigma_1\Z_1) \geq SNR(\sigma_2\Z_2)\geq \dots \geq SNR(\sigma_r\Z_r)$$
+
+This explains why the \textbf{truncated SVD}, 
+$$\A \approx \sum_{i=1}^{k} \sigma_i \Z_i \quad \mbox{where}\quad k<r$$
+can, in many scenarios, filter out some of the noise without losing much of the significant information in $\A$.
+
+## Latent Semantic Indexing
+Text mining is another area where the SVD is used heavily. In text mining, our data structure is generally known as a \textbf{Term-Document Matrix}.  The \textit{documents} are any individual pieces of text that we wish to analyze, cluster, summarize or discover topics from. They could be sentences, abstracts, webpages, or social media updates. The \textit{terms} are the words contained in these documents. The term-document matrix represents what's called the ``bag-of-words'' approach - the order of the words is removed and the data becomes unstructured in the sense that each document is represented by the words it contains, not the order or context in which they appear. The $(i,j)$ entry in this matrix is the number of times term $j$ appears in document $i$.
+
+:::{.definition name='Term-Document Matrix' #tdm}
+ Let $m$ be the number of documents in a collection and $n$ be the number of terms appearing in that collection, then we create our \textbf{term-document matrix} $\A$ as follows:
+\begin{equation}
+    \begin{array}{ccc}
+        & & \hbox{term 1 \; \; \; term $j$ \; term $n$} \\
+        \A_{m\times n} = & \begin{array}{c}
+            \hbox{Doc 1} \\
+            \\
+            \\
+            \hbox{Doc $i$} \\
+            \\
+            \hbox{Doc $m$} \\
+        \end{array} &
+        \left(
+        \begin{array}{ccccccc}
+            & & & |&  & & \\
+            & & & |&  & & \\
+            & & & |&  & & \\
+            & - & - &f_{ij}  &  & & \\
+            & & & & & & \\
+            & & & & & & \\
+        \end{array}
+        \right)
+    \end{array}
+\nonumber
+\end{equation}
+where $f_{ij}$ is the frequency of term $j$ in document $i$.  A \textbf{binary} term-document matrix will simply have $\A_{ij}=1$ if term $j$ is contained in document $i$.
+:::
+Term-document matrices tend to be large and sparse. Term-weighting schemes are often used to downplay the effect of commonly used words and bolster the effect of rare but semantically important words.  The most popular weighting method is known as  __Term Frequency-Inverse Document Frequency (TF-IDF)__. For this method, the raw term-frequencies $f_{ij}$ in the matrix $\A$ are multiplied by global weights (inverse document frequencies), $w_j$, for each term. These weights reflect the commonality of each term across the entire collection. The inverse document frequency of term $i$ is:
+$$w_j = \log \left( \frac{\mbox{total \# of documents}}{\mbox{\# documents containing term  } j} \right)$$
+To put this weight in perspective for a collection of $n=10,000$ documents we have $0\leq w_j \leq 9.2$, where $w_j=0$ means the word is contained in every document (i.e. it's not important semantically) and $w_j=9.2$ means the word is contained in only 1 document (i.e. it's quite important). The document vectors are often normalized to have unit 2-norm, since their directions (not their lengths) in the term-space is what characterizes them semantically.\\
+
+
+The noise-reduction property of the SVD was extended to text processing in 1990 by Susan Dumais et al, who named the effect \textit{Latent Semantic Indexing (LSI)}. LSI involves the singular value decomposition of the term-document matrix defined in Definition \@ref(def:tdm). In other words, it is like a principal components analysis using the unscaled, uncentered inner-product matrix $\A^T\A$. If the documents are normalized to have unit length, this is a matrix of \textbf{cosine similarities} (see Chapter \@ref(norms)). Cosine similarity is the most common measure of similarity between documents for text mining. If the term-document matrix is binary, this is often called the co-occurrence matrix because each entry gives the number of times two words occur in the same document.
+
+
+ It certainly seems logical to view text data in this context as it contains both an informative signal and semantic noise.  LSI quickly grew roots in the information retrieval community, where it is often used for query processing. The idea is to remove semantic noise, due to variation and ambiguity in vocabulary and presentation style, without losing significant amounts of information. For example, a human may not differentiate between the words ``car'' and ``automobile'', but indeed the words will become two separate entities in the raw term-document matrix.  The main idea in LSI is that the realignment of the data into fewer directions should force related documents (like those containing ``car'' and ``automobile'') closer together in an angular sense, thus revealing latent semantic connections.
+ 
+Purveyors of LSI suggest that the use of the Singular Value Decomposition to project the documents into a lower-dimensional space results in a representation which reflects the major associative patterns of the data while ignoring less important influences.  This projection is done with the simple truncation of the SVD shown in Equation \@ref(eq:truncsvd). 
+
+As we have seen with other types of data, the very nature of dimension reduction makes possible for two documents with similar semantic properties to be mapped closer together. Unfortunately, the mixture of signs (positive and negative) in the singular vectors (think principal components) makes the decomposition difficult to interpret.  While the major claims of LSI are legitimate, this lack of interpretability is still conceptually problematic for some folks. In order to make this point as clear as possible, consider the original "term basis" representation for the data, where each document (from a collection containing $m$ total terms in the dictionary) could be written as:
+$$\A_j = \sum_{i=1}^{m} f_{ij}\e_i$$
+where $f_{ij}$ is the frequency of term $i$ in the document, and $\e_i$ is the $i^{th}$ column of the $m\times m$ identity matrix. The truncated SVD gives us a new set of coordinates (scores) and basis vectors (principal component features):
+$$\A_j \approx \sum_{i=1}^r \alpha_i \u_i$$
+but the features $\u_i$ live in the term space, and thus ought to be interpretable as a linear combinations of the original "term basis." However the linear combinations, having both positive and negative coefficients, tends to be semantically obscure in practice - These new features do not often form meaningful \textit{topics} for the text, although they often do organize in a meaningful way as we will demonstrate. 
+
+

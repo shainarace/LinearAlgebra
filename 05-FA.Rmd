@@ -1,11 +1,5 @@
 # Factor Analysis {#fa}
 
-```{r, echo=F}
-thmcounter=0
-excounter=0
-cid='fa'
-```
-
 Factor Analysis is about looking for underlying _relationships_ or _associations_.  In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some _latent_ factor, that is the individual's _quantitative reasoning_. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.
 
 Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will ``figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.
@@ -94,7 +88,7 @@ Take for example the SAS output for factor analysis on the Iris dataset shown in
 
 (ref:factorOUT) SAS output for PROC FACTOR using Iris Dataset
 
-```{r fig=T, fig.width=200, echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
+```{r fig=T, fig.width=400, echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
 knitr::include_graphics('figs/factorOUT.png')
 ```
 

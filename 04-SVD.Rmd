@@ -1,10 +1,10 @@
+# Applications of SVD
+
+## Latent Semantic Indexing
+
+
 ## Image Compression {#rappasvd}
 
-```{r, echo=F}
-thmcounter=0
-excounter=0
-cid='rappasvd'
-```
 
 ### Image data in R
 

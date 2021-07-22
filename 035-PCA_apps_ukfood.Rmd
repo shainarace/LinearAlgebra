@@ -8,7 +8,6 @@ cid='pcaapp'
  Principal components have a number of applications across many areas of statistics. In the next sections, we will explore their usefulness in the context of dimension reduction. In Chapter \ref{advanced} we will look at how PCA is used to solve the issue of multicollinearity in biased regression.
 
 
-
 ## Dimension reduction
 
 It is quite common for an analyst to have too many variables. There are two different solutions to this problem:

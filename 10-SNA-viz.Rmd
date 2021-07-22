@@ -9,7 +9,7 @@ We'll use the popular ``igraph`` package to explore the student slack network in
 
 ```{r , results=F}
 library(igraph)
-load('SNA/slackanon2021.RData')
+load('LAdata/slackanon2021.RData')
 ```
 
 ```{r}
@@ -158,6 +158,8 @@ Once we have our data in the right format it's easy to create the force-directed
 
 ### Creating an Interactive Visualization with ``networkD3``
 
+The following visualization is interactive! Try it by hovering on or dragging a node.
+
 ```{r }
 colors = JS('d3.scaleOrdinal().domain(["b", "o"]).range(["#0000ff", "#ffa500"])')
 
@@ -171,7 +173,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
 
 Exploration of the resulting visualization is likely to be smoother in .html, so let's export this visualization to a file with ``saveNetwork()``. 
 
-```{r }
+```{r eval=F}
 j=forceNetwork(Links=edges, Nodes=nodes, Source = "source",
                Target = "target", NodeID="name", Group="Cohort",
                fontSize=12, opacity = 0.8, zoom=T, legend=T)

@@ -1,5 +1,6 @@
 # Introduction {#intro}
 
+
 ```{r, echo=F}
 thmcounter=0
 excounter=0
@@ -7,7 +8,7 @@ cid='intro'
 ```
 ## What is Linear Algebra?
 
-At its heart, Linear Algebra is the study of **linear functions**. The term **linear** should be understood to mean {straight} or {flat}. A  line on the two dimensional coordinate plane, written $$y=mx+b$$ represents a linear equation - the set of points $(x,y)$ satisfying this equation form a straight line. On the other hand, a quadratic equation like $$y=ax^2+bx+c$$ is *nonlinear* - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube $(x,y,z)$) is written as
+At its heart, Linear Algebra is the study of **linear functions**. The term **linear** should be understood to mean _straight_ or _flat_. A  line on the two dimensional coordinate plane, written $$y=mx+b$$ represents a linear equation - the set of points $(x,y)$ satisfying this equation form a straight line. On the other hand, a quadratic equation like $$y=ax^2+bx+c$$ is *nonlinear* - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube $(x,y,z)$) is written as
 $$ax+by+cz=d.$$
 This is also considered a linear equation - the set of points $(x,y,z)$ satisfying this equation form a flat surface (a plane). These are the types of equations we will see in this course. We will not see equations like:
 $$x^2+y^2+3z=10 \quad \mbox{or} \quad 2xy+\sqrt{z}+\frac{1}{x}=1 \quad \mbox{or} \quad \log(x-y)+e^x=0$$
@@ -63,20 +64,14 @@ In this text, when we denote a matrix, we will always use a bold capital letter 
 
 ### Dimension/Size of a Matrix
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def id='def-dim', title='Dimension/Size of a Matrix', num=thmcounter, cid=cid}
+:::{.definition #dim name='Dimension/Size of a Matrix'}
 The **dimension** of a matrix is the number of rows and number of columns in the matrix. This is sometimes referred to as the **size** of the matrix. We say a matrix in $m\times n$ if it has $m$ rows and $n$ columns. If $\A$ is a matrix, we might specify the dimensions of $\A$ with a subscript: $\A_{m\times n}$ should be read _$\A$ is an $m\times n$ matrix_.
 
 An $n\times n$ matrix is called a **square matrix** because it has the same number of rows and columns. A matrix without this characteristic is called a **rectangular matrix.**
-```
+:::
 
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Dimensions of a Matrix', num=excounter, cid=cid}
+:::{.example name='Dimensions of a Matrix' #dimensions}
 Consider the data matrix presented previously, containing observations on the two variables *Credit Score* and *Income*:
 
 $$
@@ -90,19 +85,19 @@ $$
 $$
 
 The dimension of the matrix $\A$ is $6\times 2$ because $\A$ has 6 rows and 2 columns. Thus when referring to $\A$ we might write $\A_{6\times 2}$ when the size is important. Note that the number of rows _always} comes first when specifying the size of a matrix!
-```
+:::
 
 
-```{exer title='Determining dimension of a matrix', cid=cid}
+:::{.exercise name='Determining dimension of a matrix' #dimensions}
 For the following matrices, determine the dimension:
 
 $$\bo{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) \quad \bo{C} = \left(\begin{matrix} .01&.5&1.6&1.7\\ .1&3.5&4&2\\.61&.55&.46&.17\cr1.2&1.5&1.6&1\cr.31&.35&1.3&2.3\\2.3&3.5&.06&.7\\.3&.2&2.1&1.8\end{matrix}\right) \quad \bo{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)$$
 \vspace{1cm}
-```
+:::
 
 ### $(i,j)$ Notation
 
-Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example \@ref(ex:dim) above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely _identifiers_. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index $i=\{1,2,3,4,5,6\}$ that corresponds to a row of the matrix for every person. As long as we don't reorder the rows of our matrix, we will know that the correspondence is as follows:
+Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example \@ref(exm:dimensions) above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely _identifiers_. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index $i=\{1,2,3,4,5,6\}$ that corresponds to a row of the matrix for every person. As long as we don't reorder the rows of our matrix, we will know that the correspondence is as follows:
 $$\left\lbrace \begin{array}{c}
 row 1\\ row 2\\ row 3\\ row 4\\ row 5\\ row 6
 \end{array}  \right\rbrace \Longleftrightarrow
@@ -113,13 +108,12 @@ John\\ Sam\\ Elena\\ Jim\\ Eric\\ Helen
 So, if I'd like to focus on data about _Eric_ in particular, I'd have to look no further than the $5^{th}$ row of my matrix $\A$.  Similarly, if I want to know the _Credit Scores_ of all individuals, I'd simply focus on the $1^{st}$ column of the matrix. Hence, to find _Eric's Credit Score_, I'd aim my sight on the element of the matrix located in the $5^{th}$ row and $1^{st}$ column of the matrix $\A$.
 
 Now, rather than write an entire sentence each time we want to refer to an individual element or row, we will develop some notation. As a general rule, the letter $i$ is used to index the rows of a matrix and the letter $j$ is used to index the columns.
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Notation for Elements of a Matrix', id='ijnot',num=thmcounter, cid=cid}
+
+:::{.definition name='Notation for Elements of a Matrix' #ijnotdef}
+Two subscripts are used to identify individual elements of a matrix:
 - The element of matrix $\A$ corresponding to _row_ $i$ and _column_ $j$ is written $A_{ij}$
 - The **diagonal** elements of a square matrix are those that have identical row and column indices: $\A_{ii}$
-```
+:::
 
 
 Beyond these basic conventions, there are other common notational tricks that we will become familiar with. The first of these is writing a **partitioned matrix**. We will often want to consider a matrix as a collection of either rows or columns rather than individual elements. As we will see in the future, when we partition matrices in this form, we can view their multiplication in simplified form. This often leads us to a new view of the data which can be helpful for interpretation. 
@@ -149,26 +143,19 @@ $$\bordermatrix{&&&&&}{\blue{\arow{1}} \\\vdots \\ \arow{i} \\ \vdots \\\arow{m}
  a_{i1} & \dots& a_{ij} & \dots & a_{in}\cr
  \vdots & \vdots &  &  & \vdots \cr
   a_{m1} & \dots& \dots & \dots & a_{mn} \mp}$$
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```		
-```{def title='Rows and Columns of a Matrix', id='rowcol',num=thmcounter, cid=cid}
-- To refer to the $k^{th}$ row of $\A$ we will use the notation $\arow{k}$ 
-- Similarly, to refer to the $k^{th}$ column of $\A$ we will use the notation $\acol{k}$.\\
+
+	
+:::{.definition name='Rows and Columns of a Matrix' #rowcol}
+To refer to entire rows or columns, a placeholder $\star$ is often used to represent the idea that we take _all_ rows or columns after narrowing in on a given column or row respectively:
+- To refer to the $k^{th}$ row of $\A$ we will use the notation $\arow{k}$ ("$k^{th} row, _all_ columns") \
+- Similarly, to refer to the $k^{th}$ column of $\A$ we will use the notation $\acol{k}$.\
 
 Often, when there is no confusion about whether we are referring to rows or columns, the above notation will be shortened to simply $\A_k$. In such a scenario it will be made clear from context whether this represents the $k^{th}$ row or $k^{th}$ column. For example, 
 $$\A=( \A_1 | \A_2 | \dots | \A_n )$$
 represents a matrix $\A$ with $n$ columns $\{\A_1,\A_2,\dots,\A_n\}$.
-```
-```{r, echo=F} 
-excounter=excounter+1
-```
+:::
 
-
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Rows, Columns, and Elements of a Matrix',id='ex-ijnot', num=excounter, cid=cid}
+:::{.example name='Rows, Columns, and Elements of a Matrix' #ijnot}
 Consider the following table of data and corresponding matrix:
 \begin{center}
 \begin{tabular}{c|c|c|c}
@@ -193,25 +180,21 @@ Obs. & Height (in.) & Weight (lbs.) & Age \\
 Element $B_{42}=150$ corresponds to the _weight_ (second column) of _observation 4_ (forth row).
 
 The column $$\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)$$ corresponds to the variable _age_ and the row $$\brow{6} = \left(\begin{matrix} 68&165&25 \end{matrix}\right)$$ corresponds to the measurements for _observation 6_.
+:::
 
-```
-
-```{exer title='Rows, Columns, and Elements of a Matrix', id='exer-ijnot'}
+:::{.exercise name='Rows, Columns, and Elements of a Matrix' #ijnot}
 For the matrix
 $$ \bo{L}=\left(\begin{matrix} 3 & -6 & -2\\1 & -4 & 5\\0 & 4 & -5 \end{matrix}\right)$$
 Write the following elements, rows, or columns:
 \vspace{.5cm}
 $$L_{23}= \qquad\qquad L_{31}= \qquad\qquad \bo{L}_{\star 2}= \qquad\qquad \bo{L}_{1 \star}=\qquad\qquad$$
 \vspace{1cm}
-```
+:::
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Equality of Matrices',id='equality',num=thmcounter, cid=cid}
+:::{.definition name='Equality of Matrices' #equality}
 Two matrices are **equal** if and only if they have the same size and all of their corresponding entries are equal. That is,
 $$\A=\B \Longleftrightarrow A_{ij} = B_{ij} \quad \mbox{for all i and j}$$
-```
+:::
 
 
 ### Example: Defining social networks {-}
@@ -287,12 +270,12 @@ You may wonder now why the notation is so particular, but as we get into the sub
 $$\A\x=\b \qquad \mbox{or} \qquad \bo{M}\y=\alpha\y$$
 We have to know what it represents - in the first case, we are dealing with a matrix $\A$, and two vectors $\x$ and $\b$; in the second case we are dealing with a matrix $\bo{M}$, a vector $\y$, and a scalar, $\alpha$.
 
-```{exer title='Matrix, Vector, and Scalar Notation',id= 'matnot'}
+:::{.exercise name='Matrix, Vector, and Scalar Notation' #matnot}
 For the following quantities, indicate whether the notation indicates a Matrix, Scalar, or Vector.
 \vspace{.5cm}
 $$\A \qquad \qquad A_{ij} \qquad \qquad \v \qquad \qquad  p_2 \qquad \qquad  \lambda  \qquad \qquad \p_2$$
 \vspace{.5cm}
-```
+:::
 
 In the previous exercise, we see an important difference: $p_2$ is not bold, and thus is automatically assumed to a scalar, while $\p_2$ is bold and lowercase meaning, despite the subscript, it refers to a vector. 
 
@@ -302,16 +285,13 @@ You are already familiar with the concept of "ordered pairs" or coordinates $(x_
 $$(x_1, x_2, x_3, \dots, x_n).$$
 An $n$-tuple defines a **vector** with the same $n$ elements, and so these two concepts should be thought of interchangeably. The only difference is that the vector has a direction (usually depicted with an arrow), away from the origin and toward the $n$-tuple. This concept is obviously very difficult to visualize when $n>3$, but our mental visualizations of $2-$ and $3-$space will usually be sufficient when we want to consider higher dimensional spaces.
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='2-space', id ='2space',num=excounter, cid=cid}
+:::{.example name='2-space' #twospace}
 Whereas we once thought of ordered pairs as _points_ in space, we can also consider the coordinates as defining _vectors_. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
 <center>
 <img src="figs/2spacePoints.pdf" width=300 /> 
 <img src="figs/2space.pdf" width=300 /> 
 </center>
-```
+:::
 
 You will recall that the symbol $\Re$ is used to denote the set of real numbers. $\Re$ is simply $1$-space. It is a set of vectors with a single element. In this sense any real number, $x$, has a direction: if it is positive, it is to one side of the origin, if it is negative it is to the opposite side. That number, $x$, also has a magnitude: $|x|$ is the distance between $x$ and the origin, 0.
 
@@ -327,12 +307,10 @@ Many (all, really) of the concepts we have previously considered in $2$- or $3$-
 
 ### Transpose {#transpose}
 
-One important transformation we will have to perform on a matrix is to switch the columns into rows. It is not necessary that you see the importance of this transformation right now, but trust that it is something we will need quite frequently. 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Transpose of a Matrix or Vector', id='transpose',num=thmcounter, cid=cid}
-For a given $m\times n$ matrix $\A$ the **transpose** of $\A$, written $\A^T$ (read as ``$\A$-transpose'') in this course  or sometimes written as $\A'$ (read as ``$\A$-prime'') is the $n\times m$ matrix whose rows are the corresponding columns of $\A$.
+One important transformation we will have to perform on a matrix is to switch the columns into rows. It is not necessary that you see the importance of this transformation right now, but trust that it is something we will need quite frequently.
+
+:::{.definition name='Transpose of a Matrix or Vector' #transposedef}
+For a given $m\times n$ matrix $\A$, the **transpose** of $\A$, written $\A^T$ (read as "$\A$-transpose") in this course and sometimes elsewhere denoted as $\A'$ is the $n\times m$ matrix whose rows are the corresponding columns of $\A$.
 
 Thus, if $\A$ is a $3\times 4$ matrix then $\A^T$ is a $4\times 3$ matrix as follows:
 $$\A = \left(\begin{matrix} A_{11} & A_{12} & A_{13} &A_{14}\\ A_{21} & A_{22} & A_{23} &A_{24}\\ A_{31} & A_{32} & A_{33} &A_{34}\end{matrix}\right)
@@ -341,41 +319,30 @@ $$\A = \left(\begin{matrix} A_{11} & A_{12} & A_{13} &A_{14}\\ A_{21} & A_{22} &
 An equivalent way to state this definition is to say that 
 $$(A^T)_{ij} = A_{ji}$$
 _Note: If we transpose the transpose of a matrix, we will get back the original matrix. That is,_ $$(\A^T)^T = \A.$$
-```
+:::
 
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Transpose of a Matrix or Vector', id= 'transpose',num=excounter, cid=cid}
+:::{.example name='Transpose of a Matrix or Vector' #transpose}
 For the following matrices and vectors, determine the transpose:
 $$\B=\left(\begin{matrix} 2 & -3 & -4 \\5&-6&-7\\-8&9&0 \end{matrix}\right) \qquad \bo{M}=\left(\begin{matrix} -1&2\\-3&6\\7&-9\\5&-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)$$
 To find the transpose, we simply create new matrices whose rows are the corresponding columns of each matrix or vector:
 $$\B^T=\left(\begin{matrix} 2 &5& -8\\-3&-6&9\\-4&-7&0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&-3&7&5\\2&6&-9&-1 \end{matrix}\right) $$ $$\x^T = \left(\begin{matrix} 3&-4&5&6 \end{matrix}\right)$$
-```
+:::
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Symmetric Matrix' ,id='sym',num=thmcounter, cid=cid}
+:::{.definition name='Symmetric Matrix' #symdef}
 Defining the matrix transpose allows us to define the notion of a _symmetric matrix_. A matrix $\A$ is called **symmetric** if and only if $$\A=\A^T.$$
 This is equivalent to saying that $\A$ is symmetric if and only if
 $$A_{ij}=A_{ji}.$$
 It should be clear from the definition that in order for $\A$ to be a symmetric matrix, it _must_ be a square matrix - otherwise $\A$ and $\A^T$ would not even have the same size!
-```
+:::
 
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Symmetric Matrices', id='ex-sym',num=excounter, cid=cid}
+:::{.example name='Symmetric Matrices' #sym}
 The following matrix is symmetric because $\B^T = \B$.
 $$\B=\left(\begin{matrix} 2 & 0 & 1 \\0&-6&-7\\1&-7&0 \end{matrix}\right)$$
-```
+:::
 
-
-
-```{exer title='Transpose of a Matrix or Vector', id='transpose'}
+:::{.exercise name='Transpose and Symmetry' #transposesym}
 Given that,
 $$\A=\left(\begin{matrix} 2 & -4 \\-1&2\\3&-6 \end{matrix}\right) \quad \v^T = \left(\begin{matrix} 1 & 0 & -2 & 5\end{matrix}\right) \quad \B=\left(\begin{matrix} B_{11}&B_{12}&B_{13}\\B_{21}&B_{22}&B_{23}\\B_{31}&B_{32}&B_{33}\\B_{41}&B_{42}&B_{43}\end{matrix}\right)$$
  compute the following matrices:
@@ -388,60 +355,47 @@ $$ \v= \qquad \qquad \qquad \qquad \B^T = \qquad \qquad\qquad \qquad $$
 Give an example of a $4\times 4$ symmetric matrix:\\
 \vspace{1.5cm} 
 
-Is a correlation matrix symmetric? (For a hint, see page \pageref{introcorr})\\
+Is a correlation matrix symmetric? (For a hint, see section \@ref(introcorr))\\
 \vspace{.5cm}
-
-```
+:::
 
 ### Trace of a Matrix
 
 Another important matrix operation that will come into play later is the _trace_ of a matrix. The **trace** of a square matrix is the sum of the diagonal elements of this matrix.
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Trace of a Matrix', id= 'trace',num=thmcounter, cid=cid}
+:::{.definition name='Trace of a Matrix' #tracedef}
 For an $n\times n$ square matrix, $\A$, the **trace** of $\A$, written
 $$trace(\A)\,\,\,\mbox{or}\,\,\,tr(\A)$$
 is the sum of the diagonal elements:
 $$tr(\A)=\sum_{i=1}^n A_{ii}$$
 
 The trace of a rectangular matrix is undefined. 
-```
+:::
 
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Trace of a Matrix',id='ex-trace',num=excounter, cid=cid}
+:::{.example name='Trace of a Matrix' #trace}
 Let $$\A=\left(\begin{matrix} 3&4&1\\0&1&-2\\-1&\sqrt{2}&3\end{matrix}\right)$$
 Then, the trace of $\A$ is the sum of the diagonal elements:
 $$tr(\A)=\sum_{i=1}^3 A_{ii} = 3+1+3 = 7.$$
-```
+:::
 
 While we're on the subject of diagonal elements, let's take the opportunity to introduce some special types of matrices, namely the **identity matrix** and a **diagonal matrix**. 
 
 ## Special Matrices and Vectors {#special}
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Identity Matrix', id='identity', cid=cid}
+:::{.definition name='Identity Matrix' #identity}
 The bold capital letter $\bo{I}$ will always to denote the **identity matrix**. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
 $$\bo{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
 						0 & 1 & 0 & 0\\
 						0&0&1&0\\
 						0&0&0&1 \end{matrix}\right)$$
-```
+:::
 
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Elementary Vectors', id='elemvectors',num=thmcounter, cid=cid}
+:::{.definition name='Elementary Vectors' #elemvectors}
 The bold lowercase $\bo{e}_j$ is used to refer to the $j^{th}$ column of $\bo{I}$. It is simply a vector of zeros with a one in the $j^{th}$ position. We do not often specify the size of the vector $\bo{e}_j$, the number of elements is generally assumed from the context of the problem.
 
-$$\bo{e}_j=\\begin{matrix}
+$$\bo{e}_j=\begin{matrix}
 \begin{matrix} ~ \\~\\~\\~\\j^{th}\text{row} \rightarrow \\ ~\\~\\~ \end{matrix} & 
   \begin{pmatrix}0\\0\\ \vdots \\0\\1\\0\\ \vdots\\0\end{pmatrix}\\\\
 \end{matrix}$$
@@ -449,19 +403,18 @@ $$\bo{e}_j=\\begin{matrix}
 The vector $\bo{e}$ with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced $\textbf{1}$.
 
 $$\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
-```			
+:::		
 
 The elementary vectors described in Definition \@ref(def:elemvectors) create the coordinate axes of $n$-space. For illustrative purposes, let's consider $2$-space. The elementary vectors in $2$-space are:
 $$\e_1 = \left(\begin{matrix} 1\\0\end{matrix}\right) \quad \mbox{and} \quad \e_2 = \left(\begin{matrix} 0\\1 \end{matrix}\right) $$
-These vectors correspond to the directions of the coordinate axes:
-<center>
-<img src=figs/elemvectors />
-</center>
-						
-```{r, echo=F} 
-thmcounter=thmcounter+1
+These vectors correspond to the directions of the coordinate axes as illustrated in Figure \@ref(fig:elemvectors)
+
+```{r label='elemvectors', fig.align='center', fig.cap = 'Elementary cectors represent our "usual" coordinate axes', echo=F, out.width="50%"}
+knitr::include_graphics("figs/elemvectors.jpg")
 ```
-```{def title='Diagonal Matrix', id='diag', cid=cid}
+
+						
+:::{.definition name='Diagonal Matrix' #diag}
 A **diagonal matrix** is a matrix for which off-diagonal elements, $\A_{ij},\,i\ne j$ are zero.
 For example:
 $$\bo{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
@@ -471,37 +424,32 @@ $$\bo{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
 Since the off diagonal elements are 0, we need only define the diagonal elements for such a matrix. Thus, we will frequently write
 $$\bo{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$$
 or simply $$D_{ii} = \sigma_i.$$
-```
+:::
 
 
 From the preceding definitions, it should be clear that diagonal and identity matrices are always _square_, meaning they have the same number of rows and columns, and {symmetric}, meaning they do not change under the transpose operation.
 
-
-```{exer title='Trace and Special Matrices',id='trace'}
+:::{.exercise name='Trace and Special Matrices' #traceexer}
 Write out the following matrices and then compute their Trace, if possible:
 
 $$\I_5 \qquad \bo{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4$$
 \vspace{1.5cm}
-```
+:::
 
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Triangular Matrices',id='triangular', cid=cid} 
+:::{.definition name='Triangular Matrices' #triangulardef}
 Triangular matrices are square matrices whose elements are zero either below or above the main diagonal. If the matrix has zeros below the main diagonal, then it's called **upper triangular**. The following illustration depicts an upper triangular matrix, where the asterisk symbol is used to denote any number (including potential zeros).
 $$\left(\begin{matrix} *&*&*&\dots&*\\0&*&*&\dots&*\\0&0&*&\dots&*\\ \vdots &\vdots &\ddots &\ddots&*\\0&0&0&0&*\end{matrix}\right)$$
 
 If a matrix has zeros above the main diagonal, then it's called **lower triangular**. The following illustration depicts a lower triangular matrix.
 $$\left(\begin{matrix} 0&0&0&\dots&0\\ *&0&0&\dots&0\\ *&*&0&\dots&0\\ \vdots &\vdots &\ddots &\ddots&0\\ *&*&*&*&0\end{matrix}\right)$$
-```
+:::
 
-```{exer title='Triangular Matrices', id='triangular'}
+:::{.exercise name='Triangular Matrices' #triangularexer}
 The following are examples of triangular matrices. Are they upper or lower triangular?
 
 $$\left(\begin{matrix} 1&2&3&4\\0&5&6&7\\0&0&8&9\\0&0&0&1 \end{matrix}\right) \quad \left(\begin{matrix} -1&0&0\\0&-2&0\\1&-1&2 \end{matrix}\right) \quad \left(\begin{matrix} 0&0&0\\0&0&0\\0&0&0 \end{matrix}\right)$$
-
-```
+:::
 
 ## Summary of Conventional Notation 
 
@@ -524,24 +472,23 @@ $$Tr(\A)=\sum_{i=1}^n A_{ii}.$$
 
 <ol> 
 <li>Use the following matrices or vectors to answer the following questions:
-$$\A=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \quad \bo{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
-\D = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) $$ 
-$$
-\bo{X}=\left(\begin{matrix} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{matrix}\right) \quad
-\bo{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
-\v=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \bo{u}=\left(\begin{matrix} 6&4&8&1\end{matrix}\right)
-$$
+$$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \quad \mathbf{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
+\mathbf{D} = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) \\
+
+\mathbf{X}=\left(\begin{matrix} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{matrix}\right) \quad
+\mathbf{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
+\mathbf{v}=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \mathbf{u}=\left(\begin{matrix} 6&4&8&1\end{matrix}\right)$$
 
 <ol style="list-style-type:lower-alpha">
   <li> Write the appropriate size/dimensions next to each matrix:
 <ol style="list-style-type:lower-roman">
-  <li> $\A   $  
-  <li> $\bo{M}   $  
-  <li> $\D   $  
-  <li> $\X  $  
-  <li> $\bo{t}  $  
-  <li> $\v  $  
-  <li> $\u  $  
+  <li> $\mathbf{A}$  
+  <li> $\mathbf{M}$  
+  <li> $\mathbf{D}$  
+  <li> $\mathbf{X}  $  
+  <li> $\mathbf{t}  $  
+  <li> $\mathbf{v}  $  
+  <li> $\mathbf{u}  $  
 </ol>
 
   <li> Which of these matrices are square? Which are rectangular?
@@ -622,30 +569,30 @@ knitr::include_graphics('figs/graphex.jpg')
 </ol>
 
 
-## List of Key Terms 
+<!-- ## List of Key Terms  -->
 
-- linear
-- matrix
-- vector
-- scalar
-- $A_{ij}$
-- $\A_{\star j}$
-- $\A_{i \star}$
-- dimensions
-- diagonal element
-- square matrix
-- rectangular matrix
-- network
-- graph
-- adjacency matrix
-- correlation matrix
-- transpose
-- symmetric matrix
-- trace
-- diagonal matrix
-- identity matrix
-- upper triangular matrix
-- lower triangular matrix
+<!-- - linear -->
+<!-- - matrix -->
+<!-- - vector -->
+<!-- - scalar -->
+<!-- - $A_{ij}$ -->
+<!-- - $\A_{\star j}$ -->
+<!-- - $\A_{i \star}$ -->
+<!-- - dimensions -->
+<!-- - diagonal element -->
+<!-- - square matrix -->
+<!-- - rectangular matrix -->
+<!-- - network -->
+<!-- - graph -->
+<!-- - adjacency matrix -->
+<!-- - correlation matrix -->
+<!-- - transpose -->
+<!-- - symmetric matrix -->
+<!-- - trace -->
+<!-- - diagonal matrix -->
+<!-- - identity matrix -->
+<!-- - upper triangular matrix -->
+<!-- - lower triangular matrix -->
 
 
 

@@ -21,12 +21,7 @@ $$
 
 We get a system of three equations. In general, a system of equations is nothing more than a matrix equation, $\A\x=\b$ where the matrix $\A$ contains the coefficients on the parameters you wish you find, $\x$ is a vector containing those unknown parameters and $\b$ is a vector containing the right hand sides of the equations. These systems of equations pop-up in all types of data applications from regression analysis to optimization. Let's consider a scenario which mimics the real-world and try to model it using a matrix-vector product.
 
-```{r, echo=F} 
-excounter=0
-cid='multapp'
-excounter=excounter+1
-```
-```{ex title='System of Equations',id='ex-syseq',num=excounter,cid=cid}
+:::{.example name='System of Equations' #syseq}
 A large manufacturing company has recently signed a deal to manufacture trail mix for a well-known food label. This label makes 3 versions of its product - one for airlines, one for grocery stores, and one for gas stations. Each version has a different mixture of peanuts, raisins, and chocolate which serves as the base of the trail mix. The base mixtures are made in 15 kg batches and sent to a second building for packaging. 
 
 The following table contains the information about the mixes, each row containing the recipe for a 15 kg batch. There is also some additional information on the costs of the ingredients, the price the manufacturer can charge for the mixtures and the amount of storage allocated for each ingredient.
@@ -87,8 +82,7 @@ Thus, the cost of 1 batch of each type of mixture is:
 |grocery | 66.75    |
 |gas station | 57.90|
 
-
-```
+:::
 
 
 ### _Big_ Systems of Equations
@@ -133,7 +127,7 @@ This is the single equation we usually consider when talking about regression an
 |6|5|9|
 
 
-When we write the model from Equation \ref{hwmodel}, what we are really saying is that the equation holds true for each of the 4 observations in our dataset. So rather than 1 single equation, what we really have here is 4 equations - 1 for each observation:
+When we write the model from Equation \@ref(eq:hwmodel), what we are really saying is that the equation holds true for each of the 4 observations in our dataset. So rather than 1 single equation, what we really have here is 4 equations - 1 for each observation:
 
 \begin{eqnarray}
 \beta_0 + 3 \beta_1 + 3 \beta_2 &=& 6 \quad \mbox{(obs. 1)}\\
@@ -154,7 +148,7 @@ $$\boldsymbol\epsilon = \pm \epsilon_1 \\ \epsilon_2 \\ \epsilon_3 \\ \epsilon_4
 
 ## Linear Combinations
 
-Let's revisit the second part of Example \ref{ex:syseq}, where the task was to use matrix-vector multiplication to determine how much it would cost for the manufacturer to produce 1 batch of each mixture.
+Let's revisit the second part of Example \@ref(exm:syseq), where the task was to use matrix-vector multiplication to determine how much it would cost for the manufacturer to produce 1 batch of each mixture.
 
 Essentially what we want to do is take a linear combination of the amounts of raisins, peanuts, and chocolate where the scalar weights are the cost of each ingredient:
 $$\bordermatrix{~& \mbox{Cost of 1kg}}{}{\begin{pmatrix}\mbox{airline}\\ \mbox{grocery}\\ \mbox{gas station} \end{pmatrix}} = \$2.55 \bordermatrix{~& raisins}{}{ \begin{pmatrix} 7\\ 2\\ 6\end{pmatrix}} + \$4.65 \bordermatrix{~& peanuts}{}{ \begin{pmatrix} 6\\ 5\\ 4\end{pmatrix}}  + \$4.80 \bordermatrix{~& chocolate}{}{ \begin{pmatrix} 2\\ 8\\ 5\end{pmatrix}}$$
@@ -163,10 +157,7 @@ $$\pm 7&6&2\\2&5&8 \\6&4&5 \mp \pm 2.55\\4.65\\4.80 \mp = \pm 55.35\\66.75\\57.9
 
 Matrix multiplication is nothing more than a series of linear combinations. Let's develop another quick example.
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Linear Combinations of Variables',id='ex-lincombvar', cid=cid}
+:::{.example name='Linear Combinations of Variables' #lincombvar}
 Suppose we have data for 100 postal packages using 3 variables: height $\bo{h}$, weight $\bo{w}$, and volume $\bo{v}$. If we create a data matrix, $\X$, the size of the matrix will be $100\times 3$ and the three columns will be composed of the variables height, weight, and volume. The previous sentence is written mathematically by creating a partitioned matrix:
 $$\X = \left( \bo{h} | \bo{w} | \v \right)$$
 
@@ -182,7 +173,7 @@ This could be accomplished by multiplying our whole data matrix by the vector $\
 \end{eqnarray*}
 
 If this example confuses you, you ought to write out a smaller matrix of values for the three variables, height, weight and volume. Write down 3 observations or so and see how the linear combination of these columns is precisely the same as the matrix-vector product. Being able to think of these two ideas as interchangeable will be fundamental when we start talking about factor analysis and principal components analysis.
-```
+:::
 
 
 
@@ -193,12 +184,9 @@ If we dissect our formula for a system of linear equations, $\A\x=\bo{b}$, we wi
 \bo{b}&=& (\A_1|\A_2|\dots|\A_n)\pm x_1\\x_2\\ \vdots\\x_3 \mp  \\
 \bo{b}&=& x_1\A_1 + x_2\A_2 + \dots + x_n\A_n 
 \end{eqnarray*}
-A concrete example of this expression is given in Example \ref{ex:lincom}.
+A concrete example of this expression is given in Example \@ref(exm:lincom).
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Systems of Equations as Linear Combinations', id='ex-lincom', cid=cid}
+:::{.example name='Systems of Equations as Linear Combinations' #lincom}
 Consider the following system of equations:
 \begin{eqnarray}
 3x_1 + 2x_2 + 9x_3 &=& 1\\
@@ -209,7 +197,7 @@ We can write this as a matrix vector product $\A\x=\bo{b}$ where
 $$\A=\pm 3 & 2 & 9\\4 & 2 & 3\\2 &7&1\mp \,\,\,\x=\pm x_1\\x_2\\x_3\mp \mbox{   and   } \bo{b}=\pm 1\\5\\0 \mp$$
 We can also write $\bo{b}$ as a linear combination of columns of $\A$:
 $$x_1 \pm 3\\4\\2 \mp +x_2 \pm 2\\2\\7\mp + x_3 \pm9\\3\\1 \mp = \pm 1\\5\\0 \mp$$
-```
+:::
 
 
 Similarly, if we have a matrix-matrix product, we can write each column of the result as a linear combination of columns of the first matrix. Let $\A_{m\times n}$, $\X_{n\times p}$, and $\B_{m\times p}$ be matrices. If we have $\A\X=\B$ then
@@ -219,12 +207,9 @@ $$
 
 and we can write 
 $$\B_j = \A\X_j = x_{1j}\A_1 + x_{2j}\A_2 + x_{3j}\A_3 + \dots + x_{nj}\A_n.$$
-A concrete example of this expression is given in Example \ref{ex:matmat}.
+A concrete example of this expression is given in Example \@ref(exm:matmat).
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Linear Combinations in Matrix-Matrix Products', id='ex-matmat', num=excounter, cid=cid}
+:::{.example name='Linear Combinations in Matrix-Matrix Products' #matmat}
 Suppose we have the following matrix formula:
 $$\A\X=\B$$
 Where $\A=\pm 2 & 1 & 3\\1 & 4 & 2\\ 3 & 2 & 1 \mp$, $\X=\pm 5&6\\9&5\\7&8 \mp$. 
@@ -247,9 +232,9 @@ Linear combinations are everywhere, and they can provide subtle but important me
 
 You should convince yourself of one final view of matrix multiplication, as the _sum of outer products_. In this case $\B$ is the sum of 3 outer products (3 matrices of rank 1) involving the columns of $\A$ and corresponding rows of $\X$:
 $$\B=\acol{1}\X_{1\star}+\acol{2}\X_{2\star}+\acol{3}\X_{3\star}.$$
-```
+:::
 
-Example \ref{ex:matmat} turns out to have important implications for our interpretation of matrix factorizations. In this context we'd call $\A\X$ a _factorization_ of the matrix $\B$. We will see how to use these expressions to our advantage in later chapters. 
+Example \@ref(exm:matmat) turns out to have important implications for our interpretation of matrix factorizations. In this context we'd call $\A\X$ a _factorization_ of the matrix $\B$. We will see how to use these expressions to our advantage in later chapters. 
 
 ## Exercises {#multapp-ex}
 <ol type='1'>

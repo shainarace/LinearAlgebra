@@ -168,7 +168,7 @@ knitr::include_graphics('scoresOutput.png')
 
 ### Rotated Principal Components
 
-The next task we may want to undertake is a rotation of the factor axes according to the varimax procedure. The most simple way to go about this is to use the ```varimax()``` function to find the optimal rotation of the eigenvectors in the matrix ```pca.out$rotation```. The ```varimax()``` function outputs both the new set of axes in the matrix called ```loadings``` and the rotation matrix (```rotmat```) which performs the rotation from the original principal component axes to the new axes. (i.e. if $\textbf{V}$ contains the old axes as columns and $\hat{\textbf{V}}$ contains the new axes and $\textbf{R}$ is the rotation matrix then $\hat{\textbf{V}} = \textbf{V}\textbf{R}$.) That rotation matrix can be used to perform the same rotation on the scores of the observations. If the matrix $\textbf{U}$ contains the scores for each observation, then the rotated scores $\hat{\textbf{U}}$ are found by $\hat{\textbf{U}} = \textbf{U}\textbf{R}$
+The next task we may want to undertake is a rotation of the factor axes according to the varimax procedure. The most simple way to go about this is to use the `varimax()` function to find the optimal rotation of the eigenvectors in the matrix `pca.out$rotation`. The `varimax()` function outputs both the new set of axes in the matrix called `loadings` and the rotation matrix (`rotmat`) which performs the rotation from the original principal component axes to the new axes. (i.e. if $\textbf{V}$ contains the old axes as columns and $\hat{\textbf{V}}$ contains the new axes and $\textbf{R}$ is the rotation matrix then $\hat{\textbf{V}} = \textbf{V}\textbf{R}$.) That rotation matrix can be used to perform the same rotation on the scores of the observations. If the matrix $\textbf{U}$ contains the scores for each observation, then the rotated scores $\hat{\textbf{U}}$ are found by $\hat{\textbf{U}} = \textbf{U}\textbf{R}$
 
 
 ```{r}
@@ -182,15 +182,13 @@ rotated.fact.scores[1:5,]
 
 And again we can see that these line up with our SAS Rotated output, **however** the order does not have to be the same! SAS conveniently reorders the columns according to the variance of the data along that new direction. Since we have not done that in R, the order of the columns is not the same! Factors 1 and 2 are the same in both outputs, but SAS Factor 3 = R Factor 4 and SAS Factor 5 = (-1)* R Factor 4. The coordinates are switched too so nothing changes in our interpretation. Remember, when you rotate factors, you no longer keep the notion that the "first vector" explains the most variance unless you reorder them so that is true (like SAS does).
 
-(ref: rotloads) Rotated Factor Loadings Output by SAS
 
-```{r fig.align='center', echo=F, fig.cap='(ref: rotloads)', out.width='100%'}
+```{r fig=T, label='rotloads',fig.align='center', echo=F, fig.cap='Rotated Factor Loadings Output by SAS', out.width='100%'}
 knitr::include_graphics('RotatedLoadings.png')
 ```
 
-(ref: rotscores) Rotated Factor Scores Output by SAS
 
-```{r fig.align='center', fig.cap='(ref: rotscores)', out.width='100%'}
+```{r fig=T, label='rotscores',fig.align='center', fig.cap='Rotated Factor Scores Output by SAS', out.width='100%'}
 knitr::include_graphics('RotatedScores.png')
 ```
 

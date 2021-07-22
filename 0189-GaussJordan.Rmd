@@ -108,10 +108,8 @@ x_2+x_3 =6\\
 x_3 = 1\end{align}\end{cases}$$
 is a triangular system. Using substitution, the second equation will give us the value for $x_2$, which will allow for further substitution into the first equation to solve for the value of $x_1$.  Let's take a look at an example of how we can transform any system to a triangular system.
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Transforming a System to a Triangular System via 3 Operations',id='ex-rowopeq', num=excounter, cid=cid}
+:::{.example name='Transforming a System to a Triangular System via 3 Operations' #rowopeq}
+
 Solve the following system of equations:
 $$\begin{cases}\begin{eqnarray}
 x_1+x_2 +x_3&=& 1\\
@@ -150,16 +148,13 @@ Now that our system is in triangular form, we can use substitution to solve for 
 $$x_1 = 3.6 \quad x_2 = -1.4 \quad x_3 = -1.2 $$
 
 This is the procedure for Gaussian Elimination, which we will now formalize in it's matrix version.
-```
+:::
 
 ### The Augmented Matrix
 
 When solving systems of equations, we will commonly use the **augmented matrix**. 
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='The Augmented Matrix', id='def-augmat',num=thmcounter, cid=cid}
+:::{.definition name='The Augmented Matrix' #augmat}
 The **augmented matrix** of a system of equations is simply the matrix which contains all of the coefficients of the equations, augmented with an extra column holding the values on the right hand sides of the equations. If our system is:
 
 $$\begin{cases}\begin{eqnarray}
@@ -168,19 +163,16 @@ a_{21}x_1+a_{22}x_2 +a_{23}x_3&=& b_2
 a_{31}x_1+a_{32}x_2 +a_{33}x_3&=&b_3 \end{eqnarray}\end{cases}$$
 
 Then the corresponding augmented matrix is
-$$\begin{am}{3}
+$$\left(\begin{array}{rrr|r}
 a_{11}&a_{12}&a_{13}& b_1\\
 a_{21}&a_{22}&a_{23}& b_2\\
 a_{31}&a_{12}&a_{33}& b_3\\
-\end{am}$$
-```
+\end{array}\right)$$
+:::
 
 Using this augmented matrix, we can contain all of the information needed to perform the three operations outlined in the previous section. We will formalize these operations as they pertain to the rows (i.e. individual equations) of the augmented matrix (i.e. the entire system) in the following definition.
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Row Operations for Gaussian Elimination', id='def-rowops',num=thmcounter, cid=cid}
+:::{.definition name='Row Operations for Gaussian Elimination' #rowops}
 Gaussian Elimination is performed on the rows, $\arow{i},$ of an augmented matrix, $$\A = \pm \arow{1}\\\arow{2}\\\arow{3}\\\vdots\\\arow{m}\mp$$ by using the three **elementary row operations**:
 
 1. Swap rows $i$ and $j$.
@@ -189,94 +181,87 @@ Gaussian Elimination is performed on the rows, $\arow{i},$ of an augmented matri
 
 
 The ultimate goal of Gaussian elimination is to transform an augmented matrix into an **upper-triangular matrix** which allows for backsolving. 
-$$\A \rightarrow \begin{am}{4} t_{11}& t_{12}& \dots& t_{1n}&c_1\cr 
+$$\A \rightarrow \left(\begin{array}{rrrr|r}
+ t_{11}& t_{12}& \dots& t_{1n}&c_1\cr 
 								0& t_{22}& \dots& t_{2n}&c_2\cr
 								\vdots& \vdots& \ddots& \vdots&\vdots\cr
-								0& 0& \dots& t_{nn}&c_n \end{am}$$
-
-```
+								0& 0& \dots& t_{nn}&c_n\end{array}\right)$$
+:::
 
  The key to this process at each step is to focus on one position, called the _pivot position_ or simply the _pivot_, and try to eliminate all terms below this position using the three row operations. Only nonzero numbers are allowed to be pivots. If a coefficient in a pivot position is ever 0, then the rows of the matrix should be interchanged to find a nonzero pivot. If this is not possible then we continue on to the next possible column where a pivot position can be created.
 
 Let's now go through a detailed example of Gaussian elimination using the augmented matrix. We will use the same example (and same row operations) from the previous section to demonstrate the idea.
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Row Operations on the Augmented Matrix', id='ex-rowopmat', num=excounter, cid=cid}
-We will solve the system of equations from Example \@ref(ex:rowopeq) using the Augmented Matrix.
-$$\begin{cases}\begin{align}
+:::{.example name='Row Operations on the Augmented Matrix' #rowopmat}
+We will solve the system of equations from Example \@ref(exm:rowopeq) using the Augmented Matrix.
+\begin{equation*}\begin{cases}\begin{align}
 x_1+x_2 +x_3= 1\\
 x_1-2x_2+2x_3 =4\\
 x_1+2x_2-x_3 = 2\end{align}\end{cases}
-$$
+\end{equation*}
 
 Our first step will be to write the augmented matrix and identify the current pivot. Here, a square is drawn around the pivot and the numbers below the pivot are circled. It is our goal to eliminate the circled numbers using the row with the pivot. 
-$$
-\begin{am}{3}
+\begin{equation*}
+\left(\begin{array}{rrr|r}
  1 & 1 & 1 & 1\\
  1 & -2 & 2 &4\\
  1&2&-1 &2
- \end{am}
- \xrightarrow{Current Pivot}\begin{am}{3}
+\end{array}\right)
+ \xrightarrow{Current Pivot}\left(\begin{array}{rrr|r}
  \fbox{1} & 1 & 1 & 1\\
- \textcircled{1} & -2 & 2 &4\\
- \textcircled{1}&2&-1 &2
-\end{am}
-$$
+\enclose{circle}[mathcolor="red"]{\color{black}{1}} & -2 & 2 &4\\
+ \enclose{circle}[mathcolor="red"]{\color{black}{1}}&2&-1 &2
+\end{array}\right)
+\end{equation*}
 We can eliminate the circled elements by making combinations with those rows and the pivot row. For instance, we'd replace row 2 by the combination (row 2 - row 1). Our shorthand notation for this will be R2' = R2-R1. Similarly we will replace row 3 in the next step.
-$$
+\begin{equation*}
 \xrightarrow{R2'=R2-R1}
-  \begin{am}{3}
+  \left(\begin{array}{rrr|r}
  \fbox{1} & 1 & 1 & 1\\
 \red{0} & \red{-3} & \red{1} &\red{3}\\
  \enclose{circle}[mathcolor="red"]{\color{black}{1}}&2&-1 &2
- \end{am}
- \xrightarrow{R3'=R3-R1} \begin{am}{3}
+\end{array}\right)
+ \xrightarrow{R3'=R3-R1} \left(\begin{array}{rrr|r}
  \fbox{1} & 1 & 1 & 1\\
 0 & -3 & 1 &3\\
 \red{0}&\red{1}&\red{-2}&\red{1}
- \end{am}
- $$
+\end{array}\right)
+\end{equation*}
  
  Now that we have eliminated each of the circled elements below the current pivot, we will continue on to the next pivot, which is -3. Looking into the future, we can either do the operation $R3'=R3+\frac{1}{3}R2$ or we can interchange rows 2 and 3 to avoid fractions in our next calculation. To keep things neat, we will do the latter. (_note: either way you proceed will lead you to the same solution!_)
-$$ \xrightarrow{Next Pivot}
-    \begin{am}{3}
+\begin{equation*} \xrightarrow{Next Pivot}
+    \left(\begin{array}{rrr|r}
 \fbox{1} & 1 & 1 & 1\\
 0 & \fbox{-3} & 1 &3\\
 0&\enclose{circle}[mathcolor="red"]{\color{black}{1}}&-2&1
- \end{am}
- \xrightarrow{R2 \leftrightarrow R3}      \begin{am}{3}
+\end{array}\right)
+ \xrightarrow{R2 \leftrightarrow R3}      \left(\begin{array}{rrr|r}
  \fbox{1} & 1 & 1 & 1\\
  0&\fbox{1}&-2&1\\
 0 & \enclose{circle}[mathcolor="red"]{\color{black}{-3}} & 1 &3
- \end{am}
-$$
+\end{array}\right)
+\end{equation*}
 Now that the current pivot is equal to 1, we can easily eliminate the circled entries below it by replacing rows with combinations using the pivot row. We finish the process once the last pivot is identified (the final pivot has no eliminations to make below it).
-$$
+\begin{equation*}
  \xrightarrow{R3'=R3+3R2}
-     \begin{am}{3}
+     \left(\begin{array}{rrr|r}
  \fbox{1} & 1 & 1 & 1\\
  0&\fbox{1}&-2&1\\
 \red{0} & \red{0} & \red{\fbox{-5}} &\red{6}
- \end{am}
-   $$ 
-% \xrightarrow{R3'=\frac{1}{5} R3}\begin{am}{3}
-% \fbox{1} & 1 & 1 & 1\\
-% 0&\fbox{1}&-2&1\\
-%\red{0} & \red{0} & \red{\fbox{1}} &\red{\frac{-6}{5}}
-% \end{am} 
+\end{array}\right)
+\end{equation*} 
 
 At this point, when all the pivots have been reached, the augmented matrix is said to be in **row-echelon form**. This simply means that all of the entries below the pivots are equal to 0. The augmented matrix can be transformed back into equation form now that it is in a triangular form:
 
-$$\begin{cases}\begin{align}
+\begin{equation*}
+\begin{cases}\begin{align}
 x_1+x_2 +x_3= 1\\
 x_2-2x_3 = 1\\
-5x_3 =-6\end{align}\end{cases}$$ 
-
-Which is the same system we finally solved in Example \@ref(ex:rowopeq) to get the final solution:
+5x_3 =-6\end{align}\end{cases}
+\end{equation*}
+Which is the same system we finally solved in Example \@ref(exm:rowopeq) to get the final solution:
 $$x_1 = 3.6 \quad x_2 = -1.4 \quad x_3 = -1.2 $$
-```
+:::
  
  
  
@@ -296,14 +281,14 @@ $$x_1 = 3.6 \quad x_2 = -1.4 \quad x_3 = -1.2 $$
 <li> When the entries below all of the pivots are equal to zero, the process stops. The augmented matrix is said to be in _row-echelon form_, which corresponds to a _triangular_ system of equations, suitable to solve using back substitution.
 </ol>
 
-```{exer title='Gaussian Elimination and Back Substitution', id='exer-gaussianelim'}
+:::{.exercise name='Gaussian Elimination and Back Substitution' #gaussianelim}
 Use Gaussian Elimination and back substitution to solve the following system.
 $$\begin{cases}\begin{align}
 2x_1-x_2=1\\
 -x_1+2x_2-x_3=0\\
 -x_2+x_3=0\end{align}\end{cases}$$
 \vspace{3cm}
-```
+:::
  
  
 
@@ -312,43 +297,41 @@ $$\begin{cases}\begin{align}
  Gauss-Jordan elimination is Gaussian elimination taken one step further. In Gauss-Jordan elimination, we do not stop when the augmented matrix is in row-echelon form. Instead, we force all the pivot elements to equal 1 and we continue to eliminate entries _above_ the pivot elements to reach what's called **reduced row echelon form**.
  
  Let's take a look at another example:
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Gauss-Jordan elimination', id='ex-gaussjordan', num=excounter, cid=cid}
+
+:::{.example name='Gauss-Jordan elimination' #gaussjordan}
  We begin with a system of equations, and transform it into an augmented matrix:
  $$\begin{cases}\begin{align}
 x_2 -x_3= 3\\
 -2x_1+4x_2-x_3 = 1\\
 -2x_1+5x_2-4x_3 =-2\end{align}\end{cases}
- \Longrightarrow \begin{am}{3}0&1&-1&3\\-2&4&-1&1\\-2&5&-4&-2 \end{am} $$ 
+ \Longrightarrow \left(\begin{array}{rrr|r}0&1&-1&3\\-2&4&-1&1\\-2&5&-4&-2\end{array}\right) $$ 
  
 We start by locating our first pivot element. This element cannot be zero, so we will have to swap rows to bring a non-zero element to the pivot position. 
-$$\begin{am}{3}0&1&-1&3\\-2&4&-1&1\\-2&5&-4&-2 \end{am} \xrightarrow{R1\leftrightarrow R2}
-\begin{am}{3}\fbox{-2}&4&-1&1\\0&1&-1&3\\-2&5&-4&-2 \end{am}$$
+$$\left(\begin{array}{rrr|r}0&1&-1&3\\-2&4&-1&1\\-2&5&-4&-2\end{array}\right) \xrightarrow{R1\leftrightarrow R2}
+\left(\begin{array}{rrr|r}\fbox{-2}&4&-1&1\\0&1&-1&3\\-2&5&-4&-2\end{array}\right)$$
 Now that we have a non-zero pivot, we will want to do two things: 
 \begin{itemize}
 \item Use the pivot to eliminate all of the elements below it (as with Gaussian elimination) \item Make the pivot element equal to 1.
 \end{itemize}
 It does not matter what order we perform these two tasks in. Here, we will have an easy time eliminating using the -2 pivot:
-$$\begin{am}{3}\fbox{-2}&4&-1&1\\0&1&-1&3\\-2&5&-4&-2 \end{am}\xrightarrow{R3'=R3-R1} \begin{am}{3}\fbox{-2}&4&-1&1\\0&1&-1&3\\\red{0}&\red{1}&\red{-3}&\red{-3} \end{am}$$
+$$\left(\begin{array}{rrr|r}\fbox{-2}&4&-1&1\\0&1&-1&3\\-2&5&-4&-2\end{array}\right)\xrightarrow{R3'=R3-R1} \left(\begin{array}{rrr|r}\fbox{-2}&4&-1&1\\0&1&-1&3\\\red{0}&\red{1}&\red{-3}&\red{-3}\end{array}\right)$$
 Now, as promised, we will make our pivot equal to 1.
-$$\begin{am}{3}\fbox{-2}&4&-1&1\\0&1&-1&3\\0&1&-3&-3 \end{am} \xrightarrow{R1'=-\frac{1}{2} R1} \begin{am}{3}\red{\fbox{1}}&\red{-2}&\red{\frac{1}{2}}&\red{-\frac{1}{2}}\\0&1&-1&3\\0&1&-3&-3 \end{am}$$
+$$\left(\begin{array}{rrr|r}\fbox{-2}&4&-1&1\\0&1&-1&3\\0&1&-3&-3\end{array}\right) \xrightarrow{R1'=-\frac{1}{2} R1} \left(\begin{array}{rrr|r}\red{\fbox{1}}&\red{-2}&\red{\frac{1}{2}}&\red{-\frac{1}{2}}\\0&1&-1&3\\0&1&-3&-3\end{array}\right)$$
 We have finished our work with this pivot, and now we move on to the next one. Since it is already equal to 1, the only thing left to do is use it to eliminate the entries below it:
-$$\begin{am}{3}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&\fbox{1}&-1&3\\0&1&-3&-3 \end{am}\xrightarrow{R3'=R3-R2} \begin{am}{3}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&\fbox{1}&-1&3\\\red{0}&\red{0}&\red{-2}&\red{-6} \end{am}$$
+$$\left(\begin{array}{rrr|r}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&\fbox{1}&-1&3\\0&1&-3&-3\end{array}\right)\xrightarrow{R3'=R3-R2} \left(\begin{array}{rrr|r}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&\fbox{1}&-1&3\\\red{0}&\red{0}&\red{-2}&\red{-6}\end{array}\right)$$
 And then we move onto our last pivot. This pivot has no entries below it to eliminate, so all we must do is turn it into a 1:
-$$\begin{am}{3}1&-2&\frac{1}{2}&\frac{-1}{2}\\0&1&-1&3\\0&0&\fbox{-2}&-6 \end{am}\xrightarrow{R3'=-\frac{1}{2}R3}\begin{am}{3}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&-1&3\\\red{0}&\red{0}&\red{\fbox{1}}&\red{3} \end{am} $$
+$$\left(\begin{array}{rrr|r}1&-2&\frac{1}{2}&\frac{-1}{2}\\0&1&-1&3\\0&0&\fbox{-2}&-6\end{array}\right)\xrightarrow{R3'=-\frac{1}{2}R3}\left(\begin{array}{rrr|r}1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&-1&3\\\red{0}&\red{0}&\red{\fbox{1}}&\red{3}\end{array}\right) $$
 Now, what really differentiates Gauss-Jordan elimination from Gaussian elimination is the next few steps. Here, our goal will be to use the pivots to eliminate all of the entries _above_ them. While this takes a little extra work, as we will see, it helps us avoid the tedious work of back substitution.
 
 We'll start at the southeast corner on the current pivot. We will use that pivot to eliminate the elements above it:
 
-$$\begin{am}{3} 1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&-1&3\\0&0&\fbox{1}&3 \end{am} \xrightarrow{R2'=R2+R3} \begin{am}{3} 1&-2&\frac{1}{2}&-\frac{1}{2}\\\red{0}&\red{1}&\red{0}&\red{6}\\0&0&\fbox{1}&3 \end{am}$$
+$$\left(\begin{array}{rrr|r} 1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&-1&3\\0&0&\fbox{1}&3\end{array}\right) \xrightarrow{R2'=R2+R3} \left(\begin{array}{rrr|r} 1&-2&\frac{1}{2}&-\frac{1}{2}\\\red{0}&\red{1}&\red{0}&\red{6}\\0&0&\fbox{1}&3\end{array}\right)$$
 
-$$ \begin{am}{3} 1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&0&6\\0&0&\fbox{1}&3 \end{am}\xrightarrow{R1'=R1-\frac{1}{2}R3}\begin{am}{3} \red{1}&\red{-2}&\red{0}&\red{-2}\\0&1&0&6\\0&0&\fbox{1}&3 \end{am}$$
+$$ \left(\begin{array}{rrr|r} 1&-2&\frac{1}{2}&-\frac{1}{2}\\0&1&0&6\\0&0&\fbox{1}&3\end{array}\right)\xrightarrow{R1'=R1-\frac{1}{2}R3}\left(\begin{array}{rrr|r} \red{1}&\red{-2}&\red{0}&\red{-2}\\0&1&0&6\\0&0&\fbox{1}&3\end{array}\right)$$
 We're almost done! One more pivot with elements above it to be eliminated:
 
-$$\begin{am}{3} 1&-2&0&-2\\0&\fbox{1}&0&6\\0&0&1&3 \end{am} \xrightarrow{R1'=R1+2R2}
-\begin{am}{3}\red{1}&\red{0}&\red{0}&\red{10}\\0&\fbox{1}&0&6\\0&0&1&3 \end{am}$$
+$$\left(\begin{array}{rrr|r} 1&-2&0&-2\\0&\fbox{1}&0&6\\0&0&1&3\end{array}\right) \xrightarrow{R1'=R1+2R2}
+\left(\begin{array}{rrr|r}\red{1}&\red{0}&\red{0}&\red{10}\\0&\fbox{1}&0&6\\0&0&1&3\end{array}\right)$$
 
 And we've reached **reduced row echelon form**. How does this help us? Well, let's transform back to a system of equations:
  $$\begin{cases}\begin{align}
@@ -356,7 +339,7 @@ x_1 = 10\\
 x_2= 6\\
 x_3 =3\end{align}\end{cases}$$
 The solution is simply what's left in the right hand column of the augmented matrix.
-```
+:::
 
 As you can see, the steps to performing Gaussian elimination and Gauss-Jordan elimination are very similar. Gauss-Jordan elimination is merely an extension of Gaussian elimination which brings the problem as close to completion as possible. 
 
@@ -374,17 +357,14 @@ As you can see, the steps to performing Gaussian elimination and Gauss-Jordan el
 5. When the last pivot is equal to 1, begin to eliminate all the entries above the pivot positions.
 6. When all entries above and below each pivot element are equal to zero, the augmented matrix is said to be in _reduced row echelon form_ and the Gauss-Jordan elimination process is complete.
 
- 
-```{exer title='Gauss-Jordan Elimination', id='gaussjordan'}
+:::{.exercise name='Gauss-Jordan Elimination' #gaussjordanexer}
 Use the Gauss-Jordan method to solve the following system:
 $$\begin{cases}\begin{align}
 4x_2-3x_3=3\\
 -x_1+7x_2-5x_3=4\\
 -x_1+8x_2-6x_3=5\end{align}\end{cases}$$
 
-
-
-```
+:::
 
 
 ## Three Types of Systems
@@ -402,31 +382,25 @@ Based on our earlier examples, we already have a sense for systems which fall in
 
 (ref:case1title) Case 1: Unique solution
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='(ref:case1title)', id='case1',num=thmcounter, cid=cid}
+:::{.theorem name='(ref:case1title)' #case1}
 A system of equations $\A\x=\b$ has a unique solution if and only if _both_ of the following conditions hold:
 
 1. The number of equations is equal to the number of variables (i.e. the coefficient matrix $\A$ is _square_).
 2. The number of pivots is equal to the number of rows/columns. In other words, under Gauss-Jordan elimination, the coefficient matrix is transformed into the identity matrix:
 $$\A \xrightarrow{Gauss-Jordan} I$$
 
-In this case, we say that the matrix $\A$ is **full-rank**. 
-```
+In this case, we say that the matrix $\A$ is **invertible** because it is full-rank (the rank of a matrix is the number of pivots after Gauss-Jordan elimination) _and_ square. 
+:::
 
 ### The Inconsistent Case {#inconsistent}
 
 The second case scenario is a very specific one. In order for a system of equations to be **inconsistent** and have no solutions, it must be that after Gaussian elimination, a situation occurs where at least one equation reduces to $0=\alpha$ where $\alpha$ is  nonzero. Such a situation would look as follows (using asterisks to denote any nonzero numbers):
 
-$$\begin{am}{3} *&*&*&*\\0&*&*&*\\0&0&0&\alpha\end{am} $$
+$$\left(\begin{array}{rrr|r} *&*&*&*\\0&*&*&*\\0&0&0&\alpha\end{array}\right) $$
 
 The third row of this augmented system indicates that $$0x_1+0x_2+0x_3=\alpha$$ where $\alpha\neq 0$, which is a contradiction. When we reach such a situation through Gauss-Jordan elimination, we know the system is inconsistent.
 
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Identifying an Inconsistent System', id='inconsistent', num=excounter, cid=cid}
+:::{.example name='Identifying an Inconsistent System' #inconsistent}
 $$\begin{cases}\begin{align}
 x-y+z=1\\
 x-y-z=2\\
@@ -434,12 +408,12 @@ x+y-z=3\\
 x+y+z=4\end{align}\end{cases}$$
 Using the augmented matrix and Gaussian elimination, we take the following steps:
 
-$$\begin{am}{3} 1&-1&1&1\\1&-1&-1&2\\1&1&-1&3\\1&1&1&4 \end{am} \xrightarrow{\substack{R2'=R2-R1 \\ R3'=R3-R1 \\ R4'=R4-R1}} \begin{am}{3} 1&-1&1&1\\0&0&-2&1\\0&2&-2&2\\0&2&0&3 \end{am} $$
-$$\xrightarrow{ R4\leftrightarrow R2}\begin{am}{3} 1&-1&1&1\\0&2&0&3\\0&2&-2&2\\0&0&-2&1 \end{am}\xrightarrow{R3'=R3-R2} \begin{am}{3} 1&-1&1&1\\0&2&0&3\\0&0&-2&-1\\0&0&-2&1 \end{am}$$
-$$\xrightarrow{R4'=R4-R3} \begin{am}{3} 1&-1&1&1\\0&2&0&3\\0&0&-2&-1\\0&0&0&2 \end{am}$$
+$$\left(\begin{array}{rrr|r} 1&-1&1&1\\1&-1&-1&2\\1&1&-1&3\\1&1&1&4\end{array}\right) \xrightarrow{\substack{R2'=R2-R1 \\ R3'=R3-R1 \\ R4'=R4-R1}} \left(\begin{array}{rrr|r} 1&-1&1&1\\0&0&-2&1\\0&2&-2&2\\0&2&0&3\end{array}\right) $$
+$$\xrightarrow{ R4\leftrightarrow R2}\left(\begin{array}{rrr|r} 1&-1&1&1\\0&2&0&3\\0&2&-2&2\\0&0&-2&1\end{array}\right)\xrightarrow{R3'=R3-R2} \left(\begin{array}{rrr|r} 1&-1&1&1\\0&2&0&3\\0&0&-2&-1\\0&0&-2&1\end{array}\right)$$
+$$\xrightarrow{R4'=R4-R3} \left(\begin{array}{rrr|r} 1&-1&1&1\\0&2&0&3\\0&0&-2&-1\\0&0&0&2\end{array}\right)$$
 
 In this final step, we see our contradiction equation, $0=2$. Since this is obviously impossible, we conclude that the system is inconsistent.
-```
+:::
 
 Sometimes inconsistent systems are referred to as _over-determined_. In this example, you can see that we had more equations than variables. This is a common characteristic of over-determined or inconsistent systems. You can think of it as holding too many demands for a small set of variables! In fact, this is precisely the situation in which we find ourselves when we approach linear regression. Regression systems do not have an exact solution: there are generally no set of $\beta_i's$ that we can find so that our regression equation exactly fits every observation in the dataset - the regression system is inconsistent. Thus, we need a way to get _as close as possible_ to a solution; that is, we need to find a solution that minimizes the residual error. This is done using the Least Squares method, the subject of Chapter \@ref(leastsquares).
 
@@ -447,7 +421,7 @@ Sometimes inconsistent systems are referred to as _over-determined_. In this exa
 
 For the third case, consider the following system of equations written as an augmented matrix, and its reduced row echelon form after Gauss-Jordan elimination. As an exercise, it is suggested that you confirm this result.
 
-$$\begin{am}{3} 1&2&3&0\\2&1&3&0\\1&1&2&0\end{am} \xrightarrow{Gauss-Jordan} \begin{am}{3} 1&0&1&0\\0&1&1&0\\0&0&0&0\end{am} $$
+$$\left(\begin{array}{rrr|r} 1&2&3&0\\2&1&3&0\\1&1&2&0\end{array}\right) \xrightarrow{Gauss-Jordan} \left(\begin{array}{rrr|r} 1&0&1&0\\0&1&1&0\\0&0&0&0\end{array}\right) $$
 
 There are several things you should notice about this reduced row echelon form. For starters, it has a row that is completely 0. This means, intuitively, that one of the equations was able to be completely eliminated - it contained redundant information from the first two. The second thing you might notice is that there are only 2 pivot elements. Because there is no pivot in the third row, the last entries in the third column could not be eliminated! This is characteristic of what is called a **free-variable**. Let's see what this means by translating our reduced system back to equations:
  $$\begin{cases}\begin{align}
@@ -466,25 +440,19 @@ What this means is that any scalar multiple of the vector $\pm -1\\-1\\1 \mp$ is
 
 (ref:case3title) Case 3: Infinitely Many Solutions
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='(ref:case3title)', id='case3', num=thmcounter, cid=cid}
+:::{.theorem name='(ref:case3title)' #case3}
 A system of equations $\A\x=\b$ has infinitely many solutions if the system is consistent and _any_ of the following conditions hold:
 
 1. The number of variables is greater than the number of equations.
 2. There is at least one _free variable_ presented in the reduced row echelon form.
 3. The number of pivots is less than the number of variables.
+:::
 
-```
 
-
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Infinitely Many Solutions', id='infsolutions', cid=cid}
+:::{.example name='Infinitely Many Solutions' #infsolutions}
 For the following reduced system of equations, characterize the set of solutions in the same fashion as the previous example. 
-$$\begin{am}{4} 1&0&1&2&0\\0&1&1&-1&0\\0&0&0&0&0\\0&0&0&0&0\end{am} $$
+$$\left(\begin{array}{rrrr|r}
+ 1&0&1&2&0\\0&1&1&-1&0\\0&0&0&0&0\\0&0&0&0&0\end{array}\right) $$
 A good way to start is sometimes to write out the corresponding equations:
 $$\begin{cases}\begin{align}
 x_1+x_3+2x_4 = 0\\
@@ -499,12 +467,12 @@ $$\pm x_1\\x_2\\x_3\\x_4 \mp = \pm -s-2t \\ -s+t\\s\\t \mp = s\pm -1\\-1\\1\\0 \
 so any linear combination of the vectors 
 $$\pm -1\\-1\\1\\0 \mp \quad \mbox{and} \quad \pm -2\\1\\0\\1 \mp$$
 will provide a solution to this system.
-```
+:::
 
 
 ### Matrix Rank
 
-The **rank** of a matrix is the number of linearly independent rows or columns in the matrix (the number of linearly independent rows will always be the same as the number of linearly independent columns). It can be determined by reducing a matrix to row-echelon form and counting the number of pivots. A matrix is said to be **full rank** when it's rank is maximal, meaning that either all rows or all columns are linearly independent. In other words, an $m\times n$ matrix $\A$ is full rank when the rank($\A$)$=\min(m,n)$. A square matrix that is full rank will always have an inverse. 
+The **rank** of a matrix is the number of linearly independent rows or columns in the matrix (the number of linearly independent rows will always be the same as the number of linearly independent columns). It can be determined by reducing a matrix to row-echelon form and counting the number of pivots. A matrix is said to be **full rank** when its rank is maximal, meaning that either all rows or all columns are linearly independent. In other words, an $m\times n$ matrix $\A$ is full rank when the rank($\A$)$=\min(m,n)$. A square matrix that is full rank will always have an inverse. 
 
 
 ## Solving Matrix Equations
@@ -523,7 +491,9 @@ $$\pm  1&1\\2&1\mp \pm x_{11} \\x_{21} \mp = \pm 3\\4 \mp \quad \mbox{and}\quad 
 
 Once you convince yourself that the unknowns can be found in this way, let's take a look at the augmented matrices for these two systems:
 
-$$\begin{am}{2} 1&1&3\\2&1&4 \end{am} \quad\mbox{and}\quad \begin{am}{2} 1&1&3\\2&1&5 \end{am}$$
+$$\left(\begin{array}{rr|r}
+ 1&1&3\\2&1&4\end{array}\right) \quad\mbox{and}\quad \left(\begin{array}{rr|r}
+ 1&1&3\\2&1&5\end{array}\right)$$
 
 When performing Gauss-Jordan elimination on these two augmented matrices, how are the row operations going to differ? They're not! The same row operations will be used for each augmented matrix - the only thing that will differ is how these row operations will affect the right hand side vectors. Thus, it is possible for us to keep track of those differences in one larger augmented matrix :
 
@@ -570,16 +540,14 @@ For any square matrix $\A$, we know the inverse matrix ($\A^{-1}$), if it exists
 $$\A\A^{-1} = \I.$$
 
 Using the Gauss-Jordan method with multiple right hand sides, we can solve for the inverse of any matrix. We simply start with an augmented matrix with $\A$ on the left and the identity on the right, and then use Gauss-Jordan elimination to transform the matrix $\A$ into the identity matrix.
-$$\begin{am}{1} \bo{A} & \I \end{am}\xrightarrow{Gauss-Jordan}\begin{am}{1} \bo{I} & \A^{-1} \end{am}$$
+$$\left(\begin{array}{r|r}
+ \bo{A} & \I\end{array}\right)\xrightarrow{Gauss-Jordan}\left(\begin{array}{r|r} \bo{I} & \A^{-1}\end{array}\right)$$
  If this is possible then the matrix on the right is the inverse of $\A$. If this is not possible then $\A$ does not have an inverse. Let's see a quick example of this.
  
-```{r, echo=F} 
-excounter=excounter+1
-``` 
-```{ex title='Finding a Matrix Inverse', id='findinverse', num=excounter, cid=cid}
- Find the inverse of $$\A = \pm -1&2&-1\\0&-1&1\\2&-1&0 \mp$$ using Gauss-Jordan Elimination.
+:::{.example name='Finding a Matrix Inverse' #findinverse}
+  Find the inverse of $$\A = \pm -1&2&-1\\0&-1&1\\2&-1&0 \mp$$ using Gauss-Jordan Elimination.
  
- Since $\A\A^{-1} = \I$, we set up the augmented matrix as $\begin{am}{1} \bo{A} & \I \end{am}$:
+ Since $\A\A^{-1} = \I$, we set up the augmented matrix as $\left(\begin{array}{r|r} \bo{A} & \I\end{array}\right)$:
  
  $$\begin{pmatrix}
 \begin{array}{ccc|ccc}-1&2&-1&1&0&0\\0&-1&1&0&1&0\\2&-1&0&0&0&1 \end{array}\end{pmatrix} \xrightarrow{R3'=R3+2R1}
@@ -594,24 +562,17 @@ $$\begin{pmatrix}\begin{array}{ccc|ccc} 1&-2&0&-3&-3&-1\\0&-1&0&-2&-2&-1\\0&0&1&
 
 Finally, we have completed our task. The inverse of $\A$ is the matrix on the right hand side of the augmented matrix!
 $$\A^{-1} = \pm 1&1&1\\2&2&1\\2&3&1 \mp$$
-```
+:::
 
 
-
-```{exer title='Finding a Matrix Inverse', id='exer-inverse', num=excounter, cid=cid}
+:::{.exercise name='Finding a Matrix Inverse' #inverseexer}
 Use the same method to determine the inverse of
 $$\B=\pm 1&1&1\\2&2&1\\2&3&1 \mp$$
-(_hint:  Example \@ref(ex:findinverse) should tell you the answer you expect to find!_)
+(_hint:  Example \@ref(exm:findinverse) should tell you the answer you expect to find!_)
+:::
 
 
-
-```
-
-
-```{r, echo=F} 
-excounter=excounter+1
-```
-```{ex title='Inverse of a Diagonal Matrix', id='ex:diaginverse', num=excounter, cid=cid}
+:::{.example name='Inverse of a Diagonal Matrix' #diaginverse}
 A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix $\D$,
 $$\D = \pm 3&0&0\\0&-2&0\\0&0&\sqrt{5} \mp $$
 To begin the process, we start with an augmented matrix and proceed with Gauss-Jordan Elimination. In this case, the process is quite simple! The elements above and below the diagonal pivots are already zero, we simply need to make each pivot equal to 1!
@@ -624,16 +585,13 @@ Thus, the inverse of $\D$ is:
 $$\D^{-1} = \pm \frac{1}{3}&0&0\\0&-\frac{1}{2}&0\\0&0&\frac{1}{\sqrt{5}} \mp $$
 
 As you can see, all we had to do is take the scalar inverse of each diagonal element! 
-```
+:::
 
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{def title='Inverse of a Diagonal Matrix', id='def:diaginverse', num=thmcounter, cid=cid}
+:::{.definition name='Inverse of a Diagonal Matrix' #diaginverse}
 An $n\times n$ diagonal matrix $\D = diag\{d_{11},d_{22},\dots,d_{nn}\}$ with no nonzero diagonal elements is invertible with inverse
 $$\D^{-1} = diag\{\frac{1}{d_{11}},\frac{1}{d_{22}},\dots,\frac{1}{d_{nn}}\}$$
-```
+:::
 
 
 
@@ -698,7 +656,7 @@ x_1+2x_2+2x_3+3x_4=0\\
 \dots,\sigma_{n}\}$?
 
 <li> Suppose you have a matrix of data, $\A_{n\times p}$, containing $n$ observations on $p$ variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
-$$\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.$$ Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. _Hint: This problem connects Text Exercise \@ref(exer:diagmult) and Example \@ref(ex:diaginverse)_. 
+$$\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.$$ Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. _Hint: This problem connects Text Exercise \@ref(exr:diagmultexer) and Example \@ref(exm:diaginverse)_. 
 </ol>
 
 ## List of Key Terms
