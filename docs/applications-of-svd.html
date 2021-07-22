@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -435,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="image-data-in-r" class="section level3" number="17.2.1">
 <h3><span class="header-section-number">17.2.1</span> Image data in R</h3>
 <p>Let’s take an image of a leader that we all know and respect:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-101"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-103"></span>
 <img src="LAdata/rappa.jpg" alt="Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State" width="125" />
 <p class="caption">
 Figure 17.1: Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State
@@ -470,8 +471,8 @@ Rather than a traditional data frame, when working with an image, we have to ref
 <span id="cb224-2"><a href="applications-of-svd.html#cb224-2" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span>rappa<span class="sc">@</span>green</span>
 <span id="cb224-3"><a href="applications-of-svd.html#cb224-3" aria-hidden="true" tabindex="-1"></a>rappa.blue<span class="ot">=</span>rappa<span class="sc">@</span>blue</span>
 <span id="cb224-4"><a href="applications-of-svd.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-106"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-106-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-108"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-108-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
 <p class="caption">
 Figure 17.2: Intensity of green in each pixel of the original image
 </p>
@@ -479,7 +480,7 @@ Figure 17.2: Intensity of green in each pixel of the original image
 <p>Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that <code>nrow(rappa.green)</code> gives the number of columns in the transposed matrix)</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="applications-of-svd.html#cb225-1" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span><span class="fu">t</span>(rappa.green)[,<span class="fu">nrow</span>(rappa.green)<span class="sc">:</span><span class="dv">1</span>]</span>
 <span id="cb225-2"><a href="applications-of-svd.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-107-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Rather than compressing the colors individually, let’s work with the grayscale image:</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="applications-of-svd.html#cb226-1" aria-hidden="true" tabindex="-1"></a>greyrappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.pgm&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
@@ -495,8 +496,8 @@ Figure 17.2: Intensity of green in each pixel of the original image
 <span id="cb230-2"><a href="applications-of-svd.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="co">#again, rotate 90 degrees</span></span>
 <span id="cb230-3"><a href="applications-of-svd.html#cb230-3" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span><span class="fu">t</span>(rappa.grey)[,<span class="fu">nrow</span>(rappa.grey)<span class="sc">:</span><span class="dv">1</span>]</span></code></pre></div>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="applications-of-svd.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.grey, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-109"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" alt="Greyscale representation of original image" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-111"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" alt="Greyscale representation of original image" width="672" />
 <p class="caption">
 Figure 17.3: Greyscale representation of original image
 </p>
@@ -512,24 +513,24 @@ Figure 17.3: Greyscale representation of original image
 <p>Now let’s compute some approximations of rank 3, 10 and 50:</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="applications-of-svd.html#cb233-1" aria-hidden="true" tabindex="-1"></a>rappaR3<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span>
 <span id="cb233-2"><a href="applications-of-svd.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR3, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" alt="Rank 3 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" alt="Rank 3 approximation of the image data" width="672" />
 <p class="caption">
 Figure 17.4: Rank 3 approximation of the image data
 </p>
 </div>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="applications-of-svd.html#cb234-1" aria-hidden="true" tabindex="-1"></a>rappaR10<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
 <span id="cb234-2"><a href="applications-of-svd.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR10, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-112"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" alt="Rank 10 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-114"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" alt="Rank 10 approximation of the image data" width="672" />
 <p class="caption">
 Figure 17.5: Rank 10 approximation of the image data
 </p>
 </div>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="applications-of-svd.html#cb235-1" aria-hidden="true" tabindex="-1"></a>rappaR25<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ]</span>
 <span id="cb235-2"><a href="applications-of-svd.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" alt="Rank 50 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-115"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" alt="Rank 50 approximation of the image data" width="672" />
 <p class="caption">
 Figure 17.6: Rank 50 approximation of the image data
 </p>
@@ -555,8 +556,8 @@ Figure 17.6: Rank 50 approximation of the image data
 <span id="cb238-2"><a href="applications-of-svd.html#cb238-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb238-3"><a href="applications-of-svd.html#cb238-3" aria-hidden="true" tabindex="-1"></a>rappa_bad25<span class="ot">=</span>U[ ,<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb238-4"><a href="applications-of-svd.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-115"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (16.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (16.2)" width="672" />
 <p class="caption">
 Figure 17.7: The last 25 components, or the sum of the last 25 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
 </p>
@@ -566,8 +567,8 @@ Figure 17.7: The last 25 components, or the sum of the last 25 terms in equation
 <span id="cb239-2"><a href="applications-of-svd.html#cb239-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb239-3"><a href="applications-of-svd.html#cb239-3" aria-hidden="true" tabindex="-1"></a>rappa_bad50<span class="ot">=</span>U[ ,<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb239-4"><a href="applications-of-svd.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad50, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-116"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (16.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-118"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (16.2)" width="672" />
 <p class="caption">
 Figure 17.8: The last 50 components, or the sum of the last 50 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
 </p>
@@ -577,8 +578,8 @@ Figure 17.8: The last 50 components, or the sum of the last 50 terms in equation
 <span id="cb240-2"><a href="applications-of-svd.html#cb240-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb240-3"><a href="applications-of-svd.html#cb240-3" aria-hidden="true" tabindex="-1"></a>rappa_bad100<span class="ot">=</span>U[ ,<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb240-4"><a href="applications-of-svd.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad100, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (16.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-119"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (16.2)" width="672" />
 <p class="caption">
 Figure 17.9: The last 100 components, or the sum of the last 100 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
 </p>

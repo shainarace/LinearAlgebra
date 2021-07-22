@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -542,14 +543,15 @@ Solution:
 <p>We’ll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the <em>dot product</em> in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if <span class="math inline">\(\x\)</span> is a column vector,
 <span class="math display">\[\x=\pm x_1\\x_2\\\vdots\\ x_n\mp\]</span>
 then we can automatically assume that <span class="math inline">\(\x^T\)</span> is a row vector:
-<span class="math display">\[\x^T = \pm x_1&amp;x_2&amp;\dots&amp;x_n\mp.\]</span>
-:::{.definition name=‘Inner Product’ #innerproddef}
-The <strong>inner product</strong> of two vectors, <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>, written <span class="math inline">\(\x^T\y\)</span>, is defined as the sum of the product of corresponding elements in <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>:</p>
+<span class="math display">\[\x^T = \pm x_1&amp;x_2&amp;\dots&amp;x_n\mp.\]</span></p>
+<div class="definition">
+<p><span id="def:innerproddef" class="definition"><strong>Definition 2.3  (Inner Product) </strong></span>The <strong>inner product</strong> of two vectors, <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>, written <span class="math inline">\(\x^T\y\)</span>, is defined as the sum of the product of corresponding elements in <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>:</p>
 <p><span class="math display">\[\x^T\y = \sum_{i=1}^n x_i y_i.\]</span>
 If we write this out for two vectors with 4 elements each, we’d have:</p>
 <p><span class="math display">\[\x^T\y=\pm x_1 &amp; x_2 &amp; x_3 &amp; x_4 \mp \pm y_1\\y_2\\y_3\\y_4 \mp = x_1y_1+x_2y_2+x_3y_3+x_4y_4\]</span></p>
 <p><em>Note: The inner product between vectors is only possible when the two vectors have the same number of elements!</em><br />
-:::</p>
+</p>
+</div>
 <div class="example">
 <p><span id="exm:innerprod" class="example"><strong>Example 2.4  (Vector Inner Product) </strong></span>Let <span class="math display">\[\x=\pm -1 \\2\\4\\0 \mp \quad \y=\pm 3 \\5\\1\\7 \mp \quad \v=\pm -3 \\-2\\5\\3\\-2 \mp \quad \u= \pm 2\\-1\\3\\-3\\-2 \mp\]</span></p>
 <p>If possible, compute the following inner products:</p>
@@ -587,7 +589,7 @@ Also, if we take the inner product of a vector with itself, the result is the su
 <h3><span class="header-section-number">2.4.2</span> Matrix Product</h3>
 <p>Matrix multiplication is nothing more than a collection of inner products done simultaneously in one operation. We must be careful when multiplying matrices because, as with vectors, the operation is not always possible. Unlike the vector inner product, the order in which you multiply matrices makes a big difference!</p>
 <div class="definition">
-<p><span id="def:matmultdef" class="definition"><strong>Definition 2.3  (Matrix Multiplication) </strong></span>Let <span class="math inline">\(\A_{m\times n}\)</span> and <span class="math inline">\(\B_{k\times p}\)</span> be matrices. The matrix product <span class="math inline">\(\A\B\)</span> is possible if and only if <span class="math inline">\(n=k\)</span>; that is, when the number of columns in <span class="math inline">\(\A\)</span> is the same as the number of rows in <span class="math inline">\(\B\)</span>. If this condition holds, then the dimension of the product, <span class="math inline">\(\A\B\)</span> is <span class="math inline">\(m\times p\)</span> and the (ij)-entry of the product <span class="math inline">\(\A\B\)</span> is the inner product of the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(\A\)</span> and the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\B\)</span>:</p>
+<p><span id="def:matmultdef" class="definition"><strong>Definition 2.4  (Matrix Multiplication) </strong></span>Let <span class="math inline">\(\A_{m\times n}\)</span> and <span class="math inline">\(\B_{k\times p}\)</span> be matrices. The matrix product <span class="math inline">\(\A\B\)</span> is possible if and only if <span class="math inline">\(n=k\)</span>; that is, when the number of columns in <span class="math inline">\(\A\)</span> is the same as the number of rows in <span class="math inline">\(\B\)</span>. If this condition holds, then the dimension of the product, <span class="math inline">\(\A\B\)</span> is <span class="math inline">\(m\times p\)</span> and the (ij)-entry of the product <span class="math inline">\(\A\B\)</span> is the inner product of the <span class="math inline">\(i^{th}\)</span> row of <span class="math inline">\(\A\)</span> and the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\B\)</span>:</p>
 <p><span class="math display">\[(\A\B)_{ij} = \A_{i\star}\B_{\star j}\]</span></p>
 </div>
 <p>This definition may be easier to dissect using an example:</p>
@@ -699,25 +701,25 @@ Determine whether the following matrix-vector products are possible. When possib
 <h3>Linear Combination view of Matrix Products</h3>
 <p>All matrix products can be viewed as linear combinations or a collection of linear combinations. This vantage point is <em>extremely</em> crucial to our understanding of data science techniques that are based on matrix-factorization. Let’s start with matrix-vector product and see how we can depict it as a linear combination of the columns of the matrix.</p>
 <div class="definition">
-<p><span id="def:matvecprodlincomb" class="definition"><strong>Definition 2.4  (Matrix-Vector Product as a Linear Combination) </strong></span>Let <span class="math inline">\(\A\)</span> be an <span class="math inline">\(m\times n\)</span> matrix partitioned into columns,
+<p><span id="def:matvecprodlincomb" class="definition"><strong>Definition 2.5  (Matrix-Vector Product as a Linear Combination) </strong></span>Let <span class="math inline">\(\A\)</span> be an <span class="math inline">\(m\times n\)</span> matrix partitioned into columns,
 <span class="math display">\[\A = [\A_1 | \A_2 | \dots | \A_n]\]</span>
 and let <span class="math inline">\(\x\)</span> be a vector in <span class="math inline">\(\Re^n\)</span>. Then,
 <span class="math display">\[\A\x = x_1\A_1 + x_2\A_2 + \dots + x_n\A_n\]</span><br />
 </p>
 </div>
-<p>We use the animation in Figure <a href="mult.html#fig:matvecprodlincombanim">2.5</a> to illustrate Definition <a href="mult.html#def:matvecprodlincomb">2.4</a>.</p>
+<p>We use the animation in Figure <a href="mult.html#fig:matvecprodlincombanim">2.5</a> to illustrate Definition <a href="mult.html#def:matvecprodlincomb">2.5</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:matvecprodlincombanim"></span>
-<img src="figs/matvecprodlincombanim.gif" alt="Illustration of Definition 2.4" width="50%" />
+<img src="figs/matvecprodlincombanim.gif" alt="Illustration of Definition 2.5" width="50%" />
 <p class="caption">
-Figure 2.5: Illustration of Definition <a href="mult.html#def:matvecprodlincomb">2.4</a>
+Figure 2.5: Illustration of Definition <a href="mult.html#def:matvecprodlincomb">2.5</a>
 </p>
 </div>
-<p>Definition <a href="mult.html#def:matvecprodlincomb">2.4</a> extends to <em>any</em> matrix product. If <span class="math inline">\(\A\B=\mathbf{C}\)</span> then the columns of <span class="math inline">\(\mathbf{C}\)</span> can be viewed as linear combinations of the columns of <span class="math inline">\(\A\)</span> and, likewise, the rows of <span class="math inline">\(\C\)</span> can be viewed as linear combinations of the rows of <span class="math inline">\(\B\)</span>. We leave the latter fact for the reader to explore independently (see end-of-chapter exercise 5), and animate the former in Figure <a href="mult.html#fig:multlincombanim">2.6</a>.</p>
+<p>Definition <a href="mult.html#def:matvecprodlincomb">2.5</a> extends to <em>any</em> matrix product. If <span class="math inline">\(\A\B=\mathbf{C}\)</span> then the columns of <span class="math inline">\(\mathbf{C}\)</span> can be viewed as linear combinations of the columns of <span class="math inline">\(\A\)</span> and, likewise, the rows of <span class="math inline">\(\C\)</span> can be viewed as linear combinations of the rows of <span class="math inline">\(\B\)</span>. We leave the latter fact for the reader to explore independently (see end-of-chapter exercise 5), and animate the former in Figure <a href="mult.html#fig:multlincombanim">2.6</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:multlincombanim"></span>
-<img src="figs/multlincombanim.gif" alt="Illustration of Definition 2.4" width="50%" />
+<img src="figs/multlincombanim.gif" alt="Illustration of Definition 2.5" width="50%" />
 <p class="caption">
-Figure 2.6: Illustration of Definition <a href="mult.html#def:matvecprodlincomb">2.4</a>
+Figure 2.6: Illustration of Definition <a href="mult.html#def:matvecprodlincomb">2.5</a>
 </p>
 </div>
 </div>
@@ -751,14 +753,14 @@ It is very important to understand that not all matrices have inverses. There ar
 Multiplying a scalar by its inverse yields the multiplicative identity, 1:
 <span class="math display">\[(a)(a^{-1}) = (a)(\frac{1}{a}) = 1\]</span>
 All scalars have an inverse with the exception of 0. For matrices, the idea of an inverse is quite the same - multiply a matrix on the left or right by its inverse to get the multiplicative identity, <span class="math inline">\(\I\)</span>. However, as previously stated, the matrix inverse only exists for a small subset of matrices, those that are square and full rank. Such matrices are equivalently called <strong>invertible</strong> or <strong>non-singular</strong>.</p>
-<p>(ref:canceltitle) Don’t Cancel That!!
-:::{.example name=‘(ref:canceltitle)’ #dontcancel}
-We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
+
+<div class="example">
+<p><span id="exm:dontcancel" class="example"><strong>Example 2.9  (Don’t Cancel That!!) </strong></span>We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
 <span class="math display">\[\A\x=\lambda\x\]</span>
 We <font-folor:red><strong> CANNOT </strong> <font-folor:black>cancel terms from both sides. Mathematically, this operation amounts to multiplying both sides by an inverse. When the term we are canceling is a non-zero scalar, then we can proceed as usual. However, we must be careful not to assume that a matrix/vector quantity has an inverse. For example, the following operation is <strong>nonsense:</strong>
 <span class="math display">\[\require{cancel} \A\cancel{\x}=\lambda\cancel{\x}\]</span>
-Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, <span class="math inline">\(\A\)</span>, with a scalar, <span class="math inline">\(\lambda\)</span>.
-:::</p>
+Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, <span class="math inline">\(\A\)</span>, with a scalar, <span class="math inline">\(\lambda\)</span>.</p>
+</div>
 </div>
 <div id="exercises-1" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Exercises</h2>

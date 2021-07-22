@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -441,13 +442,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another way to express linear dependence is to say that we can write one of the vectors as a linear combination of the others. If there exists a non-trivial set of coefficients <span class="math inline">\(\alpha_1,\alpha_2, \dots, \alpha_n\)</span> for which
 <span class="math display">\[\alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}\]</span>
 then for <span class="math inline">\(\alpha_j \neq 0\)</span> we could write
-<span class="math display">\[\v_j=-\frac{1}{\alpha_j} \sum_{\substack{i=1\\i \neq j}}^n \alpha_i \v_i\]</span>
-:::{.example name=‘Linearly Dependent Vectors’ #lindep}
-The vectors <span class="math inline">\(\v_1 =\pm 1\\2\\2 \mp, \v_2 = \pm 1\\2\\3 \mp, \mbox{ and } \v_3 = \pm 3\\6\\7 \mp\)</span> are linearly dependent because
+<span class="math display">\[\v_j=-\frac{1}{\alpha_j} \sum_{\substack{i=1\\i \neq j}}^n \alpha_i \v_i\]</span></p>
+<div class="example">
+<p><span id="exm:lindep" class="example"><strong>Example 7.1  (Linearly Dependent Vectors) </strong></span>The vectors <span class="math inline">\(\v_1 =\pm 1\\2\\2 \mp, \v_2 = \pm 1\\2\\3 \mp, \mbox{ and } \v_3 = \pm 3\\6\\7 \mp\)</span> are linearly dependent because
 <span class="math display">\[\v_3 = 2\v_1+\v_2\]</span>
 or, equivalently, because
-<span class="math display">\[2\v_1+\v_2-\v_3 = \bo{0}\]</span>
-:::</p>
+<span class="math display">\[2\v_1+\v_2-\v_3 = \bo{0}\]</span></p>
+</div>
 <div id="determining-linear-independence" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Determining Linear Independence</h3>
 <p>You should realize that the linear combination expressed Definition @ref{def:linind} can be written as a matrix vector product. Let <span class="math inline">\(\A_{m\times n} = (\A_1|\A_2|\dots|\A_n)\)</span> be a matrix. Then by Definition @ref{def:linind}, the columns of <span class="math inline">\(\A\)</span> are linearly independent if and only if the equation
@@ -506,7 +507,7 @@ Figure 7.2: The <span class="math inline">\(span(\a,\b)\)</span> in <span class=
 </div>
 <p>The span of two vectors <span class="math inline">\(\a\)</span> and <span class="math inline">\(\b\)</span> is a subspace because it satisfies these three conditions. (Can you prove it formally? See exercise 4).</p>
 <div class="example">
-<p><span id="exm:span" class="example"><strong>Example 7.1  (Span) </strong></span>Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>. Explain why or why not each of the following vectors is contained in the <span class="math inline">\(span(\a,\b)\)</span>?</p>
+<p><span id="exm:span" class="example"><strong>Example 7.2  (Span) </strong></span>Let <span class="math inline">\(\a=\pm 1\\3\\4 \mp\)</span> and <span class="math inline">\(\b=\pm 3\\0\\1 \mp\)</span>. Explain why or why not each of the following vectors is contained in the <span class="math inline">\(span(\a,\b)\)</span>?</p>
 <ol style="list-style-type: lower-alpha">
 <li><span class="math inline">\(\x=\pm 5\\6\\9 \mp\)</span></li>
 </ol>

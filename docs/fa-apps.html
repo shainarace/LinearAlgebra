@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -619,14 +620,14 @@ Read in the Big5 Personality test dataset, which contains likert scale responses
 ## [5,] -0.37359  0.47716 0.292680  1.233652  0.406582</code></pre>
 <p>This should match the output from SAS and it does. Remember these columns are unique up to a sign, so you’ll see factor 4 does not have the same sign in both software outputs. This is not cause for concern.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-125"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-127"></span>
 <img src="factorOutput.png" alt="Default (Unrotated) Factor Loadings Output by SAS" width="100%" />
 <p class="caption">
 Figure 19.1: Default (Unrotated) Factor Loadings Output by SAS
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-126"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-128"></span>
 <img src="scoresOutput.png" alt="Default (Unrotated) Factor Scores Output by SAS" width="100%" />
 <p class="caption">
 Figure 19.2: Default (Unrotated) Factor Scores Output by SAS
@@ -675,8 +676,8 @@ Figure 19.4: Rotated Factor Scores Output by SAS
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="fa-apps.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
 <span id="cb261-2"><a href="fa-apps.html#cb261-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
 <span id="cb261-3"><a href="fa-apps.html#cb261-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-128"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-128-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-130"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-130-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
 <p class="caption">
 Figure 19.5: BiPlot of Projection onto PC1 and PC2
 </p>
@@ -684,8 +685,8 @@ Figure 19.5: BiPlot of Projection onto PC1 and PC2
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="fa-apps.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
 <span id="cb262-2"><a href="fa-apps.html#cb262-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>],</span>
 <span id="cb262-3"><a href="fa-apps.html#cb262-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-129"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-129-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-131"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-131-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
 <p class="caption">
 Figure 19.6: BiPlot of Projection onto PC3 and PC4
 </p>
@@ -698,8 +699,8 @@ Figure 19.6: BiPlot of Projection onto PC3 and PC4
 <span id="cb263-5"><a href="fa-apps.html#cb263-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
 <span id="cb263-6"><a href="fa-apps.html#cb263-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 1&#39;</span>,</span>
 <span id="cb263-7"><a href="fa-apps.html#cb263-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 2&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-130"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-130-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-132-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
 <p class="caption">
 Figure 19.7: BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2
 </p>
@@ -709,8 +710,8 @@ Figure 19.7: BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions 
 <span id="cb264-3"><a href="fa-apps.html#cb264-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
 <span id="cb264-4"><a href="fa-apps.html#cb264-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 3&#39;</span>,</span>
 <span id="cb264-5"><a href="fa-apps.html#cb264-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 4&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-131"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-131-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-133"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
 <p class="caption">
 Figure 19.8: BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4.
 </p>

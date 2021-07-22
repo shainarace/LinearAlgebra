@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -427,6 +428,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="leastsquares" class="section level1" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Least Squares</h1>
+<div id="introducing-error" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Introducing Error</h2>
 <p>The least squares problem arises in almost all areas of applied mathematics. In data science, the idea is generally to find an approximate mathematical relationship between predictor and target variables such that the sum of squared errors between the true target values and the predicted target values is minimized. In two dimensions, the goal would be to develop a line as depicted in Figure <a href="leastsquares.html#fig:leastsquaresillustrated">11.1</a> such that the sum of squared vertical distances (the residuals, in green) between the true data (in red) and the mathematical prediction (in blue) is minimized.</p>
 <div class="figure" style="text-align: center"><span id="fig:leastsquaresillustrated"></span>
 <img src="figs/lsreg.pdf" alt="Least Squares Illustrated in 2 dimensions"  />
@@ -492,11 +495,12 @@ and so <span class="math display">\[\pm \beta_0 \\ \beta_1 \mp = \pm  0.5233 &am
 <img src=figs/grades.jpg width=50%/>
 </center>
 </div>
-<div id="why-the-normal-equations" class="section level2" number="11.1">
-<h2><span class="header-section-number">11.1</span> Why the normal equations?</h2>
+</div>
+<div id="why-the-normal-equations" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Why the normal equations?</h2>
 <p>The normal equations can be derived using matrix calculus (demonstrated at the end of this section) but the solution of the normal equations also has a nice geometrical interpretation. It involves the idea of orthogonal projection, a concept which will be useful for understanding future topics.</p>
-<div id="geometrical-interpretation" class="section level3" number="11.1.1">
-<h3><span class="header-section-number">11.1.1</span> Geometrical Interpretation</h3>
+<div id="geometrical-interpretation" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Geometrical Interpretation</h3>
 <p>In order for a system of equations, <span class="math inline">\(\A\x=\b\)</span> to have a solution, <span class="math inline">\(\b\)</span> must be a linear combination of columns of <span class="math inline">\(\A\)</span>. That is simply the definition of matrix multiplication and equality. If <span class="math inline">\(\A\)</span> is <span class="math inline">\(m\times n\)</span> then
 <span class="math display">\[\A\x=\b \Longrightarrow \b = x_1\A_1+x_2\A_2+\dots+x_n\A_n.\]</span>
 As discussed in Chapter <a href="linind.html#linind">7</a>, another way to say this is that <span class="math inline">\(\b\)</span> is in the <span class="math inline">\(span\)</span> of the columns of <span class="math inline">\(\A\)</span>. The <span class="math inline">\(span\)</span> of the columns of <span class="math inline">\(\A\)</span> is called the <strong>column space</strong> of <span class="math inline">\(\A\)</span>. In Least-Squares applications, the problem is that <span class="math inline">\(\b\)</span> is <em>not</em> in the column space of <span class="math inline">\(\A\)</span>. In essence, we want to find the vector <span class="math inline">\(\hat{\b}\)</span> that is <em>closest</em> to <span class="math inline">\(\b\)</span> but exists in the column space of <span class="math inline">\(\A\)</span>. Then we know that <span class="math inline">\(\A\hat{\x}=\hat{\b}\)</span> <em>does</em> have a unique solution, and that the right hand side of the equation comes as close to the original data as possible. By multiplying both sides of the original equation by <span class="math inline">\(\A^T\)</span> what we are really doing is <em>projecting</em> <span class="math inline">\(\b\)</span> orthogonally onto the column space of <span class="math inline">\(\A\)</span>. We should think of the column space as a flat surface (perhaps a plane) in space, and <span class="math inline">\(\b\)</span> as a point that exists off of that flat surface. There are many ways to draw a line from a point to plane, but the shortest distance would always be travelled perpendicular (orthogonal) to the plane. You may recall from undergraduate calculus or physics that a <em>normal</em> vector to a plane is a vector that is orthogonal to that plane. The normal equations, <span class="math inline">\(\A^T\A\x=\A^T\b\)</span>, help us find the closest point to <span class="math inline">\(\b\)</span> that belongs to the column space of <span class="math inline">\(\A\)</span> by means of an orthogonal projection. This geometrical vantage point is depicted in Figure <a href="leastsquares.html#fig:lsproj">11.2</a>.</p>
@@ -508,9 +512,10 @@ Figure 11.2: The normal equations yield the vector <span class="math inline">\(\
 </p>
 </div>
 </div>
-<div id="calculus-derivation" class="section level3" number="11.1.2">
-<h3><span class="header-section-number">11.1.2</span> Calculus Derivation</h3>
+<div id="calculus-derivation" class="section level3" number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> Calculus Derivation</h3>
 <p>If you’ve taken a course in undergraduate calculus, you recall that finding minima and maxima of functions typically involves taking their derivatives and setting them equal to zero. That approach to the derivation of the normal equations will be fruitful, but we first need to understand how to take derivatives of matrix equations. Without teaching vector calculus, we will simply provide the following required formulas for matrix derivatives. If you’ve taken some undergraduate calculus, perhaps you’ll see some parallels.</p>
+<p>While <span class="math inline">\(\frac{\partial}{\partial \mathbf{x}}\)</span> would commonly be the formula reported, we’ve swapped out the <span class="math inline">\(\mathbf{x}\)</span> for <span class="math inline">\(\boldsymbol \beta\)</span> in the table below in an effort to make our current problem more recognizable.</p>
 <table>
 <tr>
 <td>
@@ -519,44 +524,46 @@ Condition
 Formula
 <tr>
 <td style="text-align:center">
-<span class="math inline">\(\mathbf{a}\)</span> is not a function of <span class="math inline">\(\x\)</span>
+<span class="math inline">\(\mathbf{a}\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>
 <td>
-<span class="math inline">\(\frac{\partial \mathbf{a}}{\partial \mathbf{x}}= \mathbf{0}\)</span>
+<span class="math inline">\(\frac{\partial \mathbf{a}}{\partial \boldsymbol \beta}= \mathbf{0}\)</span>
 <tr>
 <tr>
 <td style="text-align:center">
-<span class="math inline">\(\mathbf{a}\)</span> is not a function of <span class="math inline">\(\x\)</span>
+<span class="math inline">\(\mathbf{a}\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>
 <td>
-<span class="math inline">\(\frac{\partial \mathbf{x}}{\partial \mathbf{x}}= \mathbf{I}\)</span>
-<tr>
-<tr>
-<td style="text-align:center">
-<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\x\)</span>
-<td>
-<span class="math inline">\(\frac{\partial \mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= \mathbf{A}\)</span>
+<span class="math inline">\(\frac{\partial \boldsymbol \beta}{\partial \boldsymbol \beta}= \mathbf{I}\)</span>
 <tr>
 <td style="text-align:center">
-<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\x\)</span>
+<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>
 <td>
-<span class="math inline">\(\frac{\partial \mathbf{x}^T\mathbf{A}}{\partial \mathbf{x}}= \mathbf{A}^T\)</span>
+<span class="math inline">\(\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}T\)</span>
 <tr>
 <td style="text-align:center">
-<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\x\)</span>
+<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>
 <td>
-<span class="math inline">\(\frac{\partial \mathbf{x}^T\mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= (\mathbf{A}+\mathbf{A}^T)\mathbf{x}\)</span>
+<span class="math inline">\(\frac{\partial \boldsymbol \beta^T\mathbf{A}\boldsymbol \beta}{\partial \boldsymbol \beta}= (\mathbf{A}+\mathbf{A}^T)\boldsymbol \beta\)</span>
 <tr>
 <td style="text-align:center">
-<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\x\)</span> <br> <span class="math inline">\(\A\)</span> is symmetric
+<span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span> <br> <span class="math inline">\(\A\)</span> is symmetric
 <td>
-<span class="math inline">\(\frac{\partial \mathbf{x}^T\mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= 2\mathbf{A}\mathbf{x}\)</span>
-</table
-
-Now let's start with our objective, which is to minimize sum of squared error, by writing it as the inner product of the vector of residuals with itself:
-$$\boldsymbol \varepsilon^T \boldsymbol \varepsilon = (\mathbf{y}-\mathbf{X}\boldsymbol \beta)^T(\mathbf{y}-\mathbf{X}\boldsymbol \beta)$$
-We'd like to minimize this function with respect to $\boldsymbol \beta$, our vector of unknowns. Thus, our procedure will be to take the derivative with respect to $\boldsymbol \beta$ and set it equal to 0. 
-
-In Chapter \@ref(lsapp), we'll take a deeper dive into the utility of least squares for applied data science. 
-
+<span class="math inline">\(\frac{\partial \boldsymbol \beta^T\mathbf{A}\boldsymbol \beta}{\partial \boldsymbol \beta}= 2\mathbf{A}\boldsymbol \beta\)</span>
+</td>
+</tr>
+</table>
+<p>Now let’s start with our objective, which is to minimize sum of squared error, by writing it as the inner product of the vector of residuals with itself:
+<span class="math display">\[\boldsymbol \varepsilon^T \boldsymbol \varepsilon = (\mathbf{y}-\mathbf{X}\boldsymbol \beta)^T(\mathbf{y}-\mathbf{X}\boldsymbol \beta)\]</span>
+We’d like to minimize this function with respect to <span class="math inline">\(\boldsymbol \beta\)</span>, our vector of unknowns. Thus, our procedure will be to take the derivative with respect to <span class="math inline">\(\boldsymbol \beta\)</span> and set it equal to 0. Note, on the second line of this proof, we take advantage of the fact that <span class="math inline">\(\mathbf{a}^T\mathbf{b} = \mathbf{b}^T\mathbf{a}\)</span> for all <span class="math inline">\(\mathbf{a},\mathbf{b} \in \Re^n\)</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+\frac{\partial}{\partial \boldsymbol \beta} \left(\boldsymbol \varepsilon^T \boldsymbol \varepsilon\right) 
+&amp;=&amp;
+\frac{\partial}{\partial \boldsymbol \beta} \left(\mathbf{y}^T\mathbf{y} - \mathbf{y}^T(\mathbf{X}\boldsymbol \beta) - (\mathbf{X}\boldsymbol \beta)^T\mathbf{y} + (\mathbf{X}\boldsymbol \beta)^T(\mathbf{X}\boldsymbol \beta)\right)\\
+&amp;=&amp;
+\frac{\partial}{\partial \boldsymbol \beta} \left(\mathbf{y}^T\mathbf{y} -2\mathbf{y}^T(\mathbf{X}\boldsymbol \beta) + \boldsymbol \beta\mathbf{X}^T\mathbf{X}  \boldsymbol \beta \right)\\
+&amp;=&amp; 0 - 2\mathbf{X}^Ty + 2\mathbf{X}^T\mathbf{X}\boldsymbol \beta
+\end{eqnarray*}\]</span></p>
+<p>Setting the last line equal to zero and solving for <span class="math inline">\(\boldsymbol \beta\)</span> completes the derivation. <span class="math inline">\(\Box\)</span></p>
+<p>In Chapter <a href="lsapp.html#lsapp">12</a>, we’ll take a deeper dive into the utility of least squares for applied data science.</p>
 
 </div>
 </div>

@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -449,8 +450,8 @@ and
 <span id="cb269-4"><a href="otherdimred.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
 <span id="cb269-5"><a href="otherdimred.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
 <span id="cb269-6"><a href="otherdimred.html#cb269-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-132-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-134"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-134-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
 <p class="caption">
 Figure 20.1: Multidimensional Scaling of the Iris Data
 </p>
@@ -485,8 +486,8 @@ Figure 20.1: Multidimensional Scaling of the Iris Data
 <span id="cb273-5"><a href="otherdimred.html#cb273-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb273-6"><a href="otherdimred.html#cb273-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
 <span id="cb273-7"><a href="otherdimred.html#cb273-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-135-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-137"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
 <p class="caption">
 Figure 20.2: Multidimensional Scaling of the Leukemia Data
 </p>
@@ -507,7 +508,7 @@ Figure 20.2: Multidimensional Scaling of the Leukemia Data
 <span id="cb276-5"><a href="otherdimred.html#cb276-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb276-6"><a href="otherdimred.html#cb276-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
 <span id="cb276-7"><a href="otherdimred.html#cb276-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="a-note-on-standardization" class="section level3 unnumbered">
 <h3>A note on standardization</h3>

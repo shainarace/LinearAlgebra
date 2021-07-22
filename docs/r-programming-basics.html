@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -482,23 +483,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-programming-basics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by generating random ~N(0,1) data:</span></span>
 <span id="cb17-2"><a href="r-programming-basics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb17-3"><a href="r-programming-basics.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1]  0.4349832 -0.1783693</code></pre>
+<pre><code>## [1] -0.9011749 -0.3776629</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="r-programming-basics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Why aren&#39;t the means close to zero?)</span></span>
 <span id="cb19-2"><a href="r-programming-basics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
 <span id="cb19-3"><a href="r-programming-basics.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1] -0.07054318  0.13192472</code></pre>
+<pre><code>## [1] 0.13996663 0.03067533</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-programming-basics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LawOfLargeNumbers.</span></span>
 <span id="cb21-2"><a href="r-programming-basics.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="r-programming-basics.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A,<span class="dv">2</span>,sd)</span></code></pre></div>
-<pre><code>## [1] 0.9966313 1.0316137</code></pre>
+<pre><code>## [1] 0.9954119 0.9387569</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-programming-basics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To apply a &quot;homemade function&quot; you must create it as a function</span></span>
 <span id="cb23-2"><a href="r-programming-basics.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we apply a sum of squares function for the first 5 rows of A:</span></span>
 <span id="cb23-3"><a href="r-programming-basics.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ],<span class="dv">1</span>,<span class="cf">function</span>(x) x<span class="sc">%*%</span>x)</span></code></pre></div>
-<pre><code>## [1] 2.5611445 0.3147752 9.3740075 5.2041063 3.7341892</code></pre>
+<pre><code>## [1] 3.1443126 1.8597378 0.8264218 0.9880293 1.8880833</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-programming-basics.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we center the data by subtracting the mean vector:</span></span>
 <span id="cb25-2"><a href="r-programming-basics.html#cb25-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">=</span><span class="fu">apply</span>(A,<span class="dv">2</span>,<span class="cf">function</span>(x) x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
 <span id="cb25-3"><a href="r-programming-basics.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B)</span></code></pre></div>
-<pre><code>## [1] -1.131040e-17  2.164935e-17</code></pre>
+<pre><code>## [1] -1.249001e-17 -1.547373e-17</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-programming-basics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R doesn&#39;t tell you when things are zero to machine precision. &quot;Machine zero&quot; in</span></span>
 <span id="cb27-2"><a href="r-programming-basics.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R is given by the internal variable .Machine$double.eps</span></span>
 <span id="cb27-3"><a href="r-programming-basics.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B) <span class="sc">&lt;</span> .Machine<span class="sc">$</span>double.eps</span></code></pre></div>
@@ -520,12 +521,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-2"><a href="r-programming-basics.html#cb33-2" aria-hidden="true" tabindex="-1"></a>ncols<span class="ot">=</span><span class="fu">dim</span>(A)[<span class="dv">2</span>]</span>
 <span id="cb33-3"><a href="r-programming-basics.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(A)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;This&quot;</span>,<span class="st">&quot;That&quot;</span>)</span>
 <span id="cb33-4"><a href="r-programming-basics.html#cb33-4" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
-<pre><code>##           This       That
-## [1,]  0.228515 -1.5839588
-## [2,]  0.270386  0.4915960
-## [3,]  1.933331 -2.3740761
-## [4,] -1.075704 -2.0117074
-## [5,] -1.923511 -0.1851911</code></pre>
+<pre><code>##            This       That
+## [1,]  1.0609291  1.4208244
+## [2,] -1.2721012  0.4914228
+## [3,] -0.8909797 -0.1804908
+## [4,]  0.7369920 -0.6669873
+## [5,]  0.4975269  1.2808397</code></pre>
 <ul>
 <li>Most arithmetic functions you apply to a vector act elementwise. In R, <span class="math inline">\(\x^2\)</span> will be a vector containing the square of the elements in <span class="math inline">\(\x\)</span>. You can add a column to a matrix (or a data frame) by using the <code>cbind()</code> function.</li>
 </ul>

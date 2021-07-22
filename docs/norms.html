@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Norms, Inner Products and Orthogonality | bookdownproj.utf8</title>
+  <title>Chapter 6 Norms, Similarity, and Distance | bookdownproj.utf8</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Norms, Inner Products and Orthogonality | bookdownproj.utf8" />
+  <meta property="og:title" content="Chapter 6 Norms, Similarity, and Distance | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Norms, Inner Products and Orthogonality | bookdownproj.utf8" />
+  <meta name="twitter:title" content="Chapter 6 Norms, Similarity, and Distance | bookdownproj.utf8" />
   
   
   
@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -426,31 +427,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="norms" class="section level1" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Norms, Inner Products and Orthogonality</h1>
+<h1><span class="header-section-number">Chapter 6</span> Norms, Similarity, and Distance</h1>
 <div id="sec-norms" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Norms and Distances</h2>
 <p>In applied mathematics, Norms are functions which measure the magnitude or length of a vector. They are commonly used to determine similarities between observations by measuring the distance between them. As we will see, there are many ways to define distance between two points.</p>
-:::{.definition name=‘Vector Norms and Distance Metrics’ #normdef}
-A Norm, or distance metric, is a function that takes a vector as input and returns a scalar quantity (<span class="math inline">\(f: \Re^n \to \Re\)</span>). A vector norm is typically denoted by two vertical bars surrounding the input vector, <span class="math inline">\(\|\bo{x}\|\)</span>, to signify that it is not just any function, but one that satisfies the following criteria:
-<ol>
-<li>
-If <span class="math inline">\(c\)</span> is a scalar, then <span class="math display">\[\|c\x\|=|c|\|x\|\]</span>
-<li>
-The triangle inequality: <span class="math display">\[\|\x+\bo{y}\| \leq \|\x\|+\|\bo{y}\|\]</span>
-<li>
-<span class="math inline">\(\|\x\|=0\)</span> if and only if <span class="math inline">\(\x=0\)</span>.
-<li>
-<span class="math inline">\(\|\x\|\geq 0\)</span> for any vector <span class="math inline">\(\x\)</span>
+<div class="definition">
+<p><span id="def:normdef" class="definition"><strong>Definition 6.1  (Vector Norms and Distance Metrics) </strong></span>A Norm, or distance metric, is a function that takes a vector as input and returns a scalar quantity (<span class="math inline">\(f: \Re^n \to \Re\)</span>). A vector norm is typically denoted by two vertical bars surrounding the input vector, <span class="math inline">\(\|\bo{x}\|\)</span>, to signify that it is not just any function, but one that satisfies the following criteria:</p>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(c\)</span> is a scalar, then <span class="math display">\[\|c\x\|=|c|\|x\|\]</span><br />
+</li>
+<li>The triangle inequality: <span class="math display">\[\|\x+\bo{y}\| \leq \|\x\|+\|\bo{y}\|\]</span><br />
+</li>
+<li><span class="math inline">\(\|\x\|=0\)</span> if and only if <span class="math inline">\(\x=0\)</span>.<br />
+</li>
+<li><span class="math inline">\(\|\x\|\geq 0\)</span> for any vector <span class="math inline">\(\x\)</span><br />
+</li>
 </ol>
-<p>:::</p>
+</div>
 <p>We will not spend any time on these axioms or on the theoretical aspects of norms, but we will put a couple of these functions to good use in our studies, the first of which is the <strong>Euclidean norm</strong> or <strong>2-norm</strong>.</p>
-<p>(ref:norm2title) Euclidean Norm, <span class="math inline">\(\|\star\|_2\)</span>
-:::{.definition name=‘(ref:norm2title)’ #twonormdef}
-The <strong>Euclidean Norm</strong>, also known as the <strong>2-norm</strong> simply measures the Euclidean length of a vector (i.e. a point’s distance from the origin). Let <span class="math inline">\(\x = (x_1,x_2,\dots,x_n)\)</span>. Then,
+
+<div class="definition">
+<p><span id="def:twonormdef" class="definition"><strong>Definition 6.2  (Euclidean Norm, <span class="math inline">\(\|\star\|_2\)</span>) </strong></span>The <strong>Euclidean Norm</strong>, also known as the <strong>2-norm</strong> simply measures the Euclidean length of a vector (i.e. a point’s distance from the origin). Let <span class="math inline">\(\x = (x_1,x_2,\dots,x_n)\)</span>. Then,
 <span class="math display">\[\|\x\|_2 = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2} \]</span>
 If <span class="math inline">\(\x\)</span> is a column vector, then <span class="math display">\[\|\x\|_2= \sqrt{\x^T\x}.\]</span>
-Often we will simply write <span class="math inline">\(\|\star\|\)</span> rather than <span class="math inline">\(\|\star\|_2\)</span> to denote the <span class="math inline">\(2\)</span>-norm, as it is by far the most commonly used norm.
-:::</p>
+Often we will simply write <span class="math inline">\(\|\star\|\)</span> rather than <span class="math inline">\(\|\star\|_2\)</span> to denote the <span class="math inline">\(2\)</span>-norm, as it is by far the most commonly used norm.</p>
+</div>
 <p>This is merely the distance formula from undergraduate mathematics, measuring the distance between the point <span class="math inline">\(\x\)</span> and the origin. To compute the distance between two different points, say <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>, we’d calculate
 <span class="math display">\[\|\x-\y\|_2= \sqrt{(x_1-y_1)^2 + (x_2-y_2)^2 + \dots + (x_n-y_n)^2}\]</span></p>
 <div class="example">
@@ -482,11 +483,11 @@ In vector notation, we’d let <span class="math inline">\(\y\)</span> be a vect
 <span class="math display">\[\|\hat{\y}-\y\|_2^2\]</span></p>
 <p>In fact, any situation where the phrase “sum of squares” is encountered, the <span class="math inline">\(2\)</span>-norm is generally implicated.</p>
 </div>
-<p>(ref:rsquaredtitle) Coefficient of Determination, <span class="math inline">\(R^2\)</span>
-:::{.example name=‘(ref:rsquaredtitle)’ #rsquared}
-Since variance can be expressed using the Euclidean norm, so can the <strong>coefficient of determination</strong> or <span class="math inline">\(R^2\)</span>.
-<span class="math display">\[R^2 = \frac{SS_{reg}}{SS_{tot}}= \frac{\sum_{i=1}^n (\hat{y_i}-\bar{y})^2}{\sum_{i=1}^n (y_i-\bar{y})^2} = \frac{\|\hat{\y}-\bar{\y}\|^2}{\|\y-\bar{\y}\|^2}\]</span>
-:::</p>
+
+<div class="example">
+<p><span id="exm:rsquared" class="example"><strong>Example 6.4  (Coefficient of Determination, <span class="math inline">\(R^2\)</span>) </strong></span>Since variance can be expressed using the Euclidean norm, so can the <strong>coefficient of determination</strong> or <span class="math inline">\(R^2\)</span>.
+<span class="math display">\[R^2 = \frac{SS_{reg}}{SS_{tot}}= \frac{\sum_{i=1}^n (\hat{y_i}-\bar{y})^2}{\sum_{i=1}^n (y_i-\bar{y})^2} = \frac{\|\hat{\y}-\bar{\y}\|^2}{\|\y-\bar{\y}\|^2}\]</span></p>
+</div>
 </div>
 <div id="other-useful-norms-and-distances" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Other useful norms and distances</h2>
@@ -495,7 +496,7 @@ Since variance can be expressed using the Euclidean norm, so can the <strong>coe
 <p>If <span class="math inline">\(\x=\pm x_1 &amp; x_2 &amp; \dots &amp;x_n \mp\)</span> then the <span class="math inline">\(1\)</span>-norm of <span class="math inline">\(\X\)</span> is
 <span class="math display">\[\|\x\|_1 = \sum_{i=1}^n |x_i|.\]</span>
 This metric is often referred to as <em>Manhattan distance</em>, <em>city block distance</em>, or <em>taxicab distance</em> because it measures the distance between points along a rectangular grid (as a taxicab must travel on the streets of Manhattan, for example). When <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are binary vectors, the <span class="math inline">\(1\)</span>-norm is called the <strong>Hamming Distance</strong>, and simply measures the number of elements that are different between the two vectors.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
 <img src="figs/1norm.png" alt="The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm)." width="50%" />
 <p class="caption">
 Figure 6.1: The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm).
@@ -512,7 +513,7 @@ Figure 6.1: The lengths of the red, yellow, and blue paths represent the 1-norm 
 <h2><span class="header-section-number">6.3</span> Inner Products</h2>
 <p>The inner product of vectors is a notion that we’ve already seen in Chapter <a href="mult.html#mult">2</a>, it is what’s called the <em>dot product</em> in most physics and calculus text books.</p>
 <div class="definition">
-<p><span id="def:innerproddef" class="definition"><strong>Definition 6.1  (Vector Inner Product) </strong></span>The inner product of two <span class="math inline">\(n\times 1\)</span> vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is written <span class="math inline">\(\x^T\y\)</span> (or sometimes as <span class="math inline">\(\langle \x,\y \rangle\)</span>) and is the sum of the product of corresponding elements.
+<p><span id="def:innerproddef" class="definition"><strong>Definition 2.3  (Vector Inner Product) </strong></span>The inner product of two <span class="math inline">\(n\times 1\)</span> vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is written <span class="math inline">\(\x^T\y\)</span> (or sometimes as <span class="math inline">\(\langle \x,\y \rangle\)</span>) and is the sum of the product of corresponding elements.
 <span class="math display">\[\x^T\y = \pm x_1 &amp; x_2 &amp; \dots &amp; x_n \mp \pm y_1 \\y_2 \\ \vdots \\ y_n \mp = x_1y_1+x_2y_2+\dots+x_ny_n=\sum_{i=1}^n x_i y_i.\]</span></p>
 <p>When we take the inner product of a vector with itself, we get the square of the 2-norm:
 <span class="math display">\[\x^T\x=\|\x\|_2^2.\]</span></p>
@@ -535,9 +536,9 @@ Covariance(\x,\y)=E[(\x-E[\x])(\y-E[\y])]
   \tag{6.1}
 \end{equation}\]</span>
 where <span class="math inline">\(E[\star]\)</span> is the expected value of the variable.
-If larger values of one variable correspond to larger values of the other variable and at the same time smaller values of one correspond to smaller values of the other, then the covariance between the two variables is positive. In the opposite case, if larger values of one variable correspond to smaller values of the other and vice versa, then the covariance is negative. Thus, the <em>sign</em> of the covariance shows the tendency of the linear relationship between variables, however the <em>magnitude</em> of the covariance is not easy to interpret. Covariance is a population parameter - it is a property of the joint distribution of the random variables <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>. Definition <a href="norms.html#def:covariancedef">6.2</a> provides the mathematical formulation for the <em>sample</em> covariance. This is our best estimate for the population parameter when we have data sampled from a population.</p>
+If larger values of one variable correspond to larger values of the other variable and at the same time smaller values of one correspond to smaller values of the other, then the covariance between the two variables is positive. In the opposite case, if larger values of one variable correspond to smaller values of the other and vice versa, then the covariance is negative. Thus, the <em>sign</em> of the covariance shows the tendency of the linear relationship between variables, however the <em>magnitude</em> of the covariance is not easy to interpret. Covariance is a population parameter - it is a property of the joint distribution of the random variables <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span>. Definition <a href="norms.html#def:covariancedef">6.3</a> provides the mathematical formulation for the <em>sample</em> covariance. This is our best estimate for the population parameter when we have data sampled from a population.</p>
 <div class="definition">
-<p><span id="def:covariancedef" class="definition"><strong>Definition 6.2  (Sample Covariance) </strong></span>If <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are <span class="math inline">\(n\times 1\)</span> vectors containing <span class="math inline">\(n\)</span> observations for two different variables, then the <strong>sample covariance</strong> of <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is given by
+<p><span id="def:covariancedef" class="definition"><strong>Definition 6.3  (Sample Covariance) </strong></span>If <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are <span class="math inline">\(n\times 1\)</span> vectors containing <span class="math inline">\(n\)</span> observations for two different variables, then the <strong>sample covariance</strong> of <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> is given by
 <span class="math display">\[\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y}) = \frac{1}{n-1}(\x-\bar{\x})^T(\y-\bar{\y})\]</span>
 Where again <span class="math inline">\(\bar{\x}\)</span> and <span class="math inline">\(\bar{\y}\)</span> are vectors that contain <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> repeated <span class="math inline">\(n\)</span> times. It should be clear from this formulation that <span class="math display">\[cov(\x,\y)=cov(\y,\x).\]</span></p>
 <p>When we have <span class="math inline">\(p\)</span> vectors, <span class="math inline">\(\v_1,\v_2,\dots,\v_p\)</span>, each containing <span class="math inline">\(n\)</span> observations for <span class="math inline">\(p\)</span> different variables, the sample covariances are most commonly given by the <strong>sample covariance matrix</strong>, <span class="math inline">\(\ssigma\)</span>, where <span class="math display">\[\ssigma_{ij}=cov(\v_i,\v_j).\]</span> This matrix is symmetric, since <span class="math inline">\(\ssigma_{ij}=\ssigma_{ji}\)</span>. If we create a matrix <span class="math inline">\(\V\)</span> whose columns are the vectors <span class="math inline">\(\v_1,\v_2,\dots \v_p\)</span> <em>once the variables have been centered to have mean 0</em>, then the covariance matrix is given by:
@@ -578,7 +579,7 @@ If the covariance matrix is diagonal (meaning the variables are uncorrelated) th
 <h3><span class="header-section-number">6.3.3</span> Angular Distance</h3>
 <p>The inner product between two vectors can provide useful information about their relative orientation in space and about their similarity. For example, to find the cosine of the angle between two vectors in <span class="math inline">\(n\)</span>-space, the inner product of their corresponding unit vectors will provide the result. This cosine is often used as a measure of similarity or correlation between two vectors.</p>
 <div class="definition">
-<p><span id="def:cosine" class="definition"><strong>Definition 6.3  (Cosine of Angle between Vectors) </strong></span>The cosine of the angle between two vectors in <span class="math inline">\(n\)</span>-space is given by
+<p><span id="def:cosine" class="definition"><strong>Definition 6.4  (Cosine of Angle between Vectors) </strong></span>The cosine of the angle between two vectors in <span class="math inline">\(n\)</span>-space is given by
 <span class="math display">\[\cos(\theta)=\frac{\x^T\y}{\|\x\|_2\|\y\|_2}\]</span>
 <img src="figs/cos.gif" /></p>
 </div>
@@ -587,15 +588,15 @@ If the covariance matrix is diagonal (meaning the variables are uncorrelated) th
 <div id="correlation" class="section level3" number="6.3.4">
 <h3><span class="header-section-number">6.3.4</span> Correlation</h3>
 <p>Pearson’s correlation is a normalized version of the covariance, so that not only the <em>sign</em> of the coefficient is meaningful, but its <em>magnitude</em> is meaningful in measuring the strength of the linear association.</p>
-<p>(ref:cosinecorrtitle) Pearson’s Correlation and Cosine Distance
-:::{.example name=‘(ref:cosinecorrtitle)’ #cosinecorr}
-You may recall the formula for Pearson’s correlation between variable <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> with a sample size of <span class="math inline">\(n\)</span> to be as follows:
+
+<div class="example">
+<p><span id="exm:cosinecorr" class="example"><strong>Example 6.5  (Pearson’s Correlation and Cosine Distance) </strong></span>You may recall the formula for Pearson’s correlation between variable <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> with a sample size of <span class="math inline">\(n\)</span> to be as follows:
 <span class="math display">\[r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}\]</span>
 If we let <span class="math inline">\(\bar{\x}\)</span> be a vector that contains <span class="math inline">\(\bar{x}\)</span> repeated <span class="math inline">\(n\)</span> times, like we did in Example <a href="norms.html#exm:sdnorm">6.2</a>, and let <span class="math inline">\(\bar{\y}\)</span> be a vector that contains <span class="math inline">\(\bar{y}\)</span> then Pearson’s coefficient can be written as:
 <span class="math display">\[r=\frac{(\x-\bar{\x})^T(\y-\bar{\y})}{\|\x-\bar{\x}\|\|\y-\bar{\y}\|}\]</span>
 In other words, it is just the cosine of the angle between the two vectors once they have been <em>centered</em> to have mean 0.</p>
-<p>This makes sense: correlation is a measure of the extent to which the two variables share a line in space. If the cosine of the angle is positive or negative one, this means the angle between the two vectors is <span class="math inline">\(0^{\circ}\)</span> or <span class="math inline">\(180^{\circ}\)</span>, thus, the two vectors are perfectly correlated or <em>collinear.</em>
-:::</p>
+<p>This makes sense: correlation is a measure of the extent to which the two variables share a line in space. If the cosine of the angle is positive or negative one, this means the angle between the two vectors is <span class="math inline">\(0^{\circ}\)</span> or <span class="math inline">\(180^{\circ}\)</span>, thus, the two vectors are perfectly correlated or <em>collinear.</em></p>
+</div>
 <p>It is difficult to visualize the angle between two variable vectors because they exist in <span class="math inline">\(n\)</span>-space, where <span class="math inline">\(n\)</span> is the number of observations in the dataset. Unless we have fewer than 3 observations, we cannot draw these vectors or even picture them in our minds. As it turns out, this angular measurement does translate into something we can conceptualize: Pearson’s correlation coefficient is the angle formed between the two possible regression lines using the centered data: <span class="math inline">\(\y\)</span> regressed on <span class="math inline">\(\x\)</span> and <span class="math inline">\(\x\)</span> regressed on <span class="math inline">\(\y\)</span>. This is illustrated in Figure <a href="norms.html#fig:corrangle">6.2</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:corrangle"></span>
@@ -616,7 +617,7 @@ Figure 6.2: Correlation Coefficient <span class="math inline">\(r\)</span> and A
 which clearly has rank 1. It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.</p>
 </div>
 <div class="example">
-<p><span id="exm:centerouter" class="example"><strong>Example 6.4  (Centering Data with an Outer Product) </strong></span>As we’ve seen in previous examples, many statistical formulas involve the <em>centered</em> data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals’ heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:</p>
+<p><span id="exm:centerouter" class="example"><strong>Example 6.6  (Centering Data with an Outer Product) </strong></span>As we’ve seen in previous examples, many statistical formulas involve the <em>centered</em> data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals’ heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:</p>
 <p><span class="math display">\[\A=\bm{ ~ &amp; h &amp; w &amp; s \cr 
             person_1 &amp; 60 &amp; 102 &amp; 5.5 \cr
             person_2 &amp; 72 &amp; 170 &amp;  7.5 \cr
@@ -671,7 +672,7 @@ Determine the Mahalanobis distance between <span class="math inline">\(\u\)</spa
 <p>Write a matrix expression for the correlation matrix, <span class="math inline">\(\C\)</span>, for a matrix of <em>centered</em> data, <span class="math inline">\(\X\)</span>, where <span class="math inline">\(\C_{ij}=r_{ij}\)</span> is Pearson’s correlation measure between variables <span class="math inline">\(\x_i\)</span> and <span class="math inline">\(\x_j\)</span>. To do this, we need more than an inner product, we need to normalize the rows and columns by
 the norms <span class="math inline">\(\|\x_i\|\)</span>. For a hint, revisit the exercises in Chapter <a href="mult.html#mult">2</a>.</p>
 <li>
-<p>Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Develop a matrix formula for the standardized data (where the mean of each variable should be subtracted from the corresponding column before dividing by the standard deviation). <em>Hint: use Exercises 1(f) and 4 from Chapter <a href="mult.html#mult">2</a> along with Example <a href="norms.html#exm:centerouter">6.4</a>.</em></p>
+<p>Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Develop a matrix formula for the standardized data (where the mean of each variable should be subtracted from the corresponding column before dividing by the standard deviation). <em>Hint: use Exercises 1(f) and 4 from Chapter <a href="mult.html#mult">2</a> along with Example <a href="norms.html#exm:centerouter">6.6</a>.</em></p>
 <li>
 <p>Explain why, for any norm or distance metric,
 <span class="math display">\[\|\x-\y\|=\|\y-\x\|\]</span></p>

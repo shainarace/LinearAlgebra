@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -442,7 +443,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Max.   :25.0   Max.   :120.00</code></pre>
 <p>We can plot these two variables as follows:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lsapp.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="setting-up-the-normal-equations" class="section level3" number="12.1.2">
 <h3><span class="header-section-number">12.1.2</span> Setting up the Normal Equations</h3>
@@ -504,7 +505,7 @@ var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\math
   &amp;=&amp; \widehat{\sigma_{\varepsilon}}^2 (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
   &amp;=&amp; \widehat{\sigma_{\varepsilon}}^2(\mathbf{X}^T\mathbf{X})^{-1}
 \end{eqnarray*}\]</span></p>
-<p>The variances of each <span class="math inline">\(\widehat\beta\)</span> are given by the diagonal elements of their covariance matrix (see Definition <a href="norms.html#def:covariancedef">6.2</a>), and the standard errors of each <span class="math inline">\(\widehat\beta\)</span> are thus obtained by taking the square roots of these diagonal elements:
+<p>The variances of each <span class="math inline">\(\widehat\beta\)</span> are given by the diagonal elements of their covariance matrix (see Definition <a href="norms.html#def:covariancedef">6.3</a>), and the standard errors of each <span class="math inline">\(\widehat\beta\)</span> are thus obtained by taking the square roots of these diagonal elements:
 <span class="math display">\[s.e.(\widehat{\beta_i})=\sqrt{\widehat{\sigma_{\varepsilon}}[(\mathbf{X}^T\mathbf{X})^{-1}]_{ii}}\]</span></p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="lsapp.html#cb67-1" aria-hidden="true" tabindex="-1"></a>meany<span class="ot">=</span><span class="fu">mean</span>(y)</span>
 <span id="cb67-2"><a href="lsapp.html#cb67-2" aria-hidden="true" tabindex="-1"></a>XXinv<span class="ot">=</span><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)</span>
@@ -530,7 +531,7 @@ var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\math
 <p>Let’s plot our regression line over the original data:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="lsapp.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
 <span id="cb74-2"><a href="lsapp.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(beta[<span class="dv">1</span>],beta[<span class="dv">2</span>],<span class="at">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 </div>
 <div id="ols-in-r-via-lm" class="section level3" number="12.1.4">
 <h3><span class="header-section-number">12.1.4</span> OLS in R via <code>lm()</code></h3>

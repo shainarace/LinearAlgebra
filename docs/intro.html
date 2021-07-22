@@ -315,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
 <li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
@@ -349,7 +349,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
@@ -431,16 +432,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> What is Linear Algebra?</h2>
 <p>At its heart, Linear Algebra is the study of <strong>linear functions</strong>. The term <strong>linear</strong> should be understood to mean <em>straight</em> or <em>flat</em>. A line on the two dimensional coordinate plane, written <span class="math display">\[y=mx+b\]</span> represents a linear equation - the set of points <span class="math inline">\((x,y)\)</span> satisfying this equation form a straight line. On the other hand, a quadratic equation like <span class="math display">\[y=ax^2+bx+c\]</span> is <em>nonlinear</em> - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube <span class="math inline">\((x,y,z)\)</span>) is written as
 <span class="math display">\[ax+by+cz=d.\]</span>
-This is also considered a linear equation - the set of points <span class="math inline">\((x,y,z)\)</span> satisfying this equation form a flat surface (a plane). These are the types of equations we will see in this course. We will not see equations like:
-<span class="math display">\[x^2+y^2+3z=10 \quad \mbox{or} \quad 2xy+\sqrt{z}+\frac{1}{x}=1 \quad \mbox{or} \quad \log(x-y)+e^x=0\]</span>
-All of the above equations are <em>nonlinear</em>. A linear function involves only multiplication by scalars and addition/subtraction:
+Such a plane is a classic example - the set of points <span class="math inline">\((x,y,z)\)</span> satisfying this equation form a flat surface (a plane).</p>
+<p>A linear function involves only multiplication by scalars and addition/subtraction, for example:
 <span class="math display">\[2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.\]</span>
-The second equation above brings us to an important point: we don’t live in a 3-dimensional world. The “flatness” of linear equations is evident when we can graph them in 2 and 3-dimensions. However with 6 variables we can no longer conceptualize the “flatness” of our equation - we just have to take on principal the fact that linear equations are flat and have no curvature.</p>
+The second equation above brings us to an important point: we don’t have to restrict ourselves to a 3-dimensional world. While the “flatness” of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the “flatness” of our equation. We take on principal that the surface that contains all solutions to the equation <span class="math inline">\(4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2\)</span> is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: <em>what is 6-dimensional space?</em> We’ll get to the the definition of <span class="math inline">\(n\)</span>-space soon (Definition <a href="intro.html#def:nspace">1.5</a>), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say <em>height</em>, <em>weight</em> and <em>circumference</em>, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a forth variable, say <em>cost</em>, and suddenly we cannot <em>physically</em> consider the plot (because our perception is limited to 3-dimensions) but we ought to be able to suspend our disbelief and assume that a “forth axes” (forth dimension) can be considered to represent cost.</p>
 <p>In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare “these two observations are far away from each other”.</p>
-<p>The second term of the subject is, of course, <em>algebra.</em> This is a word you are likely familiar with, however this course will challenge your initial concept of the word. Linear Algebra deals with the algebra of matrices, which is likely different from anything you’ve experienced before. For example, when given an equation for an unknown value, like
+<p>The second term in the phrase is, of course, <strong>algebra.</strong> While you are likely familiar with the term, this course will challenge your initial familiarity. Linear Algebra deals with the algebra of matrices, which is likely different from any algebra you’ve experienced before. For example, when given an equation for an unknown value, like
 <span class="math display">\[2x=3,\]</span> you probably immediately think “I should divide both sides by 2 to determine the unknown value x”. Our equations in this course will be quite different because the expressions will involve matrices and vectors. For example,
 <span class="math display">\[\left(\begin{matrix} 2 &amp; 3\\1&amp;4 \end{matrix}\right) \left(\begin{matrix} x_1\\x_2 \end{matrix}\right) = \left(\begin{matrix} 5\\6 \end{matrix}\right)\]</span>
-is one type of equation we will learn to solve in this course. In this situation, we cannot simply divide both sides by the left hand matrix to solve for the unknowns - in fact it should look quite confusing to consider what that would even mean! Learning to work with matrices will be like learning a new language - the only way to succeed will be to practice and struggle and practice and struggle. Keep pace with the course and learn the terminology and definitions foremost - without the language and notation firmly in place, the techniques will seem far more difficult than they actually are.</p>
+is one type of equation we will learn to solve in this course. In this situation, we cannot simply divide both sides by the left hand matrix to solve for the unknowns - in fact it should look quite confusing to consider what that would even mean!</p>
+<p>Learning to work with matrices will be like learning a new language - the only way to succeed will be to practice and struggle and practice and struggle. Keep pace with the course and learn the terminology and definitions foremost - without the language and notation firmly in place, the techniques will seem far more difficult than they actually are.</p>
 </div>
 <div id="why-linear-algebra" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Why Linear Algebra</h2>
@@ -559,7 +560,7 @@ When the row and column numbers are the same (<span class="math inline">\(i=j\)<
 We can quickly see that there is symmetry in this matrix because the number of times Students <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> worked together is, of course, the same as the number of times Students <span class="math inline">\(j\)</span> and <span class="math inline">\(i\)</span> worked together. Formally, a matrix is called <strong>symmetric</strong> if <span class="math inline">\(A_{ij}=A_{ji}\)</span> (this important concept will be defined again on page ). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.</p>
 <p>An adjacency matrix like the one listed above is often used to describe a <em>network</em> or <em>graph.</em> A <strong>graph</strong> is a collection of <strong>vertices</strong> (nodes) that each represent some entity, and <strong>edges</strong> which connect vertices that are related in some way.</p>
 <p>Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="figs/studentgraph.jpg" alt="Network of Student Team Membership" width="50%" />
 <p class="caption">
 Figure 1.1: Network of Student Team Membership
@@ -607,8 +608,10 @@ An <span class="math inline">\(n\)</span>-tuple defines a <strong>vector</strong
 </center>
 </div>
 <p>You will recall that the symbol <span class="math inline">\(\Re\)</span> is used to denote the set of real numbers. <span class="math inline">\(\Re\)</span> is simply <span class="math inline">\(1\)</span>-space. It is a set of vectors with a single element. In this sense any real number, <span class="math inline">\(x\)</span>, has a direction: if it is positive, it is to one side of the origin, if it is negative it is to the opposite side. That number, <span class="math inline">\(x\)</span>, also has a magnitude: <span class="math inline">\(|x|\)</span> is the distance between <span class="math inline">\(x\)</span> and the origin, 0.</p>
-<p><span class="math inline">\(n\)</span>-space (the set of real <span class="math inline">\(n\)</span>-tuples) is denoted <span class="math inline">\(\Re^n\)</span>. In set notation, the formal mathematical definition is simply:
+<div class="definition">
+<p><span id="def:nspace" class="definition"><strong>Definition 1.5  (n-space) </strong></span><span class="math inline">\(n\)</span>-space (the set of real <span class="math inline">\(n\)</span>-tuples) is denoted <span class="math inline">\(\Re^n\)</span>. In set notation, the formal mathematical definition is simply:
 <span class="math display">\[\Re^n = \left\lbrace (x_1,x_2,\dots,x_n) : x_i \in \Re, i=1,\dots, n\right\rbrace.\]</span></p>
+</div>
 <p>We will often use this notation to define the size of an arbitrary vector. For example, <span class="math inline">\(\x \in \Re^p\)</span> simply means that <span class="math inline">\(\x\)</span> is a vector with <span class="math inline">\(p\)</span> entries:
 <span class="math inline">\(\x=(x_1,x_2,\dots,x_p)\)</span>.</p>
 <p>Many (all, really) of the concepts we have previously considered in <span class="math inline">\(2\)</span>- or <span class="math inline">\(3\)</span>-space extend naturally to <span class="math inline">\(n\)</span>-space and a few new concepts become useful as well. One very important concept is that of a <strong>norm</strong> or distance metric, as we will see in Chapter <a href="norms.html#norms">6</a>. Before we get into the details of the vector space model, let’s continue with some of the basic definitions we will need on that journey.</p>
@@ -620,7 +623,7 @@ An <span class="math inline">\(n\)</span>-tuple defines a <strong>vector</strong
 <h3><span class="header-section-number">1.5.1</span> Transpose</h3>
 <p>One important transformation we will have to perform on a matrix is to switch the columns into rows. It is not necessary that you see the importance of this transformation right now, but trust that it is something we will need quite frequently.</p>
 <div class="definition">
-<p><span id="def:transposedef" class="definition"><strong>Definition 1.5  (Transpose of a Matrix or Vector) </strong></span>For a given <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span>, the <strong>transpose</strong> of <span class="math inline">\(\A\)</span>, written <span class="math inline">\(\A^T\)</span> (read as “<span class="math inline">\(\A\)</span>-transpose”) in this course and sometimes elsewhere denoted as <span class="math inline">\(\A&#39;\)</span> is the <span class="math inline">\(n\times m\)</span> matrix whose rows are the corresponding columns of <span class="math inline">\(\A\)</span>.</p>
+<p><span id="def:transposedef" class="definition"><strong>Definition 1.6  (Transpose of a Matrix or Vector) </strong></span>For a given <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span>, the <strong>transpose</strong> of <span class="math inline">\(\A\)</span>, written <span class="math inline">\(\A^T\)</span> (read as “<span class="math inline">\(\A\)</span>-transpose”) in this course and sometimes elsewhere denoted as <span class="math inline">\(\A&#39;\)</span> is the <span class="math inline">\(n\times m\)</span> matrix whose rows are the corresponding columns of <span class="math inline">\(\A\)</span>.</p>
 <p>Thus, if <span class="math inline">\(\A\)</span> is a <span class="math inline">\(3\times 4\)</span> matrix then <span class="math inline">\(\A^T\)</span> is a <span class="math inline">\(4\times 3\)</span> matrix as follows:
 <span class="math display">\[\A = \left(\begin{matrix} A_{11} &amp; A_{12} &amp; A_{13} &amp;A_{14}\\ A_{21} &amp; A_{22} &amp; A_{23} &amp;A_{24}\\ A_{31} &amp; A_{32} &amp; A_{33} &amp;A_{34}\end{matrix}\right)
 \quad  \A^T = \left(\begin{matrix} A_{11} &amp; A_{21} &amp; A_{31}\\A_{12} &amp; A_{22} &amp; A_{32}\\A_{13} &amp; A_{23} &amp; A_{33}\\A_{14} &amp; A_{24} &amp; A_{34}\end{matrix}\right)\]</span></p>
@@ -635,7 +638,7 @@ To find the transpose, we simply create new matrices whose rows are the correspo
 <span class="math display">\[\B^T=\left(\begin{matrix} 2 &amp;5&amp; -8\\-3&amp;-6&amp;9\\-4&amp;-7&amp;0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&amp;-3&amp;7&amp;5\\2&amp;6&amp;-9&amp;-1 \end{matrix}\right) \]</span> <span class="math display">\[\x^T = \left(\begin{matrix} 3&amp;-4&amp;5&amp;6 \end{matrix}\right)\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:symdef" class="definition"><strong>Definition 1.6  (Symmetric Matrix) </strong></span>Defining the matrix transpose allows us to define the notion of a <em>symmetric matrix</em>. A matrix <span class="math inline">\(\A\)</span> is called <strong>symmetric</strong> if and only if <span class="math display">\[\A=\A^T.\]</span>
+<p><span id="def:symdef" class="definition"><strong>Definition 1.7  (Symmetric Matrix) </strong></span>Defining the matrix transpose allows us to define the notion of a <em>symmetric matrix</em>. A matrix <span class="math inline">\(\A\)</span> is called <strong>symmetric</strong> if and only if <span class="math display">\[\A=\A^T.\]</span>
 This is equivalent to saying that <span class="math inline">\(\A\)</span> is symmetric if and only if
 <span class="math display">\[A_{ij}=A_{ji}.\]</span>
 It should be clear from the definition that in order for <span class="math inline">\(\A\)</span> to be a symmetric matrix, it <em>must</em> be a square matrix - otherwise <span class="math inline">\(\A\)</span> and <span class="math inline">\(\A^T\)</span> would not even have the same size!</p>
@@ -663,7 +666,7 @@ compute the following matrices:
 <h3><span class="header-section-number">1.5.2</span> Trace of a Matrix</h3>
 <p>Another important matrix operation that will come into play later is the <em>trace</em> of a matrix. The <strong>trace</strong> of a square matrix is the sum of the diagonal elements of this matrix.</p>
 <div class="definition">
-<p><span id="def:tracedef" class="definition"><strong>Definition 1.7  (Trace of a Matrix) </strong></span>For an <span class="math inline">\(n\times n\)</span> square matrix, <span class="math inline">\(\A\)</span>, the <strong>trace</strong> of <span class="math inline">\(\A\)</span>, written
+<p><span id="def:tracedef" class="definition"><strong>Definition 1.8  (Trace of a Matrix) </strong></span>For an <span class="math inline">\(n\times n\)</span> square matrix, <span class="math inline">\(\A\)</span>, the <strong>trace</strong> of <span class="math inline">\(\A\)</span>, written
 <span class="math display">\[trace(\A)\,\,\,\mbox{or}\,\,\,tr(\A)\]</span>
 is the sum of the diagonal elements:
 <span class="math display">\[tr(\A)=\sum_{i=1}^n A_{ii}\]</span></p>
@@ -680,14 +683,14 @@ Then, the trace of <span class="math inline">\(\A\)</span> is the sum of the dia
 <div id="special" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Special Matrices and Vectors</h2>
 <div class="definition">
-<p><span id="def:identity" class="definition"><strong>Definition 1.8  (Identity Matrix) </strong></span>The bold capital letter <span class="math inline">\(\bo{I}\)</span> will always to denote the <strong>identity matrix</strong>. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
+<p><span id="def:identity" class="definition"><strong>Definition 1.9  (Identity Matrix) </strong></span>The bold capital letter <span class="math inline">\(\bo{I}\)</span> will always to denote the <strong>identity matrix</strong>. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
 <span class="math display">\[\bo{I}_4 = \left(\begin{matrix} 1 &amp; 0 &amp; 0 &amp; 0 \\
                         0 &amp; 1 &amp; 0 &amp; 0\\
                         0&amp;0&amp;1&amp;0\\
                         0&amp;0&amp;0&amp;1 \end{matrix}\right)\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:elemvectors" class="definition"><strong>Definition 1.9  (Elementary Vectors) </strong></span>The bold lowercase <span class="math inline">\(\bo{e}_j\)</span> is used to refer to the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\bo{I}\)</span>. It is simply a vector of zeros with a one in the <span class="math inline">\(j^{th}\)</span> position. We do not often specify the size of the vector <span class="math inline">\(\bo{e}_j\)</span>, the number of elements is generally assumed from the context of the problem.</p>
+<p><span id="def:elemvectors" class="definition"><strong>Definition 1.10  (Elementary Vectors) </strong></span>The bold lowercase <span class="math inline">\(\bo{e}_j\)</span> is used to refer to the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\bo{I}\)</span>. It is simply a vector of zeros with a one in the <span class="math inline">\(j^{th}\)</span> position. We do not often specify the size of the vector <span class="math inline">\(\bo{e}_j\)</span>, the number of elements is generally assumed from the context of the problem.</p>
 <p><span class="math display">\[\bo{e}_j=\begin{matrix}
 \begin{matrix} ~ \\~\\~\\~\\j^{th}\text{row} \rightarrow \\ ~\\~\\~ \end{matrix} &amp; 
   \begin{pmatrix}0\\0\\ \vdots \\0\\1\\0\\ \vdots\\0\end{pmatrix}\\\\
@@ -695,7 +698,7 @@ Then, the trace of <span class="math inline">\(\A\)</span> is the sum of the dia
 <p>The vector <span class="math inline">\(\bo{e}\)</span> with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced <span class="math inline">\(\textbf{1}\)</span>.</p>
 <p><span class="math display">\[\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)\]</span></p>
 </div>
-<p>The elementary vectors described in Definition <a href="intro.html#def:elemvectors">1.9</a> create the coordinate axes of <span class="math inline">\(n\)</span>-space. For illustrative purposes, let’s consider <span class="math inline">\(2\)</span>-space. The elementary vectors in <span class="math inline">\(2\)</span>-space are:
+<p>The elementary vectors described in Definition <a href="intro.html#def:elemvectors">1.10</a> create the coordinate axes of <span class="math inline">\(n\)</span>-space. For illustrative purposes, let’s consider <span class="math inline">\(2\)</span>-space. The elementary vectors in <span class="math inline">\(2\)</span>-space are:
 <span class="math display">\[\e_1 = \left(\begin{matrix} 1\\0\end{matrix}\right) \quad \mbox{and} \quad \e_2 = \left(\begin{matrix} 0\\1 \end{matrix}\right) \]</span>
 These vectors correspond to the directions of the coordinate axes as illustrated in Figure <a href="intro.html#fig:elemvectors">1.2</a></p>
 <div class="figure" style="text-align: center"><span id="fig:elemvectors"></span>
@@ -705,7 +708,7 @@ Figure 1.2: Elementary cectors represent our “usual” coordinate axes
 </p>
 </div>
 <div class="definition">
-<p><span id="def:diag" class="definition"><strong>Definition 1.10  (Diagonal Matrix) </strong></span>A <strong>diagonal matrix</strong> is a matrix for which off-diagonal elements, <span class="math inline">\(\A_{ij},\,i\ne j\)</span> are zero.
+<p><span id="def:diag" class="definition"><strong>Definition 1.11  (Diagonal Matrix) </strong></span>A <strong>diagonal matrix</strong> is a matrix for which off-diagonal elements, <span class="math inline">\(\A_{ij},\,i\ne j\)</span> are zero.
 For example:
 <span class="math display">\[\bo{D} = \left(\begin{matrix} \sigma_1 &amp; 0 &amp; 0 &amp; 0 \\
                         0 &amp; \sigma_2 &amp; 0 &amp; 0\\
@@ -722,7 +725,7 @@ or simply <span class="math display">\[D_{ii} = \sigma_i.\]</span></p>
 </p>
 </div>
 <div class="definition">
-<p><span id="def:triangulardef" class="definition"><strong>Definition 1.11  (Triangular Matrices) </strong></span>Triangular matrices are square matrices whose elements are zero either below or above the main diagonal. If the matrix has zeros below the main diagonal, then it’s called <strong>upper triangular</strong>. The following illustration depicts an upper triangular matrix, where the asterisk symbol is used to denote any number (including potential zeros).
+<p><span id="def:triangulardef" class="definition"><strong>Definition 1.12  (Triangular Matrices) </strong></span>Triangular matrices are square matrices whose elements are zero either below or above the main diagonal. If the matrix has zeros below the main diagonal, then it’s called <strong>upper triangular</strong>. The following illustration depicts an upper triangular matrix, where the asterisk symbol is used to denote any number (including potential zeros).
 <span class="math display">\[\left(\begin{matrix} *&amp;*&amp;*&amp;\dots&amp;*\\0&amp;*&amp;*&amp;\dots&amp;*\\0&amp;0&amp;*&amp;\dots&amp;*\\ \vdots &amp;\vdots &amp;\ddots &amp;\ddots&amp;*\\0&amp;0&amp;0&amp;0&amp;*\end{matrix}\right)\]</span></p>
 <p>If a matrix has zeros above the main diagonal, then it’s called <strong>lower triangular</strong>. The following illustration depicts a lower triangular matrix.
 <span class="math display">\[\left(\begin{matrix} 0&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;*&amp;0&amp;\dots&amp;0\\ \vdots &amp;\vdots &amp;\ddots &amp;\ddots&amp;0\\ *&amp;*&amp;*&amp;*&amp;0\end{matrix}\right)\]</span></p>
@@ -916,7 +919,7 @@ is the matrix <span class="math inline">\(\bo{G}\)</span> symmetric? What is the
 <li>
 Use the network shown below to answer the following questions.<br />
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="figs/graphex.jpg" alt="Graph (Network) for exercise 11" width="2914" />
 <p class="caption">
 Figure 1.3: Graph (Network) for exercise 11
