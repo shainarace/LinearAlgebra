@@ -4,27 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python</title>
-  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 12 Applications of Least Squares | bookdownproj.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 12 Applications of Least Squares | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="MSALogo.png" />
-  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="github-repo" content="rstudio/linalg-master" />
+  
+  
+  
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Applications of Least Squares |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 12 Applications of Least Squares | bookdownproj.utf8" />
   
-  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="twitter:image" content="MSALogo.png" />
-
-<meta name="author" content="Shaina Race Bennett, PhD" />
+  
+  
 
 
-<meta name="date" content="2021-05-11" />
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +30,7 @@
   
   
 <link rel="prev" href="leastsquares.html"/>
-<link rel="next" href="linind.html"/>
+<link rel="next" href="pca.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,13 +49,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script src="libs/d3-4.5.0/d3.min.js"></script>
 <script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 <!DOCTYPE html>
@@ -70,7 +70,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -250,6 +249,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -263,14 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
 <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-<li><center><strong> with examples in R and Python </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -285,7 +285,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
 <li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>1.9</b> List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
 <ul>
@@ -296,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
 <li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
 <li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
 <ul>
@@ -309,86 +308,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
-<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.2</b> Three Types of Systems</a></li>
-<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.3</b> Solving Matrix Equations</a></li>
-<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
-<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>5.5</b> List of Key Terms</a></li>
-<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.6</b> Gauss-Jordan Elimination in R</a></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>6</b> Least Squares</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>6.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>7</b> Applications of Least Squares</a>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>7.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="7.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>7.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>8</b> Linear Independence</a>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>8.1</b> Linear Independence</a></li>
-<li class="chapter" data-level="8.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>8.2</b> Span of Vectors</a></li>
-<li class="chapter" data-level="8.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>9</b> Basis and Change of Basis</a>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>9.1</b> Exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>10</b> Eigenvalues and Eigenvectors</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>10.1</b> Diagonalization</a></li>
 <li class="chapter" data-level="10.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>10.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
-<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-5"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>11</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>11.1</b> Norms and Distances</a></li>
-<li class="chapter" data-level="11.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>11.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="11.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>11.3</b> Inner Products</a></li>
-<li class="chapter" data-level="11.4" data-path="norms.html"><a href="norms.html#orthogonality"><i class="fa fa-check"></i><b>11.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="11.5" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>11.5</b> Outer Products</a></li>
-<li class="chapter" data-level="11.6" data-path="norms.html"><a href="norms.html#exercises-6"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>12</b> Principal Components Analysis</a>
+<li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>12.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="12.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>12.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="12.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>12.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>12.2</b> Multiple Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>13</b> PCA in R</a>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="13.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>13.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="14.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>14.5</b> Image Compression</a></li>
+<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
+<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>15.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="15.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>15.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="15.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>15.3</b> Communalities</a></li>
-<li class="chapter" data-level="15.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>15.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="15.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>15.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>16</b> Factor Analysis</a>
+<li class="chapter" data-level="16" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>16</b> The Singular Value Decomposition (SVD)</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>16.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="16.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>16.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="16.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>16.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="16.2" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>16.2</b> Noise Reduction</a></li>
+<li class="chapter" data-level="16.3" data-path="svd.html"><a href="svd.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.3</b> Latent Semantic Indexing</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="17" data-path="applications-of-svd.html"><a href="applications-of-svd.html"><i class="fa fa-check"></i><b>17</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>17.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="17.1" data-path="applications-of-svd.html"><a href="applications-of-svd.html#latent-semantic-indexing-1"><i class="fa fa-check"></i><b>17.1</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="17.2" data-path="applications-of-svd.html"><a href="applications-of-svd.html#rappasvd"><i class="fa fa-check"></i><b>17.2</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>18</b> Social Network Analysis</a>
+<li class="chapter" data-level="18" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>18.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="18.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>18.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="18.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>18.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="18.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>18.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="18.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>18.3</b> Communalities</a></li>
+<li class="chapter" data-level="18.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>18.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="18.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>18.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>19.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="19.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>19.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>20</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>20.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>21</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>21.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="21.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>21.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -402,9 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -412,12 +425,12 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lsapp" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Applications of Least Squares</h1>
-<div id="simple-linear-regression" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Simple Linear Regression</h2>
-<div id="cars-data" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Cars Data</h3>
+<div id="lsapp" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Applications of Least Squares</h1>
+<div id="simple-linear-regression" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Simple Linear Regression</h2>
+<div id="cars-data" class="section level3" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> Cars Data</h3>
 <p>The `cars’ dataset is included in the datasets package. This dataset contains observations of speed and stopping distance for 50 cars. We can take a look at the summary statistics by using the <strong>summary</strong> function.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="lsapp.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cars)</span></code></pre></div>
 <pre><code>##      speed           dist       
@@ -429,10 +442,10 @@ with examples in R and Python</p></a>
 ##  Max.   :25.0   Max.   :120.00</code></pre>
 <p>We can plot these two variables as follows:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lsapp.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-141-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
-<div id="setting-up-the-normal-equations" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Setting up the Normal Equations</h3>
+<div id="setting-up-the-normal-equations" class="section level3" number="12.1.2">
+<h3><span class="header-section-number">12.1.2</span> Setting up the Normal Equations</h3>
 <p>Let’s set up a system of equations
 <span class="math display">\[\mathbf{X}\boldsymbol\beta=\mathbf{y}\]</span>
 to create the model
@@ -461,8 +474,8 @@ to create the model
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="lsapp.html#cb63-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1]  2 10  4 22 16 10 18 26 34 17</code></pre>
 </div>
-<div id="solving-for-parameter-estimates-and-statistics" class="section level3" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Solving for Parameter Estimates and Statistics</h3>
+<div id="solving-for-parameter-estimates-and-statistics" class="section level3" number="12.1.3">
+<h3><span class="header-section-number">12.1.3</span> Solving for Parameter Estimates and Statistics</h3>
 <p>Now lets find our parameter estimates by solving the normal equations,
 <span class="math display">\[\mathbf{X}^T\mathbf{X}\boldsymbol\beta = \mathbf{X}^T\mathbf{y}\]</span>
 using the built in <strong>solve</strong> function. To solve the system <span class="math inline">\(\mathbf{A}\mathbf{x}=\mathbf{b}\)</span> we’d use <code>solve(A,b)</code>.</p>
@@ -479,7 +492,7 @@ the regression sum of squares (SSR or SSM)
 the residual sum of squares (SSE)
 <span class="math display">\[\sum_{i=1}^n r_i =\mathbf{r}^T\mathbf{r}=\|\mathbf{r}\|^2\]</span>
 and the unbiased estimator of the variance of the residuals, using the model degrees of freedom which is <span class="math inline">\(n-2=48\)</span>:
-<span class="math display">\[\widehat{\sigma_{\epsilon}}^2 =\frac{SSE}{d.f.} = \frac{\|\mathbf{r}\|^2}{48}\]</span></p>
+<span class="math display">\[\widehat{\sigma_{\varepsilon}}^2 =\frac{SSE}{d.f.} = \frac{\|\mathbf{r}\|^2}{48}\]</span></p>
 <p>Then <span class="math inline">\(R^2\)</span>:
 <span class="math display">\[R^2 = \frac{SSR}{SST}\]</span></p>
 <p>We can also compute the standard error of <span class="math inline">\(\widehat{\boldsymbol\beta}\)</span> since</p>
@@ -487,12 +500,12 @@ and the unbiased estimator of the variance of the residuals, using the model deg
 \widehat{\boldsymbol\beta} &amp;=&amp; (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}\\
 var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y})\\
  &amp;=&amp;(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T var(\mathbf{y}) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
- &amp;=&amp;(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T (\widehat{\sigma_{\epsilon}}^2) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
-  &amp;=&amp; \widehat{\sigma_{\epsilon}}^2 (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
-  &amp;=&amp; \widehat{\sigma_{\epsilon}}^2(\mathbf{X}^T\mathbf{X})^{-1}
+ &amp;=&amp;(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T (\widehat{\sigma_{\varepsilon}}^2) \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
+  &amp;=&amp; \widehat{\sigma_{\varepsilon}}^2 (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1} \\
+  &amp;=&amp; \widehat{\sigma_{\varepsilon}}^2(\mathbf{X}^T\mathbf{X})^{-1}
 \end{eqnarray*}\]</span></p>
-<p>Thus, the variances of each <span class="math inline">\(\widehat\beta\)</span> are given by the diagonal elements of the covariance matrix, and the standard errors of each <span class="math inline">\(\widehat\beta\)</span> are given by the square roots of these diagonal elements:
-<span class="math display">\[s.e.(\widehat{\beta_i})=\sqrt{\widehat{\sigma_{\epsilon}}[(\mathbf{X}^T\mathbf{X})^{-1}]_{ii}}\]</span></p>
+<p>The variances of each <span class="math inline">\(\widehat\beta\)</span> are given by the diagonal elements of their covariance matrix (see Definition <a href="norms.html#def:covariancedef">6.2</a>), and the standard errors of each <span class="math inline">\(\widehat\beta\)</span> are thus obtained by taking the square roots of these diagonal elements:
+<span class="math display">\[s.e.(\widehat{\beta_i})=\sqrt{\widehat{\sigma_{\varepsilon}}[(\mathbf{X}^T\mathbf{X})^{-1}]_{ii}}\]</span></p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="lsapp.html#cb67-1" aria-hidden="true" tabindex="-1"></a>meany<span class="ot">=</span><span class="fu">mean</span>(y)</span>
 <span id="cb67-2"><a href="lsapp.html#cb67-2" aria-hidden="true" tabindex="-1"></a>XXinv<span class="ot">=</span><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)</span>
 <span id="cb67-3"><a href="lsapp.html#cb67-3" aria-hidden="true" tabindex="-1"></a>yhat<span class="ot">=</span>X<span class="sc">%*%</span>XXinv<span class="sc">%*%</span><span class="fu">t</span>(X)<span class="sc">%*%</span>y</span>
@@ -517,10 +530,10 @@ var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\math
 <p>Let’s plot our regression line over the original data:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="lsapp.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars)</span>
 <span id="cb74-2"><a href="lsapp.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(beta[<span class="dv">1</span>],beta[<span class="dv">2</span>],<span class="at">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
-<div id="ols-in-r-via-lm" class="section level3" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> OLS in R via <code>lm()</code></h3>
+<div id="ols-in-r-via-lm" class="section level3" number="12.1.4">
+<h3><span class="header-section-number">12.1.4</span> OLS in R via <code>lm()</code></h3>
 <p>Finally, let’s compare our results to the built in linear model solver, <code>lm()</code>:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="lsapp.html#cb75-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data=</span>cars)</span>
 <span id="cb75-2"><a href="lsapp.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
@@ -553,10 +566,10 @@ var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\math
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 </div>
-<div id="multiple-linear-regression" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Multiple Linear Regression</h2>
-<div id="bike-sharing-dataset" class="section level3" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Bike Sharing Dataset</h3>
+<div id="multiple-linear-regression" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Multiple Linear Regression</h2>
+<div id="bike-sharing-dataset" class="section level3" number="12.2.1">
+<h3><span class="header-section-number">12.2.1</span> Bike Sharing Dataset</h3>
 
 </div>
 </div>
@@ -567,7 +580,7 @@ var(\widehat{\boldsymbol\beta})&amp;=&amp;var((\mathbf{X}^T\mathbf{X})^{-1}\math
         </div>
       </div>
 <a href="leastsquares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linind.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -590,6 +603,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -598,7 +612,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/02-OLS.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/0299-OLS.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -606,7 +620,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/02-OLS.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/0299-OLS.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

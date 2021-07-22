@@ -4,27 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Solving Systems of Equations |  Linear Algebra for Data Science   with examples in R and Python</title>
-  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 5 Solving Systems of Equations | bookdownproj.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Solving Systems of Equations |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 5 Solving Systems of Equations | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="MSALogo.png" />
-  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="github-repo" content="rstudio/linalg-master" />
+  
+  
+  
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Solving Systems of Equations |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 5 Solving Systems of Equations | bookdownproj.utf8" />
   
-  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="twitter:image" content="MSALogo.png" />
-
-<meta name="author" content="Shaina Race Bennett, PhD" />
+  
+  
 
 
-<meta name="date" content="2021-05-11" />
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +30,7 @@
   
   
 <link rel="prev" href="r-programming-basics.html"/>
-<link rel="next" href="leastsquares.html"/>
+<link rel="next" href="norms.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,13 +49,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script src="libs/d3-4.5.0/d3.min.js"></script>
 <script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 <!DOCTYPE html>
@@ -70,7 +70,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -250,6 +249,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -263,14 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
 <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-<li><center><strong> with examples in R and Python </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -285,7 +285,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
 <li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>1.9</b> List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
 <ul>
@@ -296,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
 <li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
 <li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
 <ul>
@@ -309,86 +308,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
-<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.2</b> Three Types of Systems</a></li>
-<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.3</b> Solving Matrix Equations</a></li>
-<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
-<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>5.5</b> List of Key Terms</a></li>
-<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.6</b> Gauss-Jordan Elimination in R</a></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>6</b> Least Squares</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>6.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>7</b> Applications of Least Squares</a>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>7.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="7.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>7.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>8</b> Linear Independence</a>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>8.1</b> Linear Independence</a></li>
-<li class="chapter" data-level="8.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>8.2</b> Span of Vectors</a></li>
-<li class="chapter" data-level="8.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>9</b> Basis and Change of Basis</a>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>9.1</b> Exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>10</b> Eigenvalues and Eigenvectors</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>10.1</b> Diagonalization</a></li>
 <li class="chapter" data-level="10.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>10.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
-<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-5"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>11</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>11.1</b> Norms and Distances</a></li>
-<li class="chapter" data-level="11.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>11.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="11.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>11.3</b> Inner Products</a></li>
-<li class="chapter" data-level="11.4" data-path="norms.html"><a href="norms.html#orthogonality"><i class="fa fa-check"></i><b>11.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="11.5" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>11.5</b> Outer Products</a></li>
-<li class="chapter" data-level="11.6" data-path="norms.html"><a href="norms.html#exercises-6"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>12</b> Principal Components Analysis</a>
+<li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>12.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="12.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>12.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="12.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>12.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>12.2</b> Multiple Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>13</b> PCA in R</a>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="13.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>13.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="14.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>14.5</b> Image Compression</a></li>
+<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
+<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>15.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="15.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>15.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="15.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>15.3</b> Communalities</a></li>
-<li class="chapter" data-level="15.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>15.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="15.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>15.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>16</b> Factor Analysis</a>
+<li class="chapter" data-level="16" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>16</b> The Singular Value Decomposition (SVD)</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>16.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="16.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>16.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="16.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>16.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="16.2" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>16.2</b> Noise Reduction</a></li>
+<li class="chapter" data-level="16.3" data-path="svd.html"><a href="svd.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.3</b> Latent Semantic Indexing</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="17" data-path="applications-of-svd.html"><a href="applications-of-svd.html"><i class="fa fa-check"></i><b>17</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>17.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="17.1" data-path="applications-of-svd.html"><a href="applications-of-svd.html#latent-semantic-indexing-1"><i class="fa fa-check"></i><b>17.1</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="17.2" data-path="applications-of-svd.html"><a href="applications-of-svd.html#rappasvd"><i class="fa fa-check"></i><b>17.2</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>18</b> Social Network Analysis</a>
+<li class="chapter" data-level="18" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>18.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="18.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>18.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="18.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>18.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="18.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>18.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="18.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>18.3</b> Communalities</a></li>
+<li class="chapter" data-level="18.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>18.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="18.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>18.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>19.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="19.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>19.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>20</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>20.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>21</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>21.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="21.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>21.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -402,9 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -505,13 +518,8 @@ x_1+2x_2 +3x_3= 14\\
 x_2+x_3 =6\\
 x_3 = 1\end{align}\end{cases}\]</span>
 is a triangular system. Using substitution, the second equation will give us the value for <span class="math inline">\(x_2\)</span>, which will allow for further substitution into the first equation to solve for the value of <span class="math inline">\(x_1\)</span>. Let’s take a look at an example of how we can transform any system to a triangular system.</p>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example @ref().1: Transforming a System to a Triangular System via 3 Operations
-</div>
-<div class="S2text">
-<p>Solve the following system of equations:
+<div class="example">
+<p><span id="exm:rowopeq" class="example"><strong>Example 5.1  (Transforming a System to a Triangular System via 3 Operations) </strong></span>Solve the following system of equations:
 <span class="math display">\[\begin{cases}\begin{eqnarray}
 x_1+x_2 +x_3&amp;=&amp; 1\\
 x_1-2x_2+2x_3 &amp;=&amp;4\\
@@ -544,152 +552,182 @@ x_2-2x_3  &amp;=&amp; 1 \\
 -5x_3  &amp;=&amp;6 \end{eqnarray}\end{cases}\]</span></p>
 <p>Now that our system is in triangular form, we can use substitution to solve for all of the variables:
 <span class="math display">\[x_1 = 3.6 \quad x_2 = -1.4 \quad x_3 = -1.2 \]</span></p>
-This is the procedure for Gaussian Elimination, which we will now formalize in it’s matrix version.
-</div>
-</div>
+<p>This is the procedure for Gaussian Elimination, which we will now formalize in it’s matrix version.</p>
 </div>
 </div>
 <div id="the-augmented-matrix" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> The Augmented Matrix</h3>
 <p>When solving systems of equations, we will commonly use the <strong>augmented matrix</strong>.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition @ref().1: The Augmented Matrix
-</div>
-<div class="Stext">
-<p>The <strong>augmented matrix</strong> of a system of equations is simply the matrix which contains all of the coefficients of the equations, augmented with an extra column holding the values on the right hand sides of the equations. If our system is:</p>
+<div class="definition">
+<p><span id="def:augmat" class="definition"><strong>Definition 5.1  (The Augmented Matrix) </strong></span>The <strong>augmented matrix</strong> of a system of equations is simply the matrix which contains all of the coefficients of the equations, augmented with an extra column holding the values on the right hand sides of the equations. If our system is:</p>
 <p><span class="math display">\[\begin{cases}\begin{eqnarray}
 a_{11}x_1+a_{12}x_2 +a_{13}x_3&amp;=&amp; b_1
 a_{21}x_1+a_{22}x_2 +a_{23}x_3&amp;=&amp; b_2
 a_{31}x_1+a_{32}x_2 +a_{33}x_3&amp;=&amp;b_3 \end{eqnarray}\end{cases}\]</span></p>
-Then the corresponding augmented matrix is
-<span class="math display">\[\begin{am}{3}
+<p>Then the corresponding augmented matrix is
+<span class="math display">\[\left(\begin{array}{rrr|r}
 a_{11}&amp;a_{12}&amp;a_{13}&amp; b_1\\
 a_{21}&amp;a_{22}&amp;a_{23}&amp; b_2\\
 a_{31}&amp;a_{12}&amp;a_{33}&amp; b_3\\
-\end{am}\]</span>
-</div>
-</div>
+\end{array}\right)\]</span></p>
 </div>
 <p>Using this augmented matrix, we can contain all of the information needed to perform the three operations outlined in the previous section. We will formalize these operations as they pertain to the rows (i.e. individual equations) of the augmented matrix (i.e. the entire system) in the following definition.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition @ref().2: Row Operations for Gaussian Elimination
-</div>
-<div class="Stext">
-<p>Gaussian Elimination is performed on the rows, <span class="math inline">\(\arow{i},\)</span> of an augmented matrix, <span class="math display">\[\A = \pm \arow{1}\\\arow{2}\\\arow{3}\\\vdots\\\arow{m}\mp\]</span> by using the three <strong>elementary row operations</strong>:</p>
+<div class="definition">
+<p><span id="def:rowops" class="definition"><strong>Definition 5.2  (Row Operations for Gaussian Elimination) </strong></span>Gaussian Elimination is performed on the rows, <span class="math inline">\(\arow{i},\)</span> of an augmented matrix, <span class="math display">\[\A = \pm \arow{1}\\\arow{2}\\\arow{3}\\\vdots\\\arow{m}\mp\]</span> by using the three <strong>elementary row operations</strong>:</p>
 <ol style="list-style-type: decimal">
 <li>Swap rows <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>.</li>
 <li>Replace row <span class="math inline">\(i\)</span> by a nonzero multiple of itself.</li>
 <li>Replace row <span class="math inline">\(i\)</span> by a linear combination of itself plus a multiple of row <span class="math inline">\(j\)</span>.</li>
 </ol>
 <p>The ultimate goal of Gaussian elimination is to transform an augmented matrix into an <strong>upper-triangular matrix</strong> which allows for backsolving.
-<span class="math display">\[\A \rightarrow \begin{am}{4} t_{11}&amp; t_{12}&amp; \dots&amp; t_{1n}&amp;c_1\cr 
+<span class="math display">\[\A \rightarrow \left(\begin{array}{rrrr|r}
+ t_{11}&amp; t_{12}&amp; \dots&amp; t_{1n}&amp;c_1\cr 
                                 0&amp; t_{22}&amp; \dots&amp; t_{2n}&amp;c_2\cr
                                 \vdots&amp; \vdots&amp; \ddots&amp; \vdots&amp;\vdots\cr
-                                0&amp; 0&amp; \dots&amp; t_{nn}&amp;c_n \end{am}\]</span></p>
-</div>
-</div>
+                                0&amp; 0&amp; \dots&amp; t_{nn}&amp;c_n\end{array}\right)\]</span></p>
 </div>
 <p>The key to this process at each step is to focus on one position, called the <em>pivot position</em> or simply the <em>pivot</em>, and try to eliminate all terms below this position using the three row operations. Only nonzero numbers are allowed to be pivots. If a coefficient in a pivot position is ever 0, then the rows of the matrix should be interchanged to find a nonzero pivot. If this is not possible then we continue on to the next possible column where a pivot position can be created.</p>
 <p>Let’s now go through a detailed example of Gaussian elimination using the augmented matrix. We will use the same example (and same row operations) from the previous section to demonstrate the idea.</p>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example @ref().2: Row Operations on the Augmented Matrix
-</div>
-<div class="S2text">
-<p>We will solve the system of equations from Example <a href="#ex:rowopeq"><strong>??</strong></a> using the Augmented Matrix.
-<span class="math display">\[\begin{cases}\begin{align}
+<div class="example">
+<p><span id="exm:rowopmat" class="example"><strong>Example 5.2  (Row Operations on the Augmented Matrix) </strong></span>We will solve the system of equations from Example <a href="solvesys.html#exm:rowopeq">5.1</a> using the Augmented Matrix.
+<span class="math display">\[\begin{equation*}\begin{cases}\begin{align}
 x_1+x_2 +x_3= 1\\
 x_1-2x_2+2x_3 =4\\
 x_1+2x_2-x_3 = 2\end{align}\end{cases}
-\]</span></p>
+\end{equation*}\]</span></p>
 <p>Our first step will be to write the augmented matrix and identify the current pivot. Here, a square is drawn around the pivot and the numbers below the pivot are circled. It is our goal to eliminate the circled numbers using the row with the pivot.
-<span class="math display">\[
-\begin{am}{3}
+<span class="math display">\[\begin{equation*}
+\left(\begin{array}{rrr|r}
  1 &amp; 1 &amp; 1 &amp; 1\\
  1 &amp; -2 &amp; 2 &amp;4\\
  1&amp;2&amp;-1 &amp;2
- \end{am}
- \xrightarrow{Current Pivot}\begin{am}{3}
+\end{array}\right)
+ \xrightarrow{Current Pivot}\left(\begin{array}{rrr|r}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
- \textcircled{1} &amp; -2 &amp; 2 &amp;4\\
- \textcircled{1}&amp;2&amp;-1 &amp;2
-\end{am}
-\]</span>
+\enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}} &amp; -2 &amp; 2 &amp;4\\
+ \enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}}&amp;2&amp;-1 &amp;2
+\end{array}\right)
+\end{equation*}\]</span>
 We can eliminate the circled elements by making combinations with those rows and the pivot row. For instance, we’d replace row 2 by the combination (row 2 - row 1). Our shorthand notation for this will be R2’ = R2-R1. Similarly we will replace row 3 in the next step.
-<span class="math display">\[
+<span class="math display">\[\begin{equation*}
 \xrightarrow{R2&#39;=R2-R1}
-  \begin{am}{3}
+  \left(\begin{array}{rrr|r}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
 \red{0} &amp; \red{-3} &amp; \red{1} &amp;\red{3}\\
  \enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}}&amp;2&amp;-1 &amp;2
- \end{am}
- \xrightarrow{R3&#39;=R3-R1} \begin{am}{3}
+\end{array}\right)
+ \xrightarrow{R3&#39;=R3-R1} \left(\begin{array}{rrr|r}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
 0 &amp; -3 &amp; 1 &amp;3\\
 \red{0}&amp;\red{1}&amp;\red{-2}&amp;\red{1}
- \end{am}
- \]</span></p>
-Now that we have eliminated each of the circled elements below the current pivot, we will continue on to the next pivot, which is -3. Looking into the future, we can either do the operation <span class="math inline">\(R3&#39;=R3+\frac{1}{3}R2\)</span> or we can interchange rows 2 and 3 to avoid fractions in our next calculation. To keep things neat, we will do the latter. (<em>note: either way you proceed will lead you to the same solution!</em>)
-<span class="math display">\[ \xrightarrow{Next Pivot}
-    \begin{am}{3}
+\end{array}\right)
+\end{equation*}\]</span></p>
+<p>Now that we have eliminated each of the circled elements below the current pivot, we will continue on to the next pivot, which is -3. Looking into the future, we can either do the operation <span class="math inline">\(R3&#39;=R3+\frac{1}{3}R2\)</span> or we can interchange rows 2 and 3 to avoid fractions in our next calculation. To keep things neat, we will do the latter. (<em>note: either way you proceed will lead you to the same solution!</em>)
+<span class="math display">\[\begin{equation*} \xrightarrow{Next Pivot}
+    \left(\begin{array}{rrr|r}
 \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
 0 &amp; \fbox{-3} &amp; 1 &amp;3\\
 0&amp;\enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{1}}&amp;-2&amp;1
- \end{am}
- \xrightarrow{R2 \leftrightarrow R3}      \begin{am}{3}
+\end{array}\right)
+ \xrightarrow{R2 \leftrightarrow R3}      \left(\begin{array}{rrr|r}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
  0&amp;\fbox{1}&amp;-2&amp;1\\
 0 &amp; \enclose{circle}[mathcolor=&quot;red&quot;]{\color{black}{-3}} &amp; 1 &amp;3
- \end{am}
-\]</span>
+\end{array}\right)
+\end{equation*}\]</span>
 Now that the current pivot is equal to 1, we can easily eliminate the circled entries below it by replacing rows with combinations using the pivot row. We finish the process once the last pivot is identified (the final pivot has no eliminations to make below it).
-<span class="math display">\[
+<span class="math display">\[\begin{equation*}
  \xrightarrow{R3&#39;=R3+3R2}
-     \begin{am}{3}
+     \left(\begin{array}{rrr|r}
  \fbox{1} &amp; 1 &amp; 1 &amp; 1\\
  0&amp;\fbox{1}&amp;-2&amp;1\\
 \red{0} &amp; \red{0} &amp; \red{\fbox{-5}} &amp;\red{6}
- \end{am}
-   \]</span>
-% 
-<p>$$</p>
+\end{array}\right)
+\end{equation*}\]</span></p>
+<p>At this point, when all the pivots have been reached, the augmented matrix is said to be in <strong>row-echelon form</strong>. This simply means that all of the entries below the pivots are equal to 0. The augmented matrix can be transformed back into equation form now that it is in a triangular form:</p>
+<p><span class="math display">\[\begin{equation*}
+\begin{cases}\begin{align}
+x_1+x_2 +x_3= 1\\
+x_2-2x_3 = 1\\
+5x_3 =-6\end{align}\end{cases}
+\end{equation*}\]</span>
+Which is the same system we finally solved in Example <a href="solvesys.html#exm:rowopeq">5.1</a> to get the final solution:
+<span class="math display">\[x_1 = 3.6 \quad x_2 = -1.4 \quad x_3 = -1.2 \]</span></p>
+</div>
+</div>
+<div id="gaussian-elimination-summary" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Gaussian Elimination Summary</h3>
+Let’s summarize the process of Gaussian elimination step-by-step:
+<ol>
+<li>
+We work from the upper-left-hand corner of the matrix to the lower-right-hand corner
+<li>
+Focusing on the first column, identify the first pivot element. The first pivot element should be located in the first row (if this entry is zero, we must interchange rows so that it is non-zero).
+<li>
+Eliminate (zero-out) all elements below the pivot using the combination row operation.
+<li>
+Determine the next pivot and go back to step 2.
+<ul>
+<li>
+Only nonzero numbers are allowed to be pivots.
+<li>
+If a coefficient in the next pivot position is 0, then the rows of the matrix should be interchanged to find a nonzero pivot.
+<li>
+If this is not possible then we continue on to the next column to determine a pivot.
+</ul>
+<li>
+When the entries below all of the pivots are equal to zero, the process stops. The augmented matrix is said to be in <em>row-echelon form</em>, which corresponds to a <em>triangular</em> system of equations, suitable to solve using back substitution.
+</ol>
+<div class="exercise">
+<p><span id="exr:gaussianelim" class="exercise"><strong>Exercise 5.1  (Gaussian Elimination and Back Substitution) </strong></span>Use Gaussian Elimination and back substitution to solve the following system.
+<span class="math display">\[\begin{cases}\begin{align}
+2x_1-x_2=1\\
+-x_1+2x_2-x_3=0\\
+-x_2+x_3=0\end{align}\end{cases}\]</span>
+</p>
+</div>
+</div>
+</div>
+<div id="gauss-jordan-elimination" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Gauss-Jordan Elimination</h2>
+<p>Gauss-Jordan elimination is Gaussian elimination taken one step further. In Gauss-Jordan elimination, we do not stop when the augmented matrix is in row-echelon form. Instead, we force all the pivot elements to equal 1 and we continue to eliminate entries <em>above</em> the pivot elements to reach what’s called <strong>reduced row echelon form</strong>.</p>
+<p>Let’s take a look at another example:</p>
+<div class="example">
+<p><span id="exm:gaussjordan" class="example"><strong>Example 5.3  (Gauss-Jordan elimination) </strong></span>We begin with a system of equations, and transform it into an augmented matrix:
+<span class="math display">\[\begin{cases}\begin{align}
+x_2 -x_3= 3\\
+-2x_1+4x_2-x_3 = 1\\
+-2x_1+5x_2-4x_3 =-2\end{align}\end{cases}
+ \Longrightarrow \left(\begin{array}{rrr|r}0&amp;1&amp;-1&amp;3\\-2&amp;4&amp;-1&amp;1\\-2&amp;5&amp;-4&amp;-2\end{array}\right) \]</span></p>
 We start by locating our first pivot element. This element cannot be zero, so we will have to swap rows to bring a non-zero element to the pivot position.
-<span class="math display">\[\begin{am}{3}0&amp;1&amp;-1&amp;3\\-2&amp;4&amp;-1&amp;1\\-2&amp;5&amp;-4&amp;-2 \end{am} \xrightarrow{R1\leftrightarrow R2}
-\begin{am}{3}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\-2&amp;5&amp;-4&amp;-2 \end{am}\]</span>
+<span class="math display">\[\left(\begin{array}{rrr|r}0&amp;1&amp;-1&amp;3\\-2&amp;4&amp;-1&amp;1\\-2&amp;5&amp;-4&amp;-2\end{array}\right) \xrightarrow{R1\leftrightarrow R2}
+\left(\begin{array}{rrr|r}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\-2&amp;5&amp;-4&amp;-2\end{array}\right)\]</span>
 Now that we have a non-zero pivot, we will want to do two things:
 <p>It does not matter what order we perform these two tasks in. Here, we will have an easy time eliminating using the -2 pivot:
-<span class="math display">\[\begin{am}{3}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\-2&amp;5&amp;-4&amp;-2 \end{am}\xrightarrow{R3&#39;=R3-R1} \begin{am}{3}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\\red{0}&amp;\red{1}&amp;\red{-3}&amp;\red{-3} \end{am}\]</span>
+<span class="math display">\[\left(\begin{array}{rrr|r}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\-2&amp;5&amp;-4&amp;-2\end{array}\right)\xrightarrow{R3&#39;=R3-R1} \left(\begin{array}{rrr|r}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\\red{0}&amp;\red{1}&amp;\red{-3}&amp;\red{-3}\end{array}\right)\]</span>
 Now, as promised, we will make our pivot equal to 1.
-<span class="math display">\[\begin{am}{3}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3 \end{am} \xrightarrow{R1&#39;=-\frac{1}{2} R1} \begin{am}{3}\red{\fbox{1}}&amp;\red{-2}&amp;\red{\frac{1}{2}}&amp;\red{-\frac{1}{2}}\\0&amp;1&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3 \end{am}\]</span>
+<span class="math display">\[\left(\begin{array}{rrr|r}\fbox{-2}&amp;4&amp;-1&amp;1\\0&amp;1&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3\end{array}\right) \xrightarrow{R1&#39;=-\frac{1}{2} R1} \left(\begin{array}{rrr|r}\red{\fbox{1}}&amp;\red{-2}&amp;\red{\frac{1}{2}}&amp;\red{-\frac{1}{2}}\\0&amp;1&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3\end{array}\right)\]</span>
 We have finished our work with this pivot, and now we move on to the next one. Since it is already equal to 1, the only thing left to do is use it to eliminate the entries below it:
-<span class="math display">\[\begin{am}{3}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;\fbox{1}&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3 \end{am}\xrightarrow{R3&#39;=R3-R2} \begin{am}{3}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;\fbox{1}&amp;-1&amp;3\\\red{0}&amp;\red{0}&amp;\red{-2}&amp;\red{-6} \end{am}\]</span>
+<span class="math display">\[\left(\begin{array}{rrr|r}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;\fbox{1}&amp;-1&amp;3\\0&amp;1&amp;-3&amp;-3\end{array}\right)\xrightarrow{R3&#39;=R3-R2} \left(\begin{array}{rrr|r}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;\fbox{1}&amp;-1&amp;3\\\red{0}&amp;\red{0}&amp;\red{-2}&amp;\red{-6}\end{array}\right)\]</span>
 And then we move onto our last pivot. This pivot has no entries below it to eliminate, so all we must do is turn it into a 1:
-<span class="math display">\[\begin{am}{3}1&amp;-2&amp;\frac{1}{2}&amp;\frac{-1}{2}\\0&amp;1&amp;-1&amp;3\\0&amp;0&amp;\fbox{-2}&amp;-6 \end{am}\xrightarrow{R3&#39;=-\frac{1}{2}R3}\begin{am}{3}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;-1&amp;3\\\red{0}&amp;\red{0}&amp;\red{\fbox{1}}&amp;\red{3} \end{am} \]</span>
+<span class="math display">\[\left(\begin{array}{rrr|r}1&amp;-2&amp;\frac{1}{2}&amp;\frac{-1}{2}\\0&amp;1&amp;-1&amp;3\\0&amp;0&amp;\fbox{-2}&amp;-6\end{array}\right)\xrightarrow{R3&#39;=-\frac{1}{2}R3}\left(\begin{array}{rrr|r}1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;-1&amp;3\\\red{0}&amp;\red{0}&amp;\red{\fbox{1}}&amp;\red{3}\end{array}\right) \]</span>
 Now, what really differentiates Gauss-Jordan elimination from Gaussian elimination is the next few steps. Here, our goal will be to use the pivots to eliminate all of the entries <em>above</em> them. While this takes a little extra work, as we will see, it helps us avoid the tedious work of back substitution.</p>
 <p>We’ll start at the southeast corner on the current pivot. We will use that pivot to eliminate the elements above it:</p>
-<p><span class="math display">\[\begin{am}{3} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;-1&amp;3\\0&amp;0&amp;\fbox{1}&amp;3 \end{am} \xrightarrow{R2&#39;=R2+R3} \begin{am}{3} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\\red{0}&amp;\red{1}&amp;\red{0}&amp;\red{6}\\0&amp;0&amp;\fbox{1}&amp;3 \end{am}\]</span></p>
-<p><span class="math display">\[ \begin{am}{3} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;0&amp;6\\0&amp;0&amp;\fbox{1}&amp;3 \end{am}\xrightarrow{R1&#39;=R1-\frac{1}{2}R3}\begin{am}{3} \red{1}&amp;\red{-2}&amp;\red{0}&amp;\red{-2}\\0&amp;1&amp;0&amp;6\\0&amp;0&amp;\fbox{1}&amp;3 \end{am}\]</span>
+<p><span class="math display">\[\left(\begin{array}{rrr|r} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;-1&amp;3\\0&amp;0&amp;\fbox{1}&amp;3\end{array}\right) \xrightarrow{R2&#39;=R2+R3} \left(\begin{array}{rrr|r} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\\red{0}&amp;\red{1}&amp;\red{0}&amp;\red{6}\\0&amp;0&amp;\fbox{1}&amp;3\end{array}\right)\]</span></p>
+<p><span class="math display">\[ \left(\begin{array}{rrr|r} 1&amp;-2&amp;\frac{1}{2}&amp;-\frac{1}{2}\\0&amp;1&amp;0&amp;6\\0&amp;0&amp;\fbox{1}&amp;3\end{array}\right)\xrightarrow{R1&#39;=R1-\frac{1}{2}R3}\left(\begin{array}{rrr|r} \red{1}&amp;\red{-2}&amp;\red{0}&amp;\red{-2}\\0&amp;1&amp;0&amp;6\\0&amp;0&amp;\fbox{1}&amp;3\end{array}\right)\]</span>
 We’re almost done! One more pivot with elements above it to be eliminated:</p>
-<p><span class="math display">\[\begin{am}{3} 1&amp;-2&amp;0&amp;-2\\0&amp;\fbox{1}&amp;0&amp;6\\0&amp;0&amp;1&amp;3 \end{am} \xrightarrow{R1&#39;=R1+2R2}
-\begin{am}{3}\red{1}&amp;\red{0}&amp;\red{0}&amp;\red{10}\\0&amp;\fbox{1}&amp;0&amp;6\\0&amp;0&amp;1&amp;3 \end{am}\]</span></p>
-And we’ve reached <strong>reduced row echelon form</strong>. How does this help us? Well, let’s transform back to a system of equations:
+<p><span class="math display">\[\left(\begin{array}{rrr|r} 1&amp;-2&amp;0&amp;-2\\0&amp;\fbox{1}&amp;0&amp;6\\0&amp;0&amp;1&amp;3\end{array}\right) \xrightarrow{R1&#39;=R1+2R2}
+\left(\begin{array}{rrr|r}\red{1}&amp;\red{0}&amp;\red{0}&amp;\red{10}\\0&amp;\fbox{1}&amp;0&amp;6\\0&amp;0&amp;1&amp;3\end{array}\right)\]</span></p>
+<p>And we’ve reached <strong>reduced row echelon form</strong>. How does this help us? Well, let’s transform back to a system of equations:
 <span class="math display">\[\begin{cases}\begin{align}
 x_1 = 10\\
 x_2= 6\\
 x_3 =3\end{align}\end{cases}\]</span>
-The solution is simply what’s left in the right hand column of the augmented matrix.
-</div>
-</div>
+The solution is simply what’s left in the right hand column of the augmented matrix.</p>
 </div>
 <p>As you can see, the steps to performing Gaussian elimination and Gauss-Jordan elimination are very similar. Gauss-Jordan elimination is merely an extension of Gaussian elimination which brings the problem as close to completion as possible.</p>
-</div>
-<div id="gauss-jordan-elimination-summary" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Gauss-Jordan Elimination Summary</h3>
+<div id="gauss-jordan-elimination-summary" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Gauss-Jordan Elimination Summary</h3>
 <ol style="list-style-type: decimal">
 <li>Focusing on the first column, identify the first pivot element. The first pivot element should be located in the first row (if this entry is zero, we must interchange rows so that it is non-zero). Our goal will be to use this element to eliminate all of the elements below it.<br />
 </li>
@@ -704,67 +742,60 @@ The solution is simply what’s left in the right hand column of the augmented m
 <li>When the last pivot is equal to 1, begin to eliminate all the entries above the pivot positions.</li>
 <li>When all entries above and below each pivot element are equal to zero, the augmented matrix is said to be in <em>reduced row echelon form</em> and the Gauss-Jordan elimination process is complete.</li>
 </ol>
+<div class="exercise">
+<p><span id="exr:gaussjordanexer" class="exercise"><strong>Exercise 5.2  (Gauss-Jordan Elimination) </strong></span>Use the Gauss-Jordan method to solve the following system:
+<span class="math display">\[\begin{cases}\begin{align}
+4x_2-3x_3=3\\
+-x_1+7x_2-5x_3=4\\
+-x_1+8x_2-6x_3=5\end{align}\end{cases}\]</span></p>
 </div>
 </div>
-<div id="three-types-of-systems" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Three Types of Systems</h2>
+</div>
+<div id="three-types-of-systems" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Three Types of Systems</h2>
 <p>As was mentioned earlier, there are 3 situations that may arise when solving a system of equations:</p>
 <ul>
 <li>The system could have one <strong>unique solution</strong> (this is the situation of our examples thus far).</li>
 <li>The system could have no solutions (sometimes called <em>overdetermined</em> or <strong><em>inconsistent</em></strong>).</li>
 <li>The system could have <strong>infinitely many solutions</strong> (sometimes called <em>underdetermined</em>).</li>
 </ul>
-<div id="uniquesol" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> The Unique Solution Case</h3>
+<div id="uniquesol" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> The Unique Solution Case</h3>
 <p>Based on our earlier examples, we already have a sense for systems which fall into the first case.</p>
 
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition @ref().3: Case 1: Unique solution
-</div>
-<div class="Stext">
-<p>A system of equations <span class="math inline">\(\A\x=\b\)</span> has a unique solution if and only if <em>both</em> of the following conditions hold:</p>
+<div class="theorem">
+<p><span id="thm:case1" class="theorem"><strong>Theorem 5.1  (Case 1: Unique solution) </strong></span>A system of equations <span class="math inline">\(\A\x=\b\)</span> has a unique solution if and only if <em>both</em> of the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li>The number of equations is equal to the number of variables (i.e. the coefficient matrix <span class="math inline">\(\A\)</span> is <em>square</em>).</li>
 <li>The number of pivots is equal to the number of rows/columns. In other words, under Gauss-Jordan elimination, the coefficient matrix is transformed into the identity matrix:
 <span class="math display">\[\A \xrightarrow{Gauss-Jordan} I\]</span></li>
 </ol>
-In this case, we say that the matrix <span class="math inline">\(\A\)</span> is <strong>full-rank</strong>.
+<p>In this case, we say that the matrix <span class="math inline">\(\A\)</span> is <strong>invertible</strong> because it is full-rank (the rank of a matrix is the number of pivots after Gauss-Jordan elimination) <em>and</em> square.</p>
 </div>
 </div>
-</div>
-</div>
-<div id="inconsistent" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> The Inconsistent Case</h3>
+<div id="inconsistent" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> The Inconsistent Case</h3>
 <p>The second case scenario is a very specific one. In order for a system of equations to be <strong>inconsistent</strong> and have no solutions, it must be that after Gaussian elimination, a situation occurs where at least one equation reduces to <span class="math inline">\(0=\alpha\)</span> where <span class="math inline">\(\alpha\)</span> is nonzero. Such a situation would look as follows (using asterisks to denote any nonzero numbers):</p>
-<p><span class="math display">\[\begin{am}{3} *&amp;*&amp;*&amp;*\\0&amp;*&amp;*&amp;*\\0&amp;0&amp;0&amp;\alpha\end{am} \]</span></p>
+<p><span class="math display">\[\left(\begin{array}{rrr|r} *&amp;*&amp;*&amp;*\\0&amp;*&amp;*&amp;*\\0&amp;0&amp;0&amp;\alpha\end{array}\right) \]</span></p>
 <p>The third row of this augmented system indicates that <span class="math display">\[0x_1+0x_2+0x_3=\alpha\]</span> where <span class="math inline">\(\alpha\neq 0\)</span>, which is a contradiction. When we reach such a situation through Gauss-Jordan elimination, we know the system is inconsistent.</p>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example @ref().4: Identifying an Inconsistent System
-</div>
-<div class="S2text">
-<p><span class="math display">\[\begin{cases}\begin{align}
+<div class="example">
+<p><span id="exm:inconsistent" class="example"><strong>Example 5.4  (Identifying an Inconsistent System) </strong></span><span class="math display">\[\begin{cases}\begin{align}
 x-y+z=1\\
 x-y-z=2\\
 x+y-z=3\\
 x+y+z=4\end{align}\end{cases}\]</span>
 Using the augmented matrix and Gaussian elimination, we take the following steps:</p>
-<p><span class="math display">\[\begin{am}{3} 1&amp;-1&amp;1&amp;1\\1&amp;-1&amp;-1&amp;2\\1&amp;1&amp;-1&amp;3\\1&amp;1&amp;1&amp;4 \end{am} \xrightarrow{\substack{R2&#39;=R2-R1 \\ R3&#39;=R3-R1 \\ R4&#39;=R4-R1}} \begin{am}{3} 1&amp;-1&amp;1&amp;1\\0&amp;0&amp;-2&amp;1\\0&amp;2&amp;-2&amp;2\\0&amp;2&amp;0&amp;3 \end{am} \]</span>
-<span class="math display">\[\xrightarrow{ R4\leftrightarrow R2}\begin{am}{3} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;2&amp;-2&amp;2\\0&amp;0&amp;-2&amp;1 \end{am}\xrightarrow{R3&#39;=R3-R2} \begin{am}{3} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;0&amp;-2&amp;-1\\0&amp;0&amp;-2&amp;1 \end{am}\]</span>
-<span class="math display">\[\xrightarrow{R4&#39;=R4-R3} \begin{am}{3} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;0&amp;-2&amp;-1\\0&amp;0&amp;0&amp;2 \end{am}\]</span></p>
-In this final step, we see our contradiction equation, <span class="math inline">\(0=2\)</span>. Since this is obviously impossible, we conclude that the system is inconsistent.
+<p><span class="math display">\[\left(\begin{array}{rrr|r} 1&amp;-1&amp;1&amp;1\\1&amp;-1&amp;-1&amp;2\\1&amp;1&amp;-1&amp;3\\1&amp;1&amp;1&amp;4\end{array}\right) \xrightarrow{\substack{R2&#39;=R2-R1 \\ R3&#39;=R3-R1 \\ R4&#39;=R4-R1}} \left(\begin{array}{rrr|r} 1&amp;-1&amp;1&amp;1\\0&amp;0&amp;-2&amp;1\\0&amp;2&amp;-2&amp;2\\0&amp;2&amp;0&amp;3\end{array}\right) \]</span>
+<span class="math display">\[\xrightarrow{ R4\leftrightarrow R2}\left(\begin{array}{rrr|r} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;2&amp;-2&amp;2\\0&amp;0&amp;-2&amp;1\end{array}\right)\xrightarrow{R3&#39;=R3-R2} \left(\begin{array}{rrr|r} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;0&amp;-2&amp;-1\\0&amp;0&amp;-2&amp;1\end{array}\right)\]</span>
+<span class="math display">\[\xrightarrow{R4&#39;=R4-R3} \left(\begin{array}{rrr|r} 1&amp;-1&amp;1&amp;1\\0&amp;2&amp;0&amp;3\\0&amp;0&amp;-2&amp;-1\\0&amp;0&amp;0&amp;2\end{array}\right)\]</span></p>
+<p>In this final step, we see our contradiction equation, <span class="math inline">\(0=2\)</span>. Since this is obviously impossible, we conclude that the system is inconsistent.</p>
 </div>
+<p>Sometimes inconsistent systems are referred to as <em>over-determined</em>. In this example, you can see that we had more equations than variables. This is a common characteristic of over-determined or inconsistent systems. You can think of it as holding too many demands for a small set of variables! In fact, this is precisely the situation in which we find ourselves when we approach linear regression. Regression systems do not have an exact solution: there are generally no set of <span class="math inline">\(\beta_i&#39;s\)</span> that we can find so that our regression equation exactly fits every observation in the dataset - the regression system is inconsistent. Thus, we need a way to get <em>as close as possible</em> to a solution; that is, we need to find a solution that minimizes the residual error. This is done using the Least Squares method, the subject of Chapter <a href="leastsquares.html#leastsquares">11</a>.</p>
 </div>
-</div>
-<p>Sometimes inconsistent systems are referred to as <em>over-determined</em>. In this example, you can see that we had more equations than variables. This is a common characteristic of over-determined or inconsistent systems. You can think of it as holding too many demands for a small set of variables! In fact, this is precisely the situation in which we find ourselves when we approach linear regression. Regression systems do not have an exact solution: there are generally no set of <span class="math inline">\(\beta_i&#39;s\)</span> that we can find so that our regression equation exactly fits every observation in the dataset - the regression system is inconsistent. Thus, we need a way to get <em>as close as possible</em> to a solution; that is, we need to find a solution that minimizes the residual error. This is done using the Least Squares method, the subject of Chapter <a href="leastsquares.html#leastsquares">6</a>.</p>
-</div>
-<div id="infinitesol" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> The Infinite Solutions Case</h3>
+<div id="infinitesol" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> The Infinite Solutions Case</h3>
 <p>For the third case, consider the following system of equations written as an augmented matrix, and its reduced row echelon form after Gauss-Jordan elimination. As an exercise, it is suggested that you confirm this result.</p>
-<p><span class="math display">\[\begin{am}{3} 1&amp;2&amp;3&amp;0\\2&amp;1&amp;3&amp;0\\1&amp;1&amp;2&amp;0\end{am} \xrightarrow{Gauss-Jordan} \begin{am}{3} 1&amp;0&amp;1&amp;0\\0&amp;1&amp;1&amp;0\\0&amp;0&amp;0&amp;0\end{am} \]</span></p>
+<p><span class="math display">\[\left(\begin{array}{rrr|r} 1&amp;2&amp;3&amp;0\\2&amp;1&amp;3&amp;0\\1&amp;1&amp;2&amp;0\end{array}\right) \xrightarrow{Gauss-Jordan} \left(\begin{array}{rrr|r} 1&amp;0&amp;1&amp;0\\0&amp;1&amp;1&amp;0\\0&amp;0&amp;0&amp;0\end{array}\right) \]</span></p>
 <p>There are several things you should notice about this reduced row echelon form. For starters, it has a row that is completely 0. This means, intuitively, that one of the equations was able to be completely eliminated - it contained redundant information from the first two. The second thing you might notice is that there are only 2 pivot elements. Because there is no pivot in the third row, the last entries in the third column could not be eliminated! This is characteristic of what is called a <strong>free-variable</strong>. Let’s see what this means by translating our reduced system back to equations:
 <span class="math display">\[\begin{cases}\begin{align}
 x_1+x_3 = 0\\
@@ -777,53 +808,40 @@ x_2 &amp;= -x_3 \end{align}\]</span></p>
 <span class="math display">\[\pm x_1\\x_2\\x_3 \mp = \pm -s \\ -s \\ s \mp = s \pm -1\\-1\\1 \mp\]</span>
 What this means is that any scalar multiple of the vector <span class="math inline">\(\pm -1\\-1\\1 \mp\)</span> is a solution to the system. Thus there are infinitely many solutions!</p>
 
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="solvesys.html#solvesys">5</a>.4: Case 3: Infinitely Many Solutions
-</div>
-<div class="Stext">
-<p>A system of equations <span class="math inline">\(\A\x=\b\)</span> has infinitely many solutions if the system is consistent and <em>any</em> of the following conditions hold:</p>
+<div class="theorem">
+<p><span id="thm:case3" class="theorem"><strong>Theorem 5.2  (Case 3: Infinitely Many Solutions) </strong></span>A system of equations <span class="math inline">\(\A\x=\b\)</span> has infinitely many solutions if the system is consistent and <em>any</em> of the following conditions hold:</p>
 <ol style="list-style-type: decimal">
 <li>The number of variables is greater than the number of equations.</li>
 <li>There is at least one <em>free variable</em> presented in the reduced row echelon form.</li>
 <li>The number of pivots is less than the number of variables.</li>
 </ol>
 </div>
-</div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="solvesys.html#solvesys">5</a>.: Infinitely Many Solutions
-</div>
-<div class="S2text">
-<p>For the following reduced system of equations, characterize the set of solutions in the same fashion as the previous example.
-<span class="math display">\[\begin{am}{4} 1&amp;0&amp;1&amp;2&amp;0\\0&amp;1&amp;1&amp;-1&amp;0\\0&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;0\end{am} \]</span>
+<div class="example">
+<p><span id="exm:infsolutions" class="example"><strong>Example 5.5  (Infinitely Many Solutions) </strong></span>For the following reduced system of equations, characterize the set of solutions in the same fashion as the previous example.
+<span class="math display">\[\left(\begin{array}{rrrr|r}
+ 1&amp;0&amp;1&amp;2&amp;0\\0&amp;1&amp;1&amp;-1&amp;0\\0&amp;0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0&amp;0\end{array}\right) \]</span>
 A good way to start is sometimes to write out the corresponding equations:
 <span class="math display">\[\begin{cases}\begin{align}
 x_1+x_3+2x_4 = 0\\
 x_2+x_3-x_4= 0\end{align}\end{cases} \Longrightarrow \systeme{
 x_1=-x_3-2x_4\\
 x_2=-x_3+x_4\end{align}\end{cases}\]</span></p>
-Now we have <em>two</em> variables which are free to take on any value. Thus, let
+<p>Now we have <em>two</em> variables which are free to take on any value. Thus, let
 <span class="math display">\[x_3 = s \quad \mbox{and} \quad x_4 = t\]</span>
 Then, our solution is:
 <span class="math display">\[\pm x_1\\x_2\\x_3\\x_4 \mp = \pm -s-2t \\ -s+t\\s\\t \mp = s\pm -1\\-1\\1\\0 \mp + t\pm -2\\1\\0\\1 \mp\]</span>
 so any linear combination of the vectors
 <span class="math display">\[\pm -1\\-1\\1\\0 \mp \quad \mbox{and} \quad \pm -2\\1\\0\\1 \mp\]</span>
-will provide a solution to this system.
+will provide a solution to this system.</p>
 </div>
 </div>
+<div id="matrix-rank" class="section level3" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Matrix Rank</h3>
+<p>The <strong>rank</strong> of a matrix is the number of linearly independent rows or columns in the matrix (the number of linearly independent rows will always be the same as the number of linearly independent columns). It can be determined by reducing a matrix to row-echelon form and counting the number of pivots. A matrix is said to be <strong>full rank</strong> when its rank is maximal, meaning that either all rows or all columns are linearly independent. In other words, an <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span> is full rank when the rank(<span class="math inline">\(\A\)</span>)<span class="math inline">\(=\min(m,n)\)</span>. A square matrix that is full rank will always have an inverse.</p>
 </div>
 </div>
-<div id="matrix-rank" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Matrix Rank</h3>
-<p>The <strong>rank</strong> of a matrix is the number of linearly independent rows or columns in the matrix (the number of linearly independent rows will always be the same as the number of linearly independent columns). It can be determined by reducing a matrix to row-echelon form and counting the number of pivots. A matrix is said to be <strong>full rank</strong> when it’s rank is maximal, meaning that either all rows or all columns are linearly independent. In other words, an <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span> is full rank when the rank(<span class="math inline">\(\A\)</span>)<span class="math inline">\(=\min(m,n)\)</span>. A square matrix that is full rank will always have an inverse.</p>
-</div>
-</div>
-<div id="solving-matrix-equations" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Solving Matrix Equations</h2>
+<div id="solving-matrix-equations" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Solving Matrix Equations</h2>
 <p>One final piece to the puzzle is what happens when we have a matrix equation like
 <span class="math display">\[\A\X=\B\]</span>
 This situation is an easy extension of our previous problem because we are essentially solving the same system of equation with several different right-hand-side vectors (the columns of <span class="math inline">\(\B\)</span>).</p>
@@ -832,7 +850,9 @@ This situation is an easy extension of our previous problem because we are essen
 <p>Based on our previous discussions, we ought to be able to see that this matrix equation represents 4 separate equations which we’ll combine into two systems:</p>
 <p><span class="math display">\[\pm  1&amp;1\\2&amp;1\mp \pm x_{11} \\x_{21} \mp = \pm 3\\4 \mp \quad \mbox{and}\quad \pm  1&amp;1\\2&amp;1\mp \pm x_{12} \\x_{22} \mp = \pm 3\\5 \mp\]</span></p>
 <p>Once you convince yourself that the unknowns can be found in this way, let’s take a look at the augmented matrices for these two systems:</p>
-<p><span class="math display">\[\begin{am}{2} 1&amp;1&amp;3\\2&amp;1&amp;4 \end{am} \quad\mbox{and}\quad \begin{am}{2} 1&amp;1&amp;3\\2&amp;1&amp;5 \end{am}\]</span></p>
+<p><span class="math display">\[\left(\begin{array}{rr|r}
+ 1&amp;1&amp;3\\2&amp;1&amp;4\end{array}\right) \quad\mbox{and}\quad \left(\begin{array}{rr|r}
+ 1&amp;1&amp;3\\2&amp;1&amp;5\end{array}\right)\]</span></p>
 <p>When performing Gauss-Jordan elimination on these two augmented matrices, how are the row operations going to differ? They’re not! The same row operations will be used for each augmented matrix - the only thing that will differ is how these row operations will affect the right hand side vectors. Thus, it is possible for us to keep track of those differences in one larger augmented matrix :</p>
 <p><span class="math display">\[\begin{pmatrix}
 \begin{array}{cc|cc}
@@ -866,21 +886,17 @@ This situation is an easy extension of our previous problem because we are essen
 <p>Now again, remembering the situation from which we came, we have the equivalent system:
 <span class="math display">\[\pm 1&amp;0\\0&amp;1 \mp \pm x_{11} &amp; x_{12} \\ x_{21} &amp; x_{22} \mp = \pm 1&amp;2\\2&amp;1\mp\]</span></p>
 <p>So we can conclude that <span class="math display">\[\pm x_{11} &amp; x_{12} \\ x_{21} &amp; x_{22} \mp = \pm 1&amp;2\\2&amp;1\mp\]</span> and we have solved our system. This method is particularly useful when finding the inverse of a matrix.</p>
-<div id="solving-for-the-inverse-of-a-matrix" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Solving for the Inverse of a Matrix</h3>
+<div id="solving-for-the-inverse-of-a-matrix" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Solving for the Inverse of a Matrix</h3>
 <p>For any square matrix <span class="math inline">\(\A\)</span>, we know the inverse matrix (<span class="math inline">\(\A^{-1}\)</span>), if it exists, satisfies the following matrix equation,
 <span class="math display">\[\A\A^{-1} = \I.\]</span></p>
 <p>Using the Gauss-Jordan method with multiple right hand sides, we can solve for the inverse of any matrix. We simply start with an augmented matrix with <span class="math inline">\(\A\)</span> on the left and the identity on the right, and then use Gauss-Jordan elimination to transform the matrix <span class="math inline">\(\A\)</span> into the identity matrix.
-<span class="math display">\[\begin{am}{1} \bo{A} &amp; \I \end{am}\xrightarrow{Gauss-Jordan}\begin{am}{1} \bo{I} &amp; \A^{-1} \end{am}\]</span>
+<span class="math display">\[\left(\begin{array}{r|r}
+ \bo{A} &amp; \I\end{array}\right)\xrightarrow{Gauss-Jordan}\left(\begin{array}{r|r} \bo{I} &amp; \A^{-1}\end{array}\right)\]</span>
 If this is possible then the matrix on the right is the inverse of <span class="math inline">\(\A\)</span>. If this is not possible then <span class="math inline">\(\A\)</span> does not have an inverse. Let’s see a quick example of this.</p>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="solvesys.html#solvesys">5</a>.6: Finding a Matrix Inverse
-</div>
-<div class="S2text">
-<p>Find the inverse of <span class="math display">\[\A = \pm -1&amp;2&amp;-1\\0&amp;-1&amp;1\\2&amp;-1&amp;0 \mp\]</span> using Gauss-Jordan Elimination.</p>
-<p>Since <span class="math inline">\(\A\A^{-1} = \I\)</span>, we set up the augmented matrix as <span class="math inline">\(\begin{am}{1} \bo{A} &amp; \I \end{am}\)</span>:</p>
+<div class="example">
+<p><span id="exm:findinverse" class="example"><strong>Example 5.6  (Finding a Matrix Inverse) </strong></span>Find the inverse of <span class="math display">\[\A = \pm -1&amp;2&amp;-1\\0&amp;-1&amp;1\\2&amp;-1&amp;0 \mp\]</span> using Gauss-Jordan Elimination.</p>
+<p>Since <span class="math inline">\(\A\A^{-1} = \I\)</span>, we set up the augmented matrix as <span class="math inline">\(\left(\begin{array}{r|r} \bo{A} &amp; \I\end{array}\right)\)</span>:</p>
 <p><span class="math display">\[\begin{pmatrix}
 \begin{array}{ccc|ccc}-1&amp;2&amp;-1&amp;1&amp;0&amp;0\\0&amp;-1&amp;1&amp;0&amp;1&amp;0\\2&amp;-1&amp;0&amp;0&amp;0&amp;1 \end{array}\end{pmatrix} \xrightarrow{R3&#39;=R3+2R1}
 \begin{pmatrix}
@@ -890,18 +906,16 @@ Example <a href="solvesys.html#solvesys">5</a>.6: Finding a Matrix Inverse
 \xrightarrow{\substack{R1&#39;=-1R1\\R3&#39;=R3+3R2}}\begin{pmatrix}\begin{array}{ccc|ccc} 1&amp;-2&amp;1&amp;-1&amp;0&amp;0\\0&amp;-1&amp;1&amp;0&amp;1&amp;0\\0&amp;0&amp;1&amp;2&amp;3&amp;1 \end{array}\end{pmatrix}\]</span>
 <span class="math display">\[\begin{pmatrix}\begin{array}{ccc|ccc} 1&amp;-2&amp;1&amp;-1&amp;0&amp;0\\0&amp;-1&amp;1&amp;0&amp;1&amp;0\\0&amp;0&amp;1&amp;2&amp;3&amp;1 \end{array}\end{pmatrix}\xrightarrow{\substack{R1&#39;=R1-R3\\R2&#39;=R2-R3}}\begin{pmatrix}\begin{array}{ccc|ccc} 1&amp;-2&amp;0&amp;-3&amp;-3&amp;-1\\0&amp;-1&amp;0&amp;-2&amp;-2&amp;-1\\0&amp;0&amp;1&amp;2&amp;3&amp;1 \end{array}\end{pmatrix}\]</span>
 <span class="math display">\[\begin{pmatrix}\begin{array}{ccc|ccc} 1&amp;-2&amp;0&amp;-3&amp;-3&amp;-1\\0&amp;-1&amp;0&amp;-2&amp;-2&amp;-1\\0&amp;0&amp;1&amp;2&amp;3&amp;1 \end{array}\end{pmatrix}\xrightarrow{\substack{R2&#39;=-1R2\\R1&#39;=R1+2R2}}\begin{pmatrix}\begin{array}{ccc|ccc} 1&amp;0&amp;0&amp;1&amp;1&amp;1\\0&amp;1&amp;0&amp;2&amp;2&amp;1\\0&amp;0&amp;1&amp;2&amp;3&amp;1 \end{array}\end{pmatrix}\]</span></p>
-Finally, we have completed our task. The inverse of <span class="math inline">\(\A\)</span> is the matrix on the right hand side of the augmented matrix!
-<span class="math display">\[\A^{-1} = \pm 1&amp;1&amp;1\\2&amp;2&amp;1\\2&amp;3&amp;1 \mp\]</span>
+<p>Finally, we have completed our task. The inverse of <span class="math inline">\(\A\)</span> is the matrix on the right hand side of the augmented matrix!
+<span class="math display">\[\A^{-1} = \pm 1&amp;1&amp;1\\2&amp;2&amp;1\\2&amp;3&amp;1 \mp\]</span></p>
 </div>
+<div class="exercise">
+<p><span id="exr:inverseexer" class="exercise"><strong>Exercise 5.3  (Finding a Matrix Inverse) </strong></span>Use the same method to determine the inverse of
+<span class="math display">\[\B=\pm 1&amp;1&amp;1\\2&amp;2&amp;1\\2&amp;3&amp;1 \mp\]</span>
+(<em>hint: Example <a href="solvesys.html#exm:findinverse">5.6</a> should tell you the answer you expect to find!</em>)</p>
 </div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="solvesys.html#solvesys">5</a>.7: Inverse of a Diagonal Matrix
-</div>
-<div class="S2text">
-<p>A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix <span class="math inline">\(\D\)</span>,
+<div class="example">
+<p><span id="exm:diaginverse" class="example"><strong>Example 5.7  (Inverse of a Diagonal Matrix) </strong></span>A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix <span class="math inline">\(\D\)</span>,
 <span class="math display">\[\D = \pm 3&amp;0&amp;0\\0&amp;-2&amp;0\\0&amp;0&amp;\sqrt{5} \mp \]</span>
 To begin the process, we start with an augmented matrix and proceed with Gauss-Jordan Elimination. In this case, the process is quite simple! The elements above and below the diagonal pivots are already zero, we simply need to make each pivot equal to 1!</p>
 <p><span class="math display">\[\pm\begin{array}{ccc|ccc} 3&amp;0&amp;0&amp;1&amp;0&amp;0\\0&amp;-2&amp;0&amp;0&amp;1&amp;0\\0&amp;0&amp;\sqrt{5}&amp;0&amp;0&amp;1 \end{array}\mp
@@ -909,25 +923,16 @@ To begin the process, we start with an augmented matrix and proceed with Gauss-J
 \pm\begin{array}{ccc|ccc} 1&amp;0&amp;0&amp;\frac{1}{3}&amp;0&amp;0\\0&amp;1&amp;0&amp;0&amp;-\frac{1}{2}&amp;0\\0&amp;0&amp;1&amp;0&amp;0&amp;\frac{1}{\sqrt{5}} \end{array}\mp\]</span></p>
 <p>Thus, the inverse of <span class="math inline">\(\D\)</span> is:
 <span class="math display">\[\D^{-1} = \pm \frac{1}{3}&amp;0&amp;0\\0&amp;-\frac{1}{2}&amp;0\\0&amp;0&amp;\frac{1}{\sqrt{5}} \mp \]</span></p>
-As you can see, all we had to do is take the scalar inverse of each diagonal element!
+<p>As you can see, all we had to do is take the scalar inverse of each diagonal element!</p>
+</div>
+<div class="definition">
+<p><span id="def:diaginverse" class="definition"><strong>Definition 5.3  (Inverse of a Diagonal Matrix) </strong></span>An <span class="math inline">\(n\times n\)</span> diagonal matrix <span class="math inline">\(\D = diag\{d_{11},d_{22},\dots,d_{nn}\}\)</span> with no nonzero diagonal elements is invertible with inverse
+<span class="math display">\[\D^{-1} = diag\{\frac{1}{d_{11}},\frac{1}{d_{22}},\dots,\frac{1}{d_{nn}}\}\]</span></p>
 </div>
 </div>
 </div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="solvesys.html#solvesys">5</a>.5: Inverse of a Diagonal Matrix
-</div>
-<div class="Stext">
-An <span class="math inline">\(n\times n\)</span> diagonal matrix <span class="math inline">\(\D = diag\{d_{11},d_{22},\dots,d_{nn}\}\)</span> with no nonzero diagonal elements is invertible with inverse
-<span class="math display">\[\D^{-1} = diag\{\frac{1}{d_{11}},\frac{1}{d_{22}},\dots,\frac{1}{d_{nn}}\}\]</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="exercises-2" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Exercises</h2>
+<div id="exercises-2" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Exercises</h2>
 <ol>
 <li>
 Using Gaussian Elimination on the augmented matrices, reduce each system of equations to a triangular form and solve using back-substitution.
@@ -950,7 +955,7 @@ x_2+4x_3 =6 \end{align}\end{cases}\]</span>
 <li>
 <p>Using Gauss-Jordan Elimination on the augmented matrices, reduce each system of equations from the previous exercise to reduced row-echelon form and give the solution as a vector.</p>
 <li>
-Use either Gaussian or Gauss-Jordan Elimination to solve the following systems of equations. Indicate whether the systems have a unique solution, no solution, or infinitely many solutions. If the system has infinitely many solutions, exhibit a general solution in vector form as we did in Section <a href="solvesys.html#infinitesol">5.2.3</a>.
+Use either Gaussian or Gauss-Jordan Elimination to solve the following systems of equations. Indicate whether the systems have a unique solution, no solution, or infinitely many solutions. If the system has infinitely many solutions, exhibit a general solution in vector form as we did in Section <a href="solvesys.html#infinitesol">5.3.3</a>.
 <ol style="list-style-type:lower-alpha">
 <li>
 <span class="math display">\[\begin{cases}\begin{align}
@@ -1003,11 +1008,11 @@ Use Gauss-Jordan Elimination to find the inverse of the following matrices, if p
 <p>What is the inverse of a diagonal matrix, <span class="math inline">\(\bo{D}=diag\{\sigma_{1},\sigma_{2}, \dots,\sigma_{n}\}\)</span>?</p>
 <li>
 Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
-<span class="math display">\[\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.\]</span> Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. <em>Hint: This problem connects Text Exercise <a href="#exer:diagmult"><strong>??</strong></a> and Example <a href="#ex:diaginverse"><strong>??</strong></a></em>.
+<span class="math display">\[\bo{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.\]</span> Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. <em>Hint: This problem connects Text Exercise <a href="mult.html#exr:diagmultexer">2.3</a> and Example <a href="solvesys.html#exm:diaginverse">5.7</a></em>.
 </ol>
 </div>
-<div id="list-of-key-terms-2" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> List of Key Terms</h2>
+<div id="list-of-key-terms-1" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> List of Key Terms</h2>
 <ul>
 <li>systems of equations</li>
 <li>row operations</li>
@@ -1024,8 +1029,8 @@ Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)<
 </ul>
 
 </div>
-<div id="gauss-jordan-elimination-in-r" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> Gauss-Jordan Elimination in R</h2>
+<div id="gauss-jordan-elimination-in-r" class="section level2" number="5.7">
+<h2><span class="header-section-number">5.7</span> Gauss-Jordan Elimination in R</h2>
 <p>It is important that you understand what is happening in the process of Gauss-Jordan Elimination. Once you have a handle on how the procedure works, it is no longer necessary to do every calculation by hand. We can skip to the reduced row echelon form of a matrix using the <code>pracma</code> package in R. \</p>
 <p>We’ll start by creating our matrix as a variable in R. Matrices are entered in as one vector, which R then breaks apart into rows and columns in they way that you specify (with nrow/ncol). The default way that R reads a vector into a matrix is down the columns. To read the data in across the rows, use the byrow=TRUE option). Once a matrix is created, it is stored under the variable name you give it (below, we call our matrices <span class="math inline">\(\Y\)</span> and <span class="math inline">\(\X\)</span>). We can then print out the stored matrix by simply typing <span class="math inline">\(\Y\)</span> or <span class="math inline">\(\X\)</span> at the prompt:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="solvesys.html#cb47-1" aria-hidden="true" tabindex="-1"></a>(<span class="at">Y=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="at">nrow=</span><span class="dv">2</span>,<span class="at">ncol=</span><span class="dv">2</span>))</span></code></pre></div>
@@ -1066,7 +1071,7 @@ This should save you some time and energy by skipping the arithmetic steps in Ga
         </div>
       </div>
 <a href="r-programming-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="leastsquares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="norms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1089,6 +1094,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

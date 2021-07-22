@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Principal Components Analysis | bookdownproj.utf8</title>
+  <title>Chapter 17 Applications of SVD | bookdownproj.utf8</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta property="og:title" content="Chapter 17 Applications of SVD | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta name="twitter:title" content="Chapter 17 Applications of SVD | bookdownproj.utf8" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lsapp.html"/>
-<link rel="next" href="pca-in-r.html"/>
+<link rel="prev" href="svd.html"/>
+<link rel="next" href="fa.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -425,101 +425,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pca" class="section level1" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Principal Components Analysis</h1>
-<p>We now have the tools necessary to discuss one of the most important concepts in mathematical statistics: <strong>Principal Components Analysis (PCA)</strong>. PCA involves the analysis of eigenvalues and eigenvectors of the covariance or correlation matrix. Its development relies on the following important facts:</p>
-<div class="theorem">
-<p><span id="thm:eigsym" class="theorem"><strong>Theorem 13.1  (Diagonalization of Symmetric Matrices) </strong></span>All <span class="math inline">\(n\times n\)</span> real valued symmetric matrices (like the covariance and correlation matrix) have two very important properties:</p>
-<ol style="list-style-type: decimal">
-<li>They have a complete set of <span class="math inline">\(n\)</span> linearly independent eigenvectors, <span class="math inline">\(\{\v_1,\dots,\v_n\}\)</span>, corresponding to eigenvalues <span class="math display">\[\lambda_1 \geq \lambda_2 \geq\dots\geq \lambda_n.\]</span></li>
-<li>Furthermore, these eigenvectors can be always be chosen to be <em>orthonormal</em> so that if <span class="math inline">\(\V=[\v_1|\dots|\v_n]\)</span> then
-<span class="math display">\[\V^{T}\V=\bo{I}\]</span>
-or equivalently, <span class="math inline">\(\V^{-1}=\V^{T}\)</span>.</li>
-</ol>
-<p>Letting <span class="math inline">\(\D\)</span> be a diagonal matrix with <span class="math inline">\(D_{ii}=\lambda_i\)</span>, by the definition of eigenvalues and eigenvectors we have for any symmetric matrix <span class="math inline">\(\bo{S}\)</span>,
-<span class="math display">\[\bo{S}\V=\V\D\]</span>
-Thus, any symmetric matrix <span class="math inline">\(\bo{S}\)</span> can be diagonalized in the following way:
-<span class="math display">\[\V^{T}\bo{S}\V=\D\]</span>
-Covariance and Correlation matrices (when there is no perfect multicollinearity in variables) have the additional property that all of their eigenvalues are positive (nonzero). They are <em>positive definite</em> matrices.</p>
+<div id="applications-of-svd" class="section level1" number="17">
+<h1><span class="header-section-number">Chapter 17</span> Applications of SVD</h1>
+<div id="latent-semantic-indexing-1" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Latent Semantic Indexing</h2>
 </div>
-<p>Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use <span class="math inline">\((\lambda_1,\v_1)\)</span> to represent the <strong>largest</strong> eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the <strong>first principal component</strong> and points in the direction for which the variance of the data is maximal. Example <a href="pca.html#exm:coveigs">13.1</a> illustrates this point.</p>
-<div class="example">
-<p><span id="exm:coveigs" class="example"><strong>Example 13.1  (Eigenvectors of the Covariance Matrix) </strong></span>Suppose we have a matrix of data for 10 individuals on 2 variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>. Plotted on a plane, the data appears as follows:</p>
-<center>
-<img src="figs/pcpoints.png%20=100x" />
-</center>
-Our data matrix for these points is:
-<span class="math display">\[\X=\pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp\]</span>
-the means of the variables in <span class="math inline">\(\X\)</span> are:
-<span class="math display">\[\bar{\x}=\pm 4.4 \\ 3.7 \mp. \]</span>
-When thinking about variance directions, our first step should be to center the data so that it has mean zero. Eigenvectors measure the spread of data around the origin. Variance measures spread of data around the mean. Thus, we need to equate the mean with the origin. To center the data, we simply compute
-<span class="math display">\[\X_c=\X-\e\bar{\x}^T = \pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp - \pm 4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7  \mp = \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3\mp.\]</span>
-Examining the new centered data, we find that we’ve only translated our data in the plane - we haven’t distorted it in any fashion.
-<center>
-<img src="figs/pcpointscenter.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>Thus the covariance matrix is:
-<span class="math display">\[\ssigma=\frac{1}{9}(\X_c^T\X_c)= \pm 5.6 &amp; 4.8\\4.8&amp;6.0111 \mp \]</span>
-The eigenvalue and eigenvector pairs of <span class="math inline">\(\ssigma\)</span> are (rounded to 2 decimal places) as follows:
-<span class="math display">\[(\lambda_1,\v_1)=\left( 10.6100 ,  \begin{bmatrix} 0.69 \\ 0.72 \end{bmatrix}\right) \mbox{  and  } (\lambda_2,\v_2)= \left( 1.0012,\begin{bmatrix}-0.72\\0.69 \end{bmatrix}\right)\]</span>
-Let’s plot the eigenvector directions on the same graph:</p>
-<center>
-<img src="figs/pcpointspc.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>The eigenvector <span class="math inline">\(\v_1\)</span> is called the <strong>first principal component</strong>. It is the direction along which the variance of the data is maximal. The eigenvector <span class="math inline">\(\v_2\)</span> is the <strong>second principal component</strong>. In general, the second principal component is the direction, orthogonal to the first, along which the variance of the data is maximal (in two dimensions, there is only one direction possible.)</p>
-</div>
-<p>Why is this important? Let’s consider what we’ve just done. We started with two variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>, which appeared to be correlated. We then derived <em>new variables</em>, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, which are linear combinations of the original variables:
-<span class="math display" id="eq:pcacomb">\[\begin{eqnarray}
-\v_1 &amp;=&amp; 0.69\x_1 + 0.72\x_2 \\
-\tag{13.1}
-\v_2 &amp;=&amp; -0.72\x_1 + 0.69\x_2
-\end{eqnarray}\]</span>
-These new variables are completely uncorrelated. To see this, let’s represent our data according to the new variables - i.e. let’s change the basis from <span class="math inline">\(\mathcal{B}_1=[\x_1,\x_2]\)</span> to <span class="math inline">\(\mathcal{B}_2=[\v_1,\v_2]\)</span>.</p>
-<div class="example">
-<p><span id="exm:pcabasis" class="example"><strong>Example 13.2  (The Principal Component Basis) </strong></span>Let’s express our data in the basis defined by the principal components. We want to find coordinates (in a <span class="math inline">\(2\times 10\)</span> matrix <span class="math inline">\(\A\)</span>) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for <span class="math inline">\(\A\)</span> in the following equation (see Chapter <a href="basis.html#basis">8</a> and note that the <em>rows</em> of <span class="math inline">\(\X\)</span> define the points rather than the columns):
-<span class="math display">\[\begin{eqnarray}
- \X_c &amp;=&amp; \A \V^T \\
- \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3 \mp &amp;=&amp;  \pm a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \\ a_{31} &amp; a_{32}\\ a_{41} &amp; a_{42}\\ a_{51} &amp; a_{52}\\ a_{61} &amp; a_{62}\\ a_{71} &amp; a_{72}\\ a_{81} &amp; a_{82}\\ a_{91} &amp; a_{92}\\ a_{10,1} &amp; a_{10,2} \mp \pm \v_1^T \\ \v_2^T \mp
-\end{eqnarray}\]</span></p>
-Conveniently, our new basis is orthonormal meaning that <span class="math inline">\(\V\)</span> is an orthogonal matrix, so
-<span class="math display">\[\A=\X\V .\]</span>
-The new data coordinates reflect a simple rotation of the data around the origin:
-<center>
-<img src=figs/pcpointsrotate.pdf width=50%>
-</center>
-<p>Visually, we can see that the new variables are uncorrelated. You may wish to confirm this by calculating the covariance. In fact, we can do this in a general sense. If <span class="math inline">\(\A=\X_c\V\)</span> is our new data, then the covariance matrix is diagonal:
-<span class="math display">\[\begin{eqnarray*}
-\ssigma_A &amp;=&amp; \frac{1}{n-1}\A^T\A  \\ 
-    &amp;=&amp; \frac{1}{n-1}(\X_c\V)^T(\X_c\V) \\
-    &amp;=&amp; \frac{1}{n-1}\V^T((\X_c^T\X_c)\V\\
-    &amp;=&amp;\frac{1}{n-1}\V^T((n-1)\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\V\D\V^T)\V\\
-    &amp;=&amp; \D
-\end{eqnarray*}\]</span>
-Where <span class="math inline">\(\ssigma_X=\V\D\V^T\)</span> comes from the diagonalization in Theorem <a href="pca.html#thm:eigsym">13.1</a>.
-By changing our variables to principal components, we have managed to <strong>“hide”</strong> the correlation between <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> while keeping the spacial relationships between data points in tact. Transformation <em>back</em> to variables <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> is easily done by using the linear relationships in from Equation <a href="pca.html#eq:pcacomb">(13.1)</a>.</p>
-</div>
-<div id="geometrical-comparison-with-least-squares" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Geometrical comparison with Least Squares</h2>
-<p>In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example <a href="pca.html#exm:coveigs">13.1</a> points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared <em>orthogonal</em> distances between the points and the line. Regressing <span class="math inline">\(\x_2\)</span> on <span class="math inline">\(\x_1\)</span>, on the other hand, provides a line which minimizes the sum of squared <em>vertical</em> distances between points and the line. This is illustrated in Figure <a href="pca.html#fig:pcvsreg">13.1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcvsreg"></span>
-<img src="figs/pcvsreg.jpg" alt="Principal Components vs. Regression Lines" width="2572" />
+<div id="rappasvd" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> Image Compression</h2>
+<div id="image-data-in-r" class="section level3" number="17.2.1">
+<h3><span class="header-section-number">17.2.1</span> Image data in R</h3>
+<p>Let’s take an image of a leader that we all know and respect:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-101"></span>
+<img src="LAdata/rappa.jpg" alt="Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State" width="125" />
 <p class="caption">
-Figure 13.1: Principal Components vs. Regression Lines
+Figure 17.1: Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State
 </p>
 </div>
-<p>The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. Let this not conjure up images of linear regression in your head, though. In contrast, linear least squares tries to minimize the distance in a single direction only (the direction of your target variable axes). Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.</p>
-<p>You might be tempted to conclude from Figure <a href="pca.html#fig:pcvsreg">13.1</a> that the first principal component and the regression line “ought to be similar.” This is a terrible conclusion if you consider a large multivariate dataset and the various regression lines that would predict each variable in that dataset. In PCA, there is no target variable and thus no single regression line that we’d be comparing to.</p>
+<p>This image can be downloaded from the IAA website, after clicking on the link on the left hand side “Michael Rappa / Founding Director.”</p>
+<p>Let’s read this image into R. You’ll need to install the pixmap package:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="applications-of-svd.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;pixmap&quot;)</span></span>
+<span id="cb216-2"><a href="applications-of-svd.html#cb216-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pixmap)</span></code></pre></div>
+<p>Download the image to your computer and then set your working directory in R as the same place you have saved the image:</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="applications-of-svd.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/shaina/Desktop/lin-alg&quot;</span>)</span></code></pre></div>
+<p>The first thing we will do is examine the image as an [R,G,B] (extension .ppm) and as a grayscale (extension .pgm). Let’s start with the [R,G,B] image and see what the data looks like in R:</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="applications-of-svd.html#cb218-1" aria-hidden="true" tabindex="-1"></a>rappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.ppm&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="applications-of-svd.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Show the type of the information contained in our data:</span></span>
+<span id="cb220-2"><a href="applications-of-svd.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rappa)</span></code></pre></div>
+<pre><code>## Formal class &#39;pixmapRGB&#39; [package &quot;pixmap&quot;] with 8 slots
+##   ..@ red     : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ green   : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ blue    : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ channels: chr [1:3] &quot;red&quot; &quot;green&quot; &quot;blue&quot;
+##   ..@ size    : int [1:2] 160 250
+##   ..@ cellres : num [1:2] 1 1
+##   ..@ bbox    : num [1:4] 0 0 250 160
+##   ..@ bbcent  : logi FALSE</code></pre>
+<p>You can see we have 3 matrices - one for each of the colors: red, green, and blue.
+Rather than a traditional data frame, when working with an image, we have to refer to the elements in this data set with @ rather than with $.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="applications-of-svd.html#cb222-1" aria-hidden="true" tabindex="-1"></a>rappa<span class="sc">@</span>size</span></code></pre></div>
+<pre><code>## [1] 160 250</code></pre>
+<p>We can then display a heat map showing the intensity of each individual color in each pixel:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="applications-of-svd.html#cb224-1" aria-hidden="true" tabindex="-1"></a>rappa.red<span class="ot">=</span>rappa<span class="sc">@</span>red</span>
+<span id="cb224-2"><a href="applications-of-svd.html#cb224-2" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span>rappa<span class="sc">@</span>green</span>
+<span id="cb224-3"><a href="applications-of-svd.html#cb224-3" aria-hidden="true" tabindex="-1"></a>rappa.blue<span class="ot">=</span>rappa<span class="sc">@</span>blue</span>
+<span id="cb224-4"><a href="applications-of-svd.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-106"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-106-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
+<p class="caption">
+Figure 17.2: Intensity of green in each pixel of the original image
+</p>
 </div>
-<div id="covariance-or-correlation-matrix" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Covariance or Correlation Matrix?</h2>
-<p>Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is <em>standardizing</em> the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.</p>
-<p>The covariance matrix is the default for (most)  PCA functions. The correlation matrix is the default in SAS and the covariance matrix method is invoked by the option:</p>
-<pre><code>proc princomp data=X cov; 
-var x1--x10;
-run;</code></pre>
-<p>Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component. The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don’t we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter <a href="pcaapp.html#pcaapp">15</a> will give those who <em>always</em> use the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.</p>
+<p>Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that <code>nrow(rappa.green)</code> gives the number of columns in the transposed matrix)</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="applications-of-svd.html#cb225-1" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span><span class="fu">t</span>(rappa.green)[,<span class="fu">nrow</span>(rappa.green)<span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb225-2"><a href="applications-of-svd.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-107-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Rather than compressing the colors individually, let’s work with the grayscale image:</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="applications-of-svd.html#cb226-1" aria-hidden="true" tabindex="-1"></a>greyrappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.pgm&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="applications-of-svd.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(greyrappa)</span></code></pre></div>
+<pre><code>## Formal class &#39;pixmapGrey&#39; [package &quot;pixmap&quot;] with 6 slots
+##   ..@ grey    : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ channels: chr &quot;grey&quot;
+##   ..@ size    : int [1:2] 160 250
+##   ..@ cellres : num [1:2] 1 1
+##   ..@ bbox    : num [1:4] 0 0 250 160
+##   ..@ bbcent  : logi FALSE</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="applications-of-svd.html#cb230-1" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span>greyrappa<span class="sc">@</span>grey</span>
+<span id="cb230-2"><a href="applications-of-svd.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="co">#again, rotate 90 degrees</span></span>
+<span id="cb230-3"><a href="applications-of-svd.html#cb230-3" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span><span class="fu">t</span>(rappa.grey)[,<span class="fu">nrow</span>(rappa.grey)<span class="sc">:</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="applications-of-svd.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.grey, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-109"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-109-1.png" alt="Greyscale representation of original image" width="672" />
+<p class="caption">
+Figure 17.3: Greyscale representation of original image
+</p>
+</div>
+</div>
+<div id="computing-the-svd-of-dr.-rappa" class="section level3" number="17.2.2">
+<h3><span class="header-section-number">17.2.2</span> Computing the SVD of Dr. Rappa</h3>
+<p>Now, let’s use what we know about the SVD to compress this image. First, let’s compute the SVD and save the individual components. Remember that the rows of <span class="math inline">\(\mathbf{v}^T\)</span> are the right singular vectors. R outputs the matrix <span class="math inline">\(\mathbf{v}\)</span> which has the singular vectors in columns.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="applications-of-svd.html#cb232-1" aria-hidden="true" tabindex="-1"></a>rappasvd<span class="ot">=</span><span class="fu">svd</span>(rappa.grey)</span>
+<span id="cb232-2"><a href="applications-of-svd.html#cb232-2" aria-hidden="true" tabindex="-1"></a>U<span class="ot">=</span>rappasvd<span class="sc">$</span>u</span>
+<span id="cb232-3"><a href="applications-of-svd.html#cb232-3" aria-hidden="true" tabindex="-1"></a>d<span class="ot">=</span>rappasvd<span class="sc">$</span>d</span>
+<span id="cb232-4"><a href="applications-of-svd.html#cb232-4" aria-hidden="true" tabindex="-1"></a>Vt<span class="ot">=</span><span class="fu">t</span>(rappasvd<span class="sc">$</span>v)</span></code></pre></div>
+<p>Now let’s compute some approximations of rank 3, 10 and 50:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="applications-of-svd.html#cb233-1" aria-hidden="true" tabindex="-1"></a>rappaR3<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span>
+<span id="cb233-2"><a href="applications-of-svd.html#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR3, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-111-1.png" alt="Rank 3 approximation of the image data" width="672" />
+<p class="caption">
+Figure 17.4: Rank 3 approximation of the image data
+</p>
+</div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="applications-of-svd.html#cb234-1" aria-hidden="true" tabindex="-1"></a>rappaR10<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
+<span id="cb234-2"><a href="applications-of-svd.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR10, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-112"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" alt="Rank 10 approximation of the image data" width="672" />
+<p class="caption">
+Figure 17.5: Rank 10 approximation of the image data
+</p>
+</div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="applications-of-svd.html#cb235-1" aria-hidden="true" tabindex="-1"></a>rappaR25<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ]</span>
+<span id="cb235-2"><a href="applications-of-svd.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-113"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" alt="Rank 50 approximation of the image data" width="672" />
+<p class="caption">
+Figure 17.6: Rank 50 approximation of the image data
+</p>
+</div>
+<p>How many singular vectors does it take to recognize Dr. Rappa? Certainly 25 is sufficient. Can you recognize him with even fewer? You can play around with this and see how the image changes.</p>
+</div>
+<div id="the-noise" class="section level3" number="17.2.3">
+<h3><span class="header-section-number">17.2.3</span> The Noise</h3>
+<p>One of the main benefits of the SVD is that the <em>signal-to-noise</em> ratio of each component decreases as we move towards the right end of the SVD sum. If <span class="math inline">\(\mathbf{x}\)</span> is our data matrix (in this example, it is a matrix of pixel data to create an image) then,</p>
+<p><span class="math display" id="eq:svdsum">\[\begin{equation}
+\mathbf{X}= \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T + \sigma_3\mathbf{u}_3\mathbf{v}_3^T + \dots + \sigma_r\mathbf{u}_r\mathbf{v}_r^T
+\tag{16.2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(r\)</span> is the rank of the matrix. Our image matrix is full rank, <span class="math inline">\(r=160\)</span>. This is the number of nonzero singular values, <span class="math inline">\(\sigma_i\)</span>. But, upon examinination, we see many of the singular values are nearly 0. Let’s examine the last 20 singular values:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="applications-of-svd.html#cb236-1" aria-hidden="true" tabindex="-1"></a>d[<span class="dv">140</span><span class="sc">:</span><span class="dv">160</span>]</span></code></pre></div>
+<pre><code>##  [1] 0.035731961 0.033644986 0.033030189 0.028704912 0.027428124 0.025370919
+##  [7] 0.024289497 0.022991926 0.020876657 0.020060538 0.018651373 0.018011032
+## [13] 0.016299834 0.015668836 0.013928107 0.013046327 0.011403096 0.010763141
+## [19] 0.009210187 0.008421977 0.004167310</code></pre>
+<p>We can think of these values as the amount of ``information’’ directed along those last 20 singular components. If we assume the noise in the image or data is uniformly distributed along each orthogonal component <span class="math inline">\(\mathbf{u}_i\mathbf{v}_i^T\)</span>, then there is just as much noise in the component <span class="math inline">\(\sigma_1\mathbf{u}_1\mathbf{v}_1^T\)</span> as there is in the component <span class="math inline">\(\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T\)</span>. But, as we’ve just shown, there is far less information in the component <span class="math inline">\(\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T\)</span> than there is in the component <span class="math inline">\(\sigma_1\mathbf{u}_1\mathbf{v}_1^T\)</span>. This means that the later components are primarily noise. Let’s see if we can illustrate this using our image. We’ll construct the parts of the image that are represented on the last few singular components</p>
+
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="applications-of-svd.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 25 components:</span></span>
+<span id="cb238-2"><a href="applications-of-svd.html#cb238-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb238-3"><a href="applications-of-svd.html#cb238-3" aria-hidden="true" tabindex="-1"></a>rappa_bad25<span class="ot">=</span>U[ ,<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb238-4"><a href="applications-of-svd.html#cb238-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-115"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (16.2)" width="672" />
+<p class="caption">
+Figure 17.7: The last 25 components, or the sum of the last 25 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
+</p>
+</div>
+
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="applications-of-svd.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 50 components:</span></span>
+<span id="cb239-2"><a href="applications-of-svd.html#cb239-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb239-3"><a href="applications-of-svd.html#cb239-3" aria-hidden="true" tabindex="-1"></a>rappa_bad50<span class="ot">=</span>U[ ,<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb239-4"><a href="applications-of-svd.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad50, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-116"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (16.2)" width="672" />
+<p class="caption">
+Figure 17.8: The last 50 components, or the sum of the last 50 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
+</p>
+</div>
+
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="applications-of-svd.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 100 components: (4 times as many components as it took us to recognize the face on the front end)</span></span>
+<span id="cb240-2"><a href="applications-of-svd.html#cb240-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb240-3"><a href="applications-of-svd.html#cb240-3" aria-hidden="true" tabindex="-1"></a>rappa_bad100<span class="ot">=</span>U[ ,<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb240-4"><a href="applications-of-svd.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad100, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (16.2)" width="672" />
+<p class="caption">
+Figure 17.9: The last 100 components, or the sum of the last 100 terms in equation <a href="svd.html#eq:svdsum">(16.2)</a>
+</p>
+</div>
+<p>Mostly noise. In the last of these images, we see the outline of Dr. Rappa. One of the first things to go when images are compressed are the crisp outlines of objects. This is something you may have witnessed in your own experience, particularly when changing the format of a picture to one that compresses the size.</p>
+
+</div>
 </div>
 </div>
             </section>
@@ -527,8 +593,8 @@ run;</code></pre>
           </div>
         </div>
       </div>
-<a href="lsapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pca-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -560,7 +626,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/04-SVD.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -568,7 +634,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/04-SVD.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

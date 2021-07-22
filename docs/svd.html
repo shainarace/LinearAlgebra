@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Principal Components Analysis | bookdownproj.utf8</title>
+  <title>Chapter 16 The Singular Value Decomposition (SVD) | bookdownproj.utf8</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta property="og:title" content="Chapter 16 The Singular Value Decomposition (SVD) | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta name="twitter:title" content="Chapter 16 The Singular Value Decomposition (SVD) | bookdownproj.utf8" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lsapp.html"/>
-<link rel="next" href="pca-in-r.html"/>
+<link rel="prev" href="pcaapp.html"/>
+<link rel="next" href="applications-of-svd.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -425,101 +425,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pca" class="section level1" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Principal Components Analysis</h1>
-<p>We now have the tools necessary to discuss one of the most important concepts in mathematical statistics: <strong>Principal Components Analysis (PCA)</strong>. PCA involves the analysis of eigenvalues and eigenvectors of the covariance or correlation matrix. Its development relies on the following important facts:</p>
-<div class="theorem">
-<p><span id="thm:eigsym" class="theorem"><strong>Theorem 13.1  (Diagonalization of Symmetric Matrices) </strong></span>All <span class="math inline">\(n\times n\)</span> real valued symmetric matrices (like the covariance and correlation matrix) have two very important properties:</p>
-<ol style="list-style-type: decimal">
-<li>They have a complete set of <span class="math inline">\(n\)</span> linearly independent eigenvectors, <span class="math inline">\(\{\v_1,\dots,\v_n\}\)</span>, corresponding to eigenvalues <span class="math display">\[\lambda_1 \geq \lambda_2 \geq\dots\geq \lambda_n.\]</span></li>
-<li>Furthermore, these eigenvectors can be always be chosen to be <em>orthonormal</em> so that if <span class="math inline">\(\V=[\v_1|\dots|\v_n]\)</span> then
-<span class="math display">\[\V^{T}\V=\bo{I}\]</span>
-or equivalently, <span class="math inline">\(\V^{-1}=\V^{T}\)</span>.</li>
-</ol>
-<p>Letting <span class="math inline">\(\D\)</span> be a diagonal matrix with <span class="math inline">\(D_{ii}=\lambda_i\)</span>, by the definition of eigenvalues and eigenvectors we have for any symmetric matrix <span class="math inline">\(\bo{S}\)</span>,
-<span class="math display">\[\bo{S}\V=\V\D\]</span>
-Thus, any symmetric matrix <span class="math inline">\(\bo{S}\)</span> can be diagonalized in the following way:
-<span class="math display">\[\V^{T}\bo{S}\V=\D\]</span>
-Covariance and Correlation matrices (when there is no perfect multicollinearity in variables) have the additional property that all of their eigenvalues are positive (nonzero). They are <em>positive definite</em> matrices.</p>
-</div>
-<p>Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use <span class="math inline">\((\lambda_1,\v_1)\)</span> to represent the <strong>largest</strong> eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the <strong>first principal component</strong> and points in the direction for which the variance of the data is maximal. Example <a href="pca.html#exm:coveigs">13.1</a> illustrates this point.</p>
-<div class="example">
-<p><span id="exm:coveigs" class="example"><strong>Example 13.1  (Eigenvectors of the Covariance Matrix) </strong></span>Suppose we have a matrix of data for 10 individuals on 2 variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>. Plotted on a plane, the data appears as follows:</p>
-<center>
-<img src="figs/pcpoints.png%20=100x" />
-</center>
-Our data matrix for these points is:
-<span class="math display">\[\X=\pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp\]</span>
-the means of the variables in <span class="math inline">\(\X\)</span> are:
-<span class="math display">\[\bar{\x}=\pm 4.4 \\ 3.7 \mp. \]</span>
-When thinking about variance directions, our first step should be to center the data so that it has mean zero. Eigenvectors measure the spread of data around the origin. Variance measures spread of data around the mean. Thus, we need to equate the mean with the origin. To center the data, we simply compute
-<span class="math display">\[\X_c=\X-\e\bar{\x}^T = \pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp - \pm 4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7  \mp = \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3\mp.\]</span>
-Examining the new centered data, we find that we’ve only translated our data in the plane - we haven’t distorted it in any fashion.
-<center>
-<img src="figs/pcpointscenter.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>Thus the covariance matrix is:
-<span class="math display">\[\ssigma=\frac{1}{9}(\X_c^T\X_c)= \pm 5.6 &amp; 4.8\\4.8&amp;6.0111 \mp \]</span>
-The eigenvalue and eigenvector pairs of <span class="math inline">\(\ssigma\)</span> are (rounded to 2 decimal places) as follows:
-<span class="math display">\[(\lambda_1,\v_1)=\left( 10.6100 ,  \begin{bmatrix} 0.69 \\ 0.72 \end{bmatrix}\right) \mbox{  and  } (\lambda_2,\v_2)= \left( 1.0012,\begin{bmatrix}-0.72\\0.69 \end{bmatrix}\right)\]</span>
-Let’s plot the eigenvector directions on the same graph:</p>
-<center>
-<img src="figs/pcpointspc.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>The eigenvector <span class="math inline">\(\v_1\)</span> is called the <strong>first principal component</strong>. It is the direction along which the variance of the data is maximal. The eigenvector <span class="math inline">\(\v_2\)</span> is the <strong>second principal component</strong>. In general, the second principal component is the direction, orthogonal to the first, along which the variance of the data is maximal (in two dimensions, there is only one direction possible.)</p>
-</div>
-<p>Why is this important? Let’s consider what we’ve just done. We started with two variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>, which appeared to be correlated. We then derived <em>new variables</em>, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, which are linear combinations of the original variables:
-<span class="math display" id="eq:pcacomb">\[\begin{eqnarray}
-\v_1 &amp;=&amp; 0.69\x_1 + 0.72\x_2 \\
-\tag{13.1}
-\v_2 &amp;=&amp; -0.72\x_1 + 0.69\x_2
-\end{eqnarray}\]</span>
-These new variables are completely uncorrelated. To see this, let’s represent our data according to the new variables - i.e. let’s change the basis from <span class="math inline">\(\mathcal{B}_1=[\x_1,\x_2]\)</span> to <span class="math inline">\(\mathcal{B}_2=[\v_1,\v_2]\)</span>.</p>
-<div class="example">
-<p><span id="exm:pcabasis" class="example"><strong>Example 13.2  (The Principal Component Basis) </strong></span>Let’s express our data in the basis defined by the principal components. We want to find coordinates (in a <span class="math inline">\(2\times 10\)</span> matrix <span class="math inline">\(\A\)</span>) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for <span class="math inline">\(\A\)</span> in the following equation (see Chapter <a href="basis.html#basis">8</a> and note that the <em>rows</em> of <span class="math inline">\(\X\)</span> define the points rather than the columns):
-<span class="math display">\[\begin{eqnarray}
- \X_c &amp;=&amp; \A \V^T \\
- \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3 \mp &amp;=&amp;  \pm a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \\ a_{31} &amp; a_{32}\\ a_{41} &amp; a_{42}\\ a_{51} &amp; a_{52}\\ a_{61} &amp; a_{62}\\ a_{71} &amp; a_{72}\\ a_{81} &amp; a_{82}\\ a_{91} &amp; a_{92}\\ a_{10,1} &amp; a_{10,2} \mp \pm \v_1^T \\ \v_2^T \mp
-\end{eqnarray}\]</span></p>
-Conveniently, our new basis is orthonormal meaning that <span class="math inline">\(\V\)</span> is an orthogonal matrix, so
-<span class="math display">\[\A=\X\V .\]</span>
-The new data coordinates reflect a simple rotation of the data around the origin:
-<center>
-<img src=figs/pcpointsrotate.pdf width=50%>
-</center>
-<p>Visually, we can see that the new variables are uncorrelated. You may wish to confirm this by calculating the covariance. In fact, we can do this in a general sense. If <span class="math inline">\(\A=\X_c\V\)</span> is our new data, then the covariance matrix is diagonal:
-<span class="math display">\[\begin{eqnarray*}
-\ssigma_A &amp;=&amp; \frac{1}{n-1}\A^T\A  \\ 
-    &amp;=&amp; \frac{1}{n-1}(\X_c\V)^T(\X_c\V) \\
-    &amp;=&amp; \frac{1}{n-1}\V^T((\X_c^T\X_c)\V\\
-    &amp;=&amp;\frac{1}{n-1}\V^T((n-1)\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\V\D\V^T)\V\\
-    &amp;=&amp; \D
-\end{eqnarray*}\]</span>
-Where <span class="math inline">\(\ssigma_X=\V\D\V^T\)</span> comes from the diagonalization in Theorem <a href="pca.html#thm:eigsym">13.1</a>.
-By changing our variables to principal components, we have managed to <strong>“hide”</strong> the correlation between <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> while keeping the spacial relationships between data points in tact. Transformation <em>back</em> to variables <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> is easily done by using the linear relationships in from Equation <a href="pca.html#eq:pcacomb">(13.1)</a>.</p>
-</div>
-<div id="geometrical-comparison-with-least-squares" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Geometrical comparison with Least Squares</h2>
-<p>In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example <a href="pca.html#exm:coveigs">13.1</a> points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared <em>orthogonal</em> distances between the points and the line. Regressing <span class="math inline">\(\x_2\)</span> on <span class="math inline">\(\x_1\)</span>, on the other hand, provides a line which minimizes the sum of squared <em>vertical</em> distances between points and the line. This is illustrated in Figure <a href="pca.html#fig:pcvsreg">13.1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcvsreg"></span>
-<img src="figs/pcvsreg.jpg" alt="Principal Components vs. Regression Lines" width="2572" />
-<p class="caption">
-Figure 13.1: Principal Components vs. Regression Lines
+<div id="svd" class="section level1" number="16">
+<h1><span class="header-section-number">Chapter 16</span> The Singular Value Decomposition (SVD)</h1>
+<p>The Singular Value Decomposition (SVD) is one of the most important concepts in applied mathematics. It is used for a number of application including dimension reduction and data analysis. Principal Components Analysis (PCA) is a special case of the SVD. Let’s start with the formal definition, and then see how PCA relates to that definition.</p>
+<div class="definition">
+<p><span id="def:svddef" class="definition"><strong>Definition 16.1  (Singular Value Decomposition) </strong></span>For any <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span> with <span class="math inline">\(rank(\A)=r\)</span>, there are orthogonal matrices <span class="math inline">\(\U_{m\times m}\)</span> and <span class="math inline">\(\V_{n\times n}\)</span> and a diagonal matrix <span class="math inline">\(\D_{r\times r}=diag(\sigma_1,\sigma_2,\dots,\sigma_r)\)</span> such that
+<span class="math display" id="eq:svd">\[\begin{equation}
+\tag{16.1}
+\A = \U \underbrace{\pm \D &amp; \bo{0} \\\bo{0}&amp;\bo{0} \mp}_{\text{$m\times n$}} \V^T \quad \mbox{with}\quad \sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_r\geq 0
+\end{equation}\]</span>
+The <span class="math inline">\(\sigma_i\)</span>’s are called the nonzero  of <span class="math inline">\(\A\)</span>. (When <span class="math inline">\(r&lt;p=\min\{m,n\}\)</span> (i.e. when <span class="math inline">\(\A\)</span> is not full-rank), <span class="math inline">\(\A\)</span> is said to have an additional <span class="math inline">\(p-r\)</span> zero singular values). This factorization is called a  of <span class="math inline">\(\A\)</span>, and the columns of <span class="math inline">\(\U\)</span> and <span class="math inline">\(\V\)</span> are called the left- and right-hand  for <span class="math inline">\(\A\)</span>, respectively.\</p>
+<p>
+1. The left-hand singular vectors are a set of orthonormal eigenvectors for <span class="math inline">\(\A\A^T\)</span>.<br />
+2. The right-hand singular vectors are a set of orthonormal eigenvectors for <span class="math inline">\(\A^T\A\)</span>.<br />
+3. The singular values are the square roots of the eigenvalues for <span class="math inline">\(\A^T\A \mbox{ and } \A\A^T\)</span>, as these matrices have the same eigenvalues.<br />
 </p>
 </div>
-<p>The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. Let this not conjure up images of linear regression in your head, though. In contrast, linear least squares tries to minimize the distance in a single direction only (the direction of your target variable axes). Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.</p>
-<p>You might be tempted to conclude from Figure <a href="pca.html#fig:pcvsreg">13.1</a> that the first principal component and the regression line “ought to be similar.” This is a terrible conclusion if you consider a large multivariate dataset and the various regression lines that would predict each variable in that dataset. In PCA, there is no target variable and thus no single regression line that we’d be comparing to.</p>
+<p>When we studied PCA, one of the goals was to find the new coordinates, or , of the data in the principal components basis. If our original (centered or standardized) data was contained in the matrix <span class="math inline">\(\X\)</span> and the eigenvectors of the covariance/correlation matrix (<span class="math inline">\(\X^T\X\)</span>) were columns of a matrix <span class="math inline">\(\V\)</span>, then to find the scores (call these <span class="math inline">\(\mathbf{S}\)</span>) of the observations on the eigenvectors we used the following equation (which is the transpose of Equation <a href="pca-in-r.html#eq:cpc2">(14.2)</a>):
+<span class="math display">\[\X=\mathbf{S}\V^T.\]</span>
+This equation mimics Equation <a href="svd.html#eq:svd">(16.1)</a> because the matrix <span class="math inline">\(\V^T\)</span> in Equation (eq:svd) is also a matrix of eigenvectors for <span class="math inline">\(\A^T\A\)</span>. This means that the principal component scores <span class="math inline">\(\mathbf{S}\)</span> are actually a set of unit eigenvectors for <span class="math inline">\(\A\A^T\)</span> scaled by the singular values in <span class="math inline">\(\D\)</span>:
+<span class="math display">\[\mathbf{S}=\U \pm \D &amp; \bo{0} \\ \bo{0}&amp;\bo{0} \mp .\]</span></p>
+<div id="resolving-a-matrix-into-components" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Resolving a Matrix into Components</h2>
+<p>One of the primary goals of the singular value decomposition is to resolve the data in <span class="math inline">\(\A\)</span> into <span class="math inline">\(r\)</span> mutually orthogonal components by writing the matrix factorization as a sum of outer products using the corresponding columns of <span class="math inline">\(\U\)</span> and rows of <span class="math inline">\(\V^T\)</span>:</p>
+<p><span class="math display">\[\A = \U \pm \D &amp; \bo{0} \\\bo{0}&amp;\bo{0} \mp\V^T = \pm \u_1 &amp; \u_2 &amp; \dots &amp;\u_m \mp \pm \sigma_1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\ 0 &amp; \ddots &amp; 0 &amp; \vdots &amp; 0 \\ \vdots &amp; 0&amp; \sigma_r  &amp; 0 &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp;0\\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots\\ 0 &amp; 0 &amp; 0 &amp; 0 &amp;0 \mp \pm \v_1^T \\ \v_2^T \\ \vdots \\ \v_n^T \mp\]</span></p>
+<p><span class="math display">\[= \sigma_1\u_1\v_1^T+\sigma_2\u_2\v_2^T+\dots+\sigma_r\u_r\v_r^T.\]</span>
+<span class="math display">\[\sigma_1 \geq \sigma_2 \geq \dots \sigma_r\]</span>
+For simplicity, let <span class="math inline">\(\Z_i=\u_i\v_i^T\)</span> act as basis matrices for this expansion, so we have
+<span class="math display" id="eq:svdsum">\[\begin{equation}
+\tag{16.2}
+\A=\sum_{i=1}^r \sigma_i \Z_i.
+\end{equation}\]</span></p>
+<p>This representation can be regarded as a Fourier expansion. The coefficient (singular value) <span class="math inline">\(\sigma_i\)</span> can be interpreted as the proportion of <span class="math inline">\(\A\)</span> lying in the ``direction" of <span class="math inline">\(\Z_i\)</span>. When <span class="math inline">\(\sigma_i\)</span> is small, omitting that term from the expansion will cause only a small amount of the information in <span class="math inline">\(\A\)</span> to be lost. This fact has important consequences for compression and noise reduction.</p>
+<p>##Data Compression</p>
+<p>We’ve already seen how PCA can be used to reduce the dimensions of our data while keeping the most amount of variance. The way this is done is by simply ignoring those components for which the proportion of variance is small. Supposing we keep <span class="math inline">\(k\)</span> principal components, this amounts to truncating the sum in Equation <a href="svd.html#eq:svdsum">(16.2)</a> after <span class="math inline">\(k\)</span> terms:
+<span class="math display" id="eq:truncsvd">\[\begin{equation}
+\tag{16.3}
+\A \approx \sum_{i=1}^{k} \sigma_i \Z_i.
+\end{equation}\]</span>
+As it turns out, this truncation has important consequences in many applications. One example is that of image compression. An image is simply an array of pixels. Supposing the image size is <span class="math inline">\(m\)</span> pixels tall by <span class="math inline">\(n\)</span> pixels wide, we can capture this information in an <span class="math inline">\(m\times n\)</span> matrix if the image is in grayscale, or an <span class="math inline">\(m\times 3n\)</span> matrix for a [r,g,b] color image (we’d need 3 values for each pixel to recreate the pixel’s color). These matrices can get very large (a 6 megapixel photo is 6 million pixels).</p>
+<p>Rather than store the entire matrix, we can store an approximation to the matrix using only a few (well, more than a ) singular values and singular vectors.</p>
+<p>This is the basis of image compression. An approximated photo will not be as crisp as the original - some information will be lost - but most of the time we can store much less than the original matrix and still get a good depiction of the image.</p>
 </div>
-<div id="covariance-or-correlation-matrix" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Covariance or Correlation Matrix?</h2>
-<p>Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is <em>standardizing</em> the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.</p>
-<p>The covariance matrix is the default for (most)  PCA functions. The correlation matrix is the default in SAS and the covariance matrix method is invoked by the option:</p>
-<pre><code>proc princomp data=X cov; 
-var x1--x10;
-run;</code></pre>
-<p>Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component. The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don’t we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter <a href="pcaapp.html#pcaapp">15</a> will give those who <em>always</em> use the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.</p>
+<div id="noise-reduction" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Noise Reduction</h2>
+<p>Many applications arise where the relevant information contained in a matrix is contaminated by a certain level of noise. This is particularly common with video and audio signals, but also arises in text data and other types of (usually high dimensional) data. The  (Equation <a href="svd.html#eq:truncsvd">(16.3)</a>) can actually reduce the amount of noise in data and increase the overall  ratio under certain conditions.</p>
+<p>Let’s suppose, for instance, that our matrix <span class="math inline">\(\A_{m\times n}\)</span> contains data which is contaminated by noise. If that noise is assumed to be random (or nondirectional) in the sense that the noise is distributed more or less uniformly across the components <span class="math inline">\(\Z_i\)</span>, then there is just as much noise <code>in the direction'' of one $\Z_i$ as there is in the other. If the amount of noise along each direction is approximately the same, and the $\sigma_i$'s tell us how much (relevant) information in $\A$ is directed along each component $\Z_i$, then it must be that the ratio of</code>signal’’ (relevant information) to noise is decreasing across the ordered components, since
+<span class="math display">\[\sigma_1 \geq \sigma_2\geq \dots \geq \sigma_r\]</span>
+implies that the signal is greater in earlier components. So letting <span class="math inline">\(SNR(\sigma_i\Z_i)\)</span> denote the signal-to-noise ratio of each component, we have
+<span class="math display">\[SNR(\sigma_1\Z_1) \geq SNR(\sigma_2\Z_2)\geq \dots \geq SNR(\sigma_r\Z_r)\]</span></p>
+<p>This explains why the ,
+<span class="math display">\[\A \approx \sum_{i=1}^{k} \sigma_i \Z_i \quad \mbox{where}\quad k&lt;r\]</span>
+can, in many scenarios, filter out some of the noise without losing much of the significant information in <span class="math inline">\(\A\)</span>.</p>
+</div>
+<div id="latent-semantic-indexing" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Latent Semantic Indexing</h2>
+<p>Text mining is another area where the SVD is used heavily. In text mining, our data structure is generally known as a . The  are any individual pieces of text that we wish to analyze, cluster, summarize or discover topics from. They could be sentences, abstracts, webpages, or social media updates. The  are the words contained in these documents. The term-document matrix represents what’s called the ``bag-of-words’’ approach - the order of the words is removed and the data becomes unstructured in the sense that each document is represented by the words it contains, not the order or context in which they appear. The <span class="math inline">\((i,j)\)</span> entry in this matrix is the number of times term <span class="math inline">\(j\)</span> appears in document <span class="math inline">\(i\)</span>.</p>
+<div class="definition">
+<p><span id="def:tdm" class="definition"><strong>Definition 16.2  (Term-Document Matrix) </strong></span>Let <span class="math inline">\(m\)</span> be the number of documents in a collection and <span class="math inline">\(n\)</span> be the number of terms appearing in that collection, then we create our  <span class="math inline">\(\A\)</span> as follows:
+<span class="math display">\[\begin{equation}
+    \begin{array}{ccc}
+        &amp; &amp; \hbox{term 1 \; \; \; term $j$ \; term $n$} \\
+        \A_{m\times n} = &amp; \begin{array}{c}
+            \hbox{Doc 1} \\
+            \\
+            \\
+            \hbox{Doc $i$} \\
+            \\
+            \hbox{Doc $m$} \\
+        \end{array} &amp;
+        \left(
+        \begin{array}{ccccccc}
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; - &amp; - &amp;f_{ij}  &amp;  &amp; &amp; \\
+            &amp; &amp; &amp; &amp; &amp; &amp; \\
+            &amp; &amp; &amp; &amp; &amp; &amp; \\
+        \end{array}
+        \right)
+    \end{array}
+\nonumber
+\end{equation}\]</span>
+where <span class="math inline">\(f_{ij}\)</span> is the frequency of term <span class="math inline">\(j\)</span> in document <span class="math inline">\(i\)</span>. A  term-document matrix will simply have <span class="math inline">\(\A_{ij}=1\)</span> if term <span class="math inline">\(j\)</span> is contained in document <span class="math inline">\(i\)</span>.</p>
+</div>
+<p>Term-document matrices tend to be large and sparse. Term-weighting schemes are often used to downplay the effect of commonly used words and bolster the effect of rare but semantically important words. The most popular weighting method is known as <strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong>. For this method, the raw term-frequencies <span class="math inline">\(f_{ij}\)</span> in the matrix <span class="math inline">\(\A\)</span> are multiplied by global weights (inverse document frequencies), <span class="math inline">\(w_j\)</span>, for each term. These weights reflect the commonality of each term across the entire collection. The inverse document frequency of term <span class="math inline">\(i\)</span> is:
+<span class="math display">\[w_j = \log \left( \frac{\mbox{total \# of documents}}{\mbox{\# documents containing term  } j} \right)\]</span>
+To put this weight in perspective for a collection of <span class="math inline">\(n=10,000\)</span> documents we have <span class="math inline">\(0\leq w_j \leq 9.2\)</span>, where <span class="math inline">\(w_j=0\)</span> means the word is contained in every document (i.e. it’s not important semantically) and <span class="math inline">\(w_j=9.2\)</span> means the word is contained in only 1 document (i.e. it’s quite important). The document vectors are often normalized to have unit 2-norm, since their directions (not their lengths) in the term-space is what characterizes them semantically.\</p>
+<p>The noise-reduction property of the SVD was extended to text processing in 1990 by Susan Dumais et al, who named the effect . LSI involves the singular value decomposition of the term-document matrix defined in Definition <a href="svd.html#def:tdm">16.2</a>. In other words, it is like a principal components analysis using the unscaled, uncentered inner-product matrix <span class="math inline">\(\A^T\A\)</span>. If the documents are normalized to have unit length, this is a matrix of  (see Chapter <a href="norms.html#norms">6</a>). Cosine similarity is the most common measure of similarity between documents for text mining. If the term-document matrix is binary, this is often called the co-occurrence matrix because each entry gives the number of times two words occur in the same document.</p>
+<p>It certainly seems logical to view text data in this context as it contains both an informative signal and semantic noise. LSI quickly grew roots in the information retrieval community, where it is often used for query processing. The idea is to remove semantic noise, due to variation and ambiguity in vocabulary and presentation style, without losing significant amounts of information. For example, a human may not differentiate between the words <code>car'' and</code>automobile’‘, but indeed the words will become two separate entities in the raw term-document matrix. The main idea in LSI is that the realignment of the data into fewer directions should force related documents (like those containing <code>car'' and</code>automobile’’) closer together in an angular sense, thus revealing latent semantic connections.</p>
+<p>Purveyors of LSI suggest that the use of the Singular Value Decomposition to project the documents into a lower-dimensional space results in a representation which reflects the major associative patterns of the data while ignoring less important influences. This projection is done with the simple truncation of the SVD shown in Equation <a href="svd.html#eq:truncsvd">(16.3)</a>.</p>
+<p>As we have seen with other types of data, the very nature of dimension reduction makes possible for two documents with similar semantic properties to be mapped closer together. Unfortunately, the mixture of signs (positive and negative) in the singular vectors (think principal components) makes the decomposition difficult to interpret. While the major claims of LSI are legitimate, this lack of interpretability is still conceptually problematic for some folks. In order to make this point as clear as possible, consider the original “term basis” representation for the data, where each document (from a collection containing <span class="math inline">\(m\)</span> total terms in the dictionary) could be written as:
+<span class="math display">\[\A_j = \sum_{i=1}^{m} f_{ij}\e_i\]</span>
+where <span class="math inline">\(f_{ij}\)</span> is the frequency of term <span class="math inline">\(i\)</span> in the document, and <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the <span class="math inline">\(m\times m\)</span> identity matrix. The truncated SVD gives us a new set of coordinates (scores) and basis vectors (principal component features):
+<span class="math display">\[\A_j \approx \sum_{i=1}^r \alpha_i \u_i\]</span>
+but the features <span class="math inline">\(\u_i\)</span> live in the term space, and thus ought to be interpretable as a linear combinations of the original “term basis.” However the linear combinations, having both positive and negative coefficients, tends to be semantically obscure in practice - These new features do not often form meaningful  for the text, although they often do organize in a meaningful way as we will demonstrate.</p>
+
 </div>
 </div>
             </section>
@@ -527,8 +528,8 @@ run;</code></pre>
           </div>
         </div>
       </div>
-<a href="lsapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pca-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pcaapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications-of-svd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -560,7 +561,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/0399-SVD-text.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -568,7 +569,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/0399-SVD-text.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],

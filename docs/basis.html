@@ -4,27 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python</title>
-  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 8 Basis and Change of Basis | bookdownproj.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 8 Basis and Change of Basis | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="MSALogo.png" />
-  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="github-repo" content="rstudio/linalg-master" />
+  
+  
+  
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Basis and Change of Basis |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 8 Basis and Change of Basis | bookdownproj.utf8" />
   
-  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="twitter:image" content="MSALogo.png" />
-
-<meta name="author" content="Shaina Race Bennett, PhD" />
+  
+  
 
 
-<meta name="date" content="2021-05-11" />
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +30,7 @@
   
   
 <link rel="prev" href="linind.html"/>
-<link rel="next" href="eigen.html"/>
+<link rel="next" href="orthog.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,13 +49,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script src="libs/d3-4.5.0/d3.min.js"></script>
 <script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 <!DOCTYPE html>
@@ -70,7 +70,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -250,6 +249,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -263,14 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
 <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-<li><center><strong> with examples in R and Python </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -285,7 +285,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
 <li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>1.9</b> List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
 <ul>
@@ -296,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
 <li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
 <li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
 <ul>
@@ -309,86 +308,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
-<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.2</b> Three Types of Systems</a></li>
-<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.3</b> Solving Matrix Equations</a></li>
-<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
-<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>5.5</b> List of Key Terms</a></li>
-<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.6</b> Gauss-Jordan Elimination in R</a></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>6</b> Least Squares</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>6.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>7</b> Applications of Least Squares</a>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>7.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="7.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>7.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>8</b> Linear Independence</a>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>8.1</b> Linear Independence</a></li>
-<li class="chapter" data-level="8.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>8.2</b> Span of Vectors</a></li>
-<li class="chapter" data-level="8.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>9</b> Basis and Change of Basis</a>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>9.1</b> Exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>10</b> Eigenvalues and Eigenvectors</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>10.1</b> Diagonalization</a></li>
 <li class="chapter" data-level="10.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>10.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
-<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-5"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>11</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>11.1</b> Norms and Distances</a></li>
-<li class="chapter" data-level="11.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>11.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="11.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>11.3</b> Inner Products</a></li>
-<li class="chapter" data-level="11.4" data-path="norms.html"><a href="norms.html#orthogonality"><i class="fa fa-check"></i><b>11.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="11.5" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>11.5</b> Outer Products</a></li>
-<li class="chapter" data-level="11.6" data-path="norms.html"><a href="norms.html#exercises-6"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>12</b> Principal Components Analysis</a>
+<li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>12.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="12.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>12.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="12.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>12.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>12.2</b> Multiple Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>13</b> PCA in R</a>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="13.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>13.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="14.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>14.5</b> Image Compression</a></li>
+<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
+<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>15.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="15.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>15.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="15.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>15.3</b> Communalities</a></li>
-<li class="chapter" data-level="15.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>15.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="15.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>15.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>16</b> Factor Analysis</a>
+<li class="chapter" data-level="16" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>16</b> The Singular Value Decomposition (SVD)</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>16.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="16.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>16.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="16.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>16.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="16.2" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>16.2</b> Noise Reduction</a></li>
+<li class="chapter" data-level="16.3" data-path="svd.html"><a href="svd.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.3</b> Latent Semantic Indexing</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="17" data-path="applications-of-svd.html"><a href="applications-of-svd.html"><i class="fa fa-check"></i><b>17</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>17.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="17.1" data-path="applications-of-svd.html"><a href="applications-of-svd.html#latent-semantic-indexing-1"><i class="fa fa-check"></i><b>17.1</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="17.2" data-path="applications-of-svd.html"><a href="applications-of-svd.html#rappasvd"><i class="fa fa-check"></i><b>17.2</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>18</b> Social Network Analysis</a>
+<li class="chapter" data-level="18" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>18.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="18.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>18.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="18.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>18.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="18.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>18.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="18.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>18.3</b> Communalities</a></li>
+<li class="chapter" data-level="18.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>18.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="18.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>18.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>19.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="19.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>19.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>20</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>20.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>21</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>21.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="21.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>21.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -402,9 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -412,62 +425,54 @@ with examples in R and Python</p></a>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="basis" class="section level1" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Basis and Change of Basis</h1>
+<div id="basis" class="section level1" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Basis and Change of Basis</h1>
 <p>When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-162"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
 <img src="figs/coordplane.jpg" alt="The Coordinate Plane" width="40%" />
 <p class="caption">
-Figure 9.1: The Coordinate Plane
+Figure 8.1: The Coordinate Plane
 </p>
 </div>
-<p>When we think of our data points this way, we are considering them as linear combinations of elementary <strong>basis vectors</strong>
+<p>We may not have previously formalized it, but even in this elementary setting, we are considering these points (vectors) as linear combinations of the elementary <strong>basis vectors</strong>
 <span class="math display">\[\e_1 = \pm 1\\0\mp \mbox{  and  } \e_2=\pm 0\\1 \mp.\]</span>
-For example, the point <span class="math inline">\((2,3)\)</span> is written as
-<span class="math display">\[\begin{equation}
+For example, the point <span class="math inline">\((2,3)\)</span> can be written as
+<span class="math display" id="eq:coord">\[\begin{equation}
 \pm 2\\3 \mp = 2\pm 1\\0\mp+3\pm 0\\1\mp = 2\e_1+3\e_2.
-\label{eq:coord}
+  \tag{8.1}
 \end{equation}\]</span></p>
-<p>We consider the coefficients (the scalars 2 and 3) in this linear combination as <strong>coordinates</strong> in the basis <span class="math inline">\(\mathcal{B}_1=\{\e_1,\e_2\}\)</span>. The coordinates, in essence, tell us how much ``information’’ from the vector/point <span class="math inline">\((2 ,3 )\)</span> lies along each basis direction: to create this point, we must travel 2 units along the direction of <span class="math inline">\(\e_1\)</span> and then 3 units along the direction of <span class="math inline">\(\e_2\)</span>.</p>
-<p>We can also view Equation <span class="math inline">\(\ref{eq:coord}\)</span> as a way to separate the vector <span class="math inline">\((2,3)\)</span> into orthogonal components. Each component is an <strong>orthogonal projection</strong> of the vector onto the span of the corresponding basis vector. The orthogonal projection of vector <span class="math inline">\(\bo{a}\)</span> onto the span another vector <span class="math inline">\(\v\)</span> is simply the closest point to <span class="math inline">\(\bo{a}\)</span> contained on the span(<span class="math inline">\(\v\)</span>), found by ``projecting’’ <span class="math inline">\(\bo{a}\)</span> toward <span class="math inline">\(\v\)</span> at a <span class="math inline">\(90^\circ\)</span> angle. Figure <a href="#orthogproj"><strong>??</strong></a> shows this explicitly for <span class="math inline">\(\bo{a}=(2,3)\)</span>.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-163"></span>
+<p>We consider the coefficients (the scalars 2 and 3) in this linear combination as <strong>coordinates</strong> in the basis <span class="math inline">\(\mathcal{B}_1=\{\e_1,\e_2\}\)</span>. The coordinates, in essence, tell us how much “information” from the vector/point <span class="math inline">\((2 ,3 )\)</span> lies along each basis direction: to create this point, we must travel 2 units along the direction of <span class="math inline">\(\e_1\)</span> and then 3 units along the direction of <span class="math inline">\(\e_2\)</span>.</p>
+<p>We can also view Equation <a href="basis.html#eq:coord">(8.1)</a> as a way to separate the vector <span class="math inline">\((2,3)\)</span> into orthogonal components. Each component is an <strong>orthogonal projection</strong> of the vector onto the span of the corresponding basis vector. The orthogonal projection of vector <span class="math inline">\(\bo{a}\)</span> onto the span another vector <span class="math inline">\(\v\)</span> is simply the closest point to <span class="math inline">\(\bo{a}\)</span> contained on the span(<span class="math inline">\(\v\)</span>), found by <em>projecting</em> <span class="math inline">\(\bo{a}\)</span> onto <span class="math inline">\(\v\)</span> at a <span class="math inline">\(90^\circ\)</span> angle. Figure <a href="basis.html#fig:orthogproj">8.2</a> shows this explicitly for <span class="math inline">\(\bo{a}=(2,3)\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:orthogproj"></span>
 <img src="figs/orthogproj.jpg" alt="Orthogonal Projections onto basis vectors" width="40%" />
 <p class="caption">
-Figure 9.2: Orthogonal Projections onto basis vectors
+Figure 8.2: Orthogonal Projections onto basis vectors
 </p>
 </div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="#0"><strong>??</strong></a>.1: Elementary Basis
+<div class="definition">
+<p><span id="def:elembasisdef" class="definition"><strong>Definition 8.1  (Elementary Basis) </strong></span>For any vector <span class="math inline">\(\a=(a_1,a_2,\dots, a_n)\)</span>, the basis <span class="math inline">\(\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}\)</span> (recall <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the identity matrix <span class="math inline">\(\bo{I}_n\)</span>) is the  and <span class="math inline">\(\a\)</span> can be written in this basis using the  <span class="math inline">\(a_1,a_2,\dots, a_n\)</span> as follows:
+<span class="math display">\[\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.\]</span></p>
 </div>
-<div class="Stext">
-For any vector <span class="math inline">\(\a=(a_1,a_2,\dots, a_n)\)</span>, the basis <span class="math inline">\(\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}\)</span> (recall <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the identity matrix <span class="math inline">\(\bo{I}_n\)</span>) is the  and <span class="math inline">\(\a\)</span> can be written in this basis using the  <span class="math inline">\(a_1,a_2,\dots, a_n\)</span> as follows:
-<span class="math display">\[\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.\]</span>
-</div>
-</div>
-</div>
-<p>The elementary basis <span class="math inline">\(\mathcal{B}_1\)</span> is convenient for many reasons, one being its orthonormality:
+<p>The elementary basis <span class="math inline">\(\mathcal{B}_1\)</span> is convenient for many reasons, one being its <strong>orthonormality</strong>:
 <span class="math display">\[\begin{eqnarray*}
 \e_1^T\e_1 &amp;=&amp; \e_2^T\e_2 = 1\\
 \e_1^T\e_2 &amp;=&amp; \e_2^T\e_1 = 0
 \end{eqnarray*}\]</span></p>
-<p>However, there are many (infinitely many, in fact) ways to represent the data points on different axes. If I wanted to view this data in a different way, I could use a different basis. Let’s consider, for example, the following orthonormal basis, drawn in green over the original grid in Figure <a href="#coordplaneB2"><strong>??</strong></a>:
+<p>However, there are many (infinitely many, in fact) ways to represent the data points on different axes. If I wanted to view this data in a different way, I could use a different basis. Let’s consider, for example, the following orthonormal basis, drawn in green over the original grid in Figure <a href="basis.html#fig:coordplaneB2">8.3</a>:
 <span class="math display">\[\mathcal{B}_2 = \{\v_1,\v_2\}=\left\lbrace {\textstyle\frac{\sqrt{2}}{2}}\pm 1\\ 1\mp ,{\textstyle\frac{\sqrt{2}}{2}}\pm 1\\-1\mp\right\rbrace\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-166"></span>
+<div class="figure" style="text-align: center"><span id="fig:coordplaneB2"></span>
 <img src="figs/coordplaneB2.jpg" alt="New basis vectors, \(\v_1\) and \(\v_2\), shown on original plane" width="40%" />
 <p class="caption">
-Figure 9.3: New basis vectors, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, shown on original plane
+Figure 8.3: New basis vectors, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, shown on original plane
 </p>
 </div>
 <p>The scalar multipliers <span class="math inline">\(\frac{\sqrt{2}}{2}\)</span> are simply normalizing factors so that the basis vectors have unit length. You can convince yourself that this is an orthonormal basis by confirming that
 <span class="math display">\[\begin{eqnarray*}
 \v_1^T\v_1 &amp;=&amp; \v_2^T\v_2 = 1\\
 \v_1^T\v_2 &amp;=&amp; \v_2^T\v_1 = 0
-\end{eqnarray*}\]</span>
-
-If we want to <em>change the basis</em> from the elementary <span class="math inline">\(\mathcal{B}_1\)</span> to the new green basis vectors in <span class="math inline">\(\mathcal{B}_2\)</span>, we need to determine a new set of coordinates that direct us to the point using the green basis vectors as a frame of reference. In other words we need to determine <span class="math inline">\((\alpha_1,\alpha_2)\)</span> such that travelling <span class="math inline">\(\alpha_1\)</span> units along the direction <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(\alpha_2\)</span> units along the direction <span class="math inline">\(\v_2\)</span> will lead us to the point in question. For the point <span class="math inline">\((2,3)\)</span> that means
+\end{eqnarray*}\]</span></p>
+<p>If we want to <em>change the basis</em> from the elementary <span class="math inline">\(\mathcal{B}_1\)</span> to the new green basis vectors in <span class="math inline">\(\mathcal{B}_2\)</span>, we need to determine a new set of coordinates that direct us to the point using the green basis vectors as a frame of reference. In other words we need to determine <span class="math inline">\((\alpha_1,\alpha_2)\)</span> such that travelling <span class="math inline">\(\alpha_1\)</span> units along the direction <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(\alpha_2\)</span> units along the direction <span class="math inline">\(\v_2\)</span> will lead us to the point in question. For the point <span class="math inline">\((2,3)\)</span> that means
 <span class="math display">\[
 \pm 2\\3 \mp = \alpha_1\v_1+\alpha_2\v_2 = \alpha_1\pm \frac{\sqrt{2}}{2}\\ \frac{\sqrt{2}}{2}\mp+\alpha_2\pm \frac{\sqrt{2}}{2}\\ -\frac{\sqrt{2}}{2}\mp .
 \]</span></p>
@@ -477,63 +482,60 @@ If we want to <em>change the basis</em> from the elementary <span class="math in
 \]</span></p>
 <p>The <span class="math inline">\(2\times 2\)</span> matrix <span class="math inline">\(\V\)</span> on the left-hand side has linearly independent columns and thus has an inverse. In fact, <span class="math inline">\(\V\)</span> is an orthonormal matrix which means its inverse is its transpose. Multiplying both sides of the equation by <span class="math inline">\(\V^{-1}=\V^T\)</span> yields the solution
 <span class="math display">\[\bo{a} =\pm \alpha_1 \\ \alpha_2 \mp = \V^T\b= \pm \frac{5\sqrt{2}}{2} \\ -\frac{\sqrt{2}}{2} \mp\]</span></p>
-<p>This result tells us that in order to reach the red point (formerly known as (2,3) in our previous basis), we should travel <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span> units along the direction of <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span> units along the direction <span class="math inline">\(\v_2\)</span> (Note that <span class="math inline">\(\v_2\)</span> points toward the southeast corner and we want to move northwest, hence the coordinate is negative). Another way (a more mathematical way) to say this is that <em>the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_1\)</span> is <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span>, and the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_2\)</span> is <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span></em>. While it may seem that these are difficult distances to plot, they work out quite well if we examine our drawing in Figure <a href="#coordplaneB2"><strong>??</strong></a>, because the diagonal of each square is <span class="math inline">\(\sqrt{2}\)</span>.</p>
+<p>This result tells us that in order to reach the red point (formerly known as (2,3) in our previous basis), we should travel <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span> units along the direction of <span class="math inline">\(\v_1\)</span> and then <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span> units along the direction <span class="math inline">\(\v_2\)</span> (Note that <span class="math inline">\(\v_2\)</span> points toward the southeast corner and we want to move northwest, hence the coordinate is negative). Another way (a more mathematical way) to say this is that <em>the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_1\)</span> is <span class="math inline">\(\frac{5\sqrt{2}}{2}\)</span>, and the length of the orthogonal projection of <span class="math inline">\(\bo{a}\)</span> onto the span of <span class="math inline">\(\v_2\)</span> is <span class="math inline">\(-\frac{\sqrt{2}}{2}\)</span></em>. While it may seem that these are difficult distances to plot, they work out quite well if we examine our drawing in Figure <a href="basis.html#fig:coordplaneB2">8.3</a>, because the diagonal of each square is <span class="math inline">\(\sqrt{2}\)</span>.</p>
 <p>In the same fashion, we can re-write all 3 of the red points on our graph in the new basis by solving the same system simultaneously for all the points. Let <span class="math inline">\(\B\)</span> be a matrix containing the original coordinates of the points and let <span class="math inline">\(\A\)</span> be a matrix containing the new coordinates:
 <span class="math display">\[\B=\pm -4 &amp; 2 &amp; 5 \\ -2 &amp; 3 &amp; 2 \mp\,\, \A=\pm \alpha_{11} &amp; \alpha_{12} &amp; \alpha_{13}\\ \alpha_{21} &amp; \alpha_{22} &amp; \alpha_{23} \mp\]</span></p>
 <p>Then the new data coordinates on the rotated plane can be found by solving:
 <span class="math display">\[\V\A=\B\]</span>
 And thus <span class="math display">\[\A=\V^T\B =\frac{\sqrt{2}}{2} \pm   -6 &amp; 5 &amp;7\\ -2&amp;-1&amp;3\mp\]</span></p>
-<p>Using our new basis vectors, our alternative view of the data is that in Figure <a href="#coordplaneB2rotate"><strong>??</strong></a>.</p>
+<p>Using our new basis vectors, our alternative view of the data is that in Figure <a href="basis.html#fig:coordplaneB2rotate">8.4</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-167"></span>
+<div class="figure" style="text-align: center"><span id="fig:coordplaneB2rotate"></span>
 <img src="figs/coordplaneB2rotate.jpg" alt="Points plotted in the new basis, \(\mathcal{B}\)" width="50%" />
 <p class="caption">
-Figure 9.4: Points plotted in the new basis, <span class="math inline">\(\mathcal{B}\)</span>
+Figure 8.4: Points plotted in the new basis, <span class="math inline">\(\mathcal{B}\)</span>
 </p>
 </div>
 <p>In the above example, we changed our basis from the original elementary basis to a new orthogonal basis which provides a different view of the data. All of this amounts to a rotation of the data around the origin. No real information has been lost - the points maintain their distances from each other in nearly every distance metric. <strong>Our new variables, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span> are linear combinations of our original variables <span class="math inline">\(\e_1\)</span> and <span class="math inline">\(\e_2\)</span></strong>, thus we can transform the data <em>back</em> to its original coordinate system by again solving a linear system (in this example, we’d simply multiply the new coordinates again by <span class="math inline">\(\V\)</span>).</p>
-<p>In general, we can change bases using the procedure outlined in Theorem <a href="#thm:changebase"><strong>??</strong></a>.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Theorem <a href="#0"><strong>??</strong></a>.2: Changing Bases
-</div>
-<div class="Stext">
-<p>Given a matrix of coordinates (in columns), <span class="math inline">\(\A\)</span>, in some basis, <span class="math inline">\(\mathcal{B}_1=\{\x_1,\x_2,\dots,\x_n\}\)</span>, we can change the basis to <span class="math inline">\(\mathcal{B}_2=\{\v_1,\v_2,\dots,\v_n\}\)</span> with the new set of coordinates in a matrix <span class="math inline">\(\B\)</span> by solving the system
+<p>In general, we can change bases using the procedure outlined in Theorem <a href="basis.html#thm:changebasedef">8.1</a>.</p>
+<div class="theorem">
+<p><span id="thm:changebasedef" class="theorem"><strong>Theorem 8.1  (Changing Bases) </strong></span>Given a matrix of coordinates (in columns), <span class="math inline">\(\A\)</span>, in some basis, <span class="math inline">\(\mathcal{B}_1=\{\x_1,\x_2,\dots,\x_n\}\)</span>, we can change the basis to <span class="math inline">\(\mathcal{B}_2=\{\v_1,\v_2,\dots,\v_n\}\)</span> with the new set of coordinates in a matrix <span class="math inline">\(\B\)</span> by solving the system
 <span class="math display">\[\X\A=\V\B\]</span>
 where <span class="math inline">\(\X\)</span> and <span class="math inline">\(\V\)</span> are matrices containing (as columns) the basis vectors from <span class="math inline">\(\mathcal{B}_1\)</span> and <span class="math inline">\(\mathcal{B}_2\)</span> respectively.</p>
 <p>Note that when our original basis is the elementary basis, <span class="math inline">\(\X=\bo{I}\)</span>, our system reduces to
 <span class="math display">\[\A=\V\B.\]</span></p>
-When our new basis vectors are orthonormal, the solution to this system is simply
-<span class="math display">\[\B=\V^T\A.\]</span>
+<p>When our new basis vectors are orthonormal, the solution to this system is simply
+<span class="math display">\[\B=\V^T\A.\]</span></p>
 </div>
-</div>
-</div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Theorem <a href="#0"><strong>??</strong></a>.3: Basis
-</div>
-<div class="Stext">
-<p>A <strong>basis</strong> for an arbitrary vector space <span class="math inline">\(\mathcal{V}\)</span> is any set of linearly independent vectors <span class="math inline">\(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}\)</span> such that <span class="math display">\[span(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}) = \mathcal{\mathbf{V}}.\]</span>
+<div class="definition">
+<p><span id="def:basisdef" class="definition"><strong>Definition 8.2  (Basis) </strong></span>A <strong>basis</strong> for an arbitrary vector space <span class="math inline">\(\mathcal{V}\)</span> is any set of linearly independent vectors <span class="math inline">\(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}\)</span> such that <span class="math display">\[span(\{\mathcal{B}_1,\dots, \mathcal{B}_r\}) = \mathcal{\mathbf{V}}.\]</span>
 <span class="math inline">\(r\)</span> is said to be the <strong>dimension</strong> of the vector space <span class="math inline">\(\Re^n\)</span>.</p>
-A <strong>basis</strong> for the vector space <span class="math inline">\(\Re^n\)</span> is then any set of <span class="math inline">\(n\)</span> linearly independent vectors in <span class="math inline">\(\Re^n\)</span>; <span class="math inline">\(n\)</span> is said to be the <strong>dimension</strong> of the vector space <span class="math inline">\(\Re^n\)</span>. When the basis vectors are orthonormal (as in our prior examples), the set is called an <strong>orthonormal basis</strong>.
+<p>A <strong>basis</strong> for the vector space <span class="math inline">\(\Re^n\)</span> is then any set of <span class="math inline">\(n\)</span> linearly independent vectors in <span class="math inline">\(\Re^n\)</span>; <span class="math inline">\(n\)</span> is said to be the <strong>dimension</strong> of the vector space <span class="math inline">\(\Re^n\)</span>. When the basis vectors are orthonormal (as in our prior examples), the set is called an <strong>orthonormal basis</strong>.</p>
 </div>
-</div>
-</div>
-<p>The preceding discussion dealt entirely with bases for <span class="math inline">\(\Re^n\)</span> (our example was for points in <span class="math inline">\(\Re^2\)</span>). However, we will need to consider bases for <em>subspaces</em> of <span class="math inline">\(\Re^n\)</span>. Recall that the span of two linearly independent vectors in <span class="math inline">\(\Re^3\)</span> is a plane. This plane is a 2-dimensional subspace of <span class="math inline">\(\Re^3\)</span>. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from <span class="math inline">\(\Re^3\)</span> can be written in this basis - only those points which exist on the plane. In the next chapter, we will discuss how to proceed in a situation where the point we’d like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.</p>
-<div id="exercises-4" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Exercises</h2>
+<p>The preceding discussion dealt entirely with bases for <span class="math inline">\(\Re^n\)</span> (our example was for points in <span class="math inline">\(\Re^2\)</span>). However, we will need to consider bases for <em>subspaces</em> of <span class="math inline">\(\Re^n\)</span>. Recall that the span of two linearly independent vectors in <span class="math inline">\(\Re^3\)</span> is a plane. This plane is a 2-dimensional subspace of <span class="math inline">\(\Re^3\)</span>. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from <span class="math inline">\(\Re^3\)</span> can be written in this basis - only those points which exist on the plane. Chapter, we will discuss how to proceed in a situation where the point we’d like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.</p>
+<div id="exercises-5" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Exercises</h2>
 <ol>
 <li>
-Show that the vectors <span class="math inline">\(\v_1 = \pm 3 \\ 1\mp\)</span> and <span class="math inline">\(\v_2=\pm -2 \\6\mp\)</span> are orthogonal. Create an orthonormal basis for <span class="math inline">\(\Re^2\)</span> using these two direction vectors.
+What are the coordinates of the vector <span class="math inline">\(\x=\pm 4\\3 \mp\)</span> in the basis <span class="math inline">\(\left{\pm -1\\-1 \mp , \pm 1\\-1 \mp \right}\)</span>? Draw a picture to make sure your answer lines up with intuition.
 <li>
-Consider <span class="math inline">\(\a_1=(1,1)\)</span> and <span class="math inline">\(\a_2=(0,1)\)</span> as coordinates for points in the elementary basis. Write the coordinates of <span class="math inline">\(\a_1\)</span> and <span class="math inline">\(\a_2\)</span> in the orthonormal basis found in exercise 1. Draw a picture which reflects the old and new basis vectors.
+In the following picture what would be the signs (+/-) of the coordinates of the green point in the basis <span class="math inline">\(\{\v_1, \v_2\}\)</span>? Pick another point at random and answer the same question for that point.
+<center>
+<img src="figs/basiscoordsexer.png" />
+</center>
 <li>
 Write the orthonormal basis vectors from exercise 1 as linear combinations of the original elementary basis vectors.
 <li>
-What is the length of the orthogonal projection of <span class="math inline">\(\a_1\)</span> onto <span class="math inline">\(\v_1\)</span>?
+<p>What is the length of the orthogonal projection of <span class="math inline">\(\a_1\)</span> onto <span class="math inline">\(\v_1\)</span>?</p>
 </ol>
+</div>
+<div id="list-of-key-terms-3" class="section level2 unnumbered">
+<h2>List of Key Terms</h2>
+<ul>
+<li>basis vectors</li>
+<li>orthonormal basis</li>
+<li>coordinates in different bases</li>
+</ul>
 
 </div>
 </div>
@@ -543,7 +545,7 @@ What is the length of the orthogonal projection of <span class="math inline">\(\
         </div>
       </div>
 <a href="linind.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eigen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="orthog.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -566,6 +568,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

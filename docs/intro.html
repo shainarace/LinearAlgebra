@@ -4,27 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction |  Linear Algebra for Data Science   with examples in R and Python</title>
-  <meta name="description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 1 Introduction | bookdownproj.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta property="og:title" content="Chapter 1 Introduction | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="MSALogo.png" />
-  <meta property="og:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="github-repo" content="rstudio/linalg-master" />
+  
+  
+  
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction |  Linear Algebra for Data Science   with examples in R and Python" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | bookdownproj.utf8" />
   
-  <meta name="twitter:description" content="Linear Algebra for Data Science with examples in R." />
-  <meta name="twitter:image" content="MSALogo.png" />
-
-<meta name="author" content="Shaina Race Bennett, PhD" />
+  
+  
 
 
-<meta name="date" content="2021-05-11" />
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,13 +49,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <script src="libs/d3-4.5.0/d3.min.js"></script>
 <script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 <!DOCTYPE html>
@@ -70,7 +70,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll@^3.0.0-beta.6/dist/infinite-ajax-scroll.min.js"></script>
 
 <script type="text/javascript" id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
@@ -250,6 +249,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -263,14 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><center><img src="figs/iaaicon.png" width="50"></center></li>
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
 <li><center><strong> Linear Algebra for Data Science </strong></center></li>
-<li><center><strong> with examples in R and Python </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
 
 <li class="divider"></li>
 <li><a href="index.html#section"></a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -285,7 +285,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
 <li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
-<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#list-of-key-terms"><i class="fa fa-check"></i><b>1.9</b> List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
 <ul>
@@ -296,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
 <li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
 <li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms-1"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
 <ul>
@@ -309,86 +308,102 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
-<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.2</b> Three Types of Systems</a></li>
-<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.3</b> Solving Matrix Equations</a></li>
-<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
-<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-2"><i class="fa fa-check"></i><b>5.5</b> List of Key Terms</a></li>
-<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.6</b> Gauss-Jordan Elimination in R</a></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>6</b> Least Squares</a>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Inner Products and Orthogonality</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>6.1</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>7</b> Applications of Least Squares</a>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>7.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="7.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>7.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>8</b> Linear Independence</a>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>8.1</b> Linear Independence</a></li>
-<li class="chapter" data-level="8.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>8.2</b> Span of Vectors</a></li>
-<li class="chapter" data-level="8.3" data-path="linind.html"><a href="linind.html#exercises-3"><i class="fa fa-check"></i><b>8.3</b> Exercises</a></li>
-<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>9</b> Basis and Change of Basis</a>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="basis.html"><a href="basis.html#exercises-4"><i class="fa fa-check"></i><b>9.1</b> Exercises</a></li>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>10</b> Eigenvalues and Eigenvectors</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>10.1</b> Diagonalization</a></li>
 <li class="chapter" data-level="10.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>10.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
-<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-5"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>11</b> Norms, Inner Products and Orthogonality</a>
+<li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>11.1</b> Norms and Distances</a></li>
-<li class="chapter" data-level="11.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>11.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="11.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>11.3</b> Inner Products</a></li>
-<li class="chapter" data-level="11.4" data-path="norms.html"><a href="norms.html#orthogonality"><i class="fa fa-check"></i><b>11.4</b> Orthogonality</a></li>
-<li class="chapter" data-level="11.5" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>11.5</b> Outer Products</a></li>
-<li class="chapter" data-level="11.6" data-path="norms.html"><a href="norms.html#exercises-6"><i class="fa fa-check"></i><b>11.6</b> Exercises</a></li>
+<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.1</b> Why the normal equations?</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>12</b> Principal Components Analysis</a>
+<li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>12.1</b> Geometrical comparison with Least Squares</a></li>
-<li class="chapter" data-level="12.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>12.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="12.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>12.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="12.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>12.2</b> Multiple Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>13</b> PCA in R</a>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.1</b> Variable Clustering with PCA</a></li>
-<li class="chapter" data-level="13.2" data-path="pca-in-r.html"><a href="pca-in-r.html#pca-as-svd"><i class="fa fa-check"></i><b>13.2</b> PCA as SVD</a></li>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
-<li class="chapter" data-level="14.5" data-path="pcaapp.html"><a href="pcaapp.html#rappasvd"><i class="fa fa-check"></i><b>14.5</b> Image Compression</a></li>
+<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>15</b> Factor Analysis</a>
+<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>15.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="15.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>15.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="15.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>15.3</b> Communalities</a></li>
-<li class="chapter" data-level="15.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>15.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="15.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>15.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>16</b> Factor Analysis</a>
+<li class="chapter" data-level="16" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>16</b> The Singular Value Decomposition (SVD)</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>16.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="16.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>16.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="16.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>16.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="16.2" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>16.2</b> Noise Reduction</a></li>
+<li class="chapter" data-level="16.3" data-path="svd.html"><a href="svd.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.3</b> Latent Semantic Indexing</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html"><i class="fa fa-check"></i><b>17</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="17" data-path="applications-of-svd.html"><a href="applications-of-svd.html"><i class="fa fa-check"></i><b>17</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="dimension-reduction-for-visualization.html"><a href="dimension-reduction-for-visualization.html#multidimensional-scaling"><i class="fa fa-check"></i><b>17.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="17.1" data-path="applications-of-svd.html"><a href="applications-of-svd.html#latent-semantic-indexing-1"><i class="fa fa-check"></i><b>17.1</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="17.2" data-path="applications-of-svd.html"><a href="applications-of-svd.html#rappasvd"><i class="fa fa-check"></i><b>17.2</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="social-network-analysis.html"><a href="social-network-analysis.html"><i class="fa fa-check"></i><b>18</b> Social Network Analysis</a>
+<li class="chapter" data-level="18" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="social-network-analysis.html"><a href="social-network-analysis.html#working-with-network-data"><i class="fa fa-check"></i><b>18.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="18.2" data-path="social-network-analysis.html"><a href="social-network-analysis.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>18.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="18.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>18.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="18.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>18.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="18.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>18.3</b> Communalities</a></li>
+<li class="chapter" data-level="18.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>18.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="18.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>18.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>19.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="19.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>19.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>20</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>20.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>21</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>21.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="21.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>21.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -402,9 +417,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="2" height="200" />
-Linear Algebra for Data Science <br>
-with examples in R and Python</p></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
           </h1>
         </div>
 
@@ -416,7 +429,7 @@ with examples in R and Python</p></a>
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
 <div id="what-is-linear-algebra" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> What is Linear Algebra?</h2>
-<p>At its heart, Linear Algebra is the study of <strong>linear functions</strong>. The term <strong>linear</strong> should be understood to mean {straight} or {flat}. A line on the two dimensional coordinate plane, written <span class="math display">\[y=mx+b\]</span> represents a linear equation - the set of points <span class="math inline">\((x,y)\)</span> satisfying this equation form a straight line. On the other hand, a quadratic equation like <span class="math display">\[y=ax^2+bx+c\]</span> is <em>nonlinear</em> - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube <span class="math inline">\((x,y,z)\)</span>) is written as
+<p>At its heart, Linear Algebra is the study of <strong>linear functions</strong>. The term <strong>linear</strong> should be understood to mean <em>straight</em> or <em>flat</em>. A line on the two dimensional coordinate plane, written <span class="math display">\[y=mx+b\]</span> represents a linear equation - the set of points <span class="math inline">\((x,y)\)</span> satisfying this equation form a straight line. On the other hand, a quadratic equation like <span class="math display">\[y=ax^2+bx+c\]</span> is <em>nonlinear</em> - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube <span class="math inline">\((x,y,z)\)</span>) is written as
 <span class="math display">\[ax+by+cz=d.\]</span>
 This is also considered a linear equation - the set of points <span class="math inline">\((x,y,z)\)</span> satisfying this equation form a flat surface (a plane). These are the types of equations we will see in this course. We will not see equations like:
 <span class="math display">\[x^2+y^2+3z=10 \quad \mbox{or} \quad 2xy+\sqrt{z}+\frac{1}{x}=1 \quad \mbox{or} \quad \log(x-y)+e^x=0\]</span>
@@ -442,24 +455,12 @@ is one type of equation we will learn to solve in this course. In this situation
 <p>In this text, when we denote a matrix, we will always use a bold capital letter like <span class="math inline">\(\bo{A}, \bo{M}, \mbox{or } \bo{D}\)</span>. To start, lets cover some basic properties and notation.</p>
 <div id="dimensionsize-of-a-matrix" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Dimension/Size of a Matrix</h3>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.1: Dimension/Size of a Matrix
+<div class="definition">
+<p><span id="def:dim" class="definition"><strong>Definition 1.1  (Dimension/Size of a Matrix) </strong></span>The <strong>dimension</strong> of a matrix is the number of rows and number of columns in the matrix. This is sometimes referred to as the <strong>size</strong> of the matrix. We say a matrix in <span class="math inline">\(m\times n\)</span> if it has <span class="math inline">\(m\)</span> rows and <span class="math inline">\(n\)</span> columns. If <span class="math inline">\(\A\)</span> is a matrix, we might specify the dimensions of <span class="math inline">\(\A\)</span> with a subscript: <span class="math inline">\(\A_{m\times n}\)</span> should be read <em><span class="math inline">\(\A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix</em>.</p>
+<p>An <span class="math inline">\(n\times n\)</span> matrix is called a <strong>square matrix</strong> because it has the same number of rows and columns. A matrix without this characteristic is called a <strong>rectangular matrix.</strong></p>
 </div>
-<div class="Stext">
-<p>The <strong>dimension</strong> of a matrix is the number of rows and number of columns in the matrix. This is sometimes referred to as the <strong>size</strong> of the matrix. We say a matrix in <span class="math inline">\(m\times n\)</span> if it has <span class="math inline">\(m\)</span> rows and <span class="math inline">\(n\)</span> columns. If <span class="math inline">\(\A\)</span> is a matrix, we might specify the dimensions of <span class="math inline">\(\A\)</span> with a subscript: <span class="math inline">\(\A_{m\times n}\)</span> should be read <em><span class="math inline">\(\A\)</span> is an <span class="math inline">\(m\times n\)</span> matrix</em>.</p>
-An <span class="math inline">\(n\times n\)</span> matrix is called a <strong>square matrix</strong> because it has the same number of rows and columns. A matrix without this characteristic is called a <strong>rectangular matrix.</strong>
-</div>
-</div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.1: Dimensions of a Matrix
-</div>
-<div class="S2text">
-<p>Consider the data matrix presented previously, containing observations on the two variables <em>Credit Score</em> and <em>Income</em>:</p>
+<div class="example">
+<p><span id="exm:dimensions" class="example"><strong>Example 1.1  (Dimensions of a Matrix) </strong></span>Consider the data matrix presented previously, containing observations on the two variables <em>Credit Score</em> and <em>Income</em>:</p>
 <p><span class="math display">\[
 \A\,=\left(\begin{matrix}
 780 &amp; 95000\cr
@@ -469,14 +470,17 @@ Example <a href="intro.html#intro">1</a>.1: Dimensions of a Matrix
 450 &amp; 40000\cr
 750 &amp; 80000\end{matrix}\right)
 \]</span></p>
-The dimension of the matrix <span class="math inline">\(\A\)</span> is <span class="math inline">\(6\times 2\)</span> because <span class="math inline">\(\A\)</span> has 6 rows and 2 columns. Thus when referring to <span class="math inline">\(\A\)</span> we might write <span class="math inline">\(\A_{6\times 2}\)</span> when the size is important. Note that the number of rows _always} comes first when specifying the size of a matrix!
+<p>The dimension of the matrix <span class="math inline">\(\A\)</span> is <span class="math inline">\(6\times 2\)</span> because <span class="math inline">\(\A\)</span> has 6 rows and 2 columns. Thus when referring to <span class="math inline">\(\A\)</span> we might write <span class="math inline">\(\A_{6\times 2}\)</span> when the size is important. Note that the number of rows _always} comes first when specifying the size of a matrix!</p>
 </div>
-</div>
+<div class="exercise">
+<p><span id="exr:dimensions" class="exercise"><strong>Exercise 1.1  (Determining dimension of a matrix) </strong></span>For the following matrices, determine the dimension:</p>
+<p><span class="math display">\[\bo{B} = \left( \begin{matrix}1 &amp; 2 &amp; 0 \cr 2&amp;1&amp;0\cr3&amp;1&amp;1 \end{matrix}\right) \quad \bo{C} = \left(\begin{matrix} .01&amp;.5&amp;1.6&amp;1.7\\ .1&amp;3.5&amp;4&amp;2\\.61&amp;.55&amp;.46&amp;.17\cr1.2&amp;1.5&amp;1.6&amp;1\cr.31&amp;.35&amp;1.3&amp;2.3\\2.3&amp;3.5&amp;.06&amp;.7\\.3&amp;.2&amp;2.1&amp;1.8\end{matrix}\right) \quad \bo{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)\]</span>
+</p>
 </div>
 </div>
 <div id="ij-notation" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> <span class="math inline">\((i,j)\)</span> Notation</h3>
-<p>Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example  above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely <em>identifiers</em>. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index <span class="math inline">\(i=\{1,2,3,4,5,6\}\)</span> that corresponds to a row of the matrix for every person. As long as we don’t reorder the rows of our matrix, we will know that the correspondence is as follows:
+<p>Now beyond just knowing how many rows and columns a matrix has, we frequently want to refer to a specific row or column that matrix. In Example <a href="intro.html#exm:dimensions">1.1</a> above, you may have noticed that the names of the individuals did not appear in our matrix - those names were merely <em>identifiers</em>. Of course we did not throw them away and erase them from our hard drive, we merely replaced them with an implied numerical index <span class="math inline">\(i=\{1,2,3,4,5,6\}\)</span> that corresponds to a row of the matrix for every person. As long as we don’t reorder the rows of our matrix, we will know that the correspondence is as follows:
 <span class="math display">\[\left\lbrace \begin{array}{c}
 row 1\\ row 2\\ row 3\\ row 4\\ row 5\\ row 6
 \end{array}  \right\rbrace \Longleftrightarrow
@@ -485,18 +489,10 @@ John\\ Sam\\ Elena\\ Jim\\ Eric\\ Helen
 \end{array}  \right\rbrace\]</span></p>
 <p>So, if I’d like to focus on data about <em>Eric</em> in particular, I’d have to look no further than the <span class="math inline">\(5^{th}\)</span> row of my matrix <span class="math inline">\(\A\)</span>. Similarly, if I want to know the <em>Credit Scores</em> of all individuals, I’d simply focus on the <span class="math inline">\(1^{st}\)</span> column of the matrix. Hence, to find <em>Eric’s Credit Score</em>, I’d aim my sight on the element of the matrix located in the <span class="math inline">\(5^{th}\)</span> row and <span class="math inline">\(1^{st}\)</span> column of the matrix <span class="math inline">\(\A\)</span>.</p>
 <p>Now, rather than write an entire sentence each time we want to refer to an individual element or row, we will develop some notation. As a general rule, the letter <span class="math inline">\(i\)</span> is used to index the rows of a matrix and the letter <span class="math inline">\(j\)</span> is used to index the columns.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.2: Notation for Elements of a Matrix
-</div>
-<div class="Stext">
-<ul>
-<li>The element of matrix <span class="math inline">\(\A\)</span> corresponding to <em>row</em> <span class="math inline">\(i\)</span> and <em>column</em> <span class="math inline">\(j\)</span> is written <span class="math inline">\(A_{ij}\)</span></li>
-<li>The <strong>diagonal</strong> elements of a square matrix are those that have identical row and column indices: <span class="math inline">\(\A_{ii}\)</span>
-</div></li>
-</ul>
-</div>
+<div class="definition">
+<p><span id="def:ijnotdef" class="definition"><strong>Definition 1.2  (Notation for Elements of a Matrix) </strong></span>Two subscripts are used to identify individual elements of a matrix:
+- The element of matrix <span class="math inline">\(\A\)</span> corresponding to <em>row</em> <span class="math inline">\(i\)</span> and <em>column</em> <span class="math inline">\(j\)</span> is written <span class="math inline">\(A_{ij}\)</span>
+- The <strong>diagonal</strong> elements of a square matrix are those that have identical row and column indices: <span class="math inline">\(\A_{ii}\)</span></p>
 </div>
 <p>Beyond these basic conventions, there are other common notational tricks that we will become familiar with. The first of these is writing a <strong>partitioned matrix</strong>. We will often want to consider a matrix as a collection of either rows or columns rather than individual elements. As we will see in the future, when we partition matrices in this form, we can view their multiplication in simplified form. This often leads us to a new view of the data which can be helpful for interpretation.</p>
 <p>When we write <span class="math inline">\(\A=( \A_1 | \A_2 | \dots | \A_n )\)</span> we are viewing the matrix <span class="math inline">\(\A\)</span> as collection of column vectors, <span class="math inline">\(\A_i\)</span>, in the following way:
@@ -521,44 +517,31 @@ Definition <a href="intro.html#intro">1</a>.2: Notation for Elements of a Matrix
  a_{i1} &amp; \dots&amp; a_{ij} &amp; \dots &amp; a_{in}\cr
  \vdots &amp; \vdots &amp;  &amp;  &amp; \vdots \cr
   a_{m1} &amp; \dots&amp; \dots &amp; \dots &amp; a_{mn} \mp}\]</span></p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.3: Rows and Columns of a Matrix
-</div>
-<div class="Stext">
-<ul>
-<li>To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span></li>
-<li>Similarly, to refer to the <span class="math inline">\(k^{th}\)</span> column of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\acol{k}\)</span>.\</li>
-</ul>
-Often, when there is no confusion about whether we are referring to rows or columns, the above notation will be shortened to simply <span class="math inline">\(\A_k\)</span>. In such a scenario it will be made clear from context whether this represents the <span class="math inline">\(k^{th}\)</span> row or <span class="math inline">\(k^{th}\)</span> column. For example,
+<div class="definition">
+<p><span id="def:rowcol" class="definition"><strong>Definition 1.3  (Rows and Columns of a Matrix) </strong></span>To refer to entire rows or columns, a placeholder <span class="math inline">\(\star\)</span> is often used to represent the idea that we take <em>all</em> rows or columns after narrowing in on a given column or row respectively:
+- To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span> (“$k^{th} row, <em>all</em> columns”)<br />
+- Similarly, to refer to the <span class="math inline">\(k^{th}\)</span> column of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\acol{k}\)</span>.<br />
+</p>
+<p>Often, when there is no confusion about whether we are referring to rows or columns, the above notation will be shortened to simply <span class="math inline">\(\A_k\)</span>. In such a scenario it will be made clear from context whether this represents the <span class="math inline">\(k^{th}\)</span> row or <span class="math inline">\(k^{th}\)</span> column. For example,
 <span class="math display">\[\A=( \A_1 | \A_2 | \dots | \A_n )\]</span>
-represents a matrix <span class="math inline">\(\A\)</span> with <span class="math inline">\(n\)</span> columns <span class="math inline">\(\{\A_1,\A_2,\dots,\A_n\}\)</span>.
+represents a matrix <span class="math inline">\(\A\)</span> with <span class="math inline">\(n\)</span> columns <span class="math inline">\(\{\A_1,\A_2,\dots,\A_n\}\)</span>.</p>
 </div>
-</div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.3: Rows, Columns, and Elements of a Matrix
-</div>
-<div class="S2text">
-Consider the following table of data and corresponding matrix:
+<div class="example">
+<span id="exm:ijnot" class="example"><strong>Example 1.2  (Rows, Columns, and Elements of a Matrix) </strong></span>Consider the following table of data and corresponding matrix:
 <p>Element <span class="math inline">\(B_{42}=150\)</span> corresponds to the <em>weight</em> (second column) of <em>observation 4</em> (forth row).</p>
 <p>The column <span class="math display">\[\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)\]</span> corresponds to the variable <em>age</em> and the row <span class="math display">\[\brow{6} = \left(\begin{matrix} 68&amp;165&amp;25 \end{matrix}\right)\]</span> corresponds to the measurements for <em>observation 6</em>.</p>
 </div>
+<div class="exercise">
+<p><span id="exr:ijnot" class="exercise"><strong>Exercise 1.2  (Rows, Columns, and Elements of a Matrix) </strong></span>For the matrix
+<span class="math display">\[ \bo{L}=\left(\begin{matrix} 3 &amp; -6 &amp; -2\\1 &amp; -4 &amp; 5\\0 &amp; 4 &amp; -5 \end{matrix}\right)\]</span>
+Write the following elements, rows, or columns:
+
+<span class="math display">\[L_{23}= \qquad\qquad L_{31}= \qquad\qquad \bo{L}_{\star 2}= \qquad\qquad \bo{L}_{1 \star}=\qquad\qquad\]</span>
+</p>
 </div>
-</div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.4: Equality of Matrices
-</div>
-<div class="Stext">
-Two matrices are <strong>equal</strong> if and only if they have the same size and all of their corresponding entries are equal. That is,
-<span class="math display">\[\A=\B \Longleftrightarrow A_{ij} = B_{ij} \quad \mbox{for all i and j}\]</span>
-</div>
-</div>
+<div class="definition">
+<p><span id="def:equality" class="definition"><strong>Definition 1.4  (Equality of Matrices) </strong></span>Two matrices are <strong>equal</strong> if and only if they have the same size and all of their corresponding entries are equal. That is,
+<span class="math display">\[\A=\B \Longleftrightarrow A_{ij} = B_{ij} \quad \mbox{for all i and j}\]</span></p>
 </div>
 </div>
 <div id="example-defining-social-networks" class="section level3 unnumbered">
@@ -576,7 +559,7 @@ When the row and column numbers are the same (<span class="math inline">\(i=j\)<
 We can quickly see that there is symmetry in this matrix because the number of times Students <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> worked together is, of course, the same as the number of times Students <span class="math inline">\(j\)</span> and <span class="math inline">\(i\)</span> worked together. Formally, a matrix is called <strong>symmetric</strong> if <span class="math inline">\(A_{ij}=A_{ji}\)</span> (this important concept will be defined again on page ). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.</p>
 <p>An adjacency matrix like the one listed above is often used to describe a <em>network</em> or <em>graph.</em> A <strong>graph</strong> is a collection of <strong>vertices</strong> (nodes) that each represent some entity, and <strong>edges</strong> which connect vertices that are related in some way.</p>
 <p>Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="figs/studentgraph.jpg" alt="Network of Student Team Membership" width="50%" />
 <p class="caption">
 Figure 1.1: Network of Student Team Membership
@@ -604,32 +587,31 @@ are all examples of vectors; <span class="math inline">\(\x\)</span> and <span c
 <p>You may wonder now why the notation is so particular, but as we get into the subject it will be come clear that some convention must be retained if we are going to understand an equation. If we write an equation like
 <span class="math display">\[\A\x=\b \qquad \mbox{or} \qquad \bo{M}\y=\alpha\y\]</span>
 We have to know what it represents - in the first case, we are dealing with a matrix <span class="math inline">\(\A\)</span>, and two vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\b\)</span>; in the second case we are dealing with a matrix <span class="math inline">\(\bo{M}\)</span>, a vector <span class="math inline">\(\y\)</span>, and a scalar, <span class="math inline">\(\alpha\)</span>.</p>
+<div class="exercise">
+<p><span id="exr:matnot" class="exercise"><strong>Exercise 1.3  (Matrix, Vector, and Scalar Notation) </strong></span>For the following quantities, indicate whether the notation indicates a Matrix, Scalar, or Vector.
+
+<span class="math display">\[\A \qquad \qquad A_{ij} \qquad \qquad \v \qquad \qquad  p_2 \qquad \qquad  \lambda  \qquad \qquad \p_2\]</span>
+</p>
+</div>
 <p>In the previous exercise, we see an important difference: <span class="math inline">\(p_2\)</span> is not bold, and thus is automatically assumed to a scalar, while <span class="math inline">\(\p_2\)</span> is bold and lowercase meaning, despite the subscript, it refers to a vector.</p>
 <div id="vector-geometry-n-space" class="section level3" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Vector Geometry: <span class="math inline">\(n\)</span>-space</h3>
 <p>You are already familiar with the concept of “ordered pairs” or coordinates <span class="math inline">\((x_1,x_2)\)</span> on the two-dimensional plane (in Linear Algebra, we call this plane “<span class="math inline">\(2\)</span>-space”). Fortunately, we do not live in a two-dimensional world! Our data will more often consist of measurements on a number (lets call that number <span class="math inline">\(n\)</span>) of variables. Thus, our data points belong to what is known as <span class="math inline">\(n\)</span>-space. They are represented by <strong><span class="math inline">\(n\)</span>-tuples</strong> which are nothing more than ordered lists of numbers:
 <span class="math display">\[(x_1, x_2, x_3, \dots, x_n).\]</span>
 An <span class="math inline">\(n\)</span>-tuple defines a <strong>vector</strong> with the same <span class="math inline">\(n\)</span> elements, and so these two concepts should be thought of interchangeably. The only difference is that the vector has a direction (usually depicted with an arrow), away from the origin and toward the <span class="math inline">\(n\)</span>-tuple. This concept is obviously very difficult to visualize when <span class="math inline">\(n&gt;3\)</span>, but our mental visualizations of <span class="math inline">\(2-\)</span> and <span class="math inline">\(3-\)</span>space will usually be sufficient when we want to consider higher dimensional spaces.</p>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.4: 2-space
-</div>
-<div class="S2text">
-Whereas we once thought of ordered pairs as <em>points</em> in space, we can also consider the coordinates as defining <em>vectors</em>. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
+<div class="example">
+<span id="exm:twospace" class="example"><strong>Example 1.3  (2-space) </strong></span>Whereas we once thought of ordered pairs as <em>points</em> in space, we can also consider the coordinates as defining <em>vectors</em>. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
 <center>
 <img src="figs/2spacePoints.pdf" width=300 />
 <img src="figs/2space.pdf" width=300 />
 </center>
-</div>
-</div>
 </div>
 <p>You will recall that the symbol <span class="math inline">\(\Re\)</span> is used to denote the set of real numbers. <span class="math inline">\(\Re\)</span> is simply <span class="math inline">\(1\)</span>-space. It is a set of vectors with a single element. In this sense any real number, <span class="math inline">\(x\)</span>, has a direction: if it is positive, it is to one side of the origin, if it is negative it is to the opposite side. That number, <span class="math inline">\(x\)</span>, also has a magnitude: <span class="math inline">\(|x|\)</span> is the distance between <span class="math inline">\(x\)</span> and the origin, 0.</p>
 <p><span class="math inline">\(n\)</span>-space (the set of real <span class="math inline">\(n\)</span>-tuples) is denoted <span class="math inline">\(\Re^n\)</span>. In set notation, the formal mathematical definition is simply:
 <span class="math display">\[\Re^n = \left\lbrace (x_1,x_2,\dots,x_n) : x_i \in \Re, i=1,\dots, n\right\rbrace.\]</span></p>
 <p>We will often use this notation to define the size of an arbitrary vector. For example, <span class="math inline">\(\x \in \Re^p\)</span> simply means that <span class="math inline">\(\x\)</span> is a vector with <span class="math inline">\(p\)</span> entries:
 <span class="math inline">\(\x=(x_1,x_2,\dots,x_p)\)</span>.</p>
-<p>Many (all, really) of the concepts we have previously considered in <span class="math inline">\(2\)</span>- or <span class="math inline">\(3\)</span>-space extend naturally to <span class="math inline">\(n\)</span>-space and a few new concepts become useful as well. One very important concept is that of a <strong>norm</strong> or distance metric, as we will see in Chapter . Before we get into the details of the vector space model, let’s continue with some of the basic definitions we will need on that journey.</p>
+<p>Many (all, really) of the concepts we have previously considered in <span class="math inline">\(2\)</span>- or <span class="math inline">\(3\)</span>-space extend naturally to <span class="math inline">\(n\)</span>-space and a few new concepts become useful as well. One very important concept is that of a <strong>norm</strong> or distance metric, as we will see in Chapter <a href="norms.html#norms">6</a>. Before we get into the details of the vector space model, let’s continue with some of the basic definitions we will need on that journey.</p>
 </div>
 </div>
 <div id="matrix-operations" class="section level2" number="1.5">
@@ -637,137 +619,93 @@ Whereas we once thought of ordered pairs as <em>points</em> in space, we can als
 <div id="transpose" class="section level3" number="1.5.1">
 <h3><span class="header-section-number">1.5.1</span> Transpose</h3>
 <p>One important transformation we will have to perform on a matrix is to switch the columns into rows. It is not necessary that you see the importance of this transformation right now, but trust that it is something we will need quite frequently.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.5: Transpose of a Matrix or Vector
-</div>
-<div class="Stext">
-<p>For a given <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span> the <strong>transpose</strong> of <span class="math inline">\(\A\)</span>, written <span class="math inline">\(\A^T\)</span> (read as <code>$\A$-transpose'') in this course  or sometimes written as $\A'$ (read as</code><span class="math inline">\(\A\)</span>-prime’’) is the <span class="math inline">\(n\times m\)</span> matrix whose rows are the corresponding columns of <span class="math inline">\(\A\)</span>.</p>
+<div class="definition">
+<p><span id="def:transposedef" class="definition"><strong>Definition 1.5  (Transpose of a Matrix or Vector) </strong></span>For a given <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\A\)</span>, the <strong>transpose</strong> of <span class="math inline">\(\A\)</span>, written <span class="math inline">\(\A^T\)</span> (read as “<span class="math inline">\(\A\)</span>-transpose”) in this course and sometimes elsewhere denoted as <span class="math inline">\(\A&#39;\)</span> is the <span class="math inline">\(n\times m\)</span> matrix whose rows are the corresponding columns of <span class="math inline">\(\A\)</span>.</p>
 <p>Thus, if <span class="math inline">\(\A\)</span> is a <span class="math inline">\(3\times 4\)</span> matrix then <span class="math inline">\(\A^T\)</span> is a <span class="math inline">\(4\times 3\)</span> matrix as follows:
 <span class="math display">\[\A = \left(\begin{matrix} A_{11} &amp; A_{12} &amp; A_{13} &amp;A_{14}\\ A_{21} &amp; A_{22} &amp; A_{23} &amp;A_{24}\\ A_{31} &amp; A_{32} &amp; A_{33} &amp;A_{34}\end{matrix}\right)
 \quad  \A^T = \left(\begin{matrix} A_{11} &amp; A_{21} &amp; A_{31}\\A_{12} &amp; A_{22} &amp; A_{32}\\A_{13} &amp; A_{23} &amp; A_{33}\\A_{14} &amp; A_{24} &amp; A_{34}\end{matrix}\right)\]</span></p>
-An equivalent way to state this definition is to say that
+<p>An equivalent way to state this definition is to say that
 <span class="math display">\[(A^T)_{ij} = A_{ji}\]</span>
-<em>Note: If we transpose the transpose of a matrix, we will get back the original matrix. That is,</em> <span class="math display">\[(\A^T)^T = \A.\]</span>
+<em>Note: If we transpose the transpose of a matrix, we will get back the original matrix. That is,</em> <span class="math display">\[(\A^T)^T = \A.\]</span></p>
 </div>
-</div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.5: Transpose of a Matrix or Vector
-</div>
-<div class="S2text">
-For the following matrices and vectors, determine the transpose:
+<div class="example">
+<p><span id="exm:transpose" class="example"><strong>Example 1.4  (Transpose of a Matrix or Vector) </strong></span>For the following matrices and vectors, determine the transpose:
 <span class="math display">\[\B=\left(\begin{matrix} 2 &amp; -3 &amp; -4 \\5&amp;-6&amp;-7\\-8&amp;9&amp;0 \end{matrix}\right) \qquad \bo{M}=\left(\begin{matrix} -1&amp;2\\-3&amp;6\\7&amp;-9\\5&amp;-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)\]</span>
 To find the transpose, we simply create new matrices whose rows are the corresponding columns of each matrix or vector:
-<span class="math display">\[\B^T=\left(\begin{matrix} 2 &amp;5&amp; -8\\-3&amp;-6&amp;9\\-4&amp;-7&amp;0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&amp;-3&amp;7&amp;5\\2&amp;6&amp;-9&amp;-1 \end{matrix}\right) \]</span> <span class="math display">\[\x^T = \left(\begin{matrix} 3&amp;-4&amp;5&amp;6 \end{matrix}\right)\]</span>
+<span class="math display">\[\B^T=\left(\begin{matrix} 2 &amp;5&amp; -8\\-3&amp;-6&amp;9\\-4&amp;-7&amp;0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&amp;-3&amp;7&amp;5\\2&amp;6&amp;-9&amp;-1 \end{matrix}\right) \]</span> <span class="math display">\[\x^T = \left(\begin{matrix} 3&amp;-4&amp;5&amp;6 \end{matrix}\right)\]</span></p>
 </div>
-</div>
-</div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.6: Symmetric Matrix
-</div>
-<div class="Stext">
-Defining the matrix transpose allows us to define the notion of a <em>symmetric matrix</em>. A matrix <span class="math inline">\(\A\)</span> is called <strong>symmetric</strong> if and only if <span class="math display">\[\A=\A^T.\]</span>
+<div class="definition">
+<p><span id="def:symdef" class="definition"><strong>Definition 1.6  (Symmetric Matrix) </strong></span>Defining the matrix transpose allows us to define the notion of a <em>symmetric matrix</em>. A matrix <span class="math inline">\(\A\)</span> is called <strong>symmetric</strong> if and only if <span class="math display">\[\A=\A^T.\]</span>
 This is equivalent to saying that <span class="math inline">\(\A\)</span> is symmetric if and only if
 <span class="math display">\[A_{ij}=A_{ji}.\]</span>
-It should be clear from the definition that in order for <span class="math inline">\(\A\)</span> to be a symmetric matrix, it <em>must</em> be a square matrix - otherwise <span class="math inline">\(\A\)</span> and <span class="math inline">\(\A^T\)</span> would not even have the same size!
+It should be clear from the definition that in order for <span class="math inline">\(\A\)</span> to be a symmetric matrix, it <em>must</em> be a square matrix - otherwise <span class="math inline">\(\A\)</span> and <span class="math inline">\(\A^T\)</span> would not even have the same size!</p>
 </div>
+<div class="example">
+<p><span id="exm:sym" class="example"><strong>Example 1.5  (Symmetric Matrices) </strong></span>The following matrix is symmetric because <span class="math inline">\(\B^T = \B\)</span>.
+<span class="math display">\[\B=\left(\begin{matrix} 2 &amp; 0 &amp; 1 \\0&amp;-6&amp;-7\\1&amp;-7&amp;0 \end{matrix}\right)\]</span></p>
 </div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.6: Symmetric Matrices
-</div>
-<div class="S2text">
-The following matrix is symmetric because <span class="math inline">\(\B^T = \B\)</span>.
-<span class="math display">\[\B=\left(\begin{matrix} 2 &amp; 0 &amp; 1 \\0&amp;-6&amp;-7\\1&amp;-7&amp;0 \end{matrix}\right)\]</span>
-</div>
-</div>
+<div class="exercise">
+<p><span id="exr:transposesym" class="exercise"><strong>Exercise 1.4  (Transpose and Symmetry) </strong></span>Given that,
+<span class="math display">\[\A=\left(\begin{matrix} 2 &amp; -4 \\-1&amp;2\\3&amp;-6 \end{matrix}\right) \quad \v^T = \left(\begin{matrix} 1 &amp; 0 &amp; -2 &amp; 5\end{matrix}\right) \quad \B=\left(\begin{matrix} B_{11}&amp;B_{12}&amp;B_{13}\\B_{21}&amp;B_{22}&amp;B_{23}\\B_{31}&amp;B_{32}&amp;B_{33}\\B_{41}&amp;B_{42}&amp;B_{43}\end{matrix}\right)\]</span>
+compute the following matrices:
+
+<span class="math display">\[\A^T= \qquad \qquad \qquad \qquad (\A^T)^T= \qquad \qquad \qquad \qquad\]</span>
+
+<span class="math display">\[ \v= \qquad \qquad \qquad \qquad \B^T = \qquad \qquad\qquad \qquad \]</span>
+</p>
+<p>Give an example of a <span class="math inline">\(4\times 4\)</span> symmetric matrix:\
+</p>
+<p>Is a correlation matrix symmetric? (For a hint, see section <a href="intro.html#introcorr">1.3.3</a>)\
+</p>
 </div>
 </div>
 <div id="trace-of-a-matrix" class="section level3" number="1.5.2">
 <h3><span class="header-section-number">1.5.2</span> Trace of a Matrix</h3>
 <p>Another important matrix operation that will come into play later is the <em>trace</em> of a matrix. The <strong>trace</strong> of a square matrix is the sum of the diagonal elements of this matrix.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.7: Trace of a Matrix
-</div>
-<div class="Stext">
-<p>For an <span class="math inline">\(n\times n\)</span> square matrix, <span class="math inline">\(\A\)</span>, the <strong>trace</strong> of <span class="math inline">\(\A\)</span>, written
+<div class="definition">
+<p><span id="def:tracedef" class="definition"><strong>Definition 1.7  (Trace of a Matrix) </strong></span>For an <span class="math inline">\(n\times n\)</span> square matrix, <span class="math inline">\(\A\)</span>, the <strong>trace</strong> of <span class="math inline">\(\A\)</span>, written
 <span class="math display">\[trace(\A)\,\,\,\mbox{or}\,\,\,tr(\A)\]</span>
 is the sum of the diagonal elements:
 <span class="math display">\[tr(\A)=\sum_{i=1}^n A_{ii}\]</span></p>
-The trace of a rectangular matrix is undefined.
+<p>The trace of a rectangular matrix is undefined.</p>
 </div>
-</div>
-</div>
-<div class="S2main">
-<div class="S2container">
-<div class="S2text-header">
-Example <a href="intro.html#intro">1</a>.7: Trace of a Matrix
-</div>
-<div class="S2text">
-Let <span class="math display">\[\A=\left(\begin{matrix} 3&amp;4&amp;1\\0&amp;1&amp;-2\\-1&amp;\sqrt{2}&amp;3\end{matrix}\right)\]</span>
+<div class="example">
+<p><span id="exm:trace" class="example"><strong>Example 1.6  (Trace of a Matrix) </strong></span>Let <span class="math display">\[\A=\left(\begin{matrix} 3&amp;4&amp;1\\0&amp;1&amp;-2\\-1&amp;\sqrt{2}&amp;3\end{matrix}\right)\]</span>
 Then, the trace of <span class="math inline">\(\A\)</span> is the sum of the diagonal elements:
-<span class="math display">\[tr(\A)=\sum_{i=1}^3 A_{ii} = 3+1+3 = 7.\]</span>
-</div>
-</div>
+<span class="math display">\[tr(\A)=\sum_{i=1}^3 A_{ii} = 3+1+3 = 7.\]</span></p>
 </div>
 <p>While we’re on the subject of diagonal elements, let’s take the opportunity to introduce some special types of matrices, namely the <strong>identity matrix</strong> and a <strong>diagonal matrix</strong>.</p>
 </div>
 </div>
 <div id="special" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Special Matrices and Vectors</h2>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.: Identity Matrix
-</div>
-<div class="Stext">
-The bold capital letter <span class="math inline">\(\bo{I}\)</span> will always to denote the <strong>identity matrix</strong>. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
+<div class="definition">
+<p><span id="def:identity" class="definition"><strong>Definition 1.8  (Identity Matrix) </strong></span>The bold capital letter <span class="math inline">\(\bo{I}\)</span> will always to denote the <strong>identity matrix</strong>. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
 <span class="math display">\[\bo{I}_4 = \left(\begin{matrix} 1 &amp; 0 &amp; 0 &amp; 0 \\
                         0 &amp; 1 &amp; 0 &amp; 0\\
                         0&amp;0&amp;1&amp;0\\
-                        0&amp;0&amp;0&amp;1 \end{matrix}\right)\]</span>
+                        0&amp;0&amp;0&amp;1 \end{matrix}\right)\]</span></p>
 </div>
-</div>
-</div>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.9: Elementary Vectors
-</div>
-<div class="Stext">
-<p>The bold lowercase <span class="math inline">\(\bo{e}_j\)</span> is used to refer to the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\bo{I}\)</span>. It is simply a vector of zeros with a one in the <span class="math inline">\(j^{th}\)</span> position. We do not often specify the size of the vector <span class="math inline">\(\bo{e}_j\)</span>, the number of elements is generally assumed from the context of the problem.</p>
-<p><span class="math display">\[\bo{e}_j=\\begin{matrix}
+<div class="definition">
+<p><span id="def:elemvectors" class="definition"><strong>Definition 1.9  (Elementary Vectors) </strong></span>The bold lowercase <span class="math inline">\(\bo{e}_j\)</span> is used to refer to the <span class="math inline">\(j^{th}\)</span> column of <span class="math inline">\(\bo{I}\)</span>. It is simply a vector of zeros with a one in the <span class="math inline">\(j^{th}\)</span> position. We do not often specify the size of the vector <span class="math inline">\(\bo{e}_j\)</span>, the number of elements is generally assumed from the context of the problem.</p>
+<p><span class="math display">\[\bo{e}_j=\begin{matrix}
 \begin{matrix} ~ \\~\\~\\~\\j^{th}\text{row} \rightarrow \\ ~\\~\\~ \end{matrix} &amp; 
   \begin{pmatrix}0\\0\\ \vdots \\0\\1\\0\\ \vdots\\0\end{pmatrix}\\\\
 \end{matrix}\]</span></p>
 <p>The vector <span class="math inline">\(\bo{e}\)</span> with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced <span class="math inline">\(\textbf{1}\)</span>.</p>
-<span class="math display">\[\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)\]</span>
+<p><span class="math display">\[\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)\]</span></p>
 </div>
-</div>
-</div>
-The elementary vectors described in Definition  create the coordinate axes of <span class="math inline">\(n\)</span>-space. For illustrative purposes, let’s consider <span class="math inline">\(2\)</span>-space. The elementary vectors in <span class="math inline">\(2\)</span>-space are:
+<p>The elementary vectors described in Definition <a href="intro.html#def:elemvectors">1.9</a> create the coordinate axes of <span class="math inline">\(n\)</span>-space. For illustrative purposes, let’s consider <span class="math inline">\(2\)</span>-space. The elementary vectors in <span class="math inline">\(2\)</span>-space are:
 <span class="math display">\[\e_1 = \left(\begin{matrix} 1\\0\end{matrix}\right) \quad \mbox{and} \quad \e_2 = \left(\begin{matrix} 0\\1 \end{matrix}\right) \]</span>
-These vectors correspond to the directions of the coordinate axes:
-<center>
-<img src=figs/elemvectors />
-</center>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.: Diagonal Matrix
+These vectors correspond to the directions of the coordinate axes as illustrated in Figure <a href="intro.html#fig:elemvectors">1.2</a></p>
+<div class="figure" style="text-align: center"><span id="fig:elemvectors"></span>
+<img src="figs/elemvectors.jpg" alt="Elementary cectors represent our &quot;usual&quot; coordinate axes" width="50%" />
+<p class="caption">
+Figure 1.2: Elementary cectors represent our “usual” coordinate axes
+</p>
 </div>
-<div class="Stext">
-A <strong>diagonal matrix</strong> is a matrix for which off-diagonal elements, <span class="math inline">\(\A_{ij},\,i\ne j\)</span> are zero.
+<div class="definition">
+<p><span id="def:diag" class="definition"><strong>Definition 1.10  (Diagonal Matrix) </strong></span>A <strong>diagonal matrix</strong> is a matrix for which off-diagonal elements, <span class="math inline">\(\A_{ij},\,i\ne j\)</span> are zero.
 For example:
 <span class="math display">\[\bo{D} = \left(\begin{matrix} \sigma_1 &amp; 0 &amp; 0 &amp; 0 \\
                         0 &amp; \sigma_2 &amp; 0 &amp; 0\\
@@ -775,23 +713,23 @@ For example:
                         0&amp;0&amp;0&amp;\sigma_4 \end{matrix}\right)\]</span>
 Since the off diagonal elements are 0, we need only define the diagonal elements for such a matrix. Thus, we will frequently write
 <span class="math display">\[\bo{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}\]</span>
-or simply <span class="math display">\[D_{ii} = \sigma_i.\]</span>
-</div>
-</div>
+or simply <span class="math display">\[D_{ii} = \sigma_i.\]</span></p>
 </div>
 <p>From the preceding definitions, it should be clear that diagonal and identity matrices are always <em>square</em>, meaning they have the same number of rows and columns, and {symmetric}, meaning they do not change under the transpose operation.</p>
-<div class="Smain">
-<div class="Scontainer">
-<div class="Stext-header">
-Definition <a href="intro.html#intro">1</a>.: Triangular Matrices
+<div class="exercise">
+<p><span id="exr:traceexer" class="exercise"><strong>Exercise 1.5  (Trace and Special Matrices) </strong></span>Write out the following matrices and then compute their Trace, if possible:</p>
+<p><span class="math display">\[\I_5 \qquad \bo{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4\]</span>
+</p>
 </div>
-<div class="Stext">
-<p>Triangular matrices are square matrices whose elements are zero either below or above the main diagonal. If the matrix has zeros below the main diagonal, then it’s called <strong>upper triangular</strong>. The following illustration depicts an upper triangular matrix, where the asterisk symbol is used to denote any number (including potential zeros).
+<div class="definition">
+<p><span id="def:triangulardef" class="definition"><strong>Definition 1.11  (Triangular Matrices) </strong></span>Triangular matrices are square matrices whose elements are zero either below or above the main diagonal. If the matrix has zeros below the main diagonal, then it’s called <strong>upper triangular</strong>. The following illustration depicts an upper triangular matrix, where the asterisk symbol is used to denote any number (including potential zeros).
 <span class="math display">\[\left(\begin{matrix} *&amp;*&amp;*&amp;\dots&amp;*\\0&amp;*&amp;*&amp;\dots&amp;*\\0&amp;0&amp;*&amp;\dots&amp;*\\ \vdots &amp;\vdots &amp;\ddots &amp;\ddots&amp;*\\0&amp;0&amp;0&amp;0&amp;*\end{matrix}\right)\]</span></p>
-If a matrix has zeros above the main diagonal, then it’s called <strong>lower triangular</strong>. The following illustration depicts a lower triangular matrix.
-<span class="math display">\[\left(\begin{matrix} 0&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;*&amp;0&amp;\dots&amp;0\\ \vdots &amp;\vdots &amp;\ddots &amp;\ddots&amp;0\\ *&amp;*&amp;*&amp;*&amp;0\end{matrix}\right)\]</span>
+<p>If a matrix has zeros above the main diagonal, then it’s called <strong>lower triangular</strong>. The following illustration depicts a lower triangular matrix.
+<span class="math display">\[\left(\begin{matrix} 0&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;0&amp;0&amp;\dots&amp;0\\ *&amp;*&amp;0&amp;\dots&amp;0\\ \vdots &amp;\vdots &amp;\ddots &amp;\ddots&amp;0\\ *&amp;*&amp;*&amp;*&amp;0\end{matrix}\right)\]</span></p>
 </div>
-</div>
+<div class="exercise">
+<p><span id="exr:triangularexer" class="exercise"><strong>Exercise 1.6  (Triangular Matrices) </strong></span>The following are examples of triangular matrices. Are they upper or lower triangular?</p>
+<p><span class="math display">\[\left(\begin{matrix} 1&amp;2&amp;3&amp;4\\0&amp;5&amp;6&amp;7\\0&amp;0&amp;8&amp;9\\0&amp;0&amp;0&amp;1 \end{matrix}\right) \quad \left(\begin{matrix} -1&amp;0&amp;0\\0&amp;-2&amp;0\\1&amp;-1&amp;2 \end{matrix}\right) \quad \left(\begin{matrix} 0&amp;0&amp;0\\0&amp;0&amp;0\\0&amp;0&amp;0 \end{matrix}\right)\]</span></p>
 </div>
 </div>
 <div id="summary-of-conventional-notation" class="section level2" number="1.7">
@@ -813,38 +751,50 @@ If a matrix has zeros above the main diagonal, then it’s called <strong>lower 
 <h2><span class="header-section-number">1.8</span> Exercises</h2>
 <ol>
 <li>
-<p>Use the following matrices or vectors to answer the following questions:
-<span class="math display">\[\A=\left(\begin{matrix} 1&amp;3&amp;8\\3&amp;0&amp;-2\\4&amp;1&amp;-3 \end{matrix}\right) \quad \bo{M}=\left(\begin{matrix} 1&amp;8&amp;-2&amp;5\\2&amp;8&amp;1&amp;7 \end{matrix}\right) \quad 
-\D = \left(\begin{matrix} 1&amp;0&amp;0\\0&amp;5&amp;0\\0&amp;0&amp;3\end{matrix}\right) \]</span>
-<span class="math display">\[
-\bo{X}=\left(\begin{matrix} 780 &amp; 95000\\600 &amp; 60000\\550 &amp; 65000\\400 &amp; 35000\\450 &amp; 40000\\750 &amp;80000\end{matrix}\right) \quad
-\bo{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
-\v=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \bo{u}=\left(\begin{matrix} 6&amp;4&amp;8&amp;1\end{matrix}\right)
-\]</span></p>
+Use the following matrices or vectors to answer the following questions:
+$$=(
+<span class="math display">\[\begin{matrix} 1&amp;3&amp;8\\3&amp;0&amp;-2\\4&amp;1&amp;-3 \end{matrix}\]</span>
+) =(
+<span class="math display">\[\begin{matrix} 1&amp;8&amp;-2&amp;5\\2&amp;8&amp;1&amp;7 \end{matrix}\]</span>
+) 
+ = (
+<span class="math display">\[\begin{matrix} 1&amp;0&amp;0\\0&amp;5&amp;0\\0&amp;0&amp;3\end{matrix}\]</span>
+<p>) \</p>
+=(
+<span class="math display">\[\begin{matrix} 780 &amp; 95000\\600 &amp; 60000\\550 &amp; 65000\\400 &amp; 35000\\450 &amp; 40000\\750 &amp;80000\end{matrix}\]</span>
+) 
+ = (
+<span class="math display">\[\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\]</span>
+) 
+=(
+<span class="math display">\[\begin{matrix} 6\\3\\-1\\2\end{matrix}\]</span>
+) =(
+<span class="math display">\[\begin{matrix} 6&amp;4&amp;8&amp;1\end{matrix}\]</span>
+<p>)$$</p>
 <ol style="list-style-type:lower-alpha">
 <li>
 Write the appropriate size/dimensions next to each matrix:
 <ol style="list-style-type:lower-roman">
 <li>
-$$<br />
+<span class="math inline">\(\mathbf{A}\)</span><br />
+
+<li>
+<span class="math inline">\(\mathbf{M}\)</span><br />
+
+<li>
+<span class="math inline">\(\mathbf{D}\)</span><br />
 
 <li>
 $ $<br />
 
 <li>
-$$<br />
-
-<li>
-$$<br />
+$ $<br />
 
 <li>
 $ $<br />
 
 <li>
-$\v $<br />
-
-<li>
-$\u $<br />
+$ $<br />
 
 </ol>
 <li>
@@ -966,10 +916,10 @@ is the matrix <span class="math inline">\(\bo{G}\)</span> symmetric? What is the
 <li>
 Use the network shown below to answer the following questions.<br />
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="figs/graphex.jpg" alt="Graph (Network) for exercise 11" width="2914" />
 <p class="caption">
-Figure 1.2: Graph (Network) for exercise 11
+Figure 1.3: Graph (Network) for exercise 11
 </p>
 </div>
 <ol style="list-style-type:lower-alpha">
@@ -980,33 +930,29 @@ Write down the adjacency matrix, <span class="math inline">\(\A\)</span>, for th
 The <strong>degree</strong> of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector <span class="math inline">\(\bo{d}\)</span> such that <span class="math inline">\(d_i\)</span> is the degree of node <span class="math inline">\(i\)</span>.<br />
 
 </ol>
-</div>
-<div id="list-of-key-terms" class="section level2" number="1.9">
-<h2><span class="header-section-number">1.9</span> List of Key Terms</h2>
-<ul>
-<li>linear</li>
-<li>matrix</li>
-<li>vector</li>
-<li>scalar</li>
-<li><span class="math inline">\(A_{ij}\)</span></li>
-<li><span class="math inline">\(\A_{\star j}\)</span></li>
-<li><span class="math inline">\(\A_{i \star}\)</span></li>
-<li>dimensions</li>
-<li>diagonal element</li>
-<li>square matrix</li>
-<li>rectangular matrix</li>
-<li>network</li>
-<li>graph</li>
-<li>adjacency matrix</li>
-<li>correlation matrix</li>
-<li>transpose</li>
-<li>symmetric matrix</li>
-<li>trace</li>
-<li>diagonal matrix</li>
-<li>identity matrix</li>
-<li>upper triangular matrix</li>
-<li>lower triangular matrix</li>
-</ul>
+<!-- ## List of Key Terms  -->
+<!-- - linear -->
+<!-- - matrix -->
+<!-- - vector -->
+<!-- - scalar -->
+<!-- - $A_{ij}$ -->
+<!-- - $\A_{\star j}$ -->
+<!-- - $\A_{i \star}$ -->
+<!-- - dimensions -->
+<!-- - diagonal element -->
+<!-- - square matrix -->
+<!-- - rectangular matrix -->
+<!-- - network -->
+<!-- - graph -->
+<!-- - adjacency matrix -->
+<!-- - correlation matrix -->
+<!-- - transpose -->
+<!-- - symmetric matrix -->
+<!-- - trace -->
+<!-- - diagonal matrix -->
+<!-- - identity matrix -->
+<!-- - upper triangular matrix -->
+<!-- - lower triangular matrix -->
 
 </div>
 </div>
@@ -1039,6 +985,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

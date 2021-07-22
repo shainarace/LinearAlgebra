@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Principal Components Analysis | bookdownproj.utf8</title>
+  <title>Chapter 20 Dimension Reduction for Visualization | bookdownproj.utf8</title>
   <meta name="description" content="" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta property="og:title" content="Chapter 20 Dimension Reduction for Visualization | bookdownproj.utf8" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Principal Components Analysis | bookdownproj.utf8" />
+  <meta name="twitter:title" content="Chapter 20 Dimension Reduction for Visualization | bookdownproj.utf8" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lsapp.html"/>
-<link rel="next" href="pca-in-r.html"/>
+<link rel="prev" href="fa-apps.html"/>
+<link rel="next" href="sna.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -425,101 +425,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pca" class="section level1" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Principal Components Analysis</h1>
-<p>We now have the tools necessary to discuss one of the most important concepts in mathematical statistics: <strong>Principal Components Analysis (PCA)</strong>. PCA involves the analysis of eigenvalues and eigenvectors of the covariance or correlation matrix. Its development relies on the following important facts:</p>
-<div class="theorem">
-<p><span id="thm:eigsym" class="theorem"><strong>Theorem 13.1  (Diagonalization of Symmetric Matrices) </strong></span>All <span class="math inline">\(n\times n\)</span> real valued symmetric matrices (like the covariance and correlation matrix) have two very important properties:</p>
-<ol style="list-style-type: decimal">
-<li>They have a complete set of <span class="math inline">\(n\)</span> linearly independent eigenvectors, <span class="math inline">\(\{\v_1,\dots,\v_n\}\)</span>, corresponding to eigenvalues <span class="math display">\[\lambda_1 \geq \lambda_2 \geq\dots\geq \lambda_n.\]</span></li>
-<li>Furthermore, these eigenvectors can be always be chosen to be <em>orthonormal</em> so that if <span class="math inline">\(\V=[\v_1|\dots|\v_n]\)</span> then
-<span class="math display">\[\V^{T}\V=\bo{I}\]</span>
-or equivalently, <span class="math inline">\(\V^{-1}=\V^{T}\)</span>.</li>
-</ol>
-<p>Letting <span class="math inline">\(\D\)</span> be a diagonal matrix with <span class="math inline">\(D_{ii}=\lambda_i\)</span>, by the definition of eigenvalues and eigenvectors we have for any symmetric matrix <span class="math inline">\(\bo{S}\)</span>,
-<span class="math display">\[\bo{S}\V=\V\D\]</span>
-Thus, any symmetric matrix <span class="math inline">\(\bo{S}\)</span> can be diagonalized in the following way:
-<span class="math display">\[\V^{T}\bo{S}\V=\D\]</span>
-Covariance and Correlation matrices (when there is no perfect multicollinearity in variables) have the additional property that all of their eigenvalues are positive (nonzero). They are <em>positive definite</em> matrices.</p>
-</div>
-<p>Now that we know we have a complete set of eigenvectors, it is common to order them according to the magnitude of their corresponding eigenvalues. From here on out, we will use <span class="math inline">\((\lambda_1,\v_1)\)</span> to represent the <strong>largest</strong> eigenvalue of a matrix and its corresponding eigenvector. When working with a covariance or correlation matrix, this eigenvector associated with the largest eigenvalue is called the <strong>first principal component</strong> and points in the direction for which the variance of the data is maximal. Example <a href="pca.html#exm:coveigs">13.1</a> illustrates this point.</p>
-<div class="example">
-<p><span id="exm:coveigs" class="example"><strong>Example 13.1  (Eigenvectors of the Covariance Matrix) </strong></span>Suppose we have a matrix of data for 10 individuals on 2 variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>. Plotted on a plane, the data appears as follows:</p>
-<center>
-<img src="figs/pcpoints.png%20=100x" />
-</center>
-Our data matrix for these points is:
-<span class="math display">\[\X=\pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp\]</span>
-the means of the variables in <span class="math inline">\(\X\)</span> are:
-<span class="math display">\[\bar{\x}=\pm 4.4 \\ 3.7 \mp. \]</span>
-When thinking about variance directions, our first step should be to center the data so that it has mean zero. Eigenvectors measure the spread of data around the origin. Variance measures spread of data around the mean. Thus, we need to equate the mean with the origin. To center the data, we simply compute
-<span class="math display">\[\X_c=\X-\e\bar{\x}^T = \pm 1 &amp; 1\\2&amp;1\\2&amp;4\\3&amp;1\\4&amp;4\\5&amp;2\\6&amp;4\\6&amp;6\\7&amp;6\\8&amp;8 \mp - \pm 4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7 \\4.4 &amp; 3.7  \mp = \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3\mp.\]</span>
-Examining the new centered data, we find that we’ve only translated our data in the plane - we haven’t distorted it in any fashion.
-<center>
-<img src="figs/pcpointscenter.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>Thus the covariance matrix is:
-<span class="math display">\[\ssigma=\frac{1}{9}(\X_c^T\X_c)= \pm 5.6 &amp; 4.8\\4.8&amp;6.0111 \mp \]</span>
-The eigenvalue and eigenvector pairs of <span class="math inline">\(\ssigma\)</span> are (rounded to 2 decimal places) as follows:
-<span class="math display">\[(\lambda_1,\v_1)=\left( 10.6100 ,  \begin{bmatrix} 0.69 \\ 0.72 \end{bmatrix}\right) \mbox{  and  } (\lambda_2,\v_2)= \left( 1.0012,\begin{bmatrix}-0.72\\0.69 \end{bmatrix}\right)\]</span>
-Let’s plot the eigenvector directions on the same graph:</p>
-<center>
-<img src="figs/pcpointspc.png%20=100x" title="fig:" alt="pcpoints" />
-</center>
-<p>The eigenvector <span class="math inline">\(\v_1\)</span> is called the <strong>first principal component</strong>. It is the direction along which the variance of the data is maximal. The eigenvector <span class="math inline">\(\v_2\)</span> is the <strong>second principal component</strong>. In general, the second principal component is the direction, orthogonal to the first, along which the variance of the data is maximal (in two dimensions, there is only one direction possible.)</p>
-</div>
-<p>Why is this important? Let’s consider what we’ve just done. We started with two variables, <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>, which appeared to be correlated. We then derived <em>new variables</em>, <span class="math inline">\(\v_1\)</span> and <span class="math inline">\(\v_2\)</span>, which are linear combinations of the original variables:
-<span class="math display" id="eq:pcacomb">\[\begin{eqnarray}
-\v_1 &amp;=&amp; 0.69\x_1 + 0.72\x_2 \\
-\tag{13.1}
-\v_2 &amp;=&amp; -0.72\x_1 + 0.69\x_2
-\end{eqnarray}\]</span>
-These new variables are completely uncorrelated. To see this, let’s represent our data according to the new variables - i.e. let’s change the basis from <span class="math inline">\(\mathcal{B}_1=[\x_1,\x_2]\)</span> to <span class="math inline">\(\mathcal{B}_2=[\v_1,\v_2]\)</span>.</p>
-<div class="example">
-<p><span id="exm:pcabasis" class="example"><strong>Example 13.2  (The Principal Component Basis) </strong></span>Let’s express our data in the basis defined by the principal components. We want to find coordinates (in a <span class="math inline">\(2\times 10\)</span> matrix <span class="math inline">\(\A\)</span>) such that our original (centered) data can be expressed in terms of principal components. This is done by solving for <span class="math inline">\(\A\)</span> in the following equation (see Chapter <a href="basis.html#basis">8</a> and note that the <em>rows</em> of <span class="math inline">\(\X\)</span> define the points rather than the columns):
-<span class="math display">\[\begin{eqnarray}
- \X_c &amp;=&amp; \A \V^T \\
- \pm -3.4&amp;-2.7\\-2.4&amp;-2.7\\-2.4&amp; 0.3\\-1.4&amp;-2.7\\ -0.4&amp;  0.3\\0.6&amp;-1.7\\1.6&amp; 0.3\\1.6&amp; 2.3\\2.6&amp; 2.3\\3.6&amp;  4.3 \mp &amp;=&amp;  \pm a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \\ a_{31} &amp; a_{32}\\ a_{41} &amp; a_{42}\\ a_{51} &amp; a_{52}\\ a_{61} &amp; a_{62}\\ a_{71} &amp; a_{72}\\ a_{81} &amp; a_{82}\\ a_{91} &amp; a_{92}\\ a_{10,1} &amp; a_{10,2} \mp \pm \v_1^T \\ \v_2^T \mp
-\end{eqnarray}\]</span></p>
-Conveniently, our new basis is orthonormal meaning that <span class="math inline">\(\V\)</span> is an orthogonal matrix, so
-<span class="math display">\[\A=\X\V .\]</span>
-The new data coordinates reflect a simple rotation of the data around the origin:
-<center>
-<img src=figs/pcpointsrotate.pdf width=50%>
-</center>
-<p>Visually, we can see that the new variables are uncorrelated. You may wish to confirm this by calculating the covariance. In fact, we can do this in a general sense. If <span class="math inline">\(\A=\X_c\V\)</span> is our new data, then the covariance matrix is diagonal:
-<span class="math display">\[\begin{eqnarray*}
-\ssigma_A &amp;=&amp; \frac{1}{n-1}\A^T\A  \\ 
-    &amp;=&amp; \frac{1}{n-1}(\X_c\V)^T(\X_c\V) \\
-    &amp;=&amp; \frac{1}{n-1}\V^T((\X_c^T\X_c)\V\\
-    &amp;=&amp;\frac{1}{n-1}\V^T((n-1)\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\ssigma_X)\V\\
-    &amp;=&amp;\V^T(\V\D\V^T)\V\\
-    &amp;=&amp; \D
-\end{eqnarray*}\]</span>
-Where <span class="math inline">\(\ssigma_X=\V\D\V^T\)</span> comes from the diagonalization in Theorem <a href="pca.html#thm:eigsym">13.1</a>.
-By changing our variables to principal components, we have managed to <strong>“hide”</strong> the correlation between <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> while keeping the spacial relationships between data points in tact. Transformation <em>back</em> to variables <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> is easily done by using the linear relationships in from Equation <a href="pca.html#eq:pcacomb">(13.1)</a>.</p>
-</div>
-<div id="geometrical-comparison-with-least-squares" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Geometrical comparison with Least Squares</h2>
-<p>In least squares regression, our objective is to maximize the amount of variance explained in our target variable. It may look as though the first principal component from Example <a href="pca.html#exm:coveigs">13.1</a> points in the direction of the regression line. This is not the case however. The first principal component points in the direction of a line which minimizes the sum of squared <em>orthogonal</em> distances between the points and the line. Regressing <span class="math inline">\(\x_2\)</span> on <span class="math inline">\(\x_1\)</span>, on the other hand, provides a line which minimizes the sum of squared <em>vertical</em> distances between points and the line. This is illustrated in Figure <a href="pca.html#fig:pcvsreg">13.1</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:pcvsreg"></span>
-<img src="figs/pcvsreg.jpg" alt="Principal Components vs. Regression Lines" width="2572" />
+<div id="otherdimred" class="section level1" number="20">
+<h1><span class="header-section-number">Chapter 20</span> Dimension Reduction for Visualization</h1>
+<div id="multidimensional-scaling" class="section level2" number="20.1">
+<h2><span class="header-section-number">20.1</span> Multidimensional Scaling</h2>
+<p>Multidimensional scaling is a technique which aims to represent higher-dimensional data in a lower-dimensional space while keeping the pairwise distances between points as close to their original distances as possible. It takes as input a distance matrix, <span class="math inline">\(\D\)</span> where <span class="math inline">\(\D_{ij}\)</span> is some measure of distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> (most often Euclidean distance). The original observations may involve many variables and thus exist in a high-dimensional space. The output of MDS is a set of coordinates, usually in 2-dimensions for the purposes of visualization, such that the Euclidean distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> in the new lower-dimensional representation is an approximation to <span class="math inline">\(\D_{ij}\)</span>.</p>
+<p>One of the outputs in R will be a measure that is akin to the “percentage of variation explained” by PCs. The difference is that the matrix we are representing is not a covariance matrix, so this ratio is not exactly a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the <code>GOF</code> vector (presumably standing for <em>Goodness of Fit</em>). The first entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of only the positive eigenvalues.</p>
+<p><span class="math display">\[GOF[1] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n |\lambda_i|}\]</span>
+and
+<span class="math display">\[GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}\]</span>
+### MDS of Iris Data</p>
+<p>Let’s take a dataset we’ve already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="otherdimred.html#cb265-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">dist</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb265-2"><a href="otherdimred.html#cb265-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">cmdscale</span>(D, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>) <span class="co"># k is the number of dimensions desired</span></span>
+<span id="cb265-3"><a href="otherdimred.html#cb265-3" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># view first dozen eigenvalues</span></span></code></pre></div>
+<pre><code>##  [1] 6.3001e+02 3.6158e+01 1.1653e+01 3.5514e+00 3.4866e-13 3.1863e-13
+##  [7] 2.0112e-13 1.3770e-13 7.7470e-14 3.2881e-14 3.0740e-14 2.1786e-14</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="otherdimred.html#cb267-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF <span class="co"># view the Goodness of Fit measures</span></span></code></pre></div>
+<pre><code>## [1] 0.97769 0.97769</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="otherdimred.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the solution, colored by iris species:</span></span>
+<span id="cb269-2"><a href="otherdimred.html#cb269-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb269-3"><a href="otherdimred.html#cb269-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb269-4"><a href="otherdimred.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
+<span id="cb269-5"><a href="otherdimred.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
+<span id="cb269-6"><a href="otherdimred.html#cb269-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-132-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
 <p class="caption">
-Figure 13.1: Principal Components vs. Regression Lines
+Figure 20.1: Multidimensional Scaling of the Iris Data
 </p>
 </div>
-<p>The first principal component about the mean of a set of points can be represented by that line which most closely approaches the data points. Let this not conjure up images of linear regression in your head, though. In contrast, linear least squares tries to minimize the distance in a single direction only (the direction of your target variable axes). Thus, although the two use a similar error metric, linear least squares is a method that treats one dimension of the data preferentially, while PCA treats all dimensions equally.</p>
-<p>You might be tempted to conclude from Figure <a href="pca.html#fig:pcvsreg">13.1</a> that the first principal component and the regression line “ought to be similar.” This is a terrible conclusion if you consider a large multivariate dataset and the various regression lines that would predict each variable in that dataset. In PCA, there is no target variable and thus no single regression line that we’d be comparing to.</p>
+<p>We can tell from the eigenvalues alone that two dimensions should be relatively sufficient to summarize this data. After two large eigenvalues, the remainder drop off and become small, signifying a lack of further information. Indeed, the Goodness of Fit measurements back up this intuition: values close to 1 indicate a good fit with minimal error.</p>
+<div id="mds-of-leukemia-dataset" class="section level3" number="20.1.1">
+<h3><span class="header-section-number">20.1.1</span> MDS of Leukemia dataset</h3>
+<p>Let’s take a look at another example, this time using the Leukemia dataset which has 5000 variables. It is unreasonable to expect that we can get as good of a fit of this data using only two dimensions! There will obviously be much more error. However, we can still get a visualization that should at least show us which observations are close to each other and which are far away.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="otherdimred.html#cb270-1" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/Code/leukemia.csv&#39;</span>)</span></code></pre></div>
+<p>As you may recall, this data has some variables with 0 variance; those entire columns are constant. To determine which ones, we first remove the last column which is a character vector that identifies the type of leukemia.</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="otherdimred.html#cb271-1" aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> leuk[ , <span class="dv">5001</span>]</span>
+<span id="cb271-2"><a href="otherdimred.html#cb271-2" aria-hidden="true" tabindex="-1"></a>leuk <span class="ot">=</span> leuk[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
+<span id="cb271-3"><a href="otherdimred.html#cb271-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, could supply names of columns that have 0 variance with</span></span>
+<span id="cb271-4"><a href="otherdimred.html#cb271-4" aria-hidden="true" tabindex="-1"></a><span class="co"># names(leuk[, sapply(leuk, function(v) var(v, na.rm=TRUE)==0)])</span></span>
+<span id="cb271-5"><a href="otherdimred.html#cb271-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The na.rm=T would allow us to keep any missing information and still compute</span></span>
+<span id="cb271-6"><a href="otherdimred.html#cb271-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the variance using the non-missing values. In this instance, it is not necessary</span></span>
+<span id="cb271-7"><a href="otherdimred.html#cb271-7" aria-hidden="true" tabindex="-1"></a><span class="co"># because we have no missing values.</span></span>
+<span id="cb271-8"><a href="otherdimred.html#cb271-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb271-9"><a href="otherdimred.html#cb271-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We can remove these columns from the data with:</span></span>
+<span id="cb271-10"><a href="otherdimred.html#cb271-10" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span>leuk[,<span class="fu">apply</span>(leuk, <span class="dv">2</span>, var, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">0</span>]</span>
+<span id="cb271-11"><a href="otherdimred.html#cb271-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb271-12"><a href="otherdimred.html#cb271-12" aria-hidden="true" tabindex="-1"></a><span class="co"># compute distances matrix</span></span>
+<span id="cb271-13"><a href="otherdimred.html#cb271-13" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="fu">dist</span>(leuk)</span>
+<span id="cb271-14"><a href="otherdimred.html#cb271-14" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">=</span><span class="fu">cmdscale</span>(t,<span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb271-15"><a href="otherdimred.html#cb271-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb271-16"><a href="otherdimred.html#cb271-16" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF</span></code></pre></div>
+<pre><code>## [1] 0.35822 0.35822</code></pre>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="otherdimred.html#cb273-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb273-2"><a href="otherdimred.html#cb273-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb273-3"><a href="otherdimred.html#cb273-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb273-4"><a href="otherdimred.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb273-5"><a href="otherdimred.html#cb273-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb273-6"><a href="otherdimred.html#cb273-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
+<span id="cb273-7"><a href="otherdimred.html#cb273-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-135-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<p class="caption">
+Figure 20.2: Multidimensional Scaling of the Leukemia Data
+</p>
 </div>
-<div id="covariance-or-correlation-matrix" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Covariance or Correlation Matrix?</h2>
-<p>Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is <em>standardizing</em> the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.</p>
-<p>The covariance matrix is the default for (most)  PCA functions. The correlation matrix is the default in SAS and the covariance matrix method is invoked by the option:</p>
-<pre><code>proc princomp data=X cov; 
-var x1--x10;
-run;</code></pre>
-<p>Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component. The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don’t we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter <a href="pcaapp.html#pcaapp">15</a> will give those who <em>always</em> use the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.</p>
+<p>What if we standardize our data before running the MDS procedure? Will that effect our results? Let’s see how it looks on the standardized version of the leukemia data.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="otherdimred.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can experiment with standardization to see how it</span></span>
+<span id="cb274-2"><a href="otherdimred.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="co"># effects our results:</span></span>
+<span id="cb274-3"><a href="otherdimred.html#cb274-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-4"><a href="otherdimred.html#cb274-4" aria-hidden="true" tabindex="-1"></a>leuk2<span class="ot">=</span><span class="fu">scale</span>(leuk,<span class="at">center=</span><span class="cn">TRUE</span>, <span class="at">scale=</span><span class="cn">TRUE</span>)</span>
+<span id="cb274-5"><a href="otherdimred.html#cb274-5" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">dist</span>(leuk2)</span>
+<span id="cb274-6"><a href="otherdimred.html#cb274-6" aria-hidden="true" tabindex="-1"></a>fit2<span class="ot">=</span><span class="fu">cmdscale</span>(t2,<span class="at">eig=</span><span class="cn">TRUE</span>,<span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb274-7"><a href="otherdimred.html#cb274-7" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span>GOF</span></code></pre></div>
+<pre><code>## [1] 0.21287 0.21287</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="otherdimred.html#cb276-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb276-2"><a href="otherdimred.html#cb276-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb276-3"><a href="otherdimred.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb276-4"><a href="otherdimred.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y2,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb276-5"><a href="otherdimred.html#cb276-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb276-6"><a href="otherdimred.html#cb276-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
+<span id="cb276-7"><a href="otherdimred.html#cb276-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="a-note-on-standardization" class="section level3 unnumbered">
+<h3>A note on standardization</h3>
+<p>Clearly, things have changed substantially. We shouldn’t give to much creedence to the decreased Goodness of Fit statistics. I don’t necessarily believe that we are explaining less information just because we scaled our data, the fact that this number has changed should likely be attributed to the fact that we have significantly decreased all of the eigenvalues of the matrix, and not in any predictable or meaningful way. It’s more important to focus on what we are trying to represent and that is differences between samples. Perhaps if there are some genes for which values vary wildly between the different leukemia types, and other genes which don’t show much variation, then we should keep this information in the data. By standardizing the data, we’re making the variation of every gene equal to 1 - which stands to wash out some of the bigger, more discriminating factors in the distance calculations. This consideration is something that will need to be made for each dataset on a case-by-case basis. If our dataset had variables with wide scale variations (like income and number of cars) then standardization is a much more reasonable approach!</p>
+<p>There are several things to keep in mind when studying an MDS map.</p>
+<ol style="list-style-type: decimal">
+<li>The axis are, by themselves, meaningless.</li>
+<li>The orientation of the picture is completely arbitrary.</li>
+<li>All that matters is the relative proximity of the points in the map. Are they close? Are they far apart?</li>
+</ol>
+
+</div>
 </div>
 </div>
             </section>
@@ -527,8 +527,8 @@ run;</code></pre>
           </div>
         </div>
       </div>
-<a href="lsapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pca-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fa-apps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sna.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -560,7 +560,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/shainarace/LinearAlgebra/edit/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/06-OtherDimRed.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -568,7 +568,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/shainarace/LinearAlgebra/blob/master/03-PCA.Rmd",
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/06-OtherDimRed.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],
