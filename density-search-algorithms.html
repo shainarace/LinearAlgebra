@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Density Search Algorithms | 111-ClusterAlgos.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Density Search Algorithms | 111-ClusterAlgos.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Density Search Algorithms | 111-ClusterAlgos.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="clusteralgos.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>1</b> Algorithms for Data Clustering</a><ul>
+<li class="chapter" data-level="1.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>1.1</b> Hierarchical Algorithms</a></li>
+<li class="chapter" data-level="1.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>1.2</b> Iterative Partitional Algorithms</a></li>
+<li class="chapter" data-level="1.3" data-path="clusteralgos.html"><a href="clusteralgos.html#early-partitional-algorithms"><i class="fa fa-check"></i><b>1.3</b> Early Partitional Algorithms</a></li>
+<li class="chapter" data-level="1.4" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeans"><i class="fa fa-check"></i><b>1.4</b> <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="1.5" data-path="clusteralgos.html"><a href="clusteralgos.html#k-mediods-partitioning-around-mediods-pam-and-clustering-large-applications-clara"><i class="fa fa-check"></i><b>1.5</b> <span class="math inline">\(k\)</span>-mediods: Partitioning around Mediods (PAM) and Clustering Large Applications (CLARA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="density-search-algorithms.html"><a href="density-search-algorithms.html"><i class="fa fa-check"></i><b>2</b> Density Search Algorithms</a><ul>
+<li class="chapter" data-level="2.1" data-path="density-search-algorithms.html"><a href="density-search-algorithms.html#density-based-spacial-clustering-of-applications-with-noise-dbscan"><i class="fa fa-check"></i><b>2.1</b> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="density-search-algorithms" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Density Search Algorithms</h1>
+<p>If objects are depicted as data points in a metric space, then one may interpret the problem of clustering as an attempt to find areas of the space that are densely populated by points, separated by less populated areas. A natural approach to the problem is then to search through the space seeking these dense regions. Such algorithms have been referred to as <em>density search</em> algorithms <span class="citation">[@everitt]</span>. While these algorithms tend to suffer on real data in both accuracy efficiency, their ability to identify noise and to estimate the number of clusters <span class="math inline">\(k\)</span> makes them worthy of discussion.</p>
+<p>Many density search algorithms have their roots in the single-linkage hierarchical algorithms described in Section <a href="clusteralgos.html#hc">1.1</a>. Individual points are joined together in clusters one-by-one based upon their similarity (or nearness in space). However in this case there exists some criteria for which objects are rejected from joining an existing cluster and instead are set out to form their own cluster. For example, suppose we had two distinct well separated dense regions of points. Beginning with a single point in the first region, we form a cluster and search through the remaining points one by one adding them to the cluster in they satisfy some specified criterion of nearness to the points already in the cluster. Once all the points in the first region are combined into a single cluster, the purpose of the criterion is to reject points from the second region from joining the first cluster, causing them to create a new cluster.</p>
+<p>The conception of density search algorithms dates to the late `60s with the <em>taxmap</em> method of Carmichael <em>et al</em>. in <span class="citation">[@carmichael;@carmichaelsneath]</span> and the <em>mode analysis</em> method of Wishart <span class="citation">[@wishart]</span>. In <em>taxmap</em> the authors suggested criterion like the drop in average similarity upon adding a new point to a cluster. In <em>mode analysis</em> the criterion was simply containment in a specified radius of points in a cluster. The problem with this approach was that it had trouble finding both large and small clusters simultaneously <span class="citation">[@everitt]</span>.</p>
+<p>All density search algorithms suffer from the inability to find clusters of varying density, no matter how the term is defined in application, because the density of points is used to define the notion of a cluster. High dimensional data adds to this problem as demonstrated in Chapter <a href="#dimred"><strong>??</strong></a> because as the size of the space grows, the points naturally become less and less dense inside of it. Another problem with density search algorithm is the necessity to search through data again and again, making their implementation difficult if not irrelevant for large data sets. Among the benefits to these methods are the inherent estimation of the number of clusters and their ability to find irregularly shaped (non-convex) clusters. Several algorithms in this category, like Density Based Spacial Clustering of Applications with Noise (DBSCAN) also make an effort to determine outliers or noise in the data. Because of the computational workload of these methods, we will abandon them after the present discussion in favor of more efficient methods. For an in-depth analysis of other density search algorithms and their variants, see <span class="citation">[@density1]</span>.</p>
+<div id="density-based-spacial-clustering-of-applications-with-noise-dbscan" class="section level2">
+<h2><span class="header-section-number">2.1</span> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</h2>
+<p>Density Based Spacial Clustering of Applications with Noise (DBSCAN) is an algorithm proposed by Ester, Kriegel, Sander, and Xu in 1996 <span class="citation">[@dbscan]</span>, which uses the Euclidean nearness of a group of points in <span class="math inline">\(m\)</span>-space to define density. The algorithm uses the following definitions and parameters to determine what constitutes a cluster:</p>
+:::{.definition name=‘DBSCAN Terms’ #dbscandefs}
+The following definitions will aid our discussion of the DBSCAN algorithm:
+<ul>
+<li>
+<strong>Dense Point and</strong> <span class="math inline">\(\rho_{min}\)</span>:
+A point <span class="math inline">\(\mathbf{x}_j\)</span> is called <em>dense</em> if there are at least <span class="math inline">\(\rho_{min}\)</span> other points contained in its <span class="math inline">\(\epsilon\)</span>-neighborhood.
+<li>
+<strong>Direct Density Reachability</strong>:
+A point <span class="math inline">\(\mathbf{x}_i\)</span> is called <em>directly density reachable</em> from a point <span class="math inline">\(\mathbf{x}_j\)</span> if it is in the <span class="math inline">\(\epsilon\)</span>-neighborhood surrounding <span class="math inline">\(\mathbf{x}_j\)</span>, i.e. if <span class="math inline">\(\mathbf{x}_i \in \mathscr{N}(\mathbf{x}_j,\epsilon)\)</span>, <em>and</em> <span class="math inline">\(\mathbf{x}_j\)</span> is a dense point.
+<li>
+<strong>Density Reachability</strong>:
+A point <span class="math inline">\(\mathbf{x}_i\)</span> is called <em>density reachable</em> from a point <span class="math inline">\(\mathbf{x}_j\)</span> if there is a sequence of points <span class="math inline">\(\mathbf{x}_{1},\mathbf{x}_{2},\dots, \mathbf{x}_{p}\)</span> with <span class="math inline">\(\mathbf{x}_{1}=\mathbf{x}_j\)</span> and <span class="math inline">\(\mathbf{x}_{p}=\mathbf{x}_i\)</span> where each <span class="math inline">\(\mathbf{x}_{{k+1}}\)</span> is directly density reachable from <span class="math inline">\(\mathbf{x}_{k}.\)</span>
+<li>
+<strong>Noise Point</strong>:
+A point <span class="math inline">\(\mathbf{x}_l\)</span> is called a <em>noise point</em> or <em>outlier</em> if it contains 0 points in its <span class="math inline">\(\epsilon\)</span>-neighborhood.
+</ul>
+<p>:::</p>
+<p>The relationship of density reachability is not symmetric. This fact is illustrated in Figure <a href="density-search-algorithms.html#fig:dbscan">2.1</a>. A point in this illustration is dense if its <span class="math inline">\(\epsilon\)</span>-neighborhood contains at least <span class="math inline">\(\rho_{min} = 2\)</span> other points. The green point <span class="math inline">\(a\)</span> is density reachable from the blue point <span class="math inline">\(b\)</span>, however the reverse is not true because <span class="math inline">\(a\)</span> is not a dense point. Because of this, we introduce the notion of <em>density connectedness</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:dbscan"></span>
+<img src="figs/dbscan.jpg" alt="DBSCAN Illustration" width="50%" />
+<p class="caption">
+Figure 2.1: DBSCAN Illustration
+</p>
+</div>
+<p>:::{definition name=‘Density Connectedness’ #dbscandefs2}
+Two points <span class="math inline">\(\mathbf{x}_i\)</span> and <span class="math inline">\(\mathbf{x}_j\)</span> are <strong>density-connected</strong> if there exists some point <span class="math inline">\(\mathbf{x}_k\)</span> such that both <span class="math inline">\(\mathbf{x}_i\)</span> and <span class="math inline">\(\mathbf{x}_j\)</span> are density reachable from <span class="math inline">\(x_k\)</span>.
+:::</p>
+<p>In Figure <a href="density-search-algorithms.html#fig:dbscan">2.1</a>, it is clear that we can say points <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are density-connected since they are each density reachable from any of the 4 points in between them. The point <span class="math inline">\(c\)</span> in this illustration is a noise point or outlier because there are no points contained in its <span class="math inline">\(\epsilon\)</span>-neighborhood.</p>
+<p>Using these definitions, we can formalize the properties that define a cluster in DBSCAN.</p>
+:::{.definition name=‘DBSCAN Cluster’ #dbscancluster}
+Given the parameters <span class="math inline">\(\rho_{min}\)</span> and <span class="math inline">\(\epsilon\)</span>, a <strong>DBSCAN cluster</strong> is a set of points that satisfy the two following conditions:
+<ol>
+<li>
+All points within the cluster are mutually density-connected.
+<li>
+If a point is density-connected to any point in the cluster, it is part of the cluster as well.
+</ol>
+<p><br />
+:::</p>
+<p>Table <a href="density-search-algorithms.html#tab:algdbscan">2.1</a> describes how DBSCAN finds such clusters.</p>
+<table>
+<tr>
+<td>
+<ol>
+<li>
+<strong>Input:</strong> Set of points <span class="math inline">\(\mathbf{X}=[\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_n]\)</span> to be clustered and parameters <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(\rho_{min}\)</span>\
+<li>
+For each unvisited point <span class="math inline">\(p=\mathbf{x}_i\)</span>, do:
+<ol style="list-style-type:upper-roman">
+<li>
+Mark <span class="math inline">\(p\)</span> as visited.
+<li>
+Let <span class="math inline">\(\mathcal{N}\)</span> be the set of points contained in the <span class="math inline">\(\epsilon\)</span>-neighborhood around <span class="math inline">\(p\)</span>.
+<ol style="list-style-type:upper-alpha">
+<li>
+If <span class="math inline">\(|\mathcal{N}| &lt; \rho_{min}\)</span> mark <span class="math inline">\(p\)</span> as noise.
+<li>
+Else let <span class="math inline">\(C\)</span> be the next cluster. Do:
+<ol style="list-style-type:lower-alpha">
+<li>
+Add <span class="math inline">\(p\)</span> to cluster <span class="math inline">\(C\)</span>.
+<li>
+For each point <span class="math inline">\(p&#39;\)</span> in <span class="math inline">\(\mathcal{N}\)</span>, do:
+<ol style="list-style-type:lower-roman">
+<li>
+<p>If <span class="math inline">\(p&#39;\)</span> is not visited, mark <span class="math inline">\(p&#39;\)</span> as visited, let <span class="math inline">\(\mathscr{N}&#39;\)</span> be the set of points contained in the <span class="math inline">\(\epsilon\)</span>-neighborhood around <span class="math inline">\(p&#39;\)</span>. If <span class="math inline">\(|\mathcal{N}&#39;| \geq \rho_{min}\)</span> let <span class="math inline">\(\mathcal{N}=\mathcal{N} \cup \mathcal{N}&#39;\)</span></p>
+<li>
+If <span class="math inline">\(p&#39;\)</span> is not yet a member of any cluster, add <span class="math inline">\(p&#39;\)</span> to cluster <span class="math inline">\(C\)</span>.
+</ol>
+</ol>
+</ol>
+</ol>
+<li>
+<strong>Output:</strong> Clusters found <span class="math inline">\(C_1,\dots,C_k\)</span>
+</ol>
+</table>
+<caption>
+<span id="tab:algdbscan">Table 2.1: </span> Density Based Spacial Clustering of Applications with Noise (DBSCAN) <span class="citation">[@datamining]</span>
+</caption>
+<p><br>
+## Conclusion</p>
+<p>The purpose of this chapter was to give the reader a basic understanding of hierarchical, iterative partitional, and density search approaches to data clustering. One of the main concerns addressed in this paper is that all of these algorithms have merit, but in application rarely do the algorithms completely agree on a solution. In fact, algorithms with random inputs like <span class="math inline">\(k\)</span>-means are not even likely to agree with themselves over a number of different trials. It can be extremely difficult to qualitatively measure the goodness of your clustering when the data cannot be visualized in 2 or 3 dimensions. While there are a number of metrics to help the user get a sense of the compactness of the clusters (see Chapter <a href="#validation"><strong>??</strong></a>), the effect of noise and outliers can often blur the true picture. It is also common for such metrics to take nearly equivalent values for vastly different cluster solutions, forcing the user to choose a solution using domain knowledge and utility. First we will look at another class of clustering methods which aim to solve the graph partitioning problem described in Chapter <a href="#chap-zero"><strong>??</strong></a>.</p>
+<p>The difference between the problems of data clustering and graph partitioning is merely the structure of the input objects to be clustered. In data clustering, the input objects are composed of measurements on <span class="math inline">\(m\)</span> variables or features. If we interpret the graph partitioning problem in such a way that input objects are vertices on a graph and the variables describing them are the weights of the edges by which they are connected to other vertices, then it becomes clear we can use any of the methods in this chapter to cluster the columns of an adjacency matrix as described in Chapter <a href="#chap-zero"><strong>??</strong></a>. Similarly if one creates a similarity matrix for objects from a data clustering problem, we can cluster that matrix using the theory and algorithms from graph partitioning. While each problem can be transformed into the other, the design of the algorithms for the two cases is generally quite different. In the next chapter, we provide a thorough overview of some popular graph clustering algorithms.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="clusteralgos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/%s",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/%s",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

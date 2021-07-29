@@ -105,7 +105,7 @@ You might be tempted to conclude from Figure \@ref(fig:pcvsreg) that the first p
 
 Principal components analysis can involve eigenvectors of either the covariance matrix or the correlation matrix. When we perform this analysis on the covariance matrix, the geometric interpretation is simply centering the data and then determining the direction of maximal variance. When we perform this analysis on the correlation matrix, the interpretation is _standardizing_ the data and then determining the direction of maximal variance. The correlation matrix is simply a scaled form of the covariance matrix. In general, these two methods give different results, especially when the scales of the variables are different.
 
-The covariance matrix is the default for (most) \textsf{R} PCA functions. The correlation matrix is the default in SAS and the covariance matrix method is invoked by the option:
+The covariance matrix is the default for (most) $\textsf{R}$ PCA functions. The correlation matrix is the default in SAS and the covariance matrix method is invoked by the option:
 
 ```
 proc princomp data=X cov; 
@@ -116,7 +116,7 @@ run;
 Choosing between the covariance and correlation matrix can sometimes pose problems. The rule of thumb is that the correlation matrix should be used when the scales of the variables vary greatly. In this case, the variables with the highest variance will dominate the first principal component.  The argument against automatically using correlation matrices is that it turns out to be quite a brutal way of standardizing your data - forcing all variables to contain the same amount of information (after all, don't we equate variance to information?) seems naive and counterintuitive when it is not absolutely necessary for differences in scale. We hope that the case studies outlined in Chapter \@ref(pcaapp) will give those who _always_ use the correlation option reason for pause, and we hope that, in the future, they will consider multiple presentations of the data and their corresponding low-rank representations of the data.  
 
 
-# PCA in R
+## PCA in R
 
 Let's find Principal Components using the iris dataset. This is a well-known dataset, often used to demonstrate the effect of clustering algorithms. It contains numeric measurements for 150 iris flowers along 4 dimensions. The fifth column in the dataset tells us what species of Iris the flower is. There are 3 species.
 
@@ -135,7 +135,7 @@ Let's first take a look at the scatterplot matrix:
 pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width,data=iris,col=c("red","green3","blue")[iris$Species])
 ```
 
-It is apparent that some of our variables are correlated. We can confirm this by computing the correlation matrix with the ``` cor()``` function. We can also check out the individual variances of the variables and the covariances between variables by examining the covariance matrix (``` cov()``` function). Remember - when looking at covariances, we can really only interpret the _sign_ of the number and not the magnitude as we can with the correlations.
+It is apparent that some of our variables are correlated. We can confirm this by computing the correlation matrix with the `cor()` function. We can also check out the individual variances of the variables and the covariances between variables by examining the covariance matrix (`cov()` function). Remember - when looking at covariances, we can really only interpret the _sign_ of the number and not the magnitude as we can with the correlations.
 
 ```{r}
 cor(iris[1:4])
@@ -146,11 +146,11 @@ We have relatively strong positive correlation between Petal Length, Petal Width
 
 The scatter plots and correlation matrix provide useful information, but they don't give us a true sense for how the data looks when all 4 attributes are considered simultaneously.
 
-In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref(svd), is generally a preferred route to computing principal components. In fact, the numerical computation of principal components is outside of the scope of this book. We recommend [@cite1,@cite2, or @cite3] for a treatment of the topic.__ using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the ```prcomp``` function in R.
+In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref(svd), is generally a preferred route to computing principal components. In fact, the numerical computation of principal components is outside of the scope of this book. We recommend [@cite1,@cite2, or @cite3] for a treatment of the topic.__ using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the `prcomp` function in R.
 
 ### Covariance PCA
 
- Let's start with the covariance matrix which is the default setting for the ```prcomp``` function in R. It's worth repeating that a dedicated principal component function like ```prcomp()``` is superior in numerical stability and efficiency to the lines of code in the next section. __The only reason for directly computing the covariance matrix and its eigenvalues and eigenvectors (as opposed to  ```prcomp()```) is for edification. Computing a PCA in this manner, just this once, will help us grasp the exact mathematics of the situation and discover the nuances of them.__
+ Let's start with the covariance matrix which is the default setting for the `prcomp` function in R. It's worth repeating that a dedicated principal component function like `prcomp()` is superior in numerical stability and efficiency to the lines of code in the next section. __The only reason for directly computing the covariance matrix and its eigenvalues and eigenvectors (as opposed to  `prcomp()`) is for edification. Computing a PCA in this manner, just this once, will help us grasp the exact mathematics of the situation and discover the nuances of them.__
 
 ### Principal Components, Loadings, and Variance Explained 
 

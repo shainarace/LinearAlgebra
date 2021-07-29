@@ -15,7 +15,7 @@ Original Source: _The cancer genome atlas pan-cancer analysis project_
 - LUAD = Lung Adenocarcinoma
 - PRAD = Prostate Adenocarcinoma
 
-We are going to want to plot the data points according to their different classification labels. We should pick out a nice color palette for categorical attributes. We chose to assign palette ```Dark2``` but feel free to choose any categorical palette that attracts you in the code below!
+We are going to want to plot the data points according to their different classification labels. We should pick out a nice color palette for categorical attributes. We chose to assign palette `Dark2` but feel free to choose any categorical palette that attracts you in the code below!
 
 ```{r eval=F}
 library(RColorBrewer)

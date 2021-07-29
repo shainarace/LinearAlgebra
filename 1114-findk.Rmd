@@ -1,0 +1,316 @@
+# Determining the Number of Clusters $k$ {#findk}
+
+As previously discussed, one of the major dilemmas faced when using the clustering algorithms from Chapters \@ref(chap1) and \@ref(spectral) is that these algorithms take the number of clusters, $k$, as input. Therefore, it is necessary to somehow determine a reasonable estimate for the number of clusters present. Many methods have been proposed for this task, for a more in-depth summary we suggest the 1999 book by Gordon [@gordon] or the 1985 paper by Milligan and Cooper [@milligan]. The purpose of this chapter is to survey some established methodologies for this task, and to motivate our novel method discussed in Chapter \@ref(consensus).  
+
+## Methods based on Cluster Validity (Stopping Rules)
+
+The most popular methods for determining the number of clusters involve observing some internal measure of cluster validity (like those outlined in the previous chapter) as the number, $k$, of clusters increases. Cohesion scores like SSE are expected to be monotonically decreasing as $k$ increases. At some value, $k^*$, the marginal drop in SSE is expected to flatten drastically, indicating that further division of the clusters does not provide a significant improvement in terms of cohesion [@milligan, @gapstat, @jainbook]. Methods based on cluster validity can be implemented with any clustering algorithm the user desires. Unfortunately, if the algorithm used is not working well with the dataset then the resulting determination of the number of clusters will be flawed. Furthermore, it is possible to get different results with different algorithms or different cohesion metrics, which may instil the user with little confidence in a given solution.
+
+In the hierarchical algorithms from Section \@ref(hc), a series of solutions ranging from $k=1$ to $k=n$ clusters are output, and thus the methods for determining an appropriate value for $k$ in these procedures are often referred to as stopping rules. Since hierarchical algorithms tend to be slow and computationally expensive for large datasets, the stopping rules which cannot be extended to include general partitions of the data will be omitted from the discussion.
+
+## Sum Squared Error (SSE) Cohesion Plots
+
+For a simple example for this stopping rule methodology, consider the so-called _Ruspini dataset_ in Figure \@ref(fig:ruspini), which has been used to demonstrate clustering algorithms in the literature. This dataset consists of 75 two dimensional points in the first Cartesian quadrant, and visually it seems clear that these points fall into $k=4$ different clusters, using Euclidean distance as a measure of proximity. (Some individuals may argue that these 4 clusters could be meaningfully broken down into smaller clusters. These arguments are certainly valid, but we base our decision to specify 4 on the following assumptions: a) If asked to choose 4 clusters, most human beings would choose the same 4 - this may not be the case with 5 or 6; b) If we consider these points as a sample from a population, then it is reasonable to suspect that the collection of more data may destroy the subcluster appearance - that is, there is more observed evidence of 4 clusters than any other number.)  We ought to be able to uncover this "true" number of clusters by observing the level of decrease in the SSE metric as the number of clusters increase, and determining an "elbow" in the curve at $k^*=4$ where the SSE flattens out for $k\geq 4$.
+
+```{r label='ruspini', fig.align='center', fig.cap = 'The Two-Dimensional Ruspini Dataset', echo=F, out.width="50%"}
+knitr::include_graphics("figs/RuspiniScatter.jpg")
+```
+
+
+Figure \@ref(fig:ruspiniSSEplotgood) shows some examples of clusters found in the data using $k$-means and $k=2, 3, 4, 5, 6$ clusters. The initialization of seed points was done randomly in each case. Figure \@ref(fig:ruspiniSSEplotgood) shows the SSE (as described in Section \@ref(SSE) for the 6 different clusterings. We wish to point out that these 5 clusterings are "good" or reasonable clusterings upon visual inspection. Indeed, this first SSE plot properly depicts $k^*=4$ as the "elbow" of the curve, where the marginal decrease in SSE for adding additional clusters flattens out.\
+
+(ref:rusSSEgoodcap) 5 "Good" $k$-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot
+
+```{r label='ruspiniSSEplotgood',fig.show="hold", fig.align='center', fig.cap = "(ref:rusSSEgoodcap)", echo=F, out.width="50%"}
+knitr::include_graphics("figs/rusk2.jpg")
+knitr::include_graphics("figs/rusk3.jpg")
+knitr::include_graphics("figs/rusk4.jpg")
+knitr::include_graphics("figs/rusk5.jpg")
+knitr::include_graphics("figs/rusk6.jpg")
+
+```
+
+
+
+__User Beware__ <br>
+
+As always, with $k$-means, it is of the utmost importance that the user pay close attention to the output from the algorithm. In our creation of the SSE plot in Figure \@ref(fig:ruspiniSSEplotgood), we came by the two solutions, associated with $k=4$ and $k=5$ clusters respectively, that are shown in Figure \@ref(fig:rusSSEbad). Because we are able to visualize the data in 2 dimensions (which, practically speaking, means we could have identified $k^*=4$ by visualizing the original data anyhow), we were able to throw away these two solutions upon inspection. If we did not do this, the resulting SSE plot shown in Figure \@ref(fig:rusSSEbad) would have clearly misled us to choose $k^*=3$ clusters. Without being able to visually inspect the solutions, it is wise to run several iterations of the $k$-means algorithm for each $k$ and use some criteria (like lowest SSE, or most frequent SSE [@poweriteration]) to choose an appropriate clustering for inclusion in the SSE plot. While this is not guaranteed to circumvent problematic SSE plots like that shown in Figure \@ref(fig:rusSSEbad), it can help in many situations and certainly won't hurt in others.  This dependence on good clusterings is a glaring drawback of stopping rule methodology, because not all algorithms can produce multiple results for a single value of $k$ to choose from.
+
+```{r label='rusSSEbad',fig.show="hold", fig.align='center', fig.cap = "Example of 'Poor' Clusterings and their Effect on SSE Plot", echo=F, out.width="50%"}
+knitr::include_graphics("figs/rusk4bad.jpg")
+knitr::include_graphics("figs/rusk5bad.jpg")
+knitr::include_graphics("figs/rusSSEbad.jpg")
+
+```
+
+### Cosine-Cohesion Plots for Text Data
+
+Further complicating the method of cohesion plots is the curse of dimensionality discussed in Chapter \@ref(dimred).  For high dimensional data, it is unusual to witness such drastic "elbows" in these plots. To illustrate this effect, we consider a combination of 3 text datasets used frequently in the information retrieval literature: 'Medlars', 'Cranfield', 'CISI' [@surveytextmining,@kogan].  The Medlars-Cranfield-CISI (MCC) collection consists of nearly 4,000 scientific abstracts from 3 different disciplines. These 3 disciplines (Medlars = medicine, Cranfield = aerodynamics, CISI = information science) form 3 relatively distinct clusters in the data, which are not particularly difficult to uncover (For example, spherical $k$-means frequently achieves 98\% accuracy on the full-dimensional data). 
+
+For this experiment, we ran 25 trials of the spherical $k$-means algorithm for each value of $k=2,3,\dots,20$ and from each set of trials chose the solution with the lowest objective value. The resulting SSE plot is shown in Figure \@ref(fig:MCCSSE). It is difficult to identify a distinct "elbow" in this curve.
+
+(ref:MCCSSElab) Spherical $k$-means Objective Function Values for $2\leq k \leq 20$
+
+```{r label='MCCSSE', fig.align='center', fig.cap = '(ref:MCCSSElab)', echo=F, out.width="50%"}
+knitr::include_graphics("figs/MCCSSEPlotCoskmeans25Iter.jpg")
+```
+
+
+Because of the behavior of distance metrics in high dimensional space, it is often easier (and always faster) to find clusters after reducing the dimensions of a dataset by one of the methods discussed in Chapter \@ref(dimred). Because the singular value decomposition generally works well for text data, we conduct this same experiment on the Medlars-Cranfield-CISI dataset using projections onto the first $r=8,12, \mbox{ and } 20$ singular vectors. Using the correct number of clusters $k^*=3$, the $k$-means algorithm is able to achieve the same accuracy of 98\% on each of these dimension reductions, indicating that the clustering information is by no means lost in the lower dimensional representations.  However, the SSE plots for these lower dimensional representations, shown in Figure \@ref(fig:MCCsvdSSE), do no better at clearly indicating an appropriate number of clusters. In fact, these graphs seem to flatten out at $k=r$.  Again, 25 trials of the $k$-means algorithm were run for each value of $k$ and the solution with the lowest SSE was chosen to represent that value of $k$ in the plots. 
+
+(ref:sseplotlab) SSE Plots for Medlars-Cranfield-CISI Clusterings using SVD Reduction to $r=\{8,12,20\}$ dimensions
+
+```{r label='MCCsvdSSE',fig.show="hold", fig.align='center', fig.cap = '(ref:sseplotlab)', echo=F, out.width="50%"}
+knitr::include_graphics( "figs/MCCsvd8SSEPlotCoskmeans25Iter.jpg")
+knitr::include_graphics("figs/MCCsvd12SSEPlotCoskmeans25Iter.jpg")
+knitr::include_graphics("figs/MCCsvd20SSEPlotCoskmeans25Iter.jpg")
+
+
+```
+
+### Ray and Turi's Method
+
+In [@rayturi], Ray and Turi suggested the use of their validity metric for determining the number of clusters. Unlike the SSE plots investigated previously, this method does not rely on the subjectivity of the user. Instead, the goal is simply to find the minimum value of their validity metric over the clusterings produced for various values of $k$. Recalling the definition from Chapter \@ref(validation) Section \@ref(rayturi), we have the validity of a clustering defined as
+\begin{equation}
+v=\frac{M_{intra}}{M_{inter}}
+(\#rayturivalidity)
+\end{equation}
+where
+\begin{eqnarray}
+M_{intra} &=& \frac{1}{n} \sum_{i=1}^{k} \sum_{\x in C_i} \| \x - \mean_i\|_2^2 \\
+M_{inter} &=&  \min_{1\leq i <j \leq k} \|\mean_i - \mean_j\|^2
+\end{eqnarray}
+and
+$\mean_i$ is the centroid of cluster $i$. In their original work in [@rayturi], the authors' goal was to cluster images. They noticed for these datasets that the minimum value for the validity metric frequently occurred for small numbers of clusters in the range of 2, 3, or 4 because of the large inter-cluster distances occurring when the number of clusters is small. This was undesirable in their application to image processing because the number of clusters was not expected to be small. To account for this fact, they proposed the following procedural adjustment for determining the number of clusters: 
+
+<ol>
+<li> Specify the maximum number of clusters to be considered, $k_{max}$.
+<li> For $k=2,\dots,k_{max}$ use $k$-means to cluster the data into $k$ clusters.
+<li> For each clustering $C(k)$ compute the validity metric, $v(k)$ from Equation \@ref(eq:rayturivalidity).
+<li> Locate the _first_ local maximum in the validity measure, $\tilde{k}$ such that
+$$v(\tilde{k}-1) < v(\tilde{k}) > v(\tilde{k}+1)$$
+<li> Choose the optimal number of clusters, $k^*$, to be the __modified minimum__ such that $\tilde{k} < k^* \leq k_{max}$ is the number which minimizes the validity measure _after_ the first local maximum.
+</ol>
+
+__Ray and Turi Plots for the Ruspini Data __ \
+
+We applied the above method to the 2-dimensional Ruspini data which was depicted in Figure \@ref(fig:ruspini). To avoid the type of poor clusterings that were displayed in Figure \@ref(fig:ruspinibadclusters), for each value of $k$, the $k$-means algorithm was run 25 times and the best solution (that is, the solution with the lowest objective function) was chosen to represent that value of $k$. Figure \@ref(fig:ruspinirayturi) shows the plot of Ray and Turi's validity metric computed on each solution. If one were to pick the global minimum from this set of clusterings, the optimal number of clusters would be $k^*=2$. However, according to the modified minimum favored in the original paper [@rayturi], the optimal number of clusters for the Ruspini data is $k^*=5$.  Neither of these solutions impose quite as obvious a clustering as the true number, 4.
+
+```{r label='ruspinirayturi', fig.align='center', fig.cap = 'Ray and Turi Validity Plot for Ruspini Data', echo=F, out.width="50%"}
+knitr::include_graphics("figs/ruspinirayturi.jpg")
+```
+
+__Ray and Turi Plots for Medlars-Cranfield-CISI__ \
+
+We can generate similar plots using the same clusterings found by spherical $k$-means that were used to generate the SSE plots in Figures \@ref(fig:MCCSSE) and \@ref(fig:MCCsvdSSE). Obviously, the plots of Ray and Turi's validity metric are far more definitive in their determination of $k^*$, although it is left to the user to determine whether to pick the _global minimum_ or _modified minimum_ [@rayturi]. 
+
+(ref:rayturicap) Ray \& Turi's Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to $r=\{8,12,20\}$ Dimensions Respectively.
+
+```{r label='MCCrayturi',fig.show="hold", fig.align='center', fig.cap = '(ref:rayturicap) ', echo=F, out.width="50%"}
+knitr::include_graphics("figs/MCCrayturi.jpg")
+knitr::include_graphics("figs/MCCrayturiSVD8.jpg")
+knitr::include_graphics("figs/MCCrayturiSVD12.jpg")
+knitr::include_graphics("figs/MCCrayturiSVD20.jpg")
+
+```
+
+The results from Figures \@ref(fig:ruspinirayturi) and \@ref(fig:MCCrayturi) are summarized in the following table, which shows the number of clusters that would be chosen if one were to pick the global minimum validity or the modified minimum validity along with the actual number of clusters.\
+
+<table>
+<tr>
+<td> Data Input <td>  Global Min <td>  Modified Min.<td>  Actual $k$ 
+<tr>
+<td>Medlars-Cranfield-CISI <td>  4 <td>  6 <td>  3 or 5  
+<tr>
+<td>Ruspini <td>  2<td>  5 <td>  4 
+</table>
+ <caption>(\#tab:mccrayturitable) Approximated Number of Clusters via Ray and Turi's Method  </caption>
+
+### The Gap Statistic
+
+The _gap statistic_ is an index devised by Tibshirani, Walther, and Hastie in 2000 that has received massive amounts of attention in the literature. This method is quite similar to the stopping methods previously discussed, only now the objective is to compare the cluster cohesion values with what is expected under some null reference distribution [@gapstat]. Supposing the $n$ data points $\x_1,\dots,\x_n$ are clustered in to $k$ clusters, $C_1,C_2,\dots,C_k$ and $|C_j|=n_j$ some measure of cohesion is defined as
+$$W_k = \sum_{j=1}^k \frac{1}{2n_j} \sum_{\x_p,\x_q \in \C_j} d(\x_p,\x_q)$$
+where $d(x,y)$ is a distance function. The idea is then to compare the graph of $\log(W_k), \,\,k=1,\dots,K$ to its expectation under some null reference distribution and to choose the value of $k, 1\leq k \leq K$ for which $\log(W_k)$ falls the farthest below its expectation. This distance between $\log(W_k)$ and its expectation under the reference distribution, denoted by $E^*$, is called the _gap_:
+$$\mbox{Gap}(k) = E^*(\log(W_k)) - \log(W_k).$$
+
+This expectation is estimated by drawing a Monte Carlo sample, $\X^*_1,\X^*_2,\dots,\X^*_B$ from the reference distribution. Each dataset in the sample is clustered, and the values of $\log(W^*_k), \,\,k=1,\dots,K$ are averaged over the samples. The sampling distribution of the gap statistic is controlled using the standard deviation, $sd_k$, of the B Monte Carlo replicates of $\log(W^*_k)$. Accounting for the simulation error in $E^*(\log(W_k))$ yields the standard error
+$$s_k = sd_k\sqrt{1+\frac{1}{B}} .$$
+
+Using the common "one standard error" rule, the number of clusters $k^*$ is chosen to be the smallest $k$ such that $$Gap(k)\geq Gap(k+1)-s_{k+1}.$$
+
+The authors in [@gapstat] suggest, both for simplicity and performance, using a uniform distribution as the null reference distribution. This process is summarized in Table \@ref(tab:gapstat).
+
+<table><tr><td>
+<ol>
+<li> Cluster the observed data in $X$ (which contains $n$ objects and $m$ features), varying the total number of clusters from $k=1,2,\dots K$, recording within dispersion measures (SSE function values) $W_k, \,\,k=1,2,\dots,K$.
+<li> Generate $B$ reference datasets, each with $n$ objects having $m$ reference features generated uniformly over the range of the observed values for the original features in $X$. Cluster each of the $B$ reference datasets, recording within dispersion measures (SSE function values) $W^*_{kb},\,\, b=1,2,\dots,B,\,\,k=1,2,\dots,K.$ Compute the estimated Gap statistic:
+$$Gap(k)=(1/B)\sum_b \log(W^*_{kb})-\log(W_k)$$
+<li> Let $\bar{\mathit{l}} = (1/B)\sum_b \log(W^*_{kb})$ and compute the standard deviation:
+$$sd_k = [(1/B)\sum_b \left(\log(W^*_{kb})-\bar{\mathit{l}} \right)^2]^{1/2}.$$
+Define $s_k = sd_k \sqrt{1+\frac{1}{B}}.$ Finally choose the number of clusters to be the smallest value of $k$ such that 
+$$Gap(k) \geq Gap(k+1) - s_{k+1}$$.
+</ol>
+</table>
+ <caption>(\#tab:gapstat) Computation of the Gap Statistic [@gapstat] </caption>
+
+In Figure \@ref(fig:ruspinigapstat) we provide the results from the gap statistic procedure on the ruspini data. Our Monte Carlo simulation involved $B=10$ generated datasets. The gap statistic indicates the presence of $k^*=4$ clusters.
+
+(ref:gapstatlab) Results for gap statistic procedure on Ruspini data. Observed vs. Expected values of $\log(W_k)$ (left) and Width of Gap (right).  The maximum gap occurs at $k^*=4$ clusters.
+
+```{r label='ruspinigapstat',fig.show="hold", fig.align='center', fig.cap = '(ref:gapstatlab) ', echo=F, out.width="50%"}
+knitr::include_graphics("figs/ruspiniobsexp.jpg")
+knitr::include_graphics("figs/ruspinigap.jpg")
+
+```
+
+
+## Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis) {#perroncluster}
+
+Another commonly used methodology for determining the number of clusters relies upon the examination of eigenvalues of a graph Laplacian. Keeping with our focus in Chapter \@ref(spectral) we consider only undirected graphs. The methodology contained herein is motivated by the following observation: suppose we had an undirected graph consisting of $k$ connected components (i.e. $k$ distinct components, none of which are connected to any other). The adjacency matrix of such a graph would be block diagonal with $k$ diagonal blocks $\A_1, \dots, \A_k$, and each diagonal block would itself be an adjacency matrix for one connected component.
+
+\begin{equation}
+\A = 
+\left[ 
+\begin{array}{ccccc}
+\A_1 & 0 & 0& \dots  & 0 \\
+0   & \A_2 & 0 & \dots & 0 \\
+0   & 0 & \A_3 & \ddots & 0 \\
+0 & 0& 0 & \ddots & \vdots  \\
+0 & 0 & 0 & \dots & \A_k 
+\end{array}
+\right] 
+(\#eq:componentA)
+\end{equation}
+
+Thus, the Laplacian matrix $\mathbf{L}=\mathbf{D}-\A$ would also be block diagonal and each diagonal block would be the Laplacian matrix for one component of the graph.
+
+\begin{equation}
+\mathbf{L} = 
+\left[ 
+\begin{array}{ccccc}
+\mathbf{L}_1 & 0 & 0& \dots  & 0 \\
+0   & \mathbf{L}_2 & 0 & \dots & 0 \\
+0   & 0 & \mathbf{L}_3 & \ddots & 0 \\
+0 & 0& 0 & \ddots & \vdots  \\
+0 & 0 & 0 & \dots & \mathbf{L}_k 
+\end{array}
+\right]
+\hspace{.5cm}
+\mbox{ with } \mathbf{L}_i \e = \mathbf{0} \mbox{ for } i=1,\dots, k
+(\#eq:componentlaplacian)
+\end{equation}
+
+Thus, if each component is connected, the multiplicity of the smallest eigenvalue, $\lambda_1 = 0$, will count the number of diagonal blocks and thus the number of components. Of course the situation depicted in Equation \@ref(eq:componentlaplacian) is ideal and unlikely to be encountered in practice. However when the graph is _nearly_ decomposable into disconnected components, continuity of the eigenvalues suggests that one may be able to count the number of tightly connected components by counting the number of eigenvalues _near_ $\lambda_1 =0$. In order to be able to characterize eigenvalues as being _near_ $\lambda_1 =0$, it is necessary to transform (normalize) the Laplacian matrix so that its spectrum is contained in the interval $[0,1]$. This type of analysis is usually done using one of the two _normalized Laplacian matrices_ discussed in Chapter \@ref(spectral) and defined again here.
+<ol>
+<li> __The random-walk Laplacian__ $$\mathbf{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I}-\mathbf{D}^{-1}\mathbf{A} = \mathbf{I}-\mathbf{P}$$
+<li> __The symmetric Laplacian__ $$\mathbf{L}_{sym} = \mathbf{D}^{-1/2}\mathbf{L}\mathbf{D}^{-1/2}=\mathbf{I}-\mathbf{D}^{-1/2}\mathbf{A}\mathbf{D}^{-1/2}.$$
+</ol>
+
+The normalized Laplacians, like the Laplacian matrix itself, are both positive definite. Furthermore, $\mathbf{L}_{rw}$ and $\mathbf{L}_{sym}$ have the same spectrum.   The following well-known and easily verified fact characterizes the relationship between the eigenvalues and eigenvectors of these two matrices [@chung].
+
+(ref:thmcap1) Eigenvalues of $\mathbf{L}_{sym}$ and $\mathbf{L}_{rw}$
+
+:::{.theorem name='(ref:thmcap1)'}
+$\lambda$ is an eigenvalue of $\mathbf{L}_{rw}$ with eigenvector $\mathbf{v}$ if and only if $\lambda$ is an eigenvalue of $\mathbf{L}_{sym}$ with eigenvector $\mathbf{w}=\mathbf{D}^{1/2}\mathbf{v}$.
+:::
+
+In light of this fact, we will limit our discussion to the properties of the transition probability matrix of a random walk on the graph associated with the adjacency matrix $\A$, denoted
+ $$\mathbf{P}=\mathbf{D}^{-1} \A = \mathbf{I}-\mathbf{L}_{rw},$$  
+ since $$\lambda \in \sigma(\mathbf{P}) \quad \Rightarrow \quad (1-\lambda) \in \sigma(\mathbf{L}_{rw}).$$
+ Random walks on undirected graphs are _reversible Markov chains_, which satisfy the so-called _detailed balance equations_  [@kemenysnell;@stewart]:
+$$\mathbf{Q}\mathbf{P}=\mathbf{P}^T \mathbf{Q} \hspace{.2cm} \mbox{ where  } \mathbf{Q}=diag(\mathbf{\pi}).$$
+The stationary distribution for $\mathbf{P}$ given by  $\mathbf{\pi}^T= \frac{\e^T\mathbf{D}}{\e^T\mathbf{D}\e}$.
+
+We assume the underlying graph (which we aim to partition) is connected so that the matrix $\mathbf{P}$ is irreducible. If the graph is composed of connected components, like the one associated with Equation \@ref(eq:componentA), the resulting random walk is equivalently referred to as _completely reducible, uncoupled, or completely decomposable_ and there simple efficient algorithms available to identify the connected components [@concomp]. 
+
+ In our connected graph, we assume that there exists some cluster or community structure, i.e. that there are $k$ groups of vertices, $C_1,C_2, \dots, C_k$ with $|C_k|=n_k$, for which edges exist more frequently and with higher weight within each group than between each group. With this assumption, we can reorder the rows and columns of the transition probability matrix $\mathbf{P}$ according to group membership so that the result is _block-diagonally dominant_. By this we essentially mean that $\mathbf{P}$ is a perturbation of a block-diagonal matrix $\mathbf{B}$, such that
+
+\begin{equation}
+\mathbf{P}=\mathbf{B}+\mathbf{E} = \left[ 
+\begin{array}{ccccc}
+\mathbf{B}_{11} & \mathbf{E}_{12} & \mathbf{E}_{13}& \dots  & \mathbf{E}_{1k} \\
+\mathbf{E}_{21}   & \mathbf{B}_{22} & \mathbf{E}_{23} & \dots & \mathbf{E}_{2k} \\
+\mathbf{E}_{31}   & \mathbf{E}_{32} & \mathbf{B}_{33} & \ddots & \mathbf{E}_{3k} \\
+\vdots& \vdots& \vdots & \ddots & \vdots  \\
+\mathbf{E}_{k1} & \mathbf{E}_{k2}& \mathbf{E}_{k3} & \dots & \mathbf{B}_{kk}
+\end{array}
+\right]
+ (\#eq:bdd)
+ \end{equation}
+ where the off-diagonal blocks, $\mathbf{E}_{ij}$, are much smaller in magnitude than the the diagonal blocks. In fact, the entries in the off-diagonal blocks are small enough that the diagonal blocks are _nearly stochastic_, i.e. $\mathbf{B}_{ii} \e \approx 1$ for $i=1,2,\dots,k$.  A transition probability matrix taking this form describes a __nearly uncoupled__ or __nearly completely reducible__ Markov Chain.
+ 
+The degree to which a matrix is considered nearly uncoupled is dependent on one's criteria for measuring the level of _coupling_ (interconnection) between the _aggregates_ (clusters of states) of the Markov chain [@fischer;@meyernumc;@chuckthesis]. In [@meyernumc], the _deviation from complete reducibility_ is defined as follows:
+<!-- %  -->
+<!-- % \begin{definition}[Uncoupling Measure] -->
+<!-- % Let $n_1$ and $n_2$ be fixed positive integers such that $n_1+n_2=n$, and let $\mathbf{P}$ be an $n\times n$ irreducible stochastic matrix, whose respective rows and columns have been rearranged to the form -->
+<!-- % $$\mathbf{P}=\left[ \begin{array}{cc} -->
+<!-- % \mathbf{P}_{11} & \mathbf{P}_{12} \\ -->
+<!-- % \mathbf{P}{21} & \mathbf{P}_{22} \end{array} \right]$$ -->
+<!-- % where $\mathbf{P}_{11}$ is $n_1 \times n_1$ and $\mathbf{P}_{22}$ is $n_2 \times n_2$ so that the ratio -->
+<!-- % $$\sigma(\mathbf{P},n_1) = \frac{ \e^T \mathbf{P}_{12} \e + \e^T \mathbf{P}_{21} \e}{\e^T\mathbf{P}\e}$$ is minimized over all symmetric permutations of $\mathbf{P}$. The quantity $\sigma(\mathbf{P},n_1)$ is called the \textbf{uncoupling measure} of $\mathbf{P}$ with respect to the parameter $n_1$, defined as the ratio of the sum of the entries in the off-diagonal blocks to the sum  of all the entries in the matrix. -->
+<!-- % \end{definition} -->
+ 
+:::{.definition name='Deviation from Complete Reducibility'}
+For an $m\times n$ irreducible stochastic matrix with a $k$-level partition
+ $$\mathbf{P} = \left[ 
+\begin{array}{ccccc}
+\mathbf{P}_{11} & \mathbf{P}_{12} & \mathbf{P}_{13}& \dots  & \mathbf{P}_{1k} \\
+\mathbf{P}_{21}   & \mathbf{P}_{22} & \mathbf{P}_{23} & \dots & \mathbf{P}_{2k} \\
+\mathbf{P}_{31}   & \mathbf{P}_{32} & \mathbf{P}_{33} & \ddots & \mathbf{P}_{3k} \\
+\vdots& \vdots& \vdots & \ddots & \vdots  \\
+\mathbf{P}_{k1} & \mathbf{P}_{k2}& \mathbf{P}_{k3} & \dots & \mathbf{P}_{kk}
+\end{array}
+\right]$$
+ the number $$\delta=2\max_{i} \|\mathbf{P}_{i*}\|_{\infty}$$ is called the __deviation from complete reducibility.__ 
+
+:::
+  
+It is important to point out that the parameter $\delta$, or any other parameter that measures the level of coupling between clusters in a graph (like those suggested in [@fischer;@chuckthesis;@meyerharfield]) cannot be computed without knowing a priori the clusters in the graph. Such parameters are merely tools for the perturbation analysis, used to prove the next theorem regarding the spectrum of block-diagonally dominant stochastic matrices [@fischer; @kato; @chuck; @meyernumc; @meyerharfield; @perroncluster; @stewartnumc].
+
+(ref:bddsm) The Spectrum of a Block-Diagonally Dominant Stochastic Matrix
+
+:::{.theorem name='(ref:bddsm)' #bddsm} 
+For sufficiently small $\delta \neq 0$, the eigenvalues of $\mathbf{P}(\delta)$ are continuous in $\delta$, and can be divided into 3 parts [@fischer; @meyernumc; @perroncluster; @chuck]:
+<ol>
+<li> The Perron root, $\lambda_1(\delta)=1$,
+<li> a cluster of $k-1$ eigenvalues $\lambda_2(\delta),\lambda_3(\delta),\dots,\lambda_k(\delta)$ that approach 1 as $\delta \to 0$, and
+<li> the remaining eigenvalues, which are bounded away from 1 as $\delta \to 0$.
+</ol>
+So there.
+:::
+
+
+<!-- %Before we discuss the notion of coupling and the parameter $\epsilon$,  -->
+<!-- %  -->
+<!-- % Let $\mathbf{P}(\epsilon)$ be a family of matrices having the form in Equation \@ref(eq:bdd} and define $\epsilon^*$ such that $\mathbf{P}(\epsilon^*)=\mathbf{P}$. In order to continue such perturbation analysis, the following assumptions are adopted from [@fischer} as needed to implement Theorem 6.1 from [@kato}.  -->
+<!-- %  -->
+<!-- % \begin{itemize} -->
+<!-- % \item[] \textbf{Assumptions} -->
+<!-- % \item[1.] Let $\mathbf{P}(\epsilon) = \mathbf{P}(0) + \epsilon \mathbf{P}^{(1)} + \epsilon^2\mathbf{P}^{(2)} + \dots$ be a family of matrices that are analytic in a domain containing the origin. -->
+<!-- % \item[2.] Let $\mathbf{P}(\epsilon)$ be stochastic and reversible for all $\epsilon$, and primitive for all $\epsilon \neq 0$. -->
+<!-- % \item[3.] For $\epsilon = 0$, let $\mathbf{P}(0)$ be block-diagonal with primitive diagonal blocks. -->
+<!-- % \end{itemize}  -->
+<!-- %  -->
+
+ 
+The cluster of $k$ eigenvalues surrounding and including the Perron root $\lambda_1=1$ is known as the __Perron cluster__ [@chuck,@fischer,@perroncluster]. The analysis in [@chuck] explains that if there is no further decomposition (or meaningful sub-clustering) of the diagonal blocks, a relatively large gap between the eigenvalues $\lambda_k$ and $\lambda_{k+1}$ is expected. Thus, we can determine the number of clusters in the state space of a nearly uncoupled Markov chain (i.e. the number of clusters in a graph) by counting the number of eigenvalues in this Perron Cluster. 
+
+This method is extremely effective when the graph to be partitioned is sufficiently close to being uncoupled. Problems arise when either high levels of coupling (intercluster linkage) are in play or when some vertices within a cluster are weakly connected to that cluster (for example, _dangling nodes_ - vertices with degree 1).
+
+The examples in Figure \@ref(fig:perronex) illustrate this point. Firts we show a synthetic example of a graph exhibiting cluster structure and the eigenvalues of the associated transition probability matrix respectively.  The thickness of the edges in the graph correspond to their respective weights. Because there is a limited amount of coupling (intercluster connection) in this first example, the Perron cluster of eigenvalues is easy to identify. Because there are 3 eigenvalues near 1, the user would conclude that the graph has 3 clusters. 
+
+ Occasionally a user can get a sense of the cluster structure in a graph with an appropriate layout of the nodes and edges. Force-directed graph drawing algorithms are common in this practice. The basic idea behind these algorithms is to model the edges as springs connecting the nodes and then to somehow minimize the total amount of tension in the system. Thus, densely connected groups of nodes are placed proximal to each other and the edges which loosely connect these groups are stretched. The graph drawings in Figure \@ref(fig:perronex) are all examples of force-directed layouts. Graph drawing algorithms are beyond the scope of this paper, but for information the interested reader should see, for example, [@graphdrawing1,@graphdrawing2]. 
+
+The second two rows of Figure \@ref(fig:perronex) display a real-world example using the hyperlink graph between a sample of 1222 American political blogs. Based upon the force-directed drawing of the graph, it is clear that there are 2 large communities or clusters in this graph. These clusters correspond to the liberal and conservative division of American politics. The Perron cluster is not easily identified on the eigenvalue plot in Figure \@ref(fig:perronex), and thus no conclusion should be drawn regarding the number of clusters in this data. However, after removing a large number of dangling nodes from the graph, or blogs which link only to a single neighboring page in the sampled population, a different picture comes to light. In the final row of Figure \@ref(fig:perronex) we illustrate the effect of removing these dangling nodes (about 200 in total) on the eigenvalues of the transition probability matrix. Luckily, for this particular graph, removing the dangling nodes did not create more, a situation that is not guaranteed in general. The third eigenvalue in the Perron cluster likely identifies the small group of 3 blogs that is now visible in the force directed drawing of the graph. Such small clusters are generally undesirable in graph partitioning, and since the eigenvalues tell the user nothing about the size or composition of the graph communities counted by the eigenvalues in the Perron cluster, this method must be used with caution! 
+
+```{r label='perronex',fig.show="hold", fig.align='center', fig.cap = 'Some Examples of Perron Cluster Identification on various Network Datasets', echo=F, out.width="50%"}
+knitr::include_graphics("figs/numcGraphex.jpg")
+knitr::include_graphics("figs/numcEigsex1.jpg")
+knitr::include_graphics("figs/agblog.jpg")
+knitr::include_graphics("figs/agblogEigs.jpg")
+knitr::include_graphics("figs/AGnoDangle.jpg")
+knitr::include_graphics("figs/AGnoDangleEigs.jpg")
+
+```
+
+ In the next Chapter, we will introduce a similarity matrix that is well suited for this Perron-cluster analysis. Our method has the ability of estimating the number of clusters in very noisy and high-dimensional data when other methods fail.

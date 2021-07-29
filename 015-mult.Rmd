@@ -115,7 +115,7 @@ Linear combinations are quite simple to understand. Once the equation is written
 :::{.example name='Linear Combination' #lincomb}
 The simplest linear combination might involve columns of the identity matrix:
 $$\pm 3 \\ -2\\4 \mp = 3\pm 1\\0\\0 \mp -2 \pm 0\\1\\0 \mp +4 \pm 0\\0\\1 \mp$$
-We can easily picture this linear combination as a ``breakdown into parts'' where the parts give directions along the 3 coordinate axis with which we are all familiar.
+We can easily picture this linear combination as a "breakdown into parts where the parts give directions along the 3 coordinate axis with which we are all familiar.
 :::
 
 
@@ -139,6 +139,7 @@ We'll begin by defining the multiplication of a row vector times a column vector
 $$\x=\pm x_1\\x_2\\\vdots\\ x_n\mp$$
 then we can automatically assume that $\x^T$ is a row vector:
 $$\x^T = \pm x_1&x_2&\dots&x_n\mp.$$
+
 :::{.definition name='Inner Product' #innerproddef}
 The **inner product** of two vectors, $\x$ and $\y$, written $\x^T\y$, is defined as the sum of the product of corresponding elements in $\x$ and $\y$:
 
@@ -206,10 +207,10 @@ Let $$\A=\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp \quad \mbox{and} \quad \B=\pm  0 & -2 
 
 When we first get started with matrix multiplication, we often follow a few simple steps:
 
-1. Write down the matrices and their dimensions. Make sure the ``inside'' dimensions match - those corresponding to the columns of the first matrix and the rows of the second matrix:
+1. Write down the matrices and their dimensions. Make sure the "inside" dimensions match - those corresponding to the columns of the first matrix and the rows of the second matrix:
 $$\underset{(3\times \red{2})}{\A} \underset{(\red{2} \times 2)}{\B}$$
 If these dimensions match, then we can multiply the matrices. If they don't, we stop right there - multiplication is not possible.
-2. Now, look at the ``outer'' dimensions - this will tell you the size of the resulting matrix.
+2. Now, look at the "outer" dimensions - this will tell you the size of the resulting matrix.
 $$\underset{(\blue{3}\times 2)}{\A} \underset{(2\times \blue{2})}{\B}$$
 So the product $\A\B$ is a $3\times 2$ matrix.
 3. Finally, we compute the product of the matrices by multiplying each row of $\A$ by each column of $\B$ using inner products. The element in the first row and first column of the product (written $(\A\B)_{11}$) will be the inner product of the first row of $\A$ and the first column of $\B$. Then, $(\A\B)_{12}$ will be the inner product of the first row of $\A$ and the second column of $\B$, etc.
@@ -389,6 +390,7 @@ All scalars have an inverse with the exception of 0. For matrices, the idea of a
 
 
 (ref:canceltitle) Don't Cancel That!!
+
 :::{.example name='(ref:canceltitle)' #dontcancel}
 We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
 $$\A\x=\lambda\x$$
@@ -401,7 +403,7 @@ Note that, while this equation made sense to begin with, after erroneously cance
 
 ## Exercises
 <ol>
-<li> On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b ``tail-to-head''.
+<li> On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b "tail-to-head".
 <li> Use the following vectors to answer the questions:
 $$
 \v=\pm 6\\-1\mp \quad \bo{u}=\pm -2\\1\mp \quad \x=\pm 4\\2\\1\mp \quad \y=\pm-1\\-2\\-3\mp \quad \e=\pm 1\\1\\1\mp

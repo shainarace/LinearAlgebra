@@ -4,25 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 R Programming Basics | bookdownproj.utf8</title>
-  <meta name="description" content="" />
+  <title>Chapter 4 R Programming Basics | Linear Algebra for Data Science</title>
+  <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 R Programming Basics | bookdownproj.utf8" />
+  <meta property="og:title" content="Chapter 4 R Programming Basics | Linear Algebra for Data Science" />
   <meta property="og:type" content="book" />
   
   
-  
-  
+  <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="github-repo" content="rstudio/linalg-master" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 R Programming Basics | bookdownproj.utf8" />
+  <meta name="twitter:title" content="Chapter 4 R Programming Basics | Linear Algebra for Data Science" />
   
-  
+  <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
   
 
+<meta name="author" content="Shaina Race Bennett, PhD" />
 
 
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -249,6 +251,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -341,71 +365,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
 <li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>10</b> Eigenvalues and Eigenvectors</a>
+<li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>10.1</b> Diagonalization</a></li>
-<li class="chapter" data-level="10.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>10.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
-<li class="chapter" data-level="10.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>10.3</b> Exercises</a></li>
+<li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>11</b> Least Squares</a>
+<li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>11.1</b> Introducing Error</a></li>
-<li class="chapter" data-level="11.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>11.2</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>12</b> Applications of Least Squares</a>
+<li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>12.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="12.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>12.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="12.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>12.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>12.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="12.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>12.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
 <li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.3</b> PCA in R</a></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.4</b> Variable Clustering with PCA</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="pca-in-r.html"><a href="pca-in-r.html"><i class="fa fa-check"></i><b>14</b> PCA in R</a>
+<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pca-in-r.html"><a href="pca-in-r.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>14.1</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>15</b> Applications of Principal Components</a>
+<li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>15.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="15.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.2</b> Exploratory Analysis</a></li>
-<li class="chapter" data-level="15.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>15.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="15.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>15.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="15.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>15.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="15.2" data-path="svd.html"><a href="svd.html#data-compression"><i class="fa fa-check"></i><b>15.2</b> Data Compression</a></li>
+<li class="chapter" data-level="15.3" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>15.3</b> Noise Reduction</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>16</b> The Singular Value Decomposition (SVD)</a>
+<li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>16.1</b> Resolving a Matrix into Components</a></li>
-<li class="chapter" data-level="16.2" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>16.2</b> Noise Reduction</a></li>
-<li class="chapter" data-level="16.3" data-path="svd.html"><a href="svd.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.3</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="applications-of-svd.html"><a href="applications-of-svd.html"><i class="fa fa-check"></i><b>17</b> Applications of SVD</a>
+<li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="applications-of-svd.html"><a href="applications-of-svd.html#latent-semantic-indexing-1"><i class="fa fa-check"></i><b>17.1</b> Latent Semantic Indexing</a></li>
-<li class="chapter" data-level="17.2" data-path="applications-of-svd.html"><a href="applications-of-svd.html#rappasvd"><i class="fa fa-check"></i><b>17.2</b> Image Compression</a></li>
+<li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
+<li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
+<li class="chapter" data-level="18" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>18.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="18.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>18.2</b> Determining Factorability</a></li>
-<li class="chapter" data-level="18.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>18.3</b> Communalities</a></li>
-<li class="chapter" data-level="18.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>18.4</b> Number of Factors</a></li>
-<li class="chapter" data-level="18.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>18.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="18.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>18.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="18.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>18.2</b> Ex: Personality Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>19</b> Factor Analysis</a>
+<li class="chapter" data-level="19" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>19</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>19.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="19.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>19.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="19.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>19.1</b> Multidimensional Scaling</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>20</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="20" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>20</b> Social Network Analysis</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>20.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="20.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>20.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="20.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>20.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>21</b> Social Network Analysis</a>
+<li class="part"><span><b>I Clustering</b></span></li>
+<li class="chapter" data-level="21" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>21</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>21.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="21.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>21.2</b> Network Visualization - <code>igraph</code> package</a></li>
+<li class="chapter" data-level="21.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>21.1</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="21.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>21.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="21.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>21.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="21.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>21.4</b> History of Data Clustering</a></li>
 </ul></li>
+<li class="chapter" data-level="22" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>22.1</b> Hierarchical Algorithms</a></li>
+<li class="chapter" data-level="22.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>22.2</b> Iterative Partitional Algorithms</a></li>
+<li class="chapter" data-level="22.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>22.3</b> Density Search Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a></li>
+<li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>25</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>25.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="25.2" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>25.2</b> Stochastic Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>26</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -418,7 +471,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Algebra for Data Science</a>
           </h1>
         </div>
 
@@ -443,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1,]    1    2
 ## [2,]    3    4</code></pre>
 <ul>
-<li>The standard multiplication symbol, ‘*’, will unfortunately provide unexpected results if you are looking for matrix multiplication. ‘*’ will multiply matrices <em>elementwise</em>. In order to do matrix multiplication, the function is ‘%*%’.</li>
+<li>The standard multiplication symbol, ‘*,’ will unfortunately provide unexpected results if you are looking for matrix multiplication. ‘*’ will multiply matrices <em>elementwise</em>. In order to do matrix multiplication, the function is ‘%*%.’</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-programming-basics.html#cb5-1" aria-hidden="true" tabindex="-1"></a>X<span class="sc">*</span>X</span></code></pre></div>
 <pre><code>##      [,1] [,2]
@@ -483,23 +536,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-programming-basics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by generating random ~N(0,1) data:</span></span>
 <span id="cb17-2"><a href="r-programming-basics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb17-3"><a href="r-programming-basics.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1] -0.9011749 -0.3776629</code></pre>
+<pre><code>## [1] -0.01392856  0.13595323</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="r-programming-basics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Why aren&#39;t the means close to zero?)</span></span>
 <span id="cb19-2"><a href="r-programming-basics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
 <span id="cb19-3"><a href="r-programming-basics.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1] 0.13996663 0.03067533</code></pre>
+<pre><code>## [1] -0.08625366  0.12522390</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-programming-basics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LawOfLargeNumbers.</span></span>
 <span id="cb21-2"><a href="r-programming-basics.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="r-programming-basics.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A,<span class="dv">2</span>,sd)</span></code></pre></div>
-<pre><code>## [1] 0.9954119 0.9387569</code></pre>
+<pre><code>## [1] 1.0382383 0.9907353</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-programming-basics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To apply a &quot;homemade function&quot; you must create it as a function</span></span>
 <span id="cb23-2"><a href="r-programming-basics.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we apply a sum of squares function for the first 5 rows of A:</span></span>
 <span id="cb23-3"><a href="r-programming-basics.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ],<span class="dv">1</span>,<span class="cf">function</span>(x) x<span class="sc">%*%</span>x)</span></code></pre></div>
-<pre><code>## [1] 3.1443126 1.8597378 0.8264218 0.9880293 1.8880833</code></pre>
+<pre><code>## [1] 2.56449932 9.77864058 1.02898127 0.00953819 1.75206388</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-programming-basics.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we center the data by subtracting the mean vector:</span></span>
 <span id="cb25-2"><a href="r-programming-basics.html#cb25-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">=</span><span class="fu">apply</span>(A,<span class="dv">2</span>,<span class="cf">function</span>(x) x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
 <span id="cb25-3"><a href="r-programming-basics.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B)</span></code></pre></div>
-<pre><code>## [1] -1.249001e-17 -1.547373e-17</code></pre>
+<pre><code>## [1] -9.159340e-18  1.082467e-17</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-programming-basics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R doesn&#39;t tell you when things are zero to machine precision. &quot;Machine zero&quot; in</span></span>
 <span id="cb27-2"><a href="r-programming-basics.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R is given by the internal variable .Machine$double.eps</span></span>
 <span id="cb27-3"><a href="r-programming-basics.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B) <span class="sc">&lt;</span> .Machine<span class="sc">$</span>double.eps</span></code></pre></div>
@@ -521,12 +574,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-2"><a href="r-programming-basics.html#cb33-2" aria-hidden="true" tabindex="-1"></a>ncols<span class="ot">=</span><span class="fu">dim</span>(A)[<span class="dv">2</span>]</span>
 <span id="cb33-3"><a href="r-programming-basics.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(A)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;This&quot;</span>,<span class="st">&quot;That&quot;</span>)</span>
 <span id="cb33-4"><a href="r-programming-basics.html#cb33-4" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
-<pre><code>##            This       That
-## [1,]  1.0609291  1.4208244
-## [2,] -1.2721012  0.4914228
-## [3,] -0.8909797 -0.1804908
-## [4,]  0.7369920 -0.6669873
-## [5,]  0.4975269  1.2808397</code></pre>
+<pre><code>##             This       That
+## [1,] -1.39547470 0.78558874
+## [2,] -2.19726233 2.22501210
+## [3,]  0.53597832 0.86122500
+## [4,] -0.07215351 0.06581839
+## [5,] -0.90637660 0.96464778</code></pre>
 <ul>
 <li>Most arithmetic functions you apply to a vector act elementwise. In R, <span class="math inline">\(\x^2\)</span> will be a vector containing the square of the elements in <span class="math inline">\(\x\)</span>. You can add a column to a matrix (or a data frame) by using the <code>cbind()</code> function.</li>
 </ul>

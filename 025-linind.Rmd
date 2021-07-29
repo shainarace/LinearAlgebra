@@ -24,6 +24,7 @@ Another way to express linear dependence is to say that we can write one of the 
 $$\alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}$$
 then for $\alpha_j \neq 0$ we could write
 $$\v_j=-\frac{1}{\alpha_j} \sum_{\substack{i=1\\i \neq j}}^n \alpha_i \v_i$$
+
 :::{.example name='Linearly Dependent Vectors' #lindep}
 The vectors $\v_1 =\pm 1\\2\\2 \mp, \v_2 = \pm 1\\2\\3 \mp, \mbox{  and  } \v_3 = \pm 3\\6\\7 \mp$ are linearly dependent because 
 $$\v_3 = 2\v_1+\v_2$$
@@ -83,7 +84,7 @@ knitr::include_graphics("figs/span.png")
 
 
 :::{.definition name='Subspace' #subspacedef}
-A **subspace**, $\mathcal{S}$ of $\Re^n$ is thought of as a ``flat''  (having no curvature) surface within $\Re^n$. It is a collection of vectors which satisfies the following conditions:
+A **subspace**, $\mathcal{S}$ of $\Re^n$ is thought of as a "flat"  (having no curvature) surface within $\Re^n$. It is a collection of vectors which satisfies the following conditions:
 
 1. The origin ($\bo{0}$ vector) is contained in $\mathcal{S}$
 2. If $\x$ and $\y$ are in $\mathcal{S}$ then the sum $\x+\y$ is also in $\mathcal{S}$

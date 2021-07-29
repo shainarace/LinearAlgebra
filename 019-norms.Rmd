@@ -1,4 +1,4 @@
-# Norms, Inner Products and Orthogonality {#norms}
+# Norms, Similarity, and Distance  {#norms}
 
 ## Norms and Distances {#sec-norms}
 
@@ -6,17 +6,18 @@ In applied mathematics, Norms are functions which measure the magnitude or lengt
 
 :::{.definition name='Vector Norms and Distance Metrics' #normdef}
 A Norm, or distance metric, is a function that takes a vector as input and returns a scalar quantity ($f: \Re^n \to \Re$). A vector norm is typically denoted by two vertical bars surrounding the input vector, $\|\bo{x}\|$, to signify that it is not just any function, but one that satisfies the following criteria:
-<ol>
-<li>  If $c$ is a scalar, then $$\|c\x\|=|c|\|x\|$$
-<li> The triangle inequality: $$\|\x+\bo{y}\| \leq \|\x\|+\|\bo{y}\|$$
-<li> $\|\x\|=0$ if and only if $\x=0$.
-<li> $\|\x\|\geq 0$ for any vector $\x$
-</ol>
+
+1.  If $c$ is a scalar, then $$\|c\x\|=|c|\|x\|$$\
+2. The triangle inequality: $$\|\x+\bo{y}\| \leq \|\x\|+\|\bo{y}\|$$\
+3. $\|\x\|=0$ if and only if $\x=0$.\
+4. $\|\x\|\geq 0$ for any vector $\x$\
+
 :::
 
 We will not spend any time on these axioms or on the theoretical aspects of norms, but we will put a couple of these functions to good use in our studies, the first of which is the __Euclidean norm__ or __2-norm__.
 
 (ref:norm2title) Euclidean Norm, $\|\star\|_2$
+
 :::{.definition name='(ref:norm2title)' #twonormdef}
 The __Euclidean Norm__, also known as the __2-norm__ simply measures the Euclidean length of a vector (i.e. a point's distance from the origin). Let $\x = (x_1,x_2,\dots,x_n)$. Then,
 $$\|\x\|_2 = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2} $$
@@ -66,6 +67,7 @@ In fact, any situation where the phrase "sum of squares" is encountered, the $2$
 :::
 
 (ref:rsquaredtitle) Coefficient of Determination, $R^2$
+
 :::{.example name='(ref:rsquaredtitle)' #rsquared}
 Since variance can be expressed using the Euclidean norm, so can the __coefficient of determination__ or $R^2$. 
 $$R^2 = \frac{SS_{reg}}{SS_{tot}}= \frac{\sum_{i=1}^n (\hat{y_i}-\bar{y})^2}{\sum_{i=1}^n (y_i-\bar{y})^2} = \frac{\|\hat{\y}-\bar{\y}\|^2}{\|\y-\bar{\y}\|^2}$$
@@ -187,6 +189,7 @@ This angular distance is at the heart of __Pearson's correlation coefficient__.
 Pearson's correlation is a normalized version of the covariance, so that not only the _sign_ of the coefficient is meaningful, but its _magnitude_ is meaningful in measuring the strength of the linear association.
 
 (ref:cosinecorrtitle) Pearson's Correlation and Cosine Distance
+
 :::{.example name='(ref:cosinecorrtitle)' #cosinecorr}
 You may recall the formula for Pearson's correlation between variable $\x$ and $\y$ with a sample size of $n$ to be as follows:
 $$r = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}$$

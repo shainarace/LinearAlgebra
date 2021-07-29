@@ -91,7 +91,7 @@ When we expand our minds to the possibilities associated with matrix-matrix prod
 
 For example, let's consider a $2\times 2$ example, $$\A\X=\B$$ where $$\A=\pm 2&3\\1&4 \mp \qquad \X=\pm x_{11} & x_{12} \\x_{21} & x_{22} \mp \qquad \B=\pm 7 & 6 \\ 5& 9 \mp$$
 
-Let's take a look at what the simple equation $\A\X=\B$ is really saying in terms of all the matrix values that we have. All we have to do is write out the multiplication ``the long way''. For example, to get the element in the first row and first column of $\B$ (in this case, 7) we would compute the inner product of the first row of $\A$ with the first column of $\X$:
+Let's take a look at what the simple equation $\A\X=\B$ is really saying in terms of all the matrix values that we have. All we have to do is write out the multiplication "the long way". For example, to get the element in the first row and first column of $\B$ (in this case, 7) we would compute the inner product of the first row of $\A$ with the first column of $\X$:
 
 $$\pm 2 & 3 \mp \pm x_{11} \\ x_{21} \mp = \red{2x_{11}+3x_{21} = 7}$$
 

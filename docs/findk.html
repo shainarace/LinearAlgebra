@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 24 Determining the Number of Clusters \(k\) | Linear Algebra for Data Science</title>
+  <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 24 Determining the Number of Clusters \(k\) | Linear Algebra for Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="github-repo" content="rstudio/linalg-master" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 24 Determining the Number of Clusters \(k\) | Linear Algebra for Data Science" />
+  
+  <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-07-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="validation.html"/>
+<link rel="next" href="chap1-5.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+  }
+});
+</script>
+
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>1.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>1.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>2.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>2.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>2.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="3.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>4</b> R Programming Basics</a></li>
+<li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>12.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>12.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="12.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>12.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.3</b> PCA in R</a></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.4</b> Variable Clustering with PCA</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>15.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="15.2" data-path="svd.html"><a href="svd.html#data-compression"><i class="fa fa-check"></i><b>15.2</b> Data Compression</a></li>
+<li class="chapter" data-level="15.3" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>15.3</b> Noise Reduction</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
+<li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>18.1</b> PCA Rotations</a></li>
+<li class="chapter" data-level="18.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>18.2</b> Ex: Personality Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>19</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>19.1</b> Multidimensional Scaling</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>20</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>20.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="20.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>20.2</b> Network Visualization - <code>igraph</code> package</a></li>
+</ul></li>
+<li class="part"><span><b>I Clustering</b></span></li>
+<li class="chapter" data-level="21" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>21</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>21.1</b> Mathematical Setup</a></li>
+<li class="chapter" data-level="21.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>21.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="21.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>21.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="21.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>21.4</b> History of Data Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>22.1</b> Hierarchical Algorithms</a></li>
+<li class="chapter" data-level="22.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>22.2</b> Iterative Partitional Algorithms</a></li>
+<li class="chapter" data-level="22.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>22.3</b> Density Search Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a></li>
+<li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>25</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>25.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="25.2" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>25.2</b> Stochastic Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>26</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Algebra for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="findk" class="section level1" number="24">
+<h1><span class="header-section-number">Chapter 24</span> Determining the Number of Clusters <span class="math inline">\(k\)</span></h1>
+<p>As previously discussed, one of the major dilemmas faced when using the clustering algorithms from Chapters <a href="#chap1"><strong>??</strong></a> and <a href="chap1-5.html#spectral">25.1</a> is that these algorithms take the number of clusters, <span class="math inline">\(k\)</span>, as input. Therefore, it is necessary to somehow determine a reasonable estimate for the number of clusters present. Many methods have been proposed for this task, for a more in-depth summary we suggest the 1999 book by Gordon <span class="citation"><a href="#ref-gordon" role="doc-biblioref">[4]</a></span> or the 1985 paper by Milligan and Cooper <span class="citation"><a href="#ref-milligan" role="doc-biblioref">[13]</a></span>. The purpose of this chapter is to survey some established methodologies for this task, and to motivate our novel method discussed in Chapter <a href="#consensus"><strong>??</strong></a>.</p>
+<div id="methods-based-on-cluster-validity-stopping-rules" class="section level2" number="24.1">
+<h2><span class="header-section-number">24.1</span> Methods based on Cluster Validity (Stopping Rules)</h2>
+<p>The most popular methods for determining the number of clusters involve observing some internal measure of cluster validity (like those outlined in the previous chapter) as the number, <span class="math inline">\(k\)</span>, of clusters increases. Cohesion scores like SSE are expected to be monotonically decreasing as <span class="math inline">\(k\)</span> increases. At some value, <span class="math inline">\(k^*\)</span>, the marginal drop in SSE is expected to flatten drastically, indicating that further division of the clusters does not provide a significant improvement in terms of cohesion <span class="citation"><a href="#ref-jainbook" role="doc-biblioref">[41]</a></span>. Methods based on cluster validity can be implemented with any clustering algorithm the user desires. Unfortunately, if the algorithm used is not working well with the dataset then the resulting determination of the number of clusters will be flawed. Furthermore, it is possible to get different results with different algorithms or different cohesion metrics, which may instil the user with little confidence in a given solution.</p>
+<p>In the hierarchical algorithms from Section <a href="clusteralgos.html#hc">22.1</a>, a series of solutions ranging from <span class="math inline">\(k=1\)</span> to <span class="math inline">\(k=n\)</span> clusters are output, and thus the methods for determining an appropriate value for <span class="math inline">\(k\)</span> in these procedures are often referred to as stopping rules. Since hierarchical algorithms tend to be slow and computationally expensive for large datasets, the stopping rules which cannot be extended to include general partitions of the data will be omitted from the discussion.</p>
+</div>
+<div id="sum-squared-error-sse-cohesion-plots" class="section level2" number="24.2">
+<h2><span class="header-section-number">24.2</span> Sum Squared Error (SSE) Cohesion Plots</h2>
+<p>For a simple example for this stopping rule methodology, consider the so-called <em>Ruspini dataset</em> in Figure <a href="findk.html#fig:ruspini">24.1</a>, which has been used to demonstrate clustering algorithms in the literature. This dataset consists of 75 two dimensional points in the first Cartesian quadrant, and visually it seems clear that these points fall into <span class="math inline">\(k=4\)</span> different clusters, using Euclidean distance as a measure of proximity. (Some individuals may argue that these 4 clusters could be meaningfully broken down into smaller clusters. These arguments are certainly valid, but we base our decision to specify 4 on the following assumptions: a) If asked to choose 4 clusters, most human beings would choose the same 4 - this may not be the case with 5 or 6; b) If we consider these points as a sample from a population, then it is reasonable to suspect that the collection of more data may destroy the subcluster appearance - that is, there is more observed evidence of 4 clusters than any other number.) We ought to be able to uncover this “true” number of clusters by observing the level of decrease in the SSE metric as the number of clusters increase, and determining an “elbow” in the curve at <span class="math inline">\(k^*=4\)</span> where the SSE flattens out for <span class="math inline">\(k\geq 4\)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:ruspini"></span>
+<img src="figs/RuspiniScatter.jpg" alt="The Two-Dimensional Ruspini Dataset" width="50%" />
+<p class="caption">
+Figure 24.1: The Two-Dimensional Ruspini Dataset
+</p>
+</div>
+<p>Figure <a href="findk.html#fig:ruspiniSSEplotgood">24.2</a> shows some examples of clusters found in the data using <span class="math inline">\(k\)</span>-means and <span class="math inline">\(k=2, 3, 4, 5, 6\)</span> clusters. The initialization of seed points was done randomly in each case. Figure <a href="findk.html#fig:ruspiniSSEplotgood">24.2</a> shows the SSE (as described in Section <a href="#SSE"><strong>??</strong></a> for the 6 different clusterings. We wish to point out that these 5 clusterings are “good” or reasonable clusterings upon visual inspection. Indeed, this first SSE plot properly depicts <span class="math inline">\(k^*=4\)</span> as the “elbow” of the curve, where the marginal decrease in SSE for adding additional clusters flattens out.<br />
+</p>
+
+<div class="figure" style="text-align: center"><span id="fig:ruspiniSSEplotgood"></span>
+<img src="figs/rusk2.jpg" alt="5 “Good” \(k\)-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot" width="50%" /><img src="figs/rusk3.jpg" alt="5 “Good” \(k\)-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot" width="50%" /><img src="figs/rusk4.jpg" alt="5 “Good” \(k\)-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot" width="50%" /><img src="figs/rusk5.jpg" alt="5 “Good” \(k\)-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot" width="50%" /><img src="figs/rusk6.jpg" alt="5 “Good” \(k\)-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot" width="50%" />
+<p class="caption">
+Figure 24.2: 5 “Good” <span class="math inline">\(k\)</span>-means Clusterings of the Ruspini Dataset and the Corresponding SSE Plot
+</p>
+</div>
+<p><strong>User Beware</strong> <br></p>
+<p>As always, with <span class="math inline">\(k\)</span>-means, it is of the utmost importance that the user pay close attention to the output from the algorithm. In our creation of the SSE plot in Figure <a href="findk.html#fig:ruspiniSSEplotgood">24.2</a>, we came by the two solutions, associated with <span class="math inline">\(k=4\)</span> and <span class="math inline">\(k=5\)</span> clusters respectively, that are shown in Figure <a href="findk.html#fig:rusSSEbad">24.3</a>. Because we are able to visualize the data in 2 dimensions (which, practically speaking, means we could have identified <span class="math inline">\(k^*=4\)</span> by visualizing the original data anyhow), we were able to throw away these two solutions upon inspection. If we did not do this, the resulting SSE plot shown in Figure <a href="findk.html#fig:rusSSEbad">24.3</a> would have clearly misled us to choose <span class="math inline">\(k^*=3\)</span> clusters. Without being able to visually inspect the solutions, it is wise to run several iterations of the <span class="math inline">\(k\)</span>-means algorithm for each <span class="math inline">\(k\)</span> and use some criteria (like lowest SSE, or most frequent SSE <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>) to choose an appropriate clustering for inclusion in the SSE plot. While this is not guaranteed to circumvent problematic SSE plots like that shown in Figure <a href="findk.html#fig:rusSSEbad">24.3</a>, it can help in many situations and certainly won’t hurt in others. This dependence on good clusterings is a glaring drawback of stopping rule methodology, because not all algorithms can produce multiple results for a single value of <span class="math inline">\(k\)</span> to choose from.</p>
+<div class="figure" style="text-align: center"><span id="fig:rusSSEbad"></span>
+<img src="figs/rusk4bad.jpg" alt="Example of 'Poor' Clusterings and their Effect on SSE Plot" width="50%" /><img src="figs/rusk5bad.jpg" alt="Example of 'Poor' Clusterings and their Effect on SSE Plot" width="50%" /><img src="figs/rusSSEbad.jpg" alt="Example of 'Poor' Clusterings and their Effect on SSE Plot" width="50%" />
+<p class="caption">
+Figure 24.3: Example of ‘Poor’ Clusterings and their Effect on SSE Plot
+</p>
+</div>
+<div id="cosine-cohesion-plots-for-text-data" class="section level3" number="24.2.1">
+<h3><span class="header-section-number">24.2.1</span> Cosine-Cohesion Plots for Text Data</h3>
+<p>Further complicating the method of cohesion plots is the curse of dimensionality discussed in Chapter <a href="#dimred"><strong>??</strong></a>. For high dimensional data, it is unusual to witness such drastic “elbows” in these plots. To illustrate this effect, we consider a combination of 3 text datasets used frequently in the information retrieval literature: ‘Medlars,’ ‘Cranfield,’ ‘CISI’ <span class="citation"><a href="#ref-kogan" role="doc-biblioref">[67]</a></span>. The Medlars-Cranfield-CISI (MCC) collection consists of nearly 4,000 scientific abstracts from 3 different disciplines. These 3 disciplines (Medlars = medicine, Cranfield = aerodynamics, CISI = information science) form 3 relatively distinct clusters in the data, which are not particularly difficult to uncover (For example, spherical <span class="math inline">\(k\)</span>-means frequently achieves 98% accuracy on the full-dimensional data).</p>
+<p>For this experiment, we ran 25 trials of the spherical <span class="math inline">\(k\)</span>-means algorithm for each value of <span class="math inline">\(k=2,3,\dots,20\)</span> and from each set of trials chose the solution with the lowest objective value. The resulting SSE plot is shown in Figure <a href="findk.html#fig:MCCSSE">24.4</a>. It is difficult to identify a distinct “elbow” in this curve.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:MCCSSE"></span>
+<img src="figs/MCCSSEPlotCoskmeans25Iter.jpg" alt="Spherical \(k\)-means Objective Function Values for \(2\leq k \leq 20\)" width="50%" />
+<p class="caption">
+Figure 24.4: Spherical <span class="math inline">\(k\)</span>-means Objective Function Values for <span class="math inline">\(2\leq k \leq 20\)</span>
+</p>
+</div>
+<p>Because of the behavior of distance metrics in high dimensional space, it is often easier (and always faster) to find clusters after reducing the dimensions of a dataset by one of the methods discussed in Chapter <a href="#dimred"><strong>??</strong></a>. Because the singular value decomposition generally works well for text data, we conduct this same experiment on the Medlars-Cranfield-CISI dataset using projections onto the first <span class="math inline">\(r=8,12, \mbox{ and } 20\)</span> singular vectors. Using the correct number of clusters <span class="math inline">\(k^*=3\)</span>, the <span class="math inline">\(k\)</span>-means algorithm is able to achieve the same accuracy of 98% on each of these dimension reductions, indicating that the clustering information is by no means lost in the lower dimensional representations. However, the SSE plots for these lower dimensional representations, shown in Figure <a href="findk.html#fig:MCCsvdSSE">24.5</a>, do no better at clearly indicating an appropriate number of clusters. In fact, these graphs seem to flatten out at <span class="math inline">\(k=r\)</span>. Again, 25 trials of the <span class="math inline">\(k\)</span>-means algorithm were run for each value of <span class="math inline">\(k\)</span> and the solution with the lowest SSE was chosen to represent that value of <span class="math inline">\(k\)</span> in the plots.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:MCCsvdSSE"></span>
+<img src="figs/MCCsvd8SSEPlotCoskmeans25Iter.jpg" alt="SSE Plots for Medlars-Cranfield-CISI Clusterings using SVD Reduction to \(r=\{8,12,20\}\) dimensions" width="50%" /><img src="figs/MCCsvd12SSEPlotCoskmeans25Iter.jpg" alt="SSE Plots for Medlars-Cranfield-CISI Clusterings using SVD Reduction to \(r=\{8,12,20\}\) dimensions" width="50%" /><img src="figs/MCCsvd20SSEPlotCoskmeans25Iter.jpg" alt="SSE Plots for Medlars-Cranfield-CISI Clusterings using SVD Reduction to \(r=\{8,12,20\}\) dimensions" width="50%" />
+<p class="caption">
+Figure 24.5: SSE Plots for Medlars-Cranfield-CISI Clusterings using SVD Reduction to <span class="math inline">\(r=\{8,12,20\}\)</span> dimensions
+</p>
+</div>
+</div>
+<div id="ray-and-turis-method" class="section level3" number="24.2.2">
+<h3><span class="header-section-number">24.2.2</span> Ray and Turi’s Method</h3>
+<p>In <span class="citation"><a href="#ref-rayturi" role="doc-biblioref">[14]</a></span>, Ray and Turi suggested the use of their validity metric for determining the number of clusters. Unlike the SSE plots investigated previously, this method does not rely on the subjectivity of the user. Instead, the goal is simply to find the minimum value of their validity metric over the clusterings produced for various values of <span class="math inline">\(k\)</span>. Recalling the definition from Chapter <a href="validation.html#validation">23</a> Section <a href="validation.html#rayturi">23.1.1.2</a>, we have the validity of a clustering defined as
+<span class="math display">\[\begin{equation}
+v=\frac{M_{intra}}{M_{inter}}
+(\#rayturivalidity)
+\end{equation}\]</span>
+where
+<span class="math display">\[\begin{eqnarray}
+M_{intra} &amp;=&amp; \frac{1}{n} \sum_{i=1}^{k} \sum_{\x in C_i} \| \x - \mean_i\|_2^2 \\
+M_{inter} &amp;=&amp;  \min_{1\leq i &lt;j \leq k} \|\mean_i - \mean_j\|^2
+\end{eqnarray}\]</span>
+and
+<span class="math inline">\(\mean_i\)</span> is the centroid of cluster <span class="math inline">\(i\)</span>. In their original work in <span class="citation"><a href="#ref-rayturi" role="doc-biblioref">[14]</a></span>, the authors’ goal was to cluster images. They noticed for these datasets that the minimum value for the validity metric frequently occurred for small numbers of clusters in the range of 2, 3, or 4 because of the large inter-cluster distances occurring when the number of clusters is small. This was undesirable in their application to image processing because the number of clusters was not expected to be small. To account for this fact, they proposed the following procedural adjustment for determining the number of clusters:</p>
+<ol>
+<li>
+Specify the maximum number of clusters to be considered, <span class="math inline">\(k_{max}\)</span>.
+<li>
+For <span class="math inline">\(k=2,\dots,k_{max}\)</span> use <span class="math inline">\(k\)</span>-means to cluster the data into <span class="math inline">\(k\)</span> clusters.
+<li>
+For each clustering <span class="math inline">\(C(k)\)</span> compute the validity metric, <span class="math inline">\(v(k)\)</span> from Equation <a href="#eq:rayturivalidity">(<strong>??</strong>)</a>.
+<li>
+Locate the <em>first</em> local maximum in the validity measure, <span class="math inline">\(\tilde{k}\)</span> such that
+<span class="math display">\[v(\tilde{k}-1) &lt; v(\tilde{k}) &gt; v(\tilde{k}+1)\]</span>
+<li>
+Choose the optimal number of clusters, <span class="math inline">\(k^*\)</span>, to be the <strong>modified minimum</strong> such that <span class="math inline">\(\tilde{k} &lt; k^* \leq k_{max}\)</span> is the number which minimizes the validity measure <em>after</em> the first local maximum.
+</ol>
+<p><strong>Ray and Turi Plots for the Ruspini Data </strong><br />
+</p>
+<p>We applied the above method to the 2-dimensional Ruspini data which was depicted in Figure <a href="findk.html#fig:ruspini">24.1</a>. To avoid the type of poor clusterings that were displayed in Figure <a href="#fig:ruspinibadclusters"><strong>??</strong></a>, for each value of <span class="math inline">\(k\)</span>, the <span class="math inline">\(k\)</span>-means algorithm was run 25 times and the best solution (that is, the solution with the lowest objective function) was chosen to represent that value of <span class="math inline">\(k\)</span>. Figure <a href="findk.html#fig:ruspinirayturi">24.6</a> shows the plot of Ray and Turi’s validity metric computed on each solution. If one were to pick the global minimum from this set of clusterings, the optimal number of clusters would be <span class="math inline">\(k^*=2\)</span>. However, according to the modified minimum favored in the original paper <span class="citation"><a href="#ref-rayturi" role="doc-biblioref">[14]</a></span>, the optimal number of clusters for the Ruspini data is <span class="math inline">\(k^*=5\)</span>. Neither of these solutions impose quite as obvious a clustering as the true number, 4.</p>
+<div class="figure" style="text-align: center"><span id="fig:ruspinirayturi"></span>
+<img src="figs/ruspinirayturi.jpg" alt="Ray and Turi Validity Plot for Ruspini Data" width="50%" />
+<p class="caption">
+Figure 24.6: Ray and Turi Validity Plot for Ruspini Data
+</p>
+</div>
+<p><strong>Ray and Turi Plots for Medlars-Cranfield-CISI</strong><br />
+</p>
+<p>We can generate similar plots using the same clusterings found by spherical <span class="math inline">\(k\)</span>-means that were used to generate the SSE plots in Figures <a href="findk.html#fig:MCCSSE">24.4</a> and <a href="findk.html#fig:MCCsvdSSE">24.5</a>. Obviously, the plots of Ray and Turi’s validity metric are far more definitive in their determination of <span class="math inline">\(k^*\)</span>, although it is left to the user to determine whether to pick the <em>global minimum</em> or <em>modified minimum</em> <span class="citation"><a href="#ref-rayturi" role="doc-biblioref">[14]</a></span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:MCCrayturi"></span>
+<img src="figs/MCCrayturi.jpg" alt="Ray &amp; Turi’s Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to \(r=\{8,12,20\}\) Dimensions Respectively. " width="50%" /><img src="figs/MCCrayturiSVD8.jpg" alt="Ray &amp; Turi’s Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to \(r=\{8,12,20\}\) Dimensions Respectively. " width="50%" /><img src="figs/MCCrayturiSVD12.jpg" alt="Ray &amp; Turi’s Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to \(r=\{8,12,20\}\) Dimensions Respectively. " width="50%" /><img src="figs/MCCrayturiSVD20.jpg" alt="Ray &amp; Turi’s Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to \(r=\{8,12,20\}\) Dimensions Respectively. " width="50%" />
+<p class="caption">
+Figure 24.7: Ray &amp; Turi’s Validity Plots for Medlars-Cranfield-CISI Clusterings on Raw Data and SVD Reductions to <span class="math inline">\(r=\{8,12,20\}\)</span> Dimensions Respectively.
+</p>
+</div>
+<p>The results from Figures <a href="findk.html#fig:ruspinirayturi">24.6</a> and <a href="findk.html#fig:MCCrayturi">24.7</a> are summarized in the following table, which shows the number of clusters that would be chosen if one were to pick the global minimum validity or the modified minimum validity along with the actual number of clusters.<br />
+</p>
+<table>
+<tr>
+<td>
+Data Input
+<td>
+Global Min
+<td>
+Modified Min.
+<td>
+Actual <span class="math inline">\(k\)</span>
+<tr>
+<td>
+Medlars-Cranfield-CISI
+<td>
+4
+<td>
+6
+<td>
+3 or 5<br />
+
+<tr>
+<td>
+Ruspini
+<td>
+2
+<td>
+5
+<td>
+4
+</table>
+<caption>
+<span id="tab:mccrayturitable">Table 24.1: </span> Approximated Number of Clusters via Ray and Turi’s Method
+</caption>
+</div>
+<div id="the-gap-statistic" class="section level3" number="24.2.3">
+<h3><span class="header-section-number">24.2.3</span> The Gap Statistic</h3>
+<p>The <em>gap statistic</em> is an index devised by Tibshirani, Walther, and Hastie in 2000 that has received massive amounts of attention in the literature. This method is quite similar to the stopping methods previously discussed, only now the objective is to compare the cluster cohesion values with what is expected under some null reference distribution <span class="citation"><a href="#ref-gapstat" role="doc-biblioref">[7]</a></span>. Supposing the <span class="math inline">\(n\)</span> data points <span class="math inline">\(\x_1,\dots,\x_n\)</span> are clustered in to <span class="math inline">\(k\)</span> clusters, <span class="math inline">\(C_1,C_2,\dots,C_k\)</span> and <span class="math inline">\(|C_j|=n_j\)</span> some measure of cohesion is defined as
+<span class="math display">\[W_k = \sum_{j=1}^k \frac{1}{2n_j} \sum_{\x_p,\x_q \in \C_j} d(\x_p,\x_q)\]</span>
+where <span class="math inline">\(d(x,y)\)</span> is a distance function. The idea is then to compare the graph of <span class="math inline">\(\log(W_k), \,\,k=1,\dots,K\)</span> to its expectation under some null reference distribution and to choose the value of <span class="math inline">\(k, 1\leq k \leq K\)</span> for which <span class="math inline">\(\log(W_k)\)</span> falls the farthest below its expectation. This distance between <span class="math inline">\(\log(W_k)\)</span> and its expectation under the reference distribution, denoted by <span class="math inline">\(E^*\)</span>, is called the <em>gap</em>:
+<span class="math display">\[\mbox{Gap}(k) = E^*(\log(W_k)) - \log(W_k).\]</span></p>
+<p>This expectation is estimated by drawing a Monte Carlo sample, <span class="math inline">\(\X^*_1,\X^*_2,\dots,\X^*_B\)</span> from the reference distribution. Each dataset in the sample is clustered, and the values of <span class="math inline">\(\log(W^*_k), \,\,k=1,\dots,K\)</span> are averaged over the samples. The sampling distribution of the gap statistic is controlled using the standard deviation, <span class="math inline">\(sd_k\)</span>, of the B Monte Carlo replicates of <span class="math inline">\(\log(W^*_k)\)</span>. Accounting for the simulation error in <span class="math inline">\(E^*(\log(W_k))\)</span> yields the standard error
+<span class="math display">\[s_k = sd_k\sqrt{1+\frac{1}{B}} .\]</span></p>
+<p>Using the common “one standard error” rule, the number of clusters <span class="math inline">\(k^*\)</span> is chosen to be the smallest <span class="math inline">\(k\)</span> such that <span class="math display">\[Gap(k)\geq Gap(k+1)-s_{k+1}.\]</span></p>
+<p>The authors in <span class="citation"><a href="#ref-gapstat" role="doc-biblioref">[7]</a></span> suggest, both for simplicity and performance, using a uniform distribution as the null reference distribution. This process is summarized in Table <a href="findk.html#tab:gapstat">24.2</a>.</p>
+<table>
+<tr>
+<td>
+<ol>
+<li>
+Cluster the observed data in <span class="math inline">\(X\)</span> (which contains <span class="math inline">\(n\)</span> objects and <span class="math inline">\(m\)</span> features), varying the total number of clusters from <span class="math inline">\(k=1,2,\dots K\)</span>, recording within dispersion measures (SSE function values) <span class="math inline">\(W_k, \,\,k=1,2,\dots,K\)</span>.
+<li>
+Generate <span class="math inline">\(B\)</span> reference datasets, each with <span class="math inline">\(n\)</span> objects having <span class="math inline">\(m\)</span> reference features generated uniformly over the range of the observed values for the original features in <span class="math inline">\(X\)</span>. Cluster each of the <span class="math inline">\(B\)</span> reference datasets, recording within dispersion measures (SSE function values) <span class="math inline">\(W^*_{kb},\,\, b=1,2,\dots,B,\,\,k=1,2,\dots,K.\)</span> Compute the estimated Gap statistic:
+<span class="math display">\[Gap(k)=(1/B)\sum_b \log(W^*_{kb})-\log(W_k)\]</span>
+<li>
+Let <span class="math inline">\(\bar{\mathit{l}} = (1/B)\sum_b \log(W^*_{kb})\)</span> and compute the standard deviation:
+<span class="math display">\[sd_k = [(1/B)\sum_b \left(\log(W^*_{kb})-\bar{\mathit{l}} \right)^2]^{1/2}.\]</span>
+Define <span class="math inline">\(s_k = sd_k \sqrt{1+\frac{1}{B}}.\)</span> Finally choose the number of clusters to be the smallest value of <span class="math inline">\(k\)</span> such that
+<span class="math display">\[Gap(k) \geq Gap(k+1) - s_{k+1}\]</span>.
+</ol>
+</table>
+<caption>
+<span id="tab:gapstat">Table 24.2: </span> Computation of the Gap Statistic <span class="citation"><a href="#ref-gapstat" role="doc-biblioref">[7]</a></span>
+</caption>
+<p>In Figure <a href="findk.html#fig:ruspinigapstat">24.8</a> we provide the results from the gap statistic procedure on the ruspini data. Our Monte Carlo simulation involved <span class="math inline">\(B=10\)</span> generated datasets. The gap statistic indicates the presence of <span class="math inline">\(k^*=4\)</span> clusters.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:ruspinigapstat"></span>
+<img src="figs/ruspiniobsexp.jpg" alt="Results for gap statistic procedure on Ruspini data. Observed vs. Expected values of \(\log(W_k)\) (left) and Width of Gap (right). The maximum gap occurs at \(k^*=4\) clusters. " width="50%" /><img src="figs/ruspinigap.jpg" alt="Results for gap statistic procedure on Ruspini data. Observed vs. Expected values of \(\log(W_k)\) (left) and Width of Gap (right). The maximum gap occurs at \(k^*=4\) clusters. " width="50%" />
+<p class="caption">
+Figure 24.8: Results for gap statistic procedure on Ruspini data. Observed vs. Expected values of <span class="math inline">\(\log(W_k)\)</span> (left) and Width of Gap (right). The maximum gap occurs at <span class="math inline">\(k^*=4\)</span> clusters.
+</p>
+</div>
+</div>
+</div>
+<div id="perroncluster" class="section level2" number="24.3">
+<h2><span class="header-section-number">24.3</span> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</h2>
+<p>Another commonly used methodology for determining the number of clusters relies upon the examination of eigenvalues of a graph Laplacian. Keeping with our focus in Chapter <a href="chap1-5.html#spectral">25.1</a> we consider only undirected graphs. The methodology contained herein is motivated by the following observation: suppose we had an undirected graph consisting of <span class="math inline">\(k\)</span> connected components (i.e. <span class="math inline">\(k\)</span> distinct components, none of which are connected to any other). The adjacency matrix of such a graph would be block diagonal with <span class="math inline">\(k\)</span> diagonal blocks <span class="math inline">\(\A_1, \dots, \A_k\)</span>, and each diagonal block would itself be an adjacency matrix for one connected component.</p>
+<p><span class="math display" id="eq:componentA">\[\begin{equation}
+\A = 
+\left[ 
+\begin{array}{ccccc}
+\A_1 &amp; 0 &amp; 0&amp; \dots  &amp; 0 \\
+0   &amp; \A_2 &amp; 0 &amp; \dots &amp; 0 \\
+0   &amp; 0 &amp; \A_3 &amp; \ddots &amp; 0 \\
+0 &amp; 0&amp; 0 &amp; \ddots &amp; \vdots  \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; \A_k 
+\end{array}
+\right] 
+\tag{24.1}
+\end{equation}\]</span></p>
+<p>Thus, the Laplacian matrix <span class="math inline">\(\mathbf{L}=\mathbf{D}-\A\)</span> would also be block diagonal and each diagonal block would be the Laplacian matrix for one component of the graph.</p>
+<p><span class="math display" id="eq:componentlaplacian">\[\begin{equation}
+\mathbf{L} = 
+\left[ 
+\begin{array}{ccccc}
+\mathbf{L}_1 &amp; 0 &amp; 0&amp; \dots  &amp; 0 \\
+0   &amp; \mathbf{L}_2 &amp; 0 &amp; \dots &amp; 0 \\
+0   &amp; 0 &amp; \mathbf{L}_3 &amp; \ddots &amp; 0 \\
+0 &amp; 0&amp; 0 &amp; \ddots &amp; \vdots  \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; \mathbf{L}_k 
+\end{array}
+\right]
+\hspace{.5cm}
+\mbox{ with } \mathbf{L}_i \e = \mathbf{0} \mbox{ for } i=1,\dots, k
+\tag{24.2}
+\end{equation}\]</span></p>
+Thus, if each component is connected, the multiplicity of the smallest eigenvalue, <span class="math inline">\(\lambda_1 = 0\)</span>, will count the number of diagonal blocks and thus the number of components. Of course the situation depicted in Equation <a href="findk.html#eq:componentlaplacian">(24.2)</a> is ideal and unlikely to be encountered in practice. However when the graph is <em>nearly</em> decomposable into disconnected components, continuity of the eigenvalues suggests that one may be able to count the number of tightly connected components by counting the number of eigenvalues <em>near</em> <span class="math inline">\(\lambda_1 =0\)</span>. In order to be able to characterize eigenvalues as being <em>near</em> <span class="math inline">\(\lambda_1 =0\)</span>, it is necessary to transform (normalize) the Laplacian matrix so that its spectrum is contained in the interval <span class="math inline">\([0,1]\)</span>. This type of analysis is usually done using one of the two <em>normalized Laplacian matrices</em> discussed in Chapter <a href="chap1-5.html#spectral">25.1</a> and defined again here.
+<ol>
+<li>
+<strong>The random-walk Laplacian</strong> <span class="math display">\[\mathbf{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I}-\mathbf{D}^{-1}\mathbf{A} = \mathbf{I}-\mathbf{P}\]</span>
+<li>
+<strong>The symmetric Laplacian</strong> <span class="math display">\[\mathbf{L}_{sym} = \mathbf{D}^{-1/2}\mathbf{L}\mathbf{D}^{-1/2}=\mathbf{I}-\mathbf{D}^{-1/2}\mathbf{A}\mathbf{D}^{-1/2}.\]</span>
+</ol>
+<p>The normalized Laplacians, like the Laplacian matrix itself, are both positive definite. Furthermore, <span class="math inline">\(\mathbf{L}_{rw}\)</span> and <span class="math inline">\(\mathbf{L}_{sym}\)</span> have the same spectrum. The following well-known and easily verified fact characterizes the relationship between the eigenvalues and eigenvectors of these two matrices <span class="citation"><a href="#ref-chung" role="doc-biblioref">[58]</a></span>.</p>
+
+<div class="theorem">
+<p><span id="thm:unlabeled-div-1" class="theorem"><strong>Theorem 24.1  (Eigenvalues of <span class="math inline">\(\mathbf{L}_{sym}\)</span> and <span class="math inline">\(\mathbf{L}_{rw}\)</span>) </strong></span><span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(\mathbf{L}_{rw}\)</span> with eigenvector <span class="math inline">\(\mathbf{v}\)</span> if and only if <span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(\mathbf{L}_{sym}\)</span> with eigenvector <span class="math inline">\(\mathbf{w}=\mathbf{D}^{1/2}\mathbf{v}\)</span>.</p>
+</div>
+<p>In light of this fact, we will limit our discussion to the properties of the transition probability matrix of a random walk on the graph associated with the adjacency matrix <span class="math inline">\(\A\)</span>, denoted
+<span class="math display">\[\mathbf{P}=\mathbf{D}^{-1} \A = \mathbf{I}-\mathbf{L}_{rw},\]</span><br />
+since <span class="math display">\[\lambda \in \sigma(\mathbf{P}) \quad \Rightarrow \quad (1-\lambda) \in \sigma(\mathbf{L}_{rw}).\]</span>
+Random walks on undirected graphs are <em>reversible Markov chains</em>, which satisfy the so-called <em>detailed balance equations</em> <span class="citation"><a href="#ref-kemenysnell" role="doc-biblioref">[66]</a>, <a href="#ref-stewart" role="doc-biblioref">[70]</a></span>:
+<span class="math display">\[\mathbf{Q}\mathbf{P}=\mathbf{P}^T \mathbf{Q} \hspace{.2cm} \mbox{ where  } \mathbf{Q}=diag(\mathbf{\pi}).\]</span>
+The stationary distribution for <span class="math inline">\(\mathbf{P}\)</span> given by <span class="math inline">\(\mathbf{\pi}^T= \frac{\e^T\mathbf{D}}{\e^T\mathbf{D}\e}\)</span>.</p>
+<p>We assume the underlying graph (which we aim to partition) is connected so that the matrix <span class="math inline">\(\mathbf{P}\)</span> is irreducible. If the graph is composed of connected components, like the one associated with Equation <a href="findk.html#eq:componentA">(24.1)</a>, the resulting random walk is equivalently referred to as <em>completely reducible, uncoupled, or completely decomposable</em> and there simple efficient algorithms available to identify the connected components <span class="citation"><a href="#ref-concomp" role="doc-biblioref">[2]</a></span>.</p>
+<p>In our connected graph, we assume that there exists some cluster or community structure, i.e. that there are <span class="math inline">\(k\)</span> groups of vertices, <span class="math inline">\(C_1,C_2, \dots, C_k\)</span> with <span class="math inline">\(|C_k|=n_k\)</span>, for which edges exist more frequently and with higher weight within each group than between each group. With this assumption, we can reorder the rows and columns of the transition probability matrix <span class="math inline">\(\mathbf{P}\)</span> according to group membership so that the result is <em>block-diagonally dominant</em>. By this we essentially mean that <span class="math inline">\(\mathbf{P}\)</span> is a perturbation of a block-diagonal matrix <span class="math inline">\(\mathbf{B}\)</span>, such that</p>
+<p><span class="math display" id="eq:bdd">\[\begin{equation}
+\mathbf{P}=\mathbf{B}+\mathbf{E} = \left[ 
+\begin{array}{ccccc}
+\mathbf{B}_{11} &amp; \mathbf{E}_{12} &amp; \mathbf{E}_{13}&amp; \dots  &amp; \mathbf{E}_{1k} \\
+\mathbf{E}_{21}   &amp; \mathbf{B}_{22} &amp; \mathbf{E}_{23} &amp; \dots &amp; \mathbf{E}_{2k} \\
+\mathbf{E}_{31}   &amp; \mathbf{E}_{32} &amp; \mathbf{B}_{33} &amp; \ddots &amp; \mathbf{E}_{3k} \\
+\vdots&amp; \vdots&amp; \vdots &amp; \ddots &amp; \vdots  \\
+\mathbf{E}_{k1} &amp; \mathbf{E}_{k2}&amp; \mathbf{E}_{k3} &amp; \dots &amp; \mathbf{B}_{kk}
+\end{array}
+\right]
+ \tag{24.3}
+ \end{equation}\]</span>
+where the off-diagonal blocks, <span class="math inline">\(\mathbf{E}_{ij}\)</span>, are much smaller in magnitude than the the diagonal blocks. In fact, the entries in the off-diagonal blocks are small enough that the diagonal blocks are <em>nearly stochastic</em>, i.e. <span class="math inline">\(\mathbf{B}_{ii} \e \approx 1\)</span> for <span class="math inline">\(i=1,2,\dots,k\)</span>. A transition probability matrix taking this form describes a <strong>nearly uncoupled</strong> or <strong>nearly completely reducible</strong> Markov Chain.</p>
+<p>The degree to which a matrix is considered nearly uncoupled is dependent on one’s criteria for measuring the level of <em>coupling</em> (interconnection) between the <em>aggregates</em> (clusters of states) of the Markov chain <span class="citation"><a href="#ref-meyernumc" role="doc-biblioref">[11]</a>, <a href="#ref-chuckthesis" role="doc-biblioref">[63]</a>, <a href="#ref-fischer" role="doc-biblioref">[65]</a></span>. In <span class="citation"><a href="#ref-meyernumc" role="doc-biblioref">[11]</a></span>, the <em>deviation from complete reducibility</em> is defined as follows:
+<!-- %  -->
+<!-- % \begin{definition}[Uncoupling Measure] -->
+<!-- % Let $n_1$ and $n_2$ be fixed positive integers such that $n_1+n_2=n$, and let $\mathbf{P}$ be an $n\times n$ irreducible stochastic matrix, whose respective rows and columns have been rearranged to the form -->
+<!-- % $$\mathbf{P}=\left[ \begin{array}{cc} -->
+<!-- % \mathbf{P}_{11} & \mathbf{P}_{12} \\ -->
+<!-- % \mathbf{P}{21} & \mathbf{P}_{22} \end{array} \right]$$ -->
+<!-- % where $\mathbf{P}_{11}$ is $n_1 \times n_1$ and $\mathbf{P}_{22}$ is $n_2 \times n_2$ so that the ratio -->
+<!-- % $$\sigma(\mathbf{P},n_1) = \frac{ \e^T \mathbf{P}_{12} \e + \e^T \mathbf{P}_{21} \e}{\e^T\mathbf{P}\e}$$ is minimized over all symmetric permutations of $\mathbf{P}$. The quantity $\sigma(\mathbf{P},n_1)$ is called the \textbf{uncoupling measure} of $\mathbf{P}$ with respect to the parameter $n_1$, defined as the ratio of the sum of the entries in the off-diagonal blocks to the sum  of all the entries in the matrix. -->
+<!-- % \end{definition} --></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 24.1  (Deviation from Complete Reducibility) </strong></span>For an <span class="math inline">\(m\times n\)</span> irreducible stochastic matrix with a <span class="math inline">\(k\)</span>-level partition
+<span class="math display">\[\mathbf{P} = \left[ 
+\begin{array}{ccccc}
+\mathbf{P}_{11} &amp; \mathbf{P}_{12} &amp; \mathbf{P}_{13}&amp; \dots  &amp; \mathbf{P}_{1k} \\
+\mathbf{P}_{21}   &amp; \mathbf{P}_{22} &amp; \mathbf{P}_{23} &amp; \dots &amp; \mathbf{P}_{2k} \\
+\mathbf{P}_{31}   &amp; \mathbf{P}_{32} &amp; \mathbf{P}_{33} &amp; \ddots &amp; \mathbf{P}_{3k} \\
+\vdots&amp; \vdots&amp; \vdots &amp; \ddots &amp; \vdots  \\
+\mathbf{P}_{k1} &amp; \mathbf{P}_{k2}&amp; \mathbf{P}_{k3} &amp; \dots &amp; \mathbf{P}_{kk}
+\end{array}
+\right]\]</span>
+the number <span class="math display">\[\delta=2\max_{i} \|\mathbf{P}_{i*}\|_{\infty}\]</span> is called the <strong>deviation from complete reducibility.</strong></p>
+</div>
+<p>It is important to point out that the parameter <span class="math inline">\(\delta\)</span>, or any other parameter that measures the level of coupling between clusters in a graph (like those suggested in <span class="citation"><a href="#ref-meyerharfield" role="doc-biblioref">[1]</a>, <a href="#ref-chuckthesis" role="doc-biblioref">[63]</a>, <a href="#ref-fischer" role="doc-biblioref">[65]</a></span>) cannot be computed without knowing a priori the clusters in the graph. Such parameters are merely tools for the perturbation analysis, used to prove the next theorem regarding the spectrum of block-diagonally dominant stochastic matrices <span class="citation"><a href="#ref-meyerharfield" role="doc-biblioref">[1]</a>, <a href="#ref-stewartnumc" role="doc-biblioref">[5]</a>, <a href="#ref-perroncluster" role="doc-biblioref">[10]</a>–<a href="#ref-kato" role="doc-biblioref">[12]</a>, <a href="#ref-chuck" role="doc-biblioref">[62]</a>, <a href="#ref-fischer" role="doc-biblioref">[65]</a></span>.</p>
+:::{.theorem name=‘The Spectrum of a Block-Diagonally Dominant Stochastic Matrix’ #bddsm}
+For sufficiently small <span class="math inline">\(\delta \neq 0\)</span>, the eigenvalues of <span class="math inline">\(\mathbf{P}(\delta)\)</span> are continuous in <span class="math inline">\(\delta\)</span>, and can be divided into 3 parts <span class="citation"><a href="#ref-perroncluster" role="doc-biblioref">[10]</a>, <a href="#ref-meyernumc" role="doc-biblioref">[11]</a>, <a href="#ref-chuck" role="doc-biblioref">[62]</a>, <a href="#ref-fischer" role="doc-biblioref">[65]</a></span>:
+<ol>
+<li>
+The Perron root, <span class="math inline">\(\lambda_1(\delta)=1\)</span>,
+<li>
+a cluster of <span class="math inline">\(k-1\)</span> eigenvalues <span class="math inline">\(\lambda_2(\delta),\lambda_3(\delta),\dots,\lambda_k(\delta)\)</span> that approach 1 as <span class="math inline">\(\delta \to 0\)</span>, and
+<li>
+the remaining eigenvalues, which are bounded away from 1 as <span class="math inline">\(\delta \to 0\)</span>.
+</ol>
+<p><br />
+:::</p>
+<!-- %Before we discuss the notion of coupling and the parameter $\epsilon$,  -->
+<!-- %  -->
+<!-- % Let $\mathbf{P}(\epsilon)$ be a family of matrices having the form in Equation \@ref(eq:bdd} and define $\epsilon^*$ such that $\mathbf{P}(\epsilon^*)=\mathbf{P}$. In order to continue such perturbation analysis, the following assumptions are adopted from [@fischer} as needed to implement Theorem 6.1 from [@kato}.  -->
+<!-- %  -->
+<!-- % \begin{itemize} -->
+<!-- % \item[] \textbf{Assumptions} -->
+<!-- % \item[1.] Let $\mathbf{P}(\epsilon) = \mathbf{P}(0) + \epsilon \mathbf{P}^{(1)} + \epsilon^2\mathbf{P}^{(2)} + \dots$ be a family of matrices that are analytic in a domain containing the origin. -->
+<!-- % \item[2.] Let $\mathbf{P}(\epsilon)$ be stochastic and reversible for all $\epsilon$, and primitive for all $\epsilon \neq 0$. -->
+<!-- % \item[3.] For $\epsilon = 0$, let $\mathbf{P}(0)$ be block-diagonal with primitive diagonal blocks. -->
+<!-- % \end{itemize}  -->
+<!-- %  -->
+<p>The cluster of <span class="math inline">\(k\)</span> eigenvalues surrounding and including the Perron root <span class="math inline">\(\lambda_1=1\)</span> is known as the <strong>Perron cluster</strong> <span class="citation"><a href="#ref-perroncluster" role="doc-biblioref">[10]</a></span>. The analysis in <span class="citation"><a href="#ref-chuck" role="doc-biblioref">[62]</a></span> explains that if there is no further decomposition (or meaningful sub-clustering) of the diagonal blocks, a relatively large gap between the eigenvalues <span class="math inline">\(\lambda_k\)</span> and <span class="math inline">\(\lambda_{k+1}\)</span> is expected. Thus, we can determine the number of clusters in the state space of a nearly uncoupled Markov chain (i.e. the number of clusters in a graph) by counting the number of eigenvalues in this Perron Cluster.</p>
+<p>This method is extremely effective when the graph to be partitioned is sufficiently close to being uncoupled. Problems arise when either high levels of coupling (intercluster linkage) are in play or when some vertices within a cluster are weakly connected to that cluster (for example, <em>dangling nodes</em> - vertices with degree 1).</p>
+<p>The examples in Figure <a href="findk.html#fig:perronex">24.9</a> illustrate this point. Firts we show a synthetic example of a graph exhibiting cluster structure and the eigenvalues of the associated transition probability matrix respectively. The thickness of the edges in the graph correspond to their respective weights. Because there is a limited amount of coupling (intercluster connection) in this first example, the Perron cluster of eigenvalues is easy to identify. Because there are 3 eigenvalues near 1, the user would conclude that the graph has 3 clusters.</p>
+<p>Occasionally a user can get a sense of the cluster structure in a graph with an appropriate layout of the nodes and edges. Force-directed graph drawing algorithms are common in this practice. The basic idea behind these algorithms is to model the edges as springs connecting the nodes and then to somehow minimize the total amount of tension in the system. Thus, densely connected groups of nodes are placed proximal to each other and the edges which loosely connect these groups are stretched. The graph drawings in Figure <a href="findk.html#fig:perronex">24.9</a> are all examples of force-directed layouts. Graph drawing algorithms are beyond the scope of this paper, but for information the interested reader should see, for example, <span class="citation"><a href="#ref-graphdrawing2" role="doc-biblioref">[8]</a></span>.</p>
+<p>The second two rows of Figure <a href="findk.html#fig:perronex">24.9</a> display a real-world example using the hyperlink graph between a sample of 1222 American political blogs. Based upon the force-directed drawing of the graph, it is clear that there are 2 large communities or clusters in this graph. These clusters correspond to the liberal and conservative division of American politics. The Perron cluster is not easily identified on the eigenvalue plot in Figure <a href="findk.html#fig:perronex">24.9</a>, and thus no conclusion should be drawn regarding the number of clusters in this data. However, after removing a large number of dangling nodes from the graph, or blogs which link only to a single neighboring page in the sampled population, a different picture comes to light. In the final row of Figure <a href="findk.html#fig:perronex">24.9</a> we illustrate the effect of removing these dangling nodes (about 200 in total) on the eigenvalues of the transition probability matrix. Luckily, for this particular graph, removing the dangling nodes did not create more, a situation that is not guaranteed in general. The third eigenvalue in the Perron cluster likely identifies the small group of 3 blogs that is now visible in the force directed drawing of the graph. Such small clusters are generally undesirable in graph partitioning, and since the eigenvalues tell the user nothing about the size or composition of the graph communities counted by the eigenvalues in the Perron cluster, this method must be used with caution!</p>
+<div class="figure" style="text-align: center"><span id="fig:perronex"></span>
+<img src="figs/numcGraphex.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" /><img src="figs/numcEigsex1.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" /><img src="figs/agblog.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" /><img src="figs/agblogEigs.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" /><img src="figs/AGnoDangle.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" /><img src="figs/AGnoDangleEigs.jpg" alt="Some Examples of Perron Cluster Identification on various Network Datasets" width="50%" />
+<p class="caption">
+Figure 24.9: Some Examples of Perron Cluster Identification on various Network Datasets
+</p>
+</div>
+<p>In the next Chapter, we will introduce a similarity matrix that is well suited for this Perron-cluster analysis. Our method has the ability of estimating the number of clusters in very noisy and high-dimensional data when other methods fail.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-meyerharfield" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">C. D. Meyer and D. J. Hartfiel, <span>“On the structure of stochastic matrices with a subdominant eigenvalue near 1,”</span> <em>Linear Algebra and its Applications</em>, 1998.</div>
+</div>
+<div id="ref-concomp" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Hopcroft and R. Tarjan, <span>“Efficient algorithms for graph manipulation,”</span> <em>Communications of the ACM</em>, vol. 16, no. 6, pp. 372–378, 1973.</div>
+</div>
+<div id="ref-gordon" class="csl-entry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">A. D. Gordon, <em>Classification</em>, 2nd ed. Chapman &amp; Hall/CRC Monographs on Statistics; Applied Probability, 1999.</div>
+</div>
+<div id="ref-stewartnumc" class="csl-entry">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">W.-L. Cao and W. J. Stewart, <span>“Iterative aggregation/disaggregation techniques for nearly uncoupled markov chains,”</span> <em>Journal of the ACM</em>, vol. 32, no. 2, pp. 702–719, 1985.</div>
+</div>
+<div id="ref-gapstat" class="csl-entry">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">R. Tibshiram, G. Walther, and T. Hastie, <span>“Estimating the number of clusters via the gap statistic,”</span> <em>Journal of the Royal Statistical Society. Series B (Statistical Methodology).</em>, vol. 63, no. 2, pp. 411–423, 2001.</div>
+</div>
+<div id="ref-graphdrawing2" class="csl-entry">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">M. Authors, <em>Handbook of graph drawing and visualization</em>. http://cs.brown.edu/ rt/gdhandbook/: CRC Press, 2013.</div>
+</div>
+<div id="ref-perroncluster" class="csl-entry">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">P. Deuflhard and M. Webber, <span>“Robust peron cluster analysis in conformation dynamics,”</span> <em>Linear Algebra and its Applications</em>, vol. 398, 2004.</div>
+</div>
+<div id="ref-meyernumc" class="csl-entry">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">C. D. Meyer, <span>“Stochastic complementation, uncoupling markov chains, and the theory of nearly reducible systems,”</span> <em>SIAM Review</em>, vol. 31, no. 2, 1989.</div>
+</div>
+<div id="ref-kato" class="csl-entry">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">T. Kato, <em>Perturbation theory for linear operators</em>. Springer, 1995.</div>
+</div>
+<div id="ref-milligan" class="csl-entry">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">G. W. Milligan and M. C. Cooper, <span>“An examination of procedures for determining the number of clusters in a data set,”</span> <em>Psychometrika</em>, vol. 50, no. 2, pp. 159–179, 1985.</div>
+</div>
+<div id="ref-rayturi" class="csl-entry">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">S. Ray and R. Turi, <span>“Determination of the number of clustersin k-means clustering and apllication in colour image segmentation,”</span> 1999.</div>
+</div>
+<div id="ref-jainbook" class="csl-entry">
+<div class="csl-left-margin">[41] </div><div class="csl-right-inline">A. K. Jain and R. C. Dubes, <em>Algorithms for clustering data</em>. Prentice Hall, 1988.</div>
+</div>
+<div id="ref-chung" class="csl-entry">
+<div class="csl-left-margin">[58] </div><div class="csl-right-inline">F. Chung, <em>Spectral graph theory</em>. American Mathematical Society, 1997.</div>
+</div>
+<div id="ref-chuck" class="csl-entry">
+<div class="csl-left-margin">[62] </div><div class="csl-right-inline">C. D. Meyer and C. D. Wessell, <span>“<span>Stochastic Data Clustering</span>,”</span> <em>SIAM Journal on Matrix Analysis and Applications</em>, vol. 33, no. 4, pp. 1214–1236, 2012, [Online]. Available: <a href="http://arxiv.org/abs/1008.1758">http://arxiv.org/abs/1008.1758</a>.</div>
+</div>
+<div id="ref-chuckthesis" class="csl-entry">
+<div class="csl-left-margin">[63] </div><div class="csl-right-inline">C. Wessell, <span>“Stochastic data clustering,”</span> PhD thesis, North Carolina State University, 2011.</div>
+</div>
+<div id="ref-fischer" class="csl-entry">
+<div class="csl-left-margin">[65] </div><div class="csl-right-inline">A. F. P. Deuflhard W. Huisinga, <span>“Identification of almost invariant aggregates in reversible nearly uncoupled markov chains,”</span> <em>Linear Algebra and its Applications</em>, vol. 315, pp. 39–59, 2000.</div>
+</div>
+<div id="ref-kemenysnell" class="csl-entry">
+<div class="csl-left-margin">[66] </div><div class="csl-right-inline">J. L. S. John G. Kemeny, <em>Finite markov chains</em>. Springer, 1976.</div>
+</div>
+<div id="ref-kogan" class="csl-entry">
+<div class="csl-left-margin">[67] </div><div class="csl-right-inline">J. Kogan, <span>“Introduction to clustering large and high-dimensional data,”</span> Cambridge, New York: Cambridge University Press, 2007.</div>
+</div>
+<div id="ref-poweriteration" class="csl-entry">
+<div class="csl-left-margin">[68] </div><div class="csl-right-inline">W. W. C. F. Lin, <span>“Power iteration clustering,”</span> <em>Proceedings of the 27th International Conference of Machine Learning</em>, 2010.</div>
+</div>
+<div id="ref-stewart" class="csl-entry">
+<div class="csl-left-margin">[70] </div><div class="csl-right-inline">W. J. Stewart, <em>Probability, markov chains, queues, and simulation: The mathematical basis of performance modeling</em>. Princeton University Press, 2009.</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap1-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/1114-findk.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/1114-findk.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

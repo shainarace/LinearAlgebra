@@ -10,19 +10,21 @@ cid='intro'
 
 At its heart, Linear Algebra is the study of **linear functions**. The term **linear** should be understood to mean _straight_ or _flat_. A  line on the two dimensional coordinate plane, written $$y=mx+b$$ represents a linear equation - the set of points $(x,y)$ satisfying this equation form a straight line. On the other hand, a quadratic equation like $$y=ax^2+bx+c$$ is *nonlinear* - it is not straight, it has curvature. You may have learned that the equation of a plane in 3-dimensional space (the coordinate cube $(x,y,z)$) is written as
 $$ax+by+cz=d.$$
-This is also considered a linear equation - the set of points $(x,y,z)$ satisfying this equation form a flat surface (a plane). These are the types of equations we will see in this course. We will not see equations like:
-$$x^2+y^2+3z=10 \quad \mbox{or} \quad 2xy+\sqrt{z}+\frac{1}{x}=1 \quad \mbox{or} \quad \log(x-y)+e^x=0$$
-All of the above equations are *nonlinear*. A linear function involves only multiplication by scalars and addition/subtraction:
+Such a plane is a classic example - the set of points $(x,y,z)$ satisfying this equation form a flat surface (a plane). 
+
+A linear function involves only multiplication by scalars and addition/subtraction, for example:
 $$2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.$$
-The second equation above brings us to an important point: we don't live in a 3-dimensional world. The "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions. However with 6 variables we can no longer conceptualize the "flatness" of our equation - we just have to take on principal the fact that linear equations are flat and have no curvature. 
+The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a forth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we ought to be able to suspend our disbelief and assume that a "forth axes" (forth dimension) can be considered to represent cost. 
 
 In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare "these two observations are far away from each other". 
 
 
-The second term of the subject is, of course, *algebra.* This is a word you are likely familiar with, however this course will challenge your initial concept of the word. Linear Algebra deals with the algebra of matrices, which is likely different from anything you've experienced before. For example, when given an equation for an unknown value, like 
+The second term in the phrase is, of course, **algebra.** While you are likely familiar with the term,  this course will challenge your initial familiarity. Linear Algebra deals with the algebra of matrices, which is likely different from any algebra you've experienced before. For example, when given an equation for an unknown value, like 
 $$2x=3,$$ you probably immediately think "I should divide both sides by 2 to determine the unknown value x". Our equations in this course will be quite different because the expressions will involve matrices and vectors. For example,
 $$\left(\begin{matrix} 2 & 3\\1&4 \end{matrix}\right) \left(\begin{matrix} x_1\\x_2 \end{matrix}\right) = \left(\begin{matrix} 5\\6 \end{matrix}\right)$$
-is one type of equation we will learn to solve in this course. In this situation, we cannot simply divide both sides by the left hand matrix to solve for the unknowns - in fact it should look quite confusing to consider what that would even mean! Learning to work with matrices will be like learning a new language - the only way to succeed will be to practice and struggle and practice and struggle. Keep pace with the course and learn the terminology and definitions foremost - without the language and notation firmly in place, the techniques will seem far more difficult than they actually are.
+is one type of equation we will learn to solve in this course. In this situation, we cannot simply divide both sides by the left hand matrix to solve for the unknowns - in fact it should look quite confusing to consider what that would even mean! 
+
+Learning to work with matrices will be like learning a new language - the only way to succeed will be to practice and struggle and practice and struggle. Keep pace with the course and learn the terminology and definitions foremost - without the language and notation firmly in place, the techniques will seem far more difficult than they actually are.
 
 ## Why Linear Algebra 
 
@@ -295,8 +297,10 @@ Whereas we once thought of ordered pairs as _points_ in space, we can also consi
 
 You will recall that the symbol $\Re$ is used to denote the set of real numbers. $\Re$ is simply $1$-space. It is a set of vectors with a single element. In this sense any real number, $x$, has a direction: if it is positive, it is to one side of the origin, if it is negative it is to the opposite side. That number, $x$, also has a magnitude: $|x|$ is the distance between $x$ and the origin, 0.
 
+:::{.definition name='n-space' #nspace}
 $n$-space (the set of real $n$-tuples) is denoted $\Re^n$.  In set notation, the formal mathematical definition is simply:
 $$\Re^n = \left\lbrace (x_1,x_2,\dots,x_n) : x_i \in \Re, i=1,\dots, n\right\rbrace.$$
+:::
 
 We will often use this notation to define the size of an arbitrary vector. For example, $\x \in \Re^p$ simply means that $\x$ is a vector with $p$ entries:
 $\x=(x_1,x_2,\dots,x_p)$.

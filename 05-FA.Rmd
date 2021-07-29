@@ -44,7 +44,7 @@ Before we even begin the process of factor analysis, we have to do some prelimin
 Depending on how many variables you are working with, you may be able to determine whether or not to proceed with factor analysis by simply examining the correlation matrix. With this examination, we are looking for two things:
 
 1. Correlations that are significant at the 0.01 level of significance. At least half of the correlations should be significant in order to proceed to the next step.
-2. Correlations are ``sufficient'' to justify applying factor analysis. As a rule of thumb, at least half of the correlations should be greater than 0.30.
+2. Correlations are "sufficient" to justify applying factor analysis. As a rule of thumb, at least half of the correlations should be greater than 0.30.
 
 
 ### Barlett's Sphericity Test
@@ -55,23 +55,20 @@ Which implies that there are no underlying factors to be uncovered. Obviously, w
 
 ### Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy
 
-The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of _partial correlation_. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \ref{table:KMO} contains the information about interpretting KMO results that was provided in the original 1974 paper.
+The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of _partial correlation_. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \@ref(tab:KMO) contains the information about interpretting KMO results that was provided in the original 1974 paper.
 
 
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|c|l|}
-\hline
-\shortstack{KMO value\\ \hspace{0.5cm} } & \shortstack{Degree of \\Common Variance} \\
-\hline
-0.90 to 1.00   &            Marvelous\\
-0.80 to 0.89    &          Middling\\
-0.60 to 0.69      &         Mediocre\\
-0.50 to 0.59       &        Miserable\\
-0.00 to 0.49        &       Don't Factor\\   
-\hline
-\end{tabular}
-\caption{Interpretting the KMO value. \cite{KMO}}
+<table>
+<tr>
+<td> KMO value <td>Degree of <br> Common Variance</td>
+<td>0.90 to 1.00  <td>Marvelous</td>
+<td>0.80 to 0.89  <td>Middling</td>
+<td>0.60 to 0.69   <td>Mediocre</td>
+<td>0.50 to 0.59    <td>Miserable</td>
+<td>0.00 to 0.49   <td>Don't Factor</td>
+</table>
+Table: (\#tab:KMO) Interpretting the KMO value. \cite{KMO}
+\caption{Interpretting the KMO value. }
 \label{table:KMO}
 \end{center}
 \end{table}
@@ -88,7 +85,7 @@ Take for example the SAS output for factor analysis on the Iris dataset shown in
 
 (ref:factorOUT) SAS output for PROC FACTOR using Iris Dataset
 
-```{r fig=T, fig.width=400, echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
+```{r fig=T, out.width="100%", echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
 knitr::include_graphics('figs/factorOUT.png')
 ```
 

@@ -16,6 +16,7 @@ bookdown::gitbook:
   search: yes
   sharing:
     all: ['facebook', 'twitter', 'linkedin']
+bibliography: Dissertation.bib
 # bookdown::pdf_book:
 #   toc: yes
 #   css: toc.css

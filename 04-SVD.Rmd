@@ -1,9 +1,209 @@
-# Applications of SVD
+# Applications of SVD {#svdapp}
 
-## Latent Semantic Indexing
+## Text Mining {#tm}
 
+Text mining is another area where the SVD is used heavily. In text mining, our data structure is generally known as a __Term-Document Matrix__.  The _documents_ are any individual pieces of text that we wish to analyze, cluster, summarize or discover topics from. They could be sentences, abstracts, webpages, or social media updates. The _terms_ are the words contained in these documents. The term-document matrix represents what's called the "bag-of-words" approach - the order of the words is removed and the data becomes unstructured in the sense that each document is represented by the words it contains, not the order or context in which they appear. The $(i,j)$ entry in this matrix is the number of times term $j$ appears in document $i$.
+
+:::{.definition name='Term-Document Matrix' #tdm}
+ Let $m$ be the number of documents in a collection and $n$ be the number of terms appearing in that collection, then we create our __term-document matrix__ $\A$ as follows:
+\begin{equation}
+    \begin{array}{ccc}
+        & & \text{term 1} \quad \text{term $j$} \,\, \text{term $n$} \\
+        \A_{m\times n} = & \begin{array}{c}
+            \hbox{Doc 1} \\
+            \\
+            \\
+            \hbox{Doc $i$} \\
+            \\
+            \hbox{Doc $m$} \\
+        \end{array} &
+        \left(
+        \begin{array}{ccccccc}
+            & & & |&  & & \\
+            & & & |&  & & \\
+            & & & |&  & & \\
+            & - & - &f_{ij}  &  & & \\
+            & & & & & & \\
+            & & & & & & \\
+        \end{array}
+        \right)
+    \end{array}
+\nonumber
+\end{equation}
+where $f_{ij}$ is the frequency of term $j$ in document $i$.  A __binary__ term-document matrix will simply have $\A_{ij}=1$ if term $j$ is contained in document $i$.
+:::
+
+### Note About Rows vs. Columns 
+
+You might be asking yourself, "__Hey, wait a minute. Why do we have documents as columns in this matrix? Aren't the documents like our observations?__" Sure! Many data scientists insist on having the documents on the rows of this matrix. _But_, before you do that, you should realize something. Many SVD and PCA routines are created in a way that is more efficient when your data is long vs. wide, and text data commonly has more terms than documents. The equivalence of the two presentations should be easy to see in all matrix factorization applications. If we have 
+$$\A = \U\mathbf{D}\V^T$$ then,
+$$\A^T = \V\mathbf{D}\U^T$$
+so we merely need to switch our interpretations of the left- and right-singular vectors to switch from document columns to document rows. 
+
+Beyond any computational efficiency argument, we prefer to keep our documents on the columns here because of the emphasis placed earlier in this text regarding matrix multiplication viewed as a linear combination of columns. The animation in Figure \@ref(fig:multlincombanim) is a good thing to be clear on before proceeding here. 
+
+### Term Weighting
+
+Term-document matrices tend to be large and sparse. Term-weighting schemes are often used to downplay the effect of commonly used words and bolster the effect of rare but semantically important words \cite{termweighting, berryCIR}.  The most popular weighting method is known as  __Term Frequency-Inverse Document Frequency (TF-IDF)__. For this method, the raw term-frequencies $f_{ij}$ in the matrix $\A$ are multiplied by global weights called _inverse document frequencies_, $w_i$, for each term. These weights reflect the commonality of each term across the entire collection and ultimately quantify a term's ability to narrow one's search results (the foundations of text analysis were, after all, dominated by search technology). The inverse document frequency of term $i$ is:
+$$w_i = \log \left( \frac{\mbox{total # of documents}}{\mbox{# documents containing term  } i} \right)$$
+To put this weight in perspective, for a collection of $n=10,000$ documents we have $0\leq w_j \leq 9.2$, where $w_j=0$ means the word is contained in every document (rendering it useless for search) and $w_j=9.2$ means the word is contained in only 1 document (making it very useful for search). The document vectors are often normalized to have unit 2-norm, since their directions (not their lengths) in the term-space is what characterizes them semantically.\
+
+### Other Considerations
+
+In dealing with text, we want to do as much as we can do minimize the size of the dictionary (the collection of terms which enumerate the rows of our term-document matrix) for both computational and practical reasons.  The first effort we'll make toward this goal is to remove so-called __stop words__, or very common words that appear in a great many sentences like articles ("a", "an", "the") and prepositions ("about", "for", "at") among others. Many projects also contain domain-specific stop words. For example, one might remove the word "Reuters" from a corpus of [Reuters' newswires](https://shainarace.github.io/Reuters/). The second effort we'll often make is to apply a __stemming__ algorithm which reduces words to their _stem._ For example, the words "swimmer" and "swimming" would both be reduced to their stem, "swim". Stemming and stop word removal can greatly reduce the size of the dictionary and also help draw meaningful connections between documents.
+
+### Latent Semantic Indexing
+
+The noise-reduction property of the SVD was extended to text processing in 1990 by Susan Dumais et al, who named the effect _Latent Semantic Indexing (LSI)_. LSI involves the singular value decomposition of the term-document matrix defined in Definition \@ref(def:tdm). In other words, it is like a principal components analysis using the unscaled, uncentered inner-product matrix $\A^T\A$. If the documents are normalized to have unit length, this is a matrix of __cosine similarities__ (see Chapter \@ref(norms)). Cosine similarity is the most common measure of similarity between documents for text mining. If the term-document matrix is binary, this is often called the co-occurrence matrix because each entry gives the number of times two words occur in the same document.
+
+ It certainly seems logical to view text data in this context as it contains both an informative signal and semantic noise.  LSI quickly grew roots in the information retrieval community, where it is often used for query processing. The idea is to remove semantic noise, due to variation and ambiguity in vocabulary and presentation style, without losing significant amounts of information. For example, a human may not differentiate between the words "car" and "automobile", but indeed the words will become two separate entities in the raw term-document matrix.  The main idea in LSI is that the realignment of the data into fewer directions should force related documents (like those containing "car" and "automobile") closer together in an angular sense, thus revealing latent semantic connections.
+ 
+Purveyors of LSI suggest that the use of the Singular Value Decomposition to project the documents into a lower-dimensional space results in a representation which reflects the major associative patterns of the data while ignoring less important influences.  This projection is done with the simple truncation of the SVD shown in Equation \@ref(eq:truncsvd). 
+
+As we have seen with other types of data, the very nature of dimension reduction makes possible for two documents with similar semantic properties to be mapped closer together. Unfortunately, the mixture of signs (positive and negative) in the singular vectors (think principal components) makes the decomposition difficult to interpret.  While the major claims of LSI are legitimate, this lack of interpretability is still conceptually problematic for some folks. In order to make this point as clear as possible, consider the original "term basis" representation for the data, where each document (from a collection containing $m$ total terms in the dictionary) could be written as:
+$$\A_j = \sum_{i=1}^{m} f_{ij}\e_i$$
+where $f_{ij}$ is the frequency of term $i$ in the document, and $\e_i$ is the $i^{th}$ column of the $m\times m$ identity matrix. The truncated SVD gives us a new set of coordinates (scores) and basis vectors (principal component features):
+$$\A_j \approx \sum_{i=1}^r \alpha_i \u_i$$
+but the features $\u_i$ live in the term space, and thus ought to be interpretable as a linear combinations of the original "term basis." However the linear combinations, having both positive and negative coefficients, tends to be semantically obscure in practice - These new features do not often form meaningful _topics_ for the text, although they often do organize in a meaningful way as we will demonstrate in the next section.
+
+### Example
+
+Let's consider a corpus of short documents, perhaps status updates from social media sites. We'll keep this corpus as minimal as possible to demonstrate the utility of the SVD for text. 
+
+```{r label='studentgraph', fig.align='center', fig.cap = 'A corpus of 6 documents. Words occurring in more than one document appear in bold. Stop words removed, stemming utilized. Document numbers correspond to term-document matrix below.', echo=F, out.width="100%"}
+knitr::include_graphics("figs/documents.png")
+```
+\begin{equation*}
+    \begin{array}{cc}
+         & \begin{array}{cccccc} \;doc_1\; & \;doc_2\;& \;doc_3\;& \;doc_4\;& \;doc_5\;& \;doc_6\; \end{array}\\
+          \begin{array}{c}
+            \hbox{cat} \\
+            \hbox{dog}\\
+            \hbox{eat}\\
+            \hbox{tired} \\
+            \hbox{toy}\\
+            \hbox{injured} \\
+            \hbox{ankle} \\
+            \hbox{broken} \\
+            \hbox{swollen} \\
+            \hbox{sprained} \\
+        \end{array} &
+\left(
+\begin{array}{cccccc}
+\quad 1\quad   &  \quad 2\quad   &  \quad 2\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 0\quad  \\
+\quad 2\quad   &  \quad 3\quad   &  \quad 2\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 0\quad  \\
+\quad 2\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 0\quad  \\
+\quad 0\quad   &  \quad 1\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 0\quad  \\
+\quad 0\quad   &  \quad 1\quad   &  \quad 1\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 0\quad  \\
+\quad 0\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 1\quad   &  \quad 0\quad  \\
+\quad 0\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 1\quad   &  \quad 1\quad  \\
+\quad 0\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 0\quad   &  \quad 1\quad  \\
+\quad 0\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 0\quad   &  \quad 1\quad  \\
+\quad 0\quad   &  \quad 0\quad   &  \quad 0\quad   &  \quad 1\quad   &  \quad 1\quad   &  \quad 0\quad  \\
+\end{array}\right)
+\end{array}
+\end{equation*}
+ 
+We'll start by entering this matrix into R. Of course the process of parsing a collection of documents and creating a term-document matrix is generally more automatic. The `tm` text mining library is recommended for creating a term-document matrix in practice. 
+
+```{r}
+A=matrix(c(1,2,2,0,0,0,
+           2,3,2,0,0,0,
+           2,0,1,0,0,0,
+           0,1,0,0,1,0,
+           0,1,1,0,0,0,
+           0,0,0,1,1,0,
+           0,0,0,1,1,1,
+           0,0,0,1,0,1,
+           0,0,0,1,0,1,
+           0,0,0,1,1,0), 
+         nrow=10, byrow=T)
+A
+```
+
+Because our corpus is so small, we'll skip the step of term-weighting, but we _will_ normalize the documents to have equal length. In other words, we'll divide each document vector by its two-norm so that it becomes a unit vector:
+
+```{r}
+A_norm = apply(A, 2, function(x){x/c(sqrt(t(x)%*%x))})
+A_norm
+```
+
+We then compute the SVD of `A_norm` and observe the left- and right-singular vectors. Since the matrix $\A$ is term-by-document, you might consider the terms as being the "units" of the rows of $\A$ and the documents as being the "units" of the columns. For example, $\A_{23}=2$ could logically be interpreted as "there are 2 units of the word _dog_ per _document number 3_". In this mentality, any factorization of the matrix should preserve those units. Similar to any ["Change of Units Railroad"](https://www.katmarsoftware.com/articles/railroad-track-unit-conversion.htm), matrix factorization can be considered in terms of units assigned to both rows and columns:
+$$\A_{\text{term} \times \text{doc}} = \U_{\text{term} \times \text{factor}}\mathbf{D}_{\text{factor} \times \text{factor}}\V^T_{\text{factor} \times \text{doc}}$$
+Thus, when we examine the rows of the matrix $\U$, we're looking at information about each term and how it contributes to each factor (i.e. the "factors" are just linear combinations of our elementary term vectors); When we examine the columns of the matrix $\V^T$, we're looking at information about how each document is related to each factor (i.e. the documents are linear combinations of these factors with weights corresponding to the elements of $\V^T$). And what about $\mathbf{D}?$ Well, in classical factor analysis the matrix $\mathbf{D}$ is often combined with either $\U$ or $\V^T$ to obtain a two-matrix factorization. $\mathbf{D}$ describes how much information or signal from our original matrix exists along each of the singular components.  It is common to use a __screeplot__, a simple line plot of the singular values in $\mathbf{D}$, to determine an appropriate _rank_ for the truncation in Equation \@ref(eq:truncsvd).
+
+```{r}
+out = svd(A_norm)
+```
+Let's first examine the left-singular vectors in $\U$. Remember, the _rows_ of this matrix describe how the terms load onto factors, and the columns are those mysterious "factors" themselves. 
+
+```{r}
+out$u
+```
+
+
+So the first "factor" of SVD is as follows:
+
+$$\text{factor}_1 = 
+ -0.530 \text{cat} -0.734 \text{dog}-0.344 \text{eat}-0.112 \text{tired} -0.208 \text{toy}-0.034 \text{injured} -0.046 \text{ankle}-0.024 \text{broken} -0.024 \text{swollen} -0.034 \text{sprained} $$
+ We can immediately see why people had trouble with LSI as a topic model -- it's hard to intuit how you might treat a mix of positive and negative coefficients in the output.  If we ignore the signs and only investigate the absolute values, we can certainly see some meaningful topic information in this first factor: the largest magnitude weights all go to the words from the documents about pets. You might like to say that negative entries mean a topic is _anticorrelated_ with that word, and to some extent this is correct. That logic works nicely, in fact, for factor 2:   
+
+$$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text{tired} -0.017\text{toy} 0.370\text{injured}+ 0.587\text{ankle}  +0.415\text{broken} + 0.415\text{swollen} + 0.370\text{sprained}$$
+However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
+
+```{r label='lsiwords', fig.align='center', fig.cap = 'Projection of the Terms onto First two Singular Dimensions', echo=F, out.width="50%"}
+terms= c('cat','dog','eat','tired','toy','injured','ankle','broken','swollen','sprained')
+
+fig <- plot_ly(type = 'scatter', mode = 'markers') %>%
+   add_trace(
+    x = jitter(out$u[,1]),
+    y = jitter(out$u[,2]),
+    text = terms,
+    hoverinfo = 'text',
+    marker = list(color='green', opacity=0.6),
+    showlegend = F
+  )
+fig
+
+```
+
+Moving on to the documents, we can see a similar clustering pattern in the columns of $\V^T$ which are the rows of $\V$, shown below:
+
+```{r}
+out$v
+```
+In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
+
+```{r label='lsidocs', fig.align='center', fig.cap = 'Projection of the Docuemnts onto First two Singular Dimensions', echo=F, out.width="50%"}
+documents= c('1 (pets)','2 (pets)','3 (pets)','4 (injuries)','5 (injuries)','6 (injuries)')
+
+fig <- plot_ly(type = 'scatter', mode = 'markers') %>%
+   add_trace(
+    x = jitter(out$v[,1]),
+    y = jitter(out$v[,2]),
+    text = documents,
+    hoverinfo = 'text',
+    marker = list(color='green', opacity=0.6),
+    showlegend = F
+  )
+fig
+```
+
+Figure \@ref(fig:lsidocs) demonstrates how documents that live in a 10-dimensional term space can be compressed down to 2-dimensions in a way that captures the major information of interest. If we were to take that 2-truncated SVD of our term-document matrix and multiply it back together, we'd see an _approximation_ of our original term-document matrix, and we could calculate the error involved in that approximation. We could equivalently calculate that error by using the singular values. 
+
+```{r} 
+A_approx = out$u[,1:2]%*% diag(out$d[1:2])%*%t(out$v[,1:2])
+# Sum of element-wise squared error 
+(norm(A-A_approx,'F'))^2
+# Sum of squared singular values truncated
+(sum(out$d[3:6]^2))
+```
+
+However, multiplying back to the original data is not generally an action of interest to data scientists. What we are after in the SVD is the dimensionality reduced data contained in the columns of $\V^T$ (or, if you've created a document-term matrix, the rows of $\U$. 
 
 ## Image Compression {#rappasvd}
+
+While multiplying back to the original data is not generally something we'd like to do, it does provide a nice illustration of noise-reduction and signal-compression when working with images. The following example is not designed to teach you how to work with images for the purposes of data science. It is merely a nice visual way to _see_ what's happening when we truncate the SVD and omit these directions that have "minimal signal." 
 
 
 ### Image data in R
@@ -106,7 +306,7 @@ where $r$ is the rank of the matrix. Our image matrix is full rank, $r=160$. Thi
 d[140:160]
 ```
 
-We can think of these values as the amount of ``information'' directed along those last 20 singular components. If we assume the noise in the image or data is uniformly distributed along each orthogonal component $\mathbf{u}_i\mathbf{v}_i^T$, then there is just as much noise in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$ as there is in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$. But, as we've just shown, there is far less information in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$ than there is in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$. This means that the later components are primarily noise. Let's see if we can illustrate this using our image. We'll construct the parts of the image that are represented on the last few singular components
+We can think of these values as the amount of "information" directed along those last 20 singular components. If we assume the noise in the image or data is uniformly distributed along each orthogonal component $\mathbf{u}_i\mathbf{v}_i^T$, then there is just as much noise in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$ as there is in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$. But, as we've just shown, there is far less information in the component $\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T$ than there is in the component $\sigma_1\mathbf{u}_1\mathbf{v}_1^T$. This means that the later components are primarily noise. Let's see if we can illustrate this using our image. We'll construct the parts of the image that are represented on the last few singular components
 
 (ref:last25) The last 25 components, or the sum of the last 25 terms in equation \@ref(eq:svdsum)
 

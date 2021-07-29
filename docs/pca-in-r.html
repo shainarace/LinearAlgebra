@@ -677,24 +677,24 @@ You can see this on the biplot. The vector shown for Sepal.Length is (0.361, -0.
 <span id="cb127-3"><a href="pca-in-r.html#cb127-3" aria-hidden="true" tabindex="-1"></a>sample.size<span class="ot">=</span><span class="dv">500</span></span>
 <span id="cb127-4"><a href="pca-in-r.html#cb127-4" aria-hidden="true" tabindex="-1"></a>data<span class="ot">=</span><span class="fu">mapply</span>(<span class="cf">function</span>(mu,sig){<span class="fu">rnorm</span>(mu,sig, <span class="at">n=</span>sample.size)},<span class="at">mu=</span>means,<span class="at">sig=</span>sigmas)</span>
 <span id="cb127-5"><a href="pca-in-r.html#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span></code></pre></div>
-<pre><code>##              [,1]        [,2]       [,3]         [,4]
-## [1,]  1.000000000  0.05801779 0.03028081 -0.002021763
-## [2,]  0.058017786  1.00000000 0.06807365 -0.016115270
-## [3,]  0.030280808  0.06807365 1.00000000  0.059542930
-## [4,] -0.002021763 -0.01611527 0.05954293  1.000000000</code></pre>
+<pre><code>##              [,1]         [,2]         [,3]        [,4]
+## [1,]  1.000000000  0.004631157 -0.001606022 -0.01300897
+## [2,]  0.004631157  1.000000000 -0.047758870  0.04828778
+## [3,] -0.001606022 -0.047758870  1.000000000  0.05867241
+## [4,] -0.013008971  0.048287779  0.058672408  1.00000000</code></pre>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="pca-in-r.html#cb129-1" aria-hidden="true" tabindex="-1"></a>pc<span class="ot">=</span><span class="fu">prcomp</span>(data,<span class="at">scale=</span><span class="cn">TRUE</span>)</span>
 <span id="cb129-2"><a href="pca-in-r.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pc)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0541 1.0165 0.9777 0.9486
-## Proportion of Variance 0.2778 0.2583 0.2390 0.2249
-## Cumulative Proportion  0.2778 0.5361 0.7751 1.0000</code></pre>
+## Standard deviation     1.0298 1.0221 0.9995 0.9465
+## Proportion of Variance 0.2651 0.2612 0.2498 0.2240
+## Cumulative Proportion  0.2651 0.5263 0.7760 1.0000</code></pre>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="pca-in-r.html#cb131-1" aria-hidden="true" tabindex="-1"></a>pc<span class="sc">$</span>rotation</span></code></pre></div>
-<pre><code>##            PC1        PC2        PC3        PC4
-## [1,] 0.4702267 -0.3754353 -0.7864846 -0.1392019
-## [2,] 0.5879391 -0.3603447  0.4189828  0.5907054
-## [3,] 0.6146029  0.3301444  0.3230439 -0.6394611
-## [4,] 0.2355371  0.7875308 -0.3186504  0.4719952</code></pre>
+<pre><code>##              PC1          PC2         PC3         PC4
+## [1,]  0.16990220  0.006373112 -0.98137245  0.08944683
+## [2,] -0.01667324 -0.835064957 -0.05814887 -0.54681553
+## [3,] -0.68171582  0.407578128 -0.16857926 -0.58371623
+## [4,] -0.71142026 -0.369467144 -0.07146923  0.59352118</code></pre>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="pca-in-r.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pc)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-53"></span>
 <img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" alt="BiPlot of Iris Data" width="672" />

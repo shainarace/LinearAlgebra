@@ -1,5 +1,7 @@
 # Least Squares {#leastsquares}
 
+## Introducing Error
+
 The least squares problem arises in almost all areas of applied mathematics. In data science, the idea is generally to find an approximate mathematical relationship between predictor and target variables such that the sum of squared errors between the true target values and the predicted target values is minimized. In two dimensions, the goal would be to develop a line as depicted in Figure \@ref(fig:leastsquaresillustrated) such that the sum of squared vertical distances (the residuals, in green) between the true data (in red) and the mathematical prediction (in blue) is minimized.
 
 ```{r fig=T,fig.align='center', label='leastsquaresillustrated', fig.cap = 'Least Squares Illustrated in 2 dimensions', echo=F, fig.width=10}
@@ -110,34 +112,45 @@ knitr::include_graphics('figs/lsproj.jpg')
 
 If you've taken a course in undergraduate calculus, you recall that finding minima and maxima of functions typically involves taking their derivatives and setting them equal to zero. That approach to the derivation of the normal equations will be fruitful, but we first need to understand how to take derivatives of matrix equations. Without teaching vector calculus, we will simply provide the following required formulas for matrix derivatives. If you've taken some undergraduate calculus, perhaps you'll see some parallels. 
 
+While $\frac{\partial}{\partial \mathbf{x}}$ would commonly be the formula reported, we've swapped out the $\mathbf{x}$ for $\boldsymbol \beta$ in the table below in an effort to make our current problem more recognizable.
+
 <table>
 <tr>
 <td> Condition
 <td> Formula
 <tr>
-<td style="text-align:center"> $\mathbf{a}$ is not a function of $\x$
-<td> $\frac{\partial \mathbf{a}}{\partial \mathbf{x}}= \mathbf{0}$
+<td style="text-align:center"> $\mathbf{a}$ is not a function of $\boldsymbol \beta$
+<td> $\frac{\partial \mathbf{a}}{\partial \boldsymbol \beta}= \mathbf{0}$
 <tr>
 <tr>
-<td style="text-align:center"> $\mathbf{a}$ is not a function of $\x$
-<td> $\frac{\partial \mathbf{x}}{\partial \mathbf{x}}= \mathbf{I}$
+<td style="text-align:center"> $\mathbf{a}$ is not a function of $\boldsymbol \beta$
+<td> $\frac{\partial \boldsymbol \beta}{\partial \boldsymbol \beta}= \mathbf{I}$
 <tr>
+<td style="text-align:center"> $\A$ is not a function of $\boldsymbol \beta$
+<td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}T$
 <tr>
-<td style="text-align:center"> $\A$ is not a function of $\x$
-<td> $\frac{\partial \mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= \mathbf{A}$
+<td style="text-align:center"> $\A$ is not a function of $\boldsymbol \beta$
+<td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}\boldsymbol \beta}{\partial \boldsymbol \beta}= (\mathbf{A}+\mathbf{A}^T)\boldsymbol \beta$
 <tr>
-<td style="text-align:center"> $\A$ is not a function of $\x$
-<td> $\frac{\partial \mathbf{x}^T\mathbf{A}}{\partial \mathbf{x}}= \mathbf{A}^T$
-<tr>
-<td style="text-align:center"> $\A$ is not a function of $\x$
-<td> $\frac{\partial \mathbf{x}^T\mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= (\mathbf{A}+\mathbf{A}^T)\mathbf{x}$
-<tr>
-<td style="text-align:center"> $\A$ is not a function of $\x$ <br> $\A$ is symmetric
-<td> $\frac{\partial \mathbf{x}^T\mathbf{A}\mathbf{x}}{\partial \mathbf{x}}= 2\mathbf{A}\mathbf{x}$
-</table
+<td style="text-align:center"> $\A$ is not a function of $\boldsymbol \beta$ <br> $\A$ is symmetric
+<td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}\boldsymbol \beta}{\partial \boldsymbol \beta}= 2\mathbf{A}\boldsymbol \beta$
+</td></tr>
+</table>
+
 
 Now let's start with our objective, which is to minimize sum of squared error, by writing it as the inner product of the vector of residuals with itself:
 $$\boldsymbol \varepsilon^T \boldsymbol \varepsilon = (\mathbf{y}-\mathbf{X}\boldsymbol \beta)^T(\mathbf{y}-\mathbf{X}\boldsymbol \beta)$$
-We'd like to minimize this function with respect to $\boldsymbol \beta$, our vector of unknowns. Thus, our procedure will be to take the derivative with respect to $\boldsymbol \beta$ and set it equal to 0. 
+We'd like to minimize this function with respect to $\boldsymbol \beta$, our vector of unknowns. Thus, our procedure will be to take the derivative with respect to $\boldsymbol \beta$ and set it equal to 0. Note, on the second line of this proof, we take advantage of the fact that $\mathbf{a}^T\mathbf{b} = \mathbf{b}^T\mathbf{a}$ for all $\mathbf{a},\mathbf{b} \in \Re^n$
+
+\begin{eqnarray*}
+\frac{\partial}{\partial \boldsymbol \beta} \left(\boldsymbol \varepsilon^T \boldsymbol \varepsilon\right) 
+&=&
+\frac{\partial}{\partial \boldsymbol \beta} \left(\mathbf{y}^T\mathbf{y} - \mathbf{y}^T(\mathbf{X}\boldsymbol \beta) - (\mathbf{X}\boldsymbol \beta)^T\mathbf{y} + (\mathbf{X}\boldsymbol \beta)^T(\mathbf{X}\boldsymbol \beta)\right)\\
+&=&
+\frac{\partial}{\partial \boldsymbol \beta} \left(\mathbf{y}^T\mathbf{y} -2\mathbf{y}^T(\mathbf{X}\boldsymbol \beta) + \boldsymbol \beta\mathbf{X}^T\mathbf{X}  \boldsymbol \beta \right)\\
+&=& 0 - 2\mathbf{X}^Ty + 2\mathbf{X}^T\mathbf{X}\boldsymbol \beta
+\end{eqnarray*}
+
+Setting the last line equal to zero and solving for $\boldsymbol \beta$ completes the derivation. $\Box$
 
 In Chapter \@ref(lsapp), we'll take a deeper dive into the utility of least squares for applied data science. 

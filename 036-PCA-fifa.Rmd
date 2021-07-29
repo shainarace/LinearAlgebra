@@ -68,15 +68,16 @@ Now let's look at some projections of the players onto those 2 principal compone
 
 ```{r fig=T, fig.align='center', fig.cap="Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident." }
 plot(fifa.pca$x[,1],fifa.pca$x[,2], col=alpha(c('red','blue','green','black')[as.factor(fifa$position)],0.4), pch=16, xlab = 'Principal Component 1', ylab='Principal Component 2', main = 'Projection of Players onto 2 PCs, Colored by Position')
-legend(175,-50, c('Forward','Defense','Midfield','GoalKeeper'), c('red','blue','green','black'), bty = 'n', cex=1.1)
+legend(125,-45, c('Forward','Defense','Midfield','GoalKeeper'), c('red','blue','green','black'), bty = 'n', cex=1.1)
 ```
 
 The plot easily separates the field players from the goal keepers, and the forwards from the defenders. As one might expect, midfielders are sandwiched by the forwards and defenders, as they play both roles on the field. The labeling of player position was imperfect and done using a list of the players' preferred positions, and it's likely we are seeing that in some of the players labeled as midfielders that appear above the cloud of red points. 
 
 We can also attempt a 3-dimensional projection of this data:
 
-```{r fig=T, fig.align='center', fig.cap="Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident."}
+```{r fig=T, fig.align='center', fig.cap="Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.", message=F}
 library(plotly)
+library(processx)
 colors=alpha(c('red','blue','green','black')[as.factor(fifa$position)],0.4)
 graph = plot_ly(x = fifa.pca$x[,1], 
                 y = fifa.pca$x[,2],
@@ -152,8 +153,6 @@ outliers = fifa.pca$x[,1] > quant1h | fifa.pca$x[,1] < quant1l |
 # Here I label them by name, jittering the coordinates of the text so it's more readable
 text(jitter(fifa.pca$x[outliers,1],factor=1), jitter(fifa.pca$x[outliers,2],factor=600), fifa$Name[outliers], cex=0.7)
 ```
-
-
 
 What about by wage? First we need to convert their salary, denominated in Euros, to a numeric variable.
 

@@ -1,12 +1,13 @@
 --- 
-
 author: "Shaina Race Bennett, PhD"
-cover-image: "MSALogo.png"
 date: "`r Sys.Date()`"
 link-citations: yes
 github-repo: rstudio/linalg-master
+title: "Linear Algebra for Data Science"
 description: "A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum"
 always_allow_html: true
+bibliography: Dissertation.bib
+csl: ieee.csl
 ---
 
 #  {-}
@@ -19,7 +20,12 @@ knitr::include_graphics("figs/titlematrix.jpeg")
 
 ## Preface {-} 
 
-This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Factor Analysis, Collaborative Filtering, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we will need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is an intuitive introduction to the most important definitions and concepts that are needed to understand and effectively implement these important data mining methodologies. 
+This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Factor Analysis, Collaborative Filtering, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we will need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is an intuitive introduction to the most important definitions and concepts that are needed to understand and effectively implement these important data mining methodologies. So that we know _how_ to stir the pile...
+
+```{r id='matrixlogo.jpg', fig.align='center', echo=F, out.width="40%"}
+knitr::include_graphics("figs/xkcd.png")
+``` 
+<center>Image source: [https://xkcd.com/1838/](https://xkcd.com/1838/) </center>
 
 ## Structure of the book {-}
 
@@ -30,11 +36,15 @@ This is a work in progress; please check back frequently for updates.
 
 ## About the author {-}
 
-Shaina Race Bennett earned her PhD in Operations Research from NC State in 2014. She was a teaching assistant professor at the Institute for Advanced Analytics from 2014 until 2021 when she joined Fidelity Investments as a Principal Data Scientist. 
+Shaina Race Bennett earned her PhD in Operations Research from NC State in 2014 where she focused on matrix theory and clustering high-dimensional data sets. She was a teaching assistant professor at the Institute for Advanced Analytics from 2014 until 2021 when she joined Fidelity Investments as a Principal Data Scientist. She enjoys bringing linear algebra to life with animations and applications, and would love to hear from you about your experience with this text.
+
+```{r id='matrixlogo.jpg', fig.align='center', echo=F, out.width="40%"}
+knitr::include_graphics("figs/profile.jpeg")
+```
 
 ## Acknowledgements {-}
 
-The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, I strongly suggest the book that contains all of them:
+The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, we strongly suggest the book that contains all of them:
 
 Meyer, Carl D. _Matrix analysis and applied linear algebra_. Vol. 71. Siam, 2000.
 
