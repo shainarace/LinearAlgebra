@@ -60,9 +60,9 @@ The rows of this matrix correspond to observations, in this case a sample of peo
 ## Describing Matrices and Vectors
 
 As we alluded to earlier, **matrices** are simply arrays of numbers which correspond in some way to their rows and columns. The following are examples of matrices:
-$$\A=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \bo{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9\\1&4&1\\1&1&1\\2&0.4&9.99 \end{matrix}\right)$$
+$$\A=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \mathbf{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9\\1&4&1\\1&1&1\\2&0.4&9.99 \end{matrix}\right)$$
 
-In this text, when we denote a matrix, we will always use a bold capital letter like $\bo{A}, \bo{M}, \mbox{or } \bo{D}$. To start, lets cover some basic properties and notation.
+In this text, when we denote a matrix, we will always use a bold capital letter like $\mathbf{A}, \mathbf{M}, \mbox{or } \mathbf{D}$. To start, lets cover some basic properties and notation.
 
 ### Dimension/Size of a Matrix
 
@@ -93,7 +93,7 @@ The dimension of the matrix $\A$ is $6\times 2$ because $\A$ has 6 rows and 2 co
 :::{.exercise name='Determining dimension of a matrix' #dimensions}
 For the following matrices, determine the dimension:
 
-$$\bo{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) \quad \bo{C} = \left(\begin{matrix} .01&.5&1.6&1.7\\ .1&3.5&4&2\\.61&.55&.46&.17\cr1.2&1.5&1.6&1\cr.31&.35&1.3&2.3\\2.3&3.5&.06&.7\\.3&.2&2.1&1.8\end{matrix}\right) \quad \bo{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)$$
+$$\mathbf{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) \quad \mathbf{C} = \left(\begin{matrix} .01&.5&1.6&1.7\\ .1&3.5&4&2\\.61&.55&.46&.17\cr1.2&1.5&1.6&1\cr.31&.35&1.3&2.3\\2.3&3.5&.06&.7\\.3&.2&2.1&1.8\end{matrix}\right) \quad \mathbf{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)$$
 \vspace{1cm}
 :::
 
@@ -186,10 +186,10 @@ The column $$\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{mat
 
 :::{.exercise name='Rows, Columns, and Elements of a Matrix' #ijnot}
 For the matrix
-$$ \bo{L}=\left(\begin{matrix} 3 & -6 & -2\\1 & -4 & 5\\0 & 4 & -5 \end{matrix}\right)$$
+$$ \mathbf{L}=\left(\begin{matrix} 3 & -6 & -2\\1 & -4 & 5\\0 & 4 & -5 \end{matrix}\right)$$
 Write the following elements, rows, or columns:
 \vspace{.5cm}
-$$L_{23}= \qquad\qquad L_{31}= \qquad\qquad \bo{L}_{\star 2}= \qquad\qquad \bo{L}_{1 \star}=\qquad\qquad$$
+$$L_{23}= \qquad\qquad L_{31}= \qquad\qquad \mathbf{L}_{\star 2}= \qquad\qquad \mathbf{L}_{1 \star}=\qquad\qquad$$
 \vspace{1cm}
 :::
 
@@ -265,12 +265,12 @@ $$C_{13}=-0.9 \quad \mbox{Indicates that }\,x_1\,\,\mbox{and}\,\,x_3\,\,\mbox{ha
 
 Now that we've introduced the concept of a matrix, let's talk about vectors. A **vector** are merely a special type of matrix, one that consists of only a single row or column. They are essentially ordered lists of numbers. For example:
 
-$$\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \bo{z}=\left(\begin{matrix} 3 & 5 & 1 & 0 & 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)$$
-are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\bo{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \bo{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
+$$\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \mathbf{z}=\left(\begin{matrix} 3 & 5 & 1 & 0 & 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)$$
+are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\mathbf{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \mathbf{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
 
 You may wonder now why the notation is so particular, but as we get into the subject it will be come clear that some convention must be retained if we are going to understand an equation. If we write an equation like
-$$\A\x=\b \qquad \mbox{or} \qquad \bo{M}\y=\alpha\y$$
-We have to know what it represents - in the first case, we are dealing with a matrix $\A$, and two vectors $\x$ and $\b$; in the second case we are dealing with a matrix $\bo{M}$, a vector $\y$, and a scalar, $\alpha$.
+$$\A\x=\b \qquad \mbox{or} \qquad \mathbf{M}\y=\alpha\y$$
+We have to know what it represents - in the first case, we are dealing with a matrix $\A$, and two vectors $\x$ and $\b$; in the second case we are dealing with a matrix $\mathbf{M}$, a vector $\y$, and a scalar, $\alpha$.
 
 :::{.exercise name='Matrix, Vector, and Scalar Notation' #matnot}
 For the following quantities, indicate whether the notation indicates a Matrix, Scalar, or Vector.
@@ -328,9 +328,9 @@ _Note: If we transpose the transpose of a matrix, we will get back the original 
 
 :::{.example name='Transpose of a Matrix or Vector' #transpose}
 For the following matrices and vectors, determine the transpose:
-$$\B=\left(\begin{matrix} 2 & -3 & -4 \\5&-6&-7\\-8&9&0 \end{matrix}\right) \qquad \bo{M}=\left(\begin{matrix} -1&2\\-3&6\\7&-9\\5&-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)$$
+$$\B=\left(\begin{matrix} 2 & -3 & -4 \\5&-6&-7\\-8&9&0 \end{matrix}\right) \qquad \mathbf{M}=\left(\begin{matrix} -1&2\\-3&6\\7&-9\\5&-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)$$
 To find the transpose, we simply create new matrices whose rows are the corresponding columns of each matrix or vector:
-$$\B^T=\left(\begin{matrix} 2 &5& -8\\-3&-6&9\\-4&-7&0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&-3&7&5\\2&6&-9&-1 \end{matrix}\right) $$ $$\x^T = \left(\begin{matrix} 3&-4&5&6 \end{matrix}\right)$$
+$$\B^T=\left(\begin{matrix} 2 &5& -8\\-3&-6&9\\-4&-7&0\end{matrix}\right) \qquad \mathbf{M}^T = \left(\begin{matrix}-1&-3&7&5\\2&6&-9&-1 \end{matrix}\right) $$ $$\x^T = \left(\begin{matrix} 3&-4&5&6 \end{matrix}\right)$$
 :::
 
 :::{.definition name='Symmetric Matrix' #symdef}
@@ -388,8 +388,8 @@ While we're on the subject of diagonal elements, let's take the opportunity to i
 ## Special Matrices and Vectors {#special}
 
 :::{.definition name='Identity Matrix' #identity}
-The bold capital letter $\bo{I}$ will always to denote the **identity matrix**. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
-$$\bo{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
+The bold capital letter $\mathbf{I}$ will always to denote the **identity matrix**. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
+$$\mathbf{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
 						0 & 1 & 0 & 0\\
 						0&0&1&0\\
 						0&0&0&1 \end{matrix}\right)$$
@@ -397,16 +397,16 @@ $$\bo{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
 
 
 :::{.definition name='Elementary Vectors' #elemvectors}
-The bold lowercase $\bo{e}_j$ is used to refer to the $j^{th}$ column of $\bo{I}$. It is simply a vector of zeros with a one in the $j^{th}$ position. We do not often specify the size of the vector $\bo{e}_j$, the number of elements is generally assumed from the context of the problem.
+The bold lowercase $\mathbf{e}_j$ is used to refer to the $j^{th}$ column of $\mathbf{I}$. It is simply a vector of zeros with a one in the $j^{th}$ position. We do not often specify the size of the vector $\mathbf{e}_j$, the number of elements is generally assumed from the context of the problem.
 
-$$\bo{e}_j=\begin{matrix}
+$$\mathbf{e}_j=\begin{matrix}
 \begin{matrix} ~ \\~\\~\\~\\j^{th}\text{row} \rightarrow \\ ~\\~\\~ \end{matrix} & 
   \begin{pmatrix}0\\0\\ \vdots \\0\\1\\0\\ \vdots\\0\end{pmatrix}\\\\
 \end{matrix}$$
 
-The vector $\bo{e}$ with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced $\textbf{1}$.
+The vector $\mathbf{e}$ with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced $\textbf{1}$.
 
-$$\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
+$$\mathbf{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
 :::		
 
 The elementary vectors described in Definition \@ref(def:elemvectors) create the coordinate axes of $n$-space. For illustrative purposes, let's consider $2$-space. The elementary vectors in $2$-space are:
@@ -421,12 +421,12 @@ knitr::include_graphics("figs/elemvectors.jpg")
 :::{.definition name='Diagonal Matrix' #diag}
 A **diagonal matrix** is a matrix for which off-diagonal elements, $\A_{ij},\,i\ne j$ are zero.
 For example:
-$$\bo{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
+$$\mathbf{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
 						0 & \sigma_2 & 0 & 0\\
 						0&0&\sigma_3&0\\
 						0&0&0&\sigma_4 \end{matrix}\right)$$
 Since the off diagonal elements are 0, we need only define the diagonal elements for such a matrix. Thus, we will frequently write
-$$\bo{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$$
+$$\mathbf{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$$
 or simply $$D_{ii} = \sigma_i.$$
 :::
 
@@ -436,7 +436,7 @@ From the preceding definitions, it should be clear that diagonal and identity ma
 :::{.exercise name='Trace and Special Matrices' #traceexer}
 Write out the following matrices and then compute their Trace, if possible:
 
-$$\I_5 \qquad \bo{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4$$
+$$\I_5 \qquad \mathbf{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4$$
 \vspace{1.5cm}
 :::
 
@@ -476,23 +476,26 @@ $$Tr(\A)=\sum_{i=1}^n A_{ii}.$$
 
 <ol> 
 <li>Use the following matrices or vectors to answer the following questions:
-$$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \quad \mathbf{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
-\mathbf{D} = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) \\
-
-\mathbf{X}=\left(\begin{matrix} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{matrix}\right) \quad
-\mathbf{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
-\mathbf{v}=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \mathbf{u}=\left(\begin{matrix} 6&4&8&1\end{matrix}\right)$$
+\begin{equation*}
+\mathbf{A}=\left(\begin{array}{ccc} 1&3&8\\3&0&-2\\4&1&-3 \end{array}\right) \quad \mathbf{M}=\left(\begin{array}{cccc} 1&8&-2&5\\2&8&1&7 \end{array}\right) \quad 
+\mathbf{D} = \left(\begin{array}{ccc} 1&0&0\\0&5&0\\0&0&3\end{array}\right) 
+\end{equation*}
+\begin{equation*}
+\mathbf{X}=\left(\begin{array}{cc} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{array}\right) \quad
+\mathbf{t} = \left(\begin{array}{c} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{array}\right) \quad 
+\mathbf{v}=\left(\begin{array}{c} 6\\3\\-1\\2\end{array}\right) \quad \mathbf{u}=\left(\begin{array}{cccc} 6&4&8&1\end{array}\right)
+\end{equation*}
 
 <ol style="list-style-type:lower-alpha">
   <li> Write the appropriate size/dimensions next to each matrix:
 <ol style="list-style-type:lower-roman">
   <li> $\mathbf{A}$  
   <li> $\mathbf{M}$  
-  <li> $\mathbf{D}$  
-  <li> $\mathbf{X}  $  
-  <li> $\mathbf{t}  $  
-  <li> $\mathbf{v}  $  
-  <li> $\mathbf{u}  $  
+  <li> $\mathbf{D}$
+  <li> $\mathbf{X}$  
+  <li> $\mathbf{t}$  
+  <li> $\mathbf{v}$  
+  <li> $\mathbf{u}$  
 </ol>
 
   <li> Which of these matrices are square? Which are rectangular?
@@ -502,7 +505,7 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
   <li> $A_{12}=$   
   <li> $M_{21}=$   
   <li> $\D_{\star3}=$  
-  <li> $\bo{M}_{2\star}=$   
+  <li> $\mathbf{M}_{2\star}=$   
   <li> $X_{42}=$  
   <li> $t_5=$   
   <li> $v_3=$  
@@ -516,22 +519,22 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
 <li> For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.
 <ol style="list-style-type:lower-alpha">
   <li>  $$\A=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$  
-  <li>  $$\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$  
+  <li>  $$\mathbf{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$  
   <li>  $$\B=\left(\begin{matrix}   B_{11}&B_{12}&B_{13}\\B_{21}&B_{22}&B_{23}\\B_{31}&B_{32}&B_{33}\\B_{41}&B_{42}&B_{43}\end{matrix}\right)$$  
   <li>  $$\C=\left(\begin{matrix} 1 & 0.3 & -0.9 & 0.1\\0.3 & 1 & 0.8 & -0.5\\-0.9&0.8&1&-0.6\\0.1&-0.5&-0.6&1 \end{matrix}\right)$$  
   <li>  $$\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2$$  
 </ol>
 <li> For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:
 <ol style="list-style-type:lower-alpha">
-  <li> $\bo{H}$  
-  <li> $\bo{W}$  
+  <li> $\mathbf{H}$  
+  <li> $\mathbf{W}$  
   <li> $n$  
-  <li> $\v_2  $  
-  <li> $v_2  $  
-  <li> $\bo{M}_{\star 2} $  
-  <li> $\lambda $  
-  <li> $A_{ij} $  
-  <li> $\bo{r} $  
+  <li> $\v_2$  
+  <li> $v_2$  
+  <li> $\mathbf{M}_{\star 2}$  
+  <li> $\lambda$  
+  <li> $A_{ij}$  
+  <li> $\mathbf{r}$  
 </ol>
 
 <li> The matrix $\C$ from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of $\C$? For any correlation matrix computed using $p$ variables, what should we expect the trace to be?
@@ -555,21 +558,21 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
   <li> If we define a matrix $\S$ as
 $$S_{ij} = height(person_i) - height(person_j)$$
 is the matrix $\S$ symmetric? What is the trace($\S$)?  
-  <li> If instead we create a matrix $\bo{G}$ where
+  <li> If instead we create a matrix $\mathbf{G}$ where
 $$G_{ij} = [height(person_i) - height(person_j)]^2$$
-is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?  
+is the matrix $\mathbf{G}$ symmetric? What is the trace($\mathbf{G}$)?  
 </ol>
 
 
 <li> Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.
 
 <li> Use the network shown below to answer the following questions.  
-```{r fig.align='center', fig.cap = 'Graph (Network) for exercise 11', echo=F, fig.width=6}
+```{r fig.align='center', fig.cap = 'Graph (Network) for exercise 11', echo=F, out.width="60%"}
 knitr::include_graphics('figs/graphex.jpg')
 ```
 <ol style="list-style-type:lower-alpha">  
   <li>  Write down the adjacency matrix, $\A$, for this graph where $\A_{ij}$ reflects the weight of the edge connecting vertex $i$ and vertex $j$.   
-  <li>  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\bo{d}$ such that $d_i$ is the degree of node $i$.  
+  <li>  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\mathbf{d}$ such that $d_i$ is the degree of node $i$.  
 </ol>
 
 

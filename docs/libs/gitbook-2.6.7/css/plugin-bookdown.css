@@ -84,37 +84,12 @@ span.search-highlight {
     border-bottom: none;
 }
 
-span.theorem, span.definition, span.exercise, span.example {
+div.theorem, div.lemma, div.corollary, div.proposition, div.conjecture {
   font-style: italic;
 }
-span.theorem, span.definition {
+span.theorem, span.lemma, span.corollary, span.proposition, span.conjecture {
   font-style: normal;
 }
-
-div.theorem, div.definition{
-  background: #ccffe6;
-  max-width: 900px;
-  max-height: 30000px;
-  position: relative ;
-  border: 3px solid #00e673;
-  font-style: normal;
-  padding: 10px;
-  margin: 15px;
-}
-
-div.example, div.exercise{
-  background: #cce6ff;
-  max-width: 900px;
-  max-height: 3000px;
-  position: relative ;
-  border: 3px solid #1a8cff;
-  font-style: normal;
-  padding: 10px;
-  margin: 15px;
-
-}
-
-
 div.proof>*:last-child:after {
   content: "\25a2";
   float: right;

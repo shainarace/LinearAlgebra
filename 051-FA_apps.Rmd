@@ -1,10 +1,5 @@
-# Factor Analysis {#fa-apps}
+## Methods of Factor Analysis {#fa-apps}
 
-```{r, echo=F}
-thmcounter=0
-excounter=0
-cid='fa-apps'
-```
 
 Factor Analysis is much like PCA in that it attempts to find some latent variables (linear combinations of original variables) which can describe large portions of the total variance in data. There are numerous ways to compute factors for factor analysis, the two most common methods are:
 
@@ -21,7 +16,7 @@ The difference between Factor Analysis and PCA is two-fold:
 
 We'll talk more about the first difference than the second because it generally carries more advantages.
 
-## PCA Rotations
+### PCA Rotations
 Let's first talk about the motivation behind principal component rotations. Compare the following sets of (fabricated) factors, both using the variables from the iris dataset. Listed below are the loadings of each variable on two factors. Which set of factors is more easily interpretted? 
 
 <!-- \mathbf{b}egin{center} -->
@@ -76,7 +71,7 @@ rotatedpca$loadings
 # because you didn't even tell it what the original data was!
 ```
 
-## Ex: Personality Tests
+## Case Study: Personality Tests
 
 In this example, we'll use a publicly available dataset that describes personality traits of nearly 
 Read in the Big5 Personality test dataset, which contains likert scale responses (five point scale where 1=Disagree, 3=Neutral, 5=Agree. 0 = missing) on 50 different questions in columns 8 through 57. The questions, labeled E1-E10 (E=extroversion), N1-N10 (N=neuroticism), A1-A10 (A=agreeableness), C1-C10 (C=conscientiousness), and O1-O10 (O=openness) all attempt to measure 5 key angles of human personality. The first 7 columns contain demographic information coded as follows:

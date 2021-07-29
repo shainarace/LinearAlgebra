@@ -4,19 +4,19 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 25 Algorithms for Graph Partitioning | Linear Algebra for Data Science</title>
+  <title>Chapter 22 Algorithms for Graph Partitioning | Linear Algebra for Data Science</title>
   <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 25 Algorithms for Graph Partitioning | Linear Algebra for Data Science" />
+  <meta property="og:title" content="Chapter 22 Algorithms for Graph Partitioning | Linear Algebra for Data Science" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
-  <meta name="github-repo" content="rstudio/linalg-master" />
+  <meta name="github-repo" content="shainarace/linearalgebra" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 25 Algorithms for Graph Partitioning | Linear Algebra for Data Science" />
+  <meta name="twitter:title" content="Chapter 22 Algorithms for Graph Partitioning | Linear Algebra for Data Science" />
   
   <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-28" />
+<meta name="date" content="2021-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="findk.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="clusteralgos.html"/>
+<link rel="next" href="validation.html"/>
 <script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -303,9 +303,22 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>1.1</b> What is Linear Algebra?</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>1.2</b> Why Linear Algebra</a></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a></li>
-<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#dimensionsize-of-a-matrix"><i class="fa fa-check"></i><b>1.3.1</b> Dimension/Size of a Matrix</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ij-notation"><i class="fa fa-check"></i><b>1.3.2</b> <span class="math inline">\((i,j)\)</span> Notation</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-defining-social-networks"><i class="fa fa-check"></i>Example: Defining social networks</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#introcorr"><i class="fa fa-check"></i><b>1.3.3</b> Example: Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector-geometry-n-space"><i class="fa fa-check"></i><b>1.4.1</b> Vector Geometry: <span class="math inline">\(n\)</span>-space</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#transpose"><i class="fa fa-check"></i><b>1.5.1</b> Transpose</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#trace-of-a-matrix"><i class="fa fa-check"></i><b>1.5.2</b> Trace of a Matrix</a></li>
+</ul></li>
 <li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
 <li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
 <li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
@@ -315,7 +328,13 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>2.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
 <li class="chapter" data-level="2.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>2.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
 <li class="chapter" data-level="2.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>2.3</b> Linear Combinations</a></li>
-<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a></li>
+<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="mult.html"><a href="mult.html#the-inner-product"><i class="fa fa-check"></i><b>2.4.1</b> The Inner Product</a></li>
+<li class="chapter" data-level="2.4.2" data-path="mult.html"><a href="mult.html#matrix-product"><i class="fa fa-check"></i><b>2.4.2</b> Matrix Product</a></li>
+<li class="chapter" data-level="2.4.3" data-path="mult.html"><a href="mult.html#matrix-vector-product"><i class="fa fa-check"></i><b>2.4.3</b> Matrix-Vector Product</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#linear-combination-view-of-matrix-products"><i class="fa fa-check"></i>Linear Combination view of Matrix Products</a></li>
+</ul></li>
 <li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
 <li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
 <li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
@@ -323,7 +342,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a></li>
+<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multapp.html"><a href="multapp.html#big-systems-of-equations"><i class="fa fa-check"></i><b>3.1.1</b> <em>Big</em> Systems of Equations</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Regression Analysis</a></li>
 <li class="chapter" data-level="3.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
 <li class="chapter" data-level="3.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
@@ -331,10 +353,27 @@ div.csl-indent {
 <li class="chapter" data-level="4" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>4</b> R Programming Basics</a></li>
 <li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a></li>
-<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a></li>
-<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a></li>
-<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a></li>
+<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="solvesys.html"><a href="solvesys.html#row-operations"><i class="fa fa-check"></i><b>5.1.1</b> Row Operations</a></li>
+<li class="chapter" data-level="5.1.2" data-path="solvesys.html"><a href="solvesys.html#the-augmented-matrix"><i class="fa fa-check"></i><b>5.1.2</b> The Augmented Matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination-summary"><i class="fa fa-check"></i><b>5.1.3</b> Gaussian Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-summary"><i class="fa fa-check"></i><b>5.2.1</b> Gauss-Jordan Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="solvesys.html"><a href="solvesys.html#uniquesol"><i class="fa fa-check"></i><b>5.3.1</b> The Unique Solution Case</a></li>
+<li class="chapter" data-level="5.3.2" data-path="solvesys.html"><a href="solvesys.html#inconsistent"><i class="fa fa-check"></i><b>5.3.2</b> The Inconsistent Case</a></li>
+<li class="chapter" data-level="5.3.3" data-path="solvesys.html"><a href="solvesys.html#infinitesol"><i class="fa fa-check"></i><b>5.3.3</b> The Infinite Solutions Case</a></li>
+<li class="chapter" data-level="5.3.4" data-path="solvesys.html"><a href="solvesys.html#matrix-rank"><i class="fa fa-check"></i><b>5.3.4</b> Matrix Rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="solvesys.html"><a href="solvesys.html#solving-for-the-inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.4.1</b> Solving for the Inverse of a Matrix</a></li>
+</ul></li>
 <li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
 <li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
 <li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
@@ -342,13 +381,26 @@ div.csl-indent {
 <li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
-<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a></li>
-<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="norms.html"><a href="norms.html#norm-star_1."><i class="fa fa-check"></i><b>6.2.1</b> 1-norm, <span class="math inline">\(\|\star\|_1\)</span>.</a></li>
+<li class="chapter" data-level="6.2.2" data-path="norms.html"><a href="norms.html#infty-norm-star_infty."><i class="fa fa-check"></i><b>6.2.2</b> <span class="math inline">\(\infty\)</span>-norm, <span class="math inline">\(\|\star\|_{\infty}\)</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="norms.html"><a href="norms.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="norms.html"><a href="norms.html#mahalanobis-distance"><i class="fa fa-check"></i><b>6.3.2</b> Mahalanobis Distance</a></li>
+<li class="chapter" data-level="6.3.3" data-path="norms.html"><a href="norms.html#angular-distance"><i class="fa fa-check"></i><b>6.3.3</b> Angular Distance</a></li>
+<li class="chapter" data-level="6.3.4" data-path="norms.html"><a href="norms.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> Correlation</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a></li>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linind.html"><a href="linind.html#determining-linear-independence"><i class="fa fa-check"></i><b>7.1.1</b> Determining Linear Independence</a></li>
+</ul></li>
 <li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
 <li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
 <li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
@@ -368,12 +420,25 @@ div.csl-indent {
 <li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
-<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="leastsquares.html"><a href="leastsquares.html#geometrical-interpretation"><i class="fa fa-check"></i><b>10.2.1</b> Geometrical Interpretation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="leastsquares.html"><a href="leastsquares.html#calculus-derivation"><i class="fa fa-check"></i><b>10.2.2</b> Calculus Derivation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="lsapp.html"><a href="lsapp.html#cars-data"><i class="fa fa-check"></i><b>11.1.1</b> Cars Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="lsapp.html"><a href="lsapp.html#setting-up-the-normal-equations"><i class="fa fa-check"></i><b>11.1.2</b> Setting up the Normal Equations</a></li>
+<li class="chapter" data-level="11.1.3" data-path="lsapp.html"><a href="lsapp.html#solving-for-parameter-estimates-and-statistics"><i class="fa fa-check"></i><b>11.1.3</b> Solving for Parameter Estimates and Statistics</a></li>
+<li class="chapter" data-level="11.1.4" data-path="lsapp.html"><a href="lsapp.html#ols-in-r-via-lm"><i class="fa fa-check"></i><b>11.1.4</b> OLS in R via <code>lm()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="lsapp.html"><a href="lsapp.html#bike-sharing-dataset"><i class="fa fa-check"></i><b>11.2.1</b> Bike Sharing Dataset</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
 <ul>
@@ -385,15 +450,42 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.1</b> Geometrical comparison with Least Squares</a></li>
 <li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.2</b> Covariance or Correlation Matrix?</a></li>
-<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.3</b> PCA in R</a></li>
-<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.4</b> Variable Clustering with PCA</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.3</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="pca.html"><a href="pca.html#covariance-pca"><i class="fa fa-check"></i><b>13.3.1</b> Covariance PCA</a></li>
+<li class="chapter" data-level="13.3.2" data-path="pca.html"><a href="pca.html#principal-components-loadings-and-variance-explained"><i class="fa fa-check"></i><b>13.3.2</b> Principal Components, Loadings, and Variance Explained</a></li>
+<li class="chapter" data-level="13.3.3" data-path="pca.html"><a href="pca.html#scores-and-pca-projection"><i class="fa fa-check"></i><b>13.3.3</b> Scores and PCA Projection</a></li>
+<li class="chapter" data-level="13.3.4" data-path="pca.html"><a href="pca.html#pca-functions-in-r"><i class="fa fa-check"></i><b>13.3.4</b> PCA functions in R</a></li>
+<li class="chapter" data-level="13.3.5" data-path="pca.html"><a href="pca.html#the-biplot"><i class="fa fa-check"></i><b>13.3.5</b> The Biplot</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.4</b> Variable Clustering with PCA</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="pca.html"><a href="pca.html#correlation-pca"><i class="fa fa-check"></i><b>13.4.1</b> Correlation PCA</a></li>
+<li class="chapter" data-level="13.4.2" data-path="pca.html"><a href="pca.html#which-projection-is-better"><i class="fa fa-check"></i><b>13.4.2</b> Which Projection is Better?</a></li>
+<li class="chapter" data-level="13.4.3" data-path="pca.html"><a href="pca.html#beware-of-biplots"><i class="fa fa-check"></i><b>13.4.3</b> Beware of biplots</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a></li>
-<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a></li>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="pcaapp.html"><a href="pcaapp.html#feature-selection"><i class="fa fa-check"></i><b>14.1.1</b> Feature Selection</a></li>
+<li class="chapter" data-level="14.1.2" data-path="pcaapp.html"><a href="pcaapp.html#feature-extraction"><i class="fa fa-check"></i><b>14.1.2</b> Feature Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="pcaapp.html"><a href="pcaapp.html#uk-food-consumption"><i class="fa fa-check"></i><b>14.2.1</b> UK Food Consumption</a></li>
+</ul></li>
 <li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
-<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="pcaapp.html"><a href="pcaapp.html#computing-the-pca"><i class="fa fa-check"></i><b>14.4.1</b> Computing the PCA</a></li>
+<li class="chapter" data-level="14.4.2" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package"><i class="fa fa-check"></i><b>14.4.2</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.3" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package-1"><i class="fa fa-check"></i><b>14.4.3</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.4" data-path="pcaapp.html"><a href="pcaapp.html#variance-explained"><i class="fa fa-check"></i><b>14.4.4</b> Variance explained</a></li>
+<li class="chapter" data-level="14.4.5" data-path="pcaapp.html"><a href="pcaapp.html#using-correlation-pca"><i class="fa fa-check"></i><b>14.4.5</b> Using Correlation PCA</a></li>
+<li class="chapter" data-level="14.4.6" data-path="pcaapp.html"><a href="pcaapp.html#range-standardization-as-an-alternative-to-covariance-pca"><i class="fa fa-check"></i><b>14.4.6</b> Range standardization as an alternative to covariance PCA</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
 <ul>
@@ -403,62 +495,136 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a></li>
-<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a></li>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="svdapp.html"><a href="svdapp.html#note-about-rows-vs.-columns"><i class="fa fa-check"></i><b>16.1.1</b> Note About Rows vs. Columns</a></li>
+<li class="chapter" data-level="16.1.2" data-path="svdapp.html"><a href="svdapp.html#term-weighting"><i class="fa fa-check"></i><b>16.1.2</b> Term Weighting</a></li>
+<li class="chapter" data-level="16.1.3" data-path="svdapp.html"><a href="svdapp.html#other-considerations"><i class="fa fa-check"></i><b>16.1.3</b> Other Considerations</a></li>
+<li class="chapter" data-level="16.1.4" data-path="svdapp.html"><a href="svdapp.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.1.4</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="16.1.5" data-path="svdapp.html"><a href="svdapp.html#example"><i class="fa fa-check"></i><b>16.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="svdapp.html"><a href="svdapp.html#image-data-in-r"><i class="fa fa-check"></i><b>16.2.1</b> Image data in R</a></li>
+<li class="chapter" data-level="16.2.2" data-path="svdapp.html"><a href="svdapp.html#computing-the-svd-of-dr.-rappa"><i class="fa fa-check"></i><b>16.2.2</b> Computing the SVD of Dr. Rappa</a></li>
+<li class="chapter" data-level="16.2.3" data-path="svdapp.html"><a href="svdapp.html#the-noise"><i class="fa fa-check"></i><b>16.2.3</b> The Noise</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
-<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="fa.html"><a href="fa.html#visual-examination-of-correlation-matrix"><i class="fa fa-check"></i><b>17.2.1</b> Visual Examination of Correlation Matrix</a></li>
+<li class="chapter" data-level="17.2.2" data-path="fa.html"><a href="fa.html#barletts-sphericity-test"><i class="fa fa-check"></i><b>17.2.2</b> Barlett’s Sphericity Test</a></li>
+<li class="chapter" data-level="17.2.3" data-path="fa.html"><a href="fa.html#kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy"><i class="fa fa-check"></i><b>17.2.3</b> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</a></li>
+</ul></li>
 <li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
 <li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
 <li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="fa-apps.html"><a href="fa-apps.html"><i class="fa fa-check"></i><b>18</b> Factor Analysis</a>
+<li class="chapter" data-level="17.6" data-path="fa.html"><a href="fa.html#fa-apps"><i class="fa fa-check"></i><b>17.6</b> Methods of Factor Analysis</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="fa-apps.html"><a href="fa-apps.html#pca-rotations"><i class="fa fa-check"></i><b>18.1</b> PCA Rotations</a></li>
-<li class="chapter" data-level="18.2" data-path="fa-apps.html"><a href="fa-apps.html#ex-personality-tests"><i class="fa fa-check"></i><b>18.2</b> Ex: Personality Tests</a></li>
+<li class="chapter" data-level="17.6.1" data-path="fa.html"><a href="fa.html#pca-rotations"><i class="fa fa-check"></i><b>17.6.1</b> PCA Rotations</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>19</b> Dimension Reduction for Visualization</a>
+<li class="chapter" data-level="17.7" data-path="fa.html"><a href="fa.html#case-study-personality-tests"><i class="fa fa-check"></i><b>17.7</b> Case Study: Personality Tests</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>19.1</b> Multidimensional Scaling</a></li>
+<li class="chapter" data-level="17.7.1" data-path="fa.html"><a href="fa.html#raw-pca-factors"><i class="fa fa-check"></i><b>17.7.1</b> Raw PCA Factors</a></li>
+<li class="chapter" data-level="17.7.2" data-path="fa.html"><a href="fa.html#rotated-principal-components"><i class="fa fa-check"></i><b>17.7.2</b> Rotated Principal Components</a></li>
+<li class="chapter" data-level="17.7.3" data-path="fa.html"><a href="fa.html#visualizing-rotation-via-biplots"><i class="fa fa-check"></i><b>17.7.3</b> Visualizing Rotation via BiPlots</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>20</b> Social Network Analysis</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>20.1</b> Working with Network Data</a></li>
-<li class="chapter" data-level="20.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>20.2</b> Network Visualization - <code>igraph</code> package</a></li>
 </ul></li>
-<li class="part"><span><b>I Clustering</b></span></li>
-<li class="chapter" data-level="21" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>21</b> Introduction</a>
+<li class="chapter" data-level="18" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>18</b> Dimension Reduction for Visualization</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>21.1</b> Mathematical Setup</a></li>
-<li class="chapter" data-level="21.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>21.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
-<li class="chapter" data-level="21.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>21.3</b> Partitioning of Graphs and Networks</a></li>
-<li class="chapter" data-level="21.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>21.4</b> History of Data Clustering</a></li>
+<li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Data Clustering</a>
+</ul></li>
+<li class="chapter" data-level="19" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>19</b> Social Network Analysis</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>22.1</b> Hierarchical Algorithms</a></li>
-<li class="chapter" data-level="22.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>22.2</b> Iterative Partitional Algorithms</a></li>
-<li class="chapter" data-level="22.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>22.3</b> Density Search Algorithms</a></li>
+<li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Clustering</b></span></li>
+<li class="chapter" data-level="20" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>20.1</b> Mathematical Setup</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="clusintro.html"><a href="clusintro.html#data"><i class="fa fa-check"></i><b>20.1.1</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>20.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="20.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>20.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="20.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>20.4</b> History of Data Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>21</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>21.1</b> Hierarchical Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="clusteralgos.html"><a href="clusteralgos.html#agglomerative-hierarchical-clustering"><i class="fa fa-check"></i><b>21.1.1</b> Agglomerative Hierarchical Clustering</a></li>
+<li class="chapter" data-level="21.1.2" data-path="clusteralgos.html"><a href="clusteralgos.html#principal-direction-divisive-partitioning-pddp"><i class="fa fa-check"></i><b>21.1.2</b> Principal Direction Divisive Partitioning (PDDP)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>21.2</b> Iterative Partitional Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="clusteralgos.html"><a href="clusteralgos.html#early-partitional-algorithms"><i class="fa fa-check"></i><b>21.2.1</b> Early Partitional Algorithms</a></li>
+<li class="chapter" data-level="21.2.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeans"><i class="fa fa-check"></i><b>21.2.2</b> <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="21.2.3" data-path="clusteralgos.html"><a href="clusteralgos.html#the-expectation-maximization-em-clustering-algorithm"><i class="fa fa-check"></i><b>21.2.3</b> The Expectation-Maximization (EM) Clustering Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>21.3</b> Density Search Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="clusteralgos.html"><a href="clusteralgos.html#density-based-spacial-clustering-of-applications-with-noise-dbscan"><i class="fa fa-check"></i><b>21.3.1</b> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="clusteralgos.html"><a href="clusteralgos.html#conclusion"><i class="fa fa-check"></i><b>21.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>22.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="22.2" data-path="chap1-5.html"><a href="chap1-5.html#fiedler-partitioning"><i class="fa fa-check"></i><b>22.2</b> Fiedler Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="chap1-5.html"><a href="chap1-5.html#linear-algebraic-motivation-for-the-fiedler-vector"><i class="fa fa-check"></i><b>22.2.1</b> Linear Algebraic Motivation for the Fiedler vector</a></li>
+<li class="chapter" data-level="22.2.2" data-path="chap1-5.html"><a href="chap1-5.html#graph-cuts"><i class="fa fa-check"></i><b>22.2.2</b> Graph Cuts</a></li>
+<li class="chapter" data-level="22.2.3" data-path="chap1-5.html"><a href="chap1-5.html#pic"><i class="fa fa-check"></i><b>22.2.3</b> Power Iteration Clustering</a></li>
+<li class="chapter" data-level="22.2.4" data-path="chap1-5.html"><a href="chap1-5.html#modularity"><i class="fa fa-check"></i><b>22.2.4</b> Clustering via Modularity Maximization</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>22.3</b> Stochastic Clustering</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering-algorithm-sca"><i class="fa fa-check"></i><b>22.3.1</b> Stochastic Clustering Algorithm (SCA)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a></li>
-<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a></li>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="validation.html"><a href="validation.html#common-measures-of-cohesion-and-separation"><i class="fa fa-check"></i><b>23.1.1</b> Common Measures of Cohesion and Separation</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="validation.html"><a href="validation.html#accuracy"><i class="fa fa-check"></i><b>23.2.1</b> Accuracy</a></li>
+<li class="chapter" data-level="23.2.2" data-path="validation.html"><a href="validation.html#entropy"><i class="fa fa-check"></i><b>23.2.2</b> Entropy</a></li>
+<li class="chapter" data-level="23.2.3" data-path="validation.html"><a href="validation.html#purity"><i class="fa fa-check"></i><b>23.2.3</b> Purity</a></li>
+<li class="chapter" data-level="23.2.4" data-path="validation.html"><a href="validation.html#mutual-information-mi-and-normalized-mutual-information-nmi"><i class="fa fa-check"></i><b>23.2.4</b> Mutual Information (MI) and <br> Normalized Mutual Information (NMI)</a></li>
+<li class="chapter" data-level="23.2.5" data-path="validation.html"><a href="validation.html#other-external-measures-of-validity"><i class="fa fa-check"></i><b>23.2.5</b> Other External Measures of Validity</a></li>
+<li class="chapter" data-level="23.2.6" data-path="validation.html"><a href="validation.html#summary-table"><i class="fa fa-check"></i><b>23.2.6</b> Summary Table</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
 <ul>
 <li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
-<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="findk.html"><a href="findk.html#cosine-cohesion-plots-for-text-data"><i class="fa fa-check"></i><b>24.2.1</b> Cosine-Cohesion Plots for Text Data</a></li>
+<li class="chapter" data-level="24.2.2" data-path="findk.html"><a href="findk.html#ray-and-turis-method"><i class="fa fa-check"></i><b>24.2.2</b> Ray and Turi’s Method</a></li>
+<li class="chapter" data-level="24.2.3" data-path="findk.html"><a href="findk.html#the-gap-statistic"><i class="fa fa-check"></i><b>24.2.3</b> The Gap Statistic</a></li>
+</ul></li>
 <li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>25</b> Algorithms for Graph Partitioning</a>
-<ul>
-<li class="chapter" data-level="25.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>25.1</b> Spectral Clustering</a></li>
-<li class="chapter" data-level="25.2" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>25.2</b> Stochastic Clustering</a></li>
-</ul></li>
-<li class="chapter" data-level="26" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>26</b> References</a></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -479,14 +645,14 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chap1.5" class="section level1" number="25">
-<h1><span class="header-section-number">Chapter 25</span> Algorithms for Graph Partitioning</h1>
-<div id="spectral" class="section level2" number="25.1">
-<h2><span class="header-section-number">25.1</span> Spectral Clustering</h2>
+<div id="chap1.5" class="section level1" number="22">
+<h1><span class="header-section-number">Chapter 22</span> Algorithms for Graph Partitioning</h1>
+<div id="spectral" class="section level2" number="22.1">
+<h2><span class="header-section-number">22.1</span> Spectral Clustering</h2>
 <p>Spectral clustering is a term that data-miners have given to the partitioning problem as it arose in graph theory. The theoretical framework for spectral clustering was laid in 1973 by Miroslav Fiedler <span class="citation"><a href="#ref-fiedlerev" role="doc-biblioref">[30]</a>, <a href="#ref-fiedlerac" role="doc-biblioref">[31]</a></span>. We will begin with a discussion of this early work, and then take a look at how others have adapted the framework to meet the needs of data clustering. In this setting, we have a graph <span class="math inline">\(G\)</span> on a set of vertices <span class="math inline">\(N=\{1,2,\dots,n\}\)</span> with edge set <span class="math inline">\(E=\{(i,j) : i,j \in N \mbox{and} i \leftrightarrow j\}\)</span>. Edges between the vertices are recorded in an <em>adjacency matrix</em> <span class="math inline">\(\A = (a_{ij})\)</span>, where <span class="math inline">\(a_{ij}\)</span> is equal to the weight of the edge connecting vertex (object) <span class="math inline">\(i\)</span> and vertex <span class="math inline">\(j\)</span> and <span class="math inline">\(a_{ij}=0\)</span> if <span class="math inline">\((i,j) \notin E\)</span>. For the immediate discussion, we will assume the graph has no “self-loops,” i.e. <span class="math inline">\(a_{ii}=0 \forall i\)</span>.
 Spectral clustering algorithms typically involve the <em>Laplacian matrix</em> associated with a graph. A Laplacian matrix is defined as follows:</p>
 <div class="definition">
-<p><span id="def:laplaciandef" class="definition"><strong>Definition 25.1  (The Laplacian Matrix) </strong></span>The <em>Laplacian Matrix</em>, <span class="math inline">\(\mathbf{L}\)</span>, of an undirected, weighted graph with adjacency matrix <span class="math inline">\(\A=(a_{ij})\)</span> and diagonal degree matrix <span class="math inline">\(\mathbf{D}=\mbox{diag}(\A\e)\)</span> is:
+<p><span id="def:laplaciandef" class="definition"><strong>Definition 22.1  (The Laplacian Matrix) </strong></span>The <em>Laplacian Matrix</em>, <span class="math inline">\(\mathbf{L}\)</span>, of an undirected, weighted graph with adjacency matrix <span class="math inline">\(\A=(a_{ij})\)</span> and diagonal degree matrix <span class="math inline">\(\mathbf{D}=\mbox{diag}(\A\e)\)</span> is:
 <span class="math display">\[\mathbf{L}=\mathbf{D}-\A\]</span></p>
 </div>
 <p>The Laplacian matrix is symmetric, singular, and positive semi-definite. To see this third property, construct an <span class="math inline">\(n \times |E|\)</span> “vertex-edge incidence” matrix <span class="math inline">\(\U\)</span> with rows corresponding to vertices and columns corresponding to edges. Allow the edges of the original graph to be directed arbitrarily, and set
@@ -501,13 +667,21 @@ Spectral clustering algorithms typically involve the <em>Laplacian matrix</em> a
  \]</span></p>
 <p>Then <span class="math inline">\(\mathbf{L}=\U\U^T\)</span> is positive semi-definite <span class="citation"><a href="#ref-fiedlerac" role="doc-biblioref">[31]</a></span>. <span class="math inline">\(\mathbf{L}\)</span> gives rise to a nice quadratic form:</p>
 <p><span class="math display" id="eq:quadlaplacian">\[\begin{equation}
-\tag{25.1}
+\tag{22.1}
  \mathbf{y}^T \mathbf{L} \mathbf{y} = \sum_{(i,j) \in E}a_{ij} (y_i - y_j)^2.
  \end{equation}\]</span></p>
-Let <span class="math inline">\(\sigma(\mathbf{L})=\{\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\}\)</span> be the spectrum of <span class="math inline">\(\mathbf{L}\)</span>. Since <span class="math inline">\(\mathbf{L}\)</span> is positive semi-definite, <span class="math inline">\(\lambda_i \geq 0 \forall i\)</span>. Also, since the row sums of <span class="math inline">\(\mathbf{L}\)</span> are zero, <span class="math inline">\(\lambda_1=0\)</span>. Furthermore if the graph, <span class="math inline">\(G\)</span>, is composed of <span class="math inline">\(k\)</span> connected components, each disconnected from each other, then <span class="math inline">\(\lambda_1=\lambda_2=\dots=\lambda_k = 0\)</span> and <span class="math inline">\(\lambda_j \geq 0 \mbox{ for } j\geq k+1\)</span>. In <span class="citation"><a href="#ref-FiedlerAC" role="doc-biblioref"><strong>FiedlerAC?</strong></a></span> Fiedler defined the <em>algebraic connectivity</em> of the graph as the second smallest eigenvalue, <span class="math inline">\(\lambda_2\)</span>, because its magnitude provides information about how easily the graph is to be disconnected into two components. Later, in <span class="citation"><a href="#ref-fiedlerev" role="doc-biblioref">[30]</a></span>, he alluded to the utility of the eigenvector associated with <span class="math inline">\(\lambda_2\)</span> in determining this two-component decomposition of a graph.
-## Fiedler Partitioning
+<p>Let <span class="math inline">\(\sigma(\mathbf{L})=\{\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\}\)</span> be the spectrum of <span class="math inline">\(\mathbf{L}\)</span>. Since <span class="math inline">\(\mathbf{L}\)</span> is positive semi-definite, <span class="math inline">\(\lambda_i \geq 0 \forall i\)</span>. Also, since the row sums of <span class="math inline">\(\mathbf{L}\)</span> are zero, <span class="math inline">\(\lambda_1=0\)</span>. Furthermore if the graph, <span class="math inline">\(G\)</span>, is composed of <span class="math inline">\(k\)</span> connected components, each disconnected from each other, then <span class="math inline">\(\lambda_1=\lambda_2=\dots=\lambda_k = 0\)</span> and <span class="math inline">\(\lambda_j \geq 0 \mbox{ for } j\geq k+1\)</span>. In <span class="citation"><a href="#ref-fiedlerac" role="doc-biblioref">[31]</a></span> Fiedler defined the <em>algebraic connectivity</em> of the graph as the second smallest eigenvalue, <span class="math inline">\(\lambda_2\)</span>, because its magnitude provides information about how easily the graph is to be disconnected into two components. Later, in <span class="citation"><a href="#ref-fiedlerev" role="doc-biblioref">[30]</a></span>, he alluded to the utility of the eigenvector associated with <span class="math inline">\(\lambda_2\)</span> in determining this two-component decomposition of a graph.</p>
+</div>
+<div id="fiedler-partitioning" class="section level2" number="22.2">
+<h2><span class="header-section-number">22.2</span> Fiedler Partitioning</h2>
 Suppose we wish to decompose our graph into two components (or clusters of vertices) <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> where the edges exist more frequently and with higher weight inside the clusters than between the two clusters. In other words, we intend to make an <em>edge-cut</em> disconnecting the graph into two clusters. It is desired that the resulting partition satisfies the following objectives:
-<p>To begin with, lets take the quadratic form in  and let <span class="math inline">\(\y\)</span> be a vector that determines the cluster membership of each vertex as follows:
+<ol>
+<li>
+minimize the total weight of edges cut (edges in between components)
+<li>
+maximize the total weight of edges inside the two components.
+</ol>
+<p>To begin with, lets take the quadratic form in Equation <a href="#quadlaplacian"><strong>??</strong></a> and let <span class="math inline">\(\y\)</span> be a vector that determines the cluster membership of each vertex as follows:
 <span class="math display">\[
 \y_i=\left\{
      \begin{array}{lr}
@@ -516,45 +690,45 @@ Suppose we wish to decompose our graph into two components (or clusters of verti
      \end{array}
    \right.
  \]</span>
-Our first goal is then to minimize  over all such vectors <span class="math inline">\(\y\)</span>:
-<span class="math display" id="eq:mincut">\[\begin{equation}
-\tag{25.2}
+Our first goal is then to minimize Equation <a href="chap1-5.html#eq:quadlaplacian">(22.1)</a> over all such vectors <span class="math inline">\(\y\)</span>:</p>
+<p><span class="math display" id="eq:mincut">\[\begin{equation}
+\tag{22.2}
 \min_{\y} \y^T \mathbf{L} \y = \sum_{(i,j) \in E} a_{ij} (\y_i-\y_j)^2 = 2 \sum_{\substack{(i,j) \in E \\i \in C_1, j \in C_2}} 4 a_{ij}
 \end{equation}\]</span></p>
 <p>Note that the final sum is doubled to reflect the fact that each edge connecting <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> will be counted twice. However, the above formulation is incomplete because it does not take into account the second objective, which is to maximize the total weight of edges inside the two components. Indeed it seems the minimum solution to Equation <a href="#mincut"><strong>??</strong></a> would often involve cutting all of the edges adjacent to a single vertex of minimal degree, disconnecting the graph into components of size <span class="math inline">\(1\)</span> and <span class="math inline">\(n-1\)</span>, which is generally undesirable. In addition, the above optimization problem is NP-hard. To solve the latter problem, the objective function is relaxed from discrete to continuous. By the Rayleigh theorem,
-<span class="math display">\[\min_{\|\y\|_2=1} \y^T\mathbf{L} \y = \lambda_1\]</span> with <span class="math inline">\(\y^*\)</span> being the eigenvector corresponding to the smallest eigenvalue. However, for the Laplacian matrix, <span class="math inline">\(y^*=\e\)</span>. In context, this makes sense - in order to minimize the weight of edges cut, we should simply assign all vertices to one cluster, leaving the second empty. In order to divide the vertices into two clusters we need an additional constraint on <span class="math inline">\(\y\)</span>. Since clusters of relatively balanced size are desirable, a natural constraint is <span class="math inline">\(\y^T\e=0\)</span>. By the Courant-Fischer theorem,
-<span class="math display" id="eq:fiedlercut">\[\begin{equation}
-\tag{25.3}
+<span class="math display">\[\min_{\|\y\|_2=1} \y^T\mathbf{L} \y = \lambda_1\]</span> with <span class="math inline">\(\y^*\)</span> being the eigenvector corresponding to the smallest eigenvalue. However, for the Laplacian matrix, <span class="math inline">\(y^*=\e\)</span>. In context, this makes sense - in order to minimize the weight of edges cut, we should simply assign all vertices to one cluster, leaving the second empty. In order to divide the vertices into two clusters we need an additional constraint on <span class="math inline">\(\y\)</span>. Since clusters of relatively balanced size are desirable, a natural constraint is <span class="math inline">\(\y^T\e=0\)</span>. By the Courant-Fischer theorem,</p>
+<p><span class="math display" id="eq:fiedlercut">\[\begin{equation}
+\tag{22.3}
 \min_{\substack{\| \y \|_2=1 \\ \y^T \e=0}} \y^T \mathbf{L} \y = \lambda_2
-\end{equation}\]</span>
-with <span class="math inline">\(\y^*=\textbf{v}_2\)</span> being the eigenvector corresponding to the second smallest eigenvalue, <span class="math inline">\(\lambda_2\)</span>. This vector is often referred to as the <em>Fiedler vector</em> after the man who identified its usefulness in graph partitioning. We define the Fiedler graph partition as follows:</p>
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(\y^*=\textbf{v}_2\)</span> being the eigenvector corresponding to the second smallest eigenvalue, <span class="math inline">\(\lambda_2\)</span>. This vector is often referred to as the <em>Fiedler vector</em> after the man who identified its usefulness in graph partitioning. We define the Fiedler graph partition as follows:</p>
 <div class="definition">
-<p><span id="def:fiedlerpart" class="definition"><strong>Definition 25.2  (Fiedler Graph Partition) </strong></span>Let <span class="math inline">\(G=(N,E)\)</span> be a connected graph on vertex set <span class="math inline">\(N=\{1,2,\dots,n\}\)</span> with adjacency matrix <span class="math inline">\(\A\)</span>. Let <span class="math inline">\(\mathbf{L}=\mathbf{D}-\A\)</span> be the Laplacian matrix of <span class="math inline">\(G\)</span>. Let <span class="math inline">\(\textbf{v}_2\)</span> be an eigenvector corresponding to the second smallest eigenvalue of <span class="math inline">\(\mathbf{L}\)</span>. The <strong>Fiedler partition</strong> is:
-<span class="math display">\[\begin{eqnarray*}
+<p><span id="def:fiedlerpart" class="definition"><strong>Definition 22.2  (Fiedler Graph Partition) </strong></span>Let <span class="math inline">\(G=(N,E)\)</span> be a connected graph on vertex set <span class="math inline">\(N=\{1,2,\dots,n\}\)</span> with adjacency matrix <span class="math inline">\(\A\)</span>. Let <span class="math inline">\(\mathbf{L}=\mathbf{D}-\A\)</span> be the Laplacian matrix of <span class="math inline">\(G\)</span>. Let <span class="math inline">\(\textbf{v}_2\)</span> be an eigenvector corresponding to the second smallest eigenvalue of <span class="math inline">\(\mathbf{L}\)</span>. The <strong>Fiedler partition</strong> is:</p>
+<p><span class="math display">\[\begin{eqnarray*}
 C_1 &amp;=&amp; \{i \in N : \textbf{v}_2(i) &lt;0\}\\
 C_2 &amp;=&amp; \{i \in N : \textbf{v}_2(i) &gt;0\}
 \end{eqnarray*}\]</span>
 Vertices <span class="math inline">\(j\)</span>, for which <span class="math inline">\(\textbf{v}_2(j)=0\)</span>, can be arbitrarily placed into either cluster.</p>
 </div>
-<p>There is no uniform agreement on how to determine the cluster membership of vertices for which <span class="math inline">\(\textbf{v}_2(j)=0\)</span>. The decision to make the assignment arbitrarily comes from experimental results that indicate in <em>some scenarios</em> these zero valuated vertices are equally drawn to either cluster. Situations where there are a large proportion of zero valuated vertices may be indicative of a graph which does not conform well to Fiedler’s partition, and we suggest the user tread lightly in these cases. Figure <a href="chap1-5.html#fig:ptsart">25.1</a> shows the experimental motivation for our arbitrary assignment of zero valuated vertices. The vertices in these graphs are labelled according to the sign of the corresponding entry in <span class="math inline">\(\textbf{v}_2\)</span>. We highlight the red vertex and watch how its sign in <span class="math inline">\(\textbf{v}_2\)</span> changes as nodes and edges are added to the graph.</p>
+<p>There is no uniform agreement on how to determine the cluster membership of vertices for which <span class="math inline">\(\textbf{v}_2(j)=0\)</span>. The decision to make the assignment arbitrarily comes from experimental results that indicate in <em>some scenarios</em> these zero valuated vertices are equally drawn to either cluster. Situations where there are a large proportion of zero valuated vertices may be indicative of a graph which does not conform well to Fiedler’s partition, and we suggest the user tread lightly in these cases. Figure <a href="chap1-5.html#fig:ptsart">22.1</a> shows the experimental motivation for our arbitrary assignment of zero valuated vertices. The vertices in these graphs are labelled according to the sign of the corresponding entry in <span class="math inline">\(\textbf{v}_2\)</span>. We highlight the red vertex and watch how its sign in <span class="math inline">\(\textbf{v}_2\)</span> changes as nodes and edges are added to the graph.</p>
 <div class="figure" style="text-align: center"><span id="fig:ptsart"></span>
 <img src="figs/ptsart.jpg" alt="Fiedler Partitions and Zero Valuated Vertices" width="75%" />
 <p class="caption">
-Figure 25.1: Fiedler Partitions and Zero Valuated Vertices
+Figure 22.1: Fiedler Partitions and Zero Valuated Vertices
 </p>
 </div>
-<p>In order to create more than two clusters, the Fiedler graph partition can be performed iteratively, by examining the subgraphs induced by the vertices in <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> and partitioning each based upon their own Fiedler vector, or in an extended fashion using multiple eigenvectors. This iterative method requires a cluster to be chosen for further division, perhaps based upon the algebraic connectivity of the cluster. It is also possible to use the sign patterns in subsequent eigenvectors to further partition the graph. This approach is called Extended Fiedler Clustering and is discussed in Section <a href="chap1-5.html#extendedfiedler">25.1.1.1</a>. First, let’s take a more rigorous look at why the sign patterns of the Fiedler vector provide us with a partition.</p>
-<div id="linear-algebraic-motivation-for-the-fiedler-vector" class="section level3" number="25.1.1">
-<h3><span class="header-section-number">25.1.1</span> Linear Algebraic Motivation for the Fiedler vector</h3>
-<p>The relaxation proposed in Equation <a href="chap1-5.html#eq:fiedlercut">(25.3)</a> does not give us a general understanding of why the sign patterns of the Fiedler vector are useful in determining cluster membership information. We will use the following facts:</p>
+<p>In order to create more than two clusters, the Fiedler graph partition can be performed iteratively, by examining the subgraphs induced by the vertices in <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> and partitioning each based upon their own Fiedler vector, or in an extended fashion using multiple eigenvectors. This iterative method requires a cluster to be chosen for further division, perhaps based upon the algebraic connectivity of the cluster. It is also possible to use the sign patterns in subsequent eigenvectors to further partition the graph. This approach is called Extended Fiedler Clustering and is discussed in Section <a href="chap1-5.html#extendedfiedler">22.2.1.1</a>. First, let’s take a more rigorous look at why the sign patterns of the Fiedler vector provide us with a partition.</p>
+<div id="linear-algebraic-motivation-for-the-fiedler-vector" class="section level3" number="22.2.1">
+<h3><span class="header-section-number">22.2.1</span> Linear Algebraic Motivation for the Fiedler vector</h3>
+<p>The relaxation proposed in Equation <a href="chap1-5.html#eq:fiedlercut">(22.3)</a> does not give us a general understanding of why the sign patterns of the Fiedler vector are useful in determining cluster membership information. We will use the following facts:</p>
 <div class="lemma">
-<p><span id="lem:flem1" class="lemma"><strong>Lemma 25.1  (Fiedler Lemma 1) </strong></span>Let <span class="math inline">\(\mathbf{L}=\mathbf{D}-\A\)</span> be a Laplacian matrix for a graph <span class="math inline">\(G=(V,E)\)</span> with <span class="math inline">\(|V|=n\)</span>. Let <span class="math inline">\(\sigma(L)=\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\)</span> Then <span class="math inline">\(\mathbf{L}\)</span> is symmetric and positive semi-definite with <span class="math inline">\(\lambda_1=0\)</span>.</p>
+<p><span id="lem:flem1" class="lemma"><strong>Lemma 22.1  (Fiedler Lemma 1) </strong></span>Let <span class="math inline">\(\mathbf{L}=\mathbf{D}-\A\)</span> be a Laplacian matrix for a graph <span class="math inline">\(G=(V,E)\)</span> with <span class="math inline">\(|V|=n\)</span>. Let <span class="math inline">\(\sigma(L)=\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\)</span> Then <span class="math inline">\(\mathbf{L}\)</span> is symmetric and positive semi-definite with <span class="math inline">\(\lambda_1=0\)</span>.</p>
 </div>
 <div class="lemma">
-<p><span id="lem:flem2" class="lemma"><strong>Lemma 25.2  (Fiedler Lemma 2) </strong></span><span class="math inline">\(\lambda_2(L)=0\)</span> if and only if the graph <span class="math inline">\(G\)</span> has 2 components, <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> which are completely disconnected from each other (i.e. there are no edges connecting the vertices in <span class="math inline">\(C_1\)</span> to the vertices in <span class="math inline">\(C_2\)</span>.</p>
+<p><span id="lem:flem2" class="lemma"><strong>Lemma 22.2  (Fiedler Lemma 2) </strong></span><span class="math inline">\(\lambda_2(L)=0\)</span> if and only if the graph <span class="math inline">\(G\)</span> has 2 components, <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> which are completely disconnected from each other (i.e. there are no edges connecting the vertices in <span class="math inline">\(C_1\)</span> to the vertices in <span class="math inline">\(C_2\)</span>.)</p>
 </div>
 <div class="lemma">
-<p><span id="lem:flem3" class="lemma"><strong>Lemma 25.3  (Fiedler Lemma 3) </strong></span>Let <span class="math inline">\(\mathbf{M}\)</span> be a symmetric matrix of rank <span class="math inline">\(r\)</span>. Let
+<p><span id="lem:flem3" class="lemma"><strong>Lemma 22.3  (Fiedler Lemma 3) </strong></span>Let <span class="math inline">\(\mathbf{M}\)</span> be a symmetric matrix of rank <span class="math inline">\(r\)</span>. Let
 <span class="math display">\[\mathbf{M} = \mathbf{V} \mathbf{D}  \mathbf{V}^T = (\textbf{v}_1, \textbf{v}_2, \dots, \textbf{v}_r)
 \left(
 \begin{matrix}
@@ -599,7 +773,7 @@ Then <span class="math inline">\(\widetilde{\mathbf{M}}\)</span> is given by the
 <span class="math display">\[\textbf{v}_2 = \alpha(\mathbf{u}_1-\frac{n_1}{n_2} \mathbf{u}_2).\]</span></p>
 <p>The case when <span class="math inline">\(\mathbf{L}\)</span> is <em>not</em> disconnected into two components is far more interesting, as this is generally the problem encountered in practice. We will start with a connected graph, so that our Laplacian matrix has rank <span class="math inline">\(n-1\)</span>. Let the spectral decomposition of our Laplacian matrix <span class="math inline">\(\mathbf{L}\)</span> (which is equivalent to its singular value decomposition because <span class="math inline">\(\mathbf{L}\)</span> is symmetric) be:
 <span class="math display">\[\mathbf{L}=\sum_{i=2}^n \lambda_i \textbf{v}_i \textbf{v}_i^T.\]</span>
-Let <span class="math inline">\(\widetilde{\mathbf{L}}\)</span> be the closest rank <span class="math inline">\(n-2\)</span> approximation to <span class="math inline">\(\mathbf{L}\)</span>. Then, by Lemmas <a href="chap1-5.html#lem:flem2">25.2</a> and <a href="chap1-5.html#lem:flem3">25.3</a>,
+Let <span class="math inline">\(\widetilde{\mathbf{L}}\)</span> be the closest rank <span class="math inline">\(n-2\)</span> approximation to <span class="math inline">\(\mathbf{L}\)</span>. Then, by Lemmas <a href="chap1-5.html#lem:flem2">22.2</a> and <a href="chap1-5.html#lem:flem3">22.3</a>,
 <span class="math display">\[\widetilde{\mathbf{L}} = \sum_{i=3}^n \lambda_i  \textbf{v}_i \textbf{v}_i^T\]</span>
 and there exists a permutation matrix <span class="math inline">\(\mathbf{P}\)</span> such that</p>
 <p><span class="math display">\[
@@ -633,8 +807,8 @@ Thus, if
 \end{matrix} \right)
 \end{equation*}\]</span></p>
 <p>where <span class="math inline">\(\mathbf{a} \in \Re^{n_1}\)</span> and <span class="math inline">\(\mathbf{b} \in \Re^{n_2}\)</span></p>
-<div id="extendedfiedler" class="section level4" number="25.1.1.1">
-<h4><span class="header-section-number">25.1.1.1</span> Extended Fiedler Clustering</h4>
+<div id="extendedfiedler" class="section level4" number="22.2.1.1">
+<h4><span class="header-section-number">22.2.1.1</span> Extended Fiedler Clustering</h4>
 <p>In the extended Fiedler algorithm, we use the sign patterns of entries in the first <span class="math inline">\(l\)</span> eigenvectors of <span class="math inline">\(\mathbf{L}\)</span> to create up to <span class="math inline">\(k=2^l\)</span> clusters. For instance, suppose we had 10 vertices, and used the <span class="math inline">\(l=3\)</span> eigenvectors <span class="math inline">\(\textbf{v}_2,\textbf{v}_3,\mbox{ and }\textbf{v}_4\)</span>. Suppose the sign of the entries in these eigenvectors are recorded as follows:
 <span class="math display">\[
        \begin{array}{cc} &amp; \begin{array}{ccc} \mathbf{v}_2 &amp; \mathbf{v}_3&amp;\mathbf{v}_4 \end{array}\cr
@@ -671,19 +845,19 @@ Then the 10 vertices are clustered as follows:
        \{9\}.
      \]</span>
 Extended Fiedler makes clustering the data into a specified number of clusters <span class="math inline">\(k\)</span> difficult, but may be able determine a natural choice for <span class="math inline">\(k\)</span> as it partitions the data along several eigenvectors.</p>
-<p>In a 1990 paper by Pothen, Simon and Liou, an alternative formulation of the Fiedler partition is proposed <span class="citation"><a href="#ref-pothen" role="doc-biblioref">[25]</a></span>. Rather than partition the vertices based upon the sign of their corresponding entries in <span class="math inline">\(\mathbf{v}_2\)</span>, the vector <span class="math inline">\(\mathbf{v}_2\)</span> is instead divided at its median value. The main motivation for this approach was to split the vertices into sets of equal size. In 2003, Ding et al. derived an objective function for determining an ideal split point for similar partitions using the second eigenvector of the <em>normalized</em> Laplacian, defined in Section <a href="#ncut"><strong>??</strong></a> <span class="citation"><a href="#ref-minmax" role="doc-biblioref">[26]</a></span>. The basic idea outlined above has been adapted and altered hundreds if not thousands of times in the past 20 years. The present discussion is meant merely as an introduction to the literature.</p>
+<p>In a 1990 paper by Pothen, Simon and Liou, an alternative formulation of the Fiedler partition is proposed <span class="citation"><a href="#ref-pothen" role="doc-biblioref">[25]</a></span>. Rather than partition the vertices based upon the sign of their corresponding entries in <span class="math inline">\(\mathbf{v}_2\)</span>, the vector <span class="math inline">\(\mathbf{v}_2\)</span> is instead divided at its median value. The main motivation for this approach was to split the vertices into sets of equal size. In 2003, Ding et al. derived an objective function for determining an ideal split point for similar partitions using the second eigenvector of the <em>normalized</em> Laplacian, defined in Section <a href="chap1-5.html#ncut">22.2.2.2</a> <span class="citation"><a href="#ref-minmax" role="doc-biblioref">[26]</a></span>. The basic idea outlined above has been adapted and altered hundreds if not thousands of times in the past 20 years. The present discussion is meant merely as an introduction to the literature.</p>
 </div>
 </div>
-<div id="graph-cuts" class="section level3" number="25.1.2">
-<h3><span class="header-section-number">25.1.2</span> Graph Cuts</h3>
-<p>The majority of spectral algorithms are derived as alterations of the objective function in Equation <a href="chap1-5.html#eq:fiedlercut">(25.3)</a>.The idea is the same: partition the graph into two components by means of a minimized edge cut, while requiring that the two components remain somewhat balanced in size (i.e. do not simply isolate a small number of vertices). Two common objective functions which embody this idea are the ratio cut (RatioCut) <span class="citation"><a href="#ref-ratiocut" role="doc-biblioref">[23]</a></span>, the normalized cut (Ncut) <span class="citation"><a href="#ref-shi" role="doc-biblioref">[54]</a></span>.</p>
-<div id="ratio-cut" class="section level4" number="25.1.2.1">
-<h4><span class="header-section-number">25.1.2.1</span> Ratio Cut</h4>
+<div id="graph-cuts" class="section level3" number="22.2.2">
+<h3><span class="header-section-number">22.2.2</span> Graph Cuts</h3>
+<p>The majority of spectral algorithms are derived as alterations of the objective function in Equation <a href="chap1-5.html#eq:fiedlercut">(22.3)</a>.The idea is the same: partition the graph into two components by means of a minimized edge cut, while requiring that the two components remain somewhat balanced in size (i.e. do not simply isolate a small number of vertices). Two common objective functions which embody this idea are the ratio cut (RatioCut) <span class="citation"><a href="#ref-ratiocut" role="doc-biblioref">[23]</a></span>, the normalized cut (Ncut) <span class="citation"><a href="#ref-shi" role="doc-biblioref">[54]</a></span>.</p>
+<div id="ratio-cut" class="section level4" number="22.2.2.1">
+<h4><span class="header-section-number">22.2.2.1</span> Ratio Cut</h4>
 <p>The ratio cut objective function was first introduced by Hagen and Kahng in 1992 <span class="citation"><a href="#ref-ratiocut" role="doc-biblioref">[23]</a></span>. Given a graph <span class="math inline">\(G(V,E)\)</span> with vertex set <span class="math inline">\(V\)</span> partitioned into <span class="math inline">\(k\)</span> disjoint clusters, <span class="math inline">\(V_1,V_2,\dots V_k\)</span>, the <strong>ratio cut</strong> of the given partition is defined as
 <span class="math display">\[\mbox{RatioCut}(V_1,V_2,\dots,V_k) = \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{|V_i|}\]</span>
 where <span class="math inline">\(|V_i|\)</span> is the number of vertices in <span class="math inline">\(V_i\)</span>, <span class="math inline">\(\bar{V_i}\)</span> is the complement of the set <span class="math inline">\(V_i\)</span> and, given two vertex sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math inline">\(w(A,B)\)</span> is the sum of the weights of the edges between vertices in <span class="math inline">\(A\)</span> and vertices in <span class="math inline">\(B\)</span>. Let <span class="math inline">\(\mathbf{H}\)</span> be an <span class="math inline">\(n\times k\)</span> matrix indicating cluster membership of vertices by its entries:
 <span class="math display" id="eq:ratioH">\[\begin{equation}
-\tag{25.4}
+\tag{22.4}
  \mathbf{H}_{ij}=
  \begin{cases}
 \frac{1}{\sqrt{|V_j|}}, &amp; \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
@@ -692,7 +866,7 @@ where <span class="math inline">\(|V_i|\)</span> is the number of vertices in <s
 \end{equation}\]</span></p>
 <p>Then <span class="math inline">\(\mathbf{H}^T\mathbf{H}=\mathbf{I}\)</span> and minimizing the ratio cut over all possible partitionings is equivalent to minimizing
 <span class="math display">\[f(\mathbf{H}) = \mbox{Trace}(\mathbf{H}^T\mathbf{L}\mathbf{H})\]</span>
-over all matrices <span class="math inline">\(\mathbf{H}\)</span> described by Equation <a href="chap1-5.html#eq:ratioH">(25.4)</a>, where <span class="math inline">\(\mathbf{L}\)</span> is the Laplacian matrix from Definition <a href="chap1-5.html#def:laplaciandef">25.1</a>. The exact minimization of this objective function is again NP-hard, but relaxing the conditions on <span class="math inline">\(\mathbf{H}\)</span> to <span class="math inline">\(\mathbf{H}^T\mathbf{H}=\mathbf{I}\)</span> yields a solution <span class="math inline">\(\mathbf{H}^*\)</span> with columns containing the eigenvectors of <span class="math inline">\(\mathbf{L}\)</span> corresponding to the <span class="math inline">\(k\)</span> smallest eigenvalues.</p>
+over all matrices <span class="math inline">\(\mathbf{H}\)</span> described by Equation <a href="chap1-5.html#eq:ratioH">(22.4)</a>, where <span class="math inline">\(\mathbf{L}\)</span> is the Laplacian matrix from Definition <a href="chap1-5.html#def:laplaciandef">22.1</a>. The exact minimization of this objective function is again NP-hard, but relaxing the conditions on <span class="math inline">\(\mathbf{H}\)</span> to <span class="math inline">\(\mathbf{H}^T\mathbf{H}=\mathbf{I}\)</span> yields a solution <span class="math inline">\(\mathbf{H}^*\)</span> with columns containing the eigenvectors of <span class="math inline">\(\mathbf{L}\)</span> corresponding to the <span class="math inline">\(k\)</span> smallest eigenvalues.</p>
 <p>Unfortunately, after this relaxation it is not necessarily possible to automatically determine from <span class="math inline">\(\mathbf{H}^*\)</span> which vertices belong to each cluster. Instead, it is necessary to look for clustering patterns in the rows of <span class="math inline">\(\mathbf{H}^*\)</span>. This is a common conceptual drawback of the relaxation of objective functions in spectral clustering. The best way to procede after the relaxation is to cluster the rows of <span class="math inline">\(\mathbf{H}^*\)</span> with an algorithm like <span class="math inline">\(k\)</span>-means to determine a final clustering. The ratio cut minimization method is generally referred to as <em>unnormalized spectral clustering</em> <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>. The algorithm is as follows:</p>
 <table>
 <tr>
@@ -711,10 +885,12 @@ Cluster the points <span class="math inline">\(\mathbf{y}_i \in \Re^k\)</span> w
 <strong>Output</strong>: Clusters <span class="math inline">\(C_1,\dots,C_k\)</span> such that <span class="math inline">\(C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|\)</span>
 </table>
 <caption>
-<span id="tab:algratiocut">Table 25.1: </span> Unnormalized Spectral Clustering (RatioCut) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
+<span id="tab:algratiocut">Table 22.1: </span> Unnormalized Spectral Clustering (RatioCut) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
 </caption>
-<p><br>
-#### Normalized Cut (Ncut) {#ncut}</p>
+<p><br></p>
+</div>
+<div id="ncut" class="section level4" number="22.2.2.2">
+<h4><span class="header-section-number">22.2.2.2</span> Normalized Cut (Ncut)</h4>
 <p>The normalized cut objective function was introduced by Shi and Malik in 2000 <span class="citation"><a href="#ref-shi" role="doc-biblioref">[54]</a></span>. Given a graph <span class="math inline">\(G(V,E)\)</span> with vertex set <span class="math inline">\(V\)</span> partitioned into <span class="math inline">\(k\)</span> disjoint clusters, <span class="math inline">\(V_1,V_2,\dots V_k\)</span>, the <strong>normalized cut</strong> of the given partition is defined as
 <span class="math display">\[\mbox{Ncut}(V_1,V_2,\dots,V_k)= \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{\mbox{vol}(V_i)},\]</span>
 where <span class="math inline">\(\mbox{vol}(V_i)\)</span> is the sum of the weights of the edges connecting the vertices in <span class="math inline">\(V_i\)</span>. Whereas the size of a subgraph <span class="math inline">\(V_i\)</span> in the ratio cut formulation is measured by the number of vertices <span class="math inline">\(|V_i|\)</span>, in the normalized cut formulation it is measured by the total weight of the edges in the subgraph.
@@ -726,10 +902,10 @@ Thus, minimizing the normalized cut is equivalent to minimizing
 \frac{1}{\sqrt{\mbox{vol}(V_j)}}, &amp; \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
 0 &amp; \text{otherwise.}
 \end{cases}
-\tag{25.5}
+\tag{22.5}
 \end{equation}\]</span></p>
-With <span class="math inline">\(\mathbf{H}^T \mathbf{D} \mathbf{H} = \mathbf{I}\)</span> where <span class="math inline">\(\mathbf{D}\)</span> is the diagonal degree matrix from Definition <a href="chap1-5.html#def:laplaciandef">25.1</a>. Thus, to relax the problem, we substitute <span class="math inline">\(\mathbf{G}=\mathbf{D}^{1/2}\mathbf{H}\)</span> and minimize
-<span class="math display">\[f(\mathbf{G})=\mathbf{G}^T \mathscr{L} \mathbf{G}\]</span> subject to <span class="math inline">\(\mathbf{G}^T\mathbf{G}=\mathbf{I}\)</span>, where <span class="math inline">\(\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}\)</span> is called the <strong>normalized Laplacian</strong>. Similarly, the solution to the relaxed problem is the matrix <span class="math inline">\(\mathbf{G}^*\)</span> with columns containing eigenvectors associated with the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(\mathscr{L}\)</span>. Again, the immediate interpretation of the entries in <span class="math inline">\(\mathbf{G}^*\)</span> is lost in the relaxation and so a clustering algorithm like <span class="math inline">\(k\)</span>-means is used to determine the patterns.
+<p>With <span class="math inline">\(\mathbf{H}^T \mathbf{D} \mathbf{H} = \mathbf{I}\)</span> where <span class="math inline">\(\mathbf{D}\)</span> is the diagonal degree matrix from Definition <a href="chap1-5.html#def:laplaciandef">22.1</a>. Thus, to relax the problem, we substitute <span class="math inline">\(\mathbf{G}=\mathbf{D}^{1/2}\mathbf{H}\)</span> and minimize
+<span class="math display">\[f(\mathbf{G})=\mathbf{G}^T \mathscr{L} \mathbf{G}\]</span> subject to <span class="math inline">\(\mathbf{G}^T\mathbf{G}=\mathbf{I}\)</span>, where <span class="math inline">\(\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}\)</span> is called the <strong>normalized Laplacian</strong>. Similarly, the solution to the relaxed problem is the matrix <span class="math inline">\(\mathbf{G}^*\)</span> with columns containing eigenvectors associated with the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(\mathscr{L}\)</span>. Again, the immediate interpretation of the entries in <span class="math inline">\(\mathbf{G}^*\)</span> is lost in the relaxation and so a clustering algorithm like <span class="math inline">\(k\)</span>-means is used to determine the patterns.</p>
 <table>
 <tr>
 <td>
@@ -747,11 +923,13 @@ Cluster the points <span class="math inline">\(\mathbf{y}_i \in \Re^k\)</span> w
 <strong>Output</strong>: Clusters <span class="math inline">\(C_1,\dots,C_k\)</span> such that <span class="math inline">\(C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|\)</span>
 </table>
 <caption>
-<span id="tab:algncut">Table 25.2: </span> Normalized Spectral Clustering (Ncut) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
+<span id="tab:algncut">Table 22.2: </span> Normalized Spectral Clustering (Ncut) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
 </caption>
-<p><br>
-#### Other Normalized Cuts
-While the algorithm in Table <a href="chap1-5.html#tab:algncut">25.2</a> carries “normalized cut” in its title, other researchers have suggested alternative ways to consider normalized cuts in a graph. In a popular 2001 paper, Ng, Jordan, and Weiss made a slight alteration of the previous algorithm which simply normalized the rows of the eigenvector matrix computed in step 2 to have unit length before proceeding to step 3 <span class="citation"><a href="#ref-ng" role="doc-biblioref">[55]</a></span>. This algorithm is presented in Table <a href="chap1-5.html#tab:algnjw">25.3</a>.</p>
+<p><br></p>
+</div>
+<div id="other-normalized-cuts" class="section level4" number="22.2.2.3">
+<h4><span class="header-section-number">22.2.2.3</span> Other Normalized Cuts</h4>
+<p>While the algorithm in Table <a href="chap1-5.html#tab:algncut">22.2</a> carries “normalized cut” in its title, other researchers have suggested alternative ways to consider normalized cuts in a graph. In a popular 2001 paper, Ng, Jordan, and Weiss made a slight alteration of the previous algorithm which simply normalized the rows of the eigenvector matrix computed in step 2 to have unit length before proceeding to step 3 <span class="citation"><a href="#ref-ng" role="doc-biblioref">[55]</a></span>. This algorithm is presented in Table <a href="chap1-5.html#tab:algnjw">22.3</a>.</p>
 <table>
 <tr>
 <td>
@@ -771,10 +949,10 @@ Cluster the points <span class="math inline">\(\mathbf{y}_i \in \Re^k\)</span> w
 <strong>Output</strong>: Clusters <span class="math inline">\(C_1,\dots,C_k\)</span> such that <span class="math inline">\(C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|\)</span>
 </table>
 <caption>
-<span id="tab:algnjw">Table 25.3: </span> Normalized Spectral Clustering according to Ng, Jordan and Weiss (NJW) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
+<span id="tab:algnjw">Table 22.3: </span> Normalized Spectral Clustering according to Ng, Jordan and Weiss (NJW) <span class="citation"><a href="#ref-spectraltutorial" role="doc-biblioref">[69]</a></span>
 </caption>
 <p><br></p>
-<p>In 2001, Meila and Shi altered the objective function once again, and derived yet another spectral algorithm using the <em>normalized random walk</em> Laplacian, <span class="math inline">\(\mathscr{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1} \A\)</span> <span class="citation"><a href="#ref-meila" role="doc-biblioref">[61]</a></span>. As shown in <span class="citation"><a href="#ref-tutorial" role="doc-biblioref">[51]</a></span>, if <span class="math inline">\(\lambda\)</span> is an eigenvalue for <span class="math inline">\(\mathscr{L}\)</span> with corresponding eigenvector <span class="math inline">\(\mathbf{v}\)</span> then <span class="math inline">\(\lambda\)</span> is also an eigenvalue for <span class="math inline">\(\mathscr{L}_{rw}\)</span> with corresponding eigenvector <span class="math inline">\(\mathbf{D}^{1/2}\mathbf{v}\)</span>. This formulation amounts to a different scaling of the eigenvectors in step 3 of Table <a href="chap1-5.html#tab:algnjw">25.3</a>. This normalized random walk Laplacian will present itself again in Section <a href="chap1-5.html#pic">25.1.3</a>. Meila and Shi’s spectral clustering method is outlined in Table <a href="chap1-5.html#tab:algmeila">25.4</a>.</p>
+<p>In 2001, Meila and Shi altered the objective function once again, and derived yet another spectral algorithm using the <em>normalized random walk</em> Laplacian, <span class="math inline">\(\mathscr{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1} \A\)</span> <span class="citation"><a href="#ref-meila" role="doc-biblioref">[61]</a></span>. As shown in <span class="citation"><a href="#ref-tutorial" role="doc-biblioref">[51]</a></span>, if <span class="math inline">\(\lambda\)</span> is an eigenvalue for <span class="math inline">\(\mathscr{L}\)</span> with corresponding eigenvector <span class="math inline">\(\mathbf{v}\)</span> then <span class="math inline">\(\lambda\)</span> is also an eigenvalue for <span class="math inline">\(\mathscr{L}_{rw}\)</span> with corresponding eigenvector <span class="math inline">\(\mathbf{D}^{1/2}\mathbf{v}\)</span>. This formulation amounts to a different scaling of the eigenvectors in step 3 of Table <a href="chap1-5.html#tab:algnjw">22.3</a>. This normalized random walk Laplacian will present itself again in Section <a href="chap1-5.html#pic">22.2.3</a>. Meila and Shi’s spectral clustering method is outlined in Table <a href="chap1-5.html#tab:algmeila">22.4</a>.</p>
 <table>
 <tr>
 <td>
@@ -794,20 +972,20 @@ Cluster the points <span class="math inline">\(\mathbf{y}_i \in \Re^k\)</span> w
 <p><strong>Output</strong>: Clusters <span class="math inline">\(C_1,\dots,C_k\)</span> such that <span class="math inline">\(C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|\)</span></p>
 </table>
 <caption>
-<span id="tab:algmeila">Table 25.4: </span> Normalized Spectral Clustering according to Meila and Shi
+<span id="tab:algmeila">Table 22.4: </span> Normalized Spectral Clustering according to Meila and Shi
 </caption>
 <p><br>
 All of the spectral algorithms outlined thus far seem very similar in their formulation, yet in practice they tend to produce quite different results. This presents a problem because while each method has merit in its own right, it is impossible to predict which one will work best on any particular graph. We will discuss this problem further in .</p>
 </div>
 </div>
-<div id="pic" class="section level3" number="25.1.3">
-<h3><span class="header-section-number">25.1.3</span> Power Iteration Clustering</h3>
+<div id="pic" class="section level3" number="22.2.3">
+<h3><span class="header-section-number">22.2.3</span> Power Iteration Clustering</h3>
 <p>In a 2010 paper, Frank Lin and William Cohen propose a fast, scalable algorithm for clustering graphs using the power method (or power iteration) <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>. Let <span class="math inline">\(\mathbf{W}=\mathbf{D}^{-1}\A\)</span> be the <span class="math inline">\(n\times n\)</span> row-normalized (row stochastic) adjacency matrix for a graph, and let <span class="math inline">\(\mathbf{v}_0 \neq 0\)</span> be a vector in <span class="math inline">\(\Re^n\)</span>. A simple method for computing the eigenvector corresponding to the largest eigenvalue of <span class="math inline">\(\mathbf{W}\)</span> is the power method, which repeatedly computes the power iteration
 <span class="math display">\[\mathbf{v}_{t+1}=c\mathbf{W}\mathbf{v}_t\]</span>
 where <span class="math inline">\(c=1/\|\mathbf{W}\mathbf{v}_t\|_1\)</span> is a normalizing constant to prevent <span class="math inline">\(\mathbf{v}_t\)</span> from growing too large.</p>
 <p>Applying the power method to convergence on <span class="math inline">\(\mathbf{W}\)</span> would result in the uniform vector <span class="math inline">\(\alpha \e\)</span> where
-<span class="math inline">\(\alpha = 1/n.\)</span> However, stepping through a small number of power iterations, will result in a vector that contains combined information from the eigenvectors associated with the largest eigenvalues. The formulation of Meila and Shi’s spectral algorithm in <span class="citation"><a href="#ref-meila" role="doc-biblioref">[61]</a></span> warranted the use of the eigenvectors corresponding to the <span class="math inline">\(k\)</span> smallest eigenvalues of the normalized random walk Laplacian <span class="math inline">\(\mathscr{L}_{rw} = \mathbf{I}-\mathbf{W}\)</span> which is equivalent to the consideration of the eigenvectors of the largest eigenvalues of <span class="math inline">\(\mathbf{W}\)</span>. Thus, the idea behind Power Iteration Clustering (PIC) is to detect and stop the power method at some number of iterations <span class="math inline">\(t\)</span> such that <span class="math inline">\(\mathbf{v}_t\)</span> is a useful linear combination of the first <span class="math inline">\(k\)</span> eigenvectors. The analysis in <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span> motivates the idea that the power method should pass through some initial stage of local convergence at the cluster level before going on to the stage of global convergence toward the uniform vector. At this stopping point, it is expected that <span class="math inline">\(\mathbf{v}_t\)</span> will be an approximately piecewise constant vector, nearly uniform on each of the clusters. Thus, the clusters at this stage will be revealed by the closeness of their corresponding entries in <span class="math inline">\(\mathbf{v}_t\)</span>. See <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span> for the complete analysis. The PIC procedure is given in Table <a href="chap1-5.html#tab:algpic">25.5</a>.</p>
-<p>Applying the power method to <span class="math inline">\(\mathbf{P}^T\)</span> would equate to watching the probability distribution of a random walker evolve through time steps of the Markov Chain, where <span class="math inline">\(\mathbf{v}_t\)</span> is the distribution at time <span class="math inline">\(t\)</span>, and eventually would converge to the stationary distribution in Equation <a href="chap1-5.html#eq:pi">(25.10)</a>.<br />
+<span class="math inline">\(\alpha = 1/n.\)</span> However, stepping through a small number of power iterations, will result in a vector that contains combined information from the eigenvectors associated with the largest eigenvalues. The formulation of Meila and Shi’s spectral algorithm in <span class="citation"><a href="#ref-meila" role="doc-biblioref">[61]</a></span> warranted the use of the eigenvectors corresponding to the <span class="math inline">\(k\)</span> smallest eigenvalues of the normalized random walk Laplacian <span class="math inline">\(\mathscr{L}_{rw} = \mathbf{I}-\mathbf{W}\)</span> which is equivalent to the consideration of the eigenvectors of the largest eigenvalues of <span class="math inline">\(\mathbf{W}\)</span>. Thus, the idea behind Power Iteration Clustering (PIC) is to detect and stop the power method at some number of iterations <span class="math inline">\(t\)</span> such that <span class="math inline">\(\mathbf{v}_t\)</span> is a useful linear combination of the first <span class="math inline">\(k\)</span> eigenvectors. The analysis in <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span> motivates the idea that the power method should pass through some initial stage of local convergence at the cluster level before going on to the stage of global convergence toward the uniform vector. At this stopping point, it is expected that <span class="math inline">\(\mathbf{v}_t\)</span> will be an approximately piecewise constant vector, nearly uniform on each of the clusters. Thus, the clusters at this stage will be revealed by the closeness of their corresponding entries in <span class="math inline">\(\mathbf{v}_t\)</span>. See <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span> for the complete analysis. The PIC procedure is given in Table <a href="chap1-5.html#tab:algpic">22.5</a>.</p>
+<p>Applying the power method to <span class="math inline">\(\mathbf{P}^T\)</span> would equate to watching the probability distribution of a random walker evolve through time steps of the Markov Chain, where <span class="math inline">\(\mathbf{v}_t\)</span> is the distribution at time <span class="math inline">\(t\)</span>, and eventually would converge to the stationary distribution in Equation <a href="chap1-5.html#eq:pi">(22.10)</a>.<br />
 However, according to Lin and Cohen, stepping through a limited number of power iterations on <span class="math inline">\(\mathbf{P}\)</span> is equivalent to observing the same chain backwards, so that <span class="math inline">\(\mathbf{v}_t(i)\)</span> gives the observer a sense of the most likely distribution of the chain <span class="math inline">\(t\)</span> steps in the past, given that the walk ended with distribution <span class="math inline">\(\mathbf{v}_0\)</span>. On a graph with cluster structure as described above, a random walker that ends up on a particular vertex <span class="math inline">\(j \in C_1\)</span> is more or less equally likely to have come from any other node in <span class="math inline">\(C_1\)</span> (but relatively unlikely to have come from <span class="math inline">\(C_i, i\neq1\)</span>), making the distribution close to uniform on the vertices in <span class="math inline">\(C_1\)</span>. The same argument is true for any cluster <span class="math inline">\(C_j\)</span> and thus, by stepping backwards through time we expect to find these distribution vectors which are nearly uniform on each cluster <span class="math inline">\(C_j\)</span>. For a complete discussion of the algorithm, including a more detailed mathematical analysis, consult <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>.</p>
 <table>
 <tr>
@@ -826,7 +1004,7 @@ Use <span class="math inline">\(k\)</span>-means to cluster points on <span clas
 <p><strong>Output:</strong> Clusters <span class="math inline">\(C_1, C_2,\dots,C_k\)</span>.</p>
 </table>
 <caption>
-<span id="tab:algpic">Table 25.5: </span> Power Iteration Clustering (PIC) <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>
+<span id="tab:algpic">Table 22.5: </span> Power Iteration Clustering (PIC) <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>
 </caption>
 <p><br>
 <!-- %  -->
@@ -847,16 +1025,16 @@ Use <span class="math inline">\(k\)</span>-means to cluster points on <span clas
 <!-- %\end{thm} -->
 <!-- %This result ensures that we can divide our graph into two (and no more than two) separate components by the following partition rule: -->
 </div>
-<div id="modularity" class="section level3" number="25.1.4">
-<h3><span class="header-section-number">25.1.4</span> Clustering via Modularity Maximization</h3>
+<div id="modularity" class="section level3" number="22.2.4">
+<h3><span class="header-section-number">22.2.4</span> Clustering via Modularity Maximization</h3>
 <p>Another technique proposed in the network community detection literature compares the structure of a given graph to what one may expect from a random graph on the same vertices <span class="citation"><a href="#ref-ncdmucha" role="doc-biblioref">[28]</a>, <a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span>. The motivation for this method was that simply counting edges between clusters as was done in previous spectral methods may not be the best way to define clusters in graph. A better approach may be to somehow measure whether they are fewer edges than <em>expected</em> between communities. Let <span class="math inline">\(\A\)</span> be the adjacency matrix of the graph (or network) and let <span class="math inline">\(\mathbf{P}\)</span> be the adjacency matrix of a random graph on the same vertices containing the expected value of weights on that graph. Then the matrix <span class="math inline">\(\mathbf{B}=\A-\mathbf{P}\)</span> would contain information about how the structure of <span class="math inline">\(\A\)</span> deviates from what is expected. Obviously this formulation relies on some underlying probability distribution of the weights in the random graph, known as the <em>null model</em>. The most common null model uses the degree sequence of the vertices in the given graph, <span class="math inline">\(\{d_1,d_2,\dots,d_n\}\)</span>, where <span class="math inline">\(d_i\)</span> is the degree of vertex <span class="math inline">\(i\)</span> (i.e. <span class="math inline">\(d_i\)</span> is the sum of the weights of the edges connected to vertex <span class="math inline">\(i\)</span>), to create the probabilities <span class="citation"><a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span>
 <span class="math display" id="eq:null">\[\begin{equation}
-\tag{25.6} 
+\tag{22.6} 
  p(\mbox{edge}(i,j)) = \frac{d_j}{\sum_{k=1}^n d_k}.
  \end{equation}\]</span></p>
 <p>Thus, the expected value of the weight of the edge from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> is
 <span class="math display">\[\mathbf{P}_{ij} = E(w(i,j)) = d_i \left(\frac{d_j}{\sum_{k=1}^n d_k}\right).\]</span></p>
-<p>One may recognize that the probabilities in Equation <a href="chap1-5.html#eq:null">(25.6)</a> are precisely the stationary probabilities of the random walk on the graph defined by <span class="math inline">\(\A\)</span>, and thus seem a reasonable choice for a null model. This formulation gives us <span class="math inline">\(E(w(i,j)) = E(w(j,i))\)</span> as desired for an undirected graph. Using this null model, a <em>modularity matrix</em> <span class="math inline">\(\mathbf{B}\)</span> is formed as
+<p>One may recognize that the probabilities in Equation <a href="chap1-5.html#eq:null">(22.6)</a> are precisely the stationary probabilities of the random walk on the graph defined by <span class="math inline">\(\A\)</span>, and thus seem a reasonable choice for a null model. This formulation gives us <span class="math inline">\(E(w(i,j)) = E(w(j,i))\)</span> as desired for an undirected graph. Using this null model, a <em>modularity matrix</em> <span class="math inline">\(\mathbf{B}\)</span> is formed as
 <span class="math display">\[\mathbf{B} = \A - \mathbf{P}.\]</span></p>
 <p>For a division of the data into two clusters, let <span class="math inline">\(\mathbf{s}\)</span> be an <span class="math inline">\(n\times 1\)</span> vector indicating cluster membership by
 <span class="math display">\[\mathbf{s}_{i} = 
@@ -867,12 +1045,12 @@ Use <span class="math inline">\(k\)</span>-means to cluster points on <span clas
 \]</span>
 Let <span class="math inline">\(d=\sum_{k=1}^n d_k\)</span>. The <strong>modularity</strong> of a given partition is defined by
 <span class="math display" id="eq:modeqn">\[\begin{equation}
-\tag{25.7}
+\tag{22.7}
 Q= \frac{1}{2d} \sum_{i,j} \mathbf{B}_{ij} \mathbf{s}_i\mathbf{s}_j = \frac{1}{2d}\mathbf{s}^T\mathbf{B}\mathbf{s}.
 \end{equation}\]</span>
 The goal of the algorithm proposed in <span class="citation"><a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span> is to maximize this quantity, thus we can drop the constant <span class="math inline">\(1/2d\)</span> and write the objective as
 <span class="math display" id="eq:modobj">\[\begin{equation}
-\tag{25.8}
+\tag{22.8}
 \max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}} Q = \mathbf{s}^T \mathbf{B} \mathbf{s}
  \end{equation}\]</span></p>
 <div id="illustrative-example" class="section level4 unnumbered">
@@ -893,12 +1071,12 @@ Where <span class="math inline">\(\A_{C_1}\)</span> and <span class="math inline
 - &amp; + \end{array}\right]
 \]</span>
 Where the indicated signs reflect the sign <em>tendancy</em> of values in <span class="math inline">\(\mathbf{B}\)</span>. In other words, the entries in the diagonal blocks <span class="math inline">\(\mathbf{B}_{11}\)</span> and <span class="math inline">\(\mathbf{B}_{22}\)</span> <em>tend</em> to be positive because the edges within clusters had larger weights than one would expect at random and the entries in the off diagonal blocks <span class="math inline">\(\mathbf{B}_{12}\)</span> and <span class="math inline">\(\mathbf{B}_{21}\)</span> <em>tend</em> to be negative because the edges between clusters had smaller weights than one would expect at random. Thus, the modularity of this graph, <span class="math inline">\(\mathbf{Q} = \mathbf{s}^T \mathbf{B} \mathbf{s}\)</span>, will be maximized by the appropriate partition <span class="math inline">\(\mathbf{s}^T=[\mathbf{s}^T_1,\mathbf{s}^T_2]=[\e^T_{C_1}, -\e^T_{C_2}]\)</span>.</p>
-<p>In order to maximize the modularity objective function given in Equation <a href="chap1-5.html#eq:modobj">(25.8)</a>, let <span class="math inline">\(\uu_1,\uu_2,\dots,\uu_n\)</span> be an orthonormal set of eigenvectors for <span class="math inline">\(\mathbf{B}\)</span> corresponding respectively to the eigenvalues <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n\)</span>. Write the vector <span class="math inline">\(\mathbf{s}\)</span> as a linear combination of eigenvectors,
+<p>In order to maximize the modularity objective function given in Equation <a href="chap1-5.html#eq:modobj">(22.8)</a>, let <span class="math inline">\(\uu_1,\uu_2,\dots,\uu_n\)</span> be an orthonormal set of eigenvectors for <span class="math inline">\(\mathbf{B}\)</span> corresponding respectively to the eigenvalues <span class="math inline">\(\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n\)</span>. Write the vector <span class="math inline">\(\mathbf{s}\)</span> as a linear combination of eigenvectors,
 <span class="math display">\[\mathbf{s} = \sum_{i=1}^n \alpha_i \uu_i\]</span> where <span class="math display">\[\alpha_i =\uu_i^T \mathbf{s}.\]</span>
-Then, the objective function from Equation <a href="chap1-5.html#eq:modobj">(25.8)</a> becomes
+Then, the objective function from Equation <a href="chap1-5.html#eq:modobj">(22.8)</a> becomes
 <span class="math display">\[\max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}}  \left(\sum_{i=1}^n \alpha_i \uu_i^T \mathbf{B}\right)\left(\sum_{i=1}^n \alpha_i \uu_i\right) = \sum_{i=1}^n \lambda_i (\uu_i^T \mathbf{S})^2.\]</span></p>
 <p>This optimization is NP-hard due to the constraint that <span class="math inline">\(\mathbf{s}_i =\pm 1\)</span>. It is clear that without this constraint one would choose <span class="math inline">\(\mathbf{s}\)</span> proportional to <span class="math inline">\(\uu_1\)</span>, maximizing the first term in the summation (associated with the largest eigenvalue) and terminating the others. A reasonable way to proceed in light of this information is to maximize the leading term and ignore the remaining terms. To accomplish this, it is quite clear that we should choose <span class="math inline">\(\mathbf{s}\)</span> so that its entries match the signs of the entries in <span class="math inline">\(\uu_1\)</span>. The placement of vertices corresponding to zero entries in <span class="math inline">\(\uu_1\)</span> will be decided arbitrarily. However, if the leading eigenvalue of the modularity matrix is <em>negative</em> then the corresponding eigenvector is <span class="math inline">\(\e\)</span>, leading us to no partition. According to <span class="citation"><a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span> the ``no partition’’ solution in this scenario is in fact the correct result, i.e. a negative leading eigenvalue indicates there is no community or cluster structure in the graph. This gives a clear stopping point for the procedure, which allows it to automatically determine an appropriate number of clusters or communities to create. Unfortunately, the arbitrary placement of vertices corresponding to zero entries in <span class="math inline">\(\uu_1\)</span> may in some cases affect the determined number of clusters.</p>
-<p>To create more than 2 clusters, the above procedure can be repeated on each of the subgraphs induced by the vertices in each cluster found. This leads us to an iterative divisive (hierarchical) algorithm like the iterative Fiedler method in Section <a href="chap1-5.html#extendedfiedler">25.1.1.1</a> and PDDP in Section <a href="#pddp"><strong>??</strong></a>. The modularity clustering procedure is formalized in Table .</p>
+<p>To create more than 2 clusters, the above procedure can be repeated on each of the subgraphs induced by the vertices in each cluster found. This leads us to an iterative divisive (hierarchical) algorithm like the iterative Fiedler method in Section <a href="chap1-5.html#extendedfiedler">22.2.1.1</a> and PDDP in Section <a href="#pddp"><strong>??</strong></a>. The modularity clustering procedure is formalized in Table .</p>
 <table>
 <tr>
 <td>
@@ -917,7 +1095,7 @@ If <span class="math inline">\(\lambda_1 &lt; 0\)</span>, stop. There is no part
 <li>
 Otherwise partition the vertices of the graph into 2 clusters as follows
 <span class="math display" id="eq:modsplit">\[\begin{equation}
-\tag{25.9}
+\tag{22.9}
 \begin{split}
 C_1 &amp;= \{i : \uu_1(i) &lt;0\} \cr
 C_2 &amp;= \{i : \uu_1(i) \geq 0\}
@@ -929,22 +1107,22 @@ Determine further partitions by extracting the rows and columns of the original 
 <strong>Output:</strong> Final clusters.
 </table>
 <caption>
-<span id="tab:algmod">Table 25.6: </span> Modularity Procedure for Network Community Detection (Newman) <span class="citation"><a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span>
+<span id="tab:algmod">Table 22.6: </span> Modularity Procedure for Network Community Detection (Newman) <span class="citation"><a href="#ref-ncdnewman" role="doc-biblioref">[29]</a></span>
 </caption>
 <p><br></p>
 </div>
 </div>
 </div>
-<div id="stochastic-clustering" class="section level2" number="25.2">
-<h2><span class="header-section-number">25.2</span> Stochastic Clustering</h2>
-<p>An alternative way to interpret a graph is by considering a random walk along the edges. For an undirected graph with adjacency matrix <span class="math inline">\(\A\)</span>, we can create a transition probability matrix <span class="math inline">\(\mathbf{P}\)</span> by dividing each row by the corresponding row sum. Using the degree matrix from Definition <a href="chap1-5.html#def:laplaciandef">25.1</a> we have <span class="math display">\[\mathbf{P}=\mathbf{D}^{-1}\A.\]</span> If our graph does indeed have some cluster structure, i.e. sets of vertices <span class="math inline">\(C_1,C_2, \dots,C_k\)</span> for which the total weight of edges within each set are substantially higher than the total weight of edges between the different sets, then a random walker in a given cluster <span class="math inline">\(C_i\)</span> is more likely to stay in <span class="math inline">\(C_i\)</span> for several steps than he is to transition to another cluster <span class="math inline">\(C_j\)</span>. It is well known that for a connected and undirected graph, the long term probability distribution is given by
+<div id="stochastic-clustering" class="section level2" number="22.3">
+<h2><span class="header-section-number">22.3</span> Stochastic Clustering</h2>
+<p>An alternative way to interpret a graph is by considering a random walk along the edges. For an undirected graph with adjacency matrix <span class="math inline">\(\A\)</span>, we can create a transition probability matrix <span class="math inline">\(\mathbf{P}\)</span> by dividing each row by the corresponding row sum. Using the degree matrix from Definition <a href="chap1-5.html#def:laplaciandef">22.1</a> we have <span class="math display">\[\mathbf{P}=\mathbf{D}^{-1}\A.\]</span> If our graph does indeed have some cluster structure, i.e. sets of vertices <span class="math inline">\(C_1,C_2, \dots,C_k\)</span> for which the total weight of edges within each set are substantially higher than the total weight of edges between the different sets, then a random walker in a given cluster <span class="math inline">\(C_i\)</span> is more likely to stay in <span class="math inline">\(C_i\)</span> for several steps than he is to transition to another cluster <span class="math inline">\(C_j\)</span>. It is well known that for a connected and undirected graph, the long term probability distribution is given by
 <span class="math display" id="eq:pi">\[\begin{equation}
-\tag{25.10}
+\tag{22.10}
 \pi^T = \frac{\e^T\mathbf{D}}{\e^T\mathbf{D}\e^T}
 \end{equation}\]</span>
 Which is not likely to give any cluster information. However, the short-term evolution of this walk can tell us something about the cluster structure because a random walker is far more likely, in the short-run, to remain inside a cluster than he is to transition between clusters. The Stochastic Clustering Algorithm (SCA) of Wessell and Meyer <span class="citation"><a href="#ref-chuck" role="doc-biblioref">[62]</a></span> takes advantage of this fact.</p>
-<div id="stochastic-clustering-algorithm-sca" class="section level3" number="25.2.1">
-<h3><span class="header-section-number">25.2.1</span> Stochastic Clustering Algorithm (SCA)</h3>
+<div id="stochastic-clustering-algorithm-sca" class="section level3" number="22.3.1">
+<h3><span class="header-section-number">22.3.1</span> Stochastic Clustering Algorithm (SCA)</h3>
 <p>In a 2012 paper, Chuck Wessell and Carl Meyer formulated a clustering model by creating a symmetric (doubly stochastic) transition matrix <span class="math inline">\(\mathbf{P}\)</span> <span class="citation"><a href="#ref-chuck" role="doc-biblioref">[62]</a>, <a href="#ref-chuckthesis" role="doc-biblioref">[63]</a></span> from the adjacency matrix of a graph. The method in this paper is quite similar to that in PIC except that here the mathematics of the ``backward’’ Markov Chain intuition given in <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span> works out in this context because the probability transition matrix is symmetric. One added feature in this algorithm is the automatic determination of the number of clusters in the data, using eigenvalues of the transition matrix <span class="math inline">\(\mathbf{P}\)</span>. Wessell and Meyer’s formulation is based on theory that was developed by Nobel Laureate economist Herbert Simon and his student Albert Ando. This theory surrounds the mixing rates of resources or wealth in local economies (composed of states in a Markov chain) as part of a global economy (which links together some states from each local economy). It is assumed that the adjacency matrix for the graph is irreducible, or equivalently that the graph is connected.</p>
 <p>The basic idea is that resources will be exchanged more frequently at a local level than they will at the global level. Suppose individual companies from a global economy are represented as nodes in a graph with edges between them signifying the amount of trade between each pair of companies. Natural clusters would form in this graph at a local level, represented by the strong and frequent trade relationships of proximal companies. Let <span class="math inline">\(k\)</span> be the number of local economies (clusters), each containing <span class="math inline">\(n_i\)</span> states <span class="math inline">\(i=1,\dots,k\)</span>, and define the distribution of resources at time <span class="math inline">\(t\)</span> as <span class="math inline">\(\mathbf{\pi}_t\)</span>, given a starting distribution <span class="math inline">\(\mathbf{\pi}_0\)</span>. Then
 <span class="math display">\[\mathbf{\pi}_t^T = \mathbf{\pi}_0^T\mathbf{P}^t\]</span></p>
@@ -955,20 +1133,20 @@ After this short-term stabilization, the distribution of goods in the Markov Cha
 <span class="math display">\[\mathbf{S}\A\mathbf{S}= \mathbf{P}\]</span>
 is a doubly stochastic transition probability matrix. This task turns out to be quite simple, <span class="math inline">\(\mathbf{S}\)</span> is found by iterating a single step until convergence. Letting <span class="math inline">\(\mathbf{S}_{ii}=\mathbf{s}(i)\)</span>, the diagonal scaling procedure put forth by Ruiz [<span class="citation"><a href="#ref-ruiz" role="doc-biblioref">[16]</a></span>} is simply:
 <span class="math display" id="eq:diagscaling">\[\begin{equation}
-\tag{25.11}
+\tag{22.11}
 \begin{split}
 \mathbf{s}_0 &amp;= \e \\
 \mathbf{s}_{t+1}(i) &amp;=\sqrt{\frac{\mathbf{s}_t(i)}{\A_{i*}^T\mathbf{s}_t}}
 \end{split}
 \end{equation}\]</span></p>
-<p>In <span class="citation"><a href="#ref-chuckthesis" role="doc-biblioref">[63]</a></span>, it is convincingly argued that the diagonal scaling procedure does not change the underlying cluster structure of the data in <span class="math inline">\(\A\)</span>, and thus that the desired information is not damaged by this transformation. The clusters in this method are found in a similar manner to PIC, where <span class="math inline">\(k\)</span>-means is employed to find the nearly piecewise constant segments of the distribution vector <span class="math inline">\(\mathbf{\pi}_t\)</span> after a short number of steps. The Stochastic Clustering Algorithm automatically determines the number of clusters in the data by counting the number of eigenvalues whose value is close to <span class="math inline">\(\lambda_1=1\)</span>. This group of eigenvalues near 1 is referred to as the <em>Perron cluster</em>. We postpone discussion of this matter to  where it will be analyzed in detail. For now, we present the Stochastic Clustering method in Table <a href="chap1-5.html#tab:algsc">25.7</a>. The eigenvector iterations in SCA are quite similar to those put forth in PIC, and users commonly create visualizations of the iterations that look quite similar to those in Figure <a href="#fig:picex"><strong>??</strong></a>.</p>
+<p>In <span class="citation"><a href="#ref-chuckthesis" role="doc-biblioref">[63]</a></span>, it is convincingly argued that the diagonal scaling procedure does not change the underlying cluster structure of the data in <span class="math inline">\(\A\)</span>, and thus that the desired information is not damaged by this transformation. The clusters in this method are found in a similar manner to PIC, where <span class="math inline">\(k\)</span>-means is employed to find the nearly piecewise constant segments of the distribution vector <span class="math inline">\(\mathbf{\pi}_t\)</span> after a short number of steps. The Stochastic Clustering Algorithm automatically determines the number of clusters in the data by counting the number of eigenvalues whose value is close to <span class="math inline">\(\lambda_1=1\)</span>. This group of eigenvalues near 1 is referred to as the <em>Perron cluster</em>. We postpone discussion of this matter to  where it will be analyzed in detail. For now, we present the Stochastic Clustering method in Table <a href="chap1-5.html#tab:algsc">22.7</a>. The eigenvector iterations in SCA are quite similar to those put forth in PIC, and users commonly create visualizations of the iterations that look quite similar to those in Figure <a href="#fig:picex"><strong>??</strong></a>.</p>
 <table>
 <tr>
 <td>
 <strong>Input:</strong> Adjacency matrix <span class="math inline">\(\A\)</span> for some graph to be partitioned
 <ol>
 <li>
-Convert <span class="math inline">\(\A\)</span> to a symmetric probability transition matrix <span class="math inline">\(\mathbf{P}\)</span> using the diagonal scaling procedure given in <a href="chap1-5.html#eq:diagscaling">(25.11)</a>.
+Convert <span class="math inline">\(\A\)</span> to a symmetric probability transition matrix <span class="math inline">\(\mathbf{P}\)</span> using the diagonal scaling procedure given in <a href="chap1-5.html#eq:diagscaling">(22.11)</a>.
 <li>
 Calculate the eigenvalues of <span class="math inline">\(\mathbf{P}\)</span> and determine <span class="math inline">\(k\)</span> to be the number of eigenvalues in the Perron cluster.
 <li>
@@ -979,7 +1157,7 @@ Track the evolution of <span class="math inline">\(\mathbf{\pi}_{t+1}^T = \mathb
 __ Output:__ <span class="math inline">\(k\)</span> clusters found <span class="math inline">\(C_1, C_2,\dots, C_k\)</span>.
 </table>
 <caption>
-<span id="tab:algsc">Table 25.7: </span> Stochastic Clustering Algorithm (SCA) <span class="citation"><a href="#ref-chuck" role="doc-biblioref">[62]</a></span>
+<span id="tab:algsc">Table 22.7: </span> Stochastic Clustering Algorithm (SCA) <span class="citation"><a href="#ref-chuck" role="doc-biblioref">[62]</a></span>
 </caption>
 <p><br></p>
 
@@ -1042,8 +1220,8 @@ __ Output:__ <span class="math inline">\(k\)</span> clusters found <span class="
           </div>
         </div>
       </div>
-<a href="findk.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="clusteralgos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="validation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1086,10 +1264,13 @@ gitbook.start({
 "link": "https://github.com/shainarace/LinearAlgebra/blob/master/112-NetworkAlgos.Rmd",
 "text": null
 },
-"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"download": null,
 "toc": {
-"collapse": "subsection",
+"collapse": "section",
 "scroll_highlight": true
+},
+"search": {
+"engine": "lunr"
 }
 });
 });

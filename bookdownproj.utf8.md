@@ -1,8 +1,8 @@
 --- 
 author: "Shaina Race Bennett, PhD"
-date: "2021-07-28"
+date: "2021-07-29"
 link-citations: yes
-github-repo: rstudio/linalg-master
+github-repo: shainarace/linearalgebra
 title: "Linear Algebra for Data Science"
 description: "A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum"
 always_allow_html: true
@@ -159,9 +159,9 @@ The rows of this matrix correspond to observations, in this case a sample of peo
 ## Describing Matrices and Vectors
 
 As we alluded to earlier, **matrices** are simply arrays of numbers which correspond in some way to their rows and columns. The following are examples of matrices:
-$$\A=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \bo{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9\\1&4&1\\1&1&1\\2&0.4&9.99 \end{matrix}\right)$$
+$$\A=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \mathbf{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9\\1&4&1\\1&1&1\\2&0.4&9.99 \end{matrix}\right)$$
 
-In this text, when we denote a matrix, we will always use a bold capital letter like $\bo{A}, \bo{M}, \mbox{or } \bo{D}$. To start, lets cover some basic properties and notation.
+In this text, when we denote a matrix, we will always use a bold capital letter like $\mathbf{A}, \mathbf{M}, \mbox{or } \mathbf{D}$. To start, lets cover some basic properties and notation.
 
 ### Dimension/Size of a Matrix
 
@@ -192,7 +192,7 @@ The dimension of the matrix $\A$ is $6\times 2$ because $\A$ has 6 rows and 2 co
 :::{.exercise name='Determining dimension of a matrix' #dimensions}
 For the following matrices, determine the dimension:
 
-$$\bo{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) \quad \bo{C} = \left(\begin{matrix} .01&.5&1.6&1.7\\ .1&3.5&4&2\\.61&.55&.46&.17\cr1.2&1.5&1.6&1\cr.31&.35&1.3&2.3\\2.3&3.5&.06&.7\\.3&.2&2.1&1.8\end{matrix}\right) \quad \bo{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)$$
+$$\mathbf{B} = \left( \begin{matrix}1 & 2 & 0 \cr 2&1&0\cr3&1&1 \end{matrix}\right) \quad \mathbf{C} = \left(\begin{matrix} .01&.5&1.6&1.7\\ .1&3.5&4&2\\.61&.55&.46&.17\cr1.2&1.5&1.6&1\cr.31&.35&1.3&2.3\\2.3&3.5&.06&.7\\.3&.2&2.1&1.8\end{matrix}\right) \quad \mathbf{T} = \left(\begin{matrix} 1\cr1.3\cr0.8\cr2\cr2.5\cr0.8\cr0.9 \end{matrix} \right)$$
 \vspace{1cm}
 :::
 
@@ -285,10 +285,10 @@ The column $$\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{mat
 
 :::{.exercise name='Rows, Columns, and Elements of a Matrix' #ijnot}
 For the matrix
-$$ \bo{L}=\left(\begin{matrix} 3 & -6 & -2\\1 & -4 & 5\\0 & 4 & -5 \end{matrix}\right)$$
+$$ \mathbf{L}=\left(\begin{matrix} 3 & -6 & -2\\1 & -4 & 5\\0 & 4 & -5 \end{matrix}\right)$$
 Write the following elements, rows, or columns:
 \vspace{.5cm}
-$$L_{23}= \qquad\qquad L_{31}= \qquad\qquad \bo{L}_{\star 2}= \qquad\qquad \bo{L}_{1 \star}=\qquad\qquad$$
+$$L_{23}= \qquad\qquad L_{31}= \qquad\qquad \mathbf{L}_{\star 2}= \qquad\qquad \mathbf{L}_{1 \star}=\qquad\qquad$$
 \vspace{1cm}
 :::
 
@@ -365,12 +365,12 @@ $$C_{13}=-0.9 \quad \mbox{Indicates that }\,x_1\,\,\mbox{and}\,\,x_3\,\,\mbox{ha
 
 Now that we've introduced the concept of a matrix, let's talk about vectors. A **vector** are merely a special type of matrix, one that consists of only a single row or column. They are essentially ordered lists of numbers. For example:
 
-$$\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \bo{z}=\left(\begin{matrix} 3 & 5 & 1 & 0 & 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)$$
-are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\bo{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \bo{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
+$$\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \mathbf{z}=\left(\begin{matrix} 3 & 5 & 1 & 0 & 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)$$
+are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\mathbf{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \mathbf{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
 
 You may wonder now why the notation is so particular, but as we get into the subject it will be come clear that some convention must be retained if we are going to understand an equation. If we write an equation like
-$$\A\x=\b \qquad \mbox{or} \qquad \bo{M}\y=\alpha\y$$
-We have to know what it represents - in the first case, we are dealing with a matrix $\A$, and two vectors $\x$ and $\b$; in the second case we are dealing with a matrix $\bo{M}$, a vector $\y$, and a scalar, $\alpha$.
+$$\A\x=\b \qquad \mbox{or} \qquad \mathbf{M}\y=\alpha\y$$
+We have to know what it represents - in the first case, we are dealing with a matrix $\A$, and two vectors $\x$ and $\b$; in the second case we are dealing with a matrix $\mathbf{M}$, a vector $\y$, and a scalar, $\alpha$.
 
 :::{.exercise name='Matrix, Vector, and Scalar Notation' #matnot}
 For the following quantities, indicate whether the notation indicates a Matrix, Scalar, or Vector.
@@ -428,9 +428,9 @@ _Note: If we transpose the transpose of a matrix, we will get back the original 
 
 :::{.example name='Transpose of a Matrix or Vector' #transpose}
 For the following matrices and vectors, determine the transpose:
-$$\B=\left(\begin{matrix} 2 & -3 & -4 \\5&-6&-7\\-8&9&0 \end{matrix}\right) \qquad \bo{M}=\left(\begin{matrix} -1&2\\-3&6\\7&-9\\5&-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)$$
+$$\B=\left(\begin{matrix} 2 & -3 & -4 \\5&-6&-7\\-8&9&0 \end{matrix}\right) \qquad \mathbf{M}=\left(\begin{matrix} -1&2\\-3&6\\7&-9\\5&-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)$$
 To find the transpose, we simply create new matrices whose rows are the corresponding columns of each matrix or vector:
-$$\B^T=\left(\begin{matrix} 2 &5& -8\\-3&-6&9\\-4&-7&0\end{matrix}\right) \qquad \bo{M}^T = \left(\begin{matrix}-1&-3&7&5\\2&6&-9&-1 \end{matrix}\right) $$ $$\x^T = \left(\begin{matrix} 3&-4&5&6 \end{matrix}\right)$$
+$$\B^T=\left(\begin{matrix} 2 &5& -8\\-3&-6&9\\-4&-7&0\end{matrix}\right) \qquad \mathbf{M}^T = \left(\begin{matrix}-1&-3&7&5\\2&6&-9&-1 \end{matrix}\right) $$ $$\x^T = \left(\begin{matrix} 3&-4&5&6 \end{matrix}\right)$$
 :::
 
 :::{.definition name='Symmetric Matrix' #symdef}
@@ -488,8 +488,8 @@ While we're on the subject of diagonal elements, let's take the opportunity to i
 ## Special Matrices and Vectors {#special}
 
 :::{.definition name='Identity Matrix' #identity}
-The bold capital letter $\bo{I}$ will always to denote the **identity matrix**. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
-$$\bo{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
+The bold capital letter $\mathbf{I}$ will always to denote the **identity matrix**. Sometimes this matrix has a single subscript to specify the size of the matrix. More often, the size of the identity is implied by the matrix equation in which it appears.
+$$\mathbf{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
 						0 & 1 & 0 & 0\\
 						0&0&1&0\\
 						0&0&0&1 \end{matrix}\right)$$
@@ -497,16 +497,16 @@ $$\bo{I}_4 = \left(\begin{matrix} 1 & 0 & 0 & 0 \\
 
 
 :::{.definition name='Elementary Vectors' #elemvectors}
-The bold lowercase $\bo{e}_j$ is used to refer to the $j^{th}$ column of $\bo{I}$. It is simply a vector of zeros with a one in the $j^{th}$ position. We do not often specify the size of the vector $\bo{e}_j$, the number of elements is generally assumed from the context of the problem.
+The bold lowercase $\mathbf{e}_j$ is used to refer to the $j^{th}$ column of $\mathbf{I}$. It is simply a vector of zeros with a one in the $j^{th}$ position. We do not often specify the size of the vector $\mathbf{e}_j$, the number of elements is generally assumed from the context of the problem.
 
-$$\bo{e}_j=\begin{matrix}
+$$\mathbf{e}_j=\begin{matrix}
 \begin{matrix} ~ \\~\\~\\~\\j^{th}\text{row} \rightarrow \\ ~\\~\\~ \end{matrix} & 
   \begin{pmatrix}0\\0\\ \vdots \\0\\1\\0\\ \vdots\\0\end{pmatrix}\\\\
 \end{matrix}$$
 
-The vector $\bo{e}$ with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced $\textbf{1}$.
+The vector $\mathbf{e}$ with no subscript refers to a vector of all ones. In some texts, this vector is written as a bold faced $\textbf{1}$.
 
-$$\bo{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
+$$\mathbf{e} = \left(\begin{matrix} 1\\1\\1\\ \vdots \\ 1\end{matrix}\right)$$
 :::		
 
 The elementary vectors described in Definition \@ref(def:elemvectors) create the coordinate axes of $n$-space. For illustrative purposes, let's consider $2$-space. The elementary vectors in $2$-space are:
@@ -522,12 +522,12 @@ These vectors correspond to the directions of the coordinate axes as illustrated
 :::{.definition name='Diagonal Matrix' #diag}
 A **diagonal matrix** is a matrix for which off-diagonal elements, $\A_{ij},\,i\ne j$ are zero.
 For example:
-$$\bo{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
+$$\mathbf{D} = \left(\begin{matrix} \sigma_1 & 0 & 0 & 0 \\
 						0 & \sigma_2 & 0 & 0\\
 						0&0&\sigma_3&0\\
 						0&0&0&\sigma_4 \end{matrix}\right)$$
 Since the off diagonal elements are 0, we need only define the diagonal elements for such a matrix. Thus, we will frequently write
-$$\bo{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$$
+$$\mathbf{D}=diag\{\sigma_1,\sigma_2,\sigma_3,\sigma_4\}$$
 or simply $$D_{ii} = \sigma_i.$$
 :::
 
@@ -537,7 +537,7 @@ From the preceding definitions, it should be clear that diagonal and identity ma
 :::{.exercise name='Trace and Special Matrices' #traceexer}
 Write out the following matrices and then compute their Trace, if possible:
 
-$$\I_5 \qquad \bo{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4$$
+$$\I_5 \qquad \mathbf{D}=diag\{2,6,1\} \qquad \e_2 \in \Re^4$$
 \vspace{1.5cm}
 :::
 
@@ -577,23 +577,26 @@ $$Tr(\A)=\sum_{i=1}^n A_{ii}.$$
 
 <ol> 
 <li>Use the following matrices or vectors to answer the following questions:
-$$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \quad \mathbf{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
-\mathbf{D} = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) \\
-
-\mathbf{X}=\left(\begin{matrix} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{matrix}\right) \quad
-\mathbf{t} = \left(\begin{matrix} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{matrix}\right) \quad 
-\mathbf{v}=\left(\begin{matrix} 6\\3\\-1\\2\end{matrix}\right) \quad \mathbf{u}=\left(\begin{matrix} 6&4&8&1\end{matrix}\right)$$
+\begin{equation*}
+\mathbf{A}=\left(\begin{array}{ccc} 1&3&8\\3&0&-2\\4&1&-3 \end{array}\right) \quad \mathbf{M}=\left(\begin{array}{cccc} 1&8&-2&5\\2&8&1&7 \end{array}\right) \quad 
+\mathbf{D} = \left(\begin{array}{ccc} 1&0&0\\0&5&0\\0&0&3\end{array}\right) 
+\end{equation*}
+\begin{equation*}
+\mathbf{X}=\left(\begin{array}{cc} 780 & 95000\\600 & 60000\\550 & 65000\\400 & 35000\\450 & 40000\\750 &80000\end{array}\right) \quad
+\mathbf{t} = \left(\begin{array}{c} 1\\1.3\\0.8\\2\\2.5\\0.8\\0.9 \end{array}\right) \quad 
+\mathbf{v}=\left(\begin{array}{c} 6\\3\\-1\\2\end{array}\right) \quad \mathbf{u}=\left(\begin{array}{cccc} 6&4&8&1\end{array}\right)
+\end{equation*}
 
 <ol style="list-style-type:lower-alpha">
   <li> Write the appropriate size/dimensions next to each matrix:
 <ol style="list-style-type:lower-roman">
   <li> $\mathbf{A}$  
   <li> $\mathbf{M}$  
-  <li> $\mathbf{D}$  
-  <li> $\mathbf{X}  $  
-  <li> $\mathbf{t}  $  
-  <li> $\mathbf{v}  $  
-  <li> $\mathbf{u}  $  
+  <li> $\mathbf{D}$
+  <li> $\mathbf{X}$  
+  <li> $\mathbf{t}$  
+  <li> $\mathbf{v}$  
+  <li> $\mathbf{u}$  
 </ol>
 
   <li> Which of these matrices are square? Which are rectangular?
@@ -603,7 +606,7 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
   <li> $A_{12}=$   
   <li> $M_{21}=$   
   <li> $\D_{\star3}=$  
-  <li> $\bo{M}_{2\star}=$   
+  <li> $\mathbf{M}_{2\star}=$   
   <li> $X_{42}=$  
   <li> $t_5=$   
   <li> $v_3=$  
@@ -617,22 +620,22 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
 <li> For each of the following matrices and vectors, give their dimension. Label each as a matrix or vector. For each matrix, indicate whether the matrix is square or rectangular.
 <ol style="list-style-type:lower-alpha">
   <li>  $$\A=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$  
-  <li>  $$\bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$  
+  <li>  $$\mathbf{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$  
   <li>  $$\B=\left(\begin{matrix}   B_{11}&B_{12}&B_{13}\\B_{21}&B_{22}&B_{23}\\B_{31}&B_{32}&B_{33}\\B_{41}&B_{42}&B_{43}\end{matrix}\right)$$  
   <li>  $$\C=\left(\begin{matrix} 1 & 0.3 & -0.9 & 0.1\\0.3 & 1 & 0.8 & -0.5\\-0.9&0.8&1&-0.6\\0.1&-0.5&-0.6&1 \end{matrix}\right)$$  
   <li>  $$\A = [A_{ij}] \quad \mbox{where } i=1,2,3 \quad \mbox{and   } j=1,2$$  
 </ol>
 <li> For the following quantities, use what you know about notation to tell if they are matrices, vectors, or scalars:
 <ol style="list-style-type:lower-alpha">
-  <li> $\bo{H}$  
-  <li> $\bo{W}$  
+  <li> $\mathbf{H}$  
+  <li> $\mathbf{W}$  
   <li> $n$  
-  <li> $\v_2  $  
-  <li> $v_2  $  
-  <li> $\bo{M}_{\star 2} $  
-  <li> $\lambda $  
-  <li> $A_{ij} $  
-  <li> $\bo{r} $  
+  <li> $\v_2$  
+  <li> $v_2$  
+  <li> $\mathbf{M}_{\star 2}$  
+  <li> $\lambda$  
+  <li> $A_{ij}$  
+  <li> $\mathbf{r}$  
 </ol>
 
 <li> The matrix $\C$ from exercise 2d is the correlation matrix discussed earlier in this chapter. What is the trace of $\C$? For any correlation matrix computed using $p$ variables, what should we expect the trace to be?
@@ -656,9 +659,9 @@ $$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\4&1&-3 \end{matrix}\right) \qua
   <li> If we define a matrix $\S$ as
 $$S_{ij} = height(person_i) - height(person_j)$$
 is the matrix $\S$ symmetric? What is the trace($\S$)?  
-  <li> If instead we create a matrix $\bo{G}$ where
+  <li> If instead we create a matrix $\mathbf{G}$ where
 $$G_{ij} = [height(person_i) - height(person_j)]^2$$
-is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?  
+is the matrix $\mathbf{G}$ symmetric? What is the trace($\mathbf{G}$)?  
 </ol>
 
 
@@ -666,12 +669,12 @@ is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?
 
 <li> Use the network shown below to answer the following questions.  
 <div class="figure" style="text-align: center">
-<img src="figs/graphex.jpg" alt="Graph (Network) for exercise 11" width="2914" />
+<img src="figs/graphex.jpg" alt="Graph (Network) for exercise 11" width="60%" />
 <p class="caption">(\#fig:unnamed-chunk-8)Graph (Network) for exercise 11</p>
 </div>
 <ol style="list-style-type:lower-alpha">  
   <li>  Write down the adjacency matrix, $\A$, for this graph where $\A_{ij}$ reflects the weight of the edge connecting vertex $i$ and vertex $j$.   
-  <li>  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\bo{d}$ such that $d_i$ is the degree of node $i$.  
+  <li>  The **degree** of a vertex is defined as the sum of the weights of the edges connected to that vertex. Create a vector $\mathbf{d}$ such that $d_i$ is the degree of node $i$.  
 </ol>
 
 
@@ -707,56 +710,55 @@ is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?
 
 # Matrix Arithmetic {#mult}
 
-
-
 ## Matrix Addition, Subtraction, and Scalar Multiplication
 
 
 Addition, subtraction, and scalar multiplication are the only operations which act *element-wise* on matrices - they are performed in a way you might expect given your previous studies. 
 
 :::{.definition name='Addition, Subtraction, and Scalar Multiplication' #addsubdef}
-Two matrices can be added or subtracted only when they have the same dimensions. If $\A$ and $\B$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $\A _-^+ \B)_{ij}$ is:
+Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is:
 
-$$(\A+\B)_{ij}=A_{ij}+B_{ij}$$
-similarly,
-$$(\A-\B)_{ij}=A_{ij}-B_{ij}$$
-Multiplying a scalar by a matrix or vector also works element-wise:
-$$(\alpha\A)_{ij}=\alpha A_{ij}$$
+<!-- \begin{equation*} (\mathbf{A}+\mathbf{B})_{ij}=A_{ij}+B_{ij} \end{equation*} -->
+<!-- similarly, -->
+<!-- \begin{equation*}(\mathbf{A}-\mathbf{B})_{ij}=A_{ij}-B_{ij} \end{equation*} -->
+<!-- Multiplying a scalar by a matrix or vector also works element-wise: -->
+<!-- \begin{equation*}(\alpha\mathbf{A})_{ij}=\alpha A_{ij} \end{equation*}  -->
 :::
-
+Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is\:
 
 :::{.example name='Addition, Subtraction, and Scalar Multiplication' #addsub}
-
-a. Compute $\A+\B$, if possible: $$\A=\pm 2 & 3 & -1\\1&-1&1\\2&2&1 \mp \quad \B=\pm 4 & 5 & 6\\-1&0&4\\3&4&3 \mp$$
+<br>
+a. Compute $\mathbf{A}+\mathbf{B}$, if possible:
+$$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right) \quad \mathbf{B}=\left(\begin{matrix} 4 & 5 & 6\\-1&0&4\\3&4&3 \end{matrix}\right)$$
 *We can add the matrices because they have the same size.*
-$$\A+\B = \pm 6 & 8 & 5\\0&-1&5\\5&6&4\mp$$
-b. Compute $\A-\bo{H}$, if possible:
-$$\A=\pm 1 & 2\\3&5 \mp \qquad \bo{H}= \pm 6 & 5& 10\\0.1 & 0.5 & 0.9 \mp$$
+$$\mathbf{A}+\mathbf{B} = \left(\begin{matrix} 6 & 8 & 5\\0&-1&5\\5&6&4\end{matrix}\right)$$
+b. Compute $\mathbf{A}-\bo{H}$, if possible:
+$$\mathbf{A}=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \bo{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9 \end{matrix}\right)$$
 *We cannot subtract these matrices because they don't have the same size.*
+c. Compute $2\mathbf{A}$:
+$$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$
+*We simply multiply every element in $\mathbf{A}$ by 2,*
+$$2\mathbf{A}=\left(\begin{matrix} 4 & 6 & -2\\2&-2&2\\4&4&2 \end{matrix}\right)$$
 
-c. Compute $2\A$:
-$$\A=\pm 2 & 3 & -1\\1&-1&1\\2&2&1 \mp$$
- *We simply multiply every element in $\A$ by 2,*
-$$2\A=\pm 4 & 6 & -2\\2&-2&2\\4&4&2 \mp$$
 :::
 
+
+
+
 :::{.exercise name='Addition, Subtraction, and Scalar Multiplication' #addsubexer}
-
-a.  Compute $\v-\y$, if possible: $$\v=\pm 2\\-3\\4 \mp \quad \y=\pm 1\\4\\1 \mp$$
-
+<br>
+a.  Compute $\v-\y$, if possible: $$\v=\left(\begin{matrix} 2\\-3\\4 \end{matrix}\right) \quad \y=\left(\begin{matrix} 1\\4\\1 \end{matrix}\right)$$
 b. Compute $\v+\bo{h}$, if possible:
-$$\v=\pm 4\\-5\\3 \mp \quad \bo{h}=\pm -1\\-4\\1\\2 \mp$$
-
-
+$$\v=\left(\begin{matrix} 4\\-5\\3 \end{matrix}\right) \quad \bo{h}=\left(\begin{matrix} -1\\-4\\1\\2 \end{matrix}\right)$$
 c. Compute $\frac{1}{\sqrt{2}}\v$:
-$$\v=\pm 4\\-5\\3 \mp$$
+$$\v=\left(\begin{matrix} 4\\-5\\3 \end{matrix}\right)$$
 :::
 
 ## Geometry of Vector Addition and Scalar Multiplication {#sec:vectoradd}
 
 You've already learned how vector addition works algebraically: it occurs element-wise between two vectors of the same length:
 $$
- \a+\b =\pm a_1\\ a_2\\ a_3\\ \vdots \\ a_n \mp +\pm b_1\\ b_2\\ b_3\\ \vdots \\ b_n \mp = \pm a_1+b_1\\a_2+b_2\\a_3+b_3\\ \vdots \\a_n+b_n \mp
+ \a+\b =\left(\begin{matrix} a_1\\ a_2\\ a_3\\ \vdots \\ a_n \end{matrix}\right) +\left(\begin{matrix} b_1\\ b_2\\ b_3\\ \vdots \\ b_n \end{matrix}\right) = \left(\begin{matrix} a_1+b_1\\a_2+b_2\\a_3+b_3\\ \vdots \\a_n+b_n \end{matrix}\right)
 $$
 
 Geometrically, vector addition is witnessed by placing the two vectors, $\a$ and $\b$, _tail-to-head_. The result, $\a+\b$, is the vector from the open tail to the open head. This is called the parallelogram law and is demonstrated in Figure \@ref(fig:vectoradd).
@@ -789,7 +791,7 @@ One thing we will do frequently in this course is deal with centered and/or stan
 :::
 
 __Scalar multiplication__ is another operation which acts element-wise:
-$$\alpha \a = \alpha \pm a_1\\a_2\\a_3\\ \vdots \\a_n \mp = \pm \alpha a_1 \\ \alpha a_2\\ \alpha a_3 \\ \vdots \\ \alpha a_n\mp $$
+$$\alpha \a = \alpha \left(\begin{matrix} a_1\\a_2\\a_3\\ \vdots \\a_n \end{matrix}\right) = \left(\begin{matrix} \alpha a_1 \\ \alpha a_2\\ \alpha a_3 \\ \vdots \\ \alpha a_n\end{matrix}\right) $$
 
 Scalar multiplication changes the length of a vector but not the overall direction (although a negative scalar will scale the vector in the opposite direction through the origin). We can see this geometric interpretation of scalar multiplication in Figure \@ref(fig:vectormult).
 
@@ -821,7 +823,7 @@ Linear combinations are quite simple to understand. Once the equation is written
 
 :::{.example name='Linear Combination' #lincomb}
 The simplest linear combination might involve columns of the identity matrix:
-$$\pm 3 \\ -2\\4 \mp = 3\pm 1\\0\\0 \mp -2 \pm 0\\1\\0 \mp +4 \pm 0\\0\\1 \mp$$
+$$\left(\begin{matrix} 3 \\ -2\\4 \end{matrix}\right) = 3\left(\begin{matrix} 1\\0\\0 \end{matrix}\right) -2 \left(\begin{matrix} 0\\1\\0 \end{matrix}\right) +4 \left(\begin{matrix} 0\\0\\1 \end{matrix}\right)$$
 We can easily picture this linear combination as a "breakdown into parts where the parts give directions along the 3 coordinate axis with which we are all familiar.
 :::
 
@@ -829,10 +831,10 @@ We can easily picture this linear combination as a "breakdown into parts where t
 We don't necessarily have to use vectors as the terms for a linear combination. Example \@ref(exm:matrixlincomb) shows how we can write any $m\times n$ matrix as a linear combination of $nm$ elementary matrices.
 
 :::{.example name='Linear Combination of Matrices' #matrixlincomb}
-Write the matrix $\A=\pm 1 & 3\\4&2 \mp$ as a linear combination of the following matrices:
-$$\left\lbrace \pm 1 & 0\\0&0 \mp,\pm 0 & 1\\0&0 \mp,\pm 0 & 0\\1&0 \mp,\pm 0 & 0\\0&1 \mp \right\rbrace$$
+Write the matrix $\mathbf{A}=\left(\begin{matrix} 1 & 3\\4&2 \end{matrix}\right)$ as a linear combination of the following matrices:
+$$\left\lbrace \left(\begin{matrix} 1 & 0\\0&0 \end{matrix}\right),\left(\begin{matrix} 0 & 1\\0&0 \end{matrix}\right),\left(\begin{matrix} 0 & 0\\1&0 \end{matrix}\right),\left(\begin{matrix} 0 & 0\\0&1 \end{matrix}\right) \right\rbrace$$
 Solution:
-$$\A=\pm 1 & 3\\4&2 \mp = 1\pm 1 & 0\\0&0 \mp+3\pm 0 & 1\\0&0 \mp+4\pm 0 & 0\\1&0 \mp+2\pm 0 & 0\\0&1 \mp$$
+$$\mathbf{A}=\left(\begin{matrix} 1 & 3\\4&2 \end{matrix}\right) = 1\left(\begin{matrix} 1 & 0\\0&0 \end{matrix}\right)+3\left(\begin{matrix} 0 & 1\\0&0 \end{matrix}\right)+4\left(\begin{matrix} 0 & 0\\1&0 \end{matrix}\right)+2\left(\begin{matrix} 0 & 0\\0&1 \end{matrix}\right)$$
 :::
 
 
@@ -843,9 +845,9 @@ When we multiply matrices, we do not perform the operation element-wise as we di
 
 ### The Inner Product
 We'll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the _dot product_ in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if $\x$ is a column vector,
-$$\x=\pm x_1\\x_2\\\vdots\\ x_n\mp$$
+$$\x=\left(\begin{matrix} x_1\\x_2\\\vdots\\ x_n\end{matrix}\right)$$
 then we can automatically assume that $\x^T$ is a row vector:
-$$\x^T = \pm x_1&x_2&\dots&x_n\mp.$$
+$$\x^T = \left(\begin{matrix} x_1&x_2&\dots&x_n\end{matrix}\right).$$
 
 :::{.definition name='Inner Product' #innerproddef}
 The **inner product** of two vectors, $\x$ and $\y$, written $\x^T\y$, is defined as the sum of the product of corresponding elements in $\x$ and $\y$:
@@ -853,31 +855,31 @@ The **inner product** of two vectors, $\x$ and $\y$, written $\x^T\y$, is define
 $$\x^T\y = \sum_{i=1}^n x_i y_i.$$
 If we write this out for two vectors with 4 elements each, we'd have:
 
-$$\x^T\y=\pm x_1 & x_2 & x_3 & x_4 \mp \pm y_1\\y_2\\y_3\\y_4 \mp = x_1y_1+x_2y_2+x_3y_3+x_4y_4$$
+$$\x^T\y=\left(\begin{matrix} x_1 & x_2 & x_3 & x_4 \end{matrix}\right) \left(\begin{matrix} y_1\\y_2\\y_3\\y_4 \end{matrix}\right) = x_1y_1+x_2y_2+x_3y_3+x_4y_4$$
 
 *Note: The inner product between vectors is only possible when the two vectors have the same number of elements!*\
 :::
 
 
 :::{.example name='Vector Inner Product' #innerprod}
-Let $$\x=\pm -1 \\2\\4\\0 \mp \quad \y=\pm 3 \\5\\1\\7 \mp \quad \v=\pm -3 \\-2\\5\\3\\-2 \mp \quad \u= \pm 2\\-1\\3\\-3\\-2 \mp$$
+Let $$\x=\left(\begin{matrix} -1 \\2\\4\\0 \end{matrix}\right) \quad \y=\left(\begin{matrix} 3 \\5\\1\\7 \end{matrix}\right) \quad \v=\left(\begin{matrix} -3 \\-2\\5\\3\\-2 \end{matrix}\right) \quad \u= \left(\begin{matrix} 2\\-1\\3\\-3\\-2 \end{matrix}\right)$$
 
 If possible, compute the following inner products:
 
 a. $\x^T\y$
 \begin{eqnarray}
-\x^T\y &=&\pm -1 &2&4&0 \mp \pm 3 \\5\\1\\7 \mp \cr &=& (-1)(3)+(2)(5)+(4)(1)+(0)(7) \cr &=& -3+10+4=\framebox{11}
+\x^T\y &=&\left(\begin{matrix} -1 &2&4&0 \end{matrix}\right) \left(\begin{matrix} 3 \\5\\1\\7 \end{matrix}\right) \cr &=& (-1)(3)+(2)(5)+(4)(1)+(0)(7) \cr &=& -3+10+4=\framebox{11}
 \end{eqnarray}
 b. $\x^T\v$
 This is not possible because $\x$ and $\v$ do not have the same number of elements
 c. $\v^T\u$
 \begin{eqnarray}
-\v^T\u &=& \pm -3 &-2&5&3&-2 \mp \pm 2\\-1\\3\\-3\\-2 \mp  \cr &=& (-3)(2)+(-2)(-1)+(5)(3)+(3)(-3)+(-2)(-2) \cr &=& -6+2+15-9+4 = \framebox{6}
+\v^T\u &=& \left(\begin{matrix} -3 &-2&5&3&-2 \end{matrix}\right) \left(\begin{matrix} 2\\-1\\3\\-3\\-2 \end{matrix}\right)  \cr &=& (-3)(2)+(-2)(-1)+(5)(3)+(3)(-3)+(-2)(-2) \cr &=& -6+2+15-9+4 = \framebox{6}
 \end{eqnarray}
 :::
 
 :::{.exercise name='Vector Inner Product' #innerprodexer}
-Let $$\bo{v}=\pm 1 \\2\\3\\4\\5 \mp \quad \e=\pm 1 \\1\\1\\1\\1 \mp \quad \bo{p}=\pm 0.5 \\0.1\\0.2\\0\\0.2 \mp \quad \u= \pm 10\\4\\3\\2\\1 \mp \quad \bo{s} = \pm 2\\2\\-3 \mp$$
+Let $$\bo{v}=\left(\begin{matrix} 1 \\2\\3\\4\\5 \end{matrix}\right) \quad \e=\left(\begin{matrix} 1 \\1\\1\\1\\1 \end{matrix}\right) \quad \bo{p}=\left(\begin{matrix} 0.5 \\0.1\\0.2\\0\\0.2 \end{matrix}\right) \quad \u= \left(\begin{matrix} 10\\4\\3\\2\\1 \end{matrix}\right) \quad \bo{s} = \left(\begin{matrix} 2\\2\\-3 \end{matrix}\right)$$
 
 If possible, compute the following inner products:
 
@@ -901,60 +903,60 @@ Now that we are comfortable multiplying a row vector ($\x^T$ in the definition) 
 Matrix multiplication is nothing more than a collection of inner products done simultaneously in one operation. We must be careful when multiplying matrices because, as with vectors, the operation is not always possible. Unlike the vector inner product, the order in which you multiply matrices makes a big difference!
 
 :::{.definition name='Matrix Multiplication' #matmultdef}
-Let $\A_{m\times n}$ and $\B_{k\times p}$ be matrices. The matrix product $\A\B$ is possible if and only if $n=k$; that is, when the number of columns in $\A$ is the same as the number of rows in $\B$. If this condition holds, then the dimension of the product, $\A\B$ is $m\times p$ and the (ij)-entry of the product $\A\B$ is the inner product of the $i^{th}$ row of $\A$ and the $j^{th}$ column of $\B$:
+Let $\mathbf{A}_{m\times n}$ and $\mathbf{B}_{k\times p}$ be matrices. The matrix product $\mathbf{A}\mathbf{B}$ is possible if and only if $n=k$; that is, when the number of columns in $\mathbf{A}$ is the same as the number of rows in $\mathbf{B}$. If this condition holds, then the dimension of the product, $\mathbf{A}\mathbf{B}$ is $m\times p$ and the (ij)-entry of the product $\mathbf{A}\mathbf{B}$ is the inner product of the $i^{th}$ row of $\mathbf{A}$ and the $j^{th}$ column of $\mathbf{B}$:
 
-$$(\A\B)_{ij} = \A_{i\star}\B_{\star j}$$
+$$(\mathbf{A}\mathbf{B})_{ij} = \mathbf{A}_{i\star}\mathbf{B}_{\star j}$$
 :::
 
 This definition may be easier to dissect using an example:
 
 :::{.example name='Steps to Compute a Matrix Product' #matmult}
 
-Let $$\A=\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp \quad \mbox{and} \quad \B=\pm  0 & -2 \\ 2 & -3 \mp$$
+Let $$\mathbf{A}=\left(\begin{matrix} 2 & 3 \\ -1 & 4 \\ 5 & 1 \end{matrix}\right) \quad \mbox{and} \quad \mathbf{B}=\left(\begin{matrix}  0 & -2 \\ 2 & -3 \end{matrix}\right)$$
 
 When we first get started with matrix multiplication, we often follow a few simple steps:
 
 1. Write down the matrices and their dimensions. Make sure the "inside" dimensions match - those corresponding to the columns of the first matrix and the rows of the second matrix:
-$$\underset{(3\times \red{2})}{\A} \underset{(\red{2} \times 2)}{\B}$$
+$$\underset{(3\times \red{2})}{\mathbf{A}} \underset{(\red{2} \times 2)}{\mathbf{B}}$$
 If these dimensions match, then we can multiply the matrices. If they don't, we stop right there - multiplication is not possible.
 2. Now, look at the "outer" dimensions - this will tell you the size of the resulting matrix.
-$$\underset{(\blue{3}\times 2)}{\A} \underset{(2\times \blue{2})}{\B}$$
-So the product $\A\B$ is a $3\times 2$ matrix.
-3. Finally, we compute the product of the matrices by multiplying each row of $\A$ by each column of $\B$ using inner products. The element in the first row and first column of the product (written $(\A\B)_{11}$) will be the inner product of the first row of $\A$ and the first column of $\B$. Then, $(\A\B)_{12}$ will be the inner product of the first row of $\A$ and the second column of $\B$, etc.
+$$\underset{(\blue{3}\times 2)}{\mathbf{A}} \underset{(2\times \blue{2})}{\mathbf{B}}$$
+So the product $\mathbf{A}\mathbf{B}$ is a $3\times 2$ matrix.
+3. Finally, we compute the product of the matrices by multiplying each row of $\mathbf{A}$ by each column of $\mathbf{B}$ using inner products. The element in the first row and first column of the product (written $(\mathbf{A}\mathbf{B})_{11}$) will be the inner product of the first row of $\mathbf{A}$ and the first column of $\mathbf{B}$. Then, $(\mathbf{A}\mathbf{B})_{12}$ will be the inner product of the first row of $\mathbf{A}$ and the second column of $\mathbf{B}$, etc.
 
 \begin{eqnarray}
-\A\B &=&\pm (2)(0)+(3)(2) & (2)(-2)+(3)(-3)\\
+\mathbf{A}\mathbf{B} &=&\left(\begin{matrix} (2)(0)+(3)(2) & (2)(-2)+(3)(-3)\\
  			 (-1)(0)+(4)(2) & (-1)(-2)+(4)(-3)\\
- 			  (5)(0)+(1)(2) & (5)(-2)+(1)(-3) \mp \cr
- 	&=& \pm 6&-13\\8 & -10\\2&-13\mp
+ 			  (5)(0)+(1)(2) & (5)(-2)+(1)(-3) \end{matrix}\right) \cr
+ 	&=& \left(\begin{matrix} 6&-13\\8 & -10\\2&-13\end{matrix}\right)
 \end{eqnarray}
 :::
 
 Matrix multiplication is incredibly important for data analysis. You may not see why all these multiplications and additions are so useful at this point, but we will visit some basic applications shortly. For now, let's practice so that we are prepared for the applications!
 
 :::{.exercise name='Matrix Multiplication' #matmultexer}
-Suppose we have $$\A_{4\times 6} \quad \B_{5\times 5} \quad \M_{5\times 4} \quad \bP_{6\times 5}$$
+Suppose we have $$\mathbf{A}_{4\times 6} \quad \mathbf{B}_{5\times 5} \quad \M_{5\times 4} \quad \bP_{6\times 5}$$
 Circle the matrix products that are possible to compute and write the dimension of the result.
-$$\A\M \qquad \M\A \qquad \B\M  \qquad \M\B \qquad \bP\A \qquad \bP\M \qquad \A\bP \qquad \A^T\bP \qquad \M^T\B$$
+$$\mathbf{A}\M \qquad \M\mathbf{A} \qquad \mathbf{B}\M  \qquad \M\mathbf{B} \qquad \bP\mathbf{A} \qquad \bP\M \qquad \mathbf{A}\bP \qquad \mathbf{A}^T\bP \qquad \M^T\mathbf{B}$$
 Let 
 \begin{equation}
-\A=\pm 1&1&0&1\\0&1&1&1\\1&0&1&0\mp \quad \M = \pm -2&1&-1&2&-2\\1&-2&0&-1&2\\2&1&-3&-2&3 \\ 1&3&2&-1&2\mp  \end{equation}
+\mathbf{A}=\left(\begin{matrix} 1&1&0&1\\0&1&1&1\\1&0&1&0\end{matrix}\right) \quad \M = \left(\begin{matrix} -2&1&-1&2&-2\\1&-2&0&-1&2\\2&1&-3&-2&3 \\ 1&3&2&-1&2\end{matrix}\right)  \end{equation}
 
 \begin{equation}
-\C=\pm -1&0&1&0\\1&-1&0&0\\0&0&1&-1 \mp \end{equation}
+\C=\left(\begin{matrix} -1&0&1&0\\1&-1&0&0\\0&0&1&-1 \end{matrix}\right) \end{equation}
 
 Determine the following matrix products, if possible:
 
-a $\A\C$
+a $\mathbf{A}\C$
 
-b $\A\M$
+b $\mathbf{A}\M$
 
-c. $\A^T\C$
+c. $\mathbf{A}^T\C$
 :::
 
 One very important thing to keep in mind is this:
  <p font-color:red><strong> matrix multiplication is NOT commutative! </strong></p>
- As we see from the previous exercises, it's quite common to be able to compute a product $\A\B$ where the reverse product, $\B\A$ is not even possible to compute. Even if both products are possible it is almost _never_ the case that $\A\B$ equals $\B\A$.
+ As we see from the previous exercises, it's quite common to be able to compute a product $\mathbf{A}\mathbf{B}$ where the reverse product, $\mathbf{B}\mathbf{A}$ is not even possible to compute. Even if both products are possible it is almost _never_ the case that $\mathbf{A}\mathbf{B}$ equals $\mathbf{B}\mathbf{A}$.
  
 #### Multiplication by a Diagonal Matrix
  
@@ -962,72 +964,72 @@ One very important thing to keep in mind is this:
 
 :::{.example name='Multiplication by a Diagonal Matrix' #diagmult}
  Compute the following matrix product and comment on what you find in the results:
- $$\D=\pm 2&0&0\\0&3&0\\0&0&-2 \mp \A= \pm 1&2&3\\1&1&2\\2&1&3 \mp$$
- $$\D\A=\pm 2&4&6\\3&3&6\\-4&-2&-6 \mp$$
- In doing this multiplication, we see that the effect of multiplying the matrix $\A$ by a diagonal matrix on the left is that the rows of the matrix $\A$ are simply scaled by the entries in the diagonal matrix. You should work this computation out by hand to convince yourself that this effect will happen every time. Diagonal scaling can be important, and from now on when you see a matrix product like $\D\A$ where $\D$ is diagonal, you should automatically put together that the result is just a row-scaled version of $\A$.
+ $$\D=\left(\begin{matrix} 2&0&0\\0&3&0\\0&0&-2 \end{matrix}\right) \mathbf{A}= \left(\begin{matrix} 1&2&3\\1&1&2\\2&1&3 \end{matrix}\right)$$
+ $$\D\mathbf{A}=\left(\begin{matrix} 2&4&6\\3&3&6\\-4&-2&-6 \end{matrix}\right)$$
+ In doing this multiplication, we see that the effect of multiplying the matrix $\mathbf{A}$ by a diagonal matrix on the left is that the rows of the matrix $\mathbf{A}$ are simply scaled by the entries in the diagonal matrix. You should work this computation out by hand to convince yourself that this effect will happen every time. Diagonal scaling can be important, and from now on when you see a matrix product like $\D\mathbf{A}$ where $\D$ is diagonal, you should automatically put together that the result is just a row-scaled version of $\mathbf{A}$.
 :::
  
 :::{.exercise name='Multiplication by a Diagonal Matrix' #diagmultexer}
  What happens if we were to compute the product from Example \@ref(exm:diagmult) in the reversed order, with the diagonal matrix on the right:
- $$\A\D?$$
+ $$\mathbf{A}\D?$$
  Would we expect the same result? Is multiplication by a diagonal matrix commutative? Work out the calculation and comment on what you've found.
 :::
 
 ### Matrix-Vector Product
 
-A matrix-vector product works exactly the same way as matrix multiplication; after all, a vector $\x$ is nothing but an $n\times 1$ matrix. In order to multiply a matrix by a vector, again we must match the dimensions to make sure they line up correctly. For example, if we have an $m\times n$ matrix $\A$, we can multiply by a $1\times m$ row vector $\v^T$ on the left:
-$$\v^T\A \quad \mbox{works because } \underset{ (1\times \red{m})}{\v^T} \underset{(\red{m}\times n)}{\A}$$
+A matrix-vector product works exactly the same way as matrix multiplication; after all, a vector $\x$ is nothing but an $n\times 1$ matrix. In order to multiply a matrix by a vector, again we must match the dimensions to make sure they line up correctly. For example, if we have an $m\times n$ matrix $\mathbf{A}$, we can multiply by a $1\times m$ row vector $\v^T$ on the left:
+$$\v^T\mathbf{A} \quad \mbox{works because } \underset{ (1\times \red{m})}{\v^T} \underset{(\red{m}\times n)}{\mathbf{A}}$$
 $$\Longrightarrow \mbox{The result will be a   } 1 \times n \mbox{ row vector.}$$
 or we can multiply by an $n\times 1$ column vector $\x$ on the right:
 
-$$\A\x \quad \mbox{works because } \underset{(m\times \red{n})}{\A}\underset{(\red{n}\times 1)}{\x} $$
+$$\mathbf{A}\x \quad \mbox{works because } \underset{(m\times \red{n})}{\mathbf{A}}\underset{(\red{n}\times 1)}{\x} $$
 $$\Longrightarrow \mbox{The result will be a   } m\times 1 \mbox{ column vector.}$$
 
-Matrix-vector multiplication works the same way as matrix multiplication: we simply multiply rows by columns until we've completed the answer. In the case of $\v^T\A$, we'd multiply the row $\v$ by each of the $n$ columns of $\A$, carving out our solution, one entry at a time :
+Matrix-vector multiplication works the same way as matrix multiplication: we simply multiply rows by columns until we've completed the answer. In the case of $\v^T\mathbf{A}$, we'd multiply the row $\v$ by each of the $n$ columns of $\mathbf{A}$, carving out our solution, one entry at a time :
 
-$$\v^T\A = \pm \v^T\A_{*1} & \v^T\acol{2} & \dots & \v^T\acol{n} \mp.$$
+$$\v^T\mathbf{A} = \left(\begin{matrix} \v^T\mathbf{A}_{*1} & \v^T\acol{2} & \dots & \v^T\acol{n} \end{matrix}\right).$$
 
-In the case of $\A\x$, we'd multiply each of the $m$ rows of $\A$ by the column $\x$:
+In the case of $\mathbf{A}\x$, we'd multiply each of the $m$ rows of $\mathbf{A}$ by the column $\x$:
 
-$$\A\x = \pm \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \mp.$$
+$$\mathbf{A}\x = \left(\begin{matrix} \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \end{matrix}\right).$$
 
 Let's see an example of this:
 
 :::{.example name='Matrix-Vector Products' #matvecprod}
-Let $$\A=\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp  \quad \v=\pm 3\\2 \mp \quad \bo{q}=\pm 2\\-1\\3\mp$$
+Let $$\mathbf{A}=\left(\begin{matrix} 2 & 3 \\ -1 & 4 \\ 5 & 1 \end{matrix}\right)  \quad \v=\left(\begin{matrix} 3\\2 \end{matrix}\right) \quad \bo{q}=\left(\begin{matrix} 2\\-1\\3\end{matrix}\right)$$
 
 Determine whether the following matrix-vector products are possible. When possible, compute the product.
 
-a. $\A\bo{q}$ 
-$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(3\times \red{2})}{\A}\underset{(\red{3}\times 1)}{\bo{q}}$$
-b. $\A\v$
+a. $\mathbf{A}\bo{q}$ 
+$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(3\times \red{2})}{\mathbf{A}}\underset{(\red{3}\times 1)}{\bo{q}}$$
+b. $\mathbf{A}\v$
 $$
-\pm 2 & 3 \\ -1 & 4 \\ 5 & 1 \mp \pm 3\\2 \mp = \pm 2(3)+3(2) \\  -1(3)+4(2)\\5(3)+1(2) \mp = \pm 12\\5\\17\mp
+\left(\begin{matrix} 2 & 3 \\ -1 & 4 \\ 5 & 1 \end{matrix}\right) \left(\begin{matrix} 3\\2 \end{matrix}\right) = \left(\begin{matrix} 2(3)+3(2) \\  -1(3)+4(2)\\5(3)+1(2) \end{matrix}\right) = \left(\begin{matrix} 12\\5\\17\end{matrix}\right)
 $$
-c. $\bo{q}^T\A$
+c. $\bo{q}^T\mathbf{A}$
 <center>Rather than write out the entire calculation, the blue text highlights one of the two inner products required:</center>
 $$
-\pm \blue{2} & \blue{-1} & \blue{3}\mp \pm \blue{2} & 3 \\ \blue{-1} & 4 \\ \blue{5} & 1 \mp  =  \pm \blue{20} & 5  \mp
+\left(\begin{matrix} \blue{2} & \blue{-1} & \blue{3}\end{matrix}\right) \left(\begin{matrix} \blue{2} & 3 \\ \blue{-1} & 4 \\ \blue{5} & 1 \end{matrix}\right)  =  \left(\begin{matrix} \blue{20} & 5  \end{matrix}\right)
 $$
 
-d. $\v^T\A$
-$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(1\times \red{2})}{\v^T}\underset{(\red{3}\times 2)}{\A}$$
+d. $\v^T\mathbf{A}$
+$$\mbox{Not Possible: Inner dimensions do not match} \quad \underset{(1\times \red{2})}{\v^T}\underset{(\red{3}\times 2)}{\mathbf{A}}$$
 :::
 
 :::{.exercise name='Matrix-Vector Products' #matvecprodexer}
 Let
-$$ \A=\pm 1&1&0&1\\0&1&1&1\\1&0&1&0\mp \quad \B=\pm  0 & -2 \\ 1 & -3 \mp $$ $$ \x=\pm 2\\1\\3 \mp \quad \y = \pm 1\\1 \mp \quad \z = \pm 3\\1\\2\\3 \mp$$
+$$ \mathbf{A}=\left(\begin{matrix} 1&1&0&1\\0&1&1&1\\1&0&1&0\end{matrix}\right) \quad \mathbf{B}=\left(\begin{matrix}  0 & -2 \\ 1 & -3 \end{matrix}\right) $$ $$ \x=\left(\begin{matrix} 2\\1\\3 \end{matrix}\right) \quad \y = \left(\begin{matrix} 1\\1 \end{matrix}\right) \quad \z = \left(\begin{matrix} 3\\1\\2\\3 \end{matrix}\right)$$
 Determine whether the following matrix-vector products are possible. When possible, compute the product.
 
-a. $\A\z$
+a. $\mathbf{A}\z$
 
-b. $\z^T\A$
+b. $\z^T\mathbf{A}$
 
-c. $\y^T\B$
+c. $\y^T\mathbf{B}$
 
-d. $\B\y$
+d. $\mathbf{B}\y$
 
-e. $\x^T\A$
+e. $\x^T\mathbf{A}$
 :::
 
 ### Linear Combination view of Matrix Products {-}
@@ -1035,10 +1037,10 @@ e. $\x^T\A$
 All matrix products can be viewed as linear combinations or a collection of linear combinations. This vantage point is _extremely_ crucial to our understanding of data science techniques that are based on matrix-factorization. Let's start with matrix-vector product and see how we can depict it as a linear combination of the columns of the matrix.
 
 :::{.definition name='Matrix-Vector Product as a Linear Combination' #matvecprodlincomb}
-Let $\A$ be an $m\times n$ matrix partitioned into columns, 
-$$\A = [\A_1 | \A_2 | \dots | \A_n]$$
+Let $\mathbf{A}$ be an $m\times n$ matrix partitioned into columns, 
+$$\mathbf{A} = [\mathbf{A}_1 | \mathbf{A}_2 | \dots | \mathbf{A}_n]$$
 and let $\x$ be a vector in $\Re^n$. Then,
-$$\A\x = x_1\A_1 + x_2\A_2 + \dots + x_n\A_n$$\
+$$\mathbf{A}\x = x_1\mathbf{A}_1 + x_2\mathbf{A}_2 + \dots + x_n\mathbf{A}_n$$\
 :::
 
 We use the animation in Figure \@ref(fig:matvecprodlincombanim) to illustrate Definition \@ref(def:matvecprodlincomb).
@@ -1050,7 +1052,7 @@ We use the animation in Figure \@ref(fig:matvecprodlincombanim) to illustrate De
 <p class="caption">(\#fig:matvecprodlincombanim)(ref:matvecprodlincombanim)</p>
 </div>
 
-Definition \@ref(def:matvecprodlincomb) extends to _any_ matrix product. If $\A\B=\mathbf{C}$ then the columns of $\mathbf{C}$ can be viewed as linear combinations of the columns of $\A$ and, likewise, the rows of $\C$ can be viewed as linear combinations of the rows of $\B$. We leave the latter fact for the reader to explore independently (see end-of-chapter exercise 5), and animate the former in Figure \@ref(fig:multlincombanim).
+Definition \@ref(def:matvecprodlincomb) extends to _any_ matrix product. If $\mathbf{A}\mathbf{B}=\mathbf{C}$ then the columns of $\mathbf{C}$ can be viewed as linear combinations of the columns of $\mathbf{A}$ and, likewise, the rows of $\C$ can be viewed as linear combinations of the rows of $\mathbf{B}$. We leave the latter fact for the reader to explore independently (see end-of-chapter exercise 5), and animate the former in Figure \@ref(fig:multlincombanim).
 
 <div class="figure" style="text-align: center">
 <img src="figs/multlincombanim.gif" alt="(ref:matvecprodlincombanim)" width="50%" />
@@ -1067,28 +1069,28 @@ $$\underset{(m\times \red{1})}{\x} \underset{(\red{1} \times n)}{\y^T} = \bo{M}_
 So the result is a matrix! We'll want to treat this product in the same way we treat any matrix product, by multiplying row $\times$ column until we've run out of rows and columns. Let's take a look at an example:
 
 :::{.example name='Vector Outer Product' #outerprod}
-Let $\x = \pm 3\\4\\-2 \mp$ and $\y=\pm 1\\5\\3 \mp$. Then,
-$$\x\y^T = \pm \red{3}\\4\\-2 \mp \pm \red{1}&5&3 \mp = \pm \red{3}&15&9\\4&20&12\\-2&-10&-3\mp$$
+Let $\x = \left(\begin{matrix} 3\\4\\-2 \end{matrix}\right)$ and $\y=\left(\begin{matrix} 1\\5\\3 \end{matrix}\right)$. Then,
+$$\x\y^T = \left(\begin{matrix} \red{3}\\4\\-2 \end{matrix}\right) \left(\begin{matrix} \red{1}&5&3 \end{matrix}\right) = \left(\begin{matrix} \red{3}&15&9\\4&20&12\\-2&-10&-3\end{matrix}\right)$$
 As you can see by performing this calculation, a vector outer product will _always_ produce a matrix whose rows are multiples of each other!
 :::
 
 ## The Identity and the Matrix Inverse
 
-The *identity matrix*, introduced in Section \@ref(special), is to matrices as the number `1' is to scalars. It is the **multiplicative identity**. For any matrix (or vector) $\A$, multiplying $\A$ by the identity matrix on either side does not change $\A$:
+The *identity matrix*, introduced in Section \@ref(special), is to matrices as the number `1' is to scalars. It is the **multiplicative identity**. For any matrix (or vector) $\mathbf{A}$, multiplying $\mathbf{A}$ by the identity matrix on either side does not change $\mathbf{A}$:
 \begin{align*}
-\A\I&=\A \\
-\I\A &= \A 
+\mathbf{A}\I&=\mathbf{A} \\
+\I\mathbf{A} &= \mathbf{A} 
 \end{align*}
 
-This fact is easy to verify in light of Example \@ref(exm:diagmult). Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1.  The size of the identity matrix is generally implied in context. If $\A$ is $m\times n$ then writing $\A\I$ implies that $\I$ is $n \times n$, where as writing $\I\A$ implies $\I$ is $m\times m$.
+This fact is easy to verify in light of Example \@ref(exm:diagmult). Since the identity is simply a diagonal matrix with ones on the diagonal, when we multiply it by any matrix it merely scales each row or column of that matrix by 1.  The size of the identity matrix is generally implied in context. If $\mathbf{A}$ is $m\times n$ then writing $\mathbf{A}\I$ implies that $\I$ is $n \times n$, where as writing $\I\mathbf{A}$ implies $\I$ is $m\times m$.
 
-For *certain* square matrices $\A$, an inverse matrix, written $\A^{-1}$, exists such that
-$$\A\A^{-1} = \I$$
-$$\A^{-1}\A = \I$$
+For *certain* square matrices $\mathbf{A}$, an inverse matrix, written $\mathbf{A}^{-1}$, exists such that
+$$\mathbf{A}\mathbf{A}^{-1} = \I$$
+$$\mathbf{A}^{-1}\mathbf{A} = \I$$
 It is very important to understand that not all matrices have inverses. There are 2 very important conditions that must be satisfied:
 \begin{itemize}
-\item The matrix $\A$ must be square
-\item The matrix $\A$ must be full-rank. 
+\item The matrix $\mathbf{A}$ must be square
+\item The matrix $\mathbf{A}$ must be full-rank. 
 \end{itemize}
 
 We have not yet discussed the notion of matrix rank, so the present discussion is aimed only at defining the concept of a matrix inverse rather than defining when it exists or how it is determined. For now, we want to see the analogy of the matrix inverse to our previous understanding of scalar algebra. Recall that the inverse of a non-zero scalar number is its reciprocal:
@@ -1102,20 +1104,20 @@ All scalars have an inverse with the exception of 0. For matrices, the idea of a
 
 :::{.example name='(ref:canceltitle)' #dontcancel}
 We must be careful in linear algebra to remember the basics and not confuse our equations with scalar equations. When we see an equation like
-$$\A\x=\lambda\x$$
+$$\mathbf{A}\x=\lambda\x$$
 We <font-folor:red><strong> CANNOT </strong> <font-folor:black>cancel terms from both sides. Mathematically, this operation amounts to multiplying both sides by an inverse. When the term we are canceling is a non-zero scalar, then we can proceed as usual. However, we must be careful not to assume that a matrix/vector quantity has an inverse. For example, the following operation is **nonsense:** 
-$$\require{cancel} \A\cancel{\x}=\lambda\cancel{\x}$$
-Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, $\A$, with a scalar, $\lambda$.
+$$\require{cancel} \mathbf{A}\cancel{\x}=\lambda\cancel{\x}$$
+Note that, while this equation made sense to begin with, after erroneously canceling terms, it no longer makes sense as it equates a matrix, $\mathbf{A}$, with a scalar, $\lambda$.
 :::
 
 
 
 ## Exercises
 <ol>
-<li> On a coordinate plane, draw the vectors $\a = \pm 1\\2\mp$ and $\b=\pm 0\\1\mp$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b "tail-to-head".
+<li> On a coordinate plane, draw the vectors $\a = \left(\begin{matrix} 1\\2\end{matrix}\right)$ and $\b=\left(\begin{matrix} 0\\1\end{matrix}\right)$ and then draw $\bo{c}=\a+\b$. Make dotted lines which illustrate how the point/vector $\bo{c}$ can be reached by connecting the vectors a and b "tail-to-head".
 <li> Use the following vectors to answer the questions:
 $$
-\v=\pm 6\\-1\mp \quad \bo{u}=\pm -2\\1\mp \quad \x=\pm 4\\2\\1\mp \quad \y=\pm-1\\-2\\-3\mp \quad \e=\pm 1\\1\\1\mp
+\v=\left(\begin{matrix} 6\\-1\end{matrix}\right) \quad \bo{u}=\left(\begin{matrix} -2\\1\end{matrix}\right) \quad \x=\left(\begin{matrix} 4\\2\\1\end{matrix}\right) \quad \y=\left(\begin{matrix}-1\\-2\\-3\end{matrix}\right) \quad \e=\left(\begin{matrix} 1\\1\\1\end{matrix}\right)
 $$
   <ol style="list-style-type:lower-alpha">
       <li> Compute the following linear combinations, if possible:
@@ -1141,16 +1143,16 @@ $$
 <li> What happens when you take the inner product of a vector with itself (as in $\x^T\x$)?  
 </ol>  
 <li> Use the following matrices to answer the questions:
-$$\A=\pm 1&3&8\\3&0&-2\\8&-2&-3 \mp \quad \bo{M}=\pm 1&8&-2&5\\2&8&1&7 \mp \quad 
-\D = \pm 1&0&0\\0&5&0\\0&0&3\mp $$ 
+$$\mathbf{A}=\left(\begin{matrix} 1&3&8\\3&0&-2\\8&-2&-3 \end{matrix}\right) \quad \bo{M}=\left(\begin{matrix} 1&8&-2&5\\2&8&1&7 \end{matrix}\right) \quad 
+\D = \left(\begin{matrix} 1&0&0\\0&5&0\\0&0&3\end{matrix}\right) $$ 
 $$
-\bo{H}=\pm 2&-1\\1&3 \mp \quad \bo{W}=\pm 1&1&1&1\\2&2&2&2\\3&3&3&3\mp
+\bo{H}=\left(\begin{matrix} 2&-1\\1&3 \end{matrix}\right) \quad \bo{W}=\left(\begin{matrix} 1&1&1&1\\2&2&2&2\\3&3&3&3\end{matrix}\right)
 $$
 <ol style="list-style-type:lower-alpha">
 <li> Circle the matrix products that are possible and specify their resulting dimensions:
 <ol style="list-style-type:lower-roman">
-  <li> $\A\M$ 
-  <li> $\A\bo{W}$ 
+  <li> $\mathbf{A}\M$ 
+  <li> $\mathbf{A}\bo{W}$ 
   <li> $\bo{W}\D$
   <li> $\bo{W}^T\D$
   <li> $\bo{H}\M$
@@ -1160,20 +1162,20 @@ $$
 </ol>  
 <li> Compute the following matrix products:  
     
-$$\bo{H}\M\quad \mbox{and} \quad \A\D$$
-<li> From the previous computation, $\A\D$, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (*Hint:* see Example \@ref(exm:diagmult) and Exercise \@ref(exr:diagmultexer).  
+$$\bo{H}\M\quad \mbox{and} \quad \mathbf{A}\D$$
+<li> From the previous computation, $\mathbf{A}\D$, do you notice anything interesting about multiplying a matrix by a diagonal matrix on the right? Can you generalize what happens in words? (*Hint:* see Example \@ref(exm:diagmult) and Exercise \@ref(exr:diagmultexer).  
 </ol>  
 <li> Is matrix multiplication commutative?
 <li> **Different Views of Matrix Multiplication:** Consider the matrix product 
-$\A\B$ where $$\A = \pm 1 & 2\\3&4 \mp \quad \B = \pm 2&5\\1&3\mp$$
-Let $\C=\A\B$.
+$\mathbf{A}\mathbf{B}$ where $$\mathbf{A} = \left(\begin{matrix} 1 & 2\\3&4 \end{matrix}\right) \quad \mathbf{B} = \left(\begin{matrix} 2&5\\1&3\end{matrix}\right)$$
+Let $\C=\mathbf{A}\mathbf{B}$.
 <ol style="list-style-type:lower-roman">
 <li> Compute the matrix product $\C$.
-<li> Compute the matrix-vector product $\A\B_{\star 1}$ and show that this is the first column of $\C$. (Likewise, $\A\B_{\star 2}$ is the second column of $\C$.) (_Matrix multiplication can be viewed as a collection of matrix-vector products._)
-<li> Compute the two outer products using columns of $\A$ and rows of $\B$ and show that
+<li> Compute the matrix-vector product $\mathbf{A}\mathbf{B}_{\star 1}$ and show that this is the first column of $\C$. (Likewise, $\mathbf{A}\mathbf{B}_{\star 2}$ is the second column of $\C$.) (_Matrix multiplication can be viewed as a collection of matrix-vector products._)
+<li> Compute the two outer products using columns of $\mathbf{A}$ and rows of $\mathbf{B}$ and show that
 $$\acol{1}\brow{1} + \acol{2}\brow{2} = \C$$ (_Matrix multiplication can be viewed as the sum of outer products._)
-<li> Since $\A\B_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\A$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
-<li> Finally, note that $\arow{1}\B$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
+<li> Since $\mathbf{A}\mathbf{B}_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\mathbf{A}$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
+<li> Finally, note that $\arow{1}\mathbf{B}$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
 </ol>
 </ol>
 
@@ -1649,7 +1651,7 @@ colMeans(A)
 ```
 
 ```
-## [1] -0.2357413  0.0560651
+## [1]  0.09138574 -0.34148516
 ```
 
 ```r
@@ -1659,7 +1661,7 @@ colMeans(A)
 ```
 
 ```
-## [1] -0.10377327 -0.06875516
+## [1] -0.1930677  0.0874687
 ```
 
 ```r
@@ -1669,7 +1671,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 1.1098020 0.9813014
+## [1] 0.9540342 1.0643603
 ```
 
 ```r
@@ -1679,7 +1681,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 20.37343467  5.12446517  0.38666058  0.07485046  5.08253002
+## [1] 0.7242231 1.0520831 0.3397001 1.6553828 6.2912147
 ```
 
 ```r
@@ -1689,7 +1691,7 @@ colMeans(B)
 ```
 
 ```
-## [1]  1.665335e-18 -4.718448e-18
+## [1]  1.165734e-17 -1.221245e-17
 ```
 
 ```r
@@ -1735,12 +1737,12 @@ A[1:5, ]
 ```
 
 ```
-##            This       That
-## [1,] -3.6229938 -2.6920904
-## [2,]  2.2513671 -0.2362445
-## [3,]  0.1620190  0.6003419
-## [4,] -0.2377398 -0.1353893
-## [5,]  0.3791807  2.2223303
+##            This        That
+## [1,]  0.5291381 -0.66651026
+## [2,]  0.8526387  0.57016697
+## [3,] -0.5807107  0.04975133
+## [4,]  0.1250208 -1.28052827
+## [5,] -1.9888993 -1.52823242
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -2647,7 +2649,7 @@ This metric is often referred to as _Manhattan distance_, _city block distance_,
 
 <div class="figure" style="text-align: center">
 <img src="figs/1norm.png" alt="The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm)." width="50%" />
-<p class="caption">(\#fig:unnamed-chunk-25)The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm).</p>
+<p class="caption">(\#fig:unnamed-chunk-24)The lengths of the red, yellow, and blue paths represent the 1-norm distance between the two points. The green line shows the Euclidean measurement (2-norm).</p>
 </div>
 
 
@@ -3051,7 +3053,7 @@ When we think of coordinate pairs, or coordinate triplets, we tend to think of t
 
 <div class="figure" style="text-align: center">
 <img src="figs/coordplane.jpg" alt="The Coordinate Plane" width="40%" />
-<p class="caption">(\#fig:unnamed-chunk-27)The Coordinate Plane</p>
+<p class="caption">(\#fig:unnamed-chunk-26)The Coordinate Plane</p>
 </div>
 
 We may not have previously formalized it, but even in this elementary setting, we are considering these points (vectors) as linear combinations of the elementary __basis vectors__
@@ -3257,7 +3259,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserve0d446e295cfbccbc
+preserve54040f1fbb076350
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -3481,7 +3483,7 @@ We can plot these two variables as follows:
 plot(cars)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-30-1.png" width="480" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-29-1.png" width="480" style="display: block; margin: auto;" />
 
 ### Setting up the Normal Equations
 
@@ -3629,7 +3631,7 @@ plot(cars)
 abline(beta[1],beta[2],col='blue')
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 
 ### OLS in R via ```lm()```
@@ -3981,7 +3983,7 @@ Let's first take a look at the scatterplot matrix:
 pairs(~Sepal.Length+Sepal.Width+Petal.Length+Petal.Width,data=iris,col=c("red","green3","blue")[iris$Species])
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-38-1.png" width="864" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-37-1.png" width="864" />
 
 It is apparent that some of our variables are correlated. We can confirm this by computing the correlation matrix with the `cor()` function. We can also check out the individual variances of the variables and the covariances between variables by examining the covariance matrix (`cov()` function). Remember - when looking at covariances, we can really only interpret the _sign_ of the number and not the magnitude as we can with the correlations.
 
@@ -4152,7 +4154,7 @@ plot(scores$Prin1, scores$Prin2,
      col=c("red","green3","blue")[iris$Species])
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-45-1.png" width="480" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-44-1.png" width="480" />
 
 ### PCA functions in R
 
@@ -4215,7 +4217,7 @@ One additional feature that R users have created is the **biplot**. The PCA bipl
 biplot(irispca, col = c("gray", "blue"))
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-47-1.png" width="960" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-46-1.png" width="960" />
 
 We can examine some of the outlying observations to see how they align with these projected variable directions. It helps to compare them to the quartiles of the data. Also keep in mind the direction of the arrows in the plot. If the arrow points down then the positive direction is down - indicating observations which are greater than the mean. Let's pick out observations 42 and 132 and see what the actual data points look like in comparison to the rest of the sample population.
 
@@ -4367,13 +4369,13 @@ plot(irispca2$x[,1],irispca2$x[,2],
      col=c("red","green3","blue")[iris$Species])
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="672" />
 
 ```r
 biplot(irispca2)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" />
 
 
 Here you can see the direction vectors of the original variables are relatively uniform in length in the PCA space. This is due to the standardization in the correlation matrix. However, the general message is the same: Petal.Width and Petal.Length Cluster together, and many of the same observations appear "on the fray" on the PCA space - although not all of them!
@@ -4404,11 +4406,11 @@ cor(data)
 ```
 
 ```
-##             [,1]       [,2]        [,3]        [,4]
-## [1,] 1.000000000 0.02243684 0.001795571 0.025140528
-## [2,] 0.022436844 1.00000000 0.028154168 0.019354342
-## [3,] 0.001795571 0.02815417 1.000000000 0.009254831
-## [4,] 0.025140528 0.01935434 0.009254831 1.000000000
+##             [,1]         [,2]        [,3]         [,4]
+## [1,]  1.00000000 -0.049023673  0.05625622 -0.027725186
+## [2,] -0.04902367  1.000000000  0.06038850 -0.009804244
+## [3,]  0.05625622  0.060388497  1.00000000 -0.016110819
+## [4,] -0.02772519 -0.009804244 -0.01611082  1.000000000
 ```
 
 ```r
@@ -4419,9 +4421,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0269 1.0021 0.9883 0.9822
-## Proportion of Variance 0.2636 0.2510 0.2442 0.2412
-## Cumulative Proportion  0.2636 0.5147 0.7588 1.0000
+## Standard deviation     1.0360 1.0254 0.9936 0.9424
+## Proportion of Variance 0.2683 0.2628 0.2468 0.2220
+## Cumulative Proportion  0.2683 0.5312 0.7780 1.0000
 ```
 
 ```r
@@ -4429,11 +4431,11 @@ pc$rotation
 ```
 
 ```
-##             PC1        PC2        PC3        PC4
-## [1,] -0.4872157  0.5278880 -0.5000453 -0.4836421
-## [2,] -0.5882444 -0.2626419 -0.3578876  0.6759469
-## [3,] -0.4051983 -0.7162576  0.1646037 -0.5437784
-## [4,] -0.5023979  0.3732673  0.7712177  0.1161513
+##             PC1        PC2         PC3        PC4
+## [1,] -0.4821201 -0.6230137  0.23475726  0.5694762
+## [2,] -0.3213893  0.7526628 -0.05102459  0.5723671
+## [3,] -0.7191799  0.1576449  0.34850788 -0.5800609
+## [4,]  0.3834702  0.1431804  0.90599546  0.1078062
 ```
 
 ```r
@@ -4441,8 +4443,8 @@ biplot(pc)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-53-1.png" alt="BiPlot of Iris Data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-53)BiPlot of Iris Data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" alt="BiPlot of Iris Data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-52)BiPlot of Iris Data</p>
 </div>
 
 Obviously, the wrong conclusion to make from this biplot is that Variables 1 and 4 are correlated. Variables 1 and 4 do not load highly on the first two principal components - in the _whole_ 4-dimensional principal component space they are nearly orthogonal to each other and to variables 1 and 2. Thus, their orthogonal projections appear near the origin of this 2-dimensional subspace.
@@ -4630,7 +4632,7 @@ ggplot(data = food.melt, aes(x=Var1, y=Var2, fill=value)) +
                                    size = 12, colour = 'black', hjust = 1))+coord_fixed()
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" />
 
 <!-- \includegraphics[width=.4\textwidth]{heatmap.png} -->
 
@@ -4672,7 +4674,7 @@ summary(pca)
 plot(pca, main = "Bar-style Screeplot")
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" />
 
 
 The next plot views our four datapoints (locations) projected onto the 2-dimensional subspace
@@ -4687,7 +4689,7 @@ plot(pca$x,
 text(pca$x[,1], pca$x[,2],row.names(food))
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" />
 
 #### The BiPlot
 
@@ -4699,8 +4701,8 @@ biplot(pca$x,pca$rotation, cex = c(1.5, 1), col = c('black','red'))#,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-64-1.png" alt="BiPlot: The observations and variables projected onto the same plane." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-64)BiPlot: The observations and variables projected onto the same plane.</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-63-1.png" alt="BiPlot: The observations and variables projected onto the same plane." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-63)BiPlot: The observations and variables projected onto the same plane.</p>
 </div>
 
 ```r
@@ -4721,7 +4723,7 @@ biplot(pca$x, pca$rotation[desired.variables,1:2], cex = c(1.5, 1),
        col = c('black','red'), xlim = c(-6,5), ylim = c(-4,4))
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-64-1.png" width="672" style="display: block; margin: auto;" />
 
 #### What are all these axes?
 
@@ -4742,7 +4744,7 @@ biplot(new.scores, vmax$loadings[,1:2],
        ylab = 'Rotated Axis 2')
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-66-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;" />
 
 ```r
 vmax$loadings[,1:2]
@@ -4940,8 +4942,8 @@ ggplot(data = cor.matrix, aes(x=Var1, y=Var2, fill=value)) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-69-1.png" alt="Heatmap of correlation matrix for 34 variables of interest" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-69)Heatmap of correlation matrix for 34 variables of interest</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-68-1.png" alt="Heatmap of correlation matrix for 34 variables of interest" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-68)Heatmap of correlation matrix for 34 variables of interest</p>
 </div>
 
 
@@ -5045,8 +5047,8 @@ legend(125,-45, c('Forward','Defense','Midfield','GoalKeeper'), c('red','blue','
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-73-1.png" alt="Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-73)Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident.</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-72-1.png" alt="Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-72)Projection of the FIFA players' skill data into 2 dimensions. Player positions are evident.</p>
 </div>
 
 The plot easily separates the field players from the goal keepers, and the forwards from the defenders. As one might expect, midfielders are sandwiched by the forwards and defenders, as they play both roles on the field. The labeling of player position was imperfect and done using a list of the players' preferred positions, and it's likely we are seeing that in some of the players labeled as midfielders that appear above the cloud of red points. 
@@ -5068,8 +5070,8 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preserve44d4d804959f6ec5
-<p class="caption">(\#fig:unnamed-chunk-74)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
+preserve6e67f70791971c5e
+<p class="caption">(\#fig:unnamed-chunk-73)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
 #### The BiPlot
@@ -5084,8 +5086,8 @@ biplot(fifa.pca$x[sample(1:16501,2000),],fifa.pca$rotation[,1:2], cex=0.5, arrow
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-75-1.png" alt="(ref:fifabadplot)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-75)(ref:fifabadplot)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-74-1.png" alt="(ref:fifabadplot)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-74)(ref:fifabadplot)</p>
 </div>
 
 
@@ -5116,8 +5118,8 @@ autoplot(fifa.pca, data = fifa,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" alt="(ref:fifagoodplot)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-76)(ref:fifagoodplot)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-75-1.png" alt="(ref:fifagoodplot)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-75)(ref:fifagoodplot)</p>
 </div>
 
 
@@ -5139,8 +5141,8 @@ color.legend(130,-100,220,-90,seq(0,100,50),alpha(magma(100),0.6),gradient="x")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-77-1.png" alt="(ref:fifaoverall)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-77)(ref:fifaoverall)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-76-1.png" alt="(ref:fifaoverall)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-76)(ref:fifaoverall)</p>
 </div>
 
 We can attempt to label some of the outliers, too. First, we'll look at the 0.001 and 0.999 quantiles to get a sense of what coordinates we want to highlight. Then we'll label any players outside of those bounds and surely find some familiar names.
@@ -5198,7 +5200,7 @@ outliers = fifa.pca$x[,1] > quant1h | fifa.pca$x[,1] < quant1l |
 text(jitter(fifa.pca$x[outliers,1],factor=1), jitter(fifa.pca$x[outliers,2],factor=600), fifa$Name[outliers], cex=0.7)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-78-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-77-1.png" width="672" style="display: block; margin: auto;" />
 
 What about by wage? First we need to convert their salary, denominated in Euros, to a numeric variable.
 
@@ -5233,8 +5235,8 @@ color.legend(130,-100,220,-90,c(min(fifa$Wage),max(fifa$Wage)),alpha(magma(100),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-79-1.png" alt="Projection of Players onto 2 Principal Components, Colored by Wage" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-79)Projection of Players onto 2 Principal Components, Colored by Wage</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-78-1.png" alt="Projection of Players onto 2 Principal Components, Colored by Wage" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-78)Projection of Players onto 2 Principal Components, Colored by Wage</p>
 </div>
 
 
@@ -5252,8 +5254,8 @@ plot(cumsum(fifa.pca$sdev^2)/sum(fifa.pca$sdev^2),
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-80-1.png" alt="Cumulative proportion of variance explained by rank of the decomposition (i.e. the number of components)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-80)Cumulative proportion of variance explained by rank of the decomposition (i.e. the number of components)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-79-1.png" alt="Cumulative proportion of variance explained by rank of the decomposition (i.e. the number of components)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-79)Cumulative proportion of variance explained by rank of the decomposition (i.e. the number of components)</p>
 </div>
 
 Let's use 3 components, since the marginal benefit of using additional components seems small. Once we rotate the loadings, we can try to use a heatmap to visualize what they might represent.
@@ -5269,7 +5271,7 @@ ggplot(data = melt.loadings, aes(x=Var2, y=Var1, fill=value)) +
    midpoint = 0, limit = c(-1,1))
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-81-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-80-1.png" width="672" style="display: block; margin: auto;" />
 
 <!--chapter:end:036-PCA-fifa.Rmd-->
 
@@ -5318,8 +5320,8 @@ plot(cancer[,randomColumns],col = cancerlabels$Class)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-84-1.png" alt="Random 2-Dimensional Projections of Cancer Data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-84)Random 2-Dimensional Projections of Cancer Data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-83-1.png" alt="Random 2-Dimensional Projections of Cancer Data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-83)Random 2-Dimensional Projections of Cancer Data</p>
 </div>
 To restore our plot window from that 3-by-2 grid, we run ``dev.off()``
 
@@ -5363,8 +5365,8 @@ plot(pcaOut$x[,1], pcaOut$x[,2],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-88-1.png" alt="Covariance PCA of genetic data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-88)Covariance PCA of genetic data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-87-1.png" alt="Covariance PCA of genetic data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-87)Covariance PCA of genetic data</p>
 </div>
 
 ### 3D plot with \blue{plotly} package 
@@ -9884,19 +9886,19 @@ this.forceToRange();
 if (typeof this.Tick !== "undefined")
 this.Tick(this.value);
 };</script>
-<div id="unnamed_chunk_91div" class="rglWebGL"></div>
+<div id="unnamed_chunk_90div" class="rglWebGL"></div>
 <script type="text/javascript">
-var unnamed_chunk_91div = document.getElementById("unnamed_chunk_91div"),
-unnamed_chunk_91rgl = new rglwidgetClass();
-unnamed_chunk_91div.width = 673;
-unnamed_chunk_91div.height = 481;
-unnamed_chunk_91rgl.initialize(unnamed_chunk_91div,
+var unnamed_chunk_90div = document.getElementById("unnamed_chunk_90div"),
+unnamed_chunk_90rgl = new rglwidgetClass();
+unnamed_chunk_90div.width = 673;
+unnamed_chunk_90div.height = 481;
+unnamed_chunk_90rgl.initialize(unnamed_chunk_90div,
 {"material":{"color":"#000000","alpha":1,"lit":true,"ambient":"#000000","specular":"#FFFFFF","emission":"#000000","shininess":50,"smooth":true,"front":"filled","back":"filled","size":3,"lwd":1,"fog":false,"point_antialias":false,"line_antialias":false,"texture":null,"textype":"rgb","texmipmap":false,"texminfilter":"linear","texmagfilter":"linear","texenvmap":false,"depth_mask":true,"depth_test":"less","isTransparent":false,"polygon_offset":[0,0]},"rootSubscene":6,"objects":{"12":{"id":12,"type":"points","material":{"lit":false},"vertices":[[-62.75542,94.07198,89.51983],[-2.432896,-90.58584,-1.067308],[-71.26685,8.064608,66.11246],[-84.77078,73.24457,74.181],[-69.56017,9.61294,-67.49755],[-36.37532,101.3512,53.93197],[85.06102,43.28692,4.700781],[-17.29448,114.8563,41.23814],[-26.81081,-27.29668,-52.64066],[-62.88201,114.7202,70.84338],[-56.95938,23.49365,-62.22215],[175.4907,21.67069,-13.34559],[-34.73292,91.65868,59.55945],[-62.37755,-23.67852,-28.3213],[-77.82496,-8.142553,-56.75523],[-44.81211,18.36165,-86.82122],[8.281098,-60.89168,7.042402],[147.7674,34.36503,-2.975601],[149.211,22.94923,-8.862924],[-60.97253,74.48611,76.5303],[-46.4666,-14.85795,-85.35406],[93.83027,-30.58132,3.098672],[3.361048,-41.1666,9.974472],[-86.24841,-31.19573,-44.22644],[176.6309,21.40542,-4.125311],[14.81682,-14.3975,2.107108],[-14.52115,-102.6643,98.80268],[-55.31823,5.070459,-57.84626],[-31.49063,-36.03561,-24.92793],[-51.65034,-9.595571,-7.621815],[-51.30488,-16.95635,-68.5501],[-61.77544,-4.833272,-83.08013],[130.9917,8.21373,-28.95741],[-32.46906,12.52489,-46.25039],[-54.64653,96.59763,63.39301],[-63.32528,-7.387336,-69.51511],[106.7434,40.37995,-0.3369423],[8.131987,-3.217448,1.283124],[-56.63015,-2.165738,-64.1329],[-59.49628,-11.45245,-35.43032],[168.3951,37.82302,-23.31695],[-61.10731,126.4616,91.80428],[-45.07998,90.24365,59.4714],[168.4928,31.45511,3.350518],[178.3475,34.61097,-5.14301],[-51.0589,-7.209909,-85.2295],[-44.178,124.3719,84.38613],[-38.56791,-133.6247,121.3203],[-55.02092,-22.24537,-79.53551],[-10.33001,-56.0827,10.30637],[-55.17892,2.263673,-71.81049],[-4.668371,-59.58064,46.22733],[-44.03553,-44.14089,-24.13651],[-48.88637,117.545,77.66454],[-35.34189,-126.7741,105.5862],[-54.72654,-50.0709,-1.835785],[-62.85637,-5.646218,-81.57938],[3.572745,-93.40186,64.38242],[148.763,35.16958,13.19975],[-45.34843,40.85137,-57.84766],[-3.888372,-64.05189,10.86923],[35.05441,2.086866,-17.51242],[-25.15508,27.54643,-85.50064],[6.463398,-39.08968,15.78489],[-75.34246,79.64014,86.31324],[-11.05434,-125.8739,94.41685],[-28.27792,30.63134,-50.29709],[-66.8698,116.4055,87.95477],[164.1032,17.79717,-8.672729],[-24.99289,-25.30218,-34.26011],[173.2683,17.56976,2.353981],[-40.89114,19.2857,-65.92233],[-47.84233,9.106007,-53.8437],[6.474413,-26.96283,27.25519],[-25.7497,-34.69393,-45.09432],[-12.85613,-81.33337,8.445231],[-42.45773,22.57991,-80.52196],[109.6053,-14.36951,16.39031],[-61.42336,101.6712,75.94524],[-22.10828,-104.3109,103.3694],[-55.36071,-15.46484,-71.47009],[-53.63959,96.74008,85.23214],[-64.53221,12.05588,-41.64358],[-51.17894,0.4983717,-78.06954],[-43.83986,110.9631,81.37189],[-52.57578,108.535,87.49281],[-56.67352,-33.48166,-49.7609],[-72.88708,4.905318,-73.31683],[175.6364,35.54252,11.64265],[-29.09067,-48.10265,-35.94415],[-63.79116,101.9518,79.47811],[-65.01722,100.2915,87.41172],[-21.11811,9.469407,-79.89854],[-42.62078,13.99407,-44.89823],[-57.04871,13.29638,-79.6403],[-70.77428,120.7582,94.18856],[-12.6675,-124.5015,92.71474],[-59.66513,-1.543072,-82.17086],[-41.98879,108.6746,65.19814],[-34.18946,-3.746316,-74.70872],[-51.45255,2.915987,-62.9795],[168.3113,37.37752,-4.084766],[-49.43015,11.1456,-64.12082],[173.1046,21.69665,2.6018],[-9.354,-59.76062,16.05465],[171.47,29.8674,-13.69297],[9.181129,-73.85863,19.10484],[-16.11311,-99.82968,84.10316],[-15.52067,-58.18255,6.751375],[-1.534922,-50.84909,5.007667],[-69.69164,89.32314,104.9638],[-43.35271,24.76018,-74.48579],[-16.78638,-46.16525,-0.8576218],[-54.08254,89.37665,77.09],[-56.05508,0.8742946,-64.9268],[181.7904,34.41794,3.976703],[172.2707,8.449766,-5.220393],[163.8116,38.97107,-7.355855],[-31.12905,-6.029666,-88.7685],[-55.60916,-8.023322,-56.17735],[16.26807,-68.80814,12.38774],[166.3865,0.942341,-0.4423971],[-14.52604,-56.57649,16.84053],[-71.07664,0.8582003,-56.71775],[-52.98253,104.4823,63.47831],[-34.93973,106.3911,58.49337],[-61.94568,101.8299,87.71529],[-46.1571,27.14045,-72.28382],[173.2613,43.5881,3.966805],[-42.50272,-52.17332,8.085643],[-15.57646,-123.3683,79.7818],[-47.18966,-27.70005,-7.567743],[-15.57247,-150.9968,137.9557],[-40.55935,-28.08346,-45.88084],[-66.30081,-19.5611,-61.67335],[170.683,12.49897,-1.802853],[31.74796,-16.96751,2.252347],[-53.84205,-2.043611,-56.56187],[119.6317,20.87131,-17.39926],[-14.68435,-132.4264,89.793],[-49.62901,9.758905,-78.74676],[-70.02472,119.036,92.69476],[-43.42468,33.7057,-84.67889],[117.9858,-24.01905,2.556262],[7.892595,-27.85253,-20.44548],[-27.7904,-135.6737,124.1956],[-17.77265,100.2271,55.52473],[-43.5858,9.577222,-63.90888],[8.212486,-44.17395,38.0445],[-1.060464,-59.12559,45.80805],[12.90343,-56.33337,-14.27219],[-5.400278,-71.05809,27.89923],[-76.80154,-17.86481,-71.1565],[-53.88892,-3.806791,-85.01414],[28.64811,-38.57713,-25.8116],[-48.98807,15.14786,-58.62808],[-42.71741,2.285204,-79.21332],[-46.57422,76.90252,54.68683],[-47.85226,96.91494,71.05459],[16.05372,-29.98437,6.932292],[-52.80476,107.9174,92.6394],[-10.09471,-19.55313,16.14705],[158.0577,37.7255,-15.11248],[-44.61355,24.61786,-56.66932],[-44.61202,112.4857,59.9042],[-4.782485,-50.41778,-1.891087],[-27.84771,-136.0657,91.6526],[167.1722,32.08003,-3.388095],[9.455933,-61.90701,15.44912],[-40.97202,40.31614,-81.70609],[152.5205,35.28028,-14.22855],[1.821043,-35.63712,3.178415],[-60.34,-18.56043,-65.8351],[-12.9405,-68.51808,38.34859],[-43.61022,25.12676,-77.86665],[-51.2935,12.34534,-38.3927],[-55.05938,22.97377,-55.13811],[-41.87915,83.43773,46.73719],[-53.77299,17.28116,-68.89179],[158.0373,44.13525,-14.31056],[-29.72957,-135.3069,108.0734],[121.7386,28.6195,-29.34169],[-40.17773,7.376225,-71.49197],[-34.19378,112.2117,55.33316],[-83.35664,96.37155,94.72642],[-25.88187,89.94965,61.39379],[-7.743839,-63.56557,14.50233],[14.08154,-58.22204,1.756888],[-40.3242,-6.300297,-65.35601],[5.197701,-78.9161,60.24824],[10.59454,-18.39992,31.4483],[157.0515,14.97451,-15.59297],[-13.89049,-74.95578,50.17704],[-62.37089,85.89703,74.00439],[4.167751,-30.75633,18.74776],[-19.91116,46.05459,-73.97771],[-50.49009,-25.71085,-28.76171],[-57.0691,-5.378454,-78.89159],[1.200289,-76.78849,6.011837],[2.757505,-51.92176,-0.1294159],[-8.036095,21.78093,-89.13139],[171.689,23.34921,3.849509],[170.6524,32.13584,-9.72915],[136.6286,-5.117547,-22.01632],[172.0722,15.97321,1.725324],[-63.37096,102.9868,69.62976],[-53.81973,-44.20122,-6.107713],[-78.96974,77.79472,76.52442],[-35.15731,-2.875651,-32.93214],[17.75026,-56.33106,0.9701894],[11.87142,-40.00084,-12.87469],[-37.96898,-18.2577,-60.95597],[-47.78009,95.09252,69.73112],[-62.85325,-11.09398,-66.3165],[-45.43651,118.7325,74.42934],[-30.33552,24.59572,-73.06695],[-58.3591,-15.09613,-66.02522],[-30.28886,5.093499,-69.13274],[15.86702,-39.54937,2.211232],[-40.53419,3.858041,-72.28383],[156.9336,22.0586,-5.610614],[-0.1946515,-42.42821,3.1794],[178.6381,36.65392,-9.284242],[176.5767,16.11433,-8.175027],[19.02551,-59.3035,-10.74567],[-12.80801,35.16554,-93.81154],[170.8777,21.96836,-10.13056],[-66.14677,106.1182,92.30429],[-30.08152,16.12364,-78.30447],[4.363556,-66.13453,-2.663838],[-0.0491553,-72.0424,53.3811],[-46.20221,84.13718,55.95052],[-32.51964,-140.2825,105.8581],[-66.38717,-15.14641,-41.39763],[177.4324,31.30627,-0.7393512],[-33.21798,115.1598,55.63334],[140.0856,23.14846,-13.53325],[-6.033837,-103.6907,95.45409],[-36.56811,-3.765066,-41.81567],[166.806,34.43696,0.6189874],[164.6504,22.04165,5.431439],[-9.543504,-64.93423,-8.507735],[-69.79934,101.4153,92.14986],[-14.04999,60.11163,11.45381],[20.61017,-16.38572,10.71285],[-4.176764,-54.57595,29.35577],[176.9554,33.58747,0.2509339],[-28.97984,13.53408,-73.23278],[-16.31457,-30.42704,-36.63771],[-16.31271,-103.4182,79.7616],[-37.8527,-30.52784,-14.90542],[-64.43759,113.5923,92.91597],[6.027593,-29.28084,43.10653],[-46.56068,20.4511,-64.93233],[-63.86859,98.37887,73.42893],[174.2612,31.69853,-1.35108],[-35.19207,94.03217,82.89945],[-62.22859,110.521,73.04041],[-52.15466,102.0306,73.13547],[-38.21869,8.983154,-87.63808],[-1.481036,-83.10664,75.81176],[-28.1964,-98.85948,83.79271],[3.004133,-50.19247,-14.39417],[-18.12765,-103.5869,64.38907],[-11.42694,-102.8432,81.63094],[-75.49321,104.1434,99.31423],[-9.243269,-25.32519,12.39909],[-56.22198,-75.5937,-12.9741],[-21.72113,6.367203,-56.53221],[137.5715,30.85064,-13.53086],[159.5756,31.92836,-4.065125],[-65.18243,-20.89327,-59.49452],[-25.26059,-137.4794,117.7364],[-50.0649,81.18488,99.56438],[168.8544,23.29225,4.223951],[-46.784,91.93655,70.6494],[-41.99838,4.100281,-74.49114],[-75.04077,-14.46719,-46.22739],[155.3528,33.94571,-19.87299],[-47.1601,1.065468,-78.15954],[-29.22954,-27.75164,-43.18918],[-39.49879,-24.9619,-38.14698],[-74.25905,6.621536,-17.06356],[-3.173276,-29.90948,27.09492],[-1.594617,-65.63317,15.07059],[-51.04161,19.32034,-65.30508],[-45.52827,30.02845,-72.13758],[-45.80929,-6.064879,-74.77026],[117.7143,39.71642,15.72658],[154.1248,31.24325,-14.96551],[157.6684,17.42121,-10.33344],[166.5387,23.04389,-14.964],[-44.8853,1.549636,-52.0921],[-24.19115,-16.87944,-63.0397],[-58.39759,3.680005,-43.23151],[146.4483,40.02952,-13.81253],[-54.07471,33.67988,-81.01946],[-52.6632,36.09238,-64.06239],[6.052528,-79.21258,7.274902],[-45.84317,84.30083,68.99123],[-49.89241,36.01601,-43.67874],[-47.63979,37.26424,-78.34333],[-36.21173,-109.8621,100.3906],[-4.332297,-71.76379,12.16385],[-50.90434,104.7795,82.82514],[-57.94952,3.949469,-87.81809],[-49.55668,9.322347,-76.3271],[-29.05002,0.542196,-62.10047],[-39.20395,-142.1579,125.8473],[-32.19758,15.20487,-63.08576],[-41.37711,109.4853,60.17805],[-32.01637,29.81773,-67.51514],[-8.862589,-120.6458,70.43221],[-18.18484,-77.70551,63.2393],[9.735977,-77.20382,-4.744589],[-70.17547,106.1728,82.53253],[170.7659,34.67709,-16.09179],[-53.60008,13.24285,-58.19946],[158.933,45.22942,-7.838642],[168.1168,28.17896,-5.778601],[9.602439,-32.07258,-18.80938],[-2.113763,-84.49737,71.9297],[67.17126,26.53502,5.183508],[-48.42135,28.5091,-87.72444],[-58.8481,14.93198,-84.61852],[-38.44432,-55.19947,-31.84141],[21.32741,-19.42376,-62.41185],[165.6104,23.58931,-8.353247],[-40.49601,2.115678,-69.66325],[-56.70093,14.38845,-86.22655],[-70.22799,111.5604,90.4186],[-27.88924,-61.12968,-28.8187],[168.6824,33.47352,-11.15738],[-47.08458,-7.401317,-78.15256],[28.67114,-27.13009,-15.85768],[-41.82108,87.89351,73.46793],[128.6168,32.30679,4.101613],[-47.20892,-20.56849,-75.52637],[-61.96711,29.62881,64.5042],[-14.54101,-108.2729,98.38092],[-29.24768,22.52271,-61.76962],[-38.94277,13.86216,-63.24075],[-63.62852,-11.10549,-60.13862],[-7.610407,-70.27173,-1.024809],[-2.900736,-93.63235,31.00097],[6.226847,-42.4917,9.312174],[-42.71901,-16.67663,-68.96703],[-43.5867,-10.06918,-73.45301],[-47.30521,121.1222,69.45084],[4.27154,-42.7773,8.905729],[-58.03158,25.16496,-88.77683],[164.1999,13.06344,-11.01913],[-45.79361,0.07483342,-74.62045],[-11.61604,-120.8847,117.3351],[2.721931,-66.91414,60.64916],[2.171129,-51.3316,9.808102],[-59.0878,1.50183,-74.49664],[174.5485,42.02186,9.580628],[-42.26014,4.571075,-75.97855],[-56.17556,-24.02773,-69.55143],[-45.38213,-26.49833,-43.95633],[-22.97079,-121.5168,98.48264],[4.901969,-66.80058,25.25818],[-8.378467,-106.0484,88.13434],[99.80488,12.51014,21.80184],[-52.3349,110.3051,80.41931],[149.1519,40.34991,-10.46664],[-27.47791,-11.19765,-52.63904],[-28.20591,26.80179,-77.48816],[175.6453,24.33683,5.206428],[-11.85451,-11.69106,-46.85907],[-30.25964,-142.1918,114.6211],[-63.18047,104.7581,81.5223],[-6.225171,-69.75163,22.80067],[-71.84317,112.7295,92.93684],[-50.68872,-12.38745,-41.0772],[155.6311,24.28472,-11.38801],[-61.85359,96.8591,73.80364],[-42.69191,-5.605145,-60.11189],[-13.2632,-137.5586,95.74084],[159.594,8.719285,-9.760565],[163.9558,25.76094,1.793159],[-13.55641,-127.714,113.8845],[-26.16015,-113.1369,113.9925],[-57.23026,90.17083,68.80692],[-56.64579,-2.942787,-71.34043],[-63.5092,-11.86993,-34.02361],[-17.75091,-49.12103,93.41964],[165.971,14.37003,3.945918],[-25.43241,-37.61567,7.211876],[-44.51065,108.3014,77.02411],[-50.98988,-46.52534,-17.84591],[-49.10348,-6.271181,-61.30056],[-38.97208,-1.776489,-78.73381],[25.35548,-6.085716,6.274775],[-3.230816,-51.53575,3.604378],[172.262,16.10838,-28.88906],[20.57991,-40.46289,8.417511],[-11.20436,-41.86483,-50.69316],[163.7191,11.15637,-2.312468],[-10.66551,-120.4335,99.65813],[-41.0249,59.40479,40.61987],[-63.67169,-5.869774,-59.60815],[4.354912,-75.02258,30.52802],[-52.87688,104.5411,74.04197],[-61.19348,19.76148,-58.89797],[-45.4348,-36.58523,5.525857],[-61.67028,30.10736,-69.48573],[-5.507451,-54.71317,30.80554],[-43.20852,9.006715,-93.95902],[-50.71602,-56.17805,-9.002638],[-34.73263,80.13451,55.9914],[-52.58706,-6.982668,-47.75879],[-64.9371,115.3617,81.37132],[-2.348909,-110.0524,99.98798],[-48.22549,-4.501574,-79.23213],[-25.98166,-67.64473,10.85277],[-69.99264,-41.47355,-39.47302],[-38.90035,-62.54668,-33.60635],[7.318798,-51.94744,2.733053],[-53.77975,-6.409425,-81.36485],[-27.59044,3.824729,-74.55398],[-48.0188,30.94045,-92.80149],[145.0883,27.32877,4.519045],[1.558802,-34.48398,30.37808],[-59.9406,111.9792,75.65346],[-50.76343,2.77026,-55.31176],[-51.20852,94.92714,62.91677],[150.9191,21.99791,3.553325],[-55.12332,9.932753,-51.32818],[174.1176,33.45292,-8.307733],[-19.35478,-128.5388,92.56815],[-52.08332,-24.92086,-78.36746],[-67.23364,101.9893,90.24466],[-4.409532,-53.06546,-16.75127],[136.7763,35.731,-8.423839],[-67.39214,-9.608287,-56.32549],[-37.75847,-21.31316,-66.65537],[139.4129,6.977854,6.677105],[-38.33558,-16.51084,-56.54101],[0.3325812,-43.41473,-12.80675],[-35.79958,-38.89302,-18.21923],[-29.75769,-28.47392,-47.7203],[-60.71125,91.22279,65.55179],[-40.00671,-126.7735,108.7185],[-60.29441,0.241026,-59.46022],[87.64801,13.72665,-1.46215],[-0.9556186,-43.94225,-4.013913],[-62.92296,86.58009,93.69811],[-63.96441,-36.69847,-29.81195],[-70.56276,58.80494,78.41714],[-45.48833,15.58894,-76.36789],[-51.22345,28.19501,-76.09966],[-11.25282,-26.1189,-56.6981],[-47.61065,-2.445796,-77.18941],[134.7208,23.64366,-9.684872],[16.38703,-9.687838,-13.65235],[-31.81681,19.84154,-72.62377],[170.5446,31.01414,3.679761],[-46.9079,10.58743,-76.43939],[-49.71223,2.935093,-75.60503],[-12.14801,-78.15952,12.70529],[16.47243,-29.83173,-5.267205],[136.2947,-2.026842,-12.36166],[-0.8627254,-89.37621,74.9479],[-59.33144,112.7902,72.82967],[-25.52917,-118.8182,102.5447],[-51.22211,7.980812,-75.76601],[176.8921,28.27716,-10.80127],[151.3393,50.6379,-10.69326],[-49.42253,7.838294,-43.42596],[-42.75616,111.9525,66.40556],[166.2105,32.33198,-16.13258],[5.807307,-67.92383,67.10992],[24.80755,-36.06455,25.10011],[0.9773918,-40.52328,24.67305],[-65.7239,-18.05123,-42.16352],[-59.23057,122.1753,83.40198],[-59.45265,91.72958,79.50802],[-27.77521,-24.41757,-34.57761],[-61.05074,86.15988,60.48068],[13.56873,-49.10178,10.0722],[151.8383,21.98173,2.954525],[-50.16884,86.63325,48.69099],[-48.76646,15.56178,-50.42521],[-17.07816,-57.81118,29.48239],[-55.32331,82.63686,66.22529],[-29.66553,-60.241,29.87534],[-38.68859,23.29729,-74.54608],[-46.65794,-10.54351,-50.79096],[-6.918917,-131.399,104.1362],[3.127557,-72.21569,2.517309],[167.4447,30.69172,-15.45901],[-8.443797,-122.1982,86.20956],[-5.023694,-62.8581,20.32369],[-65.54379,3.385092,-63.41081],[-69.55275,108.8769,90.76212],[6.329937,-1.345679,-25.24473],[-18.82216,15.0229,-69.77674],[-51.41642,106.3796,64.4609],[-56.34676,21.34218,-84.26859],[-27.13286,-104.027,106.5645],[-40.71183,9.60236,-71.27319],[-21.76809,-150.0272,107.9549],[167.8725,13.42908,-4.276697],[-67.4985,14.22666,-75.63814],[-56.63964,14.70196,-72.67589],[-32.85063,-79.36776,19.54598],[-19.39354,-58.41324,26.839],[9.542327,-42.21363,-11.28229],[-2.349578,-96.839,41.95174],[143.436,27.78775,-24.19951],[0.8503582,-56.42092,10.51882],[-2.682239,-54.8433,12.50732],[-50.15675,19.95724,-84.88224],[-45.01534,14.35105,-81.14745],[59.90984,43.15194,12.30394],[-46.53056,115.4682,61.79587],[-16.25122,-66.45309,13.59701],[-50.18192,110.5834,71.75756],[-60.30436,19.50229,-53.98581],[177.7677,35.047,-14.15896],[-86.80698,-24.90277,-37.36032],[115.4008,13.45949,-13.41036],[127.5234,44.74752,1.370175],[-45.99481,77.27962,57.70367],[-47.77628,91.68169,76.32398],[10.84373,-44.32774,-1.018178],[-31.43573,2.974503,-57.64358],[114.2096,13.84238,17.18269],[-31.77588,-111.49,126.888],[-0.753925,-115.2882,82.38068],[-41.91167,-41.68152,-62.74865],[175.0626,29.02229,-7.532745],[156.4037,23.50683,-17.75796],[-35.2748,34.30542,-86.58539],[-29.34923,-7.326562,-59.54344],[-45.2516,82.3263,59.15266],[138.9246,-19.78991,7.848586],[-5.28241,-88.81901,72.85626],[-24.30841,12.78665,-62.10175],[-33.6598,-29.6534,-32.54174],[-12.57354,-102.9383,81.50311],[13.12809,-62.90425,19.74847],[-42.25033,21.70769,-73.81946],[-30.91117,21.61841,-54.6948],[-54.89563,-11.30556,-75.44904],[184.2032,26.32788,-11.32098],[-67.5858,95.80722,78.72672],[-26.04927,-35.62584,9.375789],[6.967177,-34.01236,12.77784],[-71.13844,-29.29014,-48.29115],[150.6853,28.11746,-3.682868],[-25.15263,-114.7923,90.35331],[160.2284,13.82699,-14.03654],[175.0221,36.05054,-10.97856],[-64.47461,5.255641,-52.96712],[-44.74342,91.3607,69.04751],[2.23476,-83.24928,15.98792],[163.093,33.4409,-11.61925],[-66.56941,-43.9696,-46.47052],[-25.82116,-108.6188,92.77995],[-5.682576,-60.81491,22.04068],[3.358055,-21.7717,16.40303],[-1.434123,-73.23943,-3.185368],[-47.99558,113.7782,61.61889],[2.733562,-48.8663,6.130889],[169.3246,29.86362,5.699814],[-45.02943,4.618576,-63.22563],[-22.0721,31.04778,-78.04041],[-19.30649,-117.7196,96.09087],[-33.04833,104.4485,66.06591],[-10.27488,-53.63202,-23.95692],[-24.02592,42.23158,-73.28295],[-35.81567,-51.84806,-29.28391],[155.8378,37.5516,-24.14228],[13.64443,-53.91251,3.179296],[-11.91833,-48.69874,7.577085],[-44.04153,-46.39281,-33.84459],[-67.58902,104.9908,68.82233],[-20.16906,-63.96185,9.492386],[1.836986,-56.97406,5.549716],[-51.75618,-4.889527,-71.15829],[175.4067,32.29597,-14.09627],[-72.31898,106.348,85.09206],[-19.11189,-121.7031,112.9191],[21.75735,-81.36754,12.03403],[-34.14102,92.8167,54.62014],[-19.63775,-133.5247,77.74306],[-5.349717,-1.831769,32.1243],[-12.51338,-122.8652,119.1382],[146.7782,19.53012,-14.13173],[131.5887,9.552529,-7.115838],[-24.07392,-70.65096,-34.55381],[-67.47407,0.1259228,-66.41343],[165.4405,34.79908,-0.6961065],[146.6281,7.764892,2.359153],[-8.57527,-94.16026,69.33688],[-35.03535,-0.2118587,-62.94709],[13.10963,-49.9299,-12.26142],[-53.86364,88.53362,70.66808],[-75.73538,82.91839,83.58341],[146.9422,38.29922,-26.84729],[-66.40859,-11.42373,-65.92891],[7.396857,-42.0396,36.22611],[3.795559,-23.73244,-52.42621],[-13.96727,16.05067,-77.883],[-17.60172,-115.6484,89.98656],[-43.79327,20.17007,-69.29601],[-76.99973,109.9594,109.4856],[-58.68992,111.7906,85.97767],[-0.6582771,-36.63354,-42.42838],[-47.91389,16.805,-94.64858],[-24.43843,-142.4078,100.4659],[-63.09316,0.4422735,-63.90092],[133.0415,11.39118,-7.031246],[-24.30117,-56.34081,-29.641],[-15.75623,-14.50218,-45.62262],[4.477701,-77.68866,72.0875],[-43.46295,31.08632,-61.47208],[-34.05738,84.70794,54.56224],[-52.10207,5.466624,-53.07019],[-24.92951,-66.9546,-37.67664],[146.4646,-0.1871418,26.33868],[-71.61236,97.15807,90.77605],[-2.805526,-65.79949,35.76622],[-22.73955,13.71224,-78.21318],[-51.66584,4.416136,-63.06833],[132.528,12.85704,10.5231],[-22.01317,-53.52443,-36.11177],[-52.78639,8.087606,-83.06387],[-30.10538,31.33687,-48.50519],[-25.00357,48.71284,-70.16302],[-89.76369,-40.07071,-21.93802],[-6.716002,-118.8833,87.31078],[21.27899,-11.90982,21.86228],[-1.786925,-51.60543,22.5713],[-18.66358,-42.97114,-27.02709],[-56.54412,-4.583752,-74.71466],[-42.84497,-58.06228,-37.44977],[-48.14391,115.657,80.24138],[-45.858,-26.83221,-22.73171],[-51.5132,-3.870047,-54.7955],[168.3424,34.72011,-11.40979],[1.748422,-30.49674,36.63119],[3.674348,-27.30793,0.05669216],[156.0721,36.99181,-9.063364],[180.9365,22.6187,-1.812029],[10.68838,-52.82355,-0.4787757],[119.4389,4.954432,10.14411],[-20.80321,-125.2176,124.2808],[-39.46524,42.62709,-66.01917],[-24.60225,-131.8535,102.6869],[166.1442,56.83868,-16.38864],[-61.13268,15.86826,-84.40495],[-52.35205,8.040771,-83.66585],[-46.25683,98.82065,66.04105],[-56.13759,98.09032,65.66703],[-81.74457,88.92786,95.44514],[6.357502,-40.85879,-9.788704],[-59.65166,111.2151,88.696],[-70.51221,112.6846,86.57908],[-27.98007,-128.7375,103.1767],[-68.30259,5.637142,-37.32455],[-33.95645,23.82191,-76.73275],[-7.729535,-100.4607,89.67833],[-6.526251,-39.69289,35.51657],[138.623,7.037177,-14.11128],[-41.49635,10.81276,-78.1164],[145.9481,9.632672,-7.176719],[-25.31111,-109.5177,113.547],[-28.96753,28.45218,-74.9678],[-44.90662,16.92469,-88.53994],[-34.80765,10.06643,-56.54572],[-57.16276,110.3971,68.09929],[11.1145,-26.71608,20.81976],[129.3773,13.37262,-26.24843],[-55.65433,15.83059,-82.19476],[-25.58485,56.13759,27.06389],[109.6191,-25.69679,3.768908],[-62.27802,91.46569,65.92914],[-38.83078,25.53742,-82.15942],[15.52074,-57.58575,0.6998113],[152.9263,21.01877,-3.793617],[-61.98214,98.72048,83.25029],[22.00312,-21.56702,14.29282],[-46.08609,96.09776,60.98751],[-35.69476,98.82484,53.60226],[-56.10433,-47.12761,5.483956],[158.4122,34.89803,-11.71519],[-47.03185,114.7067,84.95387],[9.310649,-46.73558,6.756727],[-13.99511,-117.1445,76.45979],[-8.641252,-96.92645,86.60352],[-54.95285,13.41339,-82.09214],[-40.14177,14.76644,-74.53889],[-56.67165,-8.470753,-83.59319],[-8.5224,-55.8603,26.28689],[140.5347,23.08072,-26.16452],[128.4492,24.39091,2.49972],[137.377,29.39579,-9.428175],[-65.62986,6.343258,-72.32163],[-2.544152,-54.40176,0.1982074],[173.2566,38.34647,-8.7964],[-55.9208,107.1014,62.88293],[-46.45976,25.5573,-62.96459],[-2.250163,-42.69561,-4.06193],[-69.08968,106.0873,104.2525],[-32.72303,21.00219,-90.9581],[-69.15292,77.68437,81.4411],[-63.4297,-29.46968,-62.44925],[141.4643,22.28506,5.824355],[-29.57674,-45.16407,-40.60723],[15.6895,-29.58885,37.3428],[-59.90058,109.944,74.40357],[-37.05224,87.24931,75.83302],[163.9198,44.19572,-14.37593],[-31.60172,83.37231,51.73524],[128.4287,-4.438145,5.897785],[-45.05259,-9.223648,-79.61167],[5.325252,-47.92772,13.82778],[8.835163,-60.38396,-4.019912],[-42.57378,-31.84933,-48.16885],[-40.92422,-0.5080971,-11.65279],[153.9644,17.56136,-6.19757],[-42.55041,-8.250334,-79.38625],[-65.3681,-4.554496,-57.90518],[-23.6291,45.82302,-49.29707],[-52.28069,-30.68465,-57.83703],[159.3325,33.13112,-2.719456],[141.1245,16.10447,5.00385],[-42.67448,108.5506,66.28401],[-18.45885,-98.53812,86.58274],[169.594,35.11042,-8.516448],[-20.83821,-50.53344,-31.0132],[-27.97133,7.84505,-41.14238],[127.6768,-9.627019,-0.232213],[-43.91531,-7.391396,-70.71544],[21.27599,-53.2171,4.468545],[-40.4786,-37.71001,-20.38027],[-58.21666,-12.50525,-65.55038],[-33.97272,101.3522,45.08239],[-37.73566,12.49621,-38.60593],[-71.16277,96.86165,92.2073],[-56.94084,11.7024,-68.90054],[-32.06371,-143.3494,107.3737],[-45.83144,11.46374,-58.65191],[-62.22179,-3.631747,-64.04865],[131.8418,8.473859,-16.6388],[-13.34291,-49.79067,12.54104],[-60.18028,-12.44653,-48.70762],[-30.12206,-33.29755,-37.90598],[-50.56187,122.8621,80.9238],[-51.3209,-6.245308,-77.22153],[-56.06293,90.15755,65.64622],[21.03652,-79.38144,39.12162],[-61.40718,3.260181,-71.9077],[-39.82673,4.975126,-53.99438],[-44.05257,22.75473,-68.37354],[12.3221,-47.08997,-1.526622],[-46.65168,-31.4642,-69.36423],[-13.27004,-47.41063,10.76169],[-38.86512,-13.91814,-55.24236],[-9.49716,-36.64817,18.62272],[147.4988,11.961,8.346078],[171.7177,27.68795,-17.81438],[-12.22698,-102.3148,80.19199],[-7.800049,-77.48345,66.35669],[-45.56111,27.07765,-87.02413],[-18.47627,42.55945,-83.59927],[-57.19019,4.024642,-54.10881],[-32.32416,-63.08367,18.31844],[-26.25716,32.98741,-70.37985],[-0.6076313,-45.04803,20.92758],[112.3302,-20.85438,19.92414],[-32.97874,-7.917029,-65.64065],[15.64575,-63.92722,2.502424],[157.2163,23.84678,18.61755],[-16.95452,-75.8125,30.35011],[0.5865785,-61.01347,18.84306],[-21.35529,-76.39184,8.145018],[168.2856,28.32742,-7.350271],[-21.08135,5.783195,-85.94209],[-88.60803,70.19186,112.2234],[-33.88591,-57.85963,-25.73217],[-53.59483,-6.978814,-52.84119],[145.3305,15.67589,-15.71461],[-73.66547,-10.93033,-71.80627],[-66.20324,82.5269,64.21341],[69.58022,2.048424,37.07157],[-45.5789,-11.77395,-66.80384],[-40.09136,0.8706118,-91.22149],[-64.73328,0.914849,-62.12349],[-66.48156,2.564274,-74.22053],[-58.4863,104.059,65.72444],[13.04636,-37.37015,10.94016],[-60.86188,22.27863,-80.92717],[-14.46543,-53.39219,38.1539],[10.48626,-21.57059,41.34588],[-55.06361,92.39478,80.05004],[-49.10303,50.99764,40.50375]],"colors":[[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.007843138,0.007843138,0.04313726,1],[0.003921569,0.003921569,0.02745098,1],[0.003921569,0.003921569,0.02745098,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.01176471,0.01176471,0.06666667,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.007843138,0.007843138,0.04313726,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0,0,0.01568628,1],[0.01960784,0.01568628,0.09019608,1],[0.01176471,0.01176471,0.06666667,1],[0,0,0.01568628,1],[0.01176471,0.01176471,0.06666667,1],[0.003921569,0.003921569,0.02745098,1],[0.01960784,0.01568628,0.09019608,1],[0.01960784,0.01568628,0.09019608,1]],"centers":[[-62.75542,94.07198,89.51983],[-2.432896,-90.58584,-1.067308],[-71.26685,8.064608,66.11246],[-84.77078,73.24457,74.181],[-69.56017,9.61294,-67.49755],[-36.37532,101.3512,53.93197],[85.06102,43.28692,4.700781],[-17.29448,114.8563,41.23814],[-26.81081,-27.29668,-52.64066],[-62.88201,114.7202,70.84338],[-56.95938,23.49365,-62.22215],[175.4907,21.67069,-13.34559],[-34.73292,91.65868,59.55945],[-62.37755,-23.67852,-28.3213],[-77.82496,-8.142553,-56.75523],[-44.81211,18.36165,-86.82122],[8.281098,-60.89168,7.042402],[147.7674,34.36503,-2.975601],[149.211,22.94923,-8.862924],[-60.97253,74.48611,76.5303],[-46.4666,-14.85795,-85.35406],[93.83027,-30.58132,3.098672],[3.361048,-41.1666,9.974472],[-86.24841,-31.19573,-44.22644],[176.6309,21.40542,-4.125311],[14.81682,-14.3975,2.107108],[-14.52115,-102.6643,98.80268],[-55.31823,5.070459,-57.84626],[-31.49063,-36.03561,-24.92793],[-51.65034,-9.595571,-7.621815],[-51.30488,-16.95635,-68.5501],[-61.77544,-4.833272,-83.08013],[130.9917,8.21373,-28.95741],[-32.46906,12.52489,-46.25039],[-54.64653,96.59763,63.39301],[-63.32528,-7.387336,-69.51511],[106.7434,40.37995,-0.3369423],[8.131987,-3.217448,1.283124],[-56.63015,-2.165738,-64.1329],[-59.49628,-11.45245,-35.43032],[168.3951,37.82302,-23.31695],[-61.10731,126.4616,91.80428],[-45.07998,90.24365,59.4714],[168.4928,31.45511,3.350518],[178.3475,34.61097,-5.14301],[-51.0589,-7.209909,-85.2295],[-44.178,124.3719,84.38613],[-38.56791,-133.6247,121.3203],[-55.02092,-22.24537,-79.53551],[-10.33001,-56.0827,10.30637],[-55.17892,2.263673,-71.81049],[-4.668371,-59.58064,46.22733],[-44.03553,-44.14089,-24.13651],[-48.88637,117.545,77.66454],[-35.34189,-126.7741,105.5862],[-54.72654,-50.0709,-1.835785],[-62.85637,-5.646218,-81.57938],[3.572745,-93.40186,64.38242],[148.763,35.16958,13.19975],[-45.34843,40.85137,-57.84766],[-3.888372,-64.05189,10.86923],[35.05441,2.086866,-17.51242],[-25.15508,27.54643,-85.50064],[6.463398,-39.08968,15.78489],[-75.34246,79.64014,86.31324],[-11.05434,-125.8739,94.41685],[-28.27792,30.63134,-50.29709],[-66.8698,116.4055,87.95477],[164.1032,17.79717,-8.672729],[-24.99289,-25.30218,-34.26011],[173.2683,17.56976,2.353981],[-40.89114,19.2857,-65.92233],[-47.84233,9.106007,-53.8437],[6.474413,-26.96283,27.25519],[-25.7497,-34.69393,-45.09432],[-12.85613,-81.33337,8.445231],[-42.45773,22.57991,-80.52196],[109.6053,-14.36951,16.39031],[-61.42336,101.6712,75.94524],[-22.10828,-104.3109,103.3694],[-55.36071,-15.46484,-71.47009],[-53.63959,96.74008,85.23214],[-64.53221,12.05588,-41.64358],[-51.17894,0.4983717,-78.06954],[-43.83986,110.9631,81.37189],[-52.57578,108.535,87.49281],[-56.67352,-33.48166,-49.7609],[-72.88708,4.905318,-73.31683],[175.6364,35.54252,11.64265],[-29.09067,-48.10265,-35.94415],[-63.79116,101.9518,79.47811],[-65.01722,100.2915,87.41172],[-21.11811,9.469407,-79.89854],[-42.62078,13.99407,-44.89823],[-57.04871,13.29638,-79.6403],[-70.77428,120.7582,94.18856],[-12.6675,-124.5015,92.71474],[-59.66513,-1.543072,-82.17086],[-41.98879,108.6746,65.19814],[-34.18946,-3.746316,-74.70872],[-51.45255,2.915987,-62.9795],[168.3113,37.37752,-4.084766],[-49.43015,11.1456,-64.12082],[173.1046,21.69665,2.6018],[-9.354,-59.76062,16.05465],[171.47,29.8674,-13.69297],[9.181129,-73.85863,19.10484],[-16.11311,-99.82968,84.10316],[-15.52067,-58.18255,6.751375],[-1.534922,-50.84909,5.007667],[-69.69164,89.32314,104.9638],[-43.35271,24.76018,-74.48579],[-16.78638,-46.16525,-0.8576218],[-54.08254,89.37665,77.09],[-56.05508,0.8742946,-64.9268],[181.7904,34.41794,3.976703],[172.2707,8.449766,-5.220393],[163.8116,38.97107,-7.355855],[-31.12905,-6.029666,-88.7685],[-55.60916,-8.023322,-56.17735],[16.26807,-68.80814,12.38774],[166.3865,0.942341,-0.4423971],[-14.52604,-56.57649,16.84053],[-71.07664,0.8582003,-56.71775],[-52.98253,104.4823,63.47831],[-34.93973,106.3911,58.49337],[-61.94568,101.8299,87.71529],[-46.1571,27.14045,-72.28382],[173.2613,43.5881,3.966805],[-42.50272,-52.17332,8.085643],[-15.57646,-123.3683,79.7818],[-47.18966,-27.70005,-7.567743],[-15.57247,-150.9968,137.9557],[-40.55935,-28.08346,-45.88084],[-66.30081,-19.5611,-61.67335],[170.683,12.49897,-1.802853],[31.74796,-16.96751,2.252347],[-53.84205,-2.043611,-56.56187],[119.6317,20.87131,-17.39926],[-14.68435,-132.4264,89.793],[-49.62901,9.758905,-78.74676],[-70.02472,119.036,92.69476],[-43.42468,33.7057,-84.67889],[117.9858,-24.01905,2.556262],[7.892595,-27.85253,-20.44548],[-27.7904,-135.6737,124.1956],[-17.77265,100.2271,55.52473],[-43.5858,9.577222,-63.90888],[8.212486,-44.17395,38.0445],[-1.060464,-59.12559,45.80805],[12.90343,-56.33337,-14.27219],[-5.400278,-71.05809,27.89923],[-76.80154,-17.86481,-71.1565],[-53.88892,-3.806791,-85.01414],[28.64811,-38.57713,-25.8116],[-48.98807,15.14786,-58.62808],[-42.71741,2.285204,-79.21332],[-46.57422,76.90252,54.68683],[-47.85226,96.91494,71.05459],[16.05372,-29.98437,6.932292],[-52.80476,107.9174,92.6394],[-10.09471,-19.55313,16.14705],[158.0577,37.7255,-15.11248],[-44.61355,24.61786,-56.66932],[-44.61202,112.4857,59.9042],[-4.782485,-50.41778,-1.891087],[-27.84771,-136.0657,91.6526],[167.1722,32.08003,-3.388095],[9.455933,-61.90701,15.44912],[-40.97202,40.31614,-81.70609],[152.5205,35.28028,-14.22855],[1.821043,-35.63712,3.178415],[-60.34,-18.56043,-65.8351],[-12.9405,-68.51808,38.34859],[-43.61022,25.12676,-77.86665],[-51.2935,12.34534,-38.3927],[-55.05938,22.97377,-55.13811],[-41.87915,83.43773,46.73719],[-53.77299,17.28116,-68.89179],[158.0373,44.13525,-14.31056],[-29.72957,-135.3069,108.0734],[121.7386,28.6195,-29.34169],[-40.17773,7.376225,-71.49197],[-34.19378,112.2117,55.33316],[-83.35664,96.37155,94.72642],[-25.88187,89.94965,61.39379],[-7.743839,-63.56557,14.50233],[14.08154,-58.22204,1.756888],[-40.3242,-6.300297,-65.35601],[5.197701,-78.9161,60.24824],[10.59454,-18.39992,31.4483],[157.0515,14.97451,-15.59297],[-13.89049,-74.95578,50.17704],[-62.37089,85.89703,74.00439],[4.167751,-30.75633,18.74776],[-19.91116,46.05459,-73.97771],[-50.49009,-25.71085,-28.76171],[-57.0691,-5.378454,-78.89159],[1.200289,-76.78849,6.011837],[2.757505,-51.92176,-0.1294159],[-8.036095,21.78093,-89.13139],[171.689,23.34921,3.849509],[170.6524,32.13584,-9.72915],[136.6286,-5.117547,-22.01632],[172.0722,15.97321,1.725324],[-63.37096,102.9868,69.62976],[-53.81973,-44.20122,-6.107713],[-78.96974,77.79472,76.52442],[-35.15731,-2.875651,-32.93214],[17.75026,-56.33106,0.9701894],[11.87142,-40.00084,-12.87469],[-37.96898,-18.2577,-60.95597],[-47.78009,95.09252,69.73112],[-62.85325,-11.09398,-66.3165],[-45.43651,118.7325,74.42934],[-30.33552,24.59572,-73.06695],[-58.3591,-15.09613,-66.02522],[-30.28886,5.093499,-69.13274],[15.86702,-39.54937,2.211232],[-40.53419,3.858041,-72.28383],[156.9336,22.0586,-5.610614],[-0.1946515,-42.42821,3.1794],[178.6381,36.65392,-9.284242],[176.5767,16.11433,-8.175027],[19.02551,-59.3035,-10.74567],[-12.80801,35.16554,-93.81154],[170.8777,21.96836,-10.13056],[-66.14677,106.1182,92.30429],[-30.08152,16.12364,-78.30447],[4.363556,-66.13453,-2.663838],[-0.0491553,-72.0424,53.3811],[-46.20221,84.13718,55.95052],[-32.51964,-140.2825,105.8581],[-66.38717,-15.14641,-41.39763],[177.4324,31.30627,-0.7393512],[-33.21798,115.1598,55.63334],[140.0856,23.14846,-13.53325],[-6.033837,-103.6907,95.45409],[-36.56811,-3.765066,-41.81567],[166.806,34.43696,0.6189874],[164.6504,22.04165,5.431439],[-9.543504,-64.93423,-8.507735],[-69.79934,101.4153,92.14986],[-14.04999,60.11163,11.45381],[20.61017,-16.38572,10.71285],[-4.176764,-54.57595,29.35577],[176.9554,33.58747,0.2509339],[-28.97984,13.53408,-73.23278],[-16.31457,-30.42704,-36.63771],[-16.31271,-103.4182,79.7616],[-37.8527,-30.52784,-14.90542],[-64.43759,113.5923,92.91597],[6.027593,-29.28084,43.10653],[-46.56068,20.4511,-64.93233],[-63.86859,98.37887,73.42893],[174.2612,31.69853,-1.35108],[-35.19207,94.03217,82.89945],[-62.22859,110.521,73.04041],[-52.15466,102.0306,73.13547],[-38.21869,8.983154,-87.63808],[-1.481036,-83.10664,75.81176],[-28.1964,-98.85948,83.79271],[3.004133,-50.19247,-14.39417],[-18.12765,-103.5869,64.38907],[-11.42694,-102.8432,81.63094],[-75.49321,104.1434,99.31423],[-9.243269,-25.32519,12.39909],[-56.22198,-75.5937,-12.9741],[-21.72113,6.367203,-56.53221],[137.5715,30.85064,-13.53086],[159.5756,31.92836,-4.065125],[-65.18243,-20.89327,-59.49452],[-25.26059,-137.4794,117.7364],[-50.0649,81.18488,99.56438],[168.8544,23.29225,4.223951],[-46.784,91.93655,70.6494],[-41.99838,4.100281,-74.49114],[-75.04077,-14.46719,-46.22739],[155.3528,33.94571,-19.87299],[-47.1601,1.065468,-78.15954],[-29.22954,-27.75164,-43.18918],[-39.49879,-24.9619,-38.14698],[-74.25905,6.621536,-17.06356],[-3.173276,-29.90948,27.09492],[-1.594617,-65.63317,15.07059],[-51.04161,19.32034,-65.30508],[-45.52827,30.02845,-72.13758],[-45.80929,-6.064879,-74.77026],[117.7143,39.71642,15.72658],[154.1248,31.24325,-14.96551],[157.6684,17.42121,-10.33344],[166.5387,23.04389,-14.964],[-44.8853,1.549636,-52.0921],[-24.19115,-16.87944,-63.0397],[-58.39759,3.680005,-43.23151],[146.4483,40.02952,-13.81253],[-54.07471,33.67988,-81.01946],[-52.6632,36.09238,-64.06239],[6.052528,-79.21258,7.274902],[-45.84317,84.30083,68.99123],[-49.89241,36.01601,-43.67874],[-47.63979,37.26424,-78.34333],[-36.21173,-109.8621,100.3906],[-4.332297,-71.76379,12.16385],[-50.90434,104.7795,82.82514],[-57.94952,3.949469,-87.81809],[-49.55668,9.322347,-76.3271],[-29.05002,0.542196,-62.10047],[-39.20395,-142.1579,125.8473],[-32.19758,15.20487,-63.08576],[-41.37711,109.4853,60.17805],[-32.01637,29.81773,-67.51514],[-8.862589,-120.6458,70.43221],[-18.18484,-77.70551,63.2393],[9.735977,-77.20382,-4.744589],[-70.17547,106.1728,82.53253],[170.7659,34.67709,-16.09179],[-53.60008,13.24285,-58.19946],[158.933,45.22942,-7.838642],[168.1168,28.17896,-5.778601],[9.602439,-32.07258,-18.80938],[-2.113763,-84.49737,71.9297],[67.17126,26.53502,5.183508],[-48.42135,28.5091,-87.72444],[-58.8481,14.93198,-84.61852],[-38.44432,-55.19947,-31.84141],[21.32741,-19.42376,-62.41185],[165.6104,23.58931,-8.353247],[-40.49601,2.115678,-69.66325],[-56.70093,14.38845,-86.22655],[-70.22799,111.5604,90.4186],[-27.88924,-61.12968,-28.8187],[168.6824,33.47352,-11.15738],[-47.08458,-7.401317,-78.15256],[28.67114,-27.13009,-15.85768],[-41.82108,87.89351,73.46793],[128.6168,32.30679,4.101613],[-47.20892,-20.56849,-75.52637],[-61.96711,29.62881,64.5042],[-14.54101,-108.2729,98.38092],[-29.24768,22.52271,-61.76962],[-38.94277,13.86216,-63.24075],[-63.62852,-11.10549,-60.13862],[-7.610407,-70.27173,-1.024809],[-2.900736,-93.63235,31.00097],[6.226847,-42.4917,9.312174],[-42.71901,-16.67663,-68.96703],[-43.5867,-10.06918,-73.45301],[-47.30521,121.1222,69.45084],[4.27154,-42.7773,8.905729],[-58.03158,25.16496,-88.77683],[164.1999,13.06344,-11.01913],[-45.79361,0.07483342,-74.62045],[-11.61604,-120.8847,117.3351],[2.721931,-66.91414,60.64916],[2.171129,-51.3316,9.808102],[-59.0878,1.50183,-74.49664],[174.5485,42.02186,9.580628],[-42.26014,4.571075,-75.97855],[-56.17556,-24.02773,-69.55143],[-45.38213,-26.49833,-43.95633],[-22.97079,-121.5168,98.48264],[4.901969,-66.80058,25.25818],[-8.378467,-106.0484,88.13434],[99.80488,12.51014,21.80184],[-52.3349,110.3051,80.41931],[149.1519,40.34991,-10.46664],[-27.47791,-11.19765,-52.63904],[-28.20591,26.80179,-77.48816],[175.6453,24.33683,5.206428],[-11.85451,-11.69106,-46.85907],[-30.25964,-142.1918,114.6211],[-63.18047,104.7581,81.5223],[-6.225171,-69.75163,22.80067],[-71.84317,112.7295,92.93684],[-50.68872,-12.38745,-41.0772],[155.6311,24.28472,-11.38801],[-61.85359,96.8591,73.80364],[-42.69191,-5.605145,-60.11189],[-13.2632,-137.5586,95.74084],[159.594,8.719285,-9.760565],[163.9558,25.76094,1.793159],[-13.55641,-127.714,113.8845],[-26.16015,-113.1369,113.9925],[-57.23026,90.17083,68.80692],[-56.64579,-2.942787,-71.34043],[-63.5092,-11.86993,-34.02361],[-17.75091,-49.12103,93.41964],[165.971,14.37003,3.945918],[-25.43241,-37.61567,7.211876],[-44.51065,108.3014,77.02411],[-50.98988,-46.52534,-17.84591],[-49.10348,-6.271181,-61.30056],[-38.97208,-1.776489,-78.73381],[25.35548,-6.085716,6.274775],[-3.230816,-51.53575,3.604378],[172.262,16.10838,-28.88906],[20.57991,-40.46289,8.417511],[-11.20436,-41.86483,-50.69316],[163.7191,11.15637,-2.312468],[-10.66551,-120.4335,99.65813],[-41.0249,59.40479,40.61987],[-63.67169,-5.869774,-59.60815],[4.354912,-75.02258,30.52802],[-52.87688,104.5411,74.04197],[-61.19348,19.76148,-58.89797],[-45.4348,-36.58523,5.525857],[-61.67028,30.10736,-69.48573],[-5.507451,-54.71317,30.80554],[-43.20852,9.006715,-93.95902],[-50.71602,-56.17805,-9.002638],[-34.73263,80.13451,55.9914],[-52.58706,-6.982668,-47.75879],[-64.9371,115.3617,81.37132],[-2.348909,-110.0524,99.98798],[-48.22549,-4.501574,-79.23213],[-25.98166,-67.64473,10.85277],[-69.99264,-41.47355,-39.47302],[-38.90035,-62.54668,-33.60635],[7.318798,-51.94744,2.733053],[-53.77975,-6.409425,-81.36485],[-27.59044,3.824729,-74.55398],[-48.0188,30.94045,-92.80149],[145.0883,27.32877,4.519045],[1.558802,-34.48398,30.37808],[-59.9406,111.9792,75.65346],[-50.76343,2.77026,-55.31176],[-51.20852,94.92714,62.91677],[150.9191,21.99791,3.553325],[-55.12332,9.932753,-51.32818],[174.1176,33.45292,-8.307733],[-19.35478,-128.5388,92.56815],[-52.08332,-24.92086,-78.36746],[-67.23364,101.9893,90.24466],[-4.409532,-53.06546,-16.75127],[136.7763,35.731,-8.423839],[-67.39214,-9.608287,-56.32549],[-37.75847,-21.31316,-66.65537],[139.4129,6.977854,6.677105],[-38.33558,-16.51084,-56.54101],[0.3325812,-43.41473,-12.80675],[-35.79958,-38.89302,-18.21923],[-29.75769,-28.47392,-47.7203],[-60.71125,91.22279,65.55179],[-40.00671,-126.7735,108.7185],[-60.29441,0.241026,-59.46022],[87.64801,13.72665,-1.46215],[-0.9556186,-43.94225,-4.013913],[-62.92296,86.58009,93.69811],[-63.96441,-36.69847,-29.81195],[-70.56276,58.80494,78.41714],[-45.48833,15.58894,-76.36789],[-51.22345,28.19501,-76.09966],[-11.25282,-26.1189,-56.6981],[-47.61065,-2.445796,-77.18941],[134.7208,23.64366,-9.684872],[16.38703,-9.687838,-13.65235],[-31.81681,19.84154,-72.62377],[170.5446,31.01414,3.679761],[-46.9079,10.58743,-76.43939],[-49.71223,2.935093,-75.60503],[-12.14801,-78.15952,12.70529],[16.47243,-29.83173,-5.267205],[136.2947,-2.026842,-12.36166],[-0.8627254,-89.37621,74.9479],[-59.33144,112.7902,72.82967],[-25.52917,-118.8182,102.5447],[-51.22211,7.980812,-75.76601],[176.8921,28.27716,-10.80127],[151.3393,50.6379,-10.69326],[-49.42253,7.838294,-43.42596],[-42.75616,111.9525,66.40556],[166.2105,32.33198,-16.13258],[5.807307,-67.92383,67.10992],[24.80755,-36.06455,25.10011],[0.9773918,-40.52328,24.67305],[-65.7239,-18.05123,-42.16352],[-59.23057,122.1753,83.40198],[-59.45265,91.72958,79.50802],[-27.77521,-24.41757,-34.57761],[-61.05074,86.15988,60.48068],[13.56873,-49.10178,10.0722],[151.8383,21.98173,2.954525],[-50.16884,86.63325,48.69099],[-48.76646,15.56178,-50.42521],[-17.07816,-57.81118,29.48239],[-55.32331,82.63686,66.22529],[-29.66553,-60.241,29.87534],[-38.68859,23.29729,-74.54608],[-46.65794,-10.54351,-50.79096],[-6.918917,-131.399,104.1362],[3.127557,-72.21569,2.517309],[167.4447,30.69172,-15.45901],[-8.443797,-122.1982,86.20956],[-5.023694,-62.8581,20.32369],[-65.54379,3.385092,-63.41081],[-69.55275,108.8769,90.76212],[6.329937,-1.345679,-25.24473],[-18.82216,15.0229,-69.77674],[-51.41642,106.3796,64.4609],[-56.34676,21.34218,-84.26859],[-27.13286,-104.027,106.5645],[-40.71183,9.60236,-71.27319],[-21.76809,-150.0272,107.9549],[167.8725,13.42908,-4.276697],[-67.4985,14.22666,-75.63814],[-56.63964,14.70196,-72.67589],[-32.85063,-79.36776,19.54598],[-19.39354,-58.41324,26.839],[9.542327,-42.21363,-11.28229],[-2.349578,-96.839,41.95174],[143.436,27.78775,-24.19951],[0.8503582,-56.42092,10.51882],[-2.682239,-54.8433,12.50732],[-50.15675,19.95724,-84.88224],[-45.01534,14.35105,-81.14745],[59.90984,43.15194,12.30394],[-46.53056,115.4682,61.79587],[-16.25122,-66.45309,13.59701],[-50.18192,110.5834,71.75756],[-60.30436,19.50229,-53.98581],[177.7677,35.047,-14.15896],[-86.80698,-24.90277,-37.36032],[115.4008,13.45949,-13.41036],[127.5234,44.74752,1.370175],[-45.99481,77.27962,57.70367],[-47.77628,91.68169,76.32398],[10.84373,-44.32774,-1.018178],[-31.43573,2.974503,-57.64358],[114.2096,13.84238,17.18269],[-31.77588,-111.49,126.888],[-0.753925,-115.2882,82.38068],[-41.91167,-41.68152,-62.74865],[175.0626,29.02229,-7.532745],[156.4037,23.50683,-17.75796],[-35.2748,34.30542,-86.58539],[-29.34923,-7.326562,-59.54344],[-45.2516,82.3263,59.15266],[138.9246,-19.78991,7.848586],[-5.28241,-88.81901,72.85626],[-24.30841,12.78665,-62.10175],[-33.6598,-29.6534,-32.54174],[-12.57354,-102.9383,81.50311],[13.12809,-62.90425,19.74847],[-42.25033,21.70769,-73.81946],[-30.91117,21.61841,-54.6948],[-54.89563,-11.30556,-75.44904],[184.2032,26.32788,-11.32098],[-67.5858,95.80722,78.72672],[-26.04927,-35.62584,9.375789],[6.967177,-34.01236,12.77784],[-71.13844,-29.29014,-48.29115],[150.6853,28.11746,-3.682868],[-25.15263,-114.7923,90.35331],[160.2284,13.82699,-14.03654],[175.0221,36.05054,-10.97856],[-64.47461,5.255641,-52.96712],[-44.74342,91.3607,69.04751],[2.23476,-83.24928,15.98792],[163.093,33.4409,-11.61925],[-66.56941,-43.9696,-46.47052],[-25.82116,-108.6188,92.77995],[-5.682576,-60.81491,22.04068],[3.358055,-21.7717,16.40303],[-1.434123,-73.23943,-3.185368],[-47.99558,113.7782,61.61889],[2.733562,-48.8663,6.130889],[169.3246,29.86362,5.699814],[-45.02943,4.618576,-63.22563],[-22.0721,31.04778,-78.04041],[-19.30649,-117.7196,96.09087],[-33.04833,104.4485,66.06591],[-10.27488,-53.63202,-23.95692],[-24.02592,42.23158,-73.28295],[-35.81567,-51.84806,-29.28391],[155.8378,37.5516,-24.14228],[13.64443,-53.91251,3.179296],[-11.91833,-48.69874,7.577085],[-44.04153,-46.39281,-33.84459],[-67.58902,104.9908,68.82233],[-20.16906,-63.96185,9.492386],[1.836986,-56.97406,5.549716],[-51.75618,-4.889527,-71.15829],[175.4067,32.29597,-14.09627],[-72.31898,106.348,85.09206],[-19.11189,-121.7031,112.9191],[21.75735,-81.36754,12.03403],[-34.14102,92.8167,54.62014],[-19.63775,-133.5247,77.74306],[-5.349717,-1.831769,32.1243],[-12.51338,-122.8652,119.1382],[146.7782,19.53012,-14.13173],[131.5887,9.552529,-7.115838],[-24.07392,-70.65096,-34.55381],[-67.47407,0.1259228,-66.41343],[165.4405,34.79908,-0.6961065],[146.6281,7.764892,2.359153],[-8.57527,-94.16026,69.33688],[-35.03535,-0.2118587,-62.94709],[13.10963,-49.9299,-12.26142],[-53.86364,88.53362,70.66808],[-75.73538,82.91839,83.58341],[146.9422,38.29922,-26.84729],[-66.40859,-11.42373,-65.92891],[7.396857,-42.0396,36.22611],[3.795559,-23.73244,-52.42621],[-13.96727,16.05067,-77.883],[-17.60172,-115.6484,89.98656],[-43.79327,20.17007,-69.29601],[-76.99973,109.9594,109.4856],[-58.68992,111.7906,85.97767],[-0.6582771,-36.63354,-42.42838],[-47.91389,16.805,-94.64858],[-24.43843,-142.4078,100.4659],[-63.09316,0.4422735,-63.90092],[133.0415,11.39118,-7.031246],[-24.30117,-56.34081,-29.641],[-15.75623,-14.50218,-45.62262],[4.477701,-77.68866,72.0875],[-43.46295,31.08632,-61.47208],[-34.05738,84.70794,54.56224],[-52.10207,5.466624,-53.07019],[-24.92951,-66.9546,-37.67664],[146.4646,-0.1871418,26.33868],[-71.61236,97.15807,90.77605],[-2.805526,-65.79949,35.76622],[-22.73955,13.71224,-78.21318],[-51.66584,4.416136,-63.06833],[132.528,12.85704,10.5231],[-22.01317,-53.52443,-36.11177],[-52.78639,8.087606,-83.06387],[-30.10538,31.33687,-48.50519],[-25.00357,48.71284,-70.16302],[-89.76369,-40.07071,-21.93802],[-6.716002,-118.8833,87.31078],[21.27899,-11.90982,21.86228],[-1.786925,-51.60543,22.5713],[-18.66358,-42.97114,-27.02709],[-56.54412,-4.583752,-74.71466],[-42.84497,-58.06228,-37.44977],[-48.14391,115.657,80.24138],[-45.858,-26.83221,-22.73171],[-51.5132,-3.870047,-54.7955],[168.3424,34.72011,-11.40979],[1.748422,-30.49674,36.63119],[3.674348,-27.30793,0.05669216],[156.0721,36.99181,-9.063364],[180.9365,22.6187,-1.812029],[10.68838,-52.82355,-0.4787757],[119.4389,4.954432,10.14411],[-20.80321,-125.2176,124.2808],[-39.46524,42.62709,-66.01917],[-24.60225,-131.8535,102.6869],[166.1442,56.83868,-16.38864],[-61.13268,15.86826,-84.40495],[-52.35205,8.040771,-83.66585],[-46.25683,98.82065,66.04105],[-56.13759,98.09032,65.66703],[-81.74457,88.92786,95.44514],[6.357502,-40.85879,-9.788704],[-59.65166,111.2151,88.696],[-70.51221,112.6846,86.57908],[-27.98007,-128.7375,103.1767],[-68.30259,5.637142,-37.32455],[-33.95645,23.82191,-76.73275],[-7.729535,-100.4607,89.67833],[-6.526251,-39.69289,35.51657],[138.623,7.037177,-14.11128],[-41.49635,10.81276,-78.1164],[145.9481,9.632672,-7.176719],[-25.31111,-109.5177,113.547],[-28.96753,28.45218,-74.9678],[-44.90662,16.92469,-88.53994],[-34.80765,10.06643,-56.54572],[-57.16276,110.3971,68.09929],[11.1145,-26.71608,20.81976],[129.3773,13.37262,-26.24843],[-55.65433,15.83059,-82.19476],[-25.58485,56.13759,27.06389],[109.6191,-25.69679,3.768908],[-62.27802,91.46569,65.92914],[-38.83078,25.53742,-82.15942],[15.52074,-57.58575,0.6998113],[152.9263,21.01877,-3.793617],[-61.98214,98.72048,83.25029],[22.00312,-21.56702,14.29282],[-46.08609,96.09776,60.98751],[-35.69476,98.82484,53.60226],[-56.10433,-47.12761,5.483956],[158.4122,34.89803,-11.71519],[-47.03185,114.7067,84.95387],[9.310649,-46.73558,6.756727],[-13.99511,-117.1445,76.45979],[-8.641252,-96.92645,86.60352],[-54.95285,13.41339,-82.09214],[-40.14177,14.76644,-74.53889],[-56.67165,-8.470753,-83.59319],[-8.5224,-55.8603,26.28689],[140.5347,23.08072,-26.16452],[128.4492,24.39091,2.49972],[137.377,29.39579,-9.428175],[-65.62986,6.343258,-72.32163],[-2.544152,-54.40176,0.1982074],[173.2566,38.34647,-8.7964],[-55.9208,107.1014,62.88293],[-46.45976,25.5573,-62.96459],[-2.250163,-42.69561,-4.06193],[-69.08968,106.0873,104.2525],[-32.72303,21.00219,-90.9581],[-69.15292,77.68437,81.4411],[-63.4297,-29.46968,-62.44925],[141.4643,22.28506,5.824355],[-29.57674,-45.16407,-40.60723],[15.6895,-29.58885,37.3428],[-59.90058,109.944,74.40357],[-37.05224,87.24931,75.83302],[163.9198,44.19572,-14.37593],[-31.60172,83.37231,51.73524],[128.4287,-4.438145,5.897785],[-45.05259,-9.223648,-79.61167],[5.325252,-47.92772,13.82778],[8.835163,-60.38396,-4.019912],[-42.57378,-31.84933,-48.16885],[-40.92422,-0.5080971,-11.65279],[153.9644,17.56136,-6.19757],[-42.55041,-8.250334,-79.38625],[-65.3681,-4.554496,-57.90518],[-23.6291,45.82302,-49.29707],[-52.28069,-30.68465,-57.83703],[159.3325,33.13112,-2.719456],[141.1245,16.10447,5.00385],[-42.67448,108.5506,66.28401],[-18.45885,-98.53812,86.58274],[169.594,35.11042,-8.516448],[-20.83821,-50.53344,-31.0132],[-27.97133,7.84505,-41.14238],[127.6768,-9.627019,-0.232213],[-43.91531,-7.391396,-70.71544],[21.27599,-53.2171,4.468545],[-40.4786,-37.71001,-20.38027],[-58.21666,-12.50525,-65.55038],[-33.97272,101.3522,45.08239],[-37.73566,12.49621,-38.60593],[-71.16277,96.86165,92.2073],[-56.94084,11.7024,-68.90054],[-32.06371,-143.3494,107.3737],[-45.83144,11.46374,-58.65191],[-62.22179,-3.631747,-64.04865],[131.8418,8.473859,-16.6388],[-13.34291,-49.79067,12.54104],[-60.18028,-12.44653,-48.70762],[-30.12206,-33.29755,-37.90598],[-50.56187,122.8621,80.9238],[-51.3209,-6.245308,-77.22153],[-56.06293,90.15755,65.64622],[21.03652,-79.38144,39.12162],[-61.40718,3.260181,-71.9077],[-39.82673,4.975126,-53.99438],[-44.05257,22.75473,-68.37354],[12.3221,-47.08997,-1.526622],[-46.65168,-31.4642,-69.36423],[-13.27004,-47.41063,10.76169],[-38.86512,-13.91814,-55.24236],[-9.49716,-36.64817,18.62272],[147.4988,11.961,8.346078],[171.7177,27.68795,-17.81438],[-12.22698,-102.3148,80.19199],[-7.800049,-77.48345,66.35669],[-45.56111,27.07765,-87.02413],[-18.47627,42.55945,-83.59927],[-57.19019,4.024642,-54.10881],[-32.32416,-63.08367,18.31844],[-26.25716,32.98741,-70.37985],[-0.6076313,-45.04803,20.92758],[112.3302,-20.85438,19.92414],[-32.97874,-7.917029,-65.64065],[15.64575,-63.92722,2.502424],[157.2163,23.84678,18.61755],[-16.95452,-75.8125,30.35011],[0.5865785,-61.01347,18.84306],[-21.35529,-76.39184,8.145018],[168.2856,28.32742,-7.350271],[-21.08135,5.783195,-85.94209],[-88.60803,70.19186,112.2234],[-33.88591,-57.85963,-25.73217],[-53.59483,-6.978814,-52.84119],[145.3305,15.67589,-15.71461],[-73.66547,-10.93033,-71.80627],[-66.20324,82.5269,64.21341],[69.58022,2.048424,37.07157],[-45.5789,-11.77395,-66.80384],[-40.09136,0.8706118,-91.22149],[-64.73328,0.914849,-62.12349],[-66.48156,2.564274,-74.22053],[-58.4863,104.059,65.72444],[13.04636,-37.37015,10.94016],[-60.86188,22.27863,-80.92717],[-14.46543,-53.39219,38.1539],[10.48626,-21.57059,41.34588],[-55.06361,92.39478,80.05004],[-49.10303,50.99764,40.50375]],"ignoreExtent":false,"flags":4096},"14":{"id":14,"type":"text","material":{"lit":false},"vertices":[[47.21975,-198.026,-134.075]],"colors":[[0,0,0,1]],"texts":[["Principal Component 1"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[47.21975,-198.026,-134.075]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":2064},"15":{"id":15,"type":"text","material":{"lit":false},"vertices":[[-136.2011,-12.26757,-134.075]],"colors":[[0,0,0,1]],"texts":[["Principal Component 2"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[-136.2011,-12.26757,-134.075]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":2064},"16":{"id":16,"type":"text","material":{"lit":false},"vertices":[[-136.2011,-198.026,21.65355]],"colors":[[0,0,0,1]],"texts":[["Principal Component 3"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[-136.2011,-198.026,21.65355]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"flags":2064},"10":{"id":10,"type":"light","vertices":[[0,0,1]],"colors":[[1,1,1,1],[1,1,1,1],[1,1,1,1]],"viewpoint":true,"finite":false},"9":{"id":9,"type":"background","material":{"fog":true},"colors":[[0.2980392,0.2980392,0.2980392,1]],"centers":[[0,0,0]],"sphere":false,"fogtype":"none","flags":0},"11":{"id":11,"type":"background","material":{"lit":false,"back":"lines"},"colors":[[1,1,1,1]],"centers":[[0,0,0]],"sphere":false,"fogtype":"none","flags":0},"13":{"id":13,"type":"bboxdeco","material":{"front":"lines","back":"lines"},"vertices":[[-50,"NA","NA"],[0,"NA","NA"],[50,"NA","NA"],[100,"NA","NA"],[150,"NA","NA"],["NA",-150,"NA"],["NA",-100,"NA"],["NA",-50,"NA"],["NA",0,"NA"],["NA",50,"NA"],["NA",100,"NA"],["NA","NA",-50],["NA","NA",0],["NA","NA",50],["NA","NA",100]],"colors":[[0,0,0,1]],"draw_front":true,"newIds":[24,25,26,27,28,29,30]},"6":{"id":6,"type":"subscene","par3d":{"antialias":16,"FOV":30,"ignoreExtent":false,"listeners":6,"mouseMode":{"left":"trackball","right":"zoom","middle":"fov","wheel":"pull"},"observer":[0,0,1111.024],"modelMatrix":[[0.9568163,0,0,-45.18062],[0,0.3231323,1.058997,-18.967],[0,-0.8877987,0.3854434,-1130.261],[0,0,0,1]],"projMatrix":[[2.665751,0,0,0],[0,3.732051,0,0],[0,0,-3.863704,-4005.113],[0,0,-1,0]],"skipRedraw":false,"userMatrix":[[1,0,0,0],[0,0.3420201,0.9396926,0],[0,-0.9396926,0.3420201,0],[0,0,0,1]],"userProjection":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"scale":[0.9568163,0.9447756,1.126961],"viewport":{"x":0,"y":0,"width":1,"height":1},"zoom":1,"bbox":[-89.76369,184.2032,-150.9968,126.4616,-94.64858,137.9557],"windowRect":[0,45,672,525],"family":"sans","font":1,"cex":1,"useFreeType":true,"fontname":"/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rgl/fonts/FreeSans.ttf","maxClipPlanes":6,"glVersion":2.1,"activeSubscene":0},"embeddings":{"viewport":"replace","projection":"replace","model":"replace","mouse":"replace"},"objects":[11,13,12,14,15,16,10,24,25,26,27,28,29,30],"subscenes":[],"flags":6736},"24":{"id":24,"type":"lines","material":{"lit":false},"vertices":[[-50,-155.1587,-98.13765],[150,-155.1587,-98.13765],[-50,-155.1587,-98.13765],[-50,-162.3032,-104.1272],[0,-155.1587,-98.13765],[0,-162.3032,-104.1272],[50,-155.1587,-98.13765],[50,-162.3032,-104.1272],[100,-155.1587,-98.13765],[100,-162.3032,-104.1272],[150,-155.1587,-98.13765],[150,-162.3032,-104.1272]],"colors":[[0,0,0,1]],"centers":[[50,-155.1587,-98.13765],[-50,-158.7309,-101.1324],[0,-158.7309,-101.1324],[50,-158.7309,-101.1324],[100,-158.7309,-101.1324],[150,-158.7309,-101.1324]],"ignoreExtent":true,"origId":13,"flags":64},"25":{"id":25,"type":"text","material":{"lit":false},"vertices":[[-50,-176.5923,-116.1063],[0,-176.5923,-116.1063],[50,-176.5923,-116.1063],[100,-176.5923,-116.1063],[150,-176.5923,-116.1063]],"colors":[[0,0,0,1]],"texts":[["-50"],["0"],["50"],["100"],["150"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[-50,-176.5923,-116.1063],[0,-176.5923,-116.1063],[50,-176.5923,-116.1063],[100,-176.5923,-116.1063],[150,-176.5923,-116.1063]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"origId":13,"flags":2064},"26":{"id":26,"type":"lines","material":{"lit":false},"vertices":[[-93.87319,-150,-98.13765],[-93.87319,100,-98.13765],[-93.87319,-150,-98.13765],[-100.9278,-150,-104.1272],[-93.87319,-100,-98.13765],[-100.9278,-100,-104.1272],[-93.87319,-50,-98.13765],[-100.9278,-50,-104.1272],[-93.87319,0,-98.13765],[-100.9278,0,-104.1272],[-93.87319,50,-98.13765],[-100.9278,50,-104.1272],[-93.87319,100,-98.13765],[-100.9278,100,-104.1272]],"colors":[[0,0,0,1]],"centers":[[-93.87319,-25,-98.13765],[-97.40051,-150,-101.1324],[-97.40051,-100,-101.1324],[-97.40051,-50,-101.1324],[-97.40051,0,-101.1324],[-97.40051,50,-101.1324],[-97.40051,100,-101.1324]],"ignoreExtent":true,"origId":13,"flags":64},"27":{"id":27,"type":"text","material":{"lit":false},"vertices":[[-115.0371,-150,-116.1063],[-115.0371,-100,-116.1063],[-115.0371,-50,-116.1063],[-115.0371,0,-116.1063],[-115.0371,50,-116.1063],[-115.0371,100,-116.1063]],"colors":[[0,0,0,1]],"texts":[["-150"],["-100"],["-50"],["0"],["50"],["100"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[-115.0371,-150,-116.1063],[-115.0371,-100,-116.1063],[-115.0371,-50,-116.1063],[-115.0371,0,-116.1063],[-115.0371,50,-116.1063],[-115.0371,100,-116.1063]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"origId":13,"flags":2064},"28":{"id":28,"type":"lines","material":{"lit":false},"vertices":[[-93.87319,-155.1587,-50],[-93.87319,-155.1587,100],[-93.87319,-155.1587,-50],[-100.9278,-162.3032,-50],[-93.87319,-155.1587,0],[-100.9278,-162.3032,0],[-93.87319,-155.1587,50],[-100.9278,-162.3032,50],[-93.87319,-155.1587,100],[-100.9278,-162.3032,100]],"colors":[[0,0,0,1]],"centers":[[-93.87319,-155.1587,25],[-97.40051,-158.7309,-50],[-97.40051,-158.7309,0],[-97.40051,-158.7309,50],[-97.40051,-158.7309,100]],"ignoreExtent":true,"origId":13,"flags":64},"29":{"id":29,"type":"text","material":{"lit":false},"vertices":[[-115.0371,-176.5923,-50],[-115.0371,-176.5923,0],[-115.0371,-176.5923,50],[-115.0371,-176.5923,100]],"colors":[[0,0,0,1]],"texts":[["-50"],["0"],["50"],["100"]],"cex":[[1]],"adj":[[0.5,0.5]],"centers":[[-115.0371,-176.5923,-50],[-115.0371,-176.5923,0],[-115.0371,-176.5923,50],[-115.0371,-176.5923,100]],"family":[["sans"]],"font":[[1]],"ignoreExtent":true,"origId":13,"flags":2064},"30":{"id":30,"type":"lines","material":{"lit":false},"vertices":[[-93.87319,-155.1587,-98.13765],[-93.87319,130.6235,-98.13765],[-93.87319,-155.1587,141.4447],[-93.87319,130.6235,141.4447],[-93.87319,-155.1587,-98.13765],[-93.87319,-155.1587,141.4447],[-93.87319,130.6235,-98.13765],[-93.87319,130.6235,141.4447],[-93.87319,-155.1587,-98.13765],[188.3127,-155.1587,-98.13765],[-93.87319,-155.1587,141.4447],[188.3127,-155.1587,141.4447],[-93.87319,130.6235,-98.13765],[188.3127,130.6235,-98.13765],[-93.87319,130.6235,141.4447],[188.3127,130.6235,141.4447],[188.3127,-155.1587,-98.13765],[188.3127,130.6235,-98.13765],[188.3127,-155.1587,141.4447],[188.3127,130.6235,141.4447],[188.3127,-155.1587,-98.13765],[188.3127,-155.1587,141.4447],[188.3127,130.6235,-98.13765],[188.3127,130.6235,141.4447]],"colors":[[0,0,0,1]],"centers":[[-93.87319,-12.26757,-98.13765],[-93.87319,-12.26757,141.4447],[-93.87319,-155.1587,21.65355],[-93.87319,130.6235,21.65355],[47.21975,-155.1587,-98.13765],[47.21975,-155.1587,141.4447],[47.21975,130.6235,-98.13765],[47.21975,130.6235,141.4447],[188.3127,-12.26757,-98.13765],[188.3127,-12.26757,141.4447],[188.3127,-155.1587,21.65355],[188.3127,130.6235,21.65355]],"ignoreExtent":true,"origId":13,"flags":64}},"snapshot":"data:image/png;base64,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","width":673,"height":481,"sphereVerts":{"vb":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.07465783,0.1464466,0.2126075,0.2705981,0.3181896,0.3535534,0.3753303,0.3826834,0.3753303,0.3535534,0.3181896,0.2705981,0.2126075,0.1464466,0.07465783,0,0,0.1379497,0.2705981,0.3928475,0.5,0.5879378,0.6532815,0.6935199,0.7071068,0.6935199,0.6532815,0.5879378,0.5,0.3928475,0.2705981,0.1379497,0,0,0.18024,0.3535534,0.51328,0.6532815,0.7681778,0.8535534,0.9061274,0.9238795,0.9061274,0.8535534,0.7681778,0.6532815,0.51328,0.3535534,0.18024,0,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,0.9807853,0.9238795,0.8314696,0.7071068,0.5555702,0.3826834,0.1950903,0,0,0.18024,0.3535534,0.51328,0.6532815,0.7681778,0.8535534,0.9061274,0.9238795,0.9061274,0.8535534,0.7681778,0.6532815,0.51328,0.3535534,0.18024,0,0,0.1379497,0.2705981,0.3928475,0.5,0.5879378,0.6532815,0.6935199,0.7071068,0.6935199,0.6532815,0.5879378,0.5,0.3928475,0.2705981,0.1379497,0,0,0.07465783,0.1464466,0.2126075,0.2705981,0.3181896,0.3535534,0.3753303,0.3826834,0.3753303,0.3535534,0.3181896,0.2705981,0.2126075,0.1464466,0.07465783,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-0,-0.07465783,-0.1464466,-0.2126075,-0.2705981,-0.3181896,-0.3535534,-0.3753303,-0.3826834,-0.3753303,-0.3535534,-0.3181896,-0.2705981,-0.2126075,-0.1464466,-0.07465783,-0,-0,-0.1379497,-0.2705981,-0.3928475,-0.5,-0.5879378,-0.6532815,-0.6935199,-0.7071068,-0.6935199,-0.6532815,-0.5879378,-0.5,-0.3928475,-0.2705981,-0.1379497,-0,-0,-0.18024,-0.3535534,-0.51328,-0.6532815,-0.7681778,-0.8535534,-0.9061274,-0.9238795,-0.9061274,-0.8535534,-0.7681778,-0.6532815,-0.51328,-0.3535534,-0.18024,-0,-0,-0.1950903,-0.3826834,-0.5555702,-0.7071068,-0.8314696,-0.9238795,-0.9807853,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,-0,-0,-0.18024,-0.3535534,-0.51328,-0.6532815,-0.7681778,-0.8535534,-0.9061274,-0.9238795,-0.9061274,-0.8535534,-0.7681778,-0.6532815,-0.51328,-0.3535534,-0.18024,-0,-0,-0.1379497,-0.2705981,-0.3928475,-0.5,-0.5879378,-0.6532815,-0.6935199,-0.7071068,-0.6935199,-0.6532815,-0.5879378,-0.5,-0.3928475,-0.2705981,-0.1379497,-0,-0,-0.07465783,-0.1464466,-0.2126075,-0.2705981,-0.3181896,-0.3535534,-0.3753303,-0.3826834,-0.3753303,-0.3535534,-0.3181896,-0.2705981,-0.2126075,-0.1464466,-0.07465783,-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1],[0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,0.9807853,0.9238795,0.8314696,0.7071068,0.5555702,0.3826834,0.1950903,0,0,0.18024,0.3535534,0.51328,0.6532815,0.7681778,0.8535534,0.9061274,0.9238795,0.9061274,0.8535534,0.7681778,0.6532815,0.51328,0.3535534,0.18024,0,0,0.1379497,0.2705981,0.3928475,0.5,0.5879378,0.6532815,0.6935199,0.7071068,0.6935199,0.6532815,0.5879378,0.5,0.3928475,0.2705981,0.1379497,0,0,0.07465783,0.1464466,0.2126075,0.2705981,0.3181896,0.3535534,0.3753303,0.3826834,0.3753303,0.3535534,0.3181896,0.2705981,0.2126075,0.1464466,0.07465783,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-0,-0.07465783,-0.1464466,-0.2126075,-0.2705981,-0.3181896,-0.3535534,-0.3753303,-0.3826834,-0.3753303,-0.3535534,-0.3181896,-0.2705981,-0.2126075,-0.1464466,-0.07465783,-0,-0,-0.1379497,-0.2705981,-0.3928475,-0.5,-0.5879378,-0.6532815,-0.6935199,-0.7071068,-0.6935199,-0.6532815,-0.5879378,-0.5,-0.3928475,-0.2705981,-0.1379497,-0,-0,-0.18024,-0.3535534,-0.51328,-0.6532815,-0.7681778,-0.8535534,-0.9061274,-0.9238795,-0.9061274,-0.8535534,-0.7681778,-0.6532815,-0.51328,-0.3535534,-0.18024,-0,-0,-0.1950903,-0.3826834,-0.5555702,-0.7071068,-0.8314696,-0.9238795,-0.9807853,-1,-0.9807853,-0.9238795,-0.8314696,-0.7071068,-0.5555702,-0.3826834,-0.1950903,-0,-0,-0.18024,-0.3535534,-0.51328,-0.6532815,-0.7681778,-0.8535534,-0.9061274,-0.9238795,-0.9061274,-0.8535534,-0.7681778,-0.6532815,-0.51328,-0.3535534,-0.18024,-0,-0,-0.1379497,-0.2705981,-0.3928475,-0.5,-0.5879378,-0.6532815,-0.6935199,-0.7071068,-0.6935199,-0.6532815,-0.5879378,-0.5,-0.3928475,-0.2705981,-0.1379497,-0,-0,-0.07465783,-0.1464466,-0.2126075,-0.2705981,-0.3181896,-0.3535534,-0.3753303,-0.3826834,-0.3753303,-0.3535534,-0.3181896,-0.2705981,-0.2126075,-0.1464466,-0.07465783,-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.07465783,0.1464466,0.2126075,0.2705981,0.3181896,0.3535534,0.3753303,0.3826834,0.3753303,0.3535534,0.3181896,0.2705981,0.2126075,0.1464466,0.07465783,0,0,0.1379497,0.2705981,0.3928475,0.5,0.5879378,0.6532815,0.6935199,0.7071068,0.6935199,0.6532815,0.5879378,0.5,0.3928475,0.2705981,0.1379497,0,0,0.18024,0.3535534,0.51328,0.6532815,0.7681778,0.8535534,0.9061274,0.9238795,0.9061274,0.8535534,0.7681778,0.6532815,0.51328,0.3535534,0.18024,0,0,0.1950903,0.3826834,0.5555702,0.7071068,0.8314696,0.9238795,0.9807853,1,0.9807853,0.9238795,0.8314696,0.7071068,0.5555702,0.3826834,0.1950903,0]],"it":[[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270],[17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288],[18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271]],"material":[],"normals":null,"texcoords":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.0625,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.125,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.1875,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.3125,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.4375,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.5625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.625,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.6875,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.75,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.8125,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.875,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,0.9375,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1,0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,0.5,0.5625,0.625,0.6875,0.75,0.8125,0.875,0.9375,1]],"meshColor":"vertices"},"context":{"shiny":false,"rmarkdown":null},"crosstalk":{"key":[],"group":[],"id":[],"options":[]}});
-unnamed_chunk_91rgl.prefix = "unnamed_chunk_91";
+unnamed_chunk_90rgl.prefix = "unnamed_chunk_90";
 </script>
-<p id="unnamed_chunk_91debug">
+<p id="unnamed_chunk_90debug">
 You must enable Javascript to view this page properly.</p>
-<script>unnamed_chunk_91rgl.start();</script>
+<script>unnamed_chunk_90rgl.start();</script>
 
 
 ### Variance explained
@@ -9963,8 +9965,8 @@ plot(pca.cor$x[,1], pca.cor$x[,2],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-97-1.png" alt="Correlation PCA of genetic data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-97)Correlation PCA of genetic data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-96-1.png" alt="Correlation PCA of genetic data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-96)Correlation PCA of genetic data</p>
 </div>
 
 And it's clear just from the 2-dimensional projection that correlation PCA does not seem to work as well as covariance PCA when it comes to separating the 4 different types of cancer. 
@@ -10013,8 +10015,8 @@ plot(minmax.pca$x[,1],minmax.pca$x[,2],col = cancerlabels$Class, xlab = "Princip
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-102-1.png" alt="Covariance PCA of range standardized genetic data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-102)Covariance PCA of range standardized genetic data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-101-1.png" alt="Covariance PCA of range standardized genetic data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-101)Covariance PCA of range standardized genetic data</p>
 </div>
 
 <!--chapter:end:037-cancer.Rmd-->
@@ -10264,8 +10266,14 @@ Thus, when we examine the rows of the matrix $\U$, we're looking at information 
 
 ```r
 out = svd(A_norm)
+plot(out$d, ylab = 'Singular Values of A_norm')
 ```
-Let's first examine the left-singular vectors in $\U$. Remember, the _rows_ of this matrix describe how the terms load onto factors, and the columns are those mysterious "factors" themselves. 
+
+<div class="figure" style="text-align: center">
+<img src="bookdownproj_files/figure-html/screetext-1.png" alt="Screeplot for the Toy Text Dataset" width="672" />
+<p class="caption">(\#fig:screetext)Screeplot for the Toy Text Dataset</p>
+</div>
+Noticing the gap, or "elbow" in the screeplot at an index of 2 lets us know that the first two singular components contain notably more information than the components to follow - A major proportion of pattern or signal in this matrix lies long 2 components, i.e. __there are 2 major topics that might provide a reasonable approximation to the data__. What's a "topic" in a vector space model? A linear combination of terms! It's just a column vector in the term space! Let's first examine the left-singular vectors in $\U$. Remember, the _rows_ of this matrix describe how the terms load onto factors, and the columns are those mysterious "factors" themselves. 
 
 
 ```r
@@ -10297,7 +10305,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preserve33881fe2952af8c2
+preservea32d97a1229520b4
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10320,7 +10328,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preserveac3c3cdaa46a8f76
+preserveff3322bdc7679dd4
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -10359,7 +10367,7 @@ Let's take an image of a leader that we all know and respect:
 
 <div class="figure" style="text-align: center">
 <img src="LAdata/rappa.jpg" alt="Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State" width="125" />
-<p class="caption">(\#fig:unnamed-chunk-109)Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State</p>
+<p class="caption">(\#fig:unnamed-chunk-107)Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State</p>
 </div>
 This image can be downloaded from the IAA website, after clicking on the link on the left hand side "Michael Rappa / Founding Director."
 
@@ -10420,8 +10428,8 @@ image(rappa.green)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-114)Intensity of green in each pixel of the original image</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-112)Intensity of green in each pixel of the original image</p>
 </div>
 
 Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that ``` nrow(rappa.green)``` gives the number of columns in the transposed matrix)
@@ -10432,7 +10440,7 @@ rappa.green=t(rappa.green)[,nrow(rappa.green):1]
 image(rappa.green)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" />
 
 Rather than compressing the colors individually, let's work with the grayscale image:
 
@@ -10471,8 +10479,8 @@ image(rappa.grey, col=grey((0:1000)/1000))
 ```
 
 <div class="figure">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="Greyscale representation of original image" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-117)Greyscale representation of original image</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" alt="Greyscale representation of original image" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-115)Greyscale representation of original image</p>
 </div>
 
 ### Computing the SVD of Dr. Rappa
@@ -10495,8 +10503,8 @@ image(rappaR3, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="Rank 3 approximation of the image data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-119)Rank 3 approximation of the image data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="Rank 3 approximation of the image data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-117)Rank 3 approximation of the image data</p>
 </div>
 
 ```r
@@ -10505,8 +10513,8 @@ image(rappaR10, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" alt="Rank 10 approximation of the image data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-120)Rank 10 approximation of the image data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" alt="Rank 10 approximation of the image data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-118)Rank 10 approximation of the image data</p>
 </div>
 
 ```r
@@ -10515,8 +10523,8 @@ image(rappaR25, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" alt="Rank 50 approximation of the image data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-121)Rank 50 approximation of the image data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="Rank 50 approximation of the image data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-119)Rank 50 approximation of the image data</p>
 </div>
 
 How many singular vectors does it take to recognize Dr. Rappa? Certainly 25 is sufficient. Can you recognize him with even fewer? You can play around with this and see how the image changes.
@@ -10557,8 +10565,8 @@ image(rappa_bad25, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" alt="(ref:last25)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-123)(ref:last25)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" alt="(ref:last25)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-121)(ref:last25)</p>
 </div>
 
 (ref:last50) The last 50 components, or the sum of the last 50 terms in equation \@ref(eq:svdsum)
@@ -10572,8 +10580,8 @@ image(rappa_bad50, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-124-1.png" alt="(ref:last50)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-124)(ref:last50)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-122-1.png" alt="(ref:last50)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-122)(ref:last50)</p>
 </div>
 
 (ref:last100) The last 100 components, or the sum of the last 100 terms in equation \@ref(eq:svdsum)
@@ -10587,8 +10595,8 @@ image(rappa_bad100, col=grey((0:1000)/1000))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" alt="(ref:last100)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-125)(ref:last100)</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" alt="(ref:last100)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-123)(ref:last100)</p>
 </div>
 
 Mostly noise. In the last of these images, we see the outline of Dr. Rappa. One of the first things to go when images are compressed are the crisp outlines of objects. This is something you may have witnessed in your own experience, particularly when changing the format of a picture to one that compresses the size.
@@ -10684,7 +10692,7 @@ Take for example the SAS output for factor analysis on the Iris dataset shown in
 
 <div class="figure" style="text-align: center">
 <img src="figs/factorOUT.png" alt="(ref:factorOUT)" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-126)(ref:factorOUT)</p>
+<p class="caption">(\#fig:unnamed-chunk-124)(ref:factorOUT)</p>
 </div>
 
 
@@ -10713,8 +10721,7 @@ The two most common rotations are **varimax** and **quartimax**. The goal of _va
 
 <!--chapter:end:05-FA.Rmd-->
 
-# Factor Analysis {#fa-apps}
-
+## Methods of Factor Analysis {#fa-apps}
 
 
 Factor Analysis is much like PCA in that it attempts to find some latent variables (linear combinations of original variables) which can describe large portions of the total variance in data. There are numerous ways to compute factors for factor analysis, the two most common methods are:
@@ -10732,7 +10739,7 @@ The difference between Factor Analysis and PCA is two-fold:
 
 We'll talk more about the first difference than the second because it generally carries more advantages.
 
-## PCA Rotations
+### PCA Rotations
 Let's first talk about the motivation behind principal component rotations. Compare the following sets of (fabricated) factors, both using the variables from the iris dataset. Listed below are the loadings of each variable on two factors. Which set of factors is more easily interpretted? 
 
 <!-- \mathbf{b}egin{center} -->
@@ -10843,7 +10850,7 @@ rotatedpca$loadings
 # because you didn't even tell it what the original data was!
 ```
 
-## Ex: Personality Tests
+## Case Study: Personality Tests
 
 In this example, we'll use a publicly available dataset that describes personality traits of nearly 
 Read in the Big5 Personality test dataset, which contains likert scale responses (five point scale where 1=Disagree, 3=Neutral, 5=Agree. 0 = missing) on 50 different questions in columns 8 through 57. The questions, labeled E1-E10 (E=extroversion), N1-N10 (N=neuroticism), A1-A10 (A=agreeableness), C1-C10 (C=conscientiousness), and O1-O10 (O=openness) all attempt to measure 5 key angles of human personality. The first 7 columns contain demographic information coded as follows:
@@ -10946,14 +10953,14 @@ This should match the output from SAS and it does. Remember these columns are un
 
 <div class="figure" style="text-align: center">
 <img src="factorOutput.png" alt="(ref:loads)" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-133)(ref:loads)</p>
+<p class="caption">(\#fig:unnamed-chunk-130)(ref:loads)</p>
 </div>
 
 (ref:scores) Default (Unrotated) Factor Scores Output by SAS
 
 <div class="figure" style="text-align: center">
 <img src="scoresOutput.png" alt="(ref:scores)" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-134)(ref:scores)</p>
+<p class="caption">(\#fig:unnamed-chunk-131)(ref:scores)</p>
 </div>
 
 
@@ -11025,8 +11032,8 @@ biplot(pca.out$x[sample(1:19719,1000),1:2],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-136)BiPlot of Projection onto PC1 and PC2</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-133)BiPlot of Projection onto PC1 and PC2</p>
 </div>
 
 
@@ -11038,8 +11045,8 @@ biplot(pca.out$x[sample(1:19719,1000),3:4],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-137)BiPlot of Projection onto PC3 and PC4</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-134-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-134)BiPlot of Projection onto PC3 and PC4</p>
 </div>
 
 
@@ -11057,8 +11064,8 @@ biplot(newscores[sample(1:19719,1000),1:2],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-138-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-138)BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-135-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-135)BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2</p>
 </div>
 
 
@@ -11072,8 +11079,8 @@ biplot(newscores[sample(1:19719,1000),3:4],
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-139-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-139)BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4.</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-136)BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4.</p>
 </div>
 
 
@@ -11129,8 +11136,8 @@ plot(x,y,col=c("red","green3","blue")[iris$Species], pch=16,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-140)Multidimensional Scaling of the Iris Data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-137)Multidimensional Scaling of the Iris Data</p>
 </div>
 
 We can tell from the eigenvalues alone that two dimensions should be relatively sufficient to summarize this data. After two large eigenvalues, the remainder drop off and become small,  signifying a lack of further information. Indeed, the Goodness of Fit measurements back up this intuition: values close to 1 indicate a good fit with minimal error.
@@ -11182,8 +11189,8 @@ text(x,y,labels=row.names(leuk))
 ```
 
 <div class="figure" style="text-align: center">
-<img src="bookdownproj_files/figure-html/unnamed-chunk-143-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-143)Multidimensional Scaling of the Leukemia Data</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-140)Multidimensional Scaling of the Leukemia Data</p>
 </div>
 
 
@@ -11214,7 +11221,7 @@ plot(x2,y2,col=c("red","green","blue")[factor(type)], cex=3,
 text(x2,y2,labels=row.names(leuk))
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" width="672" style="display: block; margin: auto;" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-141-1.png" width="672" style="display: block; margin: auto;" />
 
 ### A note on standardization {-}
 
@@ -11319,7 +11326,7 @@ slack = graph_from_data_frame(SlackNetworkSubset, directed = TRUE, vertices = us
 plot(slack)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-147-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" width="672" />
 The default plots certainly leave room for improvement. We notice that one user is not connected to the rest of the network in the general channel, signifying that this user has not reacted or replied in a threaded fashion to any posts in this channel, nor have they created a post that received any interaction. We can delete this vertex from the network by taking advantage of the `delete.vertices()` function specifying that we want to remove all vertices with degree equal to zero. You'll recall that the degree of a vertex is the number of edges that connect to it.
 
 
@@ -11335,7 +11342,7 @@ plot(slack, edge.arrow.size = .3, vertex.label=NA,vertex.size=10,
      vertex.color='gray',edge.color='blue')
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-149-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-146-1.png" width="672" />
 ### Layout algorithms for ``igraph`` package
 
 The igraph package has many different layout algorithms available; type `?igraph::layout` for a list of them. By clicking on each layout in the help menu, you'll be able to distinguish which of the layouts are force-directed and which are not. Force-directed layouts generally provide the highest quality network visualizations. The Davidson-Harel (``layout_with_dh``), Fruchterman-Reingold  (``layout_with_fr``), DrL (``layout_with_drl``) and multidimensional scaling algorithms (``layout_with_mds``) are probably the most well-known algorithms available in this package.
@@ -11366,7 +11373,7 @@ plot(slack, edge.arrow.size = .3, vertex.label=NA,vertex.size=10,
      vertex.color='lightblue', layout=l4,main = "MDS")
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-150-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-147-1.png" width="672" />
 <!-- Well, that didn't go quite as planned! Both DrL and Large Graph Layout provide positively terrible results on this network. Both of these methods are designed to work efficiently with very large networks, and as such their performance on easier problems is insufficient. Alas, we can never know what technique will work best for each application, so we leave this in the text to support our main thesis that: __It Depends!__  -->
 
 To reset your plot window, you should run ``dev.off()`` or else your future plots will continue to display in a 2x2 grid.
@@ -11394,7 +11401,7 @@ legend(x=-1.5,y=0,unique(V(slack)$Cohort),pch=21,
        pt.bg=c("blue","orange"),pt.cex=2,bty="n",ncol=1)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-152-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-149-1.png" width="672" />
 A (nearly) complete list of plot option parameters is given below:
 
 - __vertex.color__: Node color
@@ -11434,7 +11441,7 @@ legend(x=-1.5,y=0,c("Orange","Blue"),pch=21,
        pt.bg=c("Orange","Blue"),pt.cex=2,bty="n",ncol=1)
 ```
 
-<img src="bookdownproj_files/figure-html/unnamed-chunk-153-1.png" width="672" />
+<img src="bookdownproj_files/figure-html/unnamed-chunk-150-1.png" width="672" />
 ## Package ``networkD3``
 
 The network D3 package creates the same type of visualizations that you would see in the [JavaScript library D3](https://d3js.org). These visualizations are highly interactive and quite beautiful. 
@@ -11500,7 +11507,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preservecc78373c619a402f
+preserve23b3dfab08bee368
 
 ### Saving your Interactive Visualization to .html
 
@@ -11518,7 +11525,8 @@ You can find the resulting file in your working directory (or you can specify a 
 
 <!--chapter:end:10-SNA-viz.Rmd-->
 
-# (PART) Clustering {-}
+# (PART\*) Clustering {-}
+
 # Introduction {#clusintro}
 
 Clustering is the task of partitioning a set of objects into subsets (clusters) so that objects in the same cluster are similar in some sense. Thus, a "cluster" is a generally a subjective entity determined by how an observer defines the similarity of objects. Take for example Figure \@ref(fig:shapes) where we depict eight objects that differ by shape and color. Depending on the notion of similarity used (color, shape, or both) these objects might be clustered in one of the three ways shown. 
@@ -11874,21 +11882,22 @@ All density search algorithms suffer from the inability to find clusters of vary
 
 ### Density Based Spacial Clustering of Applications with Noise (DBSCAN)
 
-Density Based Spacial Clustering of Applications with Noise (DBSCAN) is an algorithm proposed by Ester, Kriegel, Sander, and Xu in 1996 [@dbscan], which uses the Euclidean nearness of a group of points in $m$-space to define density. The algorithm uses the following definitions and parameters to determine what constitutes a cluster:
+Density Based Spacial Clustering of Applications with Noise (DBSCAN) is an algorithm proposed by Ester, Kriegel, Sander, and Xu in 1996 [@dbscan], which uses the Euclidean nearness of a group of points in $m$-space to define density. The algorithm uses the terminology in Definition \@ref(def:dbscandefs). 
 
 :::{.definition name='DBSCAN Terms' #dbscandefs}
 The following definitions will aid our discussion of the DBSCAN algorithm:
-<ul>
-<li>   __Dense Point and__ $\rho_{min}$: 
-    A point $\mathbf{x}_j$ is called _dense_ if there are at least $\rho_{min}$ other points contained in its $\epsilon$-neighborhood.
-<li>    __Direct Density Reachability__:
-	A point $\mathbf{x}_i$ is called _directly density reachable_ from a point $\mathbf{x}_j$ if it is in the $\epsilon$-neighborhood surrounding $\mathbf{x}_j$, i.e. if $\mathbf{x}_i \in \mathscr{N}(\mathbf{x}_j,\epsilon)$, _and_ $\mathbf{x}_j$ is a dense point.
-<li>   __Density Reachability__:
-	A point $\mathbf{x}_i$ is called _density reachable_ from a point $\mathbf{x}_j$ if there is a sequence of points $\mathbf{x}_{1},\mathbf{x}_{2},\dots, \mathbf{x}_{p}$ with $\mathbf{x}_{1}=\mathbf{x}_j$ and $\mathbf{x}_{p}=\mathbf{x}_i$ where each $\mathbf{x}_{{k+1}}$ is directly density reachable from $\mathbf{x}_{k}.$
-<li> __Noise Point__:
-	A point $\mathbf{x}_l$ is called a _noise point_ or _outlier_ if it contains 0 points in its $\epsilon$-neighborhood.
-</ul>
 
+1. __Dense Point and__ $\rho_{min}$: 
+    A point $\mathbf{x}_j$ is called _dense_ if there are at least $\rho_{min}$ other points contained in its $\epsilon$-neighborhood.
+    
+2. __Direct Density Reachability__:
+	A point $\mathbf{x}_i$ is called _directly density reachable_ from a point $\mathbf{x}_j$ if it is in the $\epsilon$-neighborhood surrounding $\mathbf{x}_j$, i.e. if $\mathbf{x}_i \in \mathscr{N}(\mathbf{x}_j,\epsilon)$, _and_ $\mathbf{x}_j$ is a dense point.
+	
+3. __Density Reachability__:
+	A point $\mathbf{x}_i$ is called _density reachable_ from a point $\mathbf{x}_j$ if there is a sequence of points $\mathbf{x}_{1},\mathbf{x}_{2},\dots, \mathbf{x}_{p}$ with $\mathbf{x}_{1}=\mathbf{x}_j$ and $\mathbf{x}_{p}=\mathbf{x}_i$ where each $\mathbf{x}_{{k+1}}$ is directly density reachable from $\mathbf{x}_{k}.$
+	
+4. __Noise Point__:
+	A point $\mathbf{x}_l$ is called a _noise point_ or _outlier_ if it contains 0 points in its $\epsilon$-neighborhood.
 :::
 
 The relationship of density reachability is not symmetric. This fact is illustrated in Figure \@ref(fig:dbscan). A point in this illustration is dense if its $\epsilon$-neighborhood contains at least $\rho_{min} = 2$ other points. The green point $a$ is density reachable from the blue point $b$, however the reverse is not true because $a$ is not a dense point. Because of this, we introduce the notion of _density connectedness_.
@@ -11898,9 +11907,8 @@ The relationship of density reachability is not symmetric. This fact is illustra
 <p class="caption">(\#fig:dbscan)DBSCAN Illustration</p>
 </div>
 
-
-:::{definition name='Density Connectedness' #dbscandefs2}
-  Two points $\mathbf{x}_i$ and $\mathbf{x}_j$ are __density-connected__ if there exists some point $\mathbf{x}_k$ such that both $\mathbf{x}_i$ and $\mathbf{x}_j$ are density reachable from $x_k$.
+:::{.definition name='Density Connectedness' #dbscandefs2}
+Two points $\mathbf{x}_i$ and $\mathbf{x}_j$ are __density-connected__ if there exists some point $\mathbf{x}_k$ such that both $\mathbf{x}_i$ and $\mathbf{x}_j$ are density reachable from $x_k$.
 :::
 
 In Figure \@ref(fig:dbscan), it is clear that we can say points $a$ and $b$ are density-connected since they are each density reachable from any of the 4 points in between them. The point $c$ in this illustration is a noise point or outlier because there are no points contained in its $\epsilon$-neighborhood.
@@ -11910,18 +11918,18 @@ Using these definitions, we can formalize the properties that define a cluster i
 
 :::{.definition name='DBSCAN Cluster' #dbscancluster}
 Given the parameters $\rho_{min}$ and $\epsilon$, a __DBSCAN cluster__ is a set of points that satisfy the two following conditions:
-<ol>
-<li> All points within the cluster are mutually density-connected.
-<li> If a point is density-connected to any point in the cluster, it is part of the cluster as well.
-</ol>\
+
+1. All points within the cluster are mutually density-connected.
+2. If a point is density-connected to any point in the cluster, it is part of the cluster as well.
 :::
 
 Table \@ref(tab:algdbscan) describes how DBSCAN finds such clusters.
 
 <table>
 <tr><td>
+
+__Input:__ Set of points $\mathbf{X}=[\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_n]$ to be clustered and parameters $\epsilon$ and $\rho_{min}$\
 <ol>
-<li> __Input:__ Set of points $\mathbf{X}=[\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_n]$ to be clustered and parameters $\epsilon$ and $\rho_{min}$\\
 <li> For each unvisited point $p=\mathbf{x}_i$, do:
 <ol style="list-style-type:upper-roman">
 <li> Mark $p$ as visited.
@@ -11940,13 +11948,15 @@ Table \@ref(tab:algdbscan) describes how DBSCAN finds such clusters.
 </ol>
 </ol>
 </ol>
-<li>  __Output:__ Clusters found $C_1,\dots,C_k$
 </ol>
+  __Output:__ Clusters found $C_1,\dots,C_k$
+
 </table>
 
 <caption> (\#tab:algdbscan) Density Based Spacial Clustering of Applications with Noise (DBSCAN) [@datamining] </caption>
 
  <br>
+ 
 ## Conclusion
 
 The purpose of this chapter was to give the reader a basic understanding of hierarchical, iterative partitional, and density search approaches to data clustering. One of the main concerns addressed in this paper is that all of these algorithms have merit, but in application rarely do the algorithms completely agree on a solution. In fact, algorithms with random inputs like $k$-means are not even likely to agree with themselves over a number of different trials. It can be extremely difficult to qualitatively measure the goodness of your clustering when the data cannot be visualized in 2 or 3 dimensions. While there are a number of metrics to help the user get a sense of the compactness of the clusters (see Chapter \@ref(validation)), the effect of noise and outliers can often blur the true picture. It is also common for such metrics to take nearly equivalent values for vastly different cluster solutions, forcing the user to choose a solution using domain knowledge and utility.  First we will look at another class of clustering methods which aim to solve the graph partitioning problem described in Chapter \@ref(chap-zero).
@@ -11954,6 +11964,524 @@ The purpose of this chapter was to give the reader a basic understanding of hier
 The difference between the problems of data clustering and graph partitioning is merely the structure of the input objects to be clustered. In data clustering, the input objects are composed of measurements on $m$ variables or features. If we interpret the graph partitioning problem in such a way that input objects are vertices on a graph and the variables describing them are the weights of the edges by which they are connected to other vertices, then it becomes clear we can use any of the methods in this chapter to cluster the columns of an adjacency matrix as described in Chapter \@ref(chap-zero). Similarly if one creates a similarity matrix for objects from a data clustering problem, we can cluster that matrix using the theory and algorithms from graph partitioning. While each problem can be transformed into the other, the design of the algorithms for the two cases is generally quite different. In the next chapter, we provide a thorough overview of some popular graph clustering algorithms.
 
 <!--chapter:end:111-ClusterAlgos.Rmd-->
+
+# Algorithms for Graph Partitioning {#chap1.5}
+
+## Spectral Clustering {#spectral}
+Spectral clustering is a term that data-miners have given to the partitioning problem as it arose in graph theory. The theoretical framework for spectral clustering was laid in 1973 by Miroslav Fiedler [@fiedlerac;@fiedlerev]. We will begin with a discussion of this early work, and then take a look at how others have adapted the framework to meet the needs of data clustering. In this setting, we have a graph  $G$ on a set of vertices $N=\{1,2,\dots,n\}$ with edge set $E=\{(i,j) : i,j \in N \mbox{and} i \leftrightarrow j\}$. Edges between the vertices are recorded in an  _adjacency matrix_ $\A = (a_{ij})$, where $a_{ij}$ is equal to the weight of the edge connecting vertex (object) $i$ and vertex $j$ and $a_{ij}=0$ if $(i,j) \notin E$. For the immediate discussion, we will assume the graph has no "self-loops", i.e. $a_{ii}=0 \forall i$. 
+Spectral clustering algorithms typically involve the  _Laplacian matrix_ associated with a graph. A Laplacian matrix is defined as follows:
+
+:::{.definition name='The Laplacian Matrix' #laplaciandef}
+The  _Laplacian Matrix_, $\mathbf{L}$, of an undirected, weighted graph with adjacency matrix $\A=(a_{ij})$ and diagonal degree matrix $\mathbf{D}=\mbox{diag}(\A\e)$ is:
+$$\mathbf{L}=\mathbf{D}-\A$$
+:::
+
+The Laplacian matrix is symmetric, singular, and positive semi-definite. To see this third property, construct an $n \times |E|$ "vertex-edge incidence" matrix $\U$ with rows corresponding to vertices and columns corresponding to edges. Allow the edges of the original graph to be directed arbitrarily, and set 
+\[
+\U_{v,e} = \left\{
+     \begin{array}{lr}
+       +\sqrt{a_{ij}} : &\mbox{if  } v \mbox{  is the head of  } e\\
+       -\sqrt{a_{ij}} : &\mbox{if  } v \mbox{  is the tail of  } e\\
+       0  : &\mbox{otherwise}
+     \end{array}
+   \right.
+ \]
+ 
+ Then $\mathbf{L}=\U\U^T$ is positive semi-definite [@fiedlerac]. $\mathbf{L}$ gives rise to a nice quadratic form:
+ 
+ \begin{equation}
+(\#eq:quadlaplacian)
+ \mathbf{y}^T \mathbf{L} \mathbf{y} = \sum_{(i,j) \in E}a_{ij} (y_i - y_j)^2.
+ \end{equation}
+  
+  Let $\sigma(\mathbf{L})=\{\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\}$ be the spectrum of $\mathbf{L}$. Since $\mathbf{L}$ is positive semi-definite, $\lambda_i \geq 0 \forall i$. Also, since the row sums of $\mathbf{L}$ are zero, $\lambda_1=0$. Furthermore if the graph, $G$, is composed of $k$ connected components, each disconnected from each other, then $\lambda_1=\lambda_2=\dots=\lambda_k = 0$ and $\lambda_j \geq 0 \mbox{ for } j\geq k+1$.  In [@fiedlerac] Fiedler defined the  _algebraic connectivity_ of the graph as the second smallest eigenvalue, $\lambda_2$, because its magnitude provides information about how easily the graph is to be disconnected into two components. Later, in [@fiedlerev], he alluded to the utility of the eigenvector associated with $\lambda_2$ in determining this two-component decomposition of a graph. 
+  
+## Fiedler Partitioning
+
+Suppose we wish to decompose our graph into two components (or clusters of vertices) $C_1$ and $C_2$ where the edges exist more frequently and with higher weight inside the clusters than between the two clusters. In other words, we intend to make an  _edge-cut_ disconnecting the graph into two clusters. It is desired that the resulting partition satisfies the following objectives:
+<ol>
+<li> minimize the total weight of edges cut (edges in between components)
+<li> maximize the total weight of edges inside the two components.
+</ol>
+ To begin with, lets take the quadratic form in Equation \@ref(quadlaplacian) and let $\y$ be a vector that determines the cluster membership of each vertex as follows:
+ $$
+\y_i=\left\{
+     \begin{array}{lr}
+       +1 & : \mbox{if vertex } i \mbox{  belongs in } C_1\\
+       -1 & : \mbox{if vertex } i \mbox{  belongs in  } C_2\\
+     \end{array}
+   \right.
+ $$
+Our first goal is then to minimize Equation \@ref(eq:quadlaplacian) over all such vectors $\y$:
+
+\begin{equation}
+(\#eq:mincut)
+\min_{\y} \y^T \mathbf{L} \y = \sum_{(i,j) \in E} a_{ij} (\y_i-\y_j)^2 = 2 \sum_{\substack{(i,j) \in E \\i \in C_1, j \in C_2}} 4 a_{ij}
+\end{equation}
+
+Note that the final sum is doubled to reflect the fact that each edge connecting $C_1$ and $C_2$ will be counted twice. However, the above formulation is incomplete because it does not take into account the second objective, which is to maximize the total weight of edges inside the two components. Indeed it seems the minimum solution to Equation \@ref(mincut) would often involve cutting all of the edges adjacent to a single vertex of minimal degree, disconnecting the graph into components of size $1$ and $n-1$, which is generally undesirable. In addition, the above optimization problem is NP-hard. To solve the latter problem, the objective function is relaxed from discrete to continuous. By the Rayleigh theorem,
+$$\min_{\|\y\|_2=1} \y^T\mathbf{L} \y = \lambda_1$$ with $\y^*$ being the eigenvector corresponding to the smallest eigenvalue. However, for the Laplacian matrix, $y^*=\e$. In context, this makes sense - in order to minimize the weight of edges cut, we should simply assign all vertices to one cluster, leaving the second empty. In order to divide the vertices into two clusters we need an additional constraint on $\y$. Since clusters of relatively balanced size are desirable, a natural constraint is $\y^T\e=0$. By the Courant-Fischer theorem,
+
+\begin{equation}
+(\#eq:fiedlercut)
+\min_{\substack{\| \y \|_2=1 \\ \y^T \e=0}} \y^T \mathbf{L} \y = \lambda_2
+\end{equation}
+
+with $\y^*=\textbf{v}_2$ being the eigenvector corresponding to the second smallest eigenvalue, $\lambda_2$. This vector is often referred to as the  _Fiedler vector_ after the man who identified its usefulness in graph partitioning. We define the Fiedler graph partition as follows:
+
+:::{.definition name='Fiedler Graph Partition' #fiedlerpart}
+Let $G=(N,E)$ be a connected graph on vertex set $N=\{1,2,\dots,n\}$ with adjacency matrix $\A$. Let $\mathbf{L}=\mathbf{D}-\A$ be the Laplacian matrix of $G$. Let $\textbf{v}_2$ be an eigenvector corresponding to the second smallest eigenvalue of $\mathbf{L}$. The __Fiedler partition__ is:
+
+\begin{eqnarray*}
+C_1 &=& \{i \in N : \textbf{v}_2(i) <0\}\\
+C_2 &=& \{i \in N : \textbf{v}_2(i) >0\}
+\end{eqnarray*}
+Vertices $j$, for which $\textbf{v}_2(j)=0$, can be arbitrarily placed into either cluster.
+:::
+
+
+There is no uniform agreement on how to determine the cluster membership of vertices for which $\textbf{v}_2(j)=0$. The decision to make the assignment arbitrarily comes from experimental results that indicate in  _some scenarios_ these zero valuated vertices are equally drawn to either cluster. Situations where there are a large proportion of zero valuated vertices may be indicative of a graph which does not conform well to Fiedler's partition, and we suggest the user tread lightly in these cases. Figure \@ref(fig:ptsart) shows the experimental motivation for our arbitrary assignment of zero valuated vertices. The vertices in these graphs are labelled according to the sign of the corresponding entry in $\textbf{v}_2$. We highlight the red vertex and watch how its sign in $\textbf{v}_2$ changes as nodes and edges are added to the graph.
+
+
+<div class="figure" style="text-align: center">
+<img src="figs/ptsart.jpg" alt="Fiedler Partitions and Zero Valuated Vertices" width="75%" />
+<p class="caption">(\#fig:ptsart)Fiedler Partitions and Zero Valuated Vertices</p>
+</div>
+
+ In order to create more than two clusters, the Fiedler graph partition can be performed iteratively, by examining the subgraphs induced by the vertices in $C_1$ and $C_2$ and partitioning each based upon their own Fiedler vector, or in an extended fashion using multiple eigenvectors. This iterative method requires a cluster to be chosen for further division, perhaps based upon the algebraic connectivity of the cluster. It is also possible to use the sign patterns in subsequent eigenvectors to further partition the graph. This approach is called Extended Fiedler Clustering and is discussed in Section \@ref(extendedfiedler). First, let's take a more rigorous look at why the sign patterns of the Fiedler vector provide us with a partition.
+ 
+### Linear Algebraic Motivation for the Fiedler vector
+
+The relaxation proposed in Equation \@ref(eq:fiedlercut) does not give us a general understanding of why the sign patterns of the Fiedler vector are useful in determining cluster membership information. We will use the following facts:
+
+:::{.lemma name='Fiedler Lemma 1' #flem1}
+Let $\mathbf{L}=\mathbf{D}-\A$ be a Laplacian matrix for a graph $G=(V,E)$ with $|V|=n$. Let $\sigma(L)=\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n$ Then $\mathbf{L}$ is symmetric and positive semi-definite with $\lambda_1=0$. 
+:::
+
+:::{.lemma name='Fiedler Lemma 2' #flem2}
+
+$\lambda_2(L)=0$ if and only if the graph $G$ has 2 components, $C_1$ and $C_2$ which are completely disconnected from each other (i.e. there are no edges connecting the vertices in $C_1$ to the vertices in $C_2$.)
+:::
+:::{.lemma name='Fiedler Lemma 3' #flem3}
+Let $\mathbf{M}$ be a symmetric matrix of rank $r$. Let 
+$$\mathbf{M} = \mathbf{V} \mathbf{D}  \mathbf{V}^T = (\textbf{v}_1, \textbf{v}_2, \dots, \textbf{v}_r)
+\left(
+\begin{matrix}
+\sigma_1 &  0  & \ldots & 0\\
+0  &  \sigma_2 &  \ldots &  0\\
+\vdots & \vdots & \ddots&  \vdots\\
+0  &   0       &\ldots & \sigma_r\\
+\end{matrix}
+\right)
+\left(
+\begin{matrix}
+\textbf{v}_1^T\\
+\textbf{v}_2^T\\
+\vdots \\
+\textbf{v}_r^T\\
+\end{matrix} 
+\right)
+=\sum_{i=1}^r \sigma_i \textbf{v}_i \textbf{v}_i^T$$
+ be the singular value decomposition of $\mathbf{M}$, with $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r$.  Let $\widetilde{\mathbf{M}}$ be the closest (in the euclidean sense) rank $k$ approximation to $\mathbf{M}$:
+ $$\widetilde{\mathbf{M}}=\mbox{arg}\min_{\mathbf{B} , rank(\mathbf{B})=k}\|\mathbf{M} - \bf B\|.$$
+Then $\widetilde{\mathbf{M}}$  is given by the  _truncated singular value decomposition_:
+ $$B=\sum_{i=1}^k \sigma_i \textbf{v}_i \textbf{v}_i^T$$
+:::
+
+From these simple tools, we can get a sense for why the signs of the Fiedler vector will determine a natural partition of a graph into two components. In the simplest case, $\lambda_1=\lambda_2=0$, the graph contains two disjoint components, $C_1$ and $C_2$. Thus, there exists some permutation matrix $\mathbf{P}$ such that $\mathbf{P} \mathbf{L} \mathbf{P}$ is block diagonal:
+
+$$
+\mathbf{P} \mathbf{L} \mathbf{P} =\left( \begin{array}{cc}
+\mathbf{L}_1 & 0\\
+0 & \mathbf{L}_2\\
+\end{array}
+\right)
+$$
+
+and $\mathbf{L}_1$ is the Laplacian matrix for the graph of $C_1$ and $\mathbf{L}_2$ is the Laplacian for $C_2$. Let $n_1$ and $n_2$ be the number of of vertices in each component. Clearly the eigenvectors $\textbf{v}_2$ and $\textbf{v}_2$ associated with $\lambda_1=0$ and $\lambda_2=0$ are contained in the span of $\mathbf{u}_1$ and $\mathbf{u}_2$ where:
+
+\begin{equation}
+\mathbf{u}_1 =
+\begin{array}{cc}\begin{array}{c} 1\\ \vdots \\ n_1 \\ n_1+1 \\ \vdots \\ n \end{array} &\left( \begin{array}{c} 1 \\ \vdots \\ 1 \\ 0 \\ \vdots \\ 0 \end{array} \right) \end{array}
+
+\qquad\mbox{and}\qquad
+
+\mathbf{u}_2 =\begin{array}{cc}\begin{array}{c} 1\\ \vdots \\ n_1 \\ n_1+1 \\ \vdots \\ n \end{array} &\left( \begin{array}{c}0 \\ \vdots \\ 0 \\ 1 \\ \vdots \\ 1 \end{array} \right)\end{array}
+\end{equation}
+
+For all Laplacian matrices, it is convention to consider $\textbf{v}_1=\e$, the vector of all ones. Under this convention, the two conditions $\textbf{v}_2 \perp \textbf{v}_1$ and $\textbf{v}_2 \in span \{ \mathbf{u}_1,\mathbf{u}_2\}$ necessarily force $\textbf{v}_2$ to have a form such that the component membership of each vertex is discernible from the sign of the corresponding entry in the vector:
+$$\textbf{v}_2 = \alpha(\mathbf{u}_1-\frac{n_1}{n_2} \mathbf{u}_2).$$
+
+The case when $\mathbf{L}$ is  _not_ disconnected into two components is far more interesting, as this is generally the problem encountered in practice. We will start with a connected graph, so that our Laplacian matrix has rank $n-1$. Let the spectral decomposition of our Laplacian matrix $\mathbf{L}$ (which is equivalent to its singular value decomposition because $\mathbf{L}$ is symmetric) be:
+$$\mathbf{L}=\sum_{i=2}^n \lambda_i \textbf{v}_i \textbf{v}_i^T.$$
+Let $\widetilde{\mathbf{L}}$ be the closest rank $n-2$ approximation to $\mathbf{L}$. Then, by Lemmas \@ref(lem:flem2) and \@ref(lem:flem3),
+$$\widetilde{\mathbf{L}} = \sum_{i=3}^n \lambda_i  \textbf{v}_i \textbf{v}_i^T$$
+and there exists a permutation matrix $\mathbf{P}$ such that
+
+$$
+\mathbf{P} \widetilde{\mathbf{L}} \mathbf{P} =\left( \begin{matrix}
+\widetilde{\mathbf{L}}_1 & 0\\
+0 & \widetilde{\mathbf{L}}_2
+\end{matrix}
+\right).
+$$
+
+Suppose we permute the rows of $\mathbf{L}$ accordingly so that
+
+$$
+\mathbf{P} \mathbf{L} \mathbf{P} =\left( \begin{matrix}
+\mathbf{L}_1 & -\mathbf{E}\\
+-\mathbf{E}^T & \mathbf{L}_2\\
+\end{matrix}
+\right)
+$$
+where $\mathbf{E}_{ij} \geq 0 \forall i,j$ because $\mathbf{L}$ is a Laplacian matrix. Consider the difference between $\mathbf{L}$ and $\widetilde{\mathbf{L}}$:
+
+$$\mathbf{L}-\widetilde{\mathbf{L}} = \lambda_2 \textbf{v}_2 \textbf{v}_2^T$$
+
+which entails $\mathbf{L} - \lambda_2 \textbf{v}_2 \textbf{v}_2^T = \widetilde{\mathbf{L}}$. If we permute the vector $\textbf{v}_2$ in the same manner as the matrices $\mathbf{L}$ and $\widetilde{\mathbf{L}}$, then one thing is clear:
+
+\begin{equation*}
+\lambda_2\mathbf{P}\textbf{v}\textbf{v}_2^T\mathbf{P} = \left(\begin{matrix}
+\A & -\mathbf{E} \\
+-\mathbf{E}^T & B 
+\end{matrix}\right)
+\end{equation*}
+Thus, if 
+\begin{equation*}\mathbf{P}\textbf{v} =\left(\begin{matrix}
+\mathbf{a} \\
+ \mathbf{b}\\
+\end{matrix} \right)
+\end{equation*}
+
+where $\mathbf{a} \in \Re^{n_1}$ and $\mathbf{b} \in \Re^{n_2}$
+
+
+#### Extended Fiedler Clustering {#extendedfiedler}
+ In the extended Fiedler algorithm, we use the sign patterns of entries in the first $l$ eigenvectors of $\mathbf{L}$ to create up to $k=2^l$ clusters. For instance, suppose we had 10 vertices, and used the $l=3$ eigenvectors $\textbf{v}_2,\textbf{v}_3,\mbox{ and  }\textbf{v}_4$. Suppose the sign of the entries in these eigenvectors are recorded as follows:
+\[
+       \begin{array}{cc} & \begin{array}{ccc} \mathbf{v}_2 & \mathbf{v}_3&\mathbf{v}_4 \end{array}\cr
+       \begin{array}{c}
+        1 \\
+        2 \\
+        3 \\
+        4 \\
+        5 \\
+        6 \\
+        7 \\
+        8 \\
+        9 \\
+        10 \end{array} & \left(
+        \begin{array}{ccc} 
+              +&+&-\cr
+              -&+&+\cr
+              +&+&+\cr
+              -&-&-\cr
+              -&-&-\cr
+              +&+&-\cr
+              -&-&-\cr
+              -&+&+\cr
+              +&-&+\cr
+              +&+&+ \end{array}
+              \right) \end{array}
+\]
+     Then the 10 vertices are clustered as follows:
+  $$
+       \{1,6\},\quad
+       \{2,8\},\quad 
+       \{3,10\},\quad 
+       \{4,5,7\},\quad
+       \{9\}.
+     $$
+ Extended Fiedler makes clustering the data into a specified number of clusters $k$ difficult, but may be able determine a natural choice for $k$ as it partitions the data along several eigenvectors.
+ 
+ In a 1990 paper by Pothen, Simon and Liou, an alternative formulation of the Fiedler partition is proposed [@pothen]. Rather than partition the vertices based upon the sign of their corresponding entries in $\mathbf{v}_2$, the vector $\mathbf{v}_2$ is instead divided at its median value. The main motivation for this approach was to split the vertices into sets of equal size. In 2003, Ding et al. derived an objective function for determining an ideal split point for similar partitions using the second eigenvector of the _normalized_ Laplacian, defined in Section \@ref(ncut) [@minmax]. The basic idea outlined above has been adapted and altered hundreds if not thousands of times in the past 20 years. The present discussion is meant merely as an introduction to the literature. 
+ 
+ 
+### Graph Cuts
+
+ The majority of spectral algorithms are derived as alterations of the objective function in Equation \@ref(eq:fiedlercut).The idea is the same: partition the graph into two components by means of a minimized edge cut, while requiring that the two components remain somewhat balanced in size (i.e. do not simply isolate a small number of vertices). Two common objective functions which embody this idea are the ratio cut (RatioCut) [@ratiocut], the normalized cut (Ncut) [@shi]. 
+ 
+#### Ratio Cut
+
+The ratio cut objective function was first introduced by Hagen and Kahng in 1992 [@ratiocut]. Given a graph $G(V,E)$ with vertex set $V$ partitioned into $k$ disjoint clusters, $V_1,V_2,\dots V_k$, the __ratio cut__ of the given partition is defined as
+ $$\mbox{RatioCut}(V_1,V_2,\dots,V_k) = \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{|V_i|}$$
+ where $|V_i|$ is the number of vertices in $V_i$, $\bar{V_i}$ is the complement of the set $V_i$ and, given two vertex sets $A$ and $B$, $w(A,B)$ is the sum of the weights of the edges between vertices in $A$ and vertices in $B$.  Let $\mathbf{H}$ be an $n\times k$ matrix indicating cluster membership of vertices by its entries:
+\begin{equation}
+(\#eq:ratioH)
+ \mathbf{H}_{ij}=
+ \begin{cases}
+\frac{1}{\sqrt{|V_j|}}, & \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+
+ Then $\mathbf{H}^T\mathbf{H}=\mathbf{I}$ and minimizing the ratio cut over all possible partitionings is equivalent to minimizing
+ $$f(\mathbf{H}) = \mbox{Trace}(\mathbf{H}^T\mathbf{L}\mathbf{H})$$
+ over all matrices $\mathbf{H}$ described by Equation \@ref(eq:ratioH), where $\mathbf{L}$ is the Laplacian matrix from Definition \@ref(def:laplaciandef). The exact minimization of this objective function is again NP-hard, but relaxing the conditions on $\mathbf{H}$ to $\mathbf{H}^T\mathbf{H}=\mathbf{I}$ yields a solution $\mathbf{H}^*$ with columns containing the eigenvectors of $\mathbf{L}$ corresponding to the $k$ smallest eigenvalues.
+ 
+ Unfortunately, after this relaxation it is not necessarily possible to automatically determine from $\mathbf{H}^*$ which vertices belong to each cluster. Instead, it is necessary to look for clustering patterns in the rows of $\mathbf{H}^*$. This is a common conceptual drawback of the relaxation of objective functions in spectral clustering. The best way to procede after the relaxation is to cluster the rows of $\mathbf{H}^*$ with an algorithm like $k$-means to determine a final clustering. The ratio cut minimization method is generally referred to as _unnormalized spectral clustering_ [@spectraltutorial]. The algorithm is as follows:
+ 
+ <table><tr><td>
+__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
+<ol>
+<li> Compute the Laplacian $\mathbf{L}=\mathbf{D}-\mathbf{A}$.
+<li> Compute the first $k$ eigenvectors $\mathbf{V}=\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k$ of $\mathbf{L}$ corresponding to the $k$ smallest eigenvalues.
+<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
+<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
+</ol>
+__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
+</table>
+ <caption>(\#tab:algratiocut) Unnormalized Spectral Clustering (RatioCut) [@spectraltutorial] </caption>
+<br>
+
+#### Normalized Cut (Ncut) {#ncut}
+
+ The normalized cut objective function was introduced by Shi and Malik in 2000 [@shi]. Given a graph $G(V,E)$ with vertex set $V$ partitioned into $k$ disjoint clusters, $V_1,V_2,\dots V_k$, the __normalized cut__ of the given partition is defined as
+$$\mbox{Ncut}(V_1,V_2,\dots,V_k)= \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{\mbox{vol}(V_i)},$$
+where $\mbox{vol}(V_i)$ is the sum of the weights of the edges connecting the vertices in $V_i$. Whereas the size of a subgraph $V_i$ in the ratio cut formulation is measured by the number of vertices $|V_i|$, in the normalized cut formulation it is measured by the total weight of the edges in the subgraph.
+Thus, minimizing the normalized cut is equivalent to minimizing
+$$f(\mathbf{H}) = \mbox{Trace}(\mathbf{H}^T\mathbf{L}\mathbf{H})$$ over all matrices $\mathbf{H}$ with the following form:
+ 
+\begin{equation}
+\mathbf{H}_{ij}=
+\begin{cases}
+\frac{1}{\sqrt{\mbox{vol}(V_j)}}, & \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
+0 & \text{otherwise.}
+\end{cases}
+(\#eq:ncutH)
+\end{equation}
+
+With $\mathbf{H}^T \mathbf{D} \mathbf{H} = \mathbf{I}$ where $\mathbf{D}$ is the diagonal degree matrix from Definition \@ref(def:laplaciandef). Thus, to relax the problem, we substitute $\mathbf{G}=\mathbf{D}^{1/2}\mathbf{H}$ and minimize
+ $$f(\mathbf{G})=\mathbf{G}^T \mathscr{L} \mathbf{G}$$ subject to $\mathbf{G}^T\mathbf{G}=\mathbf{I}$, where $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$ is called the __normalized Laplacian__. Similarly, the solution to the relaxed problem is the matrix $\mathbf{G}^*$ with columns containing eigenvectors associated with the $k$ smallest eigenvalues of $\mathscr{L}$. Again, the immediate interpretation of the entries in $\mathbf{G}^*$ is lost in the relaxation and so a clustering algorithm like $k$-means is used to determine the patterns.
+ 
+ <table><tr><td>
+__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
+<ol>
+<li> Compute the _normalized_ Laplacian $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$.
+<li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}$ corresponding to the $k$ smallest eigenvalues.
+<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
+<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
+</ol>
+__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
+ </table>
+ <caption>(\#tab:algncut) Normalized Spectral Clustering (Ncut) [@spectraltutorial] </caption>
+ <br>
+ 
+#### Other Normalized Cuts
+
+While the algorithm in Table \@ref(tab:algncut) carries "normalized cut" in its title, other researchers have suggested alternative ways to consider normalized cuts in a graph. In a popular 2001 paper, Ng, Jordan, and Weiss made a slight alteration of  the previous algorithm which simply normalized the rows of the eigenvector matrix computed in step 2 to have unit length before proceeding to step 3 [@ng]. This algorithm is presented in Table \@ref(tab:algnjw).
+
+ <table><tr><td>
+
+__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
+ <ol>
+<li> Compute the _normalized_ Laplacian $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$.
+<li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}$ corresponding to the $k$ smallest eigenvalues.
+<li> Normalize the rows of $\mathbf{V}$ to have unit 2-norm.
+<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
+<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
+</ol>
+__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
+ </table>
+<caption> (\#tab:algnjw) Normalized Spectral Clustering according to Ng, Jordan and Weiss (NJW) [@spectraltutorial]</caption>
+<br>
+ 
+ In 2001, Meila and Shi altered the objective function once again, and derived yet another spectral algorithm using the _normalized random walk_ Laplacian, $\mathscr{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1} \A$ [@meila]. As shown in [@tutorial], if $\lambda$ is an eigenvalue for $\mathscr{L}$ with corresponding eigenvector $\mathbf{v}$ then $\lambda$ is also an eigenvalue for  $\mathscr{L}_{rw}$ with corresponding eigenvector $\mathbf{D}^{1/2}\mathbf{v}$. This formulation amounts to a different scaling of the eigenvectors in step 3 of Table \@ref(tab:algnjw). This normalized random walk Laplacian will present itself again in Section \@ref(pic).  Meila and Shi's spectral clustering method is outlined in Table \@ref(tab:algmeila).
+
+ 
+  <table><tr><td>
+__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
+<ol>
+ <li> Compute the _normalized random walk_ Laplacian $\mathscr{L}_{rw}=\mathbf{D}^{-1}\mathbf{L} $.
+ <li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}_{rw}$ corresponding to the $k$ smallest eigenvalues.
+ <li> Normalize the rows of $\mathbf{V}$ to have unit 2-norm.
+ <li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
+ <li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
+ </ol>
+__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
+
+ </table>
+ <caption>(\#tab:algmeila) Normalized Spectral Clustering according to Meila and Shi  </caption>
+ <br>
+All of the spectral algorithms outlined thus far seem very similar in their formulation, yet in practice they tend to produce quite different results. This presents a problem because while each method has merit in its own right, it is impossible to predict which one will work best on any particular graph. We will discuss this problem further in \cref{consensus}.
+
+### Power Iteration Clustering {#pic}
+  In a 2010 paper, Frank Lin and William Cohen propose a fast, scalable algorithm for clustering graphs using the power method (or power iteration) [@poweriteration]. Let $\mathbf{W}=\mathbf{D}^{-1}\A$ be the $n\times n$ row-normalized  (row stochastic) adjacency matrix for a graph, and let $\mathbf{v}_0 \neq 0$ be a vector in $\Re^n$. A simple method for computing the eigenvector corresponding to the largest eigenvalue of $\mathbf{W}$ is the power method, which repeatedly computes the power iteration
+  $$\mathbf{v}_{t+1}=c\mathbf{W}\mathbf{v}_t$$
+  where $c=1/\|\mathbf{W}\mathbf{v}_t\|_1$ is a normalizing constant to prevent $\mathbf{v}_t$ from growing too large.
+  
+Applying the power method to convergence on $\mathbf{W}$ would result in the uniform vector $\alpha \e$ where 
+$\alpha = 1/n.$  However, stepping through a small number of power iterations, will result in a vector that contains combined information from the eigenvectors associated with the largest eigenvalues. The formulation of Meila and Shi's spectral algorithm in [@meila] warranted the use of the eigenvectors corresponding to the $k$ smallest eigenvalues of the normalized random walk Laplacian $\mathscr{L}_{rw} = \mathbf{I}-\mathbf{W}$ which is equivalent to the consideration of the eigenvectors of the largest eigenvalues of $\mathbf{W}$. Thus, the idea behind Power Iteration Clustering (PIC) is to detect and stop the power method at some number of iterations $t$ such that $\mathbf{v}_t$ is a useful linear combination of the first $k$ eigenvectors.  The analysis in [@poweriteration] motivates the idea that the power method should pass through some initial stage of local convergence at the cluster level before going on to the stage of global convergence toward the uniform vector. At this stopping point, it is expected that $\mathbf{v}_t$ will be an approximately piecewise constant vector, nearly uniform on each of the clusters. Thus, the clusters at this stage will be revealed by the closeness of their corresponding entries in $\mathbf{v}_t$. See [@poweriteration] for the complete analysis. The PIC procedure is given in Table \@ref(tab:algpic). 
+
+Applying the power method to $\mathbf{P}^T$ would equate to watching the probability distribution of a random walker evolve through time steps of the Markov Chain, where $\mathbf{v}_t$ is the distribution at time $t$, and eventually would converge to the stationary distribution in Equation \@ref(eq:pi).  
+ However, according to Lin and Cohen, stepping through a limited number of power iterations on $\mathbf{P}$ is equivalent to observing the same chain backwards, so that $\mathbf{v}_t(i)$ gives the observer a sense of the most likely distribution of the chain $t$ steps in the past, given that the walk ended with distribution $\mathbf{v}_0$. On a graph with cluster structure as described above, a random walker that ends up on a particular vertex $j \in C_1$ is more or less equally likely to have come from any other node in $C_1$ (but relatively unlikely to have come from $C_i, i\neq1$), making the distribution close to uniform on the vertices in $C_1$. The same argument is true for any cluster $C_j$ and thus, by stepping backwards through time we expect to find these distribution vectors which are nearly uniform on each cluster $C_j$. For a complete discussion of the algorithm, including a more detailed mathematical analysis, consult [@poweriteration].
+
+<table><tr><td>
+__Input:__ A row-stochastic matrix $\mathbf{P}=\mathbf{D}^{-1}\A$ where $\A$ is an adjacency or similarity matrix and the number of clusters $k$.
+<ol>
+<li> Pick an initial vector $\mathbf{v}_0$. [@poweriteration] suggests the degree vector $\mathbf{v}_0 = \A\e.$
+<li> Set $\mathbf{v}_{t+1} = \frac{\mathbf{P}\mathbf{v}_t}{\|\mathbf{P}\mathbf{v}_t\|_1}$ and $\delta_{t+1} = |\mathbf{v}_{t+1}-\mathbf{v}_t|.$
+<li> Increment $t$ and repeat step 2 until $|\delta_t-\delta_{t+1}| \simeq \mathbf{0}.$
+<li> Use $k$-means to cluster points on $\mathbf{v}_t$ and return clusters $C_1, C_2,\dots,C_k.$
+</ol>
+__Output:__ Clusters $C_1, C_2,\dots,C_k$.
+
+ </table>
+<caption> (\#tab:algpic) Power Iteration Clustering (PIC) [@poweriteration] </caption>
+<br>
+<!-- %  -->
+<!-- % \subsubsection{Spectral Dimension Reduction} -->
+<!-- % In light of the discussion in \cref{dimred}, the author prefers to view Algorithms \ref{algratiocut}, \ref{algncut}, and \ref{algnjw} as graph-specialized forms of dimension reduction. Let $\mathbf{L}= \mathbf{D}-\A$ be the Laplacian matrix and let $\sigma(\mathbf{L}') = \{|\lambda_1| \geq |\lambda_2| \geq \dots \geq |\lambda_n|\}$ be the spectrum of $\mathbf{L}$ with corresponding orthonormal eigenvectors $\U=[\uu_1, \uu_2,\dots,\uu_n]$ such that -->
+<!-- % $$\mathbf{L}' = \sum_{i=1}^n \lambda_i \uu_i\uu_i^T.$$ -->
+<!-- % Then the spectral clustering in Algorithms \ref{algratiocut}, \ref{algncut}, and \ref{algnjw} amount to an unusual truncation of the above sum, containing the terms with the most trivial contribution to the over-all signal: -->
+<!-- % $$\mathbf{L}' \approx \sum_{i=K+1}^n \lambda_i \uu_i\uu_i^T.$$ -->
+<!-- %  -->
+<!-- % This interpretation of spectral clustering not intuitive and I'm hoping that by the time I finish this paper I will have some way to explain it. -->
+<!-- %  -->
+<!-- %%%%%%%%%%%%%%%%%%%%POINTS OF ARTICULATION%%%%%%%%%%%%%%%% -->
+<!-- %Fiedler gave the name \textit{points of articulation} to those vertices $j$ satisfying $\textbf{v}_2(j)=0$ because their removal from the graph (along with all adjacent edges) disconnects the graph into multiple components. In \fref{ptsofart} we try to illustrate this concept with multiple graphs. The vertices in these graphs are labelled according to the sign of the corresponding entry in $\textbf{v}_2$. -->
+
+
+<!-- %Two of his important results are combined and recast as follows: -->
+<!-- %\begin{thm}[Fiedler] -->
+<!-- %Let $G$ be a connected graph with Laplacian matrix $\mathbf{L}$. Let $\mathbf{v}_2$ be an eigenvector corresponding to the second smallest eigenvalue of $\mathbf{L}$. If $\mathbf{v}_2$ is nonzero, that is if $\mathbf{v}_2(i) \neq 0 \,\,\, \forall i$, then the subgraphs induced by cutting the edges between vertices in $C_1$ and $C_2$, where  -->
+<!-- %$C_1= \{ i \in N : \mathbf{v}_2(i) < 0 \}$ and $C_2=\{ i \in N : \mathbf{v}_2(i) >0 \}$ are both connected. Furthermore if $\mathbf{v}_2(i) = 0$ for some vertices $i$, the subgraph induced by $C_1= \{ i \in N : \mathbf{v}_2(i) \leq 0 \}$ is connected and the subgraph induced by $C_1= \{ i \in N : \mathbf{v}_2(i) \geq 0 \}$ is connected. -->
+<!-- %\end{thm} -->
+<!-- %This result ensures that we can divide our graph into two (and no more than two) separate components by the following partition rule: -->
+
+### Clustering via Modularity Maximization {#modularity}
+ 
+ Another technique proposed in the network community detection literature compares the structure of a given graph to what one may expect from a random graph on the same vertices [@ncdnewman;@ncdmucha]. The motivation for this method was that simply counting edges between clusters as was done in previous spectral methods may not be the best way to define clusters in graph. A better approach may be to somehow measure whether they are fewer edges than _expected_ between communities. Let $\A$ be the adjacency matrix of the graph (or network) and let $\mathbf{P}$ be the adjacency matrix of a random graph on the same vertices containing the expected value of weights on that graph. Then the matrix $\mathbf{B}=\A-\mathbf{P}$ would contain information about how the structure of $\A$ deviates from what is expected. Obviously this formulation relies on some underlying probability distribution of the weights in the random graph, known as the _null model_. The most common null model uses the degree sequence of the vertices in the given graph, $\{d_1,d_2,\dots,d_n\}$, where $d_i$ is the degree of vertex $i$ (i.e. $d_i$ is the sum of the weights of the edges connected to vertex $i$), to create the probabilities [@ncdmucha,@ncdnewman]
+ \begin{equation}
+(\#eq:null) 
+ p(\mbox{edge}(i,j)) = \frac{d_j}{\sum_{k=1}^n d_k}.
+ \end{equation}
+ 
+ Thus, the expected value of the weight of the edge from $i$ to $j$ is
+ $$\mathbf{P}_{ij} = E(w(i,j)) = d_i \left(\frac{d_j}{\sum_{k=1}^n d_k}\right).$$
+ 
+ One may recognize that the probabilities in Equation \@ref(eq:null) are precisely the stationary probabilities of the random walk on the graph defined by $\A$, and thus seem a reasonable choice for a null model. This formulation gives us $E(w(i,j)) = E(w(j,i))$ as desired for an undirected graph. Using this null model, a _modularity matrix_ $\mathbf{B}$ is formed as
+$$\mathbf{B} = \A - \mathbf{P}.$$
+
+ For a division of the data into two clusters, let $\mathbf{s}$ be an $n\times 1$ vector indicating cluster membership by
+$$\mathbf{s}_{i} = 
+\begin{cases}
+-1 &: \mbox{vertex }  i \mbox{ belongs in cluster 1}\\
+\,\,\,\,1 &: \mbox{vertex } i \mbox{ belongs in cluster 2}
+\end{cases}.
+$$
+Let $d=\sum_{k=1}^n d_k$. The __modularity__ of a given partition is defined by
+\begin{equation}
+(\#eq:modeqn)
+Q= \frac{1}{2d} \sum_{i,j} \mathbf{B}_{ij} \mathbf{s}_i\mathbf{s}_j = \frac{1}{2d}\mathbf{s}^T\mathbf{B}\mathbf{s}.
+\end{equation}
+The goal of the algorithm proposed in [@ncdnewman] is to maximize this quantity, thus we can drop the constant $1/2d$ and write the objective as
+\begin{equation}
+(\#eq:modobj)
+\max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}} Q = \mathbf{s}^T \mathbf{B} \mathbf{s}
+ \end{equation}
+
+#### Illustrative Example {-}
+  To get an idea of why this is true, consider the case where we have two relatively obvious clusters $C_1$ and $C_2$ in a graph and reorder the rows and columns of the adjacency matrix to reflect this structure,
+$$
+\A=\left[ \begin{array}{cc}
+\A_{C_1} & \mathbf{E} \\
+\mathbf{E}^T & \A_{C_2} \end{array}\right]
+$$
+Where $\A_{C_1}$ and $\A_{C_2}$ are relatively dense matrices with larger entries representing the weight of edges within the clusters $C_1$ and $C_2$ respectively and $\mathbf{E}$ is a sparse matrix with smaller entries representing the weight of edges which connect the two clusters. In a random graph with no community or cluster structure, we'd be likely to find just as many edges between the clusters as within clusters. Thus, after subtracting $\mathbf{P}$ our modularity matrix may look something like
+$$
+\mathbf{B}=\left[ \begin{array}{cc}
+\mathbf{B}_{11} & \mathbf{B}_{12} \\
+\mathbf{B}_{21} & \mathbf{B}_{22} \end{array}\right]
+\approx\left[ \begin{array}{cc}
++ & - \\
+- & + \end{array}\right]
+$$
+Where the indicated signs reflect the sign _tendancy_ of values in $\mathbf{B}$. In other words, the entries in the diagonal blocks $\mathbf{B}_{11}$ and $\mathbf{B}_{22}$ _tend_ to be positive because the edges within clusters had larger weights than one would expect at random and the entries in the off diagonal blocks $\mathbf{B}_{12}$ and $\mathbf{B}_{21}$ _tend_ to be negative because the edges between clusters had smaller weights than one would expect at random. Thus, the modularity of this graph, $\mathbf{Q} = \mathbf{s}^T \mathbf{B} \mathbf{s}$, will be maximized by the appropriate partition $\mathbf{s}^T=[\mathbf{s}^T_1,\mathbf{s}^T_2]=[\e^T_{C_1}, -\e^T_{C_2}]$.
+
+
+In order to maximize the modularity objective function given in Equation \@ref(eq:modobj), let $\uu_1,\uu_2,\dots,\uu_n$ be an orthonormal set of eigenvectors for $\mathbf{B}$ corresponding respectively to the eigenvalues $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n$. Write the vector $\mathbf{s}$ as a linear combination of eigenvectors,
+$$\mathbf{s} = \sum_{i=1}^n \alpha_i \uu_i$$ where $$\alpha_i =\uu_i^T \mathbf{s}.$$
+Then, the objective function from Equation \@ref(eq:modobj) becomes
+$$\max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}}  \left(\sum_{i=1}^n \alpha_i \uu_i^T \mathbf{B}\right)\left(\sum_{i=1}^n \alpha_i \uu_i\right) = \sum_{i=1}^n \lambda_i (\uu_i^T \mathbf{S})^2.$$
+
+This optimization is NP-hard due to the constraint that $\mathbf{s}_i =\pm 1$. It is clear that without this constraint one would choose $\mathbf{s}$ proportional to $\uu_1$, maximizing the first term in the summation (associated with the largest eigenvalue) and terminating the others. A reasonable way to proceed in light of this information is to maximize the leading term and ignore the remaining terms. To accomplish this, it is quite clear that we should choose $\mathbf{s}$ so that its entries match the signs of the entries in $\uu_1$. The placement of vertices corresponding to zero entries in $\uu_1$ will be decided arbitrarily. However, if the leading eigenvalue of the modularity matrix is _negative_ then the corresponding eigenvector is $\e$, leading us to no partition. According to [@ncdnewman] the ``no partition'' solution in this scenario is in fact the correct result, i.e. a negative leading eigenvalue indicates there is no community or cluster structure in the graph. This gives a clear stopping point for the procedure, which allows it to automatically determine an appropriate number of clusters or communities to create. Unfortunately, the arbitrary placement of vertices corresponding to zero entries in $\uu_1$ may in some cases affect the determined number of clusters.
+
+To create more than 2 clusters, the above procedure can be repeated on each of the subgraphs induced by the vertices in each cluster found. This leads us to an iterative divisive (hierarchical) algorithm like the iterative Fiedler method in Section \@ref(extendedfiedler) and PDDP in Section \@ref(pddp). The modularity clustering procedure is formalized in Table \ref{algmod}.
+
+<table><tr><td>
+__Input:__ $n \times n$ adjacency matrix $\A$ for an undirected graph to be partitioned
+<ol>
+<li> Let $d_i$ be the $i^{th}$ row sum of $\A$. Let $d=\sum_{i=1}^n d_i$
+<li> Form the matrix $\mathbf{P}$ with $\mathbf{P}_{ij}=d_i d_j / d$.
+<li> Form the modularity matrix $\mathbf{B}=\A-\mathbf{P}$.
+<li> Compute the largest eigenvalue $\lambda_1$ and corresponding eigenvector $\uu_1$ of $\mathbf{B}$.
+<li> If $\lambda_1 < 0$, stop. There is no partition of this graph.
+<li> Otherwise partition the vertices of the graph into 2 clusters as follows
+\begin{equation}
+(\#eq:modsplit)
+\begin{split}
+C_1 &= \{i : \uu_1(i) <0\} \cr
+C_2 &= \{i : \uu_1(i) \geq 0\}
+\end{split}
+\end{equation}
+<li> Determine further partitions by extracting the rows and columns of the original adjacency matrix corresponding to the vertices in each cluster to form $\A'$ and repeat the algorithm with $\A'$ until each created cluster fails to partition in step 5.
+</ol>
+ __Output:__ Final clusters.
+</table>
+<caption>(\#tab:algmod) Modularity Procedure for Network Community Detection (Newman) [@ncdnewman]</caption>
+<br>
+ 
+
+## Stochastic Clustering
+  
+  An alternative way to interpret a graph is by considering a random walk along the edges. For an undirected graph with adjacency matrix $\A$, we can create a transition probability matrix $\mathbf{P}$ by dividing each row by the corresponding row sum. Using the degree matrix from Definition \@ref(def:laplaciandef) we have $$\mathbf{P}=\mathbf{D}^{-1}\A.$$ If our graph does indeed have some cluster structure, i.e. sets of vertices $C_1,C_2, \dots,C_k$ for which the total weight of edges within each set are substantially higher than the total weight of edges between the different sets, then a random walker in a given cluster $C_i$ is more likely to stay in $C_i$ for several steps than he is to transition to another cluster $C_j$. It is well known that for a connected and undirected graph, the long term probability distribution is given by
+\begin{equation}
+(\#eq:pi)
+\pi^T = \frac{\e^T\mathbf{D}}{\e^T\mathbf{D}\e^T}
+\end{equation}
+  Which is not likely to give any cluster information. However, the short-term evolution of this walk can tell us something about the cluster structure because a random walker is far more likely, in the short-run, to remain inside a cluster than he is to transition between clusters. The Stochastic Clustering Algorithm (SCA) of Wessell and Meyer [@chuck] takes advantage of this fact.
+
+### Stochastic Clustering Algorithm (SCA)
+  
+  In a 2012 paper, Chuck Wessell and Carl Meyer formulated a clustering model by creating a symmetric (doubly stochastic) transition matrix $\mathbf{P}$ [@chuck;@chuckthesis] from the adjacency matrix of a graph. The method in this paper is quite similar to that in PIC except that here the mathematics of the ``backward'' Markov Chain intuition given in [@poweriteration] works out in this context because the probability transition matrix is symmetric. One added feature in this algorithm is the automatic determination of the number of clusters in the data, using eigenvalues of the transition matrix $\mathbf{P}$.  Wessell and Meyer's formulation is based on theory that was developed by Nobel Laureate economist Herbert Simon and his student Albert Ando.  This theory surrounds the mixing rates of resources or wealth in local economies (composed of states in a Markov chain) as part of a global economy (which links together some states from each local economy). It is assumed that the adjacency matrix for the graph is irreducible, or equivalently that the graph is connected. 
+  
+  The basic idea is that resources will be exchanged more frequently at a local level than they will at the global level. Suppose individual companies from a global economy are represented as nodes in a graph with edges between them signifying the amount of trade between each pair of companies. Natural clusters would form in this graph at a local level, represented by the strong and frequent trade relationships of proximal companies. Let $k$ be the number of local economies (clusters), each containing $n_i$ states $i=1,\dots,k$, and define the distribution of resources at time $t$ as $\mathbf{\pi}_t$, given a starting distribution $\mathbf{\pi}_0$. Then
+  $$\mathbf{\pi}_t^T = \mathbf{\pi}_0^T\mathbf{P}^t$$
+  
+   The heavily localized trade in this global economy leads to a so-called _short-term stabilization_ of the system characterized by a distribution vector at some time $t$ which is nearly constant across each local economy:
+$$\mathbf{\pi}_t^T \approx \left( \frac{\alpha_1}{n_1}  \frac{\alpha_1}{n_1}   \dots \frac{\alpha_1}{n_1}   | \frac{\alpha_2}{n_2}   \frac{\alpha_2}{n_2}   \dots \frac{\alpha_2}{n_2}   | \dots | \frac{\alpha_k}{n_k}   \frac{\alpha_k}{n_k}   \dots \frac{\alpha_k}{n_k} \right)$$
+   After this short-term stabilization, the distribution of goods in the Markov Chain is eventually expected to converge to a constant level across every state. However, in the period following the short-run stabilization, the distribution vector retains its approximately piecewise constant structure for a some time before settling down into its final uniform equilibrium.
+
+Wessell and Meyer's derivation requires the creation of a symmetric probability transition matrix $\mathbf{P}$ from the adjacency matrix $\A$ by means of a simultaneous row and column scaling. In other words, a diagonal matrix $\mathbf{S}$ is determined for which
+$$\mathbf{S}\A\mathbf{S}= \mathbf{P}$$
+is a doubly stochastic transition probability matrix.  This task turns out to be quite simple, $\mathbf{S}$ is found by iterating a single step until convergence. Letting $\mathbf{S}_{ii}=\mathbf{s}(i)$, the diagonal scaling procedure put forth by Ruiz [@ruiz} is simply:
+\begin{equation}
+(\#eq:diagscaling)
+\begin{split}
+\mathbf{s}_0 &= \e \\
+\mathbf{s}_{t+1}(i) &=\sqrt{\frac{\mathbf{s}_t(i)}{\A_{i*}^T\mathbf{s}_t}}
+\end{split}
+\end{equation}
+ 
+ In [@chuckthesis], it is convincingly argued that the diagonal scaling procedure does not change the underlying cluster structure of the data in $\A$, and thus that the desired information is not damaged by this transformation.  The clusters in this method are found in a similar manner to PIC, where $k$-means is employed to find the nearly piecewise constant segments of the distribution vector $\mathbf{\pi}_t$ after a short number of steps. The Stochastic Clustering Algorithm automatically determines the number of clusters in the data by counting the number of eigenvalues whose value is close to $\lambda_1=1$. This group of eigenvalues near 1 is referred to as the _Perron cluster_. We postpone discussion of this matter to \cref{findk} where it will be analyzed in detail. For now, we present the Stochastic Clustering method in Table \@ref(tab:algsc). The eigenvector iterations in SCA are quite similar to those put forth in PIC, and users commonly create visualizations of the iterations that look quite similar to those in Figure \@ref(fig:picex).
+ 
+ <table><tr><td>
+__Input:__ Adjacency matrix $\A$ for some graph to be partitioned
+<ol>
+<li> Convert $\A$ to a symmetric probability transition matrix $\mathbf{P}$ using the diagonal scaling procedure given in \@ref(eq:diagscaling).
+<li> Calculate the eigenvalues of $\mathbf{P}$ and determine $k$ to be the number of eigenvalues in the Perron cluster.
+<li> Create a random initial probability distribution $\mathbf{\pi}_0^T$.
+<li> Track the evolution of $\mathbf{\pi}_{t+1}^T = \mathbf{\pi}_t^T \mathbf{P}$. After each multiplication, cluster the entries of $\mathbf{\pi}_t$ using $k$-means. When this clustering has remained the same for a user-preferred number of iterations stop.
+</ol>
+__ Output:__ $k$ clusters found $C_1, C_2,\dots, C_k$.
+ </table>
+<caption> (\#tab:algsc) Stochastic Clustering Algorithm (SCA) [@chuck]</caption>
+<br>
+ 
+
+<!--chapter:end:112-NetworkAlgos.Rmd-->
 
 # Cluster Validation {#validation}
 
@@ -12306,7 +12834,7 @@ Name <td> Overall Measure <td> Cluster Weight <td> Type </tr>
 <caption> (\#tab:cstable) Some Common Measures of Overall Cohesion and Separation [@dcebook,@datamining]</caption> 
 
 
-<!--chapter:end:1113-validation.Rmd-->
+<!--chapter:end:113-validation.Rmd-->
 
 # Determining the Number of Clusters $k$ {#findk}
 
@@ -12562,17 +13090,19 @@ For an $m\times n$ irreducible stochastic matrix with a $k$-level partition
 \end{array}
 \right]$$
  the number $$\delta=2\max_{i} \|\mathbf{P}_{i*}\|_{\infty}$$ is called the __deviation from complete reducibility.__ 
+
 :::
   
-It is important to point out that the parameter $\delta$, or any other parameter that measures the level of coupling between clusters in a graph (like those suggested in [@fischer;@chuckthesis;@meyerharfield]) cannot be computed without knowing a priori the clusters in the graph. Such parameters are merely tools for the perturbation analysis, used to prove the next theorem regarding the spectrum of block-diagonally dominant stochastic matrices [@fischer; @kato; @chuck; @meyernumc; @meyerharfield;@perroncluster;@stewartnumc].
+It is important to point out that the parameter $\delta$, or any other parameter that measures the level of coupling between clusters in a graph (like those suggested in [@fischer;@chuckthesis;@meyerharfield]) cannot be computed without knowing a priori the clusters in the graph. Such parameters are merely tools for the perturbation analysis, used to prove the next theorem regarding the spectrum of block-diagonally dominant stochastic matrices [@fischer; @kato; @chuck; @meyernumc; @meyerharfield; @perroncluster; @stewartnumc].
 
-:::{.theorem name='The Spectrum of a Block-Diagonally Dominant Stochastic Matrix' #bddsm} 
-For sufficiently small $\delta \neq 0$, the eigenvalues of $\mathbf{P}(\delta)$ are continuous in $\delta$, and can be divided into 3 parts [@fischer;@meyernumc;@perroncluster;@chuck]:
-<ol>
-<li> The Perron root, $\lambda_1(\delta)=1$,
-<li> a cluster of $k-1$ eigenvalues $\lambda_2(\delta),\lambda_3(\delta),\dots,\lambda_k(\delta)$ that approach 1 as $\delta \to 0$, and
-<li> the remaining eigenvalues, which are bounded away from 1 as $\delta \to 0$.
-</ol>\
+(ref:bddsm) The Spectrum of a Block-Diagonally Dominant Stochastic Matrix
+
+:::{.theorem name='(ref:bddsm)' #bddsm} 
+For sufficiently small $\delta \neq 0$, the eigenvalues of $\mathbf{P}(\delta)$ are continuous in $\delta$, and can be divided into 3 parts [@fischer; @meyernumc; @perroncluster; @chuck]:
+
+1. The Perron root, $\lambda_1(\delta)=1$,
+2. a cluster of $k-1$ eigenvalues $\lambda_2(\delta),\lambda_3(\delta),\dots,\lambda_k(\delta)$ that approach 1 as $\delta \to 0$, and
+3. the remaining eigenvalues, which are bounded away from 1 as $\delta \to 0$.
 :::
 
 
@@ -12606,515 +13136,7 @@ The second two rows of Figure \@ref(fig:perronex) display a real-world example u
 
  In the next Chapter, we will introduce a similarity matrix that is well suited for this Perron-cluster analysis. Our method has the ability of estimating the number of clusters in very noisy and high-dimensional data when other methods fail.
 
-<!--chapter:end:1114-findk.Rmd-->
-
-# Algorithms for Graph Partitioning {#chap1.5}
-
-## Spectral Clustering {#spectral}
-Spectral clustering is a term that data-miners have given to the partitioning problem as it arose in graph theory. The theoretical framework for spectral clustering was laid in 1973 by Miroslav Fiedler [@fiedlerac;@fiedlerev]. We will begin with a discussion of this early work, and then take a look at how others have adapted the framework to meet the needs of data clustering. In this setting, we have a graph  $G$ on a set of vertices $N=\{1,2,\dots,n\}$ with edge set $E=\{(i,j) : i,j \in N \mbox{and} i \leftrightarrow j\}$. Edges between the vertices are recorded in an  _adjacency matrix_ $\A = (a_{ij})$, where $a_{ij}$ is equal to the weight of the edge connecting vertex (object) $i$ and vertex $j$ and $a_{ij}=0$ if $(i,j) \notin E$. For the immediate discussion, we will assume the graph has no "self-loops", i.e. $a_{ii}=0 \forall i$. 
-Spectral clustering algorithms typically involve the  _Laplacian matrix_ associated with a graph. A Laplacian matrix is defined as follows:
-
-:::{.definition name='The Laplacian Matrix' #laplaciandef}
-The  _Laplacian Matrix_, $\mathbf{L}$, of an undirected, weighted graph with adjacency matrix $\A=(a_{ij})$ and diagonal degree matrix $\mathbf{D}=\mbox{diag}(\A\e)$ is:
-$$\mathbf{L}=\mathbf{D}-\A$$
-:::
-
-The Laplacian matrix is symmetric, singular, and positive semi-definite. To see this third property, construct an $n \times |E|$ "vertex-edge incidence" matrix $\U$ with rows corresponding to vertices and columns corresponding to edges. Allow the edges of the original graph to be directed arbitrarily, and set 
-\[
-\U_{v,e} = \left\{
-     \begin{array}{lr}
-       +\sqrt{a_{ij}} : &\mbox{if  } v \mbox{  is the head of  } e\\
-       -\sqrt{a_{ij}} : &\mbox{if  } v \mbox{  is the tail of  } e\\
-       0  : &\mbox{otherwise}
-     \end{array}
-   \right.
- \]
- 
- Then $\mathbf{L}=\U\U^T$ is positive semi-definite [@fiedlerac]. $\mathbf{L}$ gives rise to a nice quadratic form:
- 
- \begin{equation}
-(\#eq:quadlaplacian)
- \mathbf{y}^T \mathbf{L} \mathbf{y} = \sum_{(i,j) \in E}a_{ij} (y_i - y_j)^2.
- \end{equation}
-  
-  Let $\sigma(\mathbf{L})=\{\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n\}$ be the spectrum of $\mathbf{L}$. Since $\mathbf{L}$ is positive semi-definite, $\lambda_i \geq 0 \forall i$. Also, since the row sums of $\mathbf{L}$ are zero, $\lambda_1=0$. Furthermore if the graph, $G$, is composed of $k$ connected components, each disconnected from each other, then $\lambda_1=\lambda_2=\dots=\lambda_k = 0$ and $\lambda_j \geq 0 \mbox{ for } j\geq k+1$.  In [@fiedlerac] Fiedler defined the  _algebraic connectivity_ of the graph as the second smallest eigenvalue, $\lambda_2$, because its magnitude provides information about how easily the graph is to be disconnected into two components. Later, in [@fiedlerev], he alluded to the utility of the eigenvector associated with $\lambda_2$ in determining this two-component decomposition of a graph. 
-## Fiedler Partitioning
-  Suppose we wish to decompose our graph into two components (or clusters of vertices) $C_1$ and $C_2$ where the edges exist more frequently and with higher weight inside the clusters than between the two clusters. In other words, we intend to make an  _edge-cut_ disconnecting the graph into two clusters. It is desired that the resulting partition satisfies the following objectives:
-  \begin{itemize}
-  \item[1.] minimize the total weight of edges cut (edges in between components)
-  \item[2.] maximize the total weight of edges inside the two components.
-  \end{itemize}
- To begin with, lets take the quadratic form in \eref{quadlaplacian} and let $\y$ be a vector that determines the cluster membership of each vertex as follows:
- $$
-\y_i=\left\{
-     \begin{array}{lr}
-       +1 & : \mbox{if vertex } i \mbox{  belongs in } C_1\\
-       -1 & : \mbox{if vertex } i \mbox{  belongs in  } C_2\\
-     \end{array}
-   \right.
- $$
-Our first goal is then to minimize \eref{quadlaplacian} over all such vectors $\y$:
-\begin{equation}
-(\#eq:mincut)
-\min_{\y} \y^T \mathbf{L} \y = \sum_{(i,j) \in E} a_{ij} (\y_i-\y_j)^2 = 2 \sum_{\substack{(i,j) \in E \\i \in C_1, j \in C_2}} 4 a_{ij}
-\end{equation}
-
-Note that the final sum is doubled to reflect the fact that each edge connecting $C_1$ and $C_2$ will be counted twice. However, the above formulation is incomplete because it does not take into account the second objective, which is to maximize the total weight of edges inside the two components. Indeed it seems the minimum solution to Equation \@ref(mincut) would often involve cutting all of the edges adjacent to a single vertex of minimal degree, disconnecting the graph into components of size $1$ and $n-1$, which is generally undesirable. In addition, the above optimization problem is NP-hard. To solve the latter problem, the objective function is relaxed from discrete to continuous. By the Rayleigh theorem,
-$$\min_{\|\y\|_2=1} \y^T\mathbf{L} \y = \lambda_1$$ with $\y^*$ being the eigenvector corresponding to the smallest eigenvalue. However, for the Laplacian matrix, $y^*=\e$. In context, this makes sense - in order to minimize the weight of edges cut, we should simply assign all vertices to one cluster, leaving the second empty. In order to divide the vertices into two clusters we need an additional constraint on $\y$. Since clusters of relatively balanced size are desirable, a natural constraint is $\y^T\e=0$. By the Courant-Fischer theorem,
-\begin{equation}
-(\#eq:fiedlercut)
-\min_{\substack{\| \y \|_2=1 \\ \y^T \e=0}} \y^T \mathbf{L} \y = \lambda_2
-\end{equation}
-with $\y^*=\textbf{v}_2$ being the eigenvector corresponding to the second smallest eigenvalue, $\lambda_2$. This vector is often referred to as the  _Fiedler vector_ after the man who identified its usefulness in graph partitioning. We define the Fiedler graph partition as follows:
-
-:::{.definition name='Fiedler Graph Partition' #fiedlerpart}
-Let $G=(N,E)$ be a connected graph on vertex set $N=\{1,2,\dots,n\}$ with adjacency matrix $\A$. Let $\mathbf{L}=\mathbf{D}-\A$ be the Laplacian matrix of $G$. Let $\textbf{v}_2$ be an eigenvector corresponding to the second smallest eigenvalue of $\mathbf{L}$. The __Fiedler partition__ is:
-\begin{eqnarray*}
-C_1 &=& \{i \in N : \textbf{v}_2(i) <0\}\\
-C_2 &=& \{i \in N : \textbf{v}_2(i) >0\}
-\end{eqnarray*}
-Vertices $j$, for which $\textbf{v}_2(j)=0$, can be arbitrarily placed into either cluster.
-:::
-
-
-There is no uniform agreement on how to determine the cluster membership of vertices for which $\textbf{v}_2(j)=0$. The decision to make the assignment arbitrarily comes from experimental results that indicate in  _some scenarios_ these zero valuated vertices are equally drawn to either cluster. Situations where there are a large proportion of zero valuated vertices may be indicative of a graph which does not conform well to Fiedler's partition, and we suggest the user tread lightly in these cases. Figure \@ref(fig:ptsart) shows the experimental motivation for our arbitrary assignment of zero valuated vertices. The vertices in these graphs are labelled according to the sign of the corresponding entry in $\textbf{v}_2$. We highlight the red vertex and watch how its sign in $\textbf{v}_2$ changes as nodes and edges are added to the graph.
-
-
-<div class="figure" style="text-align: center">
-<img src="figs/ptsart.jpg" alt="Fiedler Partitions and Zero Valuated Vertices" width="75%" />
-<p class="caption">(\#fig:ptsart)Fiedler Partitions and Zero Valuated Vertices</p>
-</div>
-
- In order to create more than two clusters, the Fiedler graph partition can be performed iteratively, by examining the subgraphs induced by the vertices in $C_1$ and $C_2$ and partitioning each based upon their own Fiedler vector, or in an extended fashion using multiple eigenvectors. This iterative method requires a cluster to be chosen for further division, perhaps based upon the algebraic connectivity of the cluster. It is also possible to use the sign patterns in subsequent eigenvectors to further partition the graph. This approach is called Extended Fiedler Clustering and is discussed in Section \@ref(extendedfiedler). First, let's take a more rigorous look at why the sign patterns of the Fiedler vector provide us with a partition.
- 
-### Linear Algebraic Motivation for the Fiedler vector
-
-The relaxation proposed in Equation \@ref(eq:fiedlercut) does not give us a general understanding of why the sign patterns of the Fiedler vector are useful in determining cluster membership information. We will use the following facts:
-
-:::{.lemma name='Fiedler Lemma 1' #flem1}
-Let $\mathbf{L}=\mathbf{D}-\A$ be a Laplacian matrix for a graph $G=(V,E)$ with $|V|=n$. Let $\sigma(L)=\lambda_1 \leq \lambda_2 \leq \dots \leq \lambda_n$ Then $\mathbf{L}$ is symmetric and positive semi-definite with $\lambda_1=0$. 
-:::
-
-:::{.lemma name='Fiedler Lemma 2' #flem2}
-
-$\lambda_2(L)=0$ if and only if the graph $G$ has 2 components, $C_1$ and $C_2$ which are completely disconnected from each other (i.e. there are no edges connecting the vertices in $C_1$ to the vertices in $C_2$.
-:::
-:::{.lemma name='Fiedler Lemma 3' #flem3}
-Let $\mathbf{M}$ be a symmetric matrix of rank $r$. Let 
-$$\mathbf{M} = \mathbf{V} \mathbf{D}  \mathbf{V}^T = (\textbf{v}_1, \textbf{v}_2, \dots, \textbf{v}_r)
-\left(
-\begin{matrix}
-\sigma_1 &  0  & \ldots & 0\\
-0  &  \sigma_2 &  \ldots &  0\\
-\vdots & \vdots & \ddots&  \vdots\\
-0  &   0       &\ldots & \sigma_r\\
-\end{matrix}
-\right)
-\left(
-\begin{matrix}
-\textbf{v}_1^T\\
-\textbf{v}_2^T\\
-\vdots \\
-\textbf{v}_r^T\\
-\end{matrix} 
-\right)
-=\sum_{i=1}^r \sigma_i \textbf{v}_i \textbf{v}_i^T$$
- be the singular value decomposition of $\mathbf{M}$, with $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r$.  Let $\widetilde{\mathbf{M}}$ be the closest (in the euclidean sense) rank $k$ approximation to $\mathbf{M}$:
- $$\widetilde{\mathbf{M}}=\mbox{arg}\min_{\mathbf{B} , rank(\mathbf{B})=k}\|\mathbf{M} - \bf B\|.$$
-Then $\widetilde{\mathbf{M}}$  is given by the  _truncated singular value decomposition_:
- $$B=\sum_{i=1}^k \sigma_i \textbf{v}_i \textbf{v}_i^T$$
-:::
-
-From these simple tools, we can get a sense for why the signs of the Fiedler vector will determine a natural partition of a graph into two components. In the simplest case, $\lambda_1=\lambda_2=0$, the graph contains two disjoint components, $C_1$ and $C_2$. Thus, there exists some permutation matrix $\mathbf{P}$ such that $\mathbf{P} \mathbf{L} \mathbf{P}$ is block diagonal:
-
-$$
-\mathbf{P} \mathbf{L} \mathbf{P} =\left( \begin{array}{cc}
-\mathbf{L}_1 & 0\\
-0 & \mathbf{L}_2\\
-\end{array}
-\right)
-$$
-
-and $\mathbf{L}_1$ is the Laplacian matrix for the graph of $C_1$ and $\mathbf{L}_2$ is the Laplacian for $C_2$. Let $n_1$ and $n_2$ be the number of of vertices in each component. Clearly the eigenvectors $\textbf{v}_2$ and $\textbf{v}_2$ associated with $\lambda_1=0$ and $\lambda_2=0$ are contained in the span of $\mathbf{u}_1$ and $\mathbf{u}_2$ where:
-
-\begin{equation}
-\mathbf{u}_1 =
-\begin{array}{cc}\begin{array}{c} 1\\ \vdots \\ n_1 \\ n_1+1 \\ \vdots \\ n \end{array} &\left( \begin{array}{c} 1 \\ \vdots \\ 1 \\ 0 \\ \vdots \\ 0 \end{array} \right) \end{array}
-
-\qquad\mbox{and}\qquad
-
-\mathbf{u}_2 =\begin{array}{cc}\begin{array}{c} 1\\ \vdots \\ n_1 \\ n_1+1 \\ \vdots \\ n \end{array} &\left( \begin{array}{c}0 \\ \vdots \\ 0 \\ 1 \\ \vdots \\ 1 \end{array} \right)\end{array}
-\end{equation}
-
-For all Laplacian matrices, it is convention to consider $\textbf{v}_1=\e$, the vector of all ones. Under this convention, the two conditions $\textbf{v}_2 \perp \textbf{v}_1$ and $\textbf{v}_2 \in span \{ \mathbf{u}_1,\mathbf{u}_2\}$ necessarily force $\textbf{v}_2$ to have a form such that the component membership of each vertex is discernible from the sign of the corresponding entry in the vector:
-$$\textbf{v}_2 = \alpha(\mathbf{u}_1-\frac{n_1}{n_2} \mathbf{u}_2).$$
-
-The case when $\mathbf{L}$ is  _not_ disconnected into two components is far more interesting, as this is generally the problem encountered in practice. We will start with a connected graph, so that our Laplacian matrix has rank $n-1$. Let the spectral decomposition of our Laplacian matrix $\mathbf{L}$ (which is equivalent to its singular value decomposition because $\mathbf{L}$ is symmetric) be:
-$$\mathbf{L}=\sum_{i=2}^n \lambda_i \textbf{v}_i \textbf{v}_i^T.$$
-Let $\widetilde{\mathbf{L}}$ be the closest rank $n-2$ approximation to $\mathbf{L}$. Then, by Lemmas \@ref(lem:flem2) and \@ref(lem:flem3),
-$$\widetilde{\mathbf{L}} = \sum_{i=3}^n \lambda_i  \textbf{v}_i \textbf{v}_i^T$$
-and there exists a permutation matrix $\mathbf{P}$ such that
-
-$$
-\mathbf{P} \widetilde{\mathbf{L}} \mathbf{P} =\left( \begin{matrix}
-\widetilde{\mathbf{L}}_1 & 0\\
-0 & \widetilde{\mathbf{L}}_2
-\end{matrix}
-\right).
-$$
-
-Suppose we permute the rows of $\mathbf{L}$ accordingly so that
-
-$$
-\mathbf{P} \mathbf{L} \mathbf{P} =\left( \begin{matrix}
-\mathbf{L}_1 & -\mathbf{E}\\
--\mathbf{E}^T & \mathbf{L}_2\\
-\end{matrix}
-\right)
-$$
-where $\mathbf{E}_{ij} \geq 0 \forall i,j$ because $\mathbf{L}$ is a Laplacian matrix. Consider the difference between $\mathbf{L}$ and $\widetilde{\mathbf{L}}$:
-
-$$\mathbf{L}-\widetilde{\mathbf{L}} = \lambda_2 \textbf{v}_2 \textbf{v}_2^T$$
-
-which entails $\mathbf{L} - \lambda_2 \textbf{v}_2 \textbf{v}_2^T = \widetilde{\mathbf{L}}$. If we permute the vector $\textbf{v}_2$ in the same manner as the matrices $\mathbf{L}$ and $\widetilde{\mathbf{L}}$, then one thing is clear:
-
-\begin{equation*}
-\lambda_2\mathbf{P}\textbf{v}\textbf{v}_2^T\mathbf{P} = \left(\begin{matrix}
-\A & -\mathbf{E} \\
--\mathbf{E}^T & B 
-\end{matrix}\right)
-\end{equation*}
-Thus, if 
-\begin{equation*}\mathbf{P}\textbf{v} =\left(\begin{matrix}
-\mathbf{a} \\
- \mathbf{b}\\
-\end{matrix} \right)
-\end{equation*}
-
-where $\mathbf{a} \in \Re^{n_1}$ and $\mathbf{b} \in \Re^{n_2}$
-
-
-#### Extended Fiedler Clustering {#extendedfiedler}
- In the extended Fiedler algorithm, we use the sign patterns of entries in the first $l$ eigenvectors of $\mathbf{L}$ to create up to $k=2^l$ clusters. For instance, suppose we had 10 vertices, and used the $l=3$ eigenvectors $\textbf{v}_2,\textbf{v}_3,\mbox{ and  }\textbf{v}_4$. Suppose the sign of the entries in these eigenvectors are recorded as follows:
-\[
-       \begin{array}{cc} & \begin{array}{ccc} \mathbf{v}_2 & \mathbf{v}_3&\mathbf{v}_4 \end{array}\cr
-       \begin{array}{c}
-        1 \\
-        2 \\
-        3 \\
-        4 \\
-        5 \\
-        6 \\
-        7 \\
-        8 \\
-        9 \\
-        10 \end{array} & \left(
-        \begin{array}{ccc} 
-              +&+&-\cr
-              -&+&+\cr
-              +&+&+\cr
-              -&-&-\cr
-              -&-&-\cr
-              +&+&-\cr
-              -&-&-\cr
-              -&+&+\cr
-              +&-&+\cr
-              +&+&+ \end{array}
-              \right) \end{array}
-\]
-     Then the 10 vertices are clustered as follows:
-  $$
-       \{1,6\},\quad
-       \{2,8\},\quad 
-       \{3,10\},\quad 
-       \{4,5,7\},\quad
-       \{9\}.
-     $$
- Extended Fiedler makes clustering the data into a specified number of clusters $k$ difficult, but may be able determine a natural choice for $k$ as it partitions the data along several eigenvectors.
- 
- In a 1990 paper by Pothen, Simon and Liou, an alternative formulation of the Fiedler partition is proposed [@pothen]. Rather than partition the vertices based upon the sign of their corresponding entries in $\mathbf{v}_2$, the vector $\mathbf{v}_2$ is instead divided at its median value. The main motivation for this approach was to split the vertices into sets of equal size. In 2003, Ding et al. derived an objective function for determining an ideal split point for similar partitions using the second eigenvector of the _normalized_ Laplacian, defined in Section \@ref(ncut) [@minmax]. The basic idea outlined above has been adapted and altered hundreds if not thousands of times in the past 20 years. The present discussion is meant merely as an introduction to the literature. 
- 
- 
-### Graph Cuts
-
- The majority of spectral algorithms are derived as alterations of the objective function in Equation \@ref(eq:fiedlercut).The idea is the same: partition the graph into two components by means of a minimized edge cut, while requiring that the two components remain somewhat balanced in size (i.e. do not simply isolate a small number of vertices). Two common objective functions which embody this idea are the ratio cut (RatioCut) [@ratiocut], the normalized cut (Ncut) [@shi]. 
- 
-#### Ratio Cut
-
-The ratio cut objective function was first introduced by Hagen and Kahng in 1992 [@ratiocut]. Given a graph $G(V,E)$ with vertex set $V$ partitioned into $k$ disjoint clusters, $V_1,V_2,\dots V_k$, the __ratio cut__ of the given partition is defined as
- $$\mbox{RatioCut}(V_1,V_2,\dots,V_k) = \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{|V_i|}$$
- where $|V_i|$ is the number of vertices in $V_i$, $\bar{V_i}$ is the complement of the set $V_i$ and, given two vertex sets $A$ and $B$, $w(A,B)$ is the sum of the weights of the edges between vertices in $A$ and vertices in $B$.  Let $\mathbf{H}$ be an $n\times k$ matrix indicating cluster membership of vertices by its entries:
-\begin{equation}
-(\#eq:ratioH)
- \mathbf{H}_{ij}=
- \begin{cases}
-\frac{1}{\sqrt{|V_j|}}, & \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-
- Then $\mathbf{H}^T\mathbf{H}=\mathbf{I}$ and minimizing the ratio cut over all possible partitionings is equivalent to minimizing
- $$f(\mathbf{H}) = \mbox{Trace}(\mathbf{H}^T\mathbf{L}\mathbf{H})$$
- over all matrices $\mathbf{H}$ described by Equation \@ref(eq:ratioH), where $\mathbf{L}$ is the Laplacian matrix from Definition \@ref(def:laplaciandef). The exact minimization of this objective function is again NP-hard, but relaxing the conditions on $\mathbf{H}$ to $\mathbf{H}^T\mathbf{H}=\mathbf{I}$ yields a solution $\mathbf{H}^*$ with columns containing the eigenvectors of $\mathbf{L}$ corresponding to the $k$ smallest eigenvalues.
- 
- Unfortunately, after this relaxation it is not necessarily possible to automatically determine from $\mathbf{H}^*$ which vertices belong to each cluster. Instead, it is necessary to look for clustering patterns in the rows of $\mathbf{H}^*$. This is a common conceptual drawback of the relaxation of objective functions in spectral clustering. The best way to procede after the relaxation is to cluster the rows of $\mathbf{H}^*$ with an algorithm like $k$-means to determine a final clustering. The ratio cut minimization method is generally referred to as _unnormalized spectral clustering_ [@spectraltutorial]. The algorithm is as follows:
- 
- <table><tr><td>
-__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
-<ol>
-<li> Compute the Laplacian $\mathbf{L}=\mathbf{D}-\mathbf{A}$.
-<li> Compute the first $k$ eigenvectors $\mathbf{V}=\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k$ of $\mathbf{L}$ corresponding to the $k$ smallest eigenvalues.
-<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
-<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
-</ol>
-__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
-</table>
- <caption>(\#tab:algratiocut) Unnormalized Spectral Clustering (RatioCut) [@spectraltutorial] </caption>
-<br>
-#### Normalized Cut (Ncut) {#ncut}
-
- The normalized cut objective function was introduced by Shi and Malik in 2000 [@shi]. Given a graph $G(V,E)$ with vertex set $V$ partitioned into $k$ disjoint clusters, $V_1,V_2,\dots V_k$, the __normalized cut__ of the given partition is defined as
-$$\mbox{Ncut}(V_1,V_2,\dots,V_k)= \sum_{i=1}^k \frac{w(V_i,\bar{V_i})}{\mbox{vol}(V_i)},$$
-where $\mbox{vol}(V_i)$ is the sum of the weights of the edges connecting the vertices in $V_i$. Whereas the size of a subgraph $V_i$ in the ratio cut formulation is measured by the number of vertices $|V_i|$, in the normalized cut formulation it is measured by the total weight of the edges in the subgraph.
-Thus, minimizing the normalized cut is equivalent to minimizing
-$$f(\mathbf{H}) = \mbox{Trace}(\mathbf{H}^T\mathbf{L}\mathbf{H})$$ over all matrices $\mathbf{H}$ with the following form:
- 
-\begin{equation}
-\mathbf{H}_{ij}=
-\begin{cases}
-\frac{1}{\sqrt{\mbox{vol}(V_j)}}, & \mbox{if the } i^{th} \mbox{ vertex is in cluster } V_j \\
-0 & \text{otherwise.}
-\end{cases}
-(\#eq:ncutH)
-\end{equation}
-
-With $\mathbf{H}^T \mathbf{D} \mathbf{H} = \mathbf{I}$ where $\mathbf{D}$ is the diagonal degree matrix from Definition \@ref(def:laplaciandef). Thus, to relax the problem, we substitute $\mathbf{G}=\mathbf{D}^{1/2}\mathbf{H}$ and minimize
- $$f(\mathbf{G})=\mathbf{G}^T \mathscr{L} \mathbf{G}$$ subject to $\mathbf{G}^T\mathbf{G}=\mathbf{I}$, where $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$ is called the __normalized Laplacian__. Similarly, the solution to the relaxed problem is the matrix $\mathbf{G}^*$ with columns containing eigenvectors associated with the $k$ smallest eigenvalues of $\mathscr{L}$. Again, the immediate interpretation of the entries in $\mathbf{G}^*$ is lost in the relaxation and so a clustering algorithm like $k$-means is used to determine the patterns.
- <table><tr><td>
-__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
-<ol>
-<li> Compute the _normalized_ Laplacian $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$.
-<li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}$ corresponding to the $k$ smallest eigenvalues.
-<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
-<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
-</ol>
-__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
- </table>
- <caption>(\#tab:algncut) Normalized Spectral Clustering (Ncut) [@spectraltutorial] </caption>
- <br>
-#### Other Normalized Cuts
-While the algorithm in Table \@ref(tab:algncut) carries "normalized cut" in its title, other researchers have suggested alternative ways to consider normalized cuts in a graph. In a popular 2001 paper, Ng, Jordan, and Weiss made a slight alteration of  the previous algorithm which simply normalized the rows of the eigenvector matrix computed in step 2 to have unit length before proceeding to step 3 [@ng]. This algorithm is presented in Table \@ref(tab:algnjw).
-
- <table><tr><td>
-
-__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
- <ol>
-<li> Compute the _normalized_ Laplacian $\mathscr{L}=\mathbf{D}^{-1/2}\mathbf{L} \mathbf{D}^{-1/2}$.
-<li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}$ corresponding to the $k$ smallest eigenvalues.
-<li> Normalize the rows of $\mathbf{V}$ to have unit 2-norm.
-<li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
-<li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
-</ol>
-__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
- </table>
-<caption> (\#tab:algnjw) Normalized Spectral Clustering according to Ng, Jordan and Weiss (NJW) [@spectraltutorial]</caption>
-<br>
- 
- In 2001, Meila and Shi altered the objective function once again, and derived yet another spectral algorithm using the _normalized random walk_ Laplacian, $\mathscr{L}_{rw} = \mathbf{D}^{-1}\mathbf{L} = \mathbf{I} - \mathbf{D}^{-1} \A$ [@meila]. As shown in [@tutorial], if $\lambda$ is an eigenvalue for $\mathscr{L}$ with corresponding eigenvector $\mathbf{v}$ then $\lambda$ is also an eigenvalue for  $\mathscr{L}_{rw}$ with corresponding eigenvector $\mathbf{D}^{1/2}\mathbf{v}$. This formulation amounts to a different scaling of the eigenvectors in step 3 of Table \@ref(tab:algnjw). This normalized random walk Laplacian will present itself again in Section \@ref(pic).  Meila and Shi's spectral clustering method is outlined in Table \@ref(tab:algmeila).
-
- 
-  <table><tr><td>
-__Input__: $n \times n$ adjacency (or similarity) matrix $\mathbf{A}$ for a graph on vertices (or objects) $\{1,\dots,n\}$ and desired number of clusters $k$
-<ol>
- <li> Compute the _normalized random walk_ Laplacian $\mathscr{L}_{rw}=\mathbf{D}^{-1}\mathbf{L} $.
- <li> Compute the first $k$ eigenvectors $\mathbf{V}=[\mathbf{v}_1,\mathbf{v}_2,\dots,\mathbf{v}_k]$ of $\mathscr{L}_{rw}$ corresponding to the $k$ smallest eigenvalues.
- <li> Normalize the rows of $\mathbf{V}$ to have unit 2-norm.
- <li> Let $\mathbf{y}_{i}$ be the $i^{th}$ row of $\mathbf{V}$
- <li> Cluster the points $\mathbf{y}_i \in \Re^k$ with the $k$-means algorithm into clusters $\bar{C}_1,\dots \bar{C}_k$.
- </ol>
-__Output__: Clusters $C_1,\dots,C_k$ such that $C_j = \{i : \mathbf{y}_i \in \bar{C}_j\|$
-
- </table>
- <caption>(\#tab:algmeila) Normalized Spectral Clustering according to Meila and Shi  </caption>
- <br>
-All of the spectral algorithms outlined thus far seem very similar in their formulation, yet in practice they tend to produce quite different results. This presents a problem because while each method has merit in its own right, it is impossible to predict which one will work best on any particular graph. We will discuss this problem further in \cref{consensus}.
-
-### Power Iteration Clustering {#pic}
-  In a 2010 paper, Frank Lin and William Cohen propose a fast, scalable algorithm for clustering graphs using the power method (or power iteration) [@poweriteration]. Let $\mathbf{W}=\mathbf{D}^{-1}\A$ be the $n\times n$ row-normalized  (row stochastic) adjacency matrix for a graph, and let $\mathbf{v}_0 \neq 0$ be a vector in $\Re^n$. A simple method for computing the eigenvector corresponding to the largest eigenvalue of $\mathbf{W}$ is the power method, which repeatedly computes the power iteration
-  $$\mathbf{v}_{t+1}=c\mathbf{W}\mathbf{v}_t$$
-  where $c=1/\|\mathbf{W}\mathbf{v}_t\|_1$ is a normalizing constant to prevent $\mathbf{v}_t$ from growing too large.
-  
-Applying the power method to convergence on $\mathbf{W}$ would result in the uniform vector $\alpha \e$ where 
-$\alpha = 1/n.$  However, stepping through a small number of power iterations, will result in a vector that contains combined information from the eigenvectors associated with the largest eigenvalues. The formulation of Meila and Shi's spectral algorithm in [@meila] warranted the use of the eigenvectors corresponding to the $k$ smallest eigenvalues of the normalized random walk Laplacian $\mathscr{L}_{rw} = \mathbf{I}-\mathbf{W}$ which is equivalent to the consideration of the eigenvectors of the largest eigenvalues of $\mathbf{W}$. Thus, the idea behind Power Iteration Clustering (PIC) is to detect and stop the power method at some number of iterations $t$ such that $\mathbf{v}_t$ is a useful linear combination of the first $k$ eigenvectors.  The analysis in [@poweriteration] motivates the idea that the power method should pass through some initial stage of local convergence at the cluster level before going on to the stage of global convergence toward the uniform vector. At this stopping point, it is expected that $\mathbf{v}_t$ will be an approximately piecewise constant vector, nearly uniform on each of the clusters. Thus, the clusters at this stage will be revealed by the closeness of their corresponding entries in $\mathbf{v}_t$. See [@poweriteration] for the complete analysis. The PIC procedure is given in Table \@ref(tab:algpic). 
-
-Applying the power method to $\mathbf{P}^T$ would equate to watching the probability distribution of a random walker evolve through time steps of the Markov Chain, where $\mathbf{v}_t$ is the distribution at time $t$, and eventually would converge to the stationary distribution in Equation \@ref(eq:pi).  
- However, according to Lin and Cohen, stepping through a limited number of power iterations on $\mathbf{P}$ is equivalent to observing the same chain backwards, so that $\mathbf{v}_t(i)$ gives the observer a sense of the most likely distribution of the chain $t$ steps in the past, given that the walk ended with distribution $\mathbf{v}_0$. On a graph with cluster structure as described above, a random walker that ends up on a particular vertex $j \in C_1$ is more or less equally likely to have come from any other node in $C_1$ (but relatively unlikely to have come from $C_i, i\neq1$), making the distribution close to uniform on the vertices in $C_1$. The same argument is true for any cluster $C_j$ and thus, by stepping backwards through time we expect to find these distribution vectors which are nearly uniform on each cluster $C_j$. For a complete discussion of the algorithm, including a more detailed mathematical analysis, consult [@poweriteration].
-
-<table><tr><td>
-__Input:__ A row-stochastic matrix $\mathbf{P}=\mathbf{D}^{-1}\A$ where $\A$ is an adjacency or similarity matrix and the number of clusters $k$.
-<ol>
-<li> Pick an initial vector $\mathbf{v}_0$. [@poweriteration] suggests the degree vector $\mathbf{v}_0 = \A\e.$
-<li> Set $\mathbf{v}_{t+1} = \frac{\mathbf{P}\mathbf{v}_t}{\|\mathbf{P}\mathbf{v}_t\|_1}$ and $\delta_{t+1} = |\mathbf{v}_{t+1}-\mathbf{v}_t|.$
-<li> Increment $t$ and repeat step 2 until $|\delta_t-\delta_{t+1}| \simeq \mathbf{0}.$
-<li> Use $k$-means to cluster points on $\mathbf{v}_t$ and return clusters $C_1, C_2,\dots,C_k.$
-</ol>
-__Output:__ Clusters $C_1, C_2,\dots,C_k$.
-
- </table>
-<caption> (\#tab:algpic) Power Iteration Clustering (PIC) [@poweriteration] </caption>
-<br>
-<!-- %  -->
-<!-- % \subsubsection{Spectral Dimension Reduction} -->
-<!-- % In light of the discussion in \cref{dimred}, the author prefers to view Algorithms \ref{algratiocut}, \ref{algncut}, and \ref{algnjw} as graph-specialized forms of dimension reduction. Let $\mathbf{L}= \mathbf{D}-\A$ be the Laplacian matrix and let $\sigma(\mathbf{L}') = \{|\lambda_1| \geq |\lambda_2| \geq \dots \geq |\lambda_n|\}$ be the spectrum of $\mathbf{L}$ with corresponding orthonormal eigenvectors $\U=[\uu_1, \uu_2,\dots,\uu_n]$ such that -->
-<!-- % $$\mathbf{L}' = \sum_{i=1}^n \lambda_i \uu_i\uu_i^T.$$ -->
-<!-- % Then the spectral clustering in Algorithms \ref{algratiocut}, \ref{algncut}, and \ref{algnjw} amount to an unusual truncation of the above sum, containing the terms with the most trivial contribution to the over-all signal: -->
-<!-- % $$\mathbf{L}' \approx \sum_{i=K+1}^n \lambda_i \uu_i\uu_i^T.$$ -->
-<!-- %  -->
-<!-- % This interpretation of spectral clustering not intuitive and I'm hoping that by the time I finish this paper I will have some way to explain it. -->
-<!-- %  -->
-<!-- %%%%%%%%%%%%%%%%%%%%POINTS OF ARTICULATION%%%%%%%%%%%%%%%% -->
-<!-- %Fiedler gave the name \textit{points of articulation} to those vertices $j$ satisfying $\textbf{v}_2(j)=0$ because their removal from the graph (along with all adjacent edges) disconnects the graph into multiple components. In \fref{ptsofart} we try to illustrate this concept with multiple graphs. The vertices in these graphs are labelled according to the sign of the corresponding entry in $\textbf{v}_2$. -->
-
-
-<!-- %Two of his important results are combined and recast as follows: -->
-<!-- %\begin{thm}[Fiedler] -->
-<!-- %Let $G$ be a connected graph with Laplacian matrix $\mathbf{L}$. Let $\mathbf{v}_2$ be an eigenvector corresponding to the second smallest eigenvalue of $\mathbf{L}$. If $\mathbf{v}_2$ is nonzero, that is if $\mathbf{v}_2(i) \neq 0 \,\,\, \forall i$, then the subgraphs induced by cutting the edges between vertices in $C_1$ and $C_2$, where  -->
-<!-- %$C_1= \{ i \in N : \mathbf{v}_2(i) < 0 \}$ and $C_2=\{ i \in N : \mathbf{v}_2(i) >0 \}$ are both connected. Furthermore if $\mathbf{v}_2(i) = 0$ for some vertices $i$, the subgraph induced by $C_1= \{ i \in N : \mathbf{v}_2(i) \leq 0 \}$ is connected and the subgraph induced by $C_1= \{ i \in N : \mathbf{v}_2(i) \geq 0 \}$ is connected. -->
-<!-- %\end{thm} -->
-<!-- %This result ensures that we can divide our graph into two (and no more than two) separate components by the following partition rule: -->
-
-### Clustering via Modularity Maximization {#modularity}
- 
- Another technique proposed in the network community detection literature compares the structure of a given graph to what one may expect from a random graph on the same vertices [@ncdnewman;@ncdmucha]. The motivation for this method was that simply counting edges between clusters as was done in previous spectral methods may not be the best way to define clusters in graph. A better approach may be to somehow measure whether they are fewer edges than _expected_ between communities. Let $\A$ be the adjacency matrix of the graph (or network) and let $\mathbf{P}$ be the adjacency matrix of a random graph on the same vertices containing the expected value of weights on that graph. Then the matrix $\mathbf{B}=\A-\mathbf{P}$ would contain information about how the structure of $\A$ deviates from what is expected. Obviously this formulation relies on some underlying probability distribution of the weights in the random graph, known as the _null model_. The most common null model uses the degree sequence of the vertices in the given graph, $\{d_1,d_2,\dots,d_n\}$, where $d_i$ is the degree of vertex $i$ (i.e. $d_i$ is the sum of the weights of the edges connected to vertex $i$), to create the probabilities [@ncdmucha,@ncdnewman]
- \begin{equation}
-(\#eq:null) 
- p(\mbox{edge}(i,j)) = \frac{d_j}{\sum_{k=1}^n d_k}.
- \end{equation}
- 
- Thus, the expected value of the weight of the edge from $i$ to $j$ is
- $$\mathbf{P}_{ij} = E(w(i,j)) = d_i \left(\frac{d_j}{\sum_{k=1}^n d_k}\right).$$
- 
- One may recognize that the probabilities in Equation \@ref(eq:null) are precisely the stationary probabilities of the random walk on the graph defined by $\A$, and thus seem a reasonable choice for a null model. This formulation gives us $E(w(i,j)) = E(w(j,i))$ as desired for an undirected graph. Using this null model, a _modularity matrix_ $\mathbf{B}$ is formed as
-$$\mathbf{B} = \A - \mathbf{P}.$$
-
- For a division of the data into two clusters, let $\mathbf{s}$ be an $n\times 1$ vector indicating cluster membership by
-$$\mathbf{s}_{i} = 
-\begin{cases}
--1 &: \mbox{vertex }  i \mbox{ belongs in cluster 1}\\
-\,\,\,\,1 &: \mbox{vertex } i \mbox{ belongs in cluster 2}
-\end{cases}.
-$$
-Let $d=\sum_{k=1}^n d_k$. The __modularity__ of a given partition is defined by
-\begin{equation}
-(\#eq:modeqn)
-Q= \frac{1}{2d} \sum_{i,j} \mathbf{B}_{ij} \mathbf{s}_i\mathbf{s}_j = \frac{1}{2d}\mathbf{s}^T\mathbf{B}\mathbf{s}.
-\end{equation}
-The goal of the algorithm proposed in [@ncdnewman] is to maximize this quantity, thus we can drop the constant $1/2d$ and write the objective as
-\begin{equation}
-(\#eq:modobj)
-\max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}} Q = \mathbf{s}^T \mathbf{B} \mathbf{s}
- \end{equation}
-
-#### Illustrative Example {-}
-  To get an idea of why this is true, consider the case where we have two relatively obvious clusters $C_1$ and $C_2$ in a graph and reorder the rows and columns of the adjacency matrix to reflect this structure,
-$$
-\A=\left[ \begin{array}{cc}
-\A_{C_1} & \mathbf{E} \\
-\mathbf{E}^T & \A_{C_2} \end{array}\right]
-$$
-Where $\A_{C_1}$ and $\A_{C_2}$ are relatively dense matrices with larger entries representing the weight of edges within the clusters $C_1$ and $C_2$ respectively and $\mathbf{E}$ is a sparse matrix with smaller entries representing the weight of edges which connect the two clusters. In a random graph with no community or cluster structure, we'd be likely to find just as many edges between the clusters as within clusters. Thus, after subtracting $\mathbf{P}$ our modularity matrix may look something like
-$$
-\mathbf{B}=\left[ \begin{array}{cc}
-\mathbf{B}_{11} & \mathbf{B}_{12} \\
-\mathbf{B}_{21} & \mathbf{B}_{22} \end{array}\right]
-\approx\left[ \begin{array}{cc}
-+ & - \\
-- & + \end{array}\right]
-$$
-Where the indicated signs reflect the sign _tendancy_ of values in $\mathbf{B}$. In other words, the entries in the diagonal blocks $\mathbf{B}_{11}$ and $\mathbf{B}_{22}$ _tend_ to be positive because the edges within clusters had larger weights than one would expect at random and the entries in the off diagonal blocks $\mathbf{B}_{12}$ and $\mathbf{B}_{21}$ _tend_ to be negative because the edges between clusters had smaller weights than one would expect at random. Thus, the modularity of this graph, $\mathbf{Q} = \mathbf{s}^T \mathbf{B} \mathbf{s}$, will be maximized by the appropriate partition $\mathbf{s}^T=[\mathbf{s}^T_1,\mathbf{s}^T_2]=[\e^T_{C_1}, -\e^T_{C_2}]$.
-
-
-In order to maximize the modularity objective function given in Equation \@ref(eq:modobj), let $\uu_1,\uu_2,\dots,\uu_n$ be an orthonormal set of eigenvectors for $\mathbf{B}$ corresponding respectively to the eigenvalues $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n$. Write the vector $\mathbf{s}$ as a linear combination of eigenvectors,
-$$\mathbf{s} = \sum_{i=1}^n \alpha_i \uu_i$$ where $$\alpha_i =\uu_i^T \mathbf{s}.$$
-Then, the objective function from Equation \@ref(eq:modobj) becomes
-$$\max_{\substack{\mathbf{s} \\ \mathbf{s}_i = \pm 1}}  \left(\sum_{i=1}^n \alpha_i \uu_i^T \mathbf{B}\right)\left(\sum_{i=1}^n \alpha_i \uu_i\right) = \sum_{i=1}^n \lambda_i (\uu_i^T \mathbf{S})^2.$$
-
-This optimization is NP-hard due to the constraint that $\mathbf{s}_i =\pm 1$. It is clear that without this constraint one would choose $\mathbf{s}$ proportional to $\uu_1$, maximizing the first term in the summation (associated with the largest eigenvalue) and terminating the others. A reasonable way to proceed in light of this information is to maximize the leading term and ignore the remaining terms. To accomplish this, it is quite clear that we should choose $\mathbf{s}$ so that its entries match the signs of the entries in $\uu_1$. The placement of vertices corresponding to zero entries in $\uu_1$ will be decided arbitrarily. However, if the leading eigenvalue of the modularity matrix is _negative_ then the corresponding eigenvector is $\e$, leading us to no partition. According to [@ncdnewman] the ``no partition'' solution in this scenario is in fact the correct result, i.e. a negative leading eigenvalue indicates there is no community or cluster structure in the graph. This gives a clear stopping point for the procedure, which allows it to automatically determine an appropriate number of clusters or communities to create. Unfortunately, the arbitrary placement of vertices corresponding to zero entries in $\uu_1$ may in some cases affect the determined number of clusters.
-
-To create more than 2 clusters, the above procedure can be repeated on each of the subgraphs induced by the vertices in each cluster found. This leads us to an iterative divisive (hierarchical) algorithm like the iterative Fiedler method in Section \@ref(extendedfiedler) and PDDP in Section \@ref(pddp). The modularity clustering procedure is formalized in Table \ref{algmod}.
-
-<table><tr><td>
-__Input:__ $n \times n$ adjacency matrix $\A$ for an undirected graph to be partitioned
-<ol>
-<li> Let $d_i$ be the $i^{th}$ row sum of $\A$. Let $d=\sum_{i=1}^n d_i$
-<li> Form the matrix $\mathbf{P}$ with $\mathbf{P}_{ij}=d_i d_j / d$.
-<li> Form the modularity matrix $\mathbf{B}=\A-\mathbf{P}$.
-<li> Compute the largest eigenvalue $\lambda_1$ and corresponding eigenvector $\uu_1$ of $\mathbf{B}$.
-<li> If $\lambda_1 < 0$, stop. There is no partition of this graph.
-<li> Otherwise partition the vertices of the graph into 2 clusters as follows
-\begin{equation}
-(\#eq:modsplit)
-\begin{split}
-C_1 &= \{i : \uu_1(i) <0\} \cr
-C_2 &= \{i : \uu_1(i) \geq 0\}
-\end{split}
-\end{equation}
-<li> Determine further partitions by extracting the rows and columns of the original adjacency matrix corresponding to the vertices in each cluster to form $\A'$ and repeat the algorithm with $\A'$ until each created cluster fails to partition in step 5.
-</ol>
- __Output:__ Final clusters.
-</table>
-<caption>(\#tab:algmod) Modularity Procedure for Network Community Detection (Newman) [@ncdnewman]</caption>
-<br>
- 
-
-## Stochastic Clustering
-  
-  An alternative way to interpret a graph is by considering a random walk along the edges. For an undirected graph with adjacency matrix $\A$, we can create a transition probability matrix $\mathbf{P}$ by dividing each row by the corresponding row sum. Using the degree matrix from Definition \@ref(def:laplaciandef) we have $$\mathbf{P}=\mathbf{D}^{-1}\A.$$ If our graph does indeed have some cluster structure, i.e. sets of vertices $C_1,C_2, \dots,C_k$ for which the total weight of edges within each set are substantially higher than the total weight of edges between the different sets, then a random walker in a given cluster $C_i$ is more likely to stay in $C_i$ for several steps than he is to transition to another cluster $C_j$. It is well known that for a connected and undirected graph, the long term probability distribution is given by
-\begin{equation}
-(\#eq:pi)
-\pi^T = \frac{\e^T\mathbf{D}}{\e^T\mathbf{D}\e^T}
-\end{equation}
-  Which is not likely to give any cluster information. However, the short-term evolution of this walk can tell us something about the cluster structure because a random walker is far more likely, in the short-run, to remain inside a cluster than he is to transition between clusters. The Stochastic Clustering Algorithm (SCA) of Wessell and Meyer [@chuck] takes advantage of this fact.
-
-### Stochastic Clustering Algorithm (SCA)
-  
-  In a 2012 paper, Chuck Wessell and Carl Meyer formulated a clustering model by creating a symmetric (doubly stochastic) transition matrix $\mathbf{P}$ [@chuck;@chuckthesis] from the adjacency matrix of a graph. The method in this paper is quite similar to that in PIC except that here the mathematics of the ``backward'' Markov Chain intuition given in [@poweriteration] works out in this context because the probability transition matrix is symmetric. One added feature in this algorithm is the automatic determination of the number of clusters in the data, using eigenvalues of the transition matrix $\mathbf{P}$.  Wessell and Meyer's formulation is based on theory that was developed by Nobel Laureate economist Herbert Simon and his student Albert Ando.  This theory surrounds the mixing rates of resources or wealth in local economies (composed of states in a Markov chain) as part of a global economy (which links together some states from each local economy). It is assumed that the adjacency matrix for the graph is irreducible, or equivalently that the graph is connected. 
-  
-  The basic idea is that resources will be exchanged more frequently at a local level than they will at the global level. Suppose individual companies from a global economy are represented as nodes in a graph with edges between them signifying the amount of trade between each pair of companies. Natural clusters would form in this graph at a local level, represented by the strong and frequent trade relationships of proximal companies. Let $k$ be the number of local economies (clusters), each containing $n_i$ states $i=1,\dots,k$, and define the distribution of resources at time $t$ as $\mathbf{\pi}_t$, given a starting distribution $\mathbf{\pi}_0$. Then
-  $$\mathbf{\pi}_t^T = \mathbf{\pi}_0^T\mathbf{P}^t$$
-  
-   The heavily localized trade in this global economy leads to a so-called _short-term stabilization_ of the system characterized by a distribution vector at some time $t$ which is nearly constant across each local economy:
-$$\mathbf{\pi}_t^T \approx \left( \frac{\alpha_1}{n_1}  \frac{\alpha_1}{n_1}   \dots \frac{\alpha_1}{n_1}   | \frac{\alpha_2}{n_2}   \frac{\alpha_2}{n_2}   \dots \frac{\alpha_2}{n_2}   | \dots | \frac{\alpha_k}{n_k}   \frac{\alpha_k}{n_k}   \dots \frac{\alpha_k}{n_k} \right)$$
-   After this short-term stabilization, the distribution of goods in the Markov Chain is eventually expected to converge to a constant level across every state. However, in the period following the short-run stabilization, the distribution vector retains its approximately piecewise constant structure for a some time before settling down into its final uniform equilibrium.
-
-Wessell and Meyer's derivation requires the creation of a symmetric probability transition matrix $\mathbf{P}$ from the adjacency matrix $\A$ by means of a simultaneous row and column scaling. In other words, a diagonal matrix $\mathbf{S}$ is determined for which
-$$\mathbf{S}\A\mathbf{S}= \mathbf{P}$$
-is a doubly stochastic transition probability matrix.  This task turns out to be quite simple, $\mathbf{S}$ is found by iterating a single step until convergence. Letting $\mathbf{S}_{ii}=\mathbf{s}(i)$, the diagonal scaling procedure put forth by Ruiz [@ruiz} is simply:
-\begin{equation}
-(\#eq:diagscaling)
-\begin{split}
-\mathbf{s}_0 &= \e \\
-\mathbf{s}_{t+1}(i) &=\sqrt{\frac{\mathbf{s}_t(i)}{\A_{i*}^T\mathbf{s}_t}}
-\end{split}
-\end{equation}
- 
- In [@chuckthesis], it is convincingly argued that the diagonal scaling procedure does not change the underlying cluster structure of the data in $\A$, and thus that the desired information is not damaged by this transformation.  The clusters in this method are found in a similar manner to PIC, where $k$-means is employed to find the nearly piecewise constant segments of the distribution vector $\mathbf{\pi}_t$ after a short number of steps. The Stochastic Clustering Algorithm automatically determines the number of clusters in the data by counting the number of eigenvalues whose value is close to $\lambda_1=1$. This group of eigenvalues near 1 is referred to as the _Perron cluster_. We postpone discussion of this matter to \cref{findk} where it will be analyzed in detail. For now, we present the Stochastic Clustering method in Table \@ref(tab:algsc). The eigenvector iterations in SCA are quite similar to those put forth in PIC, and users commonly create visualizations of the iterations that look quite similar to those in Figure \@ref(fig:picex).
- 
- <table><tr><td>
-__Input:__ Adjacency matrix $\A$ for some graph to be partitioned
-<ol>
-<li> Convert $\A$ to a symmetric probability transition matrix $\mathbf{P}$ using the diagonal scaling procedure given in \@ref(eq:diagscaling).
-<li> Calculate the eigenvalues of $\mathbf{P}$ and determine $k$ to be the number of eigenvalues in the Perron cluster.
-<li> Create a random initial probability distribution $\mathbf{\pi}_0^T$.
-<li> Track the evolution of $\mathbf{\pi}_{t+1}^T = \mathbf{\pi}_t^T \mathbf{P}$. After each multiplication, cluster the entries of $\mathbf{\pi}_t$ using $k$-means. When this clustering has remained the same for a user-preferred number of iterations stop.
-</ol>
-__ Output:__ $k$ clusters found $C_1, C_2,\dots, C_k$.
- </table>
-<caption> (\#tab:algsc) Stochastic Clustering Algorithm (SCA) [@chuck]</caption>
-<br>
- 
-
-<!--chapter:end:112-NetworkAlgos.Rmd-->
+<!--chapter:end:114-findk.Rmd-->
 
 # References
 

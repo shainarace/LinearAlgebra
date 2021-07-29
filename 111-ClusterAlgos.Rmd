@@ -243,21 +243,22 @@ All density search algorithms suffer from the inability to find clusters of vary
 
 ### Density Based Spacial Clustering of Applications with Noise (DBSCAN)
 
-Density Based Spacial Clustering of Applications with Noise (DBSCAN) is an algorithm proposed by Ester, Kriegel, Sander, and Xu in 1996 [@dbscan], which uses the Euclidean nearness of a group of points in $m$-space to define density. The algorithm uses the following definitions and parameters to determine what constitutes a cluster:
+Density Based Spacial Clustering of Applications with Noise (DBSCAN) is an algorithm proposed by Ester, Kriegel, Sander, and Xu in 1996 [@dbscan], which uses the Euclidean nearness of a group of points in $m$-space to define density. The algorithm uses the terminology in Definition \@ref(def:dbscandefs). 
 
 :::{.definition name='DBSCAN Terms' #dbscandefs}
 The following definitions will aid our discussion of the DBSCAN algorithm:
-<ul>
-<li>   __Dense Point and__ $\rho_{min}$: 
-    A point $\mathbf{x}_j$ is called _dense_ if there are at least $\rho_{min}$ other points contained in its $\epsilon$-neighborhood.
-<li>    __Direct Density Reachability__:
-	A point $\mathbf{x}_i$ is called _directly density reachable_ from a point $\mathbf{x}_j$ if it is in the $\epsilon$-neighborhood surrounding $\mathbf{x}_j$, i.e. if $\mathbf{x}_i \in \mathscr{N}(\mathbf{x}_j,\epsilon)$, _and_ $\mathbf{x}_j$ is a dense point.
-<li>   __Density Reachability__:
-	A point $\mathbf{x}_i$ is called _density reachable_ from a point $\mathbf{x}_j$ if there is a sequence of points $\mathbf{x}_{1},\mathbf{x}_{2},\dots, \mathbf{x}_{p}$ with $\mathbf{x}_{1}=\mathbf{x}_j$ and $\mathbf{x}_{p}=\mathbf{x}_i$ where each $\mathbf{x}_{{k+1}}$ is directly density reachable from $\mathbf{x}_{k}.$
-<li> __Noise Point__:
-	A point $\mathbf{x}_l$ is called a _noise point_ or _outlier_ if it contains 0 points in its $\epsilon$-neighborhood.
-</ul>
 
+1. __Dense Point and__ $\rho_{min}$: 
+    A point $\mathbf{x}_j$ is called _dense_ if there are at least $\rho_{min}$ other points contained in its $\epsilon$-neighborhood.
+    
+2. __Direct Density Reachability__:
+	A point $\mathbf{x}_i$ is called _directly density reachable_ from a point $\mathbf{x}_j$ if it is in the $\epsilon$-neighborhood surrounding $\mathbf{x}_j$, i.e. if $\mathbf{x}_i \in \mathscr{N}(\mathbf{x}_j,\epsilon)$, _and_ $\mathbf{x}_j$ is a dense point.
+	
+3. __Density Reachability__:
+	A point $\mathbf{x}_i$ is called _density reachable_ from a point $\mathbf{x}_j$ if there is a sequence of points $\mathbf{x}_{1},\mathbf{x}_{2},\dots, \mathbf{x}_{p}$ with $\mathbf{x}_{1}=\mathbf{x}_j$ and $\mathbf{x}_{p}=\mathbf{x}_i$ where each $\mathbf{x}_{{k+1}}$ is directly density reachable from $\mathbf{x}_{k}.$
+	
+4. __Noise Point__:
+	A point $\mathbf{x}_l$ is called a _noise point_ or _outlier_ if it contains 0 points in its $\epsilon$-neighborhood.
 :::
 
 The relationship of density reachability is not symmetric. This fact is illustrated in Figure \@ref(fig:dbscan). A point in this illustration is dense if its $\epsilon$-neighborhood contains at least $\rho_{min} = 2$ other points. The green point $a$ is density reachable from the blue point $b$, however the reverse is not true because $a$ is not a dense point. Because of this, we introduce the notion of _density connectedness_.
@@ -266,9 +267,8 @@ The relationship of density reachability is not symmetric. This fact is illustra
 knitr::include_graphics("figs/dbscan.jpg")
 ```
 
-
-:::{definition name='Density Connectedness' #dbscandefs2}
-  Two points $\mathbf{x}_i$ and $\mathbf{x}_j$ are __density-connected__ if there exists some point $\mathbf{x}_k$ such that both $\mathbf{x}_i$ and $\mathbf{x}_j$ are density reachable from $x_k$.
+:::{.definition name='Density Connectedness' #dbscandefs2}
+Two points $\mathbf{x}_i$ and $\mathbf{x}_j$ are __density-connected__ if there exists some point $\mathbf{x}_k$ such that both $\mathbf{x}_i$ and $\mathbf{x}_j$ are density reachable from $x_k$.
 :::
 
 In Figure \@ref(fig:dbscan), it is clear that we can say points $a$ and $b$ are density-connected since they are each density reachable from any of the 4 points in between them. The point $c$ in this illustration is a noise point or outlier because there are no points contained in its $\epsilon$-neighborhood.
@@ -278,18 +278,18 @@ Using these definitions, we can formalize the properties that define a cluster i
 
 :::{.definition name='DBSCAN Cluster' #dbscancluster}
 Given the parameters $\rho_{min}$ and $\epsilon$, a __DBSCAN cluster__ is a set of points that satisfy the two following conditions:
-<ol>
-<li> All points within the cluster are mutually density-connected.
-<li> If a point is density-connected to any point in the cluster, it is part of the cluster as well.
-</ol>\
+
+1. All points within the cluster are mutually density-connected.
+2. If a point is density-connected to any point in the cluster, it is part of the cluster as well.
 :::
 
 Table \@ref(tab:algdbscan) describes how DBSCAN finds such clusters.
 
 <table>
 <tr><td>
+
+__Input:__ Set of points $\mathbf{X}=[\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_n]$ to be clustered and parameters $\epsilon$ and $\rho_{min}$\
 <ol>
-<li> __Input:__ Set of points $\mathbf{X}=[\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_n]$ to be clustered and parameters $\epsilon$ and $\rho_{min}$\\
 <li> For each unvisited point $p=\mathbf{x}_i$, do:
 <ol style="list-style-type:upper-roman">
 <li> Mark $p$ as visited.
@@ -308,13 +308,15 @@ Table \@ref(tab:algdbscan) describes how DBSCAN finds such clusters.
 </ol>
 </ol>
 </ol>
-<li>  __Output:__ Clusters found $C_1,\dots,C_k$
 </ol>
+  __Output:__ Clusters found $C_1,\dots,C_k$
+
 </table>
 
 <caption> (\#tab:algdbscan) Density Based Spacial Clustering of Applications with Noise (DBSCAN) [@datamining] </caption>
 
  <br>
+ 
 ## Conclusion
 
 The purpose of this chapter was to give the reader a basic understanding of hierarchical, iterative partitional, and density search approaches to data clustering. One of the main concerns addressed in this paper is that all of these algorithms have merit, but in application rarely do the algorithms completely agree on a solution. In fact, algorithms with random inputs like $k$-means are not even likely to agree with themselves over a number of different trials. It can be extremely difficult to qualitatively measure the goodness of your clustering when the data cannot be visualized in 2 or 3 dimensions. While there are a number of metrics to help the user get a sense of the compactness of the clusters (see Chapter \@ref(validation)), the effect of noise and outliers can often blur the true picture. It is also common for such metrics to take nearly equivalent values for vastly different cluster solutions, forcing the user to choose a solution using domain knowledge and utility.  First we will look at another class of clustering methods which aim to solve the graph partitioning problem described in Chapter \@ref(chap-zero).

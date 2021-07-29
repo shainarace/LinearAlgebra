@@ -132,10 +132,11 @@ We then compute the SVD of `A_norm` and observe the left- and right-singular vec
 $$\A_{\text{term} \times \text{doc}} = \U_{\text{term} \times \text{factor}}\mathbf{D}_{\text{factor} \times \text{factor}}\V^T_{\text{factor} \times \text{doc}}$$
 Thus, when we examine the rows of the matrix $\U$, we're looking at information about each term and how it contributes to each factor (i.e. the "factors" are just linear combinations of our elementary term vectors); When we examine the columns of the matrix $\V^T$, we're looking at information about how each document is related to each factor (i.e. the documents are linear combinations of these factors with weights corresponding to the elements of $\V^T$). And what about $\mathbf{D}?$ Well, in classical factor analysis the matrix $\mathbf{D}$ is often combined with either $\U$ or $\V^T$ to obtain a two-matrix factorization. $\mathbf{D}$ describes how much information or signal from our original matrix exists along each of the singular components.  It is common to use a __screeplot__, a simple line plot of the singular values in $\mathbf{D}$, to determine an appropriate _rank_ for the truncation in Equation \@ref(eq:truncsvd).
 
-```{r}
+```{r, label=screetext, fig=T, fig.align='center', fig.cap = "Screeplot for the Toy Text Dataset"}
 out = svd(A_norm)
+plot(out$d, ylab = 'Singular Values of A_norm')
 ```
-Let's first examine the left-singular vectors in $\U$. Remember, the _rows_ of this matrix describe how the terms load onto factors, and the columns are those mysterious "factors" themselves. 
+Noticing the gap, or "elbow" in the screeplot at an index of 2 lets us know that the first two singular components contain notably more information than the components to follow - A major proportion of pattern or signal in this matrix lies long 2 components, i.e. __there are 2 major topics that might provide a reasonable approximation to the data__. What's a "topic" in a vector space model? A linear combination of terms! It's just a column vector in the term space! Let's first examine the left-singular vectors in $\U$. Remember, the _rows_ of this matrix describe how the terms load onto factors, and the columns are those mysterious "factors" themselves. 
 
 ```{r}
 out$u

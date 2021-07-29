@@ -1,5 +1,4 @@
 bookdown::gitbook:
-  toc_depth: 2
   css: style.css
   config:
     toc:
@@ -10,13 +9,16 @@ bookdown::gitbook:
         <li><center><strong> with examples in R </strong></center></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
+      collapse: section
+    search:
+      engine: lunr
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
   includes:
     in_header:  math-header2.html
-  search: yes
-  sharing:
-    all: ['facebook', 'twitter', 'linkedin']
-bibliography: Dissertation.bib
+  bibliography: Dissertation.bib
 # bookdown::pdf_book:
 #   toc: yes
 #   css: toc.css

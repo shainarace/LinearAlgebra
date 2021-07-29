@@ -1,4 +1,5 @@
-# (PART) Clustering {-}
+# (PART\*) Clustering {-}
+
 # Introduction {#clusintro}
 
 Clustering is the task of partitioning a set of objects into subsets (clusters) so that objects in the same cluster are similar in some sense. Thus, a "cluster" is a generally a subjective entity determined by how an observer defines the similarity of objects. Take for example Figure \@ref(fig:shapes) where we depict eight objects that differ by shape and color. Depending on the notion of similarity used (color, shape, or both) these objects might be clustered in one of the three ways shown. 

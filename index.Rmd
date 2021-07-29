@@ -2,7 +2,7 @@
 author: "Shaina Race Bennett, PhD"
 date: "`r Sys.Date()`"
 link-citations: yes
-github-repo: rstudio/linalg-master
+github-repo: shainarace/linearalgebra
 title: "Linear Algebra for Data Science"
 description: "A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum"
 always_allow_html: true
