@@ -28,14 +28,24 @@ $$\mathbf{X}\boldsymbol\beta=\mathbf{y}$$
 to create the model
 $$stopping\_distance=\beta_0+\beta_1speed.$$
 
-To do this, we need a design matrix $\mathbf{X}$ containing a column of ones for the intercept term and a column containing the speed variable. We also need a vector $\mathbf{y}$ containing the corresponding stopping distances. The ``` model.matrix()``` function will be of use to us here. ``` model.matrix()``` takes a formula and data matrix as input and exports the matrix that we represent as $\mathbf{X}$ in the normal equations. For datasets with categorical (factor) inputs, this function would also create dummy variables for each level, leaving out a reference level by default. You can override the default to leave out a reference level (when you override this default, you **one-hot-encode** your categorical variable) by including the following option as a third input to the function: ``` contrasts.arg = lapply(starwars[,sapply(starwars,is.factor) ], contrasts, contrasts=FALSE ```
+To do this, we need a design matrix $\mathbf{X}$ containing a column of ones for the intercept term and a column containing the speed variable. We also need a vector $\mathbf{y}$ containing the corresponding stopping distances.
+
+#### The `model.matrix()` function {-}
+
+The ``` model.matrix()``` function will create the design or modeling matrix $\mathbf{X}$ for us. This function takes a formula and data matrix as input and exports the matrix that we represent as $\mathbf{X}$ in the normal equations. For datasets with categorical (factor) inputs, this function would also create dummy variables for each level, leaving out a reference level by default. You can override the default to leave out a reference level (when you override this default, you perform **one-hot-encoding** on said categorical variable) by including the following option as a third input to the function, where `df` is the name of your data frame: <br>
+``` contrasts.arg = lapply(df[,sapply(df,is.factor) ], contrasts, contrasts=FALSE ```
+
+For an exact example, see the commented out code in the chunk below. There are no factors in the `cars` data, so the code may not even run, but I wanted to provide the line of code necessary for this task, as it is one that we use quite frequently for clustering, PCA, or machine learning!
 
 ```{r}
 # Create matrix X and label the columns
 X=model.matrix(dist~speed, data=cars)
-
 # Create vector y and label the column
 y=cars$dist
+
+
+# CODE TO PERFORM ONE-HOT ENCODING (NO REFERENCE LEVEL FOR CATEGORICAL DUMMIES)
+# X=model.matrix(dist~speed, data=cars, contrasts.arg = lapply(cars[,sapply(cars,is.factor) ], contrasts, contrasts=FALSE) 
 ```
 
 Let's print the first 10 rows of each to see what we did:

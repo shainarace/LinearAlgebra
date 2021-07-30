@@ -233,15 +233,18 @@ Let
 
 Determine the following matrix products, if possible:
 
-a $\mathbf{A}\C$
+a. $\mathbf{A}\C$
 
-b $\mathbf{A}\M$
+b. $\mathbf{A}\M$
 
 c. $\mathbf{A}^T\C$
+
 :::
 
 One very important thing to keep in mind is this:
- <p font-color:red><strong> matrix multiplication is NOT commutative! </strong></p>
+
+ <p style="text-align:center"><strong> matrix multiplication is NOT commutative! </strong></p>
+ 
  As we see from the previous exercises, it's quite common to be able to compute a product $\mathbf{A}\mathbf{B}$ where the reverse product, $\mathbf{B}\mathbf{A}$ is not even possible to compute. Even if both products are possible it is almost _never_ the case that $\mathbf{A}\mathbf{B}$ equals $\mathbf{B}\mathbf{A}$.
  
 #### Multiplication by a Diagonal Matrix
@@ -256,8 +259,8 @@ One very important thing to keep in mind is this:
 :::
  
 :::{.exercise name='Multiplication by a Diagonal Matrix' #diagmultexer}
- What happens if we were to compute the product from Example \@ref(exm:diagmult) in the reversed order, with the diagonal matrix on the right:
- $$\mathbf{A}\D?$$
+ What happens if we were to compute the product from Example \@ref(exm:diagmult) in the reversed order, with the diagonal matrix on the right: $\mathbf{A}\D?$
+ <br>
  Would we expect the same result? Is multiplication by a diagonal matrix commutative? Work out the calculation and comment on what you've found.
 :::
 
@@ -277,7 +280,7 @@ $$\v^T\mathbf{A} = \left(\begin{matrix} \v^T\mathbf{A}_{*1} & \v^T\acol{2} & \do
 
 In the case of $\mathbf{A}\x$, we'd multiply each of the $m$ rows of $\mathbf{A}$ by the column $\x$:
 
-$$\mathbf{A}\x = \left(\begin{matrix} \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \end{matrix}\right).$$
+$$\mathbf{A}\x = \left(\begin{matrix} \arow{1}\x \\ \arow{2}\x \\ \vdots \\ \arow{m}\x \end{matrix}\right).$$
 
 Let's see an example of this:
 

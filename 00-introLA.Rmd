@@ -86,7 +86,7 @@ $$
 750 & 80000\end{matrix}\right)
 $$
 
-The dimension of the matrix $\A$ is $6\times 2$ because $\A$ has 6 rows and 2 columns. Thus when referring to $\A$ we might write $\A_{6\times 2}$ when the size is important. Note that the number of rows _always} comes first when specifying the size of a matrix!
+The dimension of the matrix $\A$ is $6\times 2$ because $\A$ has 6 rows and 2 columns. Thus when referring to $\A$ we might write $\A_{6\times 2}$ when the size is important. Note that the number of rows _always_ comes first when specifying the size of a matrix!
 :::
 
 
@@ -113,7 +113,9 @@ Now, rather than write an entire sentence each time we want to refer to an indiv
 
 :::{.definition name='Notation for Elements of a Matrix' #ijnotdef}
 Two subscripts are used to identify individual elements of a matrix:
+
 - The element of matrix $\A$ corresponding to _row_ $i$ and _column_ $j$ is written $A_{ij}$
+
 - The **diagonal** elements of a square matrix are those that have identical row and column indices: $\A_{ii}$
 :::
 
@@ -149,7 +151,9 @@ $$\bordermatrix{&&&&&}{\blue{\arow{1}} \\\vdots \\ \arow{i} \\ \vdots \\\arow{m}
 	
 :::{.definition name='Rows and Columns of a Matrix' #rowcol}
 To refer to entire rows or columns, a placeholder $\star$ is often used to represent the idea that we take _all_ rows or columns after narrowing in on a given column or row respectively:
+
 - To refer to the $k^{th}$ row of $\A$ we will use the notation $\arow{k}$ ("$k^{th} row, _all_ columns") \
+
 - Similarly, to refer to the $k^{th}$ column of $\A$ we will use the notation $\acol{k}$.\
 
 Often, when there is no confusion about whether we are referring to rows or columns, the above notation will be shortened to simply $\A_k$. In such a scenario it will be made clear from context whether this represents the $k^{th}$ row or $k^{th}$ column. For example, 
@@ -158,26 +162,36 @@ represents a matrix $\A$ with $n$ columns $\{\A_1,\A_2,\dots,\A_n\}$.
 :::
 
 :::{.example name='Rows, Columns, and Elements of a Matrix' #ijnot}
-Consider the following table of data and corresponding matrix:
-\begin{center}
-\begin{tabular}{c|c|c|c}
-Obs. & Height (in.) & Weight (lbs.) & Age \\
-\hline
-1 & 63 & 120 & 23\\
-2 & 69 & 170 & 30\\
-3 & 72 & 190 & 41\\
-4 & 64 & 150 & 27\\
-5 & 64 & 175 & 35\\
-6 & 68 & 165 & 25\\
-7 & 70 & 180 & 21
-\end{tabular} $\Longrightarrow \,\, \B=\left(\begin{matrix}63 & 120 & 23\\
+
+Consider the following table of data and corresponding data matrix:
+<table>
+<tr>
+<td> Obs. <td>  Height (in.) <td>  Weight (lbs.) <td>  Age 
+<tr>
+<td> 1 <td>  63 <td>  120 <td>  23
+<tr>
+<td> 2 <td>  69 <td>  170 <td>  30
+<tr>
+<td> 3 <td>  72 <td>  190 <td>  41
+<tr>
+<td> 4 <td>  64 <td>  150 <td>  27
+<tr>
+<td> 5 <td>  64 <td>  175 <td>  35
+<tr>
+<td> 6 <td>  68 <td>  165 <td>  25
+<tr>
+<td> 7 <td>  70 <td>  180 <td>  21
+</td></tr>
+</table>
+
+$$\mathbf{B}=
+\left(\begin{matrix}63 & 120 & 23\\
 69 & 170 & 30\\
 72 & 190 & 41\\
 64 & 150 & 27\\
 64 & 175 & 35\\
 68 & 165 & 25\\
-70 & 180 & 21\end{matrix}\right)$
-\end{center}
+70 & 180 & 21\end{matrix}\right)$$
 
 Element $B_{42}=150$ corresponds to the _weight_ (second column) of _observation 4_ (forth row).
 
@@ -230,7 +244,7 @@ Breaking apart this matrix definition, we see both the rows (indexed by $i$) and
 $$A_{23}=2.$$ 
 When the row and column numbers are the same ($i=j$), which happens along the _diagonal_ of the matrix, the entries will be 0 (this number was chosen arbitrarily - one could also use `3' along the diagonal). The result is a square matrix with 6 rows and columns:
 $$\A=\left(\begin{matrix} 0&2&1&1&1&1\\2&0&2&2&0&0\\1&2&0&1&1&1\\1&2&1&0&1&1\\1&0&1&1&0&3\\1&0&1&1&3&0\end{matrix}\right)$$
-We can quickly see that there is symmetry in this matrix because the number of times Students $i$ and $j$ worked together is, of course, the same as the number of times Students $j$ and $i$ worked together. Formally, a matrix is called **symmetric** if $A_{ij}=A_{ji}$ (this important concept will be defined again on page \pageref{symmetric}). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.
+We can quickly see that there is symmetry in this matrix because the number of times Students $i$ and $j$ worked together is, of course, the same as the number of times Students $j$ and $i$ worked together. Formally, a matrix is called **symmetric** if $A_{ij}=A_{ji}$ (this important concept is formalized in Definition \@ref(def:symdef). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.
 
 An adjacency matrix like the one listed above is often used to describe a _network_ or _graph._ A **graph** is a collection of **vertices** (nodes) that each represent some entity, and **edges** which connect vertices that are related in some way.
 
@@ -266,7 +280,7 @@ $$C_{13}=-0.9 \quad \mbox{Indicates that }\,x_1\,\,\mbox{and}\,\,x_3\,\,\mbox{ha
 Now that we've introduced the concept of a matrix, let's talk about vectors. A **vector** are merely a special type of matrix, one that consists of only a single row or column. They are essentially ordered lists of numbers. For example:
 
 $$\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \mathbf{z}=\left(\begin{matrix} 3 & 5 & 1 & 0 & 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)$$
-are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\mathbf{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \mathbf{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
+are all examples of vectors; $\x$ and $\y$ are **column vectors** and $\mathbf{z}$ is a **row vector**. In this text, to denote a vector we will always use a _bold lower-case letter_ like $\x, \y, \mbox{or } \mathbf{a}$. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector $\y$. Thus, $x_3$ refers to the $3^{rd}$ element in the vector $\x$ above: $$x_3 = 7.$$ Notice that the elements of a vector are not written in bold. In fact, all **scalar** quantities (a quantity that is just a single number (like 2 or $\sqrt{5}$), not a matrix) will be represented by unbolded, usually lowercase (often greek) letters. For example, letters like $\alpha, \beta, x_i, \mbox{or } a$ will be used to refer to scalars.
 
 You may wonder now why the notation is so particular, but as we get into the subject it will be come clear that some convention must be retained if we are going to understand an equation. If we write an equation like
 $$\A\x=\b \qquad \mbox{or} \qquad \mathbf{M}\y=\alpha\y$$
@@ -356,10 +370,10 @@ $$\A^T= \qquad \qquad \qquad \qquad (\A^T)^T= \qquad \qquad \qquad \qquad$$
 $$ \v= \qquad \qquad \qquad \qquad \B^T = \qquad \qquad\qquad \qquad $$
 \vspace{1cm}
 
-Give an example of a $4\times 4$ symmetric matrix:\\
+Give an example of a $4\times 4$ symmetric matrix:\
 \vspace{1.5cm} 
 
-Is a correlation matrix symmetric? (For a hint, see section \@ref(introcorr))\\
+Is a correlation matrix symmetric? (For a hint, see section \@ref(introcorr))\
 \vspace{.5cm}
 :::
 

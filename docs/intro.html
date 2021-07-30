@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -690,7 +690,7 @@ is one type of equation we will learn to solve in this course. In this situation
 450 &amp; 40000\cr
 750 &amp; 80000\end{matrix}\right)
 \]</span></p>
-<p>The dimension of the matrix <span class="math inline">\(\A\)</span> is <span class="math inline">\(6\times 2\)</span> because <span class="math inline">\(\A\)</span> has 6 rows and 2 columns. Thus when referring to <span class="math inline">\(\A\)</span> we might write <span class="math inline">\(\A_{6\times 2}\)</span> when the size is important. Note that the number of rows _always} comes first when specifying the size of a matrix!</p>
+<p>The dimension of the matrix <span class="math inline">\(\A\)</span> is <span class="math inline">\(6\times 2\)</span> because <span class="math inline">\(\A\)</span> has 6 rows and 2 columns. Thus when referring to <span class="math inline">\(\A\)</span> we might write <span class="math inline">\(\A_{6\times 2}\)</span> when the size is important. Note that the number of rows <em>always</em> comes first when specifying the size of a matrix!</p>
 </div>
 <div class="exercise">
 <p><span id="exr:dimensions" class="exercise"><strong>Exercise 1.1  (Determining dimension of a matrix) </strong></span>For the following matrices, determine the dimension:</p>
@@ -710,9 +710,11 @@ John\\ Sam\\ Elena\\ Jim\\ Eric\\ Helen
 <p>So, if I’d like to focus on data about <em>Eric</em> in particular, I’d have to look no further than the <span class="math inline">\(5^{th}\)</span> row of my matrix <span class="math inline">\(\A\)</span>. Similarly, if I want to know the <em>Credit Scores</em> of all individuals, I’d simply focus on the <span class="math inline">\(1^{st}\)</span> column of the matrix. Hence, to find <em>Eric’s Credit Score</em>, I’d aim my sight on the element of the matrix located in the <span class="math inline">\(5^{th}\)</span> row and <span class="math inline">\(1^{st}\)</span> column of the matrix <span class="math inline">\(\A\)</span>.</p>
 <p>Now, rather than write an entire sentence each time we want to refer to an individual element or row, we will develop some notation. As a general rule, the letter <span class="math inline">\(i\)</span> is used to index the rows of a matrix and the letter <span class="math inline">\(j\)</span> is used to index the columns.</p>
 <div class="definition">
-<p><span id="def:ijnotdef" class="definition"><strong>Definition 1.2  (Notation for Elements of a Matrix) </strong></span>Two subscripts are used to identify individual elements of a matrix:
-- The element of matrix <span class="math inline">\(\A\)</span> corresponding to <em>row</em> <span class="math inline">\(i\)</span> and <em>column</em> <span class="math inline">\(j\)</span> is written <span class="math inline">\(A_{ij}\)</span>
-- The <strong>diagonal</strong> elements of a square matrix are those that have identical row and column indices: <span class="math inline">\(\A_{ii}\)</span></p>
+<p><span id="def:ijnotdef" class="definition"><strong>Definition 1.2  (Notation for Elements of a Matrix) </strong></span>Two subscripts are used to identify individual elements of a matrix:</p>
+<ul>
+<li><p>The element of matrix <span class="math inline">\(\A\)</span> corresponding to <em>row</em> <span class="math inline">\(i\)</span> and <em>column</em> <span class="math inline">\(j\)</span> is written <span class="math inline">\(A_{ij}\)</span></p></li>
+<li><p>The <strong>diagonal</strong> elements of a square matrix are those that have identical row and column indices: <span class="math inline">\(\A_{ii}\)</span></p></li>
+</ul>
 </div>
 <p>Beyond these basic conventions, there are other common notational tricks that we will become familiar with. The first of these is writing a <strong>partitioned matrix</strong>. We will often want to consider a matrix as a collection of either rows or columns rather than individual elements. As we will see in the future, when we partition matrices in this form, we can view their multiplication in simplified form. This often leads us to a new view of the data which can be helpful for interpretation.</p>
 <p>When we write <span class="math inline">\(\A=( \A_1 | \A_2 | \dots | \A_n )\)</span> we are viewing the matrix <span class="math inline">\(\A\)</span> as collection of column vectors, <span class="math inline">\(\A_i\)</span>, in the following way:
@@ -738,19 +740,106 @@ John\\ Sam\\ Elena\\ Jim\\ Eric\\ Helen
  \vdots &amp; \vdots &amp;  &amp;  &amp; \vdots \cr
   a_{m1} &amp; \dots&amp; \dots &amp; \dots &amp; a_{mn} \mp}\]</span></p>
 <div class="definition">
-<p><span id="def:rowcol" class="definition"><strong>Definition 1.3  (Rows and Columns of a Matrix) </strong></span>To refer to entire rows or columns, a placeholder <span class="math inline">\(\star\)</span> is often used to represent the idea that we take <em>all</em> rows or columns after narrowing in on a given column or row respectively:
-- To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span> (“$k^{th} row, <em>all</em> columns”)<br />
-- Similarly, to refer to the <span class="math inline">\(k^{th}\)</span> column of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\acol{k}\)</span>.<br />
-</p>
+<p><span id="def:rowcol" class="definition"><strong>Definition 1.3  (Rows and Columns of a Matrix) </strong></span>To refer to entire rows or columns, a placeholder <span class="math inline">\(\star\)</span> is often used to represent the idea that we take <em>all</em> rows or columns after narrowing in on a given column or row respectively:</p>
+<ul>
+<li><p>To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span> (“$k^{th} row, <em>all</em> columns”)<br />
+</p></li>
+<li><p>Similarly, to refer to the <span class="math inline">\(k^{th}\)</span> column of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\acol{k}\)</span>.<br />
+</p></li>
+</ul>
 <p>Often, when there is no confusion about whether we are referring to rows or columns, the above notation will be shortened to simply <span class="math inline">\(\A_k\)</span>. In such a scenario it will be made clear from context whether this represents the <span class="math inline">\(k^{th}\)</span> row or <span class="math inline">\(k^{th}\)</span> column. For example,
 <span class="math display">\[\A=( \A_1 | \A_2 | \dots | \A_n )\]</span>
 represents a matrix <span class="math inline">\(\A\)</span> with <span class="math inline">\(n\)</span> columns <span class="math inline">\(\{\A_1,\A_2,\dots,\A_n\}\)</span>.</p>
 </div>
-<div class="example">
-<span id="exm:ijnot" class="example"><strong>Example 1.2  (Rows, Columns, and Elements of a Matrix) </strong></span>Consider the following table of data and corresponding matrix:
+<p>:::{.example name=‘Rows, Columns, and Elements of a Matrix’ #ijnot}</p>
+Consider the following table of data and corresponding data matrix:
+<table>
+<tr>
+<td>
+Obs.
+<td>
+Height (in.)
+<td>
+Weight (lbs.)
+<td>
+Age
+<tr>
+<td>
+1
+<td>
+63
+<td>
+120
+<td>
+23
+<tr>
+<td>
+2
+<td>
+69
+<td>
+170
+<td>
+30
+<tr>
+<td>
+3
+<td>
+72
+<td>
+190
+<td>
+41
+<tr>
+<td>
+4
+<td>
+64
+<td>
+150
+<td>
+27
+<tr>
+<td>
+5
+<td>
+64
+<td>
+175
+<td>
+35
+<tr>
+<td>
+6
+<td>
+68
+<td>
+165
+<td>
+25
+<tr>
+<td>
+7
+<td>
+70
+<td>
+180
+<td>
+21
+</td>
+</tr>
+</table>
+<p><span class="math display">\[\mathbf{B}=
+\left(\begin{matrix}63 &amp; 120 &amp; 23\\
+69 &amp; 170 &amp; 30\\
+72 &amp; 190 &amp; 41\\
+64 &amp; 150 &amp; 27\\
+64 &amp; 175 &amp; 35\\
+68 &amp; 165 &amp; 25\\
+70 &amp; 180 &amp; 21\end{matrix}\right)\]</span></p>
 <p>Element <span class="math inline">\(B_{42}=150\)</span> corresponds to the <em>weight</em> (second column) of <em>observation 4</em> (forth row).</p>
-<p>The column <span class="math display">\[\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)\]</span> corresponds to the variable <em>age</em> and the row <span class="math display">\[\brow{6} = \left(\begin{matrix} 68&amp;165&amp;25 \end{matrix}\right)\]</span> corresponds to the measurements for <em>observation 6</em>.</p>
-</div>
+<p>The column <span class="math display">\[\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)\]</span> corresponds to the variable <em>age</em> and the row <span class="math display">\[\brow{6} = \left(\begin{matrix} 68&amp;165&amp;25 \end{matrix}\right)\]</span> corresponds to the measurements for <em>observation 6</em>.
+:::</p>
 <div class="exercise">
 <p><span id="exr:ijnot" class="exercise"><strong>Exercise 1.2  (Rows, Columns, and Elements of a Matrix) </strong></span>For the matrix
 <span class="math display">\[ \mathbf{L}=\left(\begin{matrix} 3 &amp; -6 &amp; -2\\1 &amp; -4 &amp; 5\\0 &amp; 4 &amp; -5 \end{matrix}\right)\]</span>
@@ -776,7 +865,7 @@ Write the following elements, rows, or columns:
 <span class="math display">\[A_{23}=2.\]</span>
 When the row and column numbers are the same (<span class="math inline">\(i=j\)</span>), which happens along the <em>diagonal</em> of the matrix, the entries will be 0 (this number was chosen arbitrarily - one could also use `3’ along the diagonal). The result is a square matrix with 6 rows and columns:
 <span class="math display">\[\A=\left(\begin{matrix} 0&amp;2&amp;1&amp;1&amp;1&amp;1\\2&amp;0&amp;2&amp;2&amp;0&amp;0\\1&amp;2&amp;0&amp;1&amp;1&amp;1\\1&amp;2&amp;1&amp;0&amp;1&amp;1\\1&amp;0&amp;1&amp;1&amp;0&amp;3\\1&amp;0&amp;1&amp;1&amp;3&amp;0\end{matrix}\right)\]</span>
-We can quickly see that there is symmetry in this matrix because the number of times Students <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> worked together is, of course, the same as the number of times Students <span class="math inline">\(j\)</span> and <span class="math inline">\(i\)</span> worked together. Formally, a matrix is called <strong>symmetric</strong> if <span class="math inline">\(A_{ij}=A_{ji}\)</span> (this important concept will be defined again on page ). We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.</p>
+We can quickly see that there is symmetry in this matrix because the number of times Students <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> worked together is, of course, the same as the number of times Students <span class="math inline">\(j\)</span> and <span class="math inline">\(i\)</span> worked together. Formally, a matrix is called <strong>symmetric</strong> if <span class="math inline">\(A_{ij}=A_{ji}\)</span> (this important concept is formalized in Definition <a href="intro.html#def:symdef">1.7</a>. We can also see straight from this matrix that Students 5 and 6 worked together every semester while neither of them worked with Student 2 at all.</p>
 <p>An adjacency matrix like the one listed above is often used to describe a <em>network</em> or <em>graph.</em> A <strong>graph</strong> is a collection of <strong>vertices</strong> (nodes) that each represent some entity, and <strong>edges</strong> which connect vertices that are related in some way.</p>
 <p>Below is a network of the students, where the thickness of the edge between two vertices indicates the number of times they have worked together.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
@@ -803,7 +892,7 @@ And in this particular example,
 <h2><span class="header-section-number">1.4</span> Vectors</h2>
 <p>Now that we’ve introduced the concept of a matrix, let’s talk about vectors. A <strong>vector</strong> are merely a special type of matrix, one that consists of only a single row or column. They are essentially ordered lists of numbers. For example:</p>
 <p><span class="math display">\[\x=\left(\begin{matrix} 5\\6\\7\\8 \end{matrix}\right) \qquad \mathbf{z}=\left(\begin{matrix} 3 &amp; 5 &amp; 1 &amp; 0 &amp; 2 \end{matrix}\right) \qquad \y = \left(\begin{matrix} y_1\\y_2\\y_3 \end{matrix}\right)\]</span>
-are all examples of vectors; <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are <strong>column vectors</strong> and <span class="math inline">\(\mathbf{z}\)</span> is a <strong>row vector</strong>. In this text, to denote a vector we will always use a <em>bold lower-case letter</em> like <span class="math inline">\(\x, \y, \mbox{or } \mathbf{a}\)</span>. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector <span class="math inline">\(\y\)</span>. Thus, <span class="math inline">\(x_3\)</span> refers to the <span class="math inline">\(3^{rd}\)</span> element in the vector <span class="math inline">\(\x\)</span> above: <span class="math display">\[x_3 = 7.\]</span> Notice that the elements of a vector are not written in bold. In fact, all <strong>scalar</strong> quantities (a quantity that is just a single number (like 2 or <span class="math inline">\(\sqrt{5}\)</span>), not a matrix) will be represented by unbolded, usually lowercase (often times greek) letters. For example, letters like <span class="math inline">\(\alpha, \beta, x_i, \mbox{or } a\)</span> will be used to refer to scalars.</p>
+are all examples of vectors; <span class="math inline">\(\x\)</span> and <span class="math inline">\(\y\)</span> are <strong>column vectors</strong> and <span class="math inline">\(\mathbf{z}\)</span> is a <strong>row vector</strong>. In this text, to denote a vector we will always use a <em>bold lower-case letter</em> like <span class="math inline">\(\x, \y, \mbox{or } \mathbf{a}\)</span>. Since vectors only have one row or column, we do not need two subscripts to refer to their elements - we can use a single subscript to refer to the elements, as shown in the vector <span class="math inline">\(\y\)</span>. Thus, <span class="math inline">\(x_3\)</span> refers to the <span class="math inline">\(3^{rd}\)</span> element in the vector <span class="math inline">\(\x\)</span> above: <span class="math display">\[x_3 = 7.\]</span> Notice that the elements of a vector are not written in bold. In fact, all <strong>scalar</strong> quantities (a quantity that is just a single number (like 2 or <span class="math inline">\(\sqrt{5}\)</span>), not a matrix) will be represented by unbolded, usually lowercase (often greek) letters. For example, letters like <span class="math inline">\(\alpha, \beta, x_i, \mbox{or } a\)</span> will be used to refer to scalars.</p>
 <p>You may wonder now why the notation is so particular, but as we get into the subject it will be come clear that some convention must be retained if we are going to understand an equation. If we write an equation like
 <span class="math display">\[\A\x=\b \qquad \mbox{or} \qquad \mathbf{M}\y=\alpha\y\]</span>
 We have to know what it represents - in the first case, we are dealing with a matrix <span class="math inline">\(\A\)</span>, and two vectors <span class="math inline">\(\x\)</span> and <span class="math inline">\(\b\)</span>; in the second case we are dealing with a matrix <span class="math inline">\(\mathbf{M}\)</span>, a vector <span class="math inline">\(\y\)</span>, and a scalar, <span class="math inline">\(\alpha\)</span>.</p>
@@ -820,7 +909,7 @@ We have to know what it represents - in the first case, we are dealing with a ma
 <span class="math display">\[(x_1, x_2, x_3, \dots, x_n).\]</span>
 An <span class="math inline">\(n\)</span>-tuple defines a <strong>vector</strong> with the same <span class="math inline">\(n\)</span> elements, and so these two concepts should be thought of interchangeably. The only difference is that the vector has a direction (usually depicted with an arrow), away from the origin and toward the <span class="math inline">\(n\)</span>-tuple. This concept is obviously very difficult to visualize when <span class="math inline">\(n&gt;3\)</span>, but our mental visualizations of <span class="math inline">\(2-\)</span> and <span class="math inline">\(3-\)</span>space will usually be sufficient when we want to consider higher dimensional spaces.</p>
 <div class="example">
-<span id="exm:twospace" class="example"><strong>Example 1.3  (2-space) </strong></span>Whereas we once thought of ordered pairs as <em>points</em> in space, we can also consider the coordinates as defining <em>vectors</em>. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
+<span id="exm:twospace" class="example"><strong>Example 1.2  (2-space) </strong></span>Whereas we once thought of ordered pairs as <em>points</em> in space, we can also consider the coordinates as defining <em>vectors</em>. In almost every scenario, these two concepts can be thought of equivalently, however the direction of vectors helps us define their arithmetic geometrically, as we will see in the next chapter.
 <center>
 <img src="figs/2spacePoints.pdf" width=300 />
 <img src="figs/2space.pdf" width=300 />
@@ -851,7 +940,7 @@ An <span class="math inline">\(n\)</span>-tuple defines a <strong>vector</strong
 <em>Note: If we transpose the transpose of a matrix, we will get back the original matrix. That is,</em> <span class="math display">\[(\A^T)^T = \A.\]</span></p>
 </div>
 <div class="example">
-<p><span id="exm:transpose" class="example"><strong>Example 1.4  (Transpose of a Matrix or Vector) </strong></span>For the following matrices and vectors, determine the transpose:
+<p><span id="exm:transpose" class="example"><strong>Example 1.3  (Transpose of a Matrix or Vector) </strong></span>For the following matrices and vectors, determine the transpose:
 <span class="math display">\[\B=\left(\begin{matrix} 2 &amp; -3 &amp; -4 \\5&amp;-6&amp;-7\\-8&amp;9&amp;0 \end{matrix}\right) \qquad \mathbf{M}=\left(\begin{matrix} -1&amp;2\\-3&amp;6\\7&amp;-9\\5&amp;-1 \end{matrix}\right) \qquad \x=\left(\begin{matrix}3\\-4\\5\\6\end{matrix}\right)\]</span>
 To find the transpose, we simply create new matrices whose rows are the corresponding columns of each matrix or vector:
 <span class="math display">\[\B^T=\left(\begin{matrix} 2 &amp;5&amp; -8\\-3&amp;-6&amp;9\\-4&amp;-7&amp;0\end{matrix}\right) \qquad \mathbf{M}^T = \left(\begin{matrix}-1&amp;-3&amp;7&amp;5\\2&amp;6&amp;-9&amp;-1 \end{matrix}\right) \]</span> <span class="math display">\[\x^T = \left(\begin{matrix} 3&amp;-4&amp;5&amp;6 \end{matrix}\right)\]</span></p>
@@ -863,7 +952,7 @@ This is equivalent to saying that <span class="math inline">\(\A\)</span> is sym
 It should be clear from the definition that in order for <span class="math inline">\(\A\)</span> to be a symmetric matrix, it <em>must</em> be a square matrix - otherwise <span class="math inline">\(\A\)</span> and <span class="math inline">\(\A^T\)</span> would not even have the same size!</p>
 </div>
 <div class="example">
-<p><span id="exm:sym" class="example"><strong>Example 1.5  (Symmetric Matrices) </strong></span>The following matrix is symmetric because <span class="math inline">\(\B^T = \B\)</span>.
+<p><span id="exm:sym" class="example"><strong>Example 1.4  (Symmetric Matrices) </strong></span>The following matrix is symmetric because <span class="math inline">\(\B^T = \B\)</span>.
 <span class="math display">\[\B=\left(\begin{matrix} 2 &amp; 0 &amp; 1 \\0&amp;-6&amp;-7\\1&amp;-7&amp;0 \end{matrix}\right)\]</span></p>
 </div>
 <div class="exercise">
@@ -875,9 +964,9 @@ compute the following matrices:
 
 <span class="math display">\[ \v= \qquad \qquad \qquad \qquad \B^T = \qquad \qquad\qquad \qquad \]</span>
 </p>
-<p>Give an example of a <span class="math inline">\(4\times 4\)</span> symmetric matrix:\
+<p>Give an example of a <span class="math inline">\(4\times 4\)</span> symmetric matrix:<br />
 </p>
-<p>Is a correlation matrix symmetric? (For a hint, see section <a href="intro.html#introcorr">1.3.3</a>)\
+<p>Is a correlation matrix symmetric? (For a hint, see section <a href="intro.html#introcorr">1.3.3</a>)<br />
 </p>
 </div>
 </div>
@@ -892,7 +981,7 @@ is the sum of the diagonal elements:
 <p>The trace of a rectangular matrix is undefined.</p>
 </div>
 <div class="example">
-<p><span id="exm:trace" class="example"><strong>Example 1.6  (Trace of a Matrix) </strong></span>Let <span class="math display">\[\A=\left(\begin{matrix} 3&amp;4&amp;1\\0&amp;1&amp;-2\\-1&amp;\sqrt{2}&amp;3\end{matrix}\right)\]</span>
+<p><span id="exm:trace" class="example"><strong>Example 1.5  (Trace of a Matrix) </strong></span>Let <span class="math display">\[\A=\left(\begin{matrix} 3&amp;4&amp;1\\0&amp;1&amp;-2\\-1&amp;\sqrt{2}&amp;3\end{matrix}\right)\]</span>
 Then, the trace of <span class="math inline">\(\A\)</span> is the sum of the diagonal elements:
 <span class="math display">\[tr(\A)=\sum_{i=1}^3 A_{ii} = 3+1+3 = 7.\]</span></p>
 </div>

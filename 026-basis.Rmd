@@ -1,6 +1,6 @@
 # Basis and Change of Basis {#basis}
 
-When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\\
+When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\
 
 ```{r id='coordplane', fig.align='center', fig.cap = 'The Coordinate Plane', echo=F, out.width="40%"}
 knitr::include_graphics("figs/coordplane.jpg")
@@ -23,7 +23,7 @@ knitr::include_graphics("figs/orthogproj.jpg")
 ```
 
 :::{.definition name='Elementary Basis' #elembasisdef}
-For any vector $\a=(a_1,a_2,\dots, a_n)$, the basis $\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}$ (recall $\e_i$ is the $i^{th}$ column of the identity matrix $\bo{I}_n$) is the \textbf{elementary basis} and $\a$ can be written in this basis using the \textbf{coordinates} $a_1,a_2,\dots, a_n$ as follows:
+For any vector $\a=(a_1,a_2,\dots, a_n)$, the basis $\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}$ (recall $\e_i$ is the $i^{th}$ column of the identity matrix $\bo{I}_n$) is the __elementary basis__ and $\a$ can be written in this basis using the __coordinates__ $a_1,a_2,\dots, a_n$ as follows:
 $$\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.$$
 :::
 
@@ -107,7 +107,7 @@ The preceding discussion dealt entirely with bases for $\Re^n$ (our example was 
 
 ## Exercises
 <ol>
-<li> What are the coordinates of the vector $\x=\pm 4\\3 \mp$ in the basis $\left{\pm -1\\-1 \mp , \pm 1\\-1 \mp \right}$? Draw a picture to make sure your answer lines up with intuition.
+<li> What are the coordinates of the vector $\x=\pm 4\\3 \mp$ in the basis $\left\lbrace\pm -1\\-1 \mp , \pm 1\\-1 \mp \right\rbrace$? Draw a picture to make sure your answer lines up with intuition.
 <li> In the following picture what would be the signs (+/-) of the coordinates of the green point in the basis $\{\v_1, \v_2\}$? Pick another point at random and answer the same question for that point.
 <center> ![](figs/basiscoordsexer.png) </center>
 <li> Write the orthonormal basis vectors from exercise 1 as linear combinations of the original elementary basis vectors.

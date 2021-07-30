@@ -23,9 +23,9 @@ Now that we know we have a complete set of eigenvectors, it is common to order t
 :::{.example name='Eigenvectors of the Covariance Matrix' #coveigs}
 Suppose we have a matrix of data for 10 individuals on 2 variables, $\x_1$ and $\x_2$. Plotted on a plane, the data appears as follows:
 
-<center>
- ![](figs/pcpoints.png =100x)
- </center>
+```{r fig.align='center',  echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcpoints.png")
+```
   
 Our data matrix for these points is:
 $$\X=\pm 1 & 1\\2&1\\2&4\\3&1\\4&4\\5&2\\6&4\\6&6\\7&6\\8&8 \mp$$
@@ -34,19 +34,20 @@ $$\bar{\x}=\pm 4.4 \\ 3.7 \mp. $$
 When thinking about variance directions, our first step should be to center the data so that it has mean zero. Eigenvectors measure the spread of data around the origin. Variance measures spread of data around the mean. Thus, we need to equate the mean with the origin. To center the data, we simply compute 
 $$\X_c=\X-\e\bar{\x}^T = \pm 1 & 1\\2&1\\2&4\\3&1\\4&4\\5&2\\6&4\\6&6\\7&6\\8&8 \mp - \pm 4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7 \\4.4 & 3.7  \mp = \pm -3.4&-2.7\\-2.4&-2.7\\-2.4& 0.3\\-1.4&-2.7\\ -0.4&  0.3\\0.6&-1.7\\1.6& 0.3\\1.6& 2.3\\2.6& 2.3\\3.6&  4.3\mp.$$
 Examining the new centered data, we find that we've only translated our data in the plane - we haven't distorted it in any fashion.
-<center>
- ![pcpoints](figs/pcpointscenter.png =100x)
-</center>
+
+```{r fig.align='center',  echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcpointscenter.png")
+```
+
 Thus the covariance matrix is:
 $$\ssigma=\frac{1}{9}(\X_c^T\X_c)= \pm 5.6 & 4.8\\4.8&6.0111 \mp $$
 The eigenvalue and eigenvector pairs of $\ssigma$ are (rounded to 2 decimal places) as follows:
 $$(\lambda_1,\v_1)=\left( 10.6100 ,  \begin{bmatrix} 0.69 \\ 0.72 \end{bmatrix}\right) \mbox{  and  } (\lambda_2,\v_2)= \left( 1.0012,\begin{bmatrix}-0.72\\0.69 \end{bmatrix}\right)$$
 Let's plot the eigenvector directions on the same graph:
 
-<center>
- ![pcpoints](figs/pcpointspc.png =100x)
-</center> 
-
+```{r fig.align='center',  echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcpointspc.png")
+```
 
 The eigenvector $\v_1$ is called the **first principal component**. It is the direction along which the variance of the data is maximal. The eigenvector $\v_2$ is the **second principal component**.  In general, the second principal component is the direction, orthogonal to the first, along which the variance of the data is maximal (in two dimensions, there is only one direction possible.) 
 :::
@@ -69,9 +70,10 @@ Let's express our data in the basis defined by the principal components. We want
  Conveniently, our new basis is orthonormal meaning that $\V$ is an orthogonal matrix, so
  $$\A=\X\V .$$
  The new data coordinates reflect a simple rotation of the data around the origin:
-<center>
-<img src=figs/pcpointsrotate.pdf width=50%>
-</center>
+ 
+```{r fig.align='center',  echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcpointsrotate.jpg")
+```
  
 Visually, we can see that the new variables are uncorrelated. You may wish to confirm this by calculating the covariance. In fact, we can do this in a general sense. If $\A=\X_c\V$ is our new data, then the covariance matrix is diagonal:
 \begin{eqnarray*}
@@ -146,11 +148,11 @@ We have relatively strong positive correlation between Petal Length, Petal Width
 
 The scatter plots and correlation matrix provide useful information, but they don't give us a true sense for how the data looks when all 4 attributes are considered simultaneously.
 
-In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref(svd), is generally a preferred route to computing principal components. In fact, the numerical computation of principal components is outside of the scope of this book. We recommend [@cite1,@cite2, or @cite3] for a treatment of the topic.__ using both the covariance matrix and the correlation matrix, and see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the `prcomp` function in R.
+In the next section we will compute the principal components directly from eigenvalues and eigenvectors of the covariance or correlation matrix. __It's important to note that this method of _computing_ principal components is not actually recommended - the answer provided is the same, but the numerical stability and efficiency of this method may be dubious for large datasets. The Singular Value Decomposition (SVD), which will be discussed in Chapter \@ref(svd), is generally a preferred route to computing principal components.__ Using both the covariance matrix and the correlation matrix, let's see what we can learn about the data. Let's start with the covariance matrix which is the default setting for the `prcomp()` function in R.
 
 ### Covariance PCA
 
- Let's start with the covariance matrix which is the default setting for the `prcomp` function in R. It's worth repeating that a dedicated principal component function like `prcomp()` is superior in numerical stability and efficiency to the lines of code in the next section. __The only reason for directly computing the covariance matrix and its eigenvalues and eigenvectors (as opposed to  `prcomp()`) is for edification. Computing a PCA in this manner, just this once, will help us grasp the exact mathematics of the situation and discover the nuances of them.__
+ Let's start with the covariance matrix which is the default setting for the `prcomp` function in R. It's worth repeating that a dedicated principal component function like `prcomp()` is superior in numerical stability and efficiency to the lines of code in the next section. __The only reason for directly computing the covariance matrix and its eigenvalues and eigenvectors (as opposed to  `prcomp()`) is for edification. Computing a PCA in this manner, just this once, will help us grasp the exact mathematics of the situation and empower us to use built in functions with greater flexibility and understanding.__
 
 ### Principal Components, Loadings, and Variance Explained 
 
@@ -348,7 +350,8 @@ biplot(pc)
 Obviously, the wrong conclusion to make from this biplot is that Variables 1 and 4 are correlated. Variables 1 and 4 do not load highly on the first two principal components - in the _whole_ 4-dimensional principal component space they are nearly orthogonal to each other and to variables 1 and 2. Thus, their orthogonal projections appear near the origin of this 2-dimensional subspace.
 
 The morals of the story: 
-- Always corroborate your results using the variable loadings and the amount of variation explained by each variable.\
-- When a variable shows up near the origin in a biplot, it is generally not well represented by your two-dimensional approximation of the data.
-
+<ul>
+<li> Always corroborate your results using the variable loadings and the amount of variation explained by each variable.
+<li> When a variable shows up near the origin in a biplot, it is generally not well represented by your two-dimensional approximation of the data.
+</ul>
 

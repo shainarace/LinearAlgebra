@@ -40,21 +40,17 @@ $$\widehat{\bbeta} = (\X^T\X)^{-1}\X^T\y$$
 
 
 :::{.example name='Solving a Least Squares Problem' #lsex}
-In 2014, data was collected regarding the percentage of linear algebra exercises done by students and the grade they received on their examination. Based on this data, what is the expected effect of completing an additional 10\% of the exercises on a students exam grade?\\
-\begin{center}
-\begin{tabular}{l | c c}
-ID & \% of Exercises & Exam Grade\\
-\hline 
-1 & 20 & 55\\
-2 & 100 & 100\\
-3 & 90 & 100\\
-4 & 70 & 70\\
-5 & 50 & 75\\
-6 & 10 & 25\\
-7 & 30 & 60
-\end{tabular}	
-
-\end{center}
+In 2014, data was collected regarding the percentage of linear algebra exercises done by students and the grade they received on their examination. Based on this data, what is the expected effect of completing an additional 10\% of the exercises on a students exam grade?\
+<table>
+<tr> <td>ID <td> \% of Exercises <td> Exam Grade
+<tr> <td> 1 <td> 20 <td> 55
+<tr> <td> 2 <td> 100<td> 100
+<tr> <td> 3 <td> 90 <td> 100
+<tr> <td> 4 <td> 70 <td> 70
+<tr> <td> 5 <td> 50 <td> 75
+<tr> <td> 6 <td> 10 <td> 25
+<tr> <td> 7 <td> 30 <td> 60
+</table>
 
 To find the least squares regression line, we want to solve the equation $\X\bbeta = \y$:
 $$
@@ -87,9 +83,10 @@ and so $$\pm \beta_0 \\ \beta_1 \mp = \pm  0.5233 &  -0.0072\\ -0.0072 & 0.0001 
 
 Thus, for each additional 10\% of exercises completed, exam grades are expected to increase by about 7 points. The data along with the regression line $$grade=32.1109+0.7033percent\_exercises$$ is shown below.
 
-<center>
-<img src=figs/grades.jpg width=50%/>
-</center>
+```{r  fig.align='center', echo=F, out.width="50%"}
+knitr::include_graphics("figs/grades.jpg")
+```
+
 :::
 		 
 ## Why the normal equations?
@@ -127,7 +124,7 @@ While $\frac{\partial}{\partial \mathbf{x}}$ would commonly be the formula repor
 <td> $\frac{\partial \boldsymbol \beta}{\partial \boldsymbol \beta}= \mathbf{I}$
 <tr>
 <td style="text-align:center"> $\A$ is not a function of $\boldsymbol \beta$
-<td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}T$
+<td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}^T$
 <tr>
 <td style="text-align:center"> $\A$ is not a function of $\boldsymbol \beta$
 <td> $\frac{\partial \boldsymbol \beta^T\mathbf{A}\boldsymbol \beta}{\partial \boldsymbol \beta}= (\mathbf{A}+\mathbf{A}^T)\boldsymbol \beta$

@@ -109,57 +109,6 @@ return(cat('
 
 
 ```{r, echo=F} 
-thmcounter=0
-excounter=0
 library(shiny)
 ```
 
-
-
-
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-
-
-
-<!-- ```{thm title='Boom. A Theorem.', num=thmcounter} -->
-<!-- Boom I just made a custom language interpreter chunk. can I number it though -->
-<!-- ``` -->
-
-
-
-<!-- ```{r, echo=F}  -->
-<!-- thmcounter=thmcounter+1 -->
-<!-- ``` -->
-
-
-
-<!-- ```{def title='Boom again. A Definition too.', num=thmcounter} -->
-<!-- I made a definition too, and I numbered them.  -->
-
-<!-- Check! -->
-<!-- ``` -->
-
-<!-- ```{r echo=F} -->
-<!-- library(knitr) -->
-<!-- ``` -->
-
-
-
-
-
-<!-- ## ermehgerd -->
-
-<!-- ```{r,echo=F}  -->
-<!-- excounter=excounter+1 -->
-<!-- ``` -->
-
-
-
-
-<!-- ```{ex name = 'Cool Example, Girl', num=excounter} -->
-<!-- Insert-mind-blowing-example-text. -->
-<!-- Maybe an image for Good Measure: -->
-<!--   <img src="_book/iaaicon.png" width="140"> -->
-<!-- ``` -->

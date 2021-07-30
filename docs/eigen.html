@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -668,7 +668,8 @@ which shows that <span class="math inline">\(\y\)</span> (or any scalar multiple
 <em>Note: when using software to compute eigenvectors, it is standard practice for the software to provide the normalized/unit eigenvector.</em></p>
 <p>In some situations, an eigenvalue can have multiple eigenvectors which are linearly independent. The number of linearly independent eigenvectors associated with an eigenvalue is called the <strong>geometric multiplicity</strong> of the eigenvalue. Example <a href="eigen.html#exm:eig2">12.2</a> clarifies this concept.</p>
 <div class="example">
-<p><span id="exm:eig2" class="example"><strong>Example 12.2  (Geometric Multiplicity) </strong></span>Consider the matrix <span class="math inline">\(\A=\pm 3 &amp; 0 \\0 &amp; 3 \mp\)</span>. It should be straightforward to see that <span class="math inline">\(\x_1 =\pm 1 \\0 \mp\)</span> and <span class="math inline">\(\x_2=\pm 0\\1\mp\)</span> are both eigenvectors corresponding to the eigenvalue <span class="math inline">\(\lambda = 3\)</span>. <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> are linearly independent, therefore the geometric multiplicity of <span class="math inline">\(\lambda=3\)</span> is 2.\</p>
+<p><span id="exm:eig2" class="example"><strong>Example 12.2  (Geometric Multiplicity) </strong></span>Consider the matrix <span class="math inline">\(\A=\pm 3 &amp; 0 \\0 &amp; 3 \mp\)</span>. It should be straightforward to see that <span class="math inline">\(\x_1 =\pm 1 \\0 \mp\)</span> and <span class="math inline">\(\x_2=\pm 0\\1\mp\)</span> are both eigenvectors corresponding to the eigenvalue <span class="math inline">\(\lambda = 3\)</span>. <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span> are linearly independent, therefore the geometric multiplicity of <span class="math inline">\(\lambda=3\)</span> is 2.<br />
+</p>
 <p>What happens if we take a linear combination of <span class="math inline">\(\x_1\)</span> and <span class="math inline">\(\x_2\)</span>? Is that also an eigenvector?
 Consider <span class="math inline">\(\y=\pm 2 \\ 3 \mp = 2\x_1+3\x_2\)</span>. Then
 <span class="math display">\[\A\y = \pm 3 &amp; 0 \\0 &amp; 3 \mp \pm 2 \\ 3 \mp = \pm 6 \\ 9 \mp = 3 \pm 2\\3\mp = 3\y\]</span>
@@ -692,7 +693,7 @@ which shows that <span class="math inline">\(\y\)</span> (or any vector in the <
 </div>
 <p>Now, let’s attempt the eigenvalue problem from the other side. Given an eigenvalue, we will find the corresponding eigenspace in Example <a href="eigen.html#exm:eig3">12.3</a>.</p>
 <div class="example">
-<p><span id="exm:eig3" class="example"><strong>Example 12.3  (Eigenvalues and Eigenvectors) </strong></span>Show that <span class="math inline">\(\lambda=5\)</span> is an eigenvalue of <span class="math inline">\(\A=\pm 1 &amp; 2 \\4&amp;3 \mp\)</span> and determine the eigenspace of <span class="math inline">\(\lambda=5\)</span>.\</p>
+<p><span id="exm:eig3" class="example"><strong>Example 12.3  (Eigenvalues and Eigenvectors) </strong></span>Show that <span class="math inline">\(\lambda=5\)</span> is an eigenvalue of <span class="math inline">\(\A=\pm 1 &amp; 2 \\4&amp;3 \mp\)</span> and determine the eigenspace of <span class="math inline">\(\lambda=5\)</span>.</p>
 <p>Attempting the problem from this angle requires slightly more work. We want to find a vector <span class="math inline">\(\x\)</span> such that <span class="math inline">\(\A\x=5\x\)</span>. Setting this up, we have:
 <span class="math display">\[\A\x = 5\x.\]</span>
 What we want to do is move both terms to one side and factor out the vector <span class="math inline">\(x\)</span>. In order to do this, we must use an identity matrix, otherwise the equation wouldn’t make sense (we’d be subtracting a constant from a matrix).

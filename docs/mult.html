@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -840,14 +840,14 @@ Let
 <p><span class="math display">\[\begin{equation}
 \C=\left(\begin{matrix} -1&amp;0&amp;1&amp;0\\1&amp;-1&amp;0&amp;0\\0&amp;0&amp;1&amp;-1 \end{matrix}\right) \end{equation}\]</span></p>
 <p>Determine the following matrix products, if possible:</p>
-<p>a <span class="math inline">\(\mathbf{A}\C\)</span></p>
-<p>b <span class="math inline">\(\mathbf{A}\M\)</span></p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li><span class="math inline">\(\mathbf{A}^T\C\)</span></li>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(\mathbf{A}\C\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{A}\M\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{A}^T\C\)</span></p></li>
 </ol>
 </div>
-One very important thing to keep in mind is this:
-<p font-color:red>
+<p>One very important thing to keep in mind is this:</p>
+<p style="text-align:center">
 <strong> matrix multiplication is NOT commutative! </strong>
 </p>
 <p>As we see from the previous exercises, it’s quite common to be able to compute a product <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span> where the reverse product, <span class="math inline">\(\mathbf{B}\mathbf{A}\)</span> is not even possible to compute. Even if both products are possible it is almost <em>never</em> the case that <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span> equals <span class="math inline">\(\mathbf{B}\mathbf{A}\)</span>.</p>
@@ -861,8 +861,8 @@ One very important thing to keep in mind is this:
 In doing this multiplication, we see that the effect of multiplying the matrix <span class="math inline">\(\mathbf{A}\)</span> by a diagonal matrix on the left is that the rows of the matrix <span class="math inline">\(\mathbf{A}\)</span> are simply scaled by the entries in the diagonal matrix. You should work this computation out by hand to convince yourself that this effect will happen every time. Diagonal scaling can be important, and from now on when you see a matrix product like <span class="math inline">\(\D\mathbf{A}\)</span> where <span class="math inline">\(\D\)</span> is diagonal, you should automatically put together that the result is just a row-scaled version of <span class="math inline">\(\mathbf{A}\)</span>.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:diagmultexer" class="exercise"><strong>Exercise 2.4  (Multiplication by a Diagonal Matrix) </strong></span>What happens if we were to compute the product from Example <a href="mult.html#exm:diagmult">2.7</a> in the reversed order, with the diagonal matrix on the right:
-<span class="math display">\[\mathbf{A}\D?\]</span>
+<p><span id="exr:diagmultexer" class="exercise"><strong>Exercise 2.4  (Multiplication by a Diagonal Matrix) </strong></span>What happens if we were to compute the product from Example <a href="mult.html#exm:diagmult">2.7</a> in the reversed order, with the diagonal matrix on the right: <span class="math inline">\(\mathbf{A}\D?\)</span>
+<br>
 Would we expect the same result? Is multiplication by a diagonal matrix commutative? Work out the calculation and comment on what you’ve found.</p>
 </div>
 </div>
@@ -878,7 +878,7 @@ or we can multiply by an <span class="math inline">\(n\times 1\)</span> column v
 <p>Matrix-vector multiplication works the same way as matrix multiplication: we simply multiply rows by columns until we’ve completed the answer. In the case of <span class="math inline">\(\v^T\mathbf{A}\)</span>, we’d multiply the row <span class="math inline">\(\v\)</span> by each of the <span class="math inline">\(n\)</span> columns of <span class="math inline">\(\mathbf{A}\)</span>, carving out our solution, one entry at a time :</p>
 <p><span class="math display">\[\v^T\mathbf{A} = \left(\begin{matrix} \v^T\mathbf{A}_{*1} &amp; \v^T\acol{2} &amp; \dots &amp; \v^T\acol{n} \end{matrix}\right).\]</span></p>
 <p>In the case of <span class="math inline">\(\mathbf{A}\x\)</span>, we’d multiply each of the <span class="math inline">\(m\)</span> rows of <span class="math inline">\(\mathbf{A}\)</span> by the column <span class="math inline">\(\x\)</span>:</p>
-<p><span class="math display">\[\mathbf{A}\x = \left(\begin{matrix} \arow{1}\x \\ \arow2{x} \\ \vdots \\ \arow{m}\x \end{matrix}\right).\]</span></p>
+<p><span class="math display">\[\mathbf{A}\x = \left(\begin{matrix} \arow{1}\x \\ \arow{2}\x \\ \vdots \\ \arow{m}\x \end{matrix}\right).\]</span></p>
 <p>Let’s see an example of this:</p>
 <div class="example">
 <p><span id="exm:matvecprod" class="example"><strong>Example 2.8  (Matrix-Vector Products) </strong></span>Let <span class="math display">\[\mathbf{A}=\left(\begin{matrix} 2 &amp; 3 \\ -1 &amp; 4 \\ 5 &amp; 1 \end{matrix}\right)  \quad \v=\left(\begin{matrix} 3\\2 \end{matrix}\right) \quad \bo{q}=\left(\begin{matrix} 2\\-1\\3\end{matrix}\right)\]</span></p>

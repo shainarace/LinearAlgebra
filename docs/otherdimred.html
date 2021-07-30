@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -669,8 +669,8 @@ and
 <span id="cb280-4"><a href="otherdimred.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
 <span id="cb280-5"><a href="otherdimred.html#cb280-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
 <span id="cb280-6"><a href="otherdimred.html#cb280-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-137"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-139"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-139-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
 <p class="caption">
 Figure 18.1: Multidimensional Scaling of the Iris Data
 </p>
@@ -705,8 +705,8 @@ Figure 18.1: Multidimensional Scaling of the Iris Data
 <span id="cb284-5"><a href="otherdimred.html#cb284-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb284-6"><a href="otherdimred.html#cb284-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
 <span id="cb284-7"><a href="otherdimred.html#cb284-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-140"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-142"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-142-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
 <p class="caption">
 Figure 18.2: Multidimensional Scaling of the Leukemia Data
 </p>
@@ -727,7 +727,7 @@ Figure 18.2: Multidimensional Scaling of the Leukemia Data
 <span id="cb287-5"><a href="otherdimred.html#cb287-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb287-6"><a href="otherdimred.html#cb287-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
 <span id="cb287-7"><a href="otherdimred.html#cb287-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-141-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-143-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="a-note-on-standardization" class="section level3 unnumbered">
 <h3>A note on standardization</h3>

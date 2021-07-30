@@ -93,7 +93,7 @@ graph
 ```
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
 
-Figure \@ref(fig:pcafig) is really the jumping off point. Once we can intuitively see _why_ we might benefit from a new basis and _how_ one might be crafted, we're ready to start digging in to PCA. Once we've exposed the basic terminology in Chapters \@ref(eigen) and \@ref(pca), we can explore the magnificent world of dimension reduction and its many benefits in the case studies in Chapters \@ref(PCA_apps_ukfood)-\@ref(otherdimred).
+Figure \@ref(fig:pcafig) is really the jumping off point. Once we can intuitively see _why_ we might benefit from a new basis and _how_ one might be crafted, we're ready to start digging in to PCA. Once we've exposed the basic terminology in Chapters \@ref(eigen) and \@ref(pca), we can explore the magnificent world of dimension reduction and its many benefits in the case studies in Chapters \@ref(pcaapp)-\@ref(otherdimred).
 
 
 ## Exercises
@@ -104,7 +104,7 @@ Figure \@ref(fig:pcafig) is really the jumping off point. Once we can intuitivel
 <li>  Show that $\U$ is an orthogonal matrix.
 <li>  Let $\bo{b}=\pm 1\\1\\1\\1\mp$. Solve the equation $\U\x=\bo{b}$.
 </ol>
-<li> Draw the orthogonal projection of the points onto the subspace $span \left{ \pm 1\\-1\mp \right}$
+<li> Draw the orthogonal projection of the points onto the subspace $span \left\lbrace \pm 1\\-1\mp \right\rbrace$
 <center>![](figs/orthogprojex.png)</center>
 <li> Are the vectors $\v_1=\pm 1\\-1\\1 \mp$ and $\v_2=\pm 0\\1\\1 \mp$ orthogonal? How do you know?
 <li> What are the two conditions necessary for a collection of vectors to be orthonormal?

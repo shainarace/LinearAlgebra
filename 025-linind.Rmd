@@ -1,11 +1,5 @@
 # Linear Independence {#linind}
 
-```{r, echo=F}
-thmcounter=0
-excounter=0
-cid='linind'
-```
-
 One of the most central ideas in all of Linear Algebra is that of **linear independence**. For regression problems, it is repeatedly stressed that _multicollinearity_ is problematic. Multicollinearity is simply a statistical term for linear dependence. It's bad. Having a firm understanding of linear combinations, we can develop the important concept of linear independence. 
 
 ## Linear Independence
@@ -17,7 +11,7 @@ A set of vectors $\{\v_1,\v_2,\dots, \v_n\}$ is **linearly dependent** if we can
   (\#eq:triv)
 \end{equation}
 
-A set of terms is **linearly independent** if Equation \@ref(eq:triv) has only the trivial solution ($\alpha_1=\alpha_2=\dots=\alpha_n = 0$).
+A set of terms is **linearly independent** if Equation \@ref(eq:triv) has only the _trivial solution_, $$\alpha_1=\alpha_2=\dots=\alpha_n = 0.$$
 :::
 
 Another way to express linear dependence is to say that we can write one of the vectors as a linear combination of the others. If there exists a non-trivial set of coefficients $\alpha_1,\alpha_2, \dots, \alpha_n$ for which
@@ -39,7 +33,7 @@ You should realize that the linear combination expressed Definition \@ref{def:li
 \A\x = \bo{0}
 (\#eq:homo)
 \end{equation}
-has only the trivial solution, $\x=0$. Equation \@ref{eq:homo} is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix $(\A|\bo{0})$ reduces to $(\bo{I}|0)$. We have already seen this condition in our discussion about matrix inverses - if a square matrix $\A$ reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called _full rank, nonsingular, or invertible_. Now we add an additional condition equivalent to the others - the matrix $\A$ has linearly independent columns (_and rows_).
+has only the trivial solution, $\x=0$. Equation \@ref(eq:homo) is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix $(\A|\bo{0})$ reduces to $(\bo{I}|0)$. We have already seen this condition in our discussion about matrix inverses - if a square matrix $\A$ reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called _full rank, nonsingular, or invertible_. Now we add an additional condition equivalent to the others - the matrix $\A$ has linearly independent columns (_and rows_).
 
 In Theorem \@ref(thm:equivcond) we provide an important list of equivalent conditions regarding the existence of a matrix inverse.
 
@@ -134,8 +128,8 @@ $$\A\B=\C.$$
 <li> Describe the span of two linearly _independent_ vectors in $\Re^3$.
 <li> Describe the span of two linearly _dependent_ vectors in $\Re^3$.
 <li> What is the span of the zero vector, $\bo{0}=(0,0,\dots, 0)$?
-<li> Compare the $span \left{\pm 1\\1 \mp\right}$ to the $span \left{\pm 1\\1 \mp , \pm 2\\2 \mp \right}$.
-<li> What is the dimension of the $span \left{\pm 1\\1 \mp , \pm 2\\2 \mp \right}$
+<li> Compare the $span \left\lbrace \pm 1\\1 \mp \right\rbrace$ to the $span \left\lbrace \pm 1\\1 \mp , \pm 2\\2 \mp \right\rbrace$.
+<li> What is the dimension of the $span \left\lbrace\pm 1\\1 \mp , \pm 2\\2 \mp \right\rbrace$
 <li> What is the definition of the dimension of a subspace?
 <li> How would you describe a hyperplane?
 <li> Draw the $span(\a,\b)$ if $\a=\pm 1\\2 \mp$ and $\b=\pm 3\\6 \mp$.

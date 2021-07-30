@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -656,7 +656,7 @@ div.csl-indent {
 \alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}.
   \tag{7.1}
 \end{equation}\]</span></p>
-<p>A set of terms is <strong>linearly independent</strong> if Equation <a href="linind.html#eq:triv">(7.1)</a> has only the trivial solution (<span class="math inline">\(\alpha_1=\alpha_2=\dots=\alpha_n = 0\)</span>).</p>
+<p>A set of terms is <strong>linearly independent</strong> if Equation <a href="linind.html#eq:triv">(7.1)</a> has only the <em>trivial solution</em>, <span class="math display">\[\alpha_1=\alpha_2=\dots=\alpha_n = 0.\]</span></p>
 </div>
 <p>Another way to express linear dependence is to say that we can write one of the vectors as a linear combination of the others. If there exists a non-trivial set of coefficients <span class="math inline">\(\alpha_1,\alpha_2, \dots, \alpha_n\)</span> for which
 <span class="math display">\[\alpha_1\v_1 +\alpha_2\v_2 + \dots +\alpha_n\v_n=\bo{0}\]</span>
@@ -675,7 +675,7 @@ or, equivalently, because
 \A\x = \bo{0}
 \tag{7.2}
 \end{equation}\]</span>
-has only the trivial solution, <span class="math inline">\(\x=0\)</span>. Equation @ref{eq:homo} is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix <span class="math inline">\((\A|\bo{0})\)</span> reduces to <span class="math inline">\((\bo{I}|0)\)</span>. We have already seen this condition in our discussion about matrix inverses - if a square matrix <span class="math inline">\(\A\)</span> reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called <em>full rank, nonsingular, or invertible</em>. Now we add an additional condition equivalent to the others - the matrix <span class="math inline">\(\A\)</span> has linearly independent columns (<em>and rows</em>).</p>
+has only the trivial solution, <span class="math inline">\(\x=0\)</span>. Equation <a href="linind.html#eq:homo">(7.2)</a> is commonly known as the homogeneous linear equation. For this equation to have only the trivial solution, it must be the case that under Gauss-Jordan elimination, the augmented matrix <span class="math inline">\((\A|\bo{0})\)</span> reduces to <span class="math inline">\((\bo{I}|0)\)</span>. We have already seen this condition in our discussion about matrix inverses - if a square matrix <span class="math inline">\(\A\)</span> reduces to the identity matrix under Gauss-Jordan elimination then it is equivalently called <em>full rank, nonsingular, or invertible</em>. Now we add an additional condition equivalent to the others - the matrix <span class="math inline">\(\A\)</span> has linearly independent columns (<em>and rows</em>).</p>
 <p>In Theorem <a href="linind.html#thm:equivcond">7.1</a> we provide an important list of equivalent conditions regarding the existence of a matrix inverse.</p>
 <div class="theorem">
 <p><span id="thm:equivcond" class="theorem"><strong>Theorem 7.1  (Equivalent Conditions for Matrix Invertibility) </strong></span>Let <span class="math inline">\(\A\)</span> be an <span class="math inline">\(n\times n\)</span> matrix - a <em>square</em> matrix. Then the following statements are <em>equivalent</em>. (If one these statements is true, then all of these statements are true)</p>
@@ -785,9 +785,9 @@ Describe the span of two linearly <em>dependent</em> vectors in <span class="mat
 <li>
 What is the span of the zero vector, <span class="math inline">\(\bo{0}=(0,0,\dots, 0)\)</span>?
 <li>
-Compare the <span class="math inline">\(span \left{\pm 1\\1 \mp\right}\)</span> to the <span class="math inline">\(span \left{\pm 1\\1 \mp , \pm 2\\2 \mp \right}\)</span>.
+Compare the <span class="math inline">\(span \left\lbrace \pm 1\\1 \mp \right\rbrace\)</span> to the <span class="math inline">\(span \left\lbrace \pm 1\\1 \mp , \pm 2\\2 \mp \right\rbrace\)</span>.
 <li>
-What is the dimension of the <span class="math inline">\(span \left{\pm 1\\1 \mp , \pm 2\\2 \mp \right}\)</span>
+What is the dimension of the <span class="math inline">\(span \left\lbrace\pm 1\\1 \mp , \pm 2\\2 \mp \right\rbrace\)</span>
 <li>
 What is the definition of the dimension of a subspace?
 <li>

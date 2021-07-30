@@ -29,7 +29,7 @@ _Note: when using software to compute eigenvectors, it is standard practice for 
 In some situations, an eigenvalue can have multiple eigenvectors which are linearly independent. The number of linearly independent eigenvectors associated with an eigenvalue is called the __geometric multiplicity__ of the eigenvalue. Example \@ref(exm:eig2) clarifies this concept.
 
 :::{.example name='Geometric Multiplicity' #eig2}
-Consider the matrix $\A=\pm 3 & 0 \\0 & 3 \mp$. It should be straightforward to see that $\x_1 =\pm 1 \\0 \mp$ and $\x_2=\pm 0\\1\mp$ are both eigenvectors corresponding to the eigenvalue $\lambda = 3$. $\x_1$ and $\x_2$ are linearly independent, therefore the geometric multiplicity of $\lambda=3$ is 2.\\
+Consider the matrix $\A=\pm 3 & 0 \\0 & 3 \mp$. It should be straightforward to see that $\x_1 =\pm 1 \\0 \mp$ and $\x_2=\pm 0\\1\mp$ are both eigenvectors corresponding to the eigenvalue $\lambda = 3$. $\x_1$ and $\x_2$ are linearly independent, therefore the geometric multiplicity of $\lambda=3$ is 2.\
 
 What happens if we take a linear combination of $\x_1$ and $\x_2$? Is that also an eigenvector?
 Consider $\y=\pm 2 \\ 3 \mp = 2\x_1+3\x_2$. Then 
@@ -60,7 +60,7 @@ Let $\A$ be a square matrix and let $\lambda$ be an eigenvalue of $\A$. The set 
 Now, let's attempt the eigenvalue problem from the other side. Given an eigenvalue, we will find the corresponding eigenspace in Example \@ref(exm:eig3).
 
 :::{.example name='Eigenvalues and Eigenvectors' #eig3}
-Show that $\lambda=5$ is an eigenvalue of $\A=\pm 1 & 2 \\4&3 \mp$ and determine the eigenspace of $\lambda=5$.\\
+Show that $\lambda=5$ is an eigenvalue of $\A=\pm 1 & 2 \\4&3 \mp$ and determine the eigenspace of $\lambda=5$.
 
 Attempting the problem from this angle requires slightly more work. We want to find a vector $\x$ such that $\A\x=5\x$. Setting this up, we have:
 $$\A\x = 5\x.$$

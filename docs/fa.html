@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -783,7 +783,7 @@ Table: (#tab:KMO) Interpretting the KMO value.
 <p>You can think of <strong>communalities</strong> as multiple <span class="math inline">\(R^2\)</span> values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.</p>
 <p>Take for example the SAS output for factor analysis on the Iris dataset shown in Figure . The factor model (which settles on only one single factor) explains 98% of the variability in <em>petal length</em>. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated <span class="math inline">\(R^2\)</span> value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in <em>petal length, petal width, and sepal length</em>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-124"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-126"></span>
 <img src="figs/factorOUT.png" alt="SAS output for PROC FACTOR using Iris Dataset" width="100%" />
 <p class="caption">
 Figure 17.1: SAS output for PROC FACTOR using Iris Dataset
@@ -1001,14 +1001,14 @@ Read in the Big5 Personality test dataset, which contains likert scale responses
 ## [5,] -0.37359  0.47716 0.292680  1.233652  0.406582</code></pre>
 <p>This should match the output from SAS and it does. Remember these columns are unique up to a sign, so you’ll see factor 4 does not have the same sign in both software outputs. This is not cause for concern.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-130"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-132"></span>
 <img src="factorOutput.png" alt="Default (Unrotated) Factor Loadings Output by SAS" width="100%" />
 <p class="caption">
 Figure 17.2: Default (Unrotated) Factor Loadings Output by SAS
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-131"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-133"></span>
 <img src="scoresOutput.png" alt="Default (Unrotated) Factor Scores Output by SAS" width="100%" />
 <p class="caption">
 Figure 17.3: Default (Unrotated) Factor Scores Output by SAS
@@ -1057,8 +1057,8 @@ Figure 17.5: Rotated Factor Scores Output by SAS
 <div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="fa.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
 <span id="cb272-2"><a href="fa.html#cb272-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
 <span id="cb272-3"><a href="fa.html#cb272-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-133"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-133-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-135-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
 <p class="caption">
 Figure 17.6: BiPlot of Projection onto PC1 and PC2
 </p>
@@ -1066,8 +1066,8 @@ Figure 17.6: BiPlot of Projection onto PC1 and PC2
 <div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="fa.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
 <span id="cb273-2"><a href="fa.html#cb273-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>],</span>
 <span id="cb273-3"><a href="fa.html#cb273-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-134"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-134-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-136"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
 <p class="caption">
 Figure 17.7: BiPlot of Projection onto PC3 and PC4
 </p>
@@ -1080,8 +1080,8 @@ Figure 17.7: BiPlot of Projection onto PC3 and PC4
 <span id="cb274-5"><a href="fa.html#cb274-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
 <span id="cb274-6"><a href="fa.html#cb274-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 1&#39;</span>,</span>
 <span id="cb274-7"><a href="fa.html#cb274-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 2&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-135-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-137"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
 <p class="caption">
 Figure 17.8: BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2
 </p>
@@ -1091,8 +1091,8 @@ Figure 17.8: BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions 
 <span id="cb275-3"><a href="fa.html#cb275-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
 <span id="cb275-4"><a href="fa.html#cb275-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 3&#39;</span>,</span>
 <span id="cb275-5"><a href="fa.html#cb275-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 4&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-136"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-136-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-138"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-138-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
 <p class="caption">
 Figure 17.9: BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4.
 </p>

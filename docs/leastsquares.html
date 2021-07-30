@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -682,8 +682,67 @@ Using the design matrix, <span class="math inline">\(\X\)</span>, the least squa
 <span class="math display">\[\widehat{\bbeta} = (\X^T\X)^{-1}\X^T\y\]</span></li>
 </ul>
 </div>
-<div class="example">
-<span id="exm:lsex" class="example"><strong>Example 10.1  (Solving a Least Squares Problem) </strong></span>In 2014, data was collected regarding the percentage of linear algebra exercises done by students and the grade they received on their examination. Based on this data, what is the expected effect of completing an additional 10% of the exercises on a students exam grade?\
+:::{.example name=‘Solving a Least Squares Problem’ #lsex}
+In 2014, data was collected regarding the percentage of linear algebra exercises done by students and the grade they received on their examination. Based on this data, what is the expected effect of completing an additional 10% of the exercises on a students exam grade?<br />
+
+<table>
+<tr>
+<td>
+ID
+<td>
+% of Exercises
+<td>
+Exam Grade
+<tr>
+<td>
+1
+<td>
+20
+<td>
+55
+<tr>
+<td>
+2
+<td>
+100
+<td>
+100
+<tr>
+<td>
+3
+<td>
+90
+<td>
+100
+<tr>
+<td>
+4
+<td>
+70
+<td>
+70
+<tr>
+<td>
+5
+<td>
+50
+<td>
+75
+<tr>
+<td>
+6
+<td>
+10
+<td>
+25
+<tr>
+<td>
+7
+<td>
+30
+<td>
+60
+</table>
 <p>To find the least squares regression line, we want to solve the equation <span class="math inline">\(\X\bbeta = \y\)</span>:
 <span class="math display">\[
 \pm 1 &amp; 20\\
@@ -710,10 +769,8 @@ Using the design matrix, <span class="math inline">\(\X\)</span>, the least squa
 <span class="math display">\[\pm 7 &amp; 370\\370&amp;26900 \mp^{-1}= \pm 0.5233 &amp;  -0.0072\\ -0.0072 &amp; 0.0001 \mp\]</span>
 and so <span class="math display">\[\pm \beta_0 \\ \beta_1 \mp = \pm  0.5233 &amp;  -0.0072\\ -0.0072 &amp; 0.0001 \mp \pm  485 \\ 30800\mp = \pm 32.1109 \\0.7033\mp\]</span></p>
 <p>Thus, for each additional 10% of exercises completed, exam grades are expected to increase by about 7 points. The data along with the regression line <span class="math display">\[grade=32.1109+0.7033percent\_exercises\]</span> is shown below.</p>
-<center>
-<img src=figs/grades.jpg width=50%/>
-</center>
-</div>
+<p><img src="figs/grades.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p>:::</p>
 </div>
 <div id="why-the-normal-equations" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> Why the normal equations?</h2>
@@ -756,7 +813,7 @@ Formula
 <td style="text-align:center">
 <span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>
 <td>
-<span class="math inline">\(\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}T\)</span>
+<span class="math inline">\(\frac{\partial \boldsymbol \beta^T\mathbf{A}}{\partial \boldsymbol \beta}= \mathbf{A}^T\)</span>
 <tr>
 <td style="text-align:center">
 <span class="math inline">\(\A\)</span> is not a function of <span class="math inline">\(\boldsymbol \beta\)</span>

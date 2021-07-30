@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -816,8 +816,8 @@ We can immediately see why people had trouble with LSI as a topic model – it�
 <p><span class="math display">\[\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text{tired} -0.017\text{toy} 0.370\text{injured}+ 0.587\text{ankle}  +0.415\text{broken} + 0.415\text{swollen} + 0.370\text{sprained}\]</span>
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words’ loadings along the first two factors in Figure <a href="svdapp.html#fig:lsiwords">16.3</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:lsiwords"></span>
-<div id="htmlwidget-1166f7c3fa35903cb572" style="width:50%;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1166f7c3fa35903cb572">{"x":{"visdat":{"10566df5464f":["function () ","plotlyVisDat"]},"cur_data":"10566df5464f","attrs":{"10566df5464f":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"10566df5464f.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.531563809367049,-0.733453606961587,-0.344828384303498,-0.112512769500384,-0.208280943536782,-0.0341040184686611,-0.0451863234368632,-0.0258653719821533,-0.0236531215050311,-0.0338942118311486],"y":[-0.0467385234043132,-0.0644704387912356,-0.0407140759247112,0.166606582000434,-0.0181970173697433,0.370197932227658,0.586168276780396,0.4143734911588,0.41516129158709,0.369729394578537],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.531563809367049,-0.733453606961587,-0.344828384303498,-0.112512769500384,-0.208280943536782,-0.0341040184686611,-0.0451863234368632,-0.0258653719821533,-0.0236531215050311,-0.0338942118311486],"y":[-0.0467385234043132,-0.0644704387912356,-0.0407140759247112,0.166606582000434,-0.0181970173697433,0.370197932227658,0.586168276780396,0.4143734911588,0.41516129158709,0.369729394578537],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d122836034cd39febf47" style="width:50%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d122836034cd39febf47">{"x":{"visdat":{"1e86e89a027":["function () ","plotlyVisDat"]},"cur_data":"1e86e89a027","attrs":{"1e86e89a027":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"1e86e89a027.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.529117094092921,-0.734561479801604,-0.344813027009006,-0.112402931488384,-0.20806147047414,-0.0330125826259328,-0.0466835010103895,-0.0229782920297289,-0.0229818955259451,-0.0340164621099083],"y":[-0.0481691993108707,-0.0651410759929211,-0.0396969343700203,0.167699145157888,-0.0160304370497985,0.369192794897867,0.58668948550675,0.41470736840829,0.415864468529967,0.368754589872336],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.529117094092921,-0.734561479801604,-0.344813027009006,-0.112402931488384,-0.20806147047414,-0.0330125826259328,-0.0466835010103895,-0.0229782920297289,-0.0229818955259451,-0.0340164621099083],"y":[-0.0481691993108707,-0.0651410759929211,-0.0396969343700203,0.167699145157888,-0.0160304370497985,0.369192794897867,0.58668948550675,0.41470736840829,0.415864468529967,0.368754589872336],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 16.3: Projection of the Terms onto First two Singular Dimensions
 </p>
@@ -833,8 +833,8 @@ Figure 16.3: Projection of the Terms onto First two Singular Dimensions
 ## [6,] -0.03357626  0.55493581  0.63206685 -0.16722869 -0.4803488  0.1808591</code></pre>
 <p>In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure <a href="svdapp.html#fig:lsidocs">16.4</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:lsidocs"></span>
-<div id="htmlwidget-245ba4cefe87579003e7" style="width:50%;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-245ba4cefe87579003e7">{"x":{"visdat":{"105635b46ad9":["function () ","plotlyVisDat"]},"cur_data":"105635b46ad9","attrs":{"105635b46ad9":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"105635b46ad9.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.553312312912439,-0.57140717597419,-0.601271162202157,-0.0433137871808742,-0.0685146014788188,-0.0318520852689443],"y":[-0.0585782010849688,-0.0249533189526986,-0.0611085067096495,0.654494131616176,0.506508011553348,0.554589537026284],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.553312312912439,-0.57140717597419,-0.601271162202157,-0.0433137871808742,-0.0685146014788188,-0.0318520852689443],"y":[-0.0585782010849688,-0.0249533189526986,-0.0611085067096495,0.654494131616176,0.506508011553348,0.554589537026284],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":["text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c48a42ebc8bca1aa915e" style="width:50%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c48a42ebc8bca1aa915e">{"x":{"visdat":{"1e8671200990":["function () ","plotlyVisDat"]},"cur_data":"1e8671200990","attrs":{"1e8671200990":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"1e8671200990.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.550350311461148,-0.569388934804793,-0.601609063965496,-0.0427158931429868,-0.0717189006230794,-0.0320204247349685],"y":[-0.0587141545351159,-0.0248105967087153,-0.0610842629915804,0.654212445437153,0.506270796439839,0.554680526811832],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.550350311461148,-0.569388934804793,-0.601609063965496,-0.0427158931429868,-0.0717189006230794,-0.0320204247349685],"y":[-0.0587141545351159,-0.0248105967087153,-0.0610842629915804,0.654212445437153,0.506270796439839,0.554680526811832],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":["text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 16.4: Projection of the Docuemnts onto First two Singular Dimensions
 </p>
@@ -856,7 +856,7 @@ Figure 16.4: Projection of the Docuemnts onto First two Singular Dimensions
 <div id="image-data-in-r" class="section level3" number="16.2.1">
 <h3><span class="header-section-number">16.2.1</span> Image data in R</h3>
 <p>Let’s take an image of a leader that we all know and respect:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-107"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-109"></span>
 <img src="LAdata/rappa.jpg" alt="Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State" width="125" />
 <p class="caption">
 Figure 16.5: Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State
@@ -891,8 +891,8 @@ Rather than a traditional data frame, when working with an image, we have to ref
 <span id="cb235-2"><a href="svdapp.html#cb235-2" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span>rappa<span class="sc">@</span>green</span>
 <span id="cb235-3"><a href="svdapp.html#cb235-3" aria-hidden="true" tabindex="-1"></a>rappa.blue<span class="ot">=</span>rappa<span class="sc">@</span>blue</span>
 <span id="cb235-4"><a href="svdapp.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-112"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-114"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-114-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
 <p class="caption">
 Figure 16.6: Intensity of green in each pixel of the original image
 </p>
@@ -900,7 +900,7 @@ Figure 16.6: Intensity of green in each pixel of the original image
 <p>Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that <code>nrow(rappa.green)</code> gives the number of columns in the transposed matrix)</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="svdapp.html#cb236-1" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span><span class="fu">t</span>(rappa.green)[,<span class="fu">nrow</span>(rappa.green)<span class="sc">:</span><span class="dv">1</span>]</span>
 <span id="cb236-2"><a href="svdapp.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Rather than compressing the colors individually, let’s work with the grayscale image:</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="svdapp.html#cb237-1" aria-hidden="true" tabindex="-1"></a>greyrappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.pgm&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
@@ -916,8 +916,8 @@ Figure 16.6: Intensity of green in each pixel of the original image
 <span id="cb241-2"><a href="svdapp.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="co">#again, rotate 90 degrees</span></span>
 <span id="cb241-3"><a href="svdapp.html#cb241-3" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span><span class="fu">t</span>(rappa.grey)[,<span class="fu">nrow</span>(rappa.grey)<span class="sc">:</span><span class="dv">1</span>]</span></code></pre></div>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="svdapp.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.grey, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-115"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-115-1.png" alt="Greyscale representation of original image" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-117"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="Greyscale representation of original image" width="672" />
 <p class="caption">
 Figure 16.7: Greyscale representation of original image
 </p>
@@ -933,24 +933,24 @@ Figure 16.7: Greyscale representation of original image
 <p>Now let’s compute some approximations of rank 3, 10 and 50:</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="svdapp.html#cb244-1" aria-hidden="true" tabindex="-1"></a>rappaR3<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span>
 <span id="cb244-2"><a href="svdapp.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR3, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" alt="Rank 3 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-119"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="Rank 3 approximation of the image data" width="672" />
 <p class="caption">
 Figure 16.8: Rank 3 approximation of the image data
 </p>
 </div>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="svdapp.html#cb245-1" aria-hidden="true" tabindex="-1"></a>rappaR10<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
 <span id="cb245-2"><a href="svdapp.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR10, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-118"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-118-1.png" alt="Rank 10 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-120"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" alt="Rank 10 approximation of the image data" width="672" />
 <p class="caption">
 Figure 16.9: Rank 10 approximation of the image data
 </p>
 </div>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="svdapp.html#cb246-1" aria-hidden="true" tabindex="-1"></a>rappaR25<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ]</span>
 <span id="cb246-2"><a href="svdapp.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-119"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="Rank 50 approximation of the image data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-121"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" alt="Rank 50 approximation of the image data" width="672" />
 <p class="caption">
 Figure 16.10: Rank 50 approximation of the image data
 </p>
@@ -976,8 +976,8 @@ Figure 16.10: Rank 50 approximation of the image data
 <span id="cb249-2"><a href="svdapp.html#cb249-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb249-3"><a href="svdapp.html#cb249-3" aria-hidden="true" tabindex="-1"></a>rappa_bad25<span class="ot">=</span>U[ ,<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb249-4"><a href="svdapp.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-121"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (15.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-123"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (15.2)" width="672" />
 <p class="caption">
 Figure 16.11: The last 25 components, or the sum of the last 25 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
 </p>
@@ -987,8 +987,8 @@ Figure 16.11: The last 25 components, or the sum of the last 25 terms in equatio
 <span id="cb250-2"><a href="svdapp.html#cb250-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb250-3"><a href="svdapp.html#cb250-3" aria-hidden="true" tabindex="-1"></a>rappa_bad50<span class="ot">=</span>U[ ,<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb250-4"><a href="svdapp.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad50, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-122"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-122-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (15.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-124"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-124-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (15.2)" width="672" />
 <p class="caption">
 Figure 16.12: The last 50 components, or the sum of the last 50 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
 </p>
@@ -998,8 +998,8 @@ Figure 16.12: The last 50 components, or the sum of the last 50 terms in equatio
 <span id="cb251-2"><a href="svdapp.html#cb251-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb251-3"><a href="svdapp.html#cb251-3" aria-hidden="true" tabindex="-1"></a>rappa_bad100<span class="ot">=</span>U[ ,<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
 <span id="cb251-4"><a href="svdapp.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad100, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-123"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (15.2)" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-125"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (15.2)" width="672" />
 <p class="caption">
 Figure 16.13: The last 100 components, or the sum of the last 100 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
 </p>

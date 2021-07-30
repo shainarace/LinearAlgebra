@@ -1,11 +1,6 @@
 # Applications of Principal Components {#pcaapp}
 
-```{r, echo=F}
-thmcounter=0
-excounter=0
-cid='pcaapp'
-```
- Principal components have a number of applications across many areas of statistics. In the next sections, we will explore their usefulness in the context of dimension reduction. In Chapter \ref{advanced} we will look at how PCA is used to solve the issue of multicollinearity in biased regression.
+ Principal components have a number of applications across many areas of statistics. In the next sections, we will explore their usefulness in the context of dimension reduction.
 
 
 ## Dimension reduction
@@ -18,26 +13,20 @@ It is quite common for an analyst to have too many variables. There are two diff
 
 ### Feature Selection 
 
-Let's think for a minute about feature selection. What are we really doing when we consider a subset of our existing variables? Take the two dimensional data in Example \ref{ex:pcabasis} (while two-dimensions rarely necessitate dimension reduction, the geometrical interpretation extends to higher dimensions as usual!). The centered data appears as follows:
+Let's think for a minute about feature selection. What are we really doing when we consider a subset of our existing variables? Take the two dimensional data in Example \@ref(ex:pcabasis) (while two-dimensions rarely necessitate dimension reduction, the geometrical interpretation extends to higher dimensions as usual!). The centered data appears as follows:
 
-<img src={figs/pcpointscenter.pdf width=40%/>
+```{r fig.align='center',  echo=F, out.width="40%"}
+knitr::include_graphics("figs/pcpointscenter.png")
+```
 
-Now say we perform some kind of feature selection (there are a number of ways to do this, chi-square tests for instances) and we determine that the variable $\x_2$ is more important than $\x_1$. So we throw out $\x_2$ and we've reduced the dimensions from $p=2$ to $k=1$. Geometrically, what does our new data look like? By dropping $\x_1$ we set all of those horizontal coordinates to zero. In other words, we **project the data orthogonally** onto the $\x_2$ axis:
+Now say we perform some kind of feature selection (there are a number of ways to do this, chi-square tests for instances) and we determine that the variable $\x_2$ is more important than $\x_1$. So we throw out $\x_2$ and we've reduced the dimensions from $p=2$ to $k=1$. Geometrically, what does our new data look like? By dropping $\x_1$ we set all of those horizontal coordinates to zero. In other words, we **project the data orthogonally** onto the $\x_2$ axis, as illustrated in Figure \@ref(fig:pcpointsselect).
 
-\begin{figure}[h!]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{figs/pcpointsselect1.pdf}
-\caption{Projecting Data Orthogonally}
-\label{select1}
-\end{subfigure}
-\begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{figs/pcpointsselect2.pdf}
-\caption{New One-Dimensional Data}
-\label{select2}
-\end{subfigure}
-\caption{Geometrical Interpretation of Feature Selection}
-\end{figure}
+(ref:pcpointscap) Geometrical Interpretation of Feature Selection: When we "drop" the variable $\x_1$ from our analysis, we are projecting the data onto the span($\x_2$)
+
+```{r label='pcpointsselect', fig.align='center', fig.show='hold', fig.cap = '(ref:pcpointscap)', echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcpointsselect1.jpg")
+knitr::include_graphics("figs/pcpointsselect2.jpg")
+```
 
 Now, how much information (variance) did we lose with this projection? The total variance in the original data is 
 $$\|\x_1\|^2+\|\x_2\|^2.$$
@@ -49,49 +38,41 @@ Our reduced dimensional data contains only 51.7\% of the variance of the origina
 
 The fact that feature selection omits variance in our predictor variables does not make it a bad thing! Obviously, getting rid of variables which have no relationship to a target variable (in the case of _supervised_ modeling like prediction and classification) is a good thing. But, in the case of _unsupervised_ learning techniques, where there is no target variable involved, we must be extra careful when it comes to feature selection. In summary,
 
-1. Feature Selection is important. Examples include:
-
-  a. Removing variables which have little to no impact on a target variable in supervised modeling (forward/backward/stepwise selection).
-  b. Removing variables which have obvious strong correlation with other predictors.
-  c. Removing variables that are not interesting in unsupervised learning (For example, you may not want to use the words ``th'' and ``of'' when clustering text).
-
-2. Feature Selection is an orthogonal projection of the original data onto the span of the variables you choose to keep.
-3. Feature selection should always be done with care and justification. 
-
-  d. In regression, could create problems of endogeneity (errors correlated with predictors - omitted variable bias).
-  e. For unsupervised modelling, could lose important information. 
-
+<ol>
+<li> Feature Selection is important. Examples include:
+<ul>
+  <li> Removing variables which have little to no impact on a target variable in supervised modeling (forward/backward/stepwise selection).
+  <li> Removing variables which have obvious strong correlation with other predictors.
+  <li> Removing variables that are not interesting in unsupervised learning (For example, you may not want to use the words "the" and "of" when clustering text).
+</ul>
+<li> Feature Selection is an orthogonal projection of the original data onto the span of the variables you choose to keep.
+<li> Feature selection should always be done with care and justification. 
+<ul>
+  <li> In regression, could create problems of endogeneity (errors correlated with predictors - omitted variable bias).
+  <li> For unsupervised modelling, could lose important information. 
+</ul>
+<.ol>
 
 ### Feature Extraction 
 
-PCA is the most common form of feature extraction. The rotation of the space shown in Example \ref{ex:pcabasis} represents the creation of new features which are linear combinations of the original features. If we have $p$ potential variables for a model and want to reduce that number to $k$, then the first $k$ principal components combine the individual variables in such a way that is guaranteed to capture as much ``information'' (variance) as possible. Again, take our two-dimensional data as an example. When we reduce our data down to one-dimension using principal components, we essentially do the same orthogonal projection that we did in Feature Selection, only in this case we conduct that projection in the new basis of principal components. Recall that for this data, our first principal component $\v_1$ was $$\v_1 = \pm 0.69 \\0.73 \mp.$$
-Projecting the data onto the first principal component is illustrated in Figure \ref{pcaproj}
-\begin{figure}[h!]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{figs/pcproj1.pdf}
-\caption{Projecting Data Orthogonally}
-\label{select1}
-\end{subfigure}
-\begin{subfigure}[b]{0.45\textwidth}
-\includegraphics[width=\textwidth]{figs/pcproj2.pdf}
-\caption{New One-Dimensional Data}
-\label{select2}
-\end{subfigure}
-\caption{Illustration of Feature Extraction via PCA}
-\label{pcaproj}
-\end{figure}
+PCA is the most common form of feature extraction. The rotation of the space shown in Example \@ref(ex:pcabasis) represents the creation of new features which are linear combinations of the original features. If we have $p$ potential variables for a model and want to reduce that number to $k$, then the first $k$ principal components combine the individual variables in such a way that is guaranteed to capture as much ``information'' (variance) as possible. Again, take our two-dimensional data as an example. When we reduce our data down to one-dimension using principal components, we essentially do the same orthogonal projection that we did in Feature Selection, only in this case we conduct that projection in the new basis of principal components. Recall that for this data, our first principal component $\v_1$ was $$\v_1 = \pm 0.69 \\0.73 \mp.$$
+Projecting the data onto the first principal component is illustrated in Figure \@ref(fig:pcaproj).
+
+
+```{r label='pcaproj', fig.align='center', fig.show='hold', fig.cap = 'Illustration of Feature Extraction via PCA', echo=F, out.width="50%"}
+knitr::include_graphics("figs/pcproj1.jpg")
+knitr::include_graphics("figs/pcproj2.jpg")
+```
+
  How much variance do we keep with $k$ principal components? The proportion of variance explained by each principal component is the ratio of the corresponding eigenvalue to the sum of the eigenvalues (which gives the total amount of variance in the data).
 
-```{r, echo=F} 
-thmcounter=thmcounter+1
-```
-```{thm title='Proportion of Variance Explained', id='pcpropvar', num=thmcounter}
+
+:::{theorem name='Proportion of Variance Explained' #pcpropvar}
 The proportion of variance explained by the projection of the data onto principal component $\v_i$ is
 $$\frac{\lambda_i}{\sum_{j=1}^p \lambda_j}.$$
 Similarly, the proportion of variance explained by the projection of the data onto the first $k$ principal components ($k<j$) is
 $$ \frac{\sum_{i=1}^k\lambda_i}{\sum_{j=1}^p \lambda_j}$$
-```
+:::
 
 In our simple 2 dimensional example we were able to keep
 $$\frac{\lambda_1}{\lambda_1+\lambda_2}=\frac{10.61}{10.61+1.00} = 91.38\%$$
@@ -122,7 +103,7 @@ food=as.data.frame(t(food))
 head(food)
 ```
 
-Next we will visualize the information in this data using a simple heat map. To do this we will standardize and then melt the data using the \blue{reshape2} package, and then use a \blue{ggplot()} heatmap.
+Next we will visualize the information in this data using a simple heat map. To do this we will standardize and then melt the data using the `reshape2` package, and then use a `ggplot()` heatmap.
 
 ```{r fig=T, fig.align='center'}
 food.std = scale(food, center=T, scale = T)
@@ -144,14 +125,14 @@ ggplot(data = food.melt, aes(x=Var1, y=Var2, fill=value)) +
 
 The ```prcomp()``` function is the one I most often recommend for reasonably sized principal component calculations in R. This function returns a list with class "prcomp" containing the following components (from help prcomp):
 
-\begin{enumerate}
-\item ```sdev```: the standard deviations of the principal components (i.e., the square roots of the eigenvalues of the covariance/correlation matrix, though the calculation is actually done with the singular values of the data matrix).
-\item ```rotation```: the matrix of \textit{variable loadings} (i.e., a matrix whose columns contain the eigenvectors). The function princomp returns this in the element loadings.
- \item ```x```:  if retx is true \textit{the value of the rotated data (i.e. the scores)} (the centred (and scaled if requested) data multiplied by the rotation matrix) is returned. Hence, cov(x) is the diagonal matrix $diag(sdev^2)$. For the formula method, napredict() is applied to handle the treatment of values omitted by the na.action.
-\item ```center```, ``` scale```: the centering and scaling used, or FALSE.
-\end{enumerate}
+<ol>
+<li> ```sdev```: the standard deviations of the principal components (i.e., the square roots of the eigenvalues of the covariance/correlation matrix, though the calculation is actually done with the singular values of the data matrix).
+<li> ```rotation```: the matrix of _variable loadings_ (i.e., a matrix whose columns contain the eigenvectors). The function princomp returns this in the element loadings.
+<li> ```x```:  if retx is true _the value of the rotated data (i.e. the scores)_ (the centred (and scaled if requested) data multiplied by the rotation matrix) is returned. Hence, cov(x) is the diagonal matrix $diag(sdev^2)$. For the formula method, napredict() is applied to handle the treatment of values omitted by the na.action.
+<li> ```center```, ``` scale```: the centering and scaling used, or FALSE.
+</ol>
 
-The option ```scale = TRUE``` inside the ```prcomp()``` function instructs the program to use **orrelation PCA**. *The default is covariance PCA*. 
+The option `scale = TRUE` inside the `prcomp()` function instructs the program to use **orrelation PCA**. *The default is covariance PCA*. 
 
 
 ```{r}
@@ -191,9 +172,9 @@ biplot(pca$x,pca$rotation, cex = c(1.5, 1), col = c('black','red'))#,
 
 #### Formatting the biplot for readability
 
-I will soon introduce the ```autoplot()``` function from the ```ggfortify`` package, but for now I just want to show you that you can specify _which_ variables (and observations) to include in the biplot by directly specifying the loadings matrix and scores matrix of interest in the biplot function:
+I will soon introduce the `autoplot()` function from the `ggfortify` package, but for now I just want to show you that you can specify _which_ variables (and observations) to include in the biplot by directly specifying the loadings matrix and scores matrix of interest in the biplot function:
 
-```{r fig=T, fig.align='center'}
+```{r fig.align='center', fig=T, fig.cap = "Specify a Subset of Variables/Observations to Include in the Biplot "}
 desired.variables = c(2,4,6,8,10)
 biplot(pca$x, pca$rotation[desired.variables,1:2], cex = c(1.5, 1), 
        col = c('black','red'), xlim = c(-6,5), ylim = c(-4,4))
@@ -203,9 +184,9 @@ biplot(pca$x, pca$rotation[desired.variables,1:2], cex = c(1.5, 1),
 
 Those numbers relate to the scores on PC1 and PC2 (sometimes normalized so that each new variable has variance 1 - and sometimes not) and the loadings on PC1 and PC2 (sometimes normalized so that each variable vector is a unit vector - and sometimes scaled by the eigenvalues or square roots of the eigenvalues in some fashion).
 
-Generally, I've never found it useful to hunt down how each package is rendering the biplot, as they should be providing the same information regardless of the _numbers_ on the axes. We don't actually use those numbers to help us draw conclusions. We use the directions of the arrows and the layout of the points in reference to those direction arrows. 
+Generally, I've rarely found it useful to hunt down how each package is rendering the axes the biplot, as they should be providing the same information regardless of the scale of the _numbers_ on the axes. We don't actually use those numbers to help us draw conclusions. We use the directions of the arrows and the layout of the points in reference to those direction arrows. 
 
-```{r,  fig.align='center'}
+```{r,  fig.align='center', fig=T, fig.cap = "Biplot with Rotated Loadings"}
 vmax = varimax(pca$rotation[,1:2])
 new.scores = pca$x[,1:2] %*% vmax$rotmat
 

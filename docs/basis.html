@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-07-29" />
+<meta name="date" content="2021-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 <!DOCTYPE html>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  loader: {load: ['[tex]/cancel', '[tex]/systeme']},
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
   TeX: {
-    packages: {'[+]': ['cancel','systeme','boldsymbol']}
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
   }
 });
 </script>
@@ -647,8 +647,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="basis" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Basis and Change of Basis</h1>
-<p>When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:\</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<p>When we think of coordinate pairs, or coordinate triplets, we tend to think of them as points on a grid where each axis represents one of the coordinate directions:<br />
+</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
 <img src="figs/coordplane.jpg" alt="The Coordinate Plane" width="40%" />
 <p class="caption">
 Figure 8.1: The Coordinate Plane
@@ -670,7 +671,7 @@ Figure 8.2: Orthogonal Projections onto basis vectors
 </p>
 </div>
 <div class="definition">
-<p><span id="def:elembasisdef" class="definition"><strong>Definition 8.1  (Elementary Basis) </strong></span>For any vector <span class="math inline">\(\a=(a_1,a_2,\dots, a_n)\)</span>, the basis <span class="math inline">\(\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}\)</span> (recall <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the identity matrix <span class="math inline">\(\bo{I}_n\)</span>) is the  and <span class="math inline">\(\a\)</span> can be written in this basis using the  <span class="math inline">\(a_1,a_2,\dots, a_n\)</span> as follows:
+<p><span id="def:elembasisdef" class="definition"><strong>Definition 8.1  (Elementary Basis) </strong></span>For any vector <span class="math inline">\(\a=(a_1,a_2,\dots, a_n)\)</span>, the basis <span class="math inline">\(\mathcal{B} = \{\e_1,\e_2,\dots,\e_n\}\)</span> (recall <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the identity matrix <span class="math inline">\(\bo{I}_n\)</span>) is the <strong>elementary basis</strong> and <span class="math inline">\(\a\)</span> can be written in this basis using the <strong>coordinates</strong> <span class="math inline">\(a_1,a_2,\dots, a_n\)</span> as follows:
 <span class="math display">\[\a=a_1\e_1+a_2\e_2+\dots a_n\e_n.\]</span></p>
 </div>
 <p>The elementary basis <span class="math inline">\(\mathcal{B}_1\)</span> is convenient for many reasons, one being its <strong>orthonormality</strong>:
@@ -737,7 +738,7 @@ where <span class="math inline">\(\X\)</span> and <span class="math inline">\(\V
 <h2><span class="header-section-number">8.1</span> Exercises</h2>
 <ol>
 <li>
-What are the coordinates of the vector <span class="math inline">\(\x=\pm 4\\3 \mp\)</span> in the basis <span class="math inline">\(\left{\pm -1\\-1 \mp , \pm 1\\-1 \mp \right}\)</span>? Draw a picture to make sure your answer lines up with intuition.
+What are the coordinates of the vector <span class="math inline">\(\x=\pm 4\\3 \mp\)</span> in the basis <span class="math inline">\(\left\lbrace\pm -1\\-1 \mp , \pm 1\\-1 \mp \right\rbrace\)</span>? Draw a picture to make sure your answer lines up with intuition.
 <li>
 In the following picture what would be the signs (+/-) of the coordinates of the green point in the basis <span class="math inline">\(\{\v_1, \v_2\}\)</span>? Pick another point at random and answer the same question for that point.
 <center>
