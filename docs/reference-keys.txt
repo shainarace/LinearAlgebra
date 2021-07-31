@@ -3,6 +3,8 @@ exm:dimensions
 exr:dimensions
 def:ijnotdef
 def:rowcol
+tab:examijnot
+exm:ijnot
 exr:ijnot
 def:equality
 fig:unnamed-chunk-7
