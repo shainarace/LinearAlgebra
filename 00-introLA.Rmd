@@ -14,7 +14,7 @@ Such a plane is a classic example - the set of points $(x,y,z)$ satisfying this 
 
 A linear function involves only multiplication by scalars and addition/subtraction, for example:
 $$2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.$$
-The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a forth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we ought to be able to suspend our disbelief and assume that a "forth axes" (forth dimension) can be considered to represent cost. 
+The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (forth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, the 4+ dimensional lists of numbers maintain all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that we developed in 2- and 3-dimensional space.
 
 In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare "these two observations are far away from each other". 
 
@@ -31,28 +31,29 @@ Learning to work with matrices will be like learning a new language - the only w
 If you want to understand the foundations of data science, it is imperative that you be familiar with Linear Algebra. As you've probably already noticed, data tends to come in rows and columns. By its very nature, data forms a matrix. A **matrix** is just an array of numbers, logically ordered by rows and columns. For example take the following data:
 
 
-\begin{center}
-\begin{tabular}{l|c|c}
-Name & Credit Score & Income\\
-\hline
-John & 780 & 95000\\
-Sam & 600 & 60000\\
-Elena & 550 & 65000\\
-Jim & 400 & 35000\\
-Eric & 450 & 40000\\
-Helen & 750 & 80000
-\end{tabular}
-\end{center}
+<table>
+<tr><td>Name <td> Credit Score <td> Income
+<tr><td> John <td> 780 <td> 95000
+<tr><td> Sam <td> 600 <td> 60000
+<tr><td> Elena <td> 550 <td> 65000
+<tr><td> Jim <td> 400 <td> 35000
+<tr><td> Eric <td> 450 <td> 40000
+<tr><td> Helen <td> 750 <td> 80000
+</table>
 
 To do anything to this data, we need a way to store it mathematically. This is done by creating a matrix:
 
-\bordermatrix{  Credit Score & Income}{John \\Sam \\Elena \\Jim \\Eric \\Helen}{ 
+\begin{equation*}
+\begin{array}{ccc} & Credit Score & Income \\
+\begin{array}{c} John \\Sam \\Elena \\Jim \\Eric \\Helen \end{array} &
 \left(\begin{matrix} 780 & 95000\\
 600 & 60000\\
 550 & 65000\\
  400 & 35000\\
  450 & 40000\\
-750 & 80000 \end{matrix} \right)}
+750 & 80000 \end{matrix} \right)
+\end{array}
+\end{equation*}
 
 
 The rows of this matrix correspond to observations, in this case a sample of people for whom we have collected data. The columns of this matrix correspond to the variables we are measuring. Some manipulation and pre-processing is usually required to turn nominal/categorical/qualitative variables into numerical data, often using binary dummy variables. Most every tool in data science involves some form of linear algebra on a data matrix.  In this course, we will learn some of the foundations of these tools. If you master the material in this course, you will be able to understand many more advanced data techniques as you progress through your careers. With that in mind, let's start at the beginning.

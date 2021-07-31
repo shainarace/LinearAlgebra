@@ -1,6 +1,6 @@
 --- 
 author: "Shaina Race Bennett, PhD"
-date: "2021-07-30"
+date: "2021-07-31"
 link-citations: yes
 github-repo: shainarace/linearalgebra
 title: "Linear Algebra for Data Science"
@@ -64,7 +64,7 @@ Such a plane is a classic example - the set of points $(x,y,z)$ satisfying this 
 
 A linear function involves only multiplication by scalars and addition/subtraction, for example:
 $$2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.$$
-The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a forth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we ought to be able to suspend our disbelief and assume that a "forth axes" (forth dimension) can be considered to represent cost. 
+The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (forth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, the 4+ dimensional lists of numbers maintain all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that we developed in 2- and 3-dimensional space.
 
 In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare "these two observations are far away from each other". 
 
@@ -81,28 +81,29 @@ Learning to work with matrices will be like learning a new language - the only w
 If you want to understand the foundations of data science, it is imperative that you be familiar with Linear Algebra. As you've probably already noticed, data tends to come in rows and columns. By its very nature, data forms a matrix. A **matrix** is just an array of numbers, logically ordered by rows and columns. For example take the following data:
 
 
-\begin{center}
-\begin{tabular}{l|c|c}
-Name & Credit Score & Income\\
-\hline
-John & 780 & 95000\\
-Sam & 600 & 60000\\
-Elena & 550 & 65000\\
-Jim & 400 & 35000\\
-Eric & 450 & 40000\\
-Helen & 750 & 80000
-\end{tabular}
-\end{center}
+<table>
+<tr><td>Name <td> Credit Score <td> Income
+<tr><td> John <td> 780 <td> 95000
+<tr><td> Sam <td> 600 <td> 60000
+<tr><td> Elena <td> 550 <td> 65000
+<tr><td> Jim <td> 400 <td> 35000
+<tr><td> Eric <td> 450 <td> 40000
+<tr><td> Helen <td> 750 <td> 80000
+</table>
 
 To do anything to this data, we need a way to store it mathematically. This is done by creating a matrix:
 
-\bordermatrix{  Credit Score & Income}{John \\Sam \\Elena \\Jim \\Eric \\Helen}{ 
+\begin{equation*}
+\begin{array}{ccc} & Credit Score & Income \\
+\begin{array}{c} John \\Sam \\Elena \\Jim \\Eric \\Helen \end{array} &
 \left(\begin{matrix} 780 & 95000\\
 600 & 60000\\
 550 & 65000\\
  400 & 35000\\
  450 & 40000\\
-750 & 80000 \end{matrix} \right)}
+750 & 80000 \end{matrix} \right)
+\end{array}
+\end{equation*}
 
 
 The rows of this matrix correspond to observations, in this case a sample of people for whom we have collected data. The columns of this matrix correspond to the variables we are measuring. Some manipulation and pre-processing is usually required to turn nominal/categorical/qualitative variables into numerical data, often using binary dummy variables. Most every tool in data science involves some form of linear algebra on a data matrix.  In this course, we will learn some of the foundations of these tools. If you master the material in this course, you will be able to understand many more advanced data techniques as you progress through your careers. With that in mind, let's start at the beginning.
@@ -1619,7 +1620,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.2315013 0.2629756
+## [1] -0.04327821  0.10206859
 ```
 
 ```r
@@ -1629,7 +1630,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.02434028 0.03931667
+## [1]  0.09760085 -0.09726631
 ```
 
 ```r
@@ -1639,7 +1640,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 0.9328960 0.9683062
+## [1] 1.121775 1.047978
 ```
 
 ```r
@@ -1649,7 +1650,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 1.6859963 3.2107129 0.5978790 0.5769954 1.2408027
+## [1] 3.371572 1.028439 1.815321 1.734083 5.707810
 ```
 
 ```r
@@ -1659,7 +1660,7 @@ colMeans(B)
 ```
 
 ```
-## [1]  2.237793e-17 -2.695760e-17
+## [1] -1.734723e-18  2.275957e-17
 ```
 
 ```r
@@ -1705,12 +1706,12 @@ A[1:5, ]
 ```
 
 ```
-##            This        That
-## [1,]  0.3380690 -1.25367686
-## [2,] -0.9038716 -1.54716807
-## [3,] -0.7687509  0.08307303
-## [4,]  0.5132449 -0.55997779
-## [5,] -0.6528813  0.90252353
+##             This       That
+## [1,]  0.90491883 -1.5977153
+## [2,] -0.06303485 -1.0121590
+## [3,]  1.03768796  0.8593747
+## [4,]  0.79896225 -1.0467771
+## [5,]  1.81229403 -1.5567273
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -3225,7 +3226,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserve5a3fcda727bd5fb3
+preserve62c89067d2bf7f26
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -4371,11 +4372,11 @@ cor(data)
 ```
 
 ```
-##              [,1]        [,2]        [,3]        [,4]
-## [1,]  1.000000000 -0.05269310  0.01582640 0.001919819
-## [2,] -0.052693096  1.00000000 -0.05700531 0.051179065
-## [3,]  0.015826403 -0.05700531  1.00000000 0.045262646
-## [4,]  0.001919819  0.05117907  0.04526265 1.000000000
+##              [,1]         [,2]         [,3]         [,4]
+## [1,]  1.000000000 -0.003239871  0.059349260  0.027203898
+## [2,] -0.003239871  1.000000000 -0.001466858 -0.001966751
+## [3,]  0.059349260 -0.001466858  1.000000000  0.056412847
+## [4,]  0.027203898 -0.001966751  0.056412847  1.000000000
 ```
 
 ```r
@@ -4386,9 +4387,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0428 1.0220 0.9882 0.9443
-## Proportion of Variance 0.2718 0.2611 0.2441 0.2229
-## Cumulative Proportion  0.2718 0.5330 0.7771 1.0000
+## Standard deviation     1.0473 1.0000 0.9863 0.9646
+## Proportion of Variance 0.2742 0.2500 0.2432 0.2326
+## Cumulative Proportion  0.2742 0.5242 0.7674 1.0000
 ```
 
 ```r
@@ -4396,11 +4397,11 @@ pc$rotation
 ```
 
 ```
-##             PC1          PC2        PC3        PC4
-## [1,] -0.5069066 -0.001916545 -0.8270674  0.2429024
-## [2,]  0.7051350 -0.197084068 -0.2450722  0.6355173
-## [3,] -0.4697804 -0.564313841  0.4408505  0.5162433
-## [4,]  0.1585457 -0.801688272 -0.2480928 -0.5202010
+##              PC1          PC2         PC3         PC4
+## [1,]  0.54692152 -0.008192766 -0.68332875  0.48360268
+## [2,] -0.03890931  0.998620656 -0.02992299  0.01864043
+## [3,]  0.64588554  0.038706111 -0.02286830 -0.76210941
+## [4,]  0.53122010  0.034518125  0.72913886  0.43008165
 ```
 
 ```r
@@ -5023,7 +5024,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preservea503d3a2d6f880cd
+preserve7d643220e940bdaa
 <p class="caption">(\#fig:unnamed-chunk-75)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10258,7 +10259,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preservea8ab25a2a7377e66
+preserveaceaa7e07f43fd51
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10281,7 +10282,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preservedec25c7e89f70d0f
+preserve04929dfa4cdd0114
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -11460,7 +11461,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserve94654f5fe6430ba3
+preserve62d4069402099c40
 
 ### Saving your Interactive Visualization to .html
 
