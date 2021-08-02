@@ -539,7 +539,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
 <li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
 </ul></li>
@@ -548,10 +549,14 @@ div.csl-indent {
 <li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
 <li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
-<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Clustering</b></span></li>
@@ -650,24 +655,32 @@ div.csl-indent {
 <div id="fa" class="section level1" number="17">
 <h1><span class="header-section-number">Chapter 17</span> Factor Analysis</h1>
 <p>Factor Analysis is about looking for underlying <em>relationships</em> or <em>associations</em>. In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some <em>latent</em> factor, that is the individual’s <em>quantitative reasoning</em>. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.</p>
-<p>Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will ``figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.</p>
+<p>Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will “figure it out,” your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.</p>
 <div id="assumptions-of-factor-analysis" class="section level2" number="17.1">
 <h2><span class="header-section-number">17.1</span> Assumptions of Factor Analysis</h2>
-<ol style="list-style-type: decimal">
-<li>No outliers in the data set</li>
-<li>Adequate sample size</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.</li>
-<li>You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table  for the details on this.</li>
-</ol>
-<ol start="3" style="list-style-type: decimal">
-<li>No perfect multicollinearity</li>
-<li>Homoskedasticity <em>not</em> required between variables (all variances <em>not</em> required to be equal)</li>
-<li>Linearity of variables desired - only models linear correlation between variables</li>
-<li>Interval data (as opposed to nominal)</li>
-<li>Measurement error on the variables/observations has constant variance and is, on average, 0</li>
-<li>Normality is not required</li>
+<ol>
+<li>
+No outliers in the data set
+<li>
+Adequate sample size
+<ul>
+<li>
+As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
+<li>
+You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table <a href="#tab:factorsig"><strong>??</strong></a> for the details on this.
+&lt;
+<li>
+No perfect multicollinearity
+<li>
+Homoskedasticity <em>not</em> required between variables (all variances <em>not</em> required to be equal)
+<li>
+Linearity of variables desired - only models linear correlation between variables
+<li>
+Interval data (as opposed to nominal)
+<li>
+Measurement error on the variables/observations has constant variance and is, on average, 0
+<li>
+Normality is not required
 </ol>
 <table>
 <caption>Factor loadings are the correlation of each variable and the factor. This table is a guide for the sample sizes necessary to consider a factor loading significant. For example, in a sample of 100, factor loadings of 0.55 are considered significant. In a sample size of 70, however, factor loadings must reach 0.65 to be considered significant. Significance based on 0.05 level, a power level of 80 percent. Source: <em>Computations made with SOLO Power Analysis, BMDP Statistical Software, Inc., 1993</em></caption>
@@ -740,7 +753,7 @@ Which implies that there are no underlying factors to be uncovered. Obviously, w
 </div>
 <div id="kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy" class="section level3" number="17.2.3">
 <h3><span class="header-section-number">17.2.3</span> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</h3>
-<p>The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett’s test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of <em>partial correlation</em>. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high (<span class="math inline">\(\approx 1\)</span>), then PCA can act efficiently; if the KMO index is low (<span class="math inline">\(\approx 0\)</span>), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table <a href="#tab:KMO">17.1</a> contains the information about interpretting KMO results that was provided in the original 1974 paper.</p>
+<p>The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett’s test in that it checks if we can factorize the original variables efficiently. However, the KMO measure is based on the idea of <em>partial correlation</em> <span class="citation"><a href="#ref-kmo" role="doc-biblioref">[1]</a></span>. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high (<span class="math inline">\(\approx 1\)</span>), then PCA can act efficiently; if the KMO index is low (<span class="math inline">\(\approx 0\)</span>), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table <a href="fa.html#tab:KMO">17.1</a> contains the information about interpretting KMO results that was provided in the original 1974 paper.</p>
 <table>
 <tr>
 <td>
@@ -774,16 +787,16 @@ Miserable
 Don’t Factor
 </td>
 </table>
-Table: (#tab:KMO) Interpretting the KMO value. 
-<p>\end{center}
-\end{table}</p>
+<caption>
+<span id="tab:KMO">Table 17.1: </span> Interpretting the KMO value. <span class="citation"><a href="#ref-kmo" role="doc-biblioref">[1]</a></span>
+</caption>
 <p>So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.</p>
 </div>
 </div>
 <div id="communalities" class="section level2" number="17.3">
 <h2><span class="header-section-number">17.3</span> Communalities</h2>
 <p>You can think of <strong>communalities</strong> as multiple <span class="math inline">\(R^2\)</span> values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.</p>
-<p>Take for example the SAS output for factor analysis on the Iris dataset shown in Figure . The factor model (which settles on only one single factor) explains 98% of the variability in <em>petal length</em>. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated <span class="math inline">\(R^2\)</span> value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in <em>petal length, petal width, and sepal length</em>.</p>
+<p>Take for example the SAS output for factor analysis on the Iris dataset shown in Figure <a href="#fig:factorOUT"><strong>??</strong></a>. The factor model (which settles on only one single factor) explains 98% of the variability in <em>petal length</em>. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated <span class="math inline">\(R^2\)</span> value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in <em>petal length, petal width, and sepal length</em>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-127"></span>
 <img src="figs/factorOUT.png" alt="SAS output for PROC FACTOR using Iris Dataset" width="100%" />
@@ -1102,6 +1115,12 @@ Figure 17.9: BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions
 <p>After the rotation, we can see the BiPlots tell a more distinct story. The extroversion questions line up along rotated axes 1, neuroticism along rotated axes 2, and agreeableness and openness are reflected in rotated axes 3 and 4 respectively. The fifth rotated component can be confirmed to represent the last remaining category which is conscientiousness.</p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-kmo" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. F. Kaiser, <span>“An index of factorial simplicity,”</span> <em>Psychometrika</em>, 1974.</div>
 </div>
 </div>
             </section>

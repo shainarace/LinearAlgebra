@@ -1633,7 +1633,7 @@ colMeans(A)
 ```
 
 ```
-## [1]  0.4174515 -0.0689434
+## [1] 0.4774505 0.2310041
 ```
 
 ```r
@@ -1643,7 +1643,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.05367730 0.02678996
+## [1] -0.013688612  0.004838959
 ```
 
 ```r
@@ -1653,7 +1653,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 0.9107075 1.0668526
+## [1] 0.9046901 1.2069431
 ```
 
 ```r
@@ -1663,7 +1663,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 0.9189428 0.8502678 1.2402235 1.2191278 0.8580084
+## [1] 0.6662789 2.9035946 0.1906068 0.7413685 5.8533517
 ```
 
 ```r
@@ -1673,7 +1673,7 @@ colMeans(B)
 ```
 
 ```
-## [1] 1.249001e-17 4.163336e-18
+## [1]  1.477117e-17 -2.463307e-18
 ```
 
 ```r
@@ -1719,12 +1719,12 @@ A[1:5, ]
 ```
 
 ```
-##            This       That
-## [1,]  0.8224768 -0.4924172
-## [2,]  0.1233941  0.9138061
-## [3,] -0.3271160 -1.0645274
-## [4,]  0.7248556  0.8328939
-## [5,] -0.7789239  0.5012843
+##              This       That
+## [1,] -0.325700415  0.7484639
+## [2,]  0.842890865  1.4809219
+## [3,] -0.182196641 -0.3967507
+## [4,] -0.717741266 -0.4756217
+## [5,] -0.006427925  2.4193616
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -3251,7 +3251,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserve6d34be407ff01352
+preserved42fd4034a8d99cf
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -4406,11 +4406,11 @@ cor(data)
 ```
 
 ```
-##             [,1]        [,2]         [,3]        [,4]
-## [1,]  1.00000000 -0.03449587  0.026123357 0.016023776
-## [2,] -0.03449587  1.00000000 -0.027582552 0.022800337
-## [3,]  0.02612336 -0.02758255  1.000000000 0.008033149
-## [4,]  0.01602378  0.02280034  0.008033149 1.000000000
+##              [,1]        [,2]        [,3]         [,4]
+## [1,]  1.000000000 -0.07479601 -0.00925664 -0.005256619
+## [2,] -0.074796014  1.00000000 -0.06295770 -0.020391034
+## [3,] -0.009256640 -0.06295770  1.00000000  0.097759310
+## [4,] -0.005256619 -0.02039103  0.09775931  1.000000000
 ```
 
 ```r
@@ -4421,9 +4421,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0291 1.0083 0.9875 0.9743
-## Proportion of Variance 0.2647 0.2542 0.2438 0.2373
-## Cumulative Proportion  0.2647 0.5189 0.7627 1.0000
+## Standard deviation     1.0638 1.0278 0.9644 0.9391
+## Proportion of Variance 0.2829 0.2641 0.2325 0.2205
+## Cumulative Proportion  0.2829 0.5470 0.7795 1.0000
 ```
 
 ```r
@@ -4431,11 +4431,11 @@ pc$rotation
 ```
 
 ```
-##               PC1       PC2         PC3        PC4
-## [1,] -0.590720848 0.2547077 -0.55913517  0.5230112
-## [2,]  0.597864995 0.3987553  0.17863415  0.6720428
-## [3,] -0.541845267 0.1572307  0.80704866  0.1742260
-## [4,] -0.003167844 0.8668314 -0.06426638 -0.4944321
+##             PC1        PC2        PC3        PC4
+## [1,]  0.2258401 -0.7195897  0.5585556 -0.3452573
+## [2,] -0.5129898  0.4762629  0.5154574 -0.4942862
+## [3,]  0.6294507  0.2963874 -0.2812207 -0.6609548
+## [4,]  0.5381724  0.4092907  0.5858619  0.4467856
 ```
 
 ```r
@@ -5058,7 +5058,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preserve2b92bc98c3ee243d
+preserve4f21484242196b8e
 <p class="caption">(\#fig:unnamed-chunk-76)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10293,7 +10293,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preserve08696dde01c7d473
+preserve7b35bea63e628168
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10316,7 +10316,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preserve914c6dac10af5498
+preserveaf4719e44faa45ad
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -10595,22 +10595,25 @@ Mostly noise. In the last of these images, we see the outline of Dr. Rappa. One 
 
 Factor Analysis is about looking for underlying _relationships_ or _associations_.  In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some _latent_ factor, that is the individual's _quantitative reasoning_. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.
 
-Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will ``figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.
+Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will "figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.
 
 
 ## Assumptions of Factor Analysis
 
-1. No outliers in the data set
-2. Adequate sample size 
-  a. As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
-  b. You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table \ref{table:factorsig} for the details on this.
-3. No perfect multicollinearity
-4. Homoskedasticity _not_ required between variables (all variances _not_ required to be equal)
-5. Linearity of variables desired - only models linear correlation between variables
-6. Interval data (as opposed to nominal)
-7. Measurement error on the variables/observations has constant variance and is, on average, 0
-8. Normality is not required
-
+<ol>
+<li> No outliers in the data set
+<li> Adequate sample size 
+<ul>
+  <li> As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
+  <li> You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table \@ref(tab:factorsig) for the details on this.
+<\ul>
+<li> No perfect multicollinearity
+<li> Homoskedasticity _not_ required between variables (all variances _not_ required to be equal)
+<li> Linearity of variables desired - only models linear correlation between variables
+<li> Interval data (as opposed to nominal)
+<li> Measurement error on the variables/observations has constant variance and is, on average, 0
+<li> Normality is not required
+</ol>
 
 |Sample Size<br> Needed for Significance| Factor Loading |
 |:-----------------------:|:---------------------:|
@@ -10634,6 +10637,7 @@ Table: Factor loadings are the correlation of each variable and the factor. This
 Before we even begin the process of factor analysis, we have to do some preliminary work to determine whether or not the data even lends itself to this technique. If none of our variables are correlated, then we cannot group them together in any meaningful way! Bartlett's Sphericity Test and the KMO index are two statistical tests for whether or not a set of variables can be factored. These tests _do not_ provide information about the appropriate number of factors, only whether or not such factors even exist.
 
 ### Visual Examination of Correlation Matrix
+
 Depending on how many variables you are working with, you may be able to determine whether or not to proceed with factor analysis by simply examining the correlation matrix. With this examination, we are looking for two things:
 
 1. Correlations that are significant at the 0.01 level of significance. At least half of the correlations should be significant in order to proceed to the next step.
@@ -10648,7 +10652,7 @@ Which implies that there are no underlying factors to be uncovered. Obviously, w
 
 ### Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy
 
-The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of _partial correlation_. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \@ref(tab:KMO) contains the information about interpretting KMO results that was provided in the original 1974 paper.
+The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize the original variables efficiently. However, the KMO measure is based on the idea of _partial correlation_ [@kmo]. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \@ref(tab:KMO) contains the information about interpretting KMO results that was provided in the original 1974 paper.
 
 
 <table>
@@ -10660,11 +10664,8 @@ The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar
 <td>0.50 to 0.59    <td>Miserable</td>
 <td>0.00 to 0.49   <td>Don't Factor</td>
 </table>
-Table: (\#tab:KMO) Interpretting the KMO value. \cite{KMO}
-\caption{Interpretting the KMO value. }
-\label{table:KMO}
-\end{center}
-\end{table}
+<caption>(\#tab:KMO) Interpretting the KMO value. [@kmo] </caption>
+
 
 So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.
 
@@ -10674,7 +10675,7 @@ So, for example, if you have a survey with 100 questions/variables and you obtai
 
 You can think of **communalities** as multiple $R^2$ values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.
 
-Take for example the SAS output for factor analysis on the Iris dataset shown in Figure \ref{factorOUT}. The factor model (which settles on only one single factor) explains 98% of the variability in _petal length_. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated $R^2$ value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in _petal length, petal width, and sepal length_.
+Take for example the SAS output for factor analysis on the Iris dataset shown in Figure \@ref(fig:factorOUT). The factor model (which settles on only one single factor) explains 98% of the variability in _petal length_. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated $R^2$ value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in _petal length, petal width, and sepal length_.
 
 (ref:factorOUT) SAS output for PROC FACTOR using Iris Dataset
 
@@ -11085,11 +11086,12 @@ After the rotation, we can see the BiPlots tell a more distinct story. The extro
 
 Multidimensional scaling is a technique which aims to represent higher-dimensional data in a lower-dimensional space while keeping the pairwise distances between points as close to their original distances as possible. It takes as input a distance matrix, $\D$ where $\D_{ij}$ is some measure of distance between observation $i$ and observation $j$ (most often Euclidean distance). The original observations may involve many variables and thus exist in a high-dimensional space. The output of MDS is a set of coordinates, usually in 2-dimensions for the purposes of visualization, such that the Euclidean distance between observation $i$ and observation $j$ in the new lower-dimensional representation is an approximation to $\D_{ij}$.
 
-One of the outputs in R will be a measure that is akin to the "percentage of variation explained" by PCs. The difference is that the matrix we are representing is not a covariance matrix, so this ratio is not exactly a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the `GOF` vector (presumably standing for _Goodness of Fit_). The first entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of only the positive eigenvalues.
+One of the outputs in R will be a measure that is akin to the "percentage of variation explained" by PCs. The difference is that the matrix we are representing is _not_ a covariance matrix, so this ratio is _not_ a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the `GOF` vector (presumably standing for _Goodness of Fit_). The first entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of only the positive eigenvalues.
 
 $$GOF[1] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n |\lambda_i|}$$
 and
 $$GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}$$
+
 ### MDS of Iris Data
 
 Let's take a dataset we've already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:
@@ -11239,32 +11241,6 @@ We'll use the popular ``igraph`` package to explore the student slack network in
 
 ```r
 library(igraph)
-```
-
-```
-## 
-## Attaching package: 'igraph'
-```
-
-```
-## The following object is masked from 'package:plotly':
-## 
-##     groups
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     decompose, spectrum
-```
-
-```
-## The following object is masked from 'package:base':
-## 
-##     union
-```
-
-```r
 load('LAdata/slackanon2021.RData')
 ```
 
@@ -11303,6 +11279,7 @@ head(users)
 ## 5 U012E096VF1      o
 ## 6 U012E09JRAB      o
 ```
+
 Using this information, we can create an igraph network object using the ``graph_from_data_frame()`` function. We can then apply some functions from the igraph package to discover the underlying data as we've already seen it. Because this network has almost 42,000 edges overall, we'll subset the data and only look at interactions from the general channel.
 
 ## Network Visualization - ``igraph`` package
@@ -11315,6 +11292,7 @@ plot(slack)
 ```
 
 <img src="bookdownproj_files/figure-html/unnamed-chunk-147-1.png" width="672" />
+
 The default plots certainly leave room for improvement. We notice that one user is not connected to the rest of the network in the general channel, signifying that this user has not reacted or replied in a threaded fashion to any posts in this channel, nor have they created a post that received any interaction. We can delete this vertex from the network by taking advantage of the `delete.vertices()` function specifying that we want to remove all vertices with degree equal to zero. You'll recall that the degree of a vertex is the number of edges that connect to it.
 
 
@@ -11331,6 +11309,7 @@ plot(slack, edge.arrow.size = .3, vertex.label=NA,vertex.size=10,
 ```
 
 <img src="bookdownproj_files/figure-html/unnamed-chunk-149-1.png" width="672" />
+
 ### Layout algorithms for ``igraph`` package
 
 The igraph package has many different layout algorithms available; type `?igraph::layout` for a list of them. By clicking on each layout in the help menu, you'll be able to distinguish which of the layouts are force-directed and which are not. Force-directed layouts generally provide the highest quality network visualizations. The Davidson-Harel (``layout_with_dh``), Fruchterman-Reingold  (``layout_with_fr``), DrL (``layout_with_drl``) and multidimensional scaling algorithms (``layout_with_mds``) are probably the most well-known algorithms available in this package.
@@ -11390,6 +11369,7 @@ legend(x=-1.5,y=0,unique(V(slack)$Cohort),pch=21,
 ```
 
 <img src="bookdownproj_files/figure-html/unnamed-chunk-152-1.png" width="672" />
+
 A (nearly) complete list of plot option parameters is given below:
 
 - __vertex.color__: Node color
@@ -11430,6 +11410,7 @@ legend(x=-1.5,y=0,c("Orange","Blue"),pch=21,
 ```
 
 <img src="bookdownproj_files/figure-html/unnamed-chunk-153-1.png" width="672" />
+
 ## Package ``networkD3``
 
 The network D3 package creates the same type of visualizations that you would see in the [JavaScript library D3](https://d3js.org). These visualizations are highly interactive and quite beautiful. 
@@ -11438,6 +11419,7 @@ The network D3 package creates the same type of visualizations that you would se
 ```r
 library(networkD3)
 ```
+
 ### Preparing the data for ``networkD3``
 
 The one thing that you'll have to keep in mind when creating this visualization is the insistence of this package that your label names (indices) of your nodes start from zero. To use this package, you need a data frame containing the edge list and a data frame containing the node data. While we already have these data frames prepared, the following chunk of code shows you how to extract them from an igraph object and easily transform your ID or label column into a counter that starts from 0. You can see the first few rows of the resulting data frames below.
@@ -11495,7 +11477,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserve7fd1a542db5a5659
+preserve317c304e3db23eff
 
 ### Saving your Interactive Visualization to .html
 

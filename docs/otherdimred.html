@@ -539,7 +539,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
 <li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
 </ul></li>
@@ -548,10 +549,14 @@ div.csl-indent {
 <li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
 <li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
-<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Clustering</b></span></li>
@@ -652,11 +657,12 @@ div.csl-indent {
 <div id="multidimensional-scaling" class="section level2" number="18.1">
 <h2><span class="header-section-number">18.1</span> Multidimensional Scaling</h2>
 <p>Multidimensional scaling is a technique which aims to represent higher-dimensional data in a lower-dimensional space while keeping the pairwise distances between points as close to their original distances as possible. It takes as input a distance matrix, <span class="math inline">\(\D\)</span> where <span class="math inline">\(\D_{ij}\)</span> is some measure of distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> (most often Euclidean distance). The original observations may involve many variables and thus exist in a high-dimensional space. The output of MDS is a set of coordinates, usually in 2-dimensions for the purposes of visualization, such that the Euclidean distance between observation <span class="math inline">\(i\)</span> and observation <span class="math inline">\(j\)</span> in the new lower-dimensional representation is an approximation to <span class="math inline">\(\D_{ij}\)</span>.</p>
-<p>One of the outputs in R will be a measure that is akin to the “percentage of variation explained” by PCs. The difference is that the matrix we are representing is not a covariance matrix, so this ratio is not exactly a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the <code>GOF</code> vector (presumably standing for <em>Goodness of Fit</em>). The first entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of only the positive eigenvalues.</p>
+<p>One of the outputs in R will be a measure that is akin to the “percentage of variation explained” by PCs. The difference is that the matrix we are representing is <em>not</em> a covariance matrix, so this ratio is <em>not</em> a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the <code>GOF</code> vector (presumably standing for <em>Goodness of Fit</em>). The first entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in <code>GOF</code> gives the ratio of the sum of the <span class="math inline">\(k\)</span> largest eigenvalues to the sum of only the positive eigenvalues.</p>
 <p><span class="math display">\[GOF[1] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n |\lambda_i|}\]</span>
 and
-<span class="math display">\[GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}\]</span>
-### MDS of Iris Data</p>
+<span class="math display">\[GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}\]</span></p>
+<div id="mds-of-iris-data" class="section level3" number="18.1.1">
+<h3><span class="header-section-number">18.1.1</span> MDS of Iris Data</h3>
 <p>Let’s take a dataset we’ve already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="otherdimred.html#cb276-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">dist</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
 <span id="cb276-2"><a href="otherdimred.html#cb276-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">cmdscale</span>(D, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>) <span class="co"># k is the number of dimensions desired</span></span>
@@ -678,8 +684,9 @@ Figure 18.1: Multidimensional Scaling of the Iris Data
 </p>
 </div>
 <p>We can tell from the eigenvalues alone that two dimensions should be relatively sufficient to summarize this data. After two large eigenvalues, the remainder drop off and become small, signifying a lack of further information. Indeed, the Goodness of Fit measurements back up this intuition: values close to 1 indicate a good fit with minimal error.</p>
-<div id="mds-of-leukemia-dataset" class="section level3" number="18.1.1">
-<h3><span class="header-section-number">18.1.1</span> MDS of Leukemia dataset</h3>
+</div>
+<div id="mds-of-leukemia-dataset" class="section level3" number="18.1.2">
+<h3><span class="header-section-number">18.1.2</span> MDS of Leukemia dataset</h3>
 <p>Let’s take a look at another example, this time using the Leukemia dataset which has 5000 variables. It is unreasonable to expect that we can get as good of a fit of this data using only two dimensions! There will obviously be much more error. However, we can still get a visualization that should at least show us which observations are close to each other and which are far away.</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="otherdimred.html#cb281-1" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/Code/leukemia.csv&#39;</span>)</span></code></pre></div>
 <p>As you may recall, this data has some variables with 0 variance; those entire columns are constant. To determine which ones, we first remove the last column which is a character vector that identifies the type of leukemia.</p>

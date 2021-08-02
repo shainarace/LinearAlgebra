@@ -415,11 +415,14 @@ rotated-principal-components
 visualizing-rotation-via-biplots
 otherdimred
 multidimensional-scaling
+mds-of-iris-data
 mds-of-leukemia-dataset
 sna
 working-with-network-data
 network-visualization---igraph-package
+layout-algorithms-for-igraph-package
 adding-attribute-information-to-your-visualization
+package-networkd3
 preparing-the-data-for-networkd3
 creating-an-interactive-visualization-with-networkd3
 saving-your-interactive-visualization-to-.html

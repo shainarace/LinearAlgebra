@@ -539,7 +539,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
 <li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
 </ul></li>
@@ -548,10 +549,14 @@ div.csl-indent {
 <li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
 <li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
-<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Clustering</b></span></li>
@@ -699,7 +704,7 @@ Figure 20.3: Two Reasonable Answers with Different Numbers of Clusters
 </div>
 <div id="partitioning-of-graphs-and-networks" class="section level2" number="20.3">
 <h2><span class="header-section-number">20.3</span> Partitioning of Graphs and Networks</h2>
-<p>Another popular research problem in clustering is the partitioning of graphs. In network applications this problem has become known to many as <em>community detection</em> <span class="citation"><a href="#ref-mahoney" role="doc-biblioref">[60]</a></span>, although the underlying problem of partitioning graphs has been studied extensively for years <span class="citation"><a href="#ref-pothen" role="doc-biblioref">[25]</a>–<a href="#ref-drineassvd" role="doc-biblioref">[27]</a>, <a href="#ref-fiedlerev" role="doc-biblioref">[30]</a>, <a href="#ref-ng" role="doc-biblioref">[55]</a>, <a href="#ref-chung" role="doc-biblioref">[58]</a>, <a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>. A <strong>graph</strong> is a set of <em>vertices</em> (or equivalently <em>nodes</em>) <span class="math inline">\(V=\{1,2,\dots, n\}\)</span> together with a set of edges <span class="math inline">\(E=\{(i,j) : i,j \in V\}\)</span> which connect vertices together. A <strong>weighted graph</strong> is one in which the edges are assigned some weight <span class="math inline">\(w_{ij}\)</span> whereas an unweighted graph has binary weights for edges: <span class="math inline">\(w_{ij}=1\)</span> if <span class="math inline">\((i,j) \in E\)</span>, <span class="math inline">\(w_{ij}=0\)</span> otherwise. Our focus will be on <em>undirected graphs</em> in which <span class="math inline">\(w_{ij}=w_{ji}\)</span>. All algorithms for graph partitioning (or network community detection) will rely on an <strong>adjacency matrix</strong>.</p>
+<p>Another popular research problem in clustering is the partitioning of graphs. In network applications this problem has become known to many as <em>community detection</em> <span class="citation"><a href="#ref-mahoney" role="doc-biblioref">[61]</a></span>, although the underlying problem of partitioning graphs has been studied extensively for years <span class="citation"><a href="#ref-pothen" role="doc-biblioref">[26]</a>–<a href="#ref-drineassvd" role="doc-biblioref">[28]</a>, <a href="#ref-fiedlerev" role="doc-biblioref">[31]</a>, <a href="#ref-ng" role="doc-biblioref">[56]</a>, <a href="#ref-chung" role="doc-biblioref">[59]</a>, <a href="#ref-poweriteration" role="doc-biblioref">[69]</a></span>. A <strong>graph</strong> is a set of <em>vertices</em> (or equivalently <em>nodes</em>) <span class="math inline">\(V=\{1,2,\dots, n\}\)</span> together with a set of edges <span class="math inline">\(E=\{(i,j) : i,j \in V\}\)</span> which connect vertices together. A <strong>weighted graph</strong> is one in which the edges are assigned some weight <span class="math inline">\(w_{ij}\)</span> whereas an unweighted graph has binary weights for edges: <span class="math inline">\(w_{ij}=1\)</span> if <span class="math inline">\((i,j) \in E\)</span>, <span class="math inline">\(w_{ij}=0\)</span> otherwise. Our focus will be on <em>undirected graphs</em> in which <span class="math inline">\(w_{ij}=w_{ji}\)</span>. All algorithms for graph partitioning (or network community detection) will rely on an <strong>adjacency matrix</strong>.</p>
 <div class="definition">
 <p><span id="def:adjmat" class="definition"><strong>Definition 20.1  (Adjacency Matrix) </strong></span>An <strong>adjacency matrix</strong> <span class="math inline">\(\A\)</span> for an undirected graph, <span class="math inline">\(\mathcal{G}=(V,E)\)</span>, is an <span class="math inline">\(n \times n\)</span> symmetric matrix defined as follows:
 <span class="math display">\[\A_{ij}=
@@ -715,7 +720,7 @@ w_{ij}, &amp; \text{if } (i,j) \in E \\
 Figure 20.4: A Graph with Clusters and its Block Diagonally Dominant Adjacency Matrix
 </p>
 </div>
-In much of the literature on graph partitioning, it is suggested that the data clustering problem can be transformed into a graph partitioning problem by means of a similarity matrix <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[68]</a></span>. A <strong>similarity matrix</strong> <span class="math inline">\(\bo{S}\)</span> is an <span class="math inline">\(n \times n\)</span> symmetric matrix where <span class="math inline">\(\bo{S}_{ij}\)</span> measures some notion of similarity between data points <span class="math inline">\(\x_i\)</span> and <span class="math inline">\(\x_j\)</span>. There are a wealth of metrics available to gauge similarity or dissimilarity, see for example <span class="citation"><a href="#ref-dcebook" role="doc-biblioref">[15]</a></span>. Common measures of similarity rely on Euclidean or angular distance measures. Two of the most popular similarity functions in the literature are the following:
+In much of the literature on graph partitioning, it is suggested that the data clustering problem can be transformed into a graph partitioning problem by means of a similarity matrix <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[69]</a></span>. A <strong>similarity matrix</strong> <span class="math inline">\(\bo{S}\)</span> is an <span class="math inline">\(n \times n\)</span> symmetric matrix where <span class="math inline">\(\bo{S}_{ij}\)</span> measures some notion of similarity between data points <span class="math inline">\(\x_i\)</span> and <span class="math inline">\(\x_j\)</span>. There are a wealth of metrics available to gauge similarity or dissimilarity, see for example <span class="citation"><a href="#ref-dcebook" role="doc-biblioref">[16]</a></span>. Common measures of similarity rely on Euclidean or angular distance measures. Two of the most popular similarity functions in the literature are the following:
 <p>Any similarity matrix can be considered an adjacency matrix for a graph, thus transforming the original data clustering problem into a graph partitioning problem. Several algorithms for data clustering and graph partitioning are provided in Section <a href="clusteralgos.html#clusteralgos">21</a>. Regardless of the method chosen for clustering, similarity matrices can be a useful tool for visualizing cluster results in light of the block diagonal structure shown in Figure <a href="clusintro.html#fig:introexg">20.4</a>. This block diagonal structure can be visualized using a heat map of a similarity matrix. A <em>matrix heat map</em> represents each value in a matrix by a colored pixel indicating the magnitude of the value. Figure <a href="clusintro.html#fig:heatmapex">20.5</a> is an example of a heat map using real data. The data are a collection of news articles (documents) from the web containing seven different topics of discussion. The rows and columns of the cosine similarity matrix for these documents have been reordered according to some cluster solution. White pixels represent negligible values of similarity. Some of these topics are closely related, which can be seen by the heightened level of similarities between blocks.</p>
 <div class="figure" style="text-align: center"><span id="fig:heatmapex"></span>
 <img src="figs/heatmapex.jpg" alt="Heat Map of Similarity Matrix Exhibiting Cluster Structure" width="50%" />
@@ -727,67 +732,67 @@ Figure 20.5: Heat Map of Similarity Matrix Exhibiting Cluster Structure
 </div>
 <div id="history-of-data-clustering" class="section level2" number="20.4">
 <h2><span class="header-section-number">20.4</span> History of Data Clustering</h2>
-<p>According to Anil Jain in <span class="citation"><a href="#ref-jain50" role="doc-biblioref">[49]</a></span>, data clustering first appeared in an article written by Forrest Clements in 1954 about anthropological data <span class="citation"><a href="#ref-1954anthro" role="doc-biblioref">[48]</a></span>. However, a Google Scholar search provides several earlier publications whose titles also contain the phrase “cluster analysis” <span class="citation"><a href="#ref-1952adcock" role="doc-biblioref">[46]</a></span>. In fact, the discussion of data clustering dates back to the 1930’s when anthropologists Driver and Kroeber <span class="citation"><a href="#ref-1932driver" role="doc-biblioref">[45]</a></span> and psychologists Zubin <span class="citation"><a href="#ref-1938zubin" role="doc-biblioref">[44]</a></span> and Tryon <span class="citation"><a href="#ref-1939tryon" role="doc-biblioref">[43]</a></span> realized the utility of such analysis in determining cultural or psychological classifications. While the usefulness of such techniques was clear to researchers in many social and biological disciplines at that time, the lack of computational tools made the analysis time consuming and practically impossible for large sets of data.</p>
-<p>Cluster analysis exploded into the limelight in the 1960’s and `70’s after Sokal and Sneath’s 1963 book <em>Principles of Numerical Taxonomy</em> <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[50]</a></span>. Although the text is primarily geared toward biologists faced with the task of classifying organisms, it motivated researchers from many different disciplines to consider the problem of data clustering from other angles like computing, statistics, and domain specific applications. <span class="citation"><a href="#ref-bock" role="doc-biblioref">[24]</a></span>. Sokal and Sneath’s book presents a detailed discussion of the simple, intuitive, and still popular <em>hierarchical clustering</em> (see Section <a href="clusteralgos.html#hc">21.1</a>) techniques for biological taxonomy. These authors also provided perhaps the earliest mention of the matrix heat map visualizations of clustering that are still popular today. Figure <a href="clusintro.html#fig:sneathheatmap">20.6</a> shows an example of one of these heat maps, then drawn by hand, from their book.</p>
+<p>According to Anil Jain in <span class="citation"><a href="#ref-jain50" role="doc-biblioref">[50]</a></span>, data clustering first appeared in an article written by Forrest Clements in 1954 about anthropological data <span class="citation"><a href="#ref-1954anthro" role="doc-biblioref">[49]</a></span>. However, a Google Scholar search provides several earlier publications whose titles also contain the phrase “cluster analysis” <span class="citation"><a href="#ref-1952adcock" role="doc-biblioref">[47]</a></span>. In fact, the discussion of data clustering dates back to the 1930’s when anthropologists Driver and Kroeber <span class="citation"><a href="#ref-1932driver" role="doc-biblioref">[46]</a></span> and psychologists Zubin <span class="citation"><a href="#ref-1938zubin" role="doc-biblioref">[45]</a></span> and Tryon <span class="citation"><a href="#ref-1939tryon" role="doc-biblioref">[44]</a></span> realized the utility of such analysis in determining cultural or psychological classifications. While the usefulness of such techniques was clear to researchers in many social and biological disciplines at that time, the lack of computational tools made the analysis time consuming and practically impossible for large sets of data.</p>
+<p>Cluster analysis exploded into the limelight in the 1960’s and `70’s after Sokal and Sneath’s 1963 book <em>Principles of Numerical Taxonomy</em> <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[51]</a></span>. Although the text is primarily geared toward biologists faced with the task of classifying organisms, it motivated researchers from many different disciplines to consider the problem of data clustering from other angles like computing, statistics, and domain specific applications. <span class="citation"><a href="#ref-bock" role="doc-biblioref">[25]</a></span>. Sokal and Sneath’s book presents a detailed discussion of the simple, intuitive, and still popular <em>hierarchical clustering</em> (see Section <a href="clusteralgos.html#hc">21.1</a>) techniques for biological taxonomy. These authors also provided perhaps the earliest mention of the matrix heat map visualizations of clustering that are still popular today. Figure <a href="clusintro.html#fig:sneathheatmap">20.6</a> shows an example of one of these heat maps, then drawn by hand, from their book.</p>
 <div class="figure" style="text-align: center"><span id="fig:sneathheatmap"></span>
 <img src="figs/sneathheatmap.jpg" alt="Hand Drawn Matrix Heat Map Visualization from 1963 Book by Sokal and Sneath" width="50%" />
 <p class="caption">
 Figure 20.6: Hand Drawn Matrix Heat Map Visualization from 1963 Book by Sokal and Sneath
 </p>
 </div>
-<p>Prior to the development of modern computational resources, programs for numerical taxonomy were written in machine language and not easily transferred from one computer to another <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[50]</a></span>. However, by the mid 1960s, it was clear that the advancement in technology would probably keep pace with advancements in algorithm design and many researchers from various disciplines began to contribute to the clustering literature. The following sections present an in-depth view of the most popular developments in data clustering since that time. Chapter <a href="#dimred"><strong>??</strong></a> explores a common problem associated with the massive datasets of modern day.</p>
+<p>Prior to the development of modern computational resources, programs for numerical taxonomy were written in machine language and not easily transferred from one computer to another <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[51]</a></span>. However, by the mid 1960s, it was clear that the advancement in technology would probably keep pace with advancements in algorithm design and many researchers from various disciplines began to contribute to the clustering literature. The following sections present an in-depth view of the most popular developments in data clustering since that time. Chapter <a href="#dimred"><strong>??</strong></a> explores a common problem associated with the massive datasets of modern day.</p>
 
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body">
 <div id="ref-dcebook" class="csl-entry">
-<div class="csl-left-margin">[15] </div><div class="csl-right-inline">G. Gan, C. Ma, and J. Wu, <em>Data clustering: Theory, algorithms and applications</em>. American Statistical Association; the Society for Industrial; Applied Mathematics, 2007.</div>
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">G. Gan, C. Ma, and J. Wu, <em>Data clustering: Theory, algorithms and applications</em>. American Statistical Association; the Society for Industrial; Applied Mathematics, 2007.</div>
 </div>
 <div id="ref-bock" class="csl-entry">
-<div class="csl-left-margin">[24] </div><div class="csl-right-inline">H.-H. Bock, <span>“Origins and extensions of the k-means algorithm in cluster analysis,”</span> <em>Electronic Journal for History of Probability and Statistics</em>, vol. 4, no. 2, 2008.</div>
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">H.-H. Bock, <span>“Origins and extensions of the k-means algorithm in cluster analysis,”</span> <em>Electronic Journal for History of Probability and Statistics</em>, vol. 4, no. 2, 2008.</div>
 </div>
 <div id="ref-pothen" class="csl-entry">
-<div class="csl-left-margin">[25] </div><div class="csl-right-inline">A. Pothen, H. D. Simon, and K.-P. Liou, <span>“Partitioning sparse matrices with eigenvectors of graphs,”</span> <em>SIAM Journal on Matrix Analysis and Applications</em>, vol. 11, no. 3, pp. 430–452, 1990.</div>
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline">A. Pothen, H. D. Simon, and K.-P. Liou, <span>“Partitioning sparse matrices with eigenvectors of graphs,”</span> <em>SIAM Journal on Matrix Analysis and Applications</em>, vol. 11, no. 3, pp. 430–452, 1990.</div>
 </div>
 <div id="ref-drineassvd" class="csl-entry">
-<div class="csl-left-margin">[27] </div><div class="csl-right-inline">P. Drineas, A. Frieze, R. Kanna, S. Vempala, and V. Vinay, <span>“Clustering large graphs via the singular value decomposition,”</span> <em>Machine Learning</em>, vol. 56, no. 1, pp. 9–33, 2004.</div>
+<div class="csl-left-margin">[28] </div><div class="csl-right-inline">P. Drineas, A. Frieze, R. Kanna, S. Vempala, and V. Vinay, <span>“Clustering large graphs via the singular value decomposition,”</span> <em>Machine Learning</em>, vol. 56, no. 1, pp. 9–33, 2004.</div>
 </div>
 <div id="ref-fiedlerev" class="csl-entry">
-<div class="csl-left-margin">[30] </div><div class="csl-right-inline">M. Fielder, <span>“A property of eigenvectors of nonnegative symmetric matrices and its application to graph theory,”</span> <em>Czechoslovak Mathematical Journal</em>, vol. 25, no. 4, pp. 619–633, 1975.</div>
+<div class="csl-left-margin">[31] </div><div class="csl-right-inline">M. Fielder, <span>“A property of eigenvectors of nonnegative symmetric matrices and its application to graph theory,”</span> <em>Czechoslovak Mathematical Journal</em>, vol. 25, no. 4, pp. 619–633, 1975.</div>
 </div>
 <div id="ref-1939tryon" class="csl-entry">
-<div class="csl-left-margin">[43] </div><div class="csl-right-inline"><em>Cluster analysis: Correlation profile and orthometric (factor) analysis for the isolation of unities in mind and personality</em>. Edwards Brothers: Ann Arbor, Michigan, 1939.</div>
+<div class="csl-left-margin">[44] </div><div class="csl-right-inline"><em>Cluster analysis: Correlation profile and orthometric (factor) analysis for the isolation of unities in mind and personality</em>. Edwards Brothers: Ann Arbor, Michigan, 1939.</div>
 </div>
 <div id="ref-1938zubin" class="csl-entry">
-<div class="csl-left-margin">[44] </div><div class="csl-right-inline">J. A. Zubin, <span>“A technique for measuring likemindedness,”</span> <em>Journal of Abnormal and Social Psychology</em>, vol. 33, pp. 508–516, 1938.</div>
+<div class="csl-left-margin">[45] </div><div class="csl-right-inline">J. A. Zubin, <span>“A technique for measuring likemindedness,”</span> <em>Journal of Abnormal and Social Psychology</em>, vol. 33, pp. 508–516, 1938.</div>
 </div>
 <div id="ref-1932driver" class="csl-entry">
-<div class="csl-left-margin">[45] </div><div class="csl-right-inline">H. E. Driver and A. L. Kroeber, <span>“Quantitative expression of cultural relationships,”</span> <em>University of California Publications in American Archaeology and Ethnology</em>, vol. 31, no. 211–256, 1932.</div>
+<div class="csl-left-margin">[46] </div><div class="csl-right-inline">H. E. Driver and A. L. Kroeber, <span>“Quantitative expression of cultural relationships,”</span> <em>University of California Publications in American Archaeology and Ethnology</em>, vol. 31, no. 211–256, 1932.</div>
 </div>
 <div id="ref-1952adcock" class="csl-entry">
-<div class="csl-left-margin">[46] </div><div class="csl-right-inline">C. J. Adcock, <span>“A note on cluster-directed analysis,”</span> <em>Psychometrika</em>, vol. 17, no. 3, pp. 249–253, 1952.</div>
+<div class="csl-left-margin">[47] </div><div class="csl-right-inline">C. J. Adcock, <span>“A note on cluster-directed analysis,”</span> <em>Psychometrika</em>, vol. 17, no. 3, pp. 249–253, 1952.</div>
 </div>
 <div id="ref-1954anthro" class="csl-entry">
-<div class="csl-left-margin">[48] </div><div class="csl-right-inline">F. E. Clements, <span>“Use of cluster analysis with anthropological data,”</span> <em>American Anthropologist</em>, vol. 56, no. 2, pp. 190–199, 1954.</div>
+<div class="csl-left-margin">[49] </div><div class="csl-right-inline">F. E. Clements, <span>“Use of cluster analysis with anthropological data,”</span> <em>American Anthropologist</em>, vol. 56, no. 2, pp. 190–199, 1954.</div>
 </div>
 <div id="ref-jain50" class="csl-entry">
-<div class="csl-left-margin">[49] </div><div class="csl-right-inline">A. K. Jain, <span>“Data clustering: 50 years beyond k-means,”</span> <em>Pattern Recognition Letters</em>, 2009.</div>
+<div class="csl-left-margin">[50] </div><div class="csl-right-inline">A. K. Jain, <span>“Data clustering: 50 years beyond k-means,”</span> <em>Pattern Recognition Letters</em>, 2009.</div>
 </div>
 <div id="ref-sokal" class="csl-entry">
-<div class="csl-left-margin">[50] </div><div class="csl-right-inline">Robert R. Sokal and P. H. A. Sneath, <em>Principals of numerical taxonomy</em>. W.H. Freeman; Company, 1963.</div>
+<div class="csl-left-margin">[51] </div><div class="csl-right-inline">Robert R. Sokal and P. H. A. Sneath, <em>Principals of numerical taxonomy</em>. W.H. Freeman; Company, 1963.</div>
 </div>
 <div id="ref-ng" class="csl-entry">
-<div class="csl-left-margin">[55] </div><div class="csl-right-inline">A. Ng, M. Jordan, and Y. Weiss, <span>“On spectral clustering: Analysis and an algorithm.”</span> 2001, [Online]. Available: <a href="https://citeseer.ist.psu.edu/ng01spectral.html">citeseer.ist.psu.edu/ng01spectral.html</a>.</div>
+<div class="csl-left-margin">[56] </div><div class="csl-right-inline">A. Ng, M. Jordan, and Y. Weiss, <span>“On spectral clustering: Analysis and an algorithm.”</span> 2001, [Online]. Available: <a href="https://citeseer.ist.psu.edu/ng01spectral.html">citeseer.ist.psu.edu/ng01spectral.html</a>.</div>
 </div>
 <div id="ref-chung" class="csl-entry">
-<div class="csl-left-margin">[58] </div><div class="csl-right-inline">F. Chung, <em>Spectral graph theory</em>. American Mathematical Society, 1997.</div>
+<div class="csl-left-margin">[59] </div><div class="csl-right-inline">F. Chung, <em>Spectral graph theory</em>. American Mathematical Society, 1997.</div>
 </div>
 <div id="ref-mahoney" class="csl-entry">
-<div class="csl-left-margin">[60] </div><div class="csl-right-inline">M. W. Mahoney, <span>“Randomized algorithms for matrices and data,”</span> <em>Foundations and Trends in Machine Learning</em>, 2011.</div>
+<div class="csl-left-margin">[61] </div><div class="csl-right-inline">M. W. Mahoney, <span>“Randomized algorithms for matrices and data,”</span> <em>Foundations and Trends in Machine Learning</em>, 2011.</div>
 </div>
 <div id="ref-poweriteration" class="csl-entry">
-<div class="csl-left-margin">[68] </div><div class="csl-right-inline">W. W. C. F. Lin, <span>“Power iteration clustering,”</span> <em>Proceedings of the 27th International Conference of Machine Learning</em>, 2010.</div>
+<div class="csl-left-margin">[69] </div><div class="csl-right-inline">W. W. C. F. Lin, <span>“Power iteration clustering,”</span> <em>Proceedings of the 27th International Conference of Machine Learning</em>, 2010.</div>
 </div>
 </div>
             </section>

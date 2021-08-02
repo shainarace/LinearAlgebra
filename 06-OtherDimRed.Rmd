@@ -4,11 +4,12 @@
 
 Multidimensional scaling is a technique which aims to represent higher-dimensional data in a lower-dimensional space while keeping the pairwise distances between points as close to their original distances as possible. It takes as input a distance matrix, $\D$ where $\D_{ij}$ is some measure of distance between observation $i$ and observation $j$ (most often Euclidean distance). The original observations may involve many variables and thus exist in a high-dimensional space. The output of MDS is a set of coordinates, usually in 2-dimensions for the purposes of visualization, such that the Euclidean distance between observation $i$ and observation $j$ in the new lower-dimensional representation is an approximation to $\D_{ij}$.
 
-One of the outputs in R will be a measure that is akin to the "percentage of variation explained" by PCs. The difference is that the matrix we are representing is not a covariance matrix, so this ratio is not exactly a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the `GOF` vector (presumably standing for _Goodness of Fit_). The first entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of only the positive eigenvalues.
+One of the outputs in R will be a measure that is akin to the "percentage of variation explained" by PCs. The difference is that the matrix we are representing is _not_ a covariance matrix, so this ratio is _not_ a percentage of variation. It can, however, be used to judge how much information is retained by the lower dimensional representation. This is output in the `GOF` vector (presumably standing for _Goodness of Fit_). The first entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of the absolute values of all the eigenvalues, and the second entry in `GOF` gives the ratio of the sum of the $k$ largest eigenvalues to the sum of only the positive eigenvalues.
 
 $$GOF[1] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n |\lambda_i|}$$
 and
 $$GOF[2] = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^n \max(\lambda_i,0)}$$
+
 ### MDS of Iris Data
 
 Let's take a dataset we've already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:

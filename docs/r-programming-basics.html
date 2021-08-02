@@ -539,7 +539,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
 <li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
 </ul></li>
@@ -548,10 +549,14 @@ div.csl-indent {
 <li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
 <li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
-<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Clustering</b></span></li>
@@ -704,23 +709,23 @@ div.csl-indent {
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-programming-basics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by generating random ~N(0,1) data:</span></span>
 <span id="cb17-2"><a href="r-programming-basics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb17-3"><a href="r-programming-basics.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1]  0.4174515 -0.0689434</code></pre>
+<pre><code>## [1] 0.4774505 0.2310041</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="r-programming-basics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Why aren&#39;t the means close to zero?)</span></span>
 <span id="cb19-2"><a href="r-programming-basics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
 <span id="cb19-3"><a href="r-programming-basics.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1] 0.05367730 0.02678996</code></pre>
+<pre><code>## [1] -0.013688612  0.004838959</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-programming-basics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LawOfLargeNumbers.</span></span>
 <span id="cb21-2"><a href="r-programming-basics.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="r-programming-basics.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A,<span class="dv">2</span>,sd)</span></code></pre></div>
-<pre><code>## [1] 0.9107075 1.0668526</code></pre>
+<pre><code>## [1] 0.9046901 1.2069431</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-programming-basics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To apply a &quot;homemade function&quot; you must create it as a function</span></span>
 <span id="cb23-2"><a href="r-programming-basics.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we apply a sum of squares function for the first 5 rows of A:</span></span>
 <span id="cb23-3"><a href="r-programming-basics.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ],<span class="dv">1</span>,<span class="cf">function</span>(x) x<span class="sc">%*%</span>x)</span></code></pre></div>
-<pre><code>## [1] 0.9189428 0.8502678 1.2402235 1.2191278 0.8580084</code></pre>
+<pre><code>## [1] 0.6662789 2.9035946 0.1906068 0.7413685 5.8533517</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-programming-basics.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we center the data by subtracting the mean vector:</span></span>
 <span id="cb25-2"><a href="r-programming-basics.html#cb25-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">=</span><span class="fu">apply</span>(A,<span class="dv">2</span>,<span class="cf">function</span>(x) x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
 <span id="cb25-3"><a href="r-programming-basics.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B)</span></code></pre></div>
-<pre><code>## [1] 1.249001e-17 4.163336e-18</code></pre>
+<pre><code>## [1]  1.477117e-17 -2.463307e-18</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-programming-basics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R doesn&#39;t tell you when things are zero to machine precision. &quot;Machine zero&quot; in</span></span>
 <span id="cb27-2"><a href="r-programming-basics.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R is given by the internal variable .Machine$double.eps</span></span>
 <span id="cb27-3"><a href="r-programming-basics.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B) <span class="sc">&lt;</span> .Machine<span class="sc">$</span>double.eps</span></code></pre></div>
@@ -742,12 +747,12 @@ div.csl-indent {
 <span id="cb33-2"><a href="r-programming-basics.html#cb33-2" aria-hidden="true" tabindex="-1"></a>ncols<span class="ot">=</span><span class="fu">dim</span>(A)[<span class="dv">2</span>]</span>
 <span id="cb33-3"><a href="r-programming-basics.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(A)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;This&quot;</span>,<span class="st">&quot;That&quot;</span>)</span>
 <span id="cb33-4"><a href="r-programming-basics.html#cb33-4" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
-<pre><code>##            This       That
-## [1,]  0.8224768 -0.4924172
-## [2,]  0.1233941  0.9138061
-## [3,] -0.3271160 -1.0645274
-## [4,]  0.7248556  0.8328939
-## [5,] -0.7789239  0.5012843</code></pre>
+<pre><code>##              This       That
+## [1,] -0.325700415  0.7484639
+## [2,]  0.842890865  1.4809219
+## [3,] -0.182196641 -0.3967507
+## [4,] -0.717741266 -0.4756217
+## [5,] -0.006427925  2.4193616</code></pre>
 <ul>
 <li>Most arithmetic functions you apply to a vector act elementwise. In R, <span class="math inline">\(\x^2\)</span> will be a vector containing the square of the elements in <span class="math inline">\(\x\)</span>. You can add a column to a matrix (or a data frame) by using the <code>cbind()</code> function.</li>
 </ul>

@@ -539,7 +539,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
 <ul>
-<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
 <li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
 </ul></li>
 </ul></li>
@@ -548,10 +549,14 @@ div.csl-indent {
 <li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
 <li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.1</b> Adding attribute information to your visualization</a></li>
-<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.2.2</b> Preparing the data for <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.3" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.2.3</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
-<li class="chapter" data-level="19.2.4" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.2.4</b> Saving your Interactive Visualization to .html</a></li>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Clustering</b></span></li>
@@ -996,24 +1001,24 @@ You can see this on the biplot. The vector shown for Sepal.Length is (0.361, -0.
 <span id="cb127-3"><a href="pca.html#cb127-3" aria-hidden="true" tabindex="-1"></a>sample.size<span class="ot">=</span><span class="dv">500</span></span>
 <span id="cb127-4"><a href="pca.html#cb127-4" aria-hidden="true" tabindex="-1"></a>data<span class="ot">=</span><span class="fu">mapply</span>(<span class="cf">function</span>(mu,sig){<span class="fu">rnorm</span>(mu,sig, <span class="at">n=</span>sample.size)},<span class="at">mu=</span>means,<span class="at">sig=</span>sigmas)</span>
 <span id="cb127-5"><a href="pca.html#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span></code></pre></div>
-<pre><code>##             [,1]        [,2]         [,3]        [,4]
-## [1,]  1.00000000 -0.03449587  0.026123357 0.016023776
-## [2,] -0.03449587  1.00000000 -0.027582552 0.022800337
-## [3,]  0.02612336 -0.02758255  1.000000000 0.008033149
-## [4,]  0.01602378  0.02280034  0.008033149 1.000000000</code></pre>
+<pre><code>##              [,1]        [,2]        [,3]         [,4]
+## [1,]  1.000000000 -0.07479601 -0.00925664 -0.005256619
+## [2,] -0.074796014  1.00000000 -0.06295770 -0.020391034
+## [3,] -0.009256640 -0.06295770  1.00000000  0.097759310
+## [4,] -0.005256619 -0.02039103  0.09775931  1.000000000</code></pre>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="pca.html#cb129-1" aria-hidden="true" tabindex="-1"></a>pc<span class="ot">=</span><span class="fu">prcomp</span>(data,<span class="at">scale=</span><span class="cn">TRUE</span>)</span>
 <span id="cb129-2"><a href="pca.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pc)</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0291 1.0083 0.9875 0.9743
-## Proportion of Variance 0.2647 0.2542 0.2438 0.2373
-## Cumulative Proportion  0.2647 0.5189 0.7627 1.0000</code></pre>
+## Standard deviation     1.0638 1.0278 0.9644 0.9391
+## Proportion of Variance 0.2829 0.2641 0.2325 0.2205
+## Cumulative Proportion  0.2829 0.5470 0.7795 1.0000</code></pre>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="pca.html#cb131-1" aria-hidden="true" tabindex="-1"></a>pc<span class="sc">$</span>rotation</span></code></pre></div>
-<pre><code>##               PC1       PC2         PC3        PC4
-## [1,] -0.590720848 0.2547077 -0.55913517  0.5230112
-## [2,]  0.597864995 0.3987553  0.17863415  0.6720428
-## [3,] -0.541845267 0.1572307  0.80704866  0.1742260
-## [4,] -0.003167844 0.8668314 -0.06426638 -0.4944321</code></pre>
+<pre><code>##             PC1        PC2        PC3        PC4
+## [1,]  0.2258401 -0.7195897  0.5585556 -0.3452573
+## [2,] -0.5129898  0.4762629  0.5154574 -0.4942862
+## [3,]  0.6294507  0.2963874 -0.2812207 -0.6609548
+## [4,]  0.5381724  0.4092907  0.5858619  0.4467856</code></pre>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="pca.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pc)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-57"></span>
 <img src="bookdownproj_files/figure-html/unnamed-chunk-57-1.png" alt="BiPlot of Iris Data" width="672" />

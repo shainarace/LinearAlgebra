@@ -2,22 +2,25 @@
 
 Factor Analysis is about looking for underlying _relationships_ or _associations_.  In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some _latent_ factor, that is the individual's _quantitative reasoning_. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.
 
-Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will ``figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.
+Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will "figure it out", your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.
 
 
 ## Assumptions of Factor Analysis
 
-1. No outliers in the data set
-2. Adequate sample size 
-  a. As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
-  b. You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table \ref{table:factorsig} for the details on this.
-3. No perfect multicollinearity
-4. Homoskedasticity _not_ required between variables (all variances _not_ required to be equal)
-5. Linearity of variables desired - only models linear correlation between variables
-6. Interval data (as opposed to nominal)
-7. Measurement error on the variables/observations has constant variance and is, on average, 0
-8. Normality is not required
-
+<ol>
+<li> No outliers in the data set
+<li> Adequate sample size 
+<ul>
+  <li> As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
+  <li> You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table \@ref(tab:factorsig) for the details on this.
+<\ul>
+<li> No perfect multicollinearity
+<li> Homoskedasticity _not_ required between variables (all variances _not_ required to be equal)
+<li> Linearity of variables desired - only models linear correlation between variables
+<li> Interval data (as opposed to nominal)
+<li> Measurement error on the variables/observations has constant variance and is, on average, 0
+<li> Normality is not required
+</ol>
 
 |Sample Size<br> Needed for Significance| Factor Loading |
 |:-----------------------:|:---------------------:|
@@ -41,6 +44,7 @@ Table: Factor loadings are the correlation of each variable and the factor. This
 Before we even begin the process of factor analysis, we have to do some preliminary work to determine whether or not the data even lends itself to this technique. If none of our variables are correlated, then we cannot group them together in any meaningful way! Bartlett's Sphericity Test and the KMO index are two statistical tests for whether or not a set of variables can be factored. These tests _do not_ provide information about the appropriate number of factors, only whether or not such factors even exist.
 
 ### Visual Examination of Correlation Matrix
+
 Depending on how many variables you are working with, you may be able to determine whether or not to proceed with factor analysis by simply examining the correlation matrix. With this examination, we are looking for two things:
 
 1. Correlations that are significant at the 0.01 level of significance. At least half of the correlations should be significant in order to proceed to the next step.
@@ -55,7 +59,7 @@ Which implies that there are no underlying factors to be uncovered. Obviously, w
 
 ### Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy
 
-The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize efficiently the original variables. However, the KMO measure is based on the idea of _partial correlation_. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \@ref(tab:KMO) contains the information about interpretting KMO results that was provided in the original 1974 paper.
+The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett's test in that it checks if we can factorize the original variables efficiently. However, the KMO measure is based on the idea of _partial correlation_ [@kmo]. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high ($\approx 1$), then PCA can act efficiently; if the KMO index is low ($\approx 0$), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table \@ref(tab:KMO) contains the information about interpretting KMO results that was provided in the original 1974 paper.
 
 
 <table>
@@ -67,11 +71,8 @@ The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar
 <td>0.50 to 0.59    <td>Miserable</td>
 <td>0.00 to 0.49   <td>Don't Factor</td>
 </table>
-Table: (\#tab:KMO) Interpretting the KMO value. \cite{KMO}
-\caption{Interpretting the KMO value. }
-\label{table:KMO}
-\end{center}
-\end{table}
+<caption>(\#tab:KMO) Interpretting the KMO value. [@kmo] </caption>
+
 
 So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.
 
@@ -81,7 +82,7 @@ So, for example, if you have a survey with 100 questions/variables and you obtai
 
 You can think of **communalities** as multiple $R^2$ values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.
 
-Take for example the SAS output for factor analysis on the Iris dataset shown in Figure \ref{factorOUT}. The factor model (which settles on only one single factor) explains 98% of the variability in _petal length_. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated $R^2$ value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in _petal length, petal width, and sepal length_.
+Take for example the SAS output for factor analysis on the Iris dataset shown in Figure \@ref(fig:factorOUT). The factor model (which settles on only one single factor) explains 98% of the variability in _petal length_. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated $R^2$ value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in _petal length, petal width, and sepal length_.
 
 (ref:factorOUT) SAS output for PROC FACTOR using Iris Dataset
 

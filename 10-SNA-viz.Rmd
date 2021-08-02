@@ -7,7 +7,7 @@ We'll use the popular ``igraph`` package to explore the student slack network in
 - ``users`` contains user-level attributes like the cohort to which a student belongs ('blue' or 'orange').
 
 
-```{r , results=F}
+```{r , results=F, message=F, warning=F}
 library(igraph)
 load('LAdata/slackanon2021.RData')
 ```
@@ -16,6 +16,7 @@ load('LAdata/slackanon2021.RData')
 head(SlackNetwork)
 head(users)
 ```
+
 Using this information, we can create an igraph network object using the ``graph_from_data_frame()`` function. We can then apply some functions from the igraph package to discover the underlying data as we've already seen it. Because this network has almost 42,000 edges overall, we'll subset the data and only look at interactions from the general channel.
 
 ## Network Visualization - ``igraph`` package
@@ -25,6 +26,7 @@ SlackNetworkSubset = SlackNetwork[SlackNetwork$channel=='general',]
 slack = graph_from_data_frame(SlackNetworkSubset, directed = TRUE, vertices = users)
 plot(slack)
 ```
+
 The default plots certainly leave room for improvement. We notice that one user is not connected to the rest of the network in the general channel, signifying that this user has not reacted or replied in a threaded fashion to any posts in this channel, nor have they created a post that received any interaction. We can delete this vertex from the network by taking advantage of the `delete.vertices()` function specifying that we want to remove all vertices with degree equal to zero. You'll recall that the degree of a vertex is the number of edges that connect to it.
 
 ```{r }
@@ -37,6 +39,7 @@ There are various ways that we can improve the network visualization, but we wil
 plot(slack, edge.arrow.size = .3, vertex.label=NA,vertex.size=10,
      vertex.color='gray',edge.color='blue')
 ```
+
 ### Layout algorithms for ``igraph`` package
 
 The igraph package has many different layout algorithms available; type `?igraph::layout` for a list of them. By clicking on each layout in the help menu, you'll be able to distinguish which of the layouts are force-directed and which are not. Force-directed layouts generally provide the highest quality network visualizations. The Davidson-Harel (``layout_with_dh``), Fruchterman-Reingold  (``layout_with_fr``), DrL (``layout_with_drl``) and multidimensional scaling algorithms (``layout_with_mds``) are probably the most well-known algorithms available in this package.
@@ -90,6 +93,7 @@ plot(slack, edge.arrow.size = .2,
 legend(x=-1.5,y=0,unique(V(slack)$Cohort),pch=21,
        pt.bg=c("blue","orange"),pt.cex=2,bty="n",ncol=1)
 ```
+
 A (nearly) complete list of plot option parameters is given below:
 
 - __vertex.color__: Node color
@@ -129,6 +133,7 @@ legend(x=-1.5,y=0,c("Orange","Blue"),pch=21,
 
 
 ```
+
 ## Package ``networkD3``
 
 The network D3 package creates the same type of visualizations that you would see in the [JavaScript library D3](https://d3js.org). These visualizations are highly interactive and quite beautiful. 
@@ -136,6 +141,7 @@ The network D3 package creates the same type of visualizations that you would se
 ```{r, results=F}
 library(networkD3)
 ```
+
 ### Preparing the data for ``networkD3``
 
 The one thing that you'll have to keep in mind when creating this visualization is the insistence of this package that your label names (indices) of your nodes start from zero. To use this package, you need a data frame containing the edge list and a data frame containing the node data. While we already have these data frames prepared, the following chunk of code shows you how to extract them from an igraph object and easily transform your ID or label column into a counter that starts from 0. You can see the first few rows of the resulting data frames below.
