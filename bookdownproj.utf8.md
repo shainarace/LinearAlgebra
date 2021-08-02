@@ -690,11 +690,11 @@ Addition, subtraction, and scalar multiplication are the only operations which a
 :::{.definition name='Addition, Subtraction, and Scalar Multiplication' #addsubdef}
 Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is:
 
-<!-- \begin{equation*} (\mathbf{A}+\mathbf{B})_{ij}=A_{ij}+B_{ij} \end{equation*} -->
-<!-- similarly, -->
-<!-- \begin{equation*}(\mathbf{A}-\mathbf{B})_{ij}=A_{ij}-B_{ij} \end{equation*} -->
-<!-- Multiplying a scalar by a matrix or vector also works element-wise: -->
-<!-- \begin{equation*}(\alpha\mathbf{A})_{ij}=\alpha A_{ij} \end{equation*}  -->
+\begin{equation*} (\mathbf{A}+\mathbf{B})_{ij}=A_{ij}+B_{ij} \end{equation*}
+similarly,
+\begin{equation*}(\mathbf{A}-\mathbf{B})_{ij}=A_{ij}-B_{ij} \end{equation*}
+Multiplying a scalar by a matrix or vector also works element-wise:
+\begin{equation*}(\alpha\mathbf{A})_{ij}=\alpha A_{ij} \end{equation*}
 :::
 Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is\:
 
@@ -1633,7 +1633,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.4774505 0.2310041
+## [1]  0.4430936 -0.4998300
 ```
 
 ```r
@@ -1643,7 +1643,7 @@ colMeans(A)
 ```
 
 ```
-## [1] -0.013688612  0.004838959
+## [1] -0.23596677 -0.05959361
 ```
 
 ```r
@@ -1653,7 +1653,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 0.9046901 1.2069431
+## [1] 0.9479809 1.0552974
 ```
 
 ```r
@@ -1663,7 +1663,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 0.6662789 2.9035946 0.1906068 0.7413685 5.8533517
+## [1]  0.9787529  0.9792011 10.3515263  0.7802449  0.9841090
 ```
 
 ```r
@@ -1673,7 +1673,7 @@ colMeans(B)
 ```
 
 ```
-## [1]  1.477117e-17 -2.463307e-18
+## [1] -1.554312e-17 -1.387779e-18
 ```
 
 ```r
@@ -1719,12 +1719,12 @@ A[1:5, ]
 ```
 
 ```
-##              This       That
-## [1,] -0.325700415  0.7484639
-## [2,]  0.842890865  1.4809219
-## [3,] -0.182196641 -0.3967507
-## [4,] -0.717741266 -0.4756217
-## [5,] -0.006427925  2.4193616
+##            This        That
+## [1,]  0.9118575 -0.38375612
+## [2,] -0.7478221 -0.64804569
+## [3,]  1.3945226  2.89945392
+## [4,] -0.6751056  0.56962910
+## [5,]  0.9902803  0.05877076
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -3251,7 +3251,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserved42fd4034a8d99cf
+preserve5f3b8c4586909eb2
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -4406,11 +4406,11 @@ cor(data)
 ```
 
 ```
-##              [,1]        [,2]        [,3]         [,4]
-## [1,]  1.000000000 -0.07479601 -0.00925664 -0.005256619
-## [2,] -0.074796014  1.00000000 -0.06295770 -0.020391034
-## [3,] -0.009256640 -0.06295770  1.00000000  0.097759310
-## [4,] -0.005256619 -0.02039103  0.09775931  1.000000000
+##             [,1]        [,2]         [,3]         [,4]
+## [1,]  1.00000000 -0.03023286  0.062621518 -0.023820180
+## [2,] -0.03023286  1.00000000 -0.050664536  0.033156887
+## [3,]  0.06262152 -0.05066454  1.000000000 -0.003724698
+## [4,] -0.02382018  0.03315689 -0.003724698  1.000000000
 ```
 
 ```r
@@ -4421,9 +4421,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0638 1.0278 0.9644 0.9391
-## Proportion of Variance 0.2829 0.2641 0.2325 0.2205
-## Cumulative Proportion  0.2829 0.5470 0.7795 1.0000
+## Standard deviation     1.0523 1.0001 0.9833 0.9621
+## Proportion of Variance 0.2768 0.2500 0.2417 0.2314
+## Cumulative Proportion  0.2768 0.5269 0.7686 1.0000
 ```
 
 ```r
@@ -4431,11 +4431,11 @@ pc$rotation
 ```
 
 ```
-##             PC1        PC2        PC3        PC4
-## [1,]  0.2258401 -0.7195897  0.5585556 -0.3452573
-## [2,] -0.5129898  0.4762629  0.5154574 -0.4942862
-## [3,]  0.6294507  0.2963874 -0.2812207 -0.6609548
-## [4,]  0.5381724  0.4092907  0.5858619  0.4467856
+##             PC1       PC2         PC3        PC4
+## [1,] -0.5506547 0.2207234 -0.61543112 -0.5189462
+## [2,]  0.5210434 0.2092272 -0.72599154  0.3970818
+## [3,] -0.5774522 0.4255944  0.08635081  0.6913479
+## [4,]  0.3030547 0.8522761  0.29448998 -0.3083162
 ```
 
 ```r
@@ -5058,7 +5058,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preserve4f21484242196b8e
+preserved73160f2de019f57
 <p class="caption">(\#fig:unnamed-chunk-76)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10293,7 +10293,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preserve7b35bea63e628168
+preserveac234563cd314c00
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10316,7 +10316,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preserveaf4719e44faa45ad
+preservece5475cefea5e6e9
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -11477,7 +11477,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserve317c304e3db23eff
+preserve4ed457fb4892a922
 
 ### Saving your Interactive Visualization to .html
 

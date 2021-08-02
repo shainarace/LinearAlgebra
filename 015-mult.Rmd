@@ -8,11 +8,11 @@ Addition, subtraction, and scalar multiplication are the only operations which a
 :::{.definition name='Addition, Subtraction, and Scalar Multiplication' #addsubdef}
 Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is:
 
-<!-- \begin{equation*} (\mathbf{A}+\mathbf{B})_{ij}=A_{ij}+B_{ij} \end{equation*} -->
-<!-- similarly, -->
-<!-- \begin{equation*}(\mathbf{A}-\mathbf{B})_{ij}=A_{ij}-B_{ij} \end{equation*} -->
-<!-- Multiplying a scalar by a matrix or vector also works element-wise: -->
-<!-- \begin{equation*}(\alpha\mathbf{A})_{ij}=\alpha A_{ij} \end{equation*}  -->
+\begin{equation*} (\mathbf{A}+\mathbf{B})_{ij}=A_{ij}+B_{ij} \end{equation*}
+similarly,
+\begin{equation*}(\mathbf{A}-\mathbf{B})_{ij}=A_{ij}-B_{ij} \end{equation*}
+Multiplying a scalar by a matrix or vector also works element-wise:
+\begin{equation*}(\alpha\mathbf{A})_{ij}=\alpha A_{ij} \end{equation*}
 :::
 Two matrices can be added or subtracted only when they have the same dimensions. If $\mathbf{A}$ and $\mathbf{B}$ are both $m\times n$ matrices then the (i,j) element of the sum (or difference), written $(\mathbf{A}_-^+ \mathbf{B})_{ij}$ is\:
 
