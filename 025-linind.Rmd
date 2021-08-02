@@ -66,7 +66,11 @@ knitr::include_graphics("figs/vectoradd.png")
 ```
 
 
-If we have two linearly independent vectors on a coordinate plane, then any third vector can be written as a linear combination of them. This is because two vectors is sufficient to _span_ the entire 2-dimensional plane. You should take a moment to convince yourself of this geometrically.
+If we have two linearly independent vectors on a coordinate plane, then any third vector can be written as a linear combination of them. This is because two vectors is sufficient to _span_ the entire 2-dimensional plane. You should take a moment to convince yourself of this geometrically, using the animation in Figure \@ref(fig:animspan) to help.
+
+```{r label='animspan', fig.align='center', fig.cap = 'Animation: Span of Two Linear Independent Vectors is a Plane. ', echo=F, out.width=300}
+knitr::include_graphics("figs/animspan.gif")
+```
 
 In 3-space, two linearly independent vectors can still only span a plane. Figure \@ref(fig:spanfig) depicts this situation. The set of all linearly combinations of the two vectors $\a$ and $\b$ (i.e. the $span(\a,\b)$) carves out a plane. We call this a two-dimensional collection of vectors a **subspace** of $\Re^3$. A subspace is formally defined in Definition \@ref(def:subspacedef).
 
@@ -103,6 +107,15 @@ b. $\y=\pm 2\\4\\6 \mp$
   - We could follow the same procedure as we did in part (a) to learn that the corresponding system is _not_ consistent and thus that $\y$ is not in the $span(\a,\b)$.
 
 :::
+
+:::{.definition name='Hyperplane' #hyperplane}
+A **hyperplane** is a subspace with 1 less dimension than the ambient space. Such a space "cuts" the ambient space into two pieces, one that is "above" the hyperplane, and one that is "below" it.  Hyperplanes are not always defined to go through the origin, so we will distinguish these subspaces from _affine_ hyperplanes, which are not subspaces. 
+
+```{r  fig.align='center', echo=F, out.width=300}
+knitr::include_graphics("figs/hyperplane.png")
+```
+:::
+
 
 ##  Exercises
 <ol>

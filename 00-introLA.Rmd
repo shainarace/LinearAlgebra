@@ -14,7 +14,7 @@ Such a plane is a classic example - the set of points $(x,y,z)$ satisfying this 
 
 A linear function involves only multiplication by scalars and addition/subtraction, for example:
 $$2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.$$
-The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (forth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, the 4+ dimensional lists of numbers maintain all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that we developed in 2- and 3-dimensional space.
+The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (fourth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, the 4+ dimensional lists of numbers maintain all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that we developed in 2- and 3-dimensional space.
 
 In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare "these two observations are far away from each other". 
 
@@ -162,9 +162,6 @@ $$\A=( \A_1 | \A_2 | \dots | \A_n )$$
 represents a matrix $\A$ with $n$ columns $\{\A_1,\A_2,\dots,\A_n\}$.
 :::
 
-:::{.example name='Rows, Columns, and Elements of a Matrix' #ijnot}
-
-Consider the following table of data and corresponding data matrix:
 <table>
 <tr>
 <td> Obs. <td>  Height (in.) <td>  Weight (lbs.) <td>  Age 
@@ -184,6 +181,15 @@ Consider the following table of data and corresponding data matrix:
 <td> 7 <td>  70 <td>  180 <td>  21
 </td></tr>
 </table>
+<caption> (\#tab:examijnot) Data for Example \@ref(exm:ijnot) </caption>
+
+:::{.example name='Rows, Columns, and Elements of a Matrix' #ijnot}
+
+Consider the data in Table \@ref(tab:examijnot) and corresponding data matrix:
+
+<div>
+
+</div>
 
 $$\mathbf{B}=
 \left(\begin{matrix}63 & 120 & 23\\
@@ -194,7 +200,7 @@ $$\mathbf{B}=
 68 & 165 & 25\\
 70 & 180 & 21\end{matrix}\right)$$
 
-Element $B_{42}=150$ corresponds to the _weight_ (second column) of _observation 4_ (forth row).
+Element $B_{42}=150$ corresponds to the _weight_ (second column) of _observation 4_ (fourth row).
 
 The column $$\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)$$ corresponds to the variable _age_ and the row $$\brow{6} = \left(\begin{matrix} 68&165&25 \end{matrix}\right)$$ corresponds to the measurements for _observation 6_.
 :::
