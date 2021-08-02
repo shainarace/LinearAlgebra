@@ -706,7 +706,8 @@ $$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right) 
 $$\mathbf{A}+\mathbf{B} = \left(\begin{matrix} 6 & 8 & 5\\0&-1&5\\5&6&4\end{matrix}\right)$$
 b. Compute $\mathbf{A}-\bo{H}$, if possible:
 $$\mathbf{A}=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \bo{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9 \end{matrix}\right)$$
-*We cannot subtract these matrices because they don't have the same size.*
+*We cannot subtract these matrices because they don't have the same size.*\
+
 c. Compute $2\mathbf{A}$:
 $$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$
 *We simply multiply every element in $\mathbf{A}$ by 2,*
@@ -1633,7 +1634,7 @@ colMeans(A)
 ```
 
 ```
-## [1]  0.4430936 -0.4998300
+## [1]  0.07026611 -0.19105826
 ```
 
 ```r
@@ -1643,7 +1644,7 @@ colMeans(A)
 ```
 
 ```
-## [1] -0.23596677 -0.05959361
+## [1] -0.088383791  0.009258649
 ```
 
 ```r
@@ -1653,7 +1654,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 0.9479809 1.0552974
+## [1] 0.9939934 1.0653783
 ```
 
 ```r
@@ -1663,7 +1664,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1]  0.9787529  0.9792011 10.3515263  0.7802449  0.9841090
+## [1] 0.5092665 0.7769321 1.2645749 6.6386635 1.1766071
 ```
 
 ```r
@@ -1673,7 +1674,7 @@ colMeans(B)
 ```
 
 ```
-## [1] -1.554312e-17 -1.387779e-18
+## [1]  2.373102e-17 -2.263814e-17
 ```
 
 ```r
@@ -1719,12 +1720,12 @@ A[1:5, ]
 ```
 
 ```
-##            This        That
-## [1,]  0.9118575 -0.38375612
-## [2,] -0.7478221 -0.64804569
-## [3,]  1.3945226  2.89945392
-## [4,] -0.6751056  0.56962910
-## [5,]  0.9902803  0.05877076
+##            This       That
+## [1,]  0.1200798  0.7034539
+## [2,] -0.2004114  0.8583515
+## [3,]  1.1020791 -0.2235993
+## [4,]  0.8429696  2.4347620
+## [5,] -0.9853639  0.4535032
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -3251,7 +3252,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserve5f3b8c4586909eb2
+preserveea9d16ff2b574a9d
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -4406,11 +4407,11 @@ cor(data)
 ```
 
 ```
-##             [,1]        [,2]         [,3]         [,4]
-## [1,]  1.00000000 -0.03023286  0.062621518 -0.023820180
-## [2,] -0.03023286  1.00000000 -0.050664536  0.033156887
-## [3,]  0.06262152 -0.05066454  1.000000000 -0.003724698
-## [4,] -0.02382018  0.03315689 -0.003724698  1.000000000
+##              [,1]        [,2]        [,3]         [,4]
+## [1,]  1.000000000 -0.03400735 0.006137436 -0.004801481
+## [2,] -0.034007355  1.00000000 0.058796304  0.017518225
+## [3,]  0.006137436  0.05879630 1.000000000  0.020177108
+## [4,] -0.004801481  0.01751823 0.020177108  1.000000000
 ```
 
 ```r
@@ -4421,9 +4422,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0523 1.0001 0.9833 0.9621
-## Proportion of Variance 0.2768 0.2500 0.2417 0.2314
-## Cumulative Proportion  0.2768 0.5269 0.7686 1.0000
+## Standard deviation     1.0368 1.0033 0.9946 0.9640
+## Proportion of Variance 0.2687 0.2517 0.2473 0.2323
+## Cumulative Proportion  0.2687 0.5204 0.7677 1.0000
 ```
 
 ```r
@@ -4431,11 +4432,11 @@ pc$rotation
 ```
 
 ```
-##             PC1       PC2         PC3        PC4
-## [1,] -0.5506547 0.2207234 -0.61543112 -0.5189462
-## [2,]  0.5210434 0.2092272 -0.72599154  0.3970818
-## [3,] -0.5774522 0.4255944  0.08635081  0.6913479
-## [4,]  0.3030547 0.8522761  0.29448998 -0.3083162
+##             PC1        PC2        PC3         PC4
+## [1,] -0.2785111  0.8650811 -0.1584574 -0.38595019
+## [2,]  0.6734876 -0.1332105 -0.2354644 -0.68791418
+## [3,]  0.5965359  0.4077061 -0.3179006  0.61388916
+## [4,]  0.3361413  0.2601258  0.9046474 -0.03092939
 ```
 
 ```r
@@ -5058,7 +5059,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preserved73160f2de019f57
+preserve0e0c621a52792b2a
 <p class="caption">(\#fig:unnamed-chunk-76)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10293,7 +10294,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preserveac234563cd314c00
+preserve3e7910c341cee1d3
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10316,7 +10317,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preservece5475cefea5e6e9
+preservefe5ad89d7e17cca5
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -11477,7 +11478,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserve4ed457fb4892a922
+preserve8b5d0c30ba26b969
 
 ### Saving your Interactive Visualization to .html
 

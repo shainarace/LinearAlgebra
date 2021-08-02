@@ -24,7 +24,8 @@ $$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right) 
 $$\mathbf{A}+\mathbf{B} = \left(\begin{matrix} 6 & 8 & 5\\0&-1&5\\5&6&4\end{matrix}\right)$$
 b. Compute $\mathbf{A}-\bo{H}$, if possible:
 $$\mathbf{A}=\left(\begin{matrix} 1 & 2\\3&5 \end{matrix}\right) \qquad \bo{H}= \left(\begin{matrix} 6 & 5& 10\\0.1 & 0.5 & 0.9 \end{matrix}\right)$$
-*We cannot subtract these matrices because they don't have the same size.*
+*We cannot subtract these matrices because they don't have the same size.*\
+
 c. Compute $2\mathbf{A}$:
 $$\mathbf{A}=\left(\begin{matrix} 2 & 3 & -1\\1&-1&1\\2&2&1 \end{matrix}\right)$$
 *We simply multiply every element in $\mathbf{A}$ by 2,*
