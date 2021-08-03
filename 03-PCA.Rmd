@@ -189,8 +189,9 @@ covM = cov(iris[1:4])
 eig=eigen(covM,symmetric=TRUE,only.values=FALSE)
 c=colnames(iris[1:4])
 eig$values
+# Label the loadings
 rownames(eig$vectors)=c(colnames(iris[1:4]))
-eig$vectors
+# eig$vectors
 ```
 
 The eigenvalues tell us how much of the total variance in the data is directed along each eigenvector. Thus, the amount of variance along $\mathbf{v}_1$ is $\lambda_1$ and the _proportion_ of variance explained by the first principal component is
@@ -217,7 +218,7 @@ Lets plot the *projection* of the four-dimensional iris data onto the two dimens
 $$\mathbf{X}=\mathbf{A}\mathbf{V}^T$$
 where $\mathbf{X}$ is our original iris data **(centered to have mean = 0)** and $\mathbf{A}$ is a matrix of coordinates in the new principal component space, spanned by the eigenvectors in $\mathbf{V}$.
 
-Solving this system is simple enough - since $\mathbf{V}$ is an orthogonal matrix. Let's confirm this:
+Solving this system is simple enough - since $\mathbf{V}$ is an orthogonal matrix per Theorem \@ref(thm:eigsym). Let's confirm this:
 
 ```{r}
 eig$vectors %*% t(eig$vectors)
@@ -226,8 +227,8 @@ t(eig$vectors) %*% eig$vectors
 
 We'll have to settle for precision at 15 decimal places. Close enough!
 
-So to find the scores, we simply subtract the means from our original variables to create the data matrix $\mathbf{X}$ and compute
-$$\mathbf{A}=\mathbf{X}\mathbf{V}$$
+To find the scores, we simply subtract the means from our original variables to create the data matrix $\mathbf{X}$ and compute
+$$\mathbf{A}=\mathbf{X}\mathbf{V}$$ 
 
 ```{r }
 # The scale function centers and scales by default
@@ -240,7 +241,7 @@ colnames(scores)=c("Prin1","Prin2","Prin3","Prin4")
 scores[1:10, ]
 ```
  
-To this point, we have simply computed coordinates (scores) on a new set of axis (principal components, eigenvectors, loadings). These axis are orthogonal and are aligned with the directions of maximal variance in the data. When we consider only a subset of principal components (like 2 components accounting for 97% of the variance), then we are projecting the data onto a lower dimensional space. Generally, this is one of the primary goals of PCA: Project the data down into a lower dimensional space (_onto the span of the principal components_) while keeping the maximum amount of information (i.e. variance).
+To this point, we have simply computed coordinates (scores) on a new set of axis (formed by the principal components, i.e. the eigenvectors). These axes are orthogonal and are aligned with the directions of maximal variance in the data. When we consider only a subset of principal components (like 2 the two components here that account for 97.8% of the variance),  we are projecting the data onto a lower dimensional space. Generally, this is one of the primary goals of PCA: Project the data down into a lower dimensional space (_onto the span of the principal components_) while keeping the maximum amount of information (i.e. variance).
 
 Thus, we know that almost 98% of the data's variance can be seen in two-dimensions using the first two principal components. Let's go ahead and see what this looks like:
 
