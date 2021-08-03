@@ -6,7 +6,26 @@ We now have the tools necessary to discuss one of the most important concepts in
 
 Imagine your data as a multidimensional cloud of points in space. God (however you conceive that) has a flashlight and can project this data at a right angle down onto a flat surface - the flashlight just casts a point shadow, the shadows don’t get bigger like on Earth. The center of the flat surface is fixed at the center of the data, so it's more like 2 flashlights, one from below the surface, one from above, both at right angles. We could rotate this flashlight/flat surface setup around and get infinitely many projections of the data from different perspectives. The PCA projection is the _one_ with the most variance, which indicates that it _contains the most information from your original data_. It's also the projection that is _closest to the original data_ in the Euclidean or sum-of-squared-error sense (PCA gives the rank k approximation to your data with the lowest possible error). Once projected, the axes of the projection (drawn so that the “first” axis points in the direction of greatest variance) are your principal components, providing the orthogonal directions of maximal variance. 
 
-This projection we've just described is actually the projection of the data onto a _hyperplane_, which entails a rank reduction of 1, though you might have imagined it as a projection onto a 2-dimensional plane. The great thing about PCA is that both of those visuals are appropriate - we can project the data onto any dimensional subspace of the original from 2 to rank($\X$)-1. 
+This projection we've just described is actually the projection of the data onto a _hyperplane_, which entails a rank reduction of 1, though you might have imagined it as a projection onto a 2-dimensional plane. The great thing about PCA is that both of those visuals are appropriate - we can project the data onto any dimensional subspace of the original from 1 to rank($\X$)-1. 
+
+With this analogy in mind, we bring back to the interactive plot from Chapter \@ref(orthog) to ponder what these different projections of a data cloud would look like, and to locate the maximum variance projection of _this_ data.
+
+```{r, fig=T, out.width="100%", echo=F,fig.align='center', warning=F, message=F}
+library(MASS)
+mu=c(0,0,0)
+Sigma=matrix(c(1,.5,.5,.5,1,.99,.5,.99,1),3)
+dat=mvrnorm(5000,mu=mu,Sigma=Sigma)
+# x= rnorm(500,0,1)
+# y=rnorm(500,0,1)
+# z=2*x+4*y
+# dat = cbind(x,y,z)
+# library(rgl)
+library(plotly)
+library(processx)
+graph = plot_ly(x=dat[,1],y=dat[,2],z=dat[,3],type='scatter3d')
+# plot3d(x=dat[,1],y=dat[,2],z=dat[,3], xlab='',ylab='',zlab='',xaxt='n',yaxt='n',zaxt='n', box=F)
+graph
+```
 
 ## PCA Details
 

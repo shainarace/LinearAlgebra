@@ -44,7 +44,7 @@ knitr::include_graphics("figs/profile.jpeg")
 
 ## Acknowledgements {-}
 
-The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, we strongly suggest the book that contains all of them:
+The author would like to acknowledge and celebrate the work of her PhD advisor Dr. Carl Meyer who wrote the most _thorough_ and complete proof-based presentation of the material in this book. If you're looking for more details, we strongly suggest the book that contains all of them [@meyerbook]:
 
 Meyer, Carl D. _Matrix analysis and applied linear algebra_. Vol. 71. Siam, 2000.
 

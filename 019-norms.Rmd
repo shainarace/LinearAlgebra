@@ -214,6 +214,7 @@ $$\X=[\x_1|\x_2|\x_3|\dots|\x_p].$$
 
 Using this centered and normalized data, the correlation matrix is simply
 $$\C=\X^T\X.$$
+
 ## Outer Products
 
 The outer product of two vectors $\x \in \Re^m$ and $\y \in \Re^n$, written $\x\y^T$, is an $m\times n $ matrix with rank 1. To see this basic fact, lets just look at an example.
@@ -227,12 +228,13 @@ which clearly has rank 1.  It should be clear from this example that computing a
 :::{.example name='Centering Data with an Outer Product' #centerouter}
 As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
 
-$$\A=\bm{ ~ & h & w & s \cr 
-			person_1 & 60 & 102 & 5.5 \cr
-			person_2 & 72 & 170 &  7.5 \cr
-			person_3 & 66 & 110 & 6.0\cr
-			person_4 & 69 & 128 & 6.5\cr
-			person_5 & 63 & 130 &  7.0\cr}$$
+\begin{equation}\A=\begin{array}{cc} & \begin{array}{ccc} h & w & s \end{array} \\
+			\begin{array}{c} person_1 \\
+person_2 \\
+person_3 \\
+person_4 \\
+person_5 \end{array} & \left(\begin{array}{ccc}60 & 102 & 5.5 \cr 72 & 170 &  7.5 \cr 66 & 110 & 6.0\cr 69 & 128 & 6.5\cr 63 & 130 &  7.0\cr \end{array} \right)\end{array}\end{equation}
+			 
 			
 The average values for height, weight, and wrist size are as follows:
 \begin{eqnarray}

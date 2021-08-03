@@ -13,7 +13,7 @@ Any attempt to use factor analysis to summarize or reduce a set to data should b
 <ul>
   <li> As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
   <li> You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table \@ref(tab:factorsig) for the details on this.
-<\ul>
+</ul>
 <li> No perfect multicollinearity
 <li> Homoskedasticity _not_ required between variables (all variances _not_ required to be equal)
 <li> Linearity of variables desired - only models linear correlation between variables
@@ -22,20 +22,8 @@ Any attempt to use factor analysis to summarize or reduce a set to data should b
 <li> Normality is not required
 </ol>
 
-|Sample Size<br> Needed for Significance| Factor Loading |
-|:-----------------------:|:---------------------:|
-|350       |    .30|
-|   250    |    .35|
-|   200    |    .40|
-|   150    |    .45|
-|   120    |    .50|
-|   100    |    .55|
-|     85   |    .60|
-|     70   |    .65|
-|     60   |    .70|
-|     50   |    .75|
 
-Table: Factor loadings are the correlation of each variable and the factor. This table is a guide for the sample sizes necessary to consider a factor loading significant. For example, in a sample of 100, factor loadings of 0.55 are considered significant. In a sample size of 70, however, factor loadings must reach 0.65 to be considered significant. Significance based on 0.05 level, a power level of 80 percent. Source: _Computations made with SOLO Power Analysis, BMDP Statistical Software, Inc., 1993_
+
 
 
 
@@ -53,9 +41,9 @@ Depending on how many variables you are working with, you may be able to determi
 
 ### Barlett's Sphericity Test
 
-Barlett's sphericity test checks if the observed correlation matrix is significantly different from the identity matrix. Recall that the correlation of two variables is equal to 0 if and only if they are orthogonal (and thus completely uncorrelated). When this is the case, we cannot reduce the number of variables any further, neither PCA nor Factor Analysis will be able to compress the information reliably into fewer dimensions. For Barlett's test,
-$$H_0 = \mbox{ The variables are orthogonal} $$
-Which implies that there are no underlying factors to be uncovered. Obviously, we must be able to reject this hypothesis for a meaningful result in PCA.
+Barlett's sphericity test checks if the observed correlation matrix is significantly different from the identity matrix. Recall that the correlation of two variables is equal to 0 if and only if they are orthogonal (and thus completely uncorrelated). When this is the case, we cannot reduce the number of variables any further and neither PCA nor any other flavor of factor analysis will be able to compress the information reliably into fewer dimensions. For Barlett's test, the null hypothesis is:
+$$H_0 = \mbox{ The variables are orthogonal,} $$
+which implies that there are no underlying factors to be uncovered. Obviously, we must be able to reject this hypothesis for a meaningful factor model.
 
 ### Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy
 
@@ -63,22 +51,38 @@ The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar
 
 
 <table>
-<tr>
-<td> KMO value <td>Degree of <br> Common Variance</td>
-<td>0.90 to 1.00  <td>Marvelous</td>
-<td>0.80 to 0.89  <td>Middling</td>
-<td>0.60 to 0.69   <td>Mediocre</td>
-<td>0.50 to 0.59    <td>Miserable</td>
-<td>0.00 to 0.49   <td>Don't Factor</td>
+<tr><td> KMO value <td>Degree of <br> Common Variance</tr>
+<tr><td>0.90 to 1.00  <td>Marvelous</tr>
+<tr><td>0.80 to 0.89  <td>Middling</tr>
+<tr><td>0.60 to 0.69   <td>Mediocre</tr>
+<tr><td>0.50 to 0.59    <td>Miserable</tr>
+<tr><td>0.00 to 0.49   <td>Don't Factor</tr>
 </table>
 <caption>(\#tab:KMO) Interpretting the KMO value. [@kmo] </caption>
 
 
 So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.
 
+### Significant factor loadings
+
+When performing principal factor analysis on the correlation matrix, we have some clear guidelines for what kind of factor loadings will be deemed "significant" from a statistical viewpoint based on sample size. Table  \@ref(tab:factorsig) provides those limits.
+
+<table>
+<tr><td>Sample Size<br> Needed for Significance<td> Factor Loading </tr>
+<tr><td>350       <td>    .30</tr>
+<tr><td>   250    <td>    .35</tr>
+<tr><td>   200    <td>    .40</tr>
+<tr><td>   150    <td>    .45</tr>
+<tr><td>   120    <td>    .50</tr>
+<tr><td>   100    <td>    .55</tr>
+<tr><td>     85   <td>    .60</tr>
+<tr><td>     70   <td>    .65</tr>
+<tr><td>     60   <td>    .70</tr>
+<tr><td>     50   <td>    .75</tr>
+</table>
+<caption> (\#tab:factorsig) For principal component factor analysis on the correlation matrix, the factor loadings provide the correlations of each variable with each factor. This table is a guide for the sample sizes necessary to consider a factor loading significant. For example, in a sample of 100, factor loadings of 0.55 are considered significant. In a sample size of 70, however, factor loadings must reach 0.65 to be considered significant. Significance based on 0.05 level, a power level of 80 percent. Source: _Computations made with SOLO Power Analysis, BMDP Statistical Software, Inc., 1993_ </caption>
 
 ## Communalities
-
 
 You can think of **communalities** as multiple $R^2$ values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.
 
@@ -86,7 +90,7 @@ Take for example the SAS output for factor analysis on the Iris dataset shown in
 
 (ref:factorOUT) SAS output for PROC FACTOR using Iris Dataset
 
-```{r fig=T, out.width="100%", echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
+```{r fig=T, out.width="60%", echo=F,fig.align='center', id='factorOUT', fig.cap='(ref:factorOUT)'} 
 knitr::include_graphics('figs/factorOUT.png')
 ```
 
@@ -105,7 +109,7 @@ The denominator in that fraction comes from the fact that the correlation matrix
 
 ## Number of Factors
 
-A good rule of thumb for determining the number of factors is to only choose factors with associated eigenvalue (or variance) greater than 1. Since the correlation matrix is used for factor analysis, we want our factors to explain more variance than any individual variable from our dataset. If this rule of thumb produces too many factors, it is reasonable to raise that limiting condition only if the number of factors still explains a reasonable amount of the total variance.
+A common rule of thumb for determining the number of factors in principal factor analysis on the correlation matrix is to only choose factors with associated eigenvalue (or variance) greater than 1. Since the correlation matrix implies the use of standardized data, each individual variable going in has a variance of 1. So this rule of thumb simply states that we want our factors to explain more variance than any individual variable from our dataset. If this rule of thumb produces too many factors, it is reasonable to raise that limiting condition only if the number of factors still explains a reasonable amount of the total variance.
 
 
 ## Rotation of Factors

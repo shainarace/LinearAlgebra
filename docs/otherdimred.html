@@ -393,7 +393,8 @@ div.csl-indent {
 <li class="chapter" data-level="6.3.3" data-path="norms.html"><a href="norms.html#angular-distance"><i class="fa fa-check"></i><b>6.3.3</b> Angular Distance</a></li>
 <li class="chapter" data-level="6.3.4" data-path="norms.html"><a href="norms.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> Correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.4</b> Exercises</a></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>6.4</b> Outer Products</a></li>
+<li class="chapter" data-level="6.5" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
 <ul>
@@ -520,6 +521,7 @@ div.csl-indent {
 <li class="chapter" data-level="17.2.1" data-path="fa.html"><a href="fa.html#visual-examination-of-correlation-matrix"><i class="fa fa-check"></i><b>17.2.1</b> Visual Examination of Correlation Matrix</a></li>
 <li class="chapter" data-level="17.2.2" data-path="fa.html"><a href="fa.html#barletts-sphericity-test"><i class="fa fa-check"></i><b>17.2.2</b> Barlett’s Sphericity Test</a></li>
 <li class="chapter" data-level="17.2.3" data-path="fa.html"><a href="fa.html#kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy"><i class="fa fa-check"></i><b>17.2.3</b> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</a></li>
+<li class="chapter" data-level="17.2.4" data-path="fa.html"><a href="fa.html#significant-factor-loadings"><i class="fa fa-check"></i><b>17.2.4</b> Significant factor loadings</a></li>
 </ul></li>
 <li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
 <li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
@@ -677,8 +679,8 @@ and
 <span id="cb280-4"><a href="otherdimred.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
 <span id="cb280-5"><a href="otherdimred.html#cb280-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
 <span id="cb280-6"><a href="otherdimred.html#cb280-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-140"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-141"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-141-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
 <p class="caption">
 Figure 18.1: Multidimensional Scaling of the Iris Data
 </p>
@@ -714,8 +716,8 @@ Figure 18.1: Multidimensional Scaling of the Iris Data
 <span id="cb284-5"><a href="otherdimred.html#cb284-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb284-6"><a href="otherdimred.html#cb284-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
 <span id="cb284-7"><a href="otherdimred.html#cb284-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-143"></span>
-<img src="bookdownproj_files/figure-html/unnamed-chunk-143-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-144"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
 <p class="caption">
 Figure 18.2: Multidimensional Scaling of the Leukemia Data
 </p>
@@ -736,7 +738,7 @@ Figure 18.2: Multidimensional Scaling of the Leukemia Data
 <span id="cb287-5"><a href="otherdimred.html#cb287-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
 <span id="cb287-6"><a href="otherdimred.html#cb287-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
 <span id="cb287-7"><a href="otherdimred.html#cb287-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-145-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="a-note-on-standardization" class="section level3 unnumbered">
 <h3>A note on standardization</h3>
