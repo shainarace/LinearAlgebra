@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 20 Introduction | Linear Algebra for Data Science</title>
+  <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 20 Introduction | Linear Algebra for Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="github-repo" content="shainarace/linearalgebra" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 20 Introduction | Linear Algebra for Data Science" />
+  
+  <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-08-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sna.html"/>
+<link rel="next" href="clusteralgos.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
+  }
+});
+</script>
+
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>1.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>1.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#dimensionsize-of-a-matrix"><i class="fa fa-check"></i><b>1.3.1</b> Dimension/Size of a Matrix</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ij-notation"><i class="fa fa-check"></i><b>1.3.2</b> <span class="math inline">\((i,j)\)</span> Notation</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-defining-social-networks"><i class="fa fa-check"></i>Example: Defining social networks</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#introcorr"><i class="fa fa-check"></i><b>1.3.3</b> Example: Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector-geometry-n-space"><i class="fa fa-check"></i><b>1.4.1</b> Vector Geometry: <span class="math inline">\(n\)</span>-space</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#transpose"><i class="fa fa-check"></i><b>1.5.1</b> Transpose</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#trace-of-a-matrix"><i class="fa fa-check"></i><b>1.5.2</b> Trace of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>2.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>2.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>2.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="mult.html"><a href="mult.html#the-inner-product"><i class="fa fa-check"></i><b>2.4.1</b> The Inner Product</a></li>
+<li class="chapter" data-level="2.4.2" data-path="mult.html"><a href="mult.html#matrix-product"><i class="fa fa-check"></i><b>2.4.2</b> Matrix Product</a></li>
+<li class="chapter" data-level="2.4.3" data-path="mult.html"><a href="mult.html#matrix-vector-product"><i class="fa fa-check"></i><b>2.4.3</b> Matrix-Vector Product</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#linear-combination-view-of-matrix-products"><i class="fa fa-check"></i>Linear Combination view of Matrix Products</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multapp.html"><a href="multapp.html#big-systems-of-equations"><i class="fa fa-check"></i><b>3.1.1</b> <em>Big</em> Systems of Equations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>4</b> R Programming Basics</a></li>
+<li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="solvesys.html"><a href="solvesys.html#row-operations"><i class="fa fa-check"></i><b>5.1.1</b> Row Operations</a></li>
+<li class="chapter" data-level="5.1.2" data-path="solvesys.html"><a href="solvesys.html#the-augmented-matrix"><i class="fa fa-check"></i><b>5.1.2</b> The Augmented Matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination-summary"><i class="fa fa-check"></i><b>5.1.3</b> Gaussian Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-summary"><i class="fa fa-check"></i><b>5.2.1</b> Gauss-Jordan Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="solvesys.html"><a href="solvesys.html#uniquesol"><i class="fa fa-check"></i><b>5.3.1</b> The Unique Solution Case</a></li>
+<li class="chapter" data-level="5.3.2" data-path="solvesys.html"><a href="solvesys.html#inconsistent"><i class="fa fa-check"></i><b>5.3.2</b> The Inconsistent Case</a></li>
+<li class="chapter" data-level="5.3.3" data-path="solvesys.html"><a href="solvesys.html#infinitesol"><i class="fa fa-check"></i><b>5.3.3</b> The Infinite Solutions Case</a></li>
+<li class="chapter" data-level="5.3.4" data-path="solvesys.html"><a href="solvesys.html#matrix-rank"><i class="fa fa-check"></i><b>5.3.4</b> Matrix Rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="solvesys.html"><a href="solvesys.html#solving-for-the-inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.4.1</b> Solving for the Inverse of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="norms.html"><a href="norms.html#norm-star_1."><i class="fa fa-check"></i><b>6.2.1</b> 1-norm, <span class="math inline">\(\|\star\|_1\)</span>.</a></li>
+<li class="chapter" data-level="6.2.2" data-path="norms.html"><a href="norms.html#infty-norm-star_infty."><i class="fa fa-check"></i><b>6.2.2</b> <span class="math inline">\(\infty\)</span>-norm, <span class="math inline">\(\|\star\|_{\infty}\)</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="norms.html"><a href="norms.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="norms.html"><a href="norms.html#mahalanobis-distance"><i class="fa fa-check"></i><b>6.3.2</b> Mahalanobis Distance</a></li>
+<li class="chapter" data-level="6.3.3" data-path="norms.html"><a href="norms.html#angular-distance"><i class="fa fa-check"></i><b>6.3.3</b> Angular Distance</a></li>
+<li class="chapter" data-level="6.3.4" data-path="norms.html"><a href="norms.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>6.4</b> Outer Products</a></li>
+<li class="chapter" data-level="6.5" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linind.html"><a href="linind.html#determining-linear-independence"><i class="fa fa-check"></i><b>7.1.1</b> Determining Linear Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="leastsquares.html"><a href="leastsquares.html#geometrical-interpretation"><i class="fa fa-check"></i><b>10.2.1</b> Geometrical Interpretation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="leastsquares.html"><a href="leastsquares.html#calculus-derivation"><i class="fa fa-check"></i><b>10.2.2</b> Calculus Derivation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="lsapp.html"><a href="lsapp.html#cars-data"><i class="fa fa-check"></i><b>11.1.1</b> Cars Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="lsapp.html"><a href="lsapp.html#setting-up-the-normal-equations"><i class="fa fa-check"></i><b>11.1.2</b> Setting up the Normal Equations</a></li>
+<li class="chapter" data-level="11.1.3" data-path="lsapp.html"><a href="lsapp.html#solving-for-parameter-estimates-and-statistics"><i class="fa fa-check"></i><b>11.1.3</b> Solving for Parameter Estimates and Statistics</a></li>
+<li class="chapter" data-level="11.1.4" data-path="lsapp.html"><a href="lsapp.html#ols-in-r-via-lm"><i class="fa fa-check"></i><b>11.1.4</b> OLS in R via <code>lm()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="lsapp.html"><a href="lsapp.html#bike-sharing-dataset"><i class="fa fa-check"></i><b>11.2.1</b> Bike Sharing Dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>12.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>12.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="12.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>12.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#gods-flashlight"><i class="fa fa-check"></i><b>13.1</b> God’s Flashlight</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#pca-details"><i class="fa fa-check"></i><b>13.2</b> PCA Details</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.3</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.4</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.5" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.5</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="pca.html"><a href="pca.html#covariance-pca"><i class="fa fa-check"></i><b>13.5.1</b> Covariance PCA</a></li>
+<li class="chapter" data-level="13.5.2" data-path="pca.html"><a href="pca.html#principal-components-loadings-and-variance-explained"><i class="fa fa-check"></i><b>13.5.2</b> Principal Components, Loadings, and Variance Explained</a></li>
+<li class="chapter" data-level="13.5.3" data-path="pca.html"><a href="pca.html#scores-and-pca-projection"><i class="fa fa-check"></i><b>13.5.3</b> Scores and PCA Projection</a></li>
+<li class="chapter" data-level="13.5.4" data-path="pca.html"><a href="pca.html#pca-functions-in-r"><i class="fa fa-check"></i><b>13.5.4</b> PCA functions in R</a></li>
+<li class="chapter" data-level="13.5.5" data-path="pca.html"><a href="pca.html#the-biplot"><i class="fa fa-check"></i><b>13.5.5</b> The Biplot</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.6</b> Variable Clustering with PCA</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="pca.html"><a href="pca.html#correlation-pca"><i class="fa fa-check"></i><b>13.6.1</b> Correlation PCA</a></li>
+<li class="chapter" data-level="13.6.2" data-path="pca.html"><a href="pca.html#which-projection-is-better"><i class="fa fa-check"></i><b>13.6.2</b> Which Projection is Better?</a></li>
+<li class="chapter" data-level="13.6.3" data-path="pca.html"><a href="pca.html#beware-of-biplots"><i class="fa fa-check"></i><b>13.6.3</b> Beware of biplots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="pcaapp.html"><a href="pcaapp.html#feature-selection"><i class="fa fa-check"></i><b>14.1.1</b> Feature Selection</a></li>
+<li class="chapter" data-level="14.1.2" data-path="pcaapp.html"><a href="pcaapp.html#feature-extraction"><i class="fa fa-check"></i><b>14.1.2</b> Feature Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="pcaapp.html"><a href="pcaapp.html#uk-food-consumption"><i class="fa fa-check"></i><b>14.2.1</b> UK Food Consumption</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="pcaapp.html"><a href="pcaapp.html#computing-the-pca"><i class="fa fa-check"></i><b>14.4.1</b> Computing the PCA</a></li>
+<li class="chapter" data-level="14.4.2" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package"><i class="fa fa-check"></i><b>14.4.2</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.3" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package-1"><i class="fa fa-check"></i><b>14.4.3</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.4" data-path="pcaapp.html"><a href="pcaapp.html#variance-explained"><i class="fa fa-check"></i><b>14.4.4</b> Variance explained</a></li>
+<li class="chapter" data-level="14.4.5" data-path="pcaapp.html"><a href="pcaapp.html#using-correlation-pca"><i class="fa fa-check"></i><b>14.4.5</b> Using Correlation PCA</a></li>
+<li class="chapter" data-level="14.4.6" data-path="pcaapp.html"><a href="pcaapp.html#range-standardization-as-an-alternative-to-covariance-pca"><i class="fa fa-check"></i><b>14.4.6</b> Range standardization as an alternative to covariance PCA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>15.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="15.2" data-path="svd.html"><a href="svd.html#data-compression"><i class="fa fa-check"></i><b>15.2</b> Data Compression</a></li>
+<li class="chapter" data-level="15.3" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>15.3</b> Noise Reduction</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="svdapp.html"><a href="svdapp.html#note-about-rows-vs.-columns"><i class="fa fa-check"></i><b>16.1.1</b> Note About Rows vs. Columns</a></li>
+<li class="chapter" data-level="16.1.2" data-path="svdapp.html"><a href="svdapp.html#term-weighting"><i class="fa fa-check"></i><b>16.1.2</b> Term Weighting</a></li>
+<li class="chapter" data-level="16.1.3" data-path="svdapp.html"><a href="svdapp.html#other-considerations"><i class="fa fa-check"></i><b>16.1.3</b> Other Considerations</a></li>
+<li class="chapter" data-level="16.1.4" data-path="svdapp.html"><a href="svdapp.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.1.4</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="16.1.5" data-path="svdapp.html"><a href="svdapp.html#example"><i class="fa fa-check"></i><b>16.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="svdapp.html"><a href="svdapp.html#image-data-in-r"><i class="fa fa-check"></i><b>16.2.1</b> Image data in R</a></li>
+<li class="chapter" data-level="16.2.2" data-path="svdapp.html"><a href="svdapp.html#computing-the-svd-of-dr.-rappa"><i class="fa fa-check"></i><b>16.2.2</b> Computing the SVD of Dr. Rappa</a></li>
+<li class="chapter" data-level="16.2.3" data-path="svdapp.html"><a href="svdapp.html#the-noise"><i class="fa fa-check"></i><b>16.2.3</b> The Noise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="fa.html"><a href="fa.html#visual-examination-of-correlation-matrix"><i class="fa fa-check"></i><b>17.2.1</b> Visual Examination of Correlation Matrix</a></li>
+<li class="chapter" data-level="17.2.2" data-path="fa.html"><a href="fa.html#barletts-sphericity-test"><i class="fa fa-check"></i><b>17.2.2</b> Barlett’s Sphericity Test</a></li>
+<li class="chapter" data-level="17.2.3" data-path="fa.html"><a href="fa.html#kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy"><i class="fa fa-check"></i><b>17.2.3</b> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</a></li>
+<li class="chapter" data-level="17.2.4" data-path="fa.html"><a href="fa.html#significant-factor-loadings"><i class="fa fa-check"></i><b>17.2.4</b> Significant factor loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
+<li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="17.6" data-path="fa.html"><a href="fa.html#fa-apps"><i class="fa fa-check"></i><b>17.6</b> Methods of Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="fa.html"><a href="fa.html#pca-rotations"><i class="fa fa-check"></i><b>17.6.1</b> PCA Rotations</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="fa.html"><a href="fa.html#case-study-personality-tests"><i class="fa fa-check"></i><b>17.7</b> Case Study: Personality Tests</a>
+<ul>
+<li class="chapter" data-level="17.7.1" data-path="fa.html"><a href="fa.html#raw-pca-factors"><i class="fa fa-check"></i><b>17.7.1</b> Raw PCA Factors</a></li>
+<li class="chapter" data-level="17.7.2" data-path="fa.html"><a href="fa.html#rotated-principal-components"><i class="fa fa-check"></i><b>17.7.2</b> Rotated Principal Components</a></li>
+<li class="chapter" data-level="17.7.3" data-path="fa.html"><a href="fa.html#visualizing-rotation-via-biplots"><i class="fa fa-check"></i><b>17.7.3</b> Visualizing Rotation via BiPlots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>18</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>19</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Clustering</b></span></li>
+<li class="chapter" data-level="20" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>20.1</b> Mathematical Setup</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="clusintro.html"><a href="clusintro.html#data"><i class="fa fa-check"></i><b>20.1.1</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>20.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="20.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>20.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="20.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>20.4</b> History of Data Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>21</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>21.1</b> Hierarchical Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="clusteralgos.html"><a href="clusteralgos.html#agglomerative-hierarchical-clustering"><i class="fa fa-check"></i><b>21.1.1</b> Agglomerative Hierarchical Clustering</a></li>
+<li class="chapter" data-level="21.1.2" data-path="clusteralgos.html"><a href="clusteralgos.html#principal-direction-divisive-partitioning-pddp"><i class="fa fa-check"></i><b>21.1.2</b> Principal Direction Divisive Partitioning (PDDP)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>21.2</b> Iterative Partitional Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="clusteralgos.html"><a href="clusteralgos.html#early-partitional-algorithms"><i class="fa fa-check"></i><b>21.2.1</b> Early Partitional Algorithms</a></li>
+<li class="chapter" data-level="21.2.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeans"><i class="fa fa-check"></i><b>21.2.2</b> <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="21.2.3" data-path="clusteralgos.html"><a href="clusteralgos.html#the-expectation-maximization-em-clustering-algorithm"><i class="fa fa-check"></i><b>21.2.3</b> The Expectation-Maximization (EM) Clustering Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>21.3</b> Density Search Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="clusteralgos.html"><a href="clusteralgos.html#density-based-spacial-clustering-of-applications-with-noise-dbscan"><i class="fa fa-check"></i><b>21.3.1</b> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="clusteralgos.html"><a href="clusteralgos.html#conclusion"><i class="fa fa-check"></i><b>21.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>22.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="22.2" data-path="chap1-5.html"><a href="chap1-5.html#fiedler-partitioning"><i class="fa fa-check"></i><b>22.2</b> Fiedler Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="chap1-5.html"><a href="chap1-5.html#linear-algebraic-motivation-for-the-fiedler-vector"><i class="fa fa-check"></i><b>22.2.1</b> Linear Algebraic Motivation for the Fiedler vector</a></li>
+<li class="chapter" data-level="22.2.2" data-path="chap1-5.html"><a href="chap1-5.html#graph-cuts"><i class="fa fa-check"></i><b>22.2.2</b> Graph Cuts</a></li>
+<li class="chapter" data-level="22.2.3" data-path="chap1-5.html"><a href="chap1-5.html#pic"><i class="fa fa-check"></i><b>22.2.3</b> Power Iteration Clustering</a></li>
+<li class="chapter" data-level="22.2.4" data-path="chap1-5.html"><a href="chap1-5.html#modularity"><i class="fa fa-check"></i><b>22.2.4</b> Clustering via Modularity Maximization</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>22.3</b> Stochastic Clustering</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering-algorithm-sca"><i class="fa fa-check"></i><b>22.3.1</b> Stochastic Clustering Algorithm (SCA)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="validation.html"><a href="validation.html#common-measures-of-cohesion-and-separation"><i class="fa fa-check"></i><b>23.1.1</b> Common Measures of Cohesion and Separation</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="validation.html"><a href="validation.html#accuracy"><i class="fa fa-check"></i><b>23.2.1</b> Accuracy</a></li>
+<li class="chapter" data-level="23.2.2" data-path="validation.html"><a href="validation.html#entropy"><i class="fa fa-check"></i><b>23.2.2</b> Entropy</a></li>
+<li class="chapter" data-level="23.2.3" data-path="validation.html"><a href="validation.html#purity"><i class="fa fa-check"></i><b>23.2.3</b> Purity</a></li>
+<li class="chapter" data-level="23.2.4" data-path="validation.html"><a href="validation.html#mutual-information-mi-and-normalized-mutual-information-nmi"><i class="fa fa-check"></i><b>23.2.4</b> Mutual Information (MI) and <br> Normalized Mutual Information (NMI)</a></li>
+<li class="chapter" data-level="23.2.5" data-path="validation.html"><a href="validation.html#other-external-measures-of-validity"><i class="fa fa-check"></i><b>23.2.5</b> Other External Measures of Validity</a></li>
+<li class="chapter" data-level="23.2.6" data-path="validation.html"><a href="validation.html#summary-table"><i class="fa fa-check"></i><b>23.2.6</b> Summary Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="findk.html"><a href="findk.html#cosine-cohesion-plots-for-text-data"><i class="fa fa-check"></i><b>24.2.1</b> Cosine-Cohesion Plots for Text Data</a></li>
+<li class="chapter" data-level="24.2.2" data-path="findk.html"><a href="findk.html#ray-and-turis-method"><i class="fa fa-check"></i><b>24.2.2</b> Ray and Turi’s Method</a></li>
+<li class="chapter" data-level="24.2.3" data-path="findk.html"><a href="findk.html#the-gap-statistic"><i class="fa fa-check"></i><b>24.2.3</b> The Gap Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Algebra for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clusintro" class="section level1" number="20">
+<h1><span class="header-section-number">Chapter 20</span> Introduction</h1>
+<p>Clustering is the task of partitioning a set of objects into subsets (clusters) so that objects in the same cluster are similar in some sense. Thus, a “cluster” is a generally a subjective entity determined by how an observer defines the similarity of objects. Take for example Figure <a href="clusintro.html#fig:shapes">20.1</a> where we depict eight objects that differ by shape and color. Depending on the notion of similarity used (color, shape, or both) these objects might be clustered in one of the three ways shown.</p>
+<div class="figure" style="text-align: center"><span id="fig:shapes"></span>
+<img src="figs/shapes.jpg" alt="Three Meaningful Clusterings of One Set of Objects" width="75%" />
+<p class="caption">
+Figure 20.1: Three Meaningful Clusterings of One Set of Objects
+</p>
+</div>
+<div id="mathematical-setup" class="section level2" number="20.1">
+<h2><span class="header-section-number">20.1</span> Mathematical Setup</h2>
+<p>In order to define this problem in a mathematical sense, it is necessary to quantify the attributes of objects using data so that we can mathematically or statistically determine notions of similarity. Data clustering refers to the process of grouping data points <em>naturally</em> based on information found in the data which describes its characteristics and relationships. It is not an exact science and, as we will discuss at length, there is no <em>best</em> method for partitioning data into clusters.</p>
+<div id="data" class="section level3" number="20.1.1">
+<h3><span class="header-section-number">20.1.1</span> Data</h3>
+<p>We will use the terms “observation,” “object,” and “data point” interchangeably to refer to the entities we aim to partition into clusters. These data points could represent any population of interest, be it a collection of documents or a group of Iris flowers. Each data point will be considered as a column vector, containing measurements of features, attributes, or variables (again, used interchangeably) which characterize it. For example, a column vector characterizing a document could have as many rows as there are words in the dictionary, and each entry in the vector could indicate the number of times each word occurred in the document. An Iris flower, on the other hand, may be characterized by far fewer attributes, perhaps measurements on the size of its petal and sepal. It is assumed we have <span class="math inline">\(n\)</span> such objects, each represented by a column vector <span class="math inline">\(\x_j\)</span> containing measurements on <span class="math inline">\(m\)</span> variables. All of this information is collected in an <span class="math inline">\(m \times n\)</span> <strong>data matrix</strong>, <span class="math inline">\(\X\)</span>, which will serve as input to the various clustering methods.
+<span class="math display">\[\X=[\x_1,\x_2,\dots,\x_n]\]</span></p>
+<p>The aim of data clustering is to automatically determine clusters in these populations based upon the information contained in those vectors. In the document collection, the goal may be to identify clusters of documents which discuss similar subject matter whereas in the Iris data, the goal may be to learn about different species of Iris flowers.</p>
+<!-- %In any situation where measurements are taken or data is collected, it becomes necessary to consider the presence of \textbf{noise:} erroneous, or meaningless information obscuring meaningful patterns in data. In Chapter \ref{chap2} we will discuss techniques for reducing noise in high-dimensional data (data with a large number of attributes).   -->
+In applied data mining, variables fall into the following four categories: Nominal/Categorical, Ordinal, Interval, or Ratio.
+<ol>
+<li>
+<strong>Nominal/Categorical:</strong> Variables which have no ordering, for example ethnicity, color or shape.
+<li>
+<strong>Ordinal:</strong> Variables which can be rank-ordered but for which distances have no meaning. For example, scores assigned to levels education (0=no high school, 1=some high school, 2=high school diploma). The distance between 0 and 1 is not necessarily the same as the distance between 1 and 2, but the numbers have some meaning by order.
+<li>
+<strong>Interval:</strong> Variables for which differences can be interpreted but for with ratios make no sense. For example if temperature is measured in degrees Fahrenheit the distance from 20 to 30 degrees is the same as the distance from 70 to 80 degrees, however 80 degrees is not ``twice as hot’’ as 40 degrees.
+<li>
+<strong>Ratio:</strong> variables for which a meaningful ratio can be constructed. For example height or weight. An absolute zero is meaningful for a ratio variable.
+</ol>
+<p>For the algorithms contained herein, it is assumed that the attributes used are ratio variables, although many of the methods can be extended to include other types of data (or one can simply use dummy variables and/or ordinal encoding as long as one explores the potential impacts of such decisions).</p>
+</div>
+</div>
+<div id="the-number-of-clusters-k" class="section level2" number="20.2">
+<h2><span class="header-section-number">20.2</span> The Number of Clusters, <span class="math inline">\(k\)</span></h2>
+<p>One of the important problems in cluster analysis is the determination of the number of clusters, <span class="math inline">\(k\)</span>. The number of clusters can also be a matter of subjectivity. Take for instance the 2-dimensional scatter plot of points in Figure <a href="clusintro.html#fig:introex">20.2</a>. Using the points’ proximity in Euclidean space as a measure of their similarity, one could argue that there are any number of clusters in this simple illustration. However, most people would agree that there is indeed cluster-like structure in this data.</p>
+<div class="figure" style="text-align: center"><span id="fig:introex"></span>
+<img src="figs/introex.jpg" alt="How Many Clusters do _You_ See?" width="50%" />
+<p class="caption">
+Figure 20.2: How Many Clusters do <em>You</em> See?
+</p>
+</div>
+<p>Figure <a href="clusintro.html#fig:introex">20.2</a> also motivates a discussion of <em>subcluster structure</em>. Figure <a href="clusintro.html#fig:introex12">20.3</a> shows two possible clusterings with different numbers of clusters. The clustering on the right depicts a logical subdivison of the clusters on the left.</p>
+<div class="figure" style="text-align: center"><span id="fig:introex12"></span>
+<img src="figs/introex12.png" alt="Two Reasonable Answers with Different Numbers of Clusters" width="100%" />
+<p class="caption">
+Figure 20.3: Two Reasonable Answers with Different Numbers of Clusters
+</p>
+</div>
+<p>It is easy to imagine data in which the number of clusters to specify is a matter of debate only because groups of related objects can be meaningfully divided into subcategories or <em>subclusters.</em> For example a collection of webpages may clearly fall into 3 categories: sports, investment banking, and astronomy. If the webpages about sports further divide into 2 categories like baseball and basketball then we’d refer to that as subclustering.</p>
+</div>
+<div id="partitioning-of-graphs-and-networks" class="section level2" number="20.3">
+<h2><span class="header-section-number">20.3</span> Partitioning of Graphs and Networks</h2>
+<p>Another popular research problem in clustering is the partitioning of graphs. In network applications this problem has become known to many as <em>community detection</em> <span class="citation"><a href="#ref-mahoney" role="doc-biblioref">[62]</a></span>, although the underlying problem of partitioning graphs has been studied extensively for years <span class="citation"><a href="#ref-pothen" role="doc-biblioref">[26]</a>–<a href="#ref-drineassvd" role="doc-biblioref">[28]</a>, <a href="#ref-fiedlerev" role="doc-biblioref">[31]</a>, <a href="#ref-ng" role="doc-biblioref">[57]</a>, <a href="#ref-chung" role="doc-biblioref">[60]</a>, <a href="#ref-poweriteration" role="doc-biblioref">[70]</a></span>. A <strong>graph</strong> is a set of <em>vertices</em> (or equivalently <em>nodes</em>) <span class="math inline">\(V=\{1,2,\dots, n\}\)</span> together with a set of edges <span class="math inline">\(E=\{(i,j) : i,j \in V\}\)</span> which connect vertices together. A <strong>weighted graph</strong> is one in which the edges are assigned some weight <span class="math inline">\(w_{ij}\)</span> whereas an unweighted graph has binary weights for edges: <span class="math inline">\(w_{ij}=1\)</span> if <span class="math inline">\((i,j) \in E\)</span>, <span class="math inline">\(w_{ij}=0\)</span> otherwise. Our focus will be on <em>undirected graphs</em> in which <span class="math inline">\(w_{ij}=w_{ji}\)</span>. All algorithms for graph partitioning (or network community detection) will rely on an <strong>adjacency matrix</strong>.</p>
+<div class="definition">
+<p><span id="def:adjmat" class="definition"><strong>Definition 20.1  (Adjacency Matrix) </strong></span>An <strong>adjacency matrix</strong> <span class="math inline">\(\A\)</span> for an undirected graph, <span class="math inline">\(\mathcal{G}=(V,E)\)</span>, is an <span class="math inline">\(n \times n\)</span> symmetric matrix defined as follows:
+<span class="math display">\[\A_{ij}=
+\begin{cases}
+w_{ij}, &amp; \text{if } (i,j) \in E \\
+0 &amp; \text{otherwise}
+\end{cases}\]</span></p>
+</div>
+<p>Figure <a href="clusintro.html#fig:introexg">20.4</a> is an example of a graph exhibiting cluster or community structure. The weights of the edges are depicted by their thickness. It is expected that edges within the clusters occur more frequently and with higher weight than edges between the clusters. Thus, once the rows and columns of the matrix are reordered according to their cluster membership, we expect to see a matrix that is <em>block-diagonally dominant</em> - that is, one in which values in square diagonal blocks are relatively large compared to those in the off-diagonal blocks.</p>
+<div class="figure" style="text-align: center"><span id="fig:introexg"></span>
+<img src="figs/introexg.png" alt="A Graph with Clusters and its Block Diagonally Dominant Adjacency Matrix" width="100%" />
+<p class="caption">
+Figure 20.4: A Graph with Clusters and its Block Diagonally Dominant Adjacency Matrix
+</p>
+</div>
+In much of the literature on graph partitioning, it is suggested that the data clustering problem can be transformed into a graph partitioning problem by means of a similarity matrix <span class="citation"><a href="#ref-poweriteration" role="doc-biblioref">[70]</a></span>. A <strong>similarity matrix</strong> <span class="math inline">\(\bo{S}\)</span> is an <span class="math inline">\(n \times n\)</span> symmetric matrix where <span class="math inline">\(\bo{S}_{ij}\)</span> measures some notion of similarity between data points <span class="math inline">\(\x_i\)</span> and <span class="math inline">\(\x_j\)</span>. There are a wealth of metrics available to gauge similarity or dissimilarity, see for example <span class="citation"><a href="#ref-dcebook" role="doc-biblioref">[16]</a></span>. Common measures of similarity rely on Euclidean or angular distance measures. Two of the most popular similarity functions in the literature are the following:
+<p>Any similarity matrix can be considered an adjacency matrix for a graph, thus transforming the original data clustering problem into a graph partitioning problem. Several algorithms for data clustering and graph partitioning are provided in Section <a href="clusteralgos.html#clusteralgos">21</a>. Regardless of the method chosen for clustering, similarity matrices can be a useful tool for visualizing cluster results in light of the block diagonal structure shown in Figure <a href="clusintro.html#fig:introexg">20.4</a>. This block diagonal structure can be visualized using a heat map of a similarity matrix. A <em>matrix heat map</em> represents each value in a matrix by a colored pixel indicating the magnitude of the value. Figure <a href="clusintro.html#fig:heatmapex">20.5</a> is an example of a heat map using real data. The data are a collection of news articles (documents) from the web containing seven different topics of discussion. The rows and columns of the cosine similarity matrix for these documents have been reordered according to some cluster solution. White pixels represent negligible values of similarity. Some of these topics are closely related, which can be seen by the heightened level of similarities between blocks.</p>
+<div class="figure" style="text-align: center"><span id="fig:heatmapex"></span>
+<img src="figs/heatmapex.jpg" alt="Heat Map of Similarity Matrix Exhibiting Cluster Structure" width="50%" />
+<p class="caption">
+Figure 20.5: Heat Map of Similarity Matrix Exhibiting Cluster Structure
+</p>
+</div>
+<p>While a heat-map visualization allows the user to get a sense of the quality of a specific clustering, it does not always make it easy to determine which is a better solution given two different clusterings. Since clustering is an unsupervised process, quantitative measures of cluster quality are often used to compare different clusterings. A short survery of these metrics is given in Section <a href="validation.html#validation">23</a>. First, we will take a brief historical look at the roots of cluster analysis and how it emerged into a major field of research in the late twentieth century.</p>
+</div>
+<div id="history-of-data-clustering" class="section level2" number="20.4">
+<h2><span class="header-section-number">20.4</span> History of Data Clustering</h2>
+<p>According to Anil Jain in <span class="citation"><a href="#ref-jain50" role="doc-biblioref">[50]</a></span>, data clustering first appeared in an article written by Forrest Clements in 1954 about anthropological data <span class="citation"><a href="#ref-1954anthro" role="doc-biblioref">[49]</a></span>. However, a Google Scholar search provides several earlier publications whose titles also contain the phrase “cluster analysis” <span class="citation"><a href="#ref-1952adcock" role="doc-biblioref">[47]</a></span>. In fact, the discussion of data clustering dates back to the 1930’s when anthropologists Driver and Kroeber <span class="citation"><a href="#ref-1932driver" role="doc-biblioref">[46]</a></span> and psychologists Zubin <span class="citation"><a href="#ref-1938zubin" role="doc-biblioref">[45]</a></span> and Tryon <span class="citation"><a href="#ref-1939tryon" role="doc-biblioref">[44]</a></span> realized the utility of such analysis in determining cultural or psychological classifications. While the usefulness of such techniques was clear to researchers in many social and biological disciplines at that time, the lack of computational tools made the analysis time consuming and practically impossible for large sets of data.</p>
+<p>Cluster analysis exploded into the limelight in the 1960’s and `70’s after Sokal and Sneath’s 1963 book <em>Principles of Numerical Taxonomy</em> <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[51]</a></span>. Although the text is primarily geared toward biologists faced with the task of classifying organisms, it motivated researchers from many different disciplines to consider the problem of data clustering from other angles like computing, statistics, and domain specific applications. <span class="citation"><a href="#ref-bock" role="doc-biblioref">[25]</a></span>. Sokal and Sneath’s book presents a detailed discussion of the simple, intuitive, and still popular <em>hierarchical clustering</em> (see Section <a href="clusteralgos.html#hc">21.1</a>) techniques for biological taxonomy. These authors also provided perhaps the earliest mention of the matrix heat map visualizations of clustering that are still popular today. Figure <a href="clusintro.html#fig:sneathheatmap">20.6</a> shows an example of one of these heat maps, then drawn by hand, from their book.</p>
+<div class="figure" style="text-align: center"><span id="fig:sneathheatmap"></span>
+<img src="figs/sneathheatmap.jpg" alt="Hand Drawn Matrix Heat Map Visualization from 1963 Book by Sokal and Sneath" width="50%" />
+<p class="caption">
+Figure 20.6: Hand Drawn Matrix Heat Map Visualization from 1963 Book by Sokal and Sneath
+</p>
+</div>
+<p>Prior to the development of modern computational resources, programs for numerical taxonomy were written in machine language and not easily transferred from one computer to another <span class="citation"><a href="#ref-sokal" role="doc-biblioref">[51]</a></span>. However, by the mid 1960s, it was clear that the advancement in technology would probably keep pace with advancements in algorithm design and many researchers from various disciplines began to contribute to the clustering literature. The following sections present an in-depth view of the most popular developments in data clustering since that time. Chapter <a href="#dimred"><strong>??</strong></a> explores a common problem associated with the massive datasets of modern day.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-dcebook" class="csl-entry">
+<div class="csl-left-margin">[16] </div><div class="csl-right-inline">G. Gan, C. Ma, and J. Wu, <em>Data clustering: Theory, algorithms and applications</em>. American Statistical Association; the Society for Industrial; Applied Mathematics, 2007.</div>
+</div>
+<div id="ref-bock" class="csl-entry">
+<div class="csl-left-margin">[25] </div><div class="csl-right-inline">H.-H. Bock, <span>“Origins and extensions of the k-means algorithm in cluster analysis,”</span> <em>Electronic Journal for History of Probability and Statistics</em>, vol. 4, no. 2, 2008.</div>
+</div>
+<div id="ref-pothen" class="csl-entry">
+<div class="csl-left-margin">[26] </div><div class="csl-right-inline">A. Pothen, H. D. Simon, and K.-P. Liou, <span>“Partitioning sparse matrices with eigenvectors of graphs,”</span> <em>SIAM Journal on Matrix Analysis and Applications</em>, vol. 11, no. 3, pp. 430–452, 1990.</div>
+</div>
+<div id="ref-drineassvd" class="csl-entry">
+<div class="csl-left-margin">[28] </div><div class="csl-right-inline">P. Drineas, A. Frieze, R. Kanna, S. Vempala, and V. Vinay, <span>“Clustering large graphs via the singular value decomposition,”</span> <em>Machine Learning</em>, vol. 56, no. 1, pp. 9–33, 2004.</div>
+</div>
+<div id="ref-fiedlerev" class="csl-entry">
+<div class="csl-left-margin">[31] </div><div class="csl-right-inline">M. Fielder, <span>“A property of eigenvectors of nonnegative symmetric matrices and its application to graph theory,”</span> <em>Czechoslovak Mathematical Journal</em>, vol. 25, no. 4, pp. 619–633, 1975.</div>
+</div>
+<div id="ref-1939tryon" class="csl-entry">
+<div class="csl-left-margin">[44] </div><div class="csl-right-inline"><em>Cluster analysis: Correlation profile and orthometric (factor) analysis for the isolation of unities in mind and personality</em>. Edwards Brothers: Ann Arbor, Michigan, 1939.</div>
+</div>
+<div id="ref-1938zubin" class="csl-entry">
+<div class="csl-left-margin">[45] </div><div class="csl-right-inline">J. A. Zubin, <span>“A technique for measuring likemindedness,”</span> <em>Journal of Abnormal and Social Psychology</em>, vol. 33, pp. 508–516, 1938.</div>
+</div>
+<div id="ref-1932driver" class="csl-entry">
+<div class="csl-left-margin">[46] </div><div class="csl-right-inline">H. E. Driver and A. L. Kroeber, <span>“Quantitative expression of cultural relationships,”</span> <em>University of California Publications in American Archaeology and Ethnology</em>, vol. 31, no. 211–256, 1932.</div>
+</div>
+<div id="ref-1952adcock" class="csl-entry">
+<div class="csl-left-margin">[47] </div><div class="csl-right-inline">C. J. Adcock, <span>“A note on cluster-directed analysis,”</span> <em>Psychometrika</em>, vol. 17, no. 3, pp. 249–253, 1952.</div>
+</div>
+<div id="ref-1954anthro" class="csl-entry">
+<div class="csl-left-margin">[49] </div><div class="csl-right-inline">F. E. Clements, <span>“Use of cluster analysis with anthropological data,”</span> <em>American Anthropologist</em>, vol. 56, no. 2, pp. 190–199, 1954.</div>
+</div>
+<div id="ref-jain50" class="csl-entry">
+<div class="csl-left-margin">[50] </div><div class="csl-right-inline">A. K. Jain, <span>“Data clustering: 50 years beyond k-means,”</span> <em>Pattern Recognition Letters</em>, 2009.</div>
+</div>
+<div id="ref-sokal" class="csl-entry">
+<div class="csl-left-margin">[51] </div><div class="csl-right-inline">Robert R. Sokal and P. H. A. Sneath, <em>Principals of numerical taxonomy</em>. W.H. Freeman; Company, 1963.</div>
+</div>
+<div id="ref-ng" class="csl-entry">
+<div class="csl-left-margin">[57] </div><div class="csl-right-inline">A. Ng, M. Jordan, and Y. Weiss, <span>“On spectral clustering: Analysis and an algorithm.”</span> 2001, [Online]. Available: <a href="https://citeseer.ist.psu.edu/ng01spectral.html">citeseer.ist.psu.edu/ng01spectral.html</a>.</div>
+</div>
+<div id="ref-chung" class="csl-entry">
+<div class="csl-left-margin">[60] </div><div class="csl-right-inline">F. Chung, <em>Spectral graph theory</em>. American Mathematical Society, 1997.</div>
+</div>
+<div id="ref-mahoney" class="csl-entry">
+<div class="csl-left-margin">[62] </div><div class="csl-right-inline">M. W. Mahoney, <span>“Randomized algorithms for matrices and data,”</span> <em>Foundations and Trends in Machine Learning</em>, 2011.</div>
+</div>
+<div id="ref-poweriteration" class="csl-entry">
+<div class="csl-left-margin">[70] </div><div class="csl-right-inline">W. W. C. F. Lin, <span>“Power iteration clustering,”</span> <em>Proceedings of the 27th International Conference of Machine Learning</em>, 2010.</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sna.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clusteralgos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/11-Clustering.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/11-Clustering.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": {
+"engine": "lunr"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

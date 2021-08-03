@@ -225,45 +225,6 @@ $$\x\y^T = \pm 1\\2\\3\\4\mp \pm 2&1&3\mp = \pm 2&1&3\\4&2&6\\6&3&9\\8&4&12 \mp$
 which clearly has rank 1.  It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.
 :::
 
-:::{.example name='Centering Data with an Outer Product' #centerouter}
-As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
-
-\begin{equation}\A=\begin{array}{cc} & \begin{array}{ccc} h & w & s \end{array} \\
-			\begin{array}{c} person_1 \\
-person_2 \\
-person_3 \\
-person_4 \\
-person_5 \end{array} & \left(\begin{array}{ccc}60 & 102 & 5.5 \cr 72 & 170 &  7.5 \cr 66 & 110 & 6.0\cr 69 & 128 & 6.5\cr 63 & 130 &  7.0\cr \end{array} \right)\end{array}\end{equation}
-			 
-			
-The average values for height, weight, and wrist size are as follows:
-\begin{eqnarray}
-\bar{h}&=&66\\
-\bar{w}&=&128\\
-\bar{s}&=&6.5
-\end{eqnarray}			
-
-To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:
-
- $$\pm 60 & 102 & 5.5 \cr
-			 72 & 170 &  7.5 \cr
-			66 & 110 & 6.0\cr
-			69 & 128 & 6.5\cr
-			63 & 130 &  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 & 128 & 6.5 \mp$$
-$$= \pm 60 & 102 & 5.5 \cr
-			 72 & 170 &  7.5 \cr
-			66 & 110 & 6.0\cr
-			69 & 128 & 6.5\cr
-			63 & 130 &  7.0\cr \mp - \pm  66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \mp$$
-
-$$= \pm    -6.0000 & -26.0000  & -1.0000\\
-    6.0000 &  42.0000   & 1.0000\\
-         0 & -18.0000 &  -0.5000\\
-    3.0000    &     0       &  0\\
-   -3.0000 &   2.0000 &   0.5000 \mp$$
-:::
-
-
 ## Exercises
 
 <ol>

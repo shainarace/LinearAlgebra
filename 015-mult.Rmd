@@ -131,6 +131,7 @@ $$\mathbf{A}=\left(\begin{matrix} 1 & 3\\4&2 \end{matrix}\right) = 1\left(\begin
 When we multiply matrices, we do not perform the operation element-wise as we did with addition and scalar multiplication. Matrix multiplication is, in itself, a very powerful tool for summarizing information. In fact, many of the analytical tools we will focus on in this course, like Markov Chains, Principal Components Analysis, Factor Analysis, and the Singular Value Decomposition, can all be understood more clearly with a firm grasp on matrix multiplication. Because this operation is so important, we will spend a considerable amount of energy breaking it down in many ways. 
 
 ### The Inner Product
+
 We'll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the _dot product_ in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if $\x$ is a column vector,
 $$\x=\left(\begin{matrix} x_1\\x_2\\\vdots\\ x_n\end{matrix}\right)$$
 then we can automatically assume that $\x^T$ is a row vector:
@@ -354,7 +355,7 @@ knitr::include_graphics("figs/multlincombanim.gif")
 
 ## Vector Outer Products
 
-Whereas inner products were the product of a row vector with a column vector (think $\x^T\y$),  **outer products**  are the product of a *column* vector with a *row* vector (think $\x\y^T$).
+Inner products involved multiplying a row vector by a column vector on the right (think $\x^T\y$).  **Outer products**  occur when we multiply a *column* vector with a *row* vector on the right (think $\x\y^T$).
 Let's first consider the dimensions of the outcome:
 
 $$\underset{(m\times \red{1})}{\x} \underset{(\red{1} \times n)}{\y^T} = \bo{M}_{m\times n}$$
@@ -365,6 +366,44 @@ So the result is a matrix! We'll want to treat this product in the same way we t
 Let $\x = \left(\begin{matrix} 3\\4\\-2 \end{matrix}\right)$ and $\y=\left(\begin{matrix} 1\\5\\3 \end{matrix}\right)$. Then,
 $$\x\y^T = \left(\begin{matrix} \red{3}\\4\\-2 \end{matrix}\right) \left(\begin{matrix} \red{1}&5&3 \end{matrix}\right) = \left(\begin{matrix} \red{3}&15&9\\4&20&12\\-2&-10&-3\end{matrix}\right)$$
 As you can see by performing this calculation, a vector outer product will _always_ produce a matrix whose rows are multiples of each other!
+:::
+
+:::{.example name='Centering Data with an Outer Product' #centerouter}
+As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
+
+\begin{equation}\A=\begin{array}{cc} & \begin{array}{ccc} h & w & s \end{array} \\
+			\begin{array}{c} person_1 \\
+person_2 \\
+person_3 \\
+person_4 \\
+person_5 \end{array} & \left(\begin{array}{ccc}60 & 102 & 5.5 \cr 72 & 170 &  7.5 \cr 66 & 110 & 6.0\cr 69 & 128 & 6.5\cr 63 & 130 &  7.0\cr \end{array} \right)\end{array}\end{equation}
+			 
+			
+The average values for height, weight, and wrist size are as follows:
+\begin{eqnarray}
+\bar{h}&=&66\\
+\bar{w}&=&128\\
+\bar{s}&=&6.5
+\end{eqnarray}			
+
+To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:
+
+ $$\pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 & 128 & 6.5 \mp$$
+$$= \pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm  66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \mp$$
+
+$$= \pm    -6.0000 & -26.0000  & -1.0000\\
+    6.0000 &  42.0000   & 1.0000\\
+         0 & -18.0000 &  -0.5000\\
+    3.0000    &     0       &  0\\
+   -3.0000 &   2.0000 &   0.5000 \mp$$
 :::
 
 ## The Identity and the Matrix Inverse

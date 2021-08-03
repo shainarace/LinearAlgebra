@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 16 Applications of SVD | Linear Algebra for Data Science</title>
+  <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 16 Applications of SVD | Linear Algebra for Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="github-repo" content="shainarace/linearalgebra" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 16 Applications of SVD | Linear Algebra for Data Science" />
+  
+  <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-08-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="svd.html"/>
+<link rel="next" href="fa.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
+  }
+});
+</script>
+
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>1.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>1.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#dimensionsize-of-a-matrix"><i class="fa fa-check"></i><b>1.3.1</b> Dimension/Size of a Matrix</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ij-notation"><i class="fa fa-check"></i><b>1.3.2</b> <span class="math inline">\((i,j)\)</span> Notation</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-defining-social-networks"><i class="fa fa-check"></i>Example: Defining social networks</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#introcorr"><i class="fa fa-check"></i><b>1.3.3</b> Example: Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector-geometry-n-space"><i class="fa fa-check"></i><b>1.4.1</b> Vector Geometry: <span class="math inline">\(n\)</span>-space</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#transpose"><i class="fa fa-check"></i><b>1.5.1</b> Transpose</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#trace-of-a-matrix"><i class="fa fa-check"></i><b>1.5.2</b> Trace of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>2.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>2.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>2.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="mult.html"><a href="mult.html#the-inner-product"><i class="fa fa-check"></i><b>2.4.1</b> The Inner Product</a></li>
+<li class="chapter" data-level="2.4.2" data-path="mult.html"><a href="mult.html#matrix-product"><i class="fa fa-check"></i><b>2.4.2</b> Matrix Product</a></li>
+<li class="chapter" data-level="2.4.3" data-path="mult.html"><a href="mult.html#matrix-vector-product"><i class="fa fa-check"></i><b>2.4.3</b> Matrix-Vector Product</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#linear-combination-view-of-matrix-products"><i class="fa fa-check"></i>Linear Combination view of Matrix Products</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multapp.html"><a href="multapp.html#big-systems-of-equations"><i class="fa fa-check"></i><b>3.1.1</b> <em>Big</em> Systems of Equations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>4</b> R Programming Basics</a></li>
+<li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="solvesys.html"><a href="solvesys.html#row-operations"><i class="fa fa-check"></i><b>5.1.1</b> Row Operations</a></li>
+<li class="chapter" data-level="5.1.2" data-path="solvesys.html"><a href="solvesys.html#the-augmented-matrix"><i class="fa fa-check"></i><b>5.1.2</b> The Augmented Matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination-summary"><i class="fa fa-check"></i><b>5.1.3</b> Gaussian Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-summary"><i class="fa fa-check"></i><b>5.2.1</b> Gauss-Jordan Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="solvesys.html"><a href="solvesys.html#uniquesol"><i class="fa fa-check"></i><b>5.3.1</b> The Unique Solution Case</a></li>
+<li class="chapter" data-level="5.3.2" data-path="solvesys.html"><a href="solvesys.html#inconsistent"><i class="fa fa-check"></i><b>5.3.2</b> The Inconsistent Case</a></li>
+<li class="chapter" data-level="5.3.3" data-path="solvesys.html"><a href="solvesys.html#infinitesol"><i class="fa fa-check"></i><b>5.3.3</b> The Infinite Solutions Case</a></li>
+<li class="chapter" data-level="5.3.4" data-path="solvesys.html"><a href="solvesys.html#matrix-rank"><i class="fa fa-check"></i><b>5.3.4</b> Matrix Rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="solvesys.html"><a href="solvesys.html#solving-for-the-inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.4.1</b> Solving for the Inverse of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="norms.html"><a href="norms.html#norm-star_1."><i class="fa fa-check"></i><b>6.2.1</b> 1-norm, <span class="math inline">\(\|\star\|_1\)</span>.</a></li>
+<li class="chapter" data-level="6.2.2" data-path="norms.html"><a href="norms.html#infty-norm-star_infty."><i class="fa fa-check"></i><b>6.2.2</b> <span class="math inline">\(\infty\)</span>-norm, <span class="math inline">\(\|\star\|_{\infty}\)</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="norms.html"><a href="norms.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="norms.html"><a href="norms.html#mahalanobis-distance"><i class="fa fa-check"></i><b>6.3.2</b> Mahalanobis Distance</a></li>
+<li class="chapter" data-level="6.3.3" data-path="norms.html"><a href="norms.html#angular-distance"><i class="fa fa-check"></i><b>6.3.3</b> Angular Distance</a></li>
+<li class="chapter" data-level="6.3.4" data-path="norms.html"><a href="norms.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>6.4</b> Outer Products</a></li>
+<li class="chapter" data-level="6.5" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linind.html"><a href="linind.html#determining-linear-independence"><i class="fa fa-check"></i><b>7.1.1</b> Determining Linear Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="leastsquares.html"><a href="leastsquares.html#geometrical-interpretation"><i class="fa fa-check"></i><b>10.2.1</b> Geometrical Interpretation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="leastsquares.html"><a href="leastsquares.html#calculus-derivation"><i class="fa fa-check"></i><b>10.2.2</b> Calculus Derivation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="lsapp.html"><a href="lsapp.html#cars-data"><i class="fa fa-check"></i><b>11.1.1</b> Cars Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="lsapp.html"><a href="lsapp.html#setting-up-the-normal-equations"><i class="fa fa-check"></i><b>11.1.2</b> Setting up the Normal Equations</a></li>
+<li class="chapter" data-level="11.1.3" data-path="lsapp.html"><a href="lsapp.html#solving-for-parameter-estimates-and-statistics"><i class="fa fa-check"></i><b>11.1.3</b> Solving for Parameter Estimates and Statistics</a></li>
+<li class="chapter" data-level="11.1.4" data-path="lsapp.html"><a href="lsapp.html#ols-in-r-via-lm"><i class="fa fa-check"></i><b>11.1.4</b> OLS in R via <code>lm()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="lsapp.html"><a href="lsapp.html#bike-sharing-dataset"><i class="fa fa-check"></i><b>11.2.1</b> Bike Sharing Dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>12.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>12.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="12.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>12.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#gods-flashlight"><i class="fa fa-check"></i><b>13.1</b> God’s Flashlight</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#pca-details"><i class="fa fa-check"></i><b>13.2</b> PCA Details</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.3</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.4</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.5" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.5</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="pca.html"><a href="pca.html#covariance-pca"><i class="fa fa-check"></i><b>13.5.1</b> Covariance PCA</a></li>
+<li class="chapter" data-level="13.5.2" data-path="pca.html"><a href="pca.html#principal-components-loadings-and-variance-explained"><i class="fa fa-check"></i><b>13.5.2</b> Principal Components, Loadings, and Variance Explained</a></li>
+<li class="chapter" data-level="13.5.3" data-path="pca.html"><a href="pca.html#scores-and-pca-projection"><i class="fa fa-check"></i><b>13.5.3</b> Scores and PCA Projection</a></li>
+<li class="chapter" data-level="13.5.4" data-path="pca.html"><a href="pca.html#pca-functions-in-r"><i class="fa fa-check"></i><b>13.5.4</b> PCA functions in R</a></li>
+<li class="chapter" data-level="13.5.5" data-path="pca.html"><a href="pca.html#the-biplot"><i class="fa fa-check"></i><b>13.5.5</b> The Biplot</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.6</b> Variable Clustering with PCA</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="pca.html"><a href="pca.html#correlation-pca"><i class="fa fa-check"></i><b>13.6.1</b> Correlation PCA</a></li>
+<li class="chapter" data-level="13.6.2" data-path="pca.html"><a href="pca.html#which-projection-is-better"><i class="fa fa-check"></i><b>13.6.2</b> Which Projection is Better?</a></li>
+<li class="chapter" data-level="13.6.3" data-path="pca.html"><a href="pca.html#beware-of-biplots"><i class="fa fa-check"></i><b>13.6.3</b> Beware of biplots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="pcaapp.html"><a href="pcaapp.html#feature-selection"><i class="fa fa-check"></i><b>14.1.1</b> Feature Selection</a></li>
+<li class="chapter" data-level="14.1.2" data-path="pcaapp.html"><a href="pcaapp.html#feature-extraction"><i class="fa fa-check"></i><b>14.1.2</b> Feature Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="pcaapp.html"><a href="pcaapp.html#uk-food-consumption"><i class="fa fa-check"></i><b>14.2.1</b> UK Food Consumption</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="pcaapp.html"><a href="pcaapp.html#computing-the-pca"><i class="fa fa-check"></i><b>14.4.1</b> Computing the PCA</a></li>
+<li class="chapter" data-level="14.4.2" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package"><i class="fa fa-check"></i><b>14.4.2</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.3" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package-1"><i class="fa fa-check"></i><b>14.4.3</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.4" data-path="pcaapp.html"><a href="pcaapp.html#variance-explained"><i class="fa fa-check"></i><b>14.4.4</b> Variance explained</a></li>
+<li class="chapter" data-level="14.4.5" data-path="pcaapp.html"><a href="pcaapp.html#using-correlation-pca"><i class="fa fa-check"></i><b>14.4.5</b> Using Correlation PCA</a></li>
+<li class="chapter" data-level="14.4.6" data-path="pcaapp.html"><a href="pcaapp.html#range-standardization-as-an-alternative-to-covariance-pca"><i class="fa fa-check"></i><b>14.4.6</b> Range standardization as an alternative to covariance PCA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>15.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="15.2" data-path="svd.html"><a href="svd.html#data-compression"><i class="fa fa-check"></i><b>15.2</b> Data Compression</a></li>
+<li class="chapter" data-level="15.3" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>15.3</b> Noise Reduction</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="svdapp.html"><a href="svdapp.html#note-about-rows-vs.-columns"><i class="fa fa-check"></i><b>16.1.1</b> Note About Rows vs. Columns</a></li>
+<li class="chapter" data-level="16.1.2" data-path="svdapp.html"><a href="svdapp.html#term-weighting"><i class="fa fa-check"></i><b>16.1.2</b> Term Weighting</a></li>
+<li class="chapter" data-level="16.1.3" data-path="svdapp.html"><a href="svdapp.html#other-considerations"><i class="fa fa-check"></i><b>16.1.3</b> Other Considerations</a></li>
+<li class="chapter" data-level="16.1.4" data-path="svdapp.html"><a href="svdapp.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.1.4</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="16.1.5" data-path="svdapp.html"><a href="svdapp.html#example"><i class="fa fa-check"></i><b>16.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="svdapp.html"><a href="svdapp.html#image-data-in-r"><i class="fa fa-check"></i><b>16.2.1</b> Image data in R</a></li>
+<li class="chapter" data-level="16.2.2" data-path="svdapp.html"><a href="svdapp.html#computing-the-svd-of-dr.-rappa"><i class="fa fa-check"></i><b>16.2.2</b> Computing the SVD of Dr. Rappa</a></li>
+<li class="chapter" data-level="16.2.3" data-path="svdapp.html"><a href="svdapp.html#the-noise"><i class="fa fa-check"></i><b>16.2.3</b> The Noise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="fa.html"><a href="fa.html#visual-examination-of-correlation-matrix"><i class="fa fa-check"></i><b>17.2.1</b> Visual Examination of Correlation Matrix</a></li>
+<li class="chapter" data-level="17.2.2" data-path="fa.html"><a href="fa.html#barletts-sphericity-test"><i class="fa fa-check"></i><b>17.2.2</b> Barlett’s Sphericity Test</a></li>
+<li class="chapter" data-level="17.2.3" data-path="fa.html"><a href="fa.html#kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy"><i class="fa fa-check"></i><b>17.2.3</b> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</a></li>
+<li class="chapter" data-level="17.2.4" data-path="fa.html"><a href="fa.html#significant-factor-loadings"><i class="fa fa-check"></i><b>17.2.4</b> Significant factor loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
+<li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="17.6" data-path="fa.html"><a href="fa.html#fa-apps"><i class="fa fa-check"></i><b>17.6</b> Methods of Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="fa.html"><a href="fa.html#pca-rotations"><i class="fa fa-check"></i><b>17.6.1</b> PCA Rotations</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="fa.html"><a href="fa.html#case-study-personality-tests"><i class="fa fa-check"></i><b>17.7</b> Case Study: Personality Tests</a>
+<ul>
+<li class="chapter" data-level="17.7.1" data-path="fa.html"><a href="fa.html#raw-pca-factors"><i class="fa fa-check"></i><b>17.7.1</b> Raw PCA Factors</a></li>
+<li class="chapter" data-level="17.7.2" data-path="fa.html"><a href="fa.html#rotated-principal-components"><i class="fa fa-check"></i><b>17.7.2</b> Rotated Principal Components</a></li>
+<li class="chapter" data-level="17.7.3" data-path="fa.html"><a href="fa.html#visualizing-rotation-via-biplots"><i class="fa fa-check"></i><b>17.7.3</b> Visualizing Rotation via BiPlots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>18</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>19</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Clustering</b></span></li>
+<li class="chapter" data-level="20" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>20.1</b> Mathematical Setup</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="clusintro.html"><a href="clusintro.html#data"><i class="fa fa-check"></i><b>20.1.1</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>20.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="20.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>20.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="20.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>20.4</b> History of Data Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>21</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>21.1</b> Hierarchical Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="clusteralgos.html"><a href="clusteralgos.html#agglomerative-hierarchical-clustering"><i class="fa fa-check"></i><b>21.1.1</b> Agglomerative Hierarchical Clustering</a></li>
+<li class="chapter" data-level="21.1.2" data-path="clusteralgos.html"><a href="clusteralgos.html#principal-direction-divisive-partitioning-pddp"><i class="fa fa-check"></i><b>21.1.2</b> Principal Direction Divisive Partitioning (PDDP)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>21.2</b> Iterative Partitional Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="clusteralgos.html"><a href="clusteralgos.html#early-partitional-algorithms"><i class="fa fa-check"></i><b>21.2.1</b> Early Partitional Algorithms</a></li>
+<li class="chapter" data-level="21.2.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeans"><i class="fa fa-check"></i><b>21.2.2</b> <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="21.2.3" data-path="clusteralgos.html"><a href="clusteralgos.html#the-expectation-maximization-em-clustering-algorithm"><i class="fa fa-check"></i><b>21.2.3</b> The Expectation-Maximization (EM) Clustering Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>21.3</b> Density Search Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="clusteralgos.html"><a href="clusteralgos.html#density-based-spacial-clustering-of-applications-with-noise-dbscan"><i class="fa fa-check"></i><b>21.3.1</b> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="clusteralgos.html"><a href="clusteralgos.html#conclusion"><i class="fa fa-check"></i><b>21.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>22.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="22.2" data-path="chap1-5.html"><a href="chap1-5.html#fiedler-partitioning"><i class="fa fa-check"></i><b>22.2</b> Fiedler Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="chap1-5.html"><a href="chap1-5.html#linear-algebraic-motivation-for-the-fiedler-vector"><i class="fa fa-check"></i><b>22.2.1</b> Linear Algebraic Motivation for the Fiedler vector</a></li>
+<li class="chapter" data-level="22.2.2" data-path="chap1-5.html"><a href="chap1-5.html#graph-cuts"><i class="fa fa-check"></i><b>22.2.2</b> Graph Cuts</a></li>
+<li class="chapter" data-level="22.2.3" data-path="chap1-5.html"><a href="chap1-5.html#pic"><i class="fa fa-check"></i><b>22.2.3</b> Power Iteration Clustering</a></li>
+<li class="chapter" data-level="22.2.4" data-path="chap1-5.html"><a href="chap1-5.html#modularity"><i class="fa fa-check"></i><b>22.2.4</b> Clustering via Modularity Maximization</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>22.3</b> Stochastic Clustering</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering-algorithm-sca"><i class="fa fa-check"></i><b>22.3.1</b> Stochastic Clustering Algorithm (SCA)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="validation.html"><a href="validation.html#common-measures-of-cohesion-and-separation"><i class="fa fa-check"></i><b>23.1.1</b> Common Measures of Cohesion and Separation</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="validation.html"><a href="validation.html#accuracy"><i class="fa fa-check"></i><b>23.2.1</b> Accuracy</a></li>
+<li class="chapter" data-level="23.2.2" data-path="validation.html"><a href="validation.html#entropy"><i class="fa fa-check"></i><b>23.2.2</b> Entropy</a></li>
+<li class="chapter" data-level="23.2.3" data-path="validation.html"><a href="validation.html#purity"><i class="fa fa-check"></i><b>23.2.3</b> Purity</a></li>
+<li class="chapter" data-level="23.2.4" data-path="validation.html"><a href="validation.html#mutual-information-mi-and-normalized-mutual-information-nmi"><i class="fa fa-check"></i><b>23.2.4</b> Mutual Information (MI) and <br> Normalized Mutual Information (NMI)</a></li>
+<li class="chapter" data-level="23.2.5" data-path="validation.html"><a href="validation.html#other-external-measures-of-validity"><i class="fa fa-check"></i><b>23.2.5</b> Other External Measures of Validity</a></li>
+<li class="chapter" data-level="23.2.6" data-path="validation.html"><a href="validation.html#summary-table"><i class="fa fa-check"></i><b>23.2.6</b> Summary Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="findk.html"><a href="findk.html#cosine-cohesion-plots-for-text-data"><i class="fa fa-check"></i><b>24.2.1</b> Cosine-Cohesion Plots for Text Data</a></li>
+<li class="chapter" data-level="24.2.2" data-path="findk.html"><a href="findk.html#ray-and-turis-method"><i class="fa fa-check"></i><b>24.2.2</b> Ray and Turi’s Method</a></li>
+<li class="chapter" data-level="24.2.3" data-path="findk.html"><a href="findk.html#the-gap-statistic"><i class="fa fa-check"></i><b>24.2.3</b> The Gap Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Algebra for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="svdapp" class="section level1" number="16">
+<h1><span class="header-section-number">Chapter 16</span> Applications of SVD</h1>
+<div id="tm" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Text Mining</h2>
+<p>Text mining is another area where the SVD is used heavily. In text mining, our data structure is generally known as a <strong>Term-Document Matrix</strong>. The <em>documents</em> are any individual pieces of text that we wish to analyze, cluster, summarize or discover topics from. They could be sentences, abstracts, webpages, or social media updates. The <em>terms</em> are the words contained in these documents. The term-document matrix represents what’s called the “bag-of-words” approach - the order of the words is removed and the data becomes unstructured in the sense that each document is represented by the words it contains, not the order or context in which they appear. The <span class="math inline">\((i,j)\)</span> entry in this matrix is the number of times term <span class="math inline">\(j\)</span> appears in document <span class="math inline">\(i\)</span>.</p>
+<div class="definition">
+<p><span id="def:tdm" class="definition"><strong>Definition 16.1  (Term-Document Matrix) </strong></span>Let <span class="math inline">\(m\)</span> be the number of documents in a collection and <span class="math inline">\(n\)</span> be the number of terms appearing in that collection, then we create our <strong>term-document matrix</strong> <span class="math inline">\(\A\)</span> as follows:
+<span class="math display">\[\begin{equation}
+    \begin{array}{ccc}
+        &amp; &amp; \text{term 1} \quad \text{term $j$} \,\, \text{term $n$} \\
+        \A_{m\times n} = &amp; \begin{array}{c}
+            \hbox{Doc 1} \\
+            \\
+            \\
+            \hbox{Doc $i$} \\
+            \\
+            \hbox{Doc $m$} \\
+        \end{array} &amp;
+        \left(
+        \begin{array}{ccccccc}
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; &amp; &amp; |&amp;  &amp; &amp; \\
+            &amp; - &amp; - &amp;f_{ij}  &amp;  &amp; &amp; \\
+            &amp; &amp; &amp; &amp; &amp; &amp; \\
+            &amp; &amp; &amp; &amp; &amp; &amp; \\
+        \end{array}
+        \right)
+    \end{array}
+\nonumber
+\end{equation}\]</span>
+where <span class="math inline">\(f_{ij}\)</span> is the frequency of term <span class="math inline">\(j\)</span> in document <span class="math inline">\(i\)</span>. A <strong>binary</strong> term-document matrix will simply have <span class="math inline">\(\A_{ij}=1\)</span> if term <span class="math inline">\(j\)</span> is contained in document <span class="math inline">\(i\)</span>.</p>
+</div>
+<div id="note-about-rows-vs.-columns" class="section level3" number="16.1.1">
+<h3><span class="header-section-number">16.1.1</span> Note About Rows vs. Columns</h3>
+<p>You might be asking yourself, “<strong>Hey, wait a minute. Why do we have documents as columns in this matrix? Aren’t the documents like our observations?</strong>” Sure! Many data scientists insist on having the documents on the rows of this matrix. <em>But</em>, before you do that, you should realize something. Many SVD and PCA routines are created in a way that is more efficient when your data is long vs. wide, and text data commonly has more terms than documents. The equivalence of the two presentations should be easy to see in all matrix factorization applications. If we have
+<span class="math display">\[\A = \U\mathbf{D}\V^T\]</span> then,
+<span class="math display">\[\A^T = \V\mathbf{D}\U^T\]</span>
+so we merely need to switch our interpretations of the left- and right-singular vectors to switch from document columns to document rows.</p>
+<p>Beyond any computational efficiency argument, we prefer to keep our documents on the columns here because of the emphasis placed earlier in this text regarding matrix multiplication viewed as a linear combination of columns. The animation in Figure <a href="mult.html#fig:multlincombanim">2.7</a> is a good thing to be clear on before proceeding here.</p>
+</div>
+<div id="term-weighting" class="section level3" number="16.1.2">
+<h3><span class="header-section-number">16.1.2</span> Term Weighting</h3>
+<p>Term-document matrices tend to be large and sparse. Term-weighting schemes are often used to downplay the effect of commonly used words and bolster the effect of rare but semantically important words . The most popular weighting method is known as <strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong>. For this method, the raw term-frequencies <span class="math inline">\(f_{ij}\)</span> in the matrix <span class="math inline">\(\A\)</span> are multiplied by global weights called <em>inverse document frequencies</em>, <span class="math inline">\(w_i\)</span>, for each term. These weights reflect the commonality of each term across the entire collection and ultimately quantify a term’s ability to narrow one’s search results (the foundations of text analysis were, after all, dominated by search technology). The inverse document frequency of term <span class="math inline">\(i\)</span> is:
+<span class="math display">\[w_i = \log \left( \frac{\mbox{total # of documents}}{\mbox{# documents containing term  } i} \right)\]</span>
+To put this weight in perspective, for a collection of <span class="math inline">\(n=10,000\)</span> documents we have <span class="math inline">\(0\leq w_j \leq 9.2\)</span>, where <span class="math inline">\(w_j=0\)</span> means the word is contained in every document (rendering it useless for search) and <span class="math inline">\(w_j=9.2\)</span> means the word is contained in only 1 document (making it very useful for search). The document vectors are often normalized to have unit 2-norm, since their directions (not their lengths) in the term-space is what characterizes them semantically.<br />
+</p>
+</div>
+<div id="other-considerations" class="section level3" number="16.1.3">
+<h3><span class="header-section-number">16.1.3</span> Other Considerations</h3>
+<p>In dealing with text, we want to do as much as we can do minimize the size of the dictionary (the collection of terms which enumerate the rows of our term-document matrix) for both computational and practical reasons. The first effort we’ll make toward this goal is to remove so-called <strong>stop words</strong>, or very common words that appear in a great many sentences like articles (“a,” “an,” “the”) and prepositions (“about,” “for,” “at”) among others. Many projects also contain domain-specific stop words. For example, one might remove the word “Reuters” from a corpus of <a href="https://shainarace.github.io/Reuters/">Reuters’ newswires</a>. The second effort we’ll often make is to apply a <strong>stemming</strong> algorithm which reduces words to their <em>stem.</em> For example, the words “swimmer” and “swimming” would both be reduced to their stem, “swim.” Stemming and stop word removal can greatly reduce the size of the dictionary and also help draw meaningful connections between documents.</p>
+</div>
+<div id="latent-semantic-indexing" class="section level3" number="16.1.4">
+<h3><span class="header-section-number">16.1.4</span> Latent Semantic Indexing</h3>
+<p>The noise-reduction property of the SVD was extended to text processing in 1990 by Susan Dumais et al, who named the effect <em>Latent Semantic Indexing (LSI)</em>. LSI involves the singular value decomposition of the term-document matrix defined in Definition <a href="svdapp.html#def:tdm">16.1</a>. In other words, it is like a principal components analysis using the unscaled, uncentered inner-product matrix <span class="math inline">\(\A^T\A\)</span>. If the documents are normalized to have unit length, this is a matrix of <strong>cosine similarities</strong> (see Chapter <a href="norms.html#norms">6</a>). Cosine similarity is the most common measure of similarity between documents for text mining. If the term-document matrix is binary, this is often called the co-occurrence matrix because each entry gives the number of times two words occur in the same document.</p>
+<p>It certainly seems logical to view text data in this context as it contains both an informative signal and semantic noise. LSI quickly grew roots in the information retrieval community, where it is often used for query processing. The idea is to remove semantic noise, due to variation and ambiguity in vocabulary and presentation style, without losing significant amounts of information. For example, a human may not differentiate between the words “car” and “automobile,” but indeed the words will become two separate entities in the raw term-document matrix. The main idea in LSI is that the realignment of the data into fewer directions should force related documents (like those containing “car” and “automobile”) closer together in an angular sense, thus revealing latent semantic connections.</p>
+<p>Purveyors of LSI suggest that the use of the Singular Value Decomposition to project the documents into a lower-dimensional space results in a representation which reflects the major associative patterns of the data while ignoring less important influences. This projection is done with the simple truncation of the SVD shown in Equation <a href="svd.html#eq:truncsvd">(15.3)</a>.</p>
+<p>As we have seen with other types of data, the very nature of dimension reduction makes possible for two documents with similar semantic properties to be mapped closer together. Unfortunately, the mixture of signs (positive and negative) in the singular vectors (think principal components) makes the decomposition difficult to interpret. While the major claims of LSI are legitimate, this lack of interpretability is still conceptually problematic for some folks. In order to make this point as clear as possible, consider the original “term basis” representation for the data, where each document (from a collection containing <span class="math inline">\(m\)</span> total terms in the dictionary) could be written as:
+<span class="math display">\[\A_j = \sum_{i=1}^{m} f_{ij}\e_i\]</span>
+where <span class="math inline">\(f_{ij}\)</span> is the frequency of term <span class="math inline">\(i\)</span> in the document, and <span class="math inline">\(\e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> column of the <span class="math inline">\(m\times m\)</span> identity matrix. The truncated SVD gives us a new set of coordinates (scores) and basis vectors (principal component features):
+<span class="math display">\[\A_j \approx \sum_{i=1}^r \alpha_i \u_i\]</span>
+but the features <span class="math inline">\(\u_i\)</span> live in the term space, and thus ought to be interpretable as a linear combinations of the original “term basis.” However the linear combinations, having both positive and negative coefficients, tends to be semantically obscure in practice - These new features do not often form meaningful <em>topics</em> for the text, although they often do organize in a meaningful way as we will demonstrate in the next section.</p>
+</div>
+<div id="example" class="section level3" number="16.1.5">
+<h3><span class="header-section-number">16.1.5</span> Example</h3>
+<p>Let’s consider a corpus of short documents, perhaps status updates from social media sites. We’ll keep this corpus as minimal as possible to demonstrate the utility of the SVD for text.</p>
+<div class="figure" style="text-align: center"><span id="fig:studentgraph"></span>
+<img src="figs/documents.png" alt="A corpus of 6 documents. Words occurring in more than one document appear in bold. Stop words removed, stemming utilized. Document numbers correspond to term-document matrix below." width="100%" />
+<p class="caption">
+Figure 16.1: A corpus of 6 documents. Words occurring in more than one document appear in bold. Stop words removed, stemming utilized. Document numbers correspond to term-document matrix below.
+</p>
+</div>
+<p><span class="math display">\[\begin{equation*}
+    \begin{array}{cc}
+         &amp; \begin{array}{cccccc} \;doc_1\; &amp; \;doc_2\;&amp; \;doc_3\;&amp; \;doc_4\;&amp; \;doc_5\;&amp; \;doc_6\; \end{array}\\
+          \begin{array}{c}
+            \hbox{cat} \\
+            \hbox{dog}\\
+            \hbox{eat}\\
+            \hbox{tired} \\
+            \hbox{toy}\\
+            \hbox{injured} \\
+            \hbox{ankle} \\
+            \hbox{broken} \\
+            \hbox{swollen} \\
+            \hbox{sprained} \\
+        \end{array} &amp;
+\left(
+\begin{array}{cccccc}
+\quad 1\quad   &amp;  \quad 2\quad   &amp;  \quad 2\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad  \\
+\quad 2\quad   &amp;  \quad 3\quad   &amp;  \quad 2\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad  \\
+\quad 2\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad  \\
+\quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad  \\
+\quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad  \\
+\quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad  \\
+\quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 1\quad   &amp;  \quad 1\quad  \\
+\quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad  \\
+\quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad  \\
+\quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 0\quad   &amp;  \quad 1\quad   &amp;  \quad 1\quad   &amp;  \quad 0\quad  \\
+\end{array}\right)
+\end{array}
+\end{equation*}\]</span></p>
+<p>We’ll start by entering this matrix into R. Of course the process of parsing a collection of documents and creating a term-document matrix is generally more automatic. The <code>tm</code> text mining library is recommended for creating a term-document matrix in practice.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="svdapp.html#cb214-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb214-2"><a href="svdapp.html#cb214-2" aria-hidden="true" tabindex="-1"></a>           <span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb214-3"><a href="svdapp.html#cb214-3" aria-hidden="true" tabindex="-1"></a>           <span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb214-4"><a href="svdapp.html#cb214-4" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,</span>
+<span id="cb214-5"><a href="svdapp.html#cb214-5" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb214-6"><a href="svdapp.html#cb214-6" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,</span>
+<span id="cb214-7"><a href="svdapp.html#cb214-7" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,</span>
+<span id="cb214-8"><a href="svdapp.html#cb214-8" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,</span>
+<span id="cb214-9"><a href="svdapp.html#cb214-9" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,</span>
+<span id="cb214-10"><a href="svdapp.html#cb214-10" aria-hidden="true" tabindex="-1"></a>           <span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>), </span>
+<span id="cb214-11"><a href="svdapp.html#cb214-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">byrow=</span>T)</span>
+<span id="cb214-12"><a href="svdapp.html#cb214-12" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6]
+##  [1,]    1    2    2    0    0    0
+##  [2,]    2    3    2    0    0    0
+##  [3,]    2    0    1    0    0    0
+##  [4,]    0    1    0    0    1    0
+##  [5,]    0    1    1    0    0    0
+##  [6,]    0    0    0    1    1    0
+##  [7,]    0    0    0    1    1    1
+##  [8,]    0    0    0    1    0    1
+##  [9,]    0    0    0    1    0    1
+## [10,]    0    0    0    1    1    0</code></pre>
+<p>Because our corpus is so small, we’ll skip the step of term-weighting, but we <em>will</em> normalize the documents to have equal length. In other words, we’ll divide each document vector by its two-norm so that it becomes a unit vector:</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="svdapp.html#cb216-1" aria-hidden="true" tabindex="-1"></a>A_norm <span class="ot">=</span> <span class="fu">apply</span>(A, <span class="dv">2</span>, <span class="cf">function</span>(x){x<span class="sc">/</span><span class="fu">c</span>(<span class="fu">sqrt</span>(<span class="fu">t</span>(x)<span class="sc">%*%</span>x))})</span>
+<span id="cb216-2"><a href="svdapp.html#cb216-2" aria-hidden="true" tabindex="-1"></a>A_norm</span></code></pre></div>
+<pre><code>##            [,1]      [,2]      [,3]      [,4] [,5]      [,6]
+##  [1,] 0.3333333 0.5163978 0.6324555 0.0000000  0.0 0.0000000
+##  [2,] 0.6666667 0.7745967 0.6324555 0.0000000  0.0 0.0000000
+##  [3,] 0.6666667 0.0000000 0.3162278 0.0000000  0.0 0.0000000
+##  [4,] 0.0000000 0.2581989 0.0000000 0.0000000  0.5 0.0000000
+##  [5,] 0.0000000 0.2581989 0.3162278 0.0000000  0.0 0.0000000
+##  [6,] 0.0000000 0.0000000 0.0000000 0.4472136  0.5 0.0000000
+##  [7,] 0.0000000 0.0000000 0.0000000 0.4472136  0.5 0.5773503
+##  [8,] 0.0000000 0.0000000 0.0000000 0.4472136  0.0 0.5773503
+##  [9,] 0.0000000 0.0000000 0.0000000 0.4472136  0.0 0.5773503
+## [10,] 0.0000000 0.0000000 0.0000000 0.4472136  0.5 0.0000000</code></pre>
+<p>We then compute the SVD of <code>A_norm</code> and observe the left- and right-singular vectors. Since the matrix <span class="math inline">\(\A\)</span> is term-by-document, you might consider the terms as being the “units” of the rows of <span class="math inline">\(\A\)</span> and the documents as being the “units” of the columns. For example, <span class="math inline">\(\A_{23}=2\)</span> could logically be interpreted as “there are 2 units of the word <em>dog</em> per <em>document number 3</em>.” In this mentality, any factorization of the matrix should preserve those units. Similar to any <a href="https://www.katmarsoftware.com/articles/railroad-track-unit-conversion.htm">“Change of Units Railroad”</a>, matrix factorization can be considered in terms of units assigned to both rows and columns:
+<span class="math display">\[\A_{\text{term} \times \text{doc}} = \U_{\text{term} \times \text{factor}}\mathbf{D}_{\text{factor} \times \text{factor}}\V^T_{\text{factor} \times \text{doc}}\]</span>
+Thus, when we examine the rows of the matrix <span class="math inline">\(\U\)</span>, we’re looking at information about each term and how it contributes to each factor (i.e. the “factors” are just linear combinations of our elementary term vectors); When we examine the columns of the matrix <span class="math inline">\(\V^T\)</span>, we’re looking at information about how each document is related to each factor (i.e. the documents are linear combinations of these factors with weights corresponding to the elements of <span class="math inline">\(\V^T\)</span>). And what about <span class="math inline">\(\mathbf{D}?\)</span> Well, in classical factor analysis the matrix <span class="math inline">\(\mathbf{D}\)</span> is often combined with either <span class="math inline">\(\U\)</span> or <span class="math inline">\(\V^T\)</span> to obtain a two-matrix factorization. <span class="math inline">\(\mathbf{D}\)</span> describes how much information or signal from our original matrix exists along each of the singular components. It is common to use a <strong>screeplot</strong>, a simple line plot of the singular values in <span class="math inline">\(\mathbf{D}\)</span>, to determine an appropriate <em>rank</em> for the truncation in Equation <a href="svd.html#eq:truncsvd">(15.3)</a>.</p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="svdapp.html#cb218-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">svd</span>(A_norm)</span>
+<span id="cb218-2"><a href="svdapp.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out<span class="sc">$</span>d, <span class="at">ylab =</span> <span class="st">&#39;Singular Values of A_norm&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:screetext"></span>
+<img src="bookdownproj_files/figure-html/screetext-1.png" alt="Screeplot for the Toy Text Dataset" width="672" />
+<p class="caption">
+Figure 16.2: Screeplot for the Toy Text Dataset
+</p>
+</div>
+<p>Noticing the gap, or “elbow” in the screeplot at an index of 2 lets us know that the first two singular components contain notably more information than the components to follow - A major proportion of pattern or signal in this matrix lies long 2 components, i.e. <strong>there are 2 major topics that might provide a reasonable approximation to the data</strong>. What’s a “topic” in a vector space model? A linear combination of terms! It’s just a column vector in the term space! Let’s first examine the left-singular vectors in <span class="math inline">\(\U\)</span>. Remember, the <em>rows</em> of this matrix describe how the terms load onto factors, and the columns are those mysterious “factors” themselves.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="svdapp.html#cb219-1" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>u</span></code></pre></div>
+<pre><code>##              [,1]        [,2]        [,3]        [,4]        [,5]        [,6]
+##  [1,] -0.52980742 -0.04803212  0.01606507 -0.24737747  0.23870207  0.45722153
+##  [2,] -0.73429739 -0.06558224  0.02165167 -0.08821632 -0.09484667 -0.56183983
+##  [3,] -0.34442976 -0.03939120  0.10670326  0.83459702 -0.14778574  0.25277609
+##  [4,] -0.11234648  0.16724740 -0.47798864 -0.22995963 -0.59187851 -0.07506297
+##  [5,] -0.20810051 -0.01743101 -0.01281893 -0.34717811  0.23948814  0.42758997
+##  [6,] -0.03377822  0.36991575 -0.41154158  0.15837732  0.39526231 -0.10648584
+##  [7,] -0.04573569  0.58708873  0.01651849 -0.01514815 -0.42604773  0.38615891
+##  [8,] -0.02427277  0.41546131  0.45839081 -0.07300613  0.07255625 -0.15988106
+##  [9,] -0.02427277  0.41546131  0.45839081 -0.07300613  0.07255625 -0.15988106
+## [10,] -0.03377822  0.36991575 -0.41154158  0.15837732  0.39526231 -0.10648584</code></pre>
+<p>So the first “factor” of SVD is as follows:</p>
+<p><span class="math display">\[\text{factor}_1 = 
+ -0.530 \text{cat} -0.734 \text{dog}-0.344 \text{eat}-0.112 \text{tired} -0.208 \text{toy}-0.034 \text{injured} -0.046 \text{ankle}-0.024 \text{broken} -0.024 \text{swollen} -0.034 \text{sprained} \]</span>
+We can immediately see why people had trouble with LSI as a topic model – it’s hard to intuit how you might treat a mix of positive and negative coefficients in the output. If we ignore the signs and only investigate the absolute values, we can certainly see some meaningful topic information in this first factor: the largest magnitude weights all go to the words from the documents about pets. You might like to say that negative entries mean a topic is <em>anticorrelated</em> with that word, and to some extent this is correct. That logic works nicely, in fact, for factor 2:</p>
+<p><span class="math display">\[\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text{tired} -0.017\text{toy} 0.370\text{injured}+ 0.587\text{ankle}  +0.415\text{broken} + 0.415\text{swollen} + 0.370\text{sprained}\]</span>
+However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words’ loadings along the first two factors in Figure <a href="svdapp.html#fig:lsiwords">16.3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:lsiwords"></span>
+<div id="htmlwidget-57a33ece217247950847" style="width:50%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-57a33ece217247950847">{"x":{"visdat":{"4f0150d3fd41":["function () ","plotlyVisDat"]},"cur_data":"4f0150d3fd41","attrs":{"4f0150d3fd41":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"4f0150d3fd41.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.530158440368728,-0.734760838916492,-0.345164972281373,-0.110850666252602,-0.209919495768589,-0.0330240450358669,-0.0453249365517418,-0.0228246493987327,-0.0255000920552348,-0.0322642781357466],"y":[-0.0480395820144693,-0.0648124555519797,-0.0407331004028897,0.165698960492398,-0.0187624514861292,0.369328097682142,0.585503478840962,0.414460674473027,0.416888254731128,0.369909057014784],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.530158440368728,-0.734760838916492,-0.345164972281373,-0.110850666252602,-0.209919495768589,-0.0330240450358669,-0.0453249365517418,-0.0228246493987327,-0.0255000920552348,-0.0322642781357466],"y":[-0.0480395820144693,-0.0648124555519797,-0.0407331004028897,0.165698960492398,-0.0187624514861292,0.369328097682142,0.585503478840962,0.414460674473027,0.416888254731128,0.369909057014784],"text":["cat","dog","eat","tired","toy","injured","ankle","broken","swollen","sprained"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 16.3: Projection of the Terms onto First two Singular Dimensions
+</p>
+</div>
+<p>Moving on to the documents, we can see a similar clustering pattern in the columns of <span class="math inline">\(\V^T\)</span> which are the rows of <span class="math inline">\(\V\)</span>, shown below:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="svdapp.html#cb221-1" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>v</span></code></pre></div>
+<pre><code>##             [,1]        [,2]        [,3]        [,4]       [,5]       [,6]
+## [1,] -0.55253068 -0.05828903  0.10665606  0.74609663 -0.2433982 -0.2530492
+## [2,] -0.57064141 -0.02502636 -0.11924683 -0.62022594 -0.1219825 -0.5098650
+## [3,] -0.60092838 -0.06088635  0.06280655 -0.10444424  0.3553232  0.7029012
+## [4,] -0.04464392  0.65412158  0.05781835  0.12506090  0.6749109 -0.3092635
+## [5,] -0.06959068  0.50639918 -0.75339800  0.06438433 -0.3367244  0.2314730
+## [6,] -0.03357626  0.55493581  0.63206685 -0.16722869 -0.4803488  0.1808591</code></pre>
+<p>In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure <a href="svdapp.html#fig:lsidocs">16.4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:lsidocs"></span>
+<div id="htmlwidget-3ae9594622e18442aa61" style="width:50%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3ae9594622e18442aa61">{"x":{"visdat":{"4f0118635244":["function () ","plotlyVisDat"]},"cur_data":"4f0118635244","attrs":{"4f0118635244":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"4f0118635244.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":[-0.553158431391009,-0.568985321996562,-0.601364098117821,-0.0458941932125387,-0.0699808554588817,-0.0356562651497124],"y":[-0.0579555971832696,-0.0253487288748514,-0.0606198578156859,0.653992370873829,0.506377704747864,0.555157290092611],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":"text","marker":{"color":"green","opacity":0.6},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":[]},"yaxis":{"domain":[0,1],"automargin":true,"title":[]},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-0.553158431391009,-0.568985321996562,-0.601364098117821,-0.0458941932125387,-0.0699808554588817,-0.0356562651497124],"y":[-0.0579555971832696,-0.0253487288748514,-0.0606198578156859,0.653992370873829,0.506377704747864,0.555157290092611],"text":["1 (pets)","2 (pets)","3 (pets)","4 (injuries)","5 (injuries)","6 (injuries)"],"hoverinfo":["text","text","text","text","text","text"],"marker":{"color":"green","opacity":0.6,"line":{"color":"rgba(255,127,14,1)"}},"showlegend":false,"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 16.4: Projection of the Docuemnts onto First two Singular Dimensions
+</p>
+</div>
+<p>Figure <a href="svdapp.html#fig:lsidocs">16.4</a> demonstrates how documents that live in a 10-dimensional term space can be compressed down to 2-dimensions in a way that captures the major information of interest. If we were to take that 2-truncated SVD of our term-document matrix and multiply it back together, we’d see an <em>approximation</em> of our original term-document matrix, and we could calculate the error involved in that approximation. We could equivalently calculate that error by using the singular values.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="svdapp.html#cb223-1" aria-hidden="true" tabindex="-1"></a>A_approx <span class="ot">=</span> out<span class="sc">$</span>u[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]<span class="sc">%*%</span> <span class="fu">diag</span>(out<span class="sc">$</span>d[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">%*%</span><span class="fu">t</span>(out<span class="sc">$</span>v[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb223-2"><a href="svdapp.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of element-wise squared error </span></span>
+<span id="cb223-3"><a href="svdapp.html#cb223-3" aria-hidden="true" tabindex="-1"></a>(<span class="fu">norm</span>(A<span class="sc">-</span>A_approx,<span class="st">&#39;F&#39;</span>))<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 24.44893</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="svdapp.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of squared singular values truncated</span></span>
+<span id="cb225-2"><a href="svdapp.html#cb225-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(out<span class="sc">$</span>d[<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>]<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1.195292</code></pre>
+<p>However, multiplying back to the original data is not generally an action of interest to data scientists. What we are after in the SVD is the dimensionality reduced data contained in the columns of <span class="math inline">\(\V^T\)</span> (or, if you’ve created a document-term matrix, the rows of <span class="math inline">\(\U\)</span>.</p>
+</div>
+</div>
+<div id="rappasvd" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Image Compression</h2>
+<p>While multiplying back to the original data is not generally something we’d like to do, it does provide a nice illustration of noise-reduction and signal-compression when working with images. The following example is not designed to teach you how to work with images for the purposes of data science. It is merely a nice visual way to <em>see</em> what’s happening when we truncate the SVD and omit these directions that have “minimal signal.”</p>
+<div id="image-data-in-r" class="section level3" number="16.2.1">
+<h3><span class="header-section-number">16.2.1</span> Image data in R</h3>
+<p>Let’s take an image of a leader that we all know and respect:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
+<img src="LAdata/rappa.jpg" alt="Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State" width="125" />
+<p class="caption">
+Figure 16.5: Michael Rappa, PhD, Founding Director of the Institute for Advanced Analytics and Distinguished Professor at NC State
+</p>
+</div>
+<p>This image can be downloaded from the IAA website, after clicking on the link on the left hand side “Michael Rappa / Founding Director.”</p>
+<p>Let’s read this image into R. You’ll need to install the pixmap package:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="svdapp.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;pixmap&quot;)</span></span>
+<span id="cb227-2"><a href="svdapp.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pixmap)</span></code></pre></div>
+<p>Download the image to your computer and then set your working directory in R as the same place you have saved the image:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="svdapp.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/shaina/Desktop/lin-alg&quot;</span>)</span></code></pre></div>
+<p>The first thing we will do is examine the image as an [R,G,B] (extension .ppm) and as a grayscale (extension .pgm). Let’s start with the [R,G,B] image and see what the data looks like in R:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="svdapp.html#cb229-1" aria-hidden="true" tabindex="-1"></a>rappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.ppm&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="svdapp.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Show the type of the information contained in our data:</span></span>
+<span id="cb231-2"><a href="svdapp.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(rappa)</span></code></pre></div>
+<pre><code>## Formal class &#39;pixmapRGB&#39; [package &quot;pixmap&quot;] with 8 slots
+##   ..@ red     : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ green   : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ blue    : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ channels: chr [1:3] &quot;red&quot; &quot;green&quot; &quot;blue&quot;
+##   ..@ size    : int [1:2] 160 250
+##   ..@ cellres : num [1:2] 1 1
+##   ..@ bbox    : num [1:4] 0 0 250 160
+##   ..@ bbcent  : logi FALSE</code></pre>
+<p>You can see we have 3 matrices - one for each of the colors: red, green, and blue.
+Rather than a traditional data frame, when working with an image, we have to refer to the elements in this data set with @ rather than with $.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="svdapp.html#cb233-1" aria-hidden="true" tabindex="-1"></a>rappa<span class="sc">@</span>size</span></code></pre></div>
+<pre><code>## [1] 160 250</code></pre>
+<p>We can then display a heat map showing the intensity of each individual color in each pixel:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="svdapp.html#cb235-1" aria-hidden="true" tabindex="-1"></a>rappa.red<span class="ot">=</span>rappa<span class="sc">@</span>red</span>
+<span id="cb235-2"><a href="svdapp.html#cb235-2" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span>rappa<span class="sc">@</span>green</span>
+<span id="cb235-3"><a href="svdapp.html#cb235-3" aria-hidden="true" tabindex="-1"></a>rappa.blue<span class="ot">=</span>rappa<span class="sc">@</span>blue</span>
+<span id="cb235-4"><a href="svdapp.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-116"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-116-1.png" alt="Intensity of green in each pixel of the original image" width="672" />
+<p class="caption">
+Figure 16.6: Intensity of green in each pixel of the original image
+</p>
+</div>
+<p>Oops! Dr. Rappa is sideways. To rotate the graphic, we actually have to rotate our coordinate system. There is an easy way to do this (with a little bit of matrix experience), we simply transpose the matrix and then reorder the columns so the last one is first: (note that <code>nrow(rappa.green)</code> gives the number of columns in the transposed matrix)</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="svdapp.html#cb236-1" aria-hidden="true" tabindex="-1"></a>rappa.green<span class="ot">=</span><span class="fu">t</span>(rappa.green)[,<span class="fu">nrow</span>(rappa.green)<span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb236-2"><a href="svdapp.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.green)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Rather than compressing the colors individually, let’s work with the grayscale image:</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="svdapp.html#cb237-1" aria-hidden="true" tabindex="-1"></a>greyrappa <span class="ot">=</span> <span class="fu">read.pnm</span>(<span class="st">&quot;LAdata/rappa.pgm&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in rep(cellres, length = 2): &#39;x&#39; is NULL so the result will be NULL</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="svdapp.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(greyrappa)</span></code></pre></div>
+<pre><code>## Formal class &#39;pixmapGrey&#39; [package &quot;pixmap&quot;] with 6 slots
+##   ..@ grey    : num [1:160, 1:250] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ channels: chr &quot;grey&quot;
+##   ..@ size    : int [1:2] 160 250
+##   ..@ cellres : num [1:2] 1 1
+##   ..@ bbox    : num [1:4] 0 0 250 160
+##   ..@ bbcent  : logi FALSE</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="svdapp.html#cb241-1" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span>greyrappa<span class="sc">@</span>grey</span>
+<span id="cb241-2"><a href="svdapp.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="co">#again, rotate 90 degrees</span></span>
+<span id="cb241-3"><a href="svdapp.html#cb241-3" aria-hidden="true" tabindex="-1"></a>rappa.grey<span class="ot">=</span><span class="fu">t</span>(rappa.grey)[,<span class="fu">nrow</span>(rappa.grey)<span class="sc">:</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="svdapp.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa.grey, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-119"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-119-1.png" alt="Greyscale representation of original image" width="672" />
+<p class="caption">
+Figure 16.7: Greyscale representation of original image
+</p>
+</div>
+</div>
+<div id="computing-the-svd-of-dr.-rappa" class="section level3" number="16.2.2">
+<h3><span class="header-section-number">16.2.2</span> Computing the SVD of Dr. Rappa</h3>
+<p>Now, let’s use what we know about the SVD to compress this image. First, let’s compute the SVD and save the individual components. Remember that the rows of <span class="math inline">\(\mathbf{v}^T\)</span> are the right singular vectors. R outputs the matrix <span class="math inline">\(\mathbf{v}\)</span> which has the singular vectors in columns.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="svdapp.html#cb243-1" aria-hidden="true" tabindex="-1"></a>rappasvd<span class="ot">=</span><span class="fu">svd</span>(rappa.grey)</span>
+<span id="cb243-2"><a href="svdapp.html#cb243-2" aria-hidden="true" tabindex="-1"></a>U<span class="ot">=</span>rappasvd<span class="sc">$</span>u</span>
+<span id="cb243-3"><a href="svdapp.html#cb243-3" aria-hidden="true" tabindex="-1"></a>d<span class="ot">=</span>rappasvd<span class="sc">$</span>d</span>
+<span id="cb243-4"><a href="svdapp.html#cb243-4" aria-hidden="true" tabindex="-1"></a>Vt<span class="ot">=</span><span class="fu">t</span>(rappasvd<span class="sc">$</span>v)</span></code></pre></div>
+<p>Now let’s compute some approximations of rank 3, 10 and 50:</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="svdapp.html#cb244-1" aria-hidden="true" tabindex="-1"></a>rappaR3<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ]</span>
+<span id="cb244-2"><a href="svdapp.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR3, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-121"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-121-1.png" alt="Rank 3 approximation of the image data" width="672" />
+<p class="caption">
+Figure 16.8: Rank 3 approximation of the image data
+</p>
+</div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="svdapp.html#cb245-1" aria-hidden="true" tabindex="-1"></a>rappaR10<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span>
+<span id="cb245-2"><a href="svdapp.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR10, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-122"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-122-1.png" alt="Rank 10 approximation of the image data" width="672" />
+<p class="caption">
+Figure 16.9: Rank 10 approximation of the image data
+</p>
+</div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="svdapp.html#cb246-1" aria-hidden="true" tabindex="-1"></a>rappaR25<span class="ot">=</span>U[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>])<span class="sc">%*%</span>Vt[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ]</span>
+<span id="cb246-2"><a href="svdapp.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappaR25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-123"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-123-1.png" alt="Rank 50 approximation of the image data" width="672" />
+<p class="caption">
+Figure 16.10: Rank 50 approximation of the image data
+</p>
+</div>
+<p>How many singular vectors does it take to recognize Dr. Rappa? Certainly 25 is sufficient. Can you recognize him with even fewer? You can play around with this and see how the image changes.</p>
+</div>
+<div id="the-noise" class="section level3" number="16.2.3">
+<h3><span class="header-section-number">16.2.3</span> The Noise</h3>
+<p>One of the main benefits of the SVD is that the <em>signal-to-noise</em> ratio of each component decreases as we move towards the right end of the SVD sum. If <span class="math inline">\(\mathbf{x}\)</span> is our data matrix (in this example, it is a matrix of pixel data to create an image) then,</p>
+<p><span class="math display" id="eq:svdsum">\[\begin{equation}
+\mathbf{X}= \sigma_1\mathbf{u}_1\mathbf{v}_1^T + \sigma_2\mathbf{u}_2\mathbf{v}_2^T + \sigma_3\mathbf{u}_3\mathbf{v}_3^T + \dots + \sigma_r\mathbf{u}_r\mathbf{v}_r^T
+\tag{15.2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(r\)</span> is the rank of the matrix. Our image matrix is full rank, <span class="math inline">\(r=160\)</span>. This is the number of nonzero singular values, <span class="math inline">\(\sigma_i\)</span>. But, upon examinination, we see many of the singular values are nearly 0. Let’s examine the last 20 singular values:</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="svdapp.html#cb247-1" aria-hidden="true" tabindex="-1"></a>d[<span class="dv">140</span><span class="sc">:</span><span class="dv">160</span>]</span></code></pre></div>
+<pre><code>##  [1] 0.035731961 0.033644986 0.033030189 0.028704912 0.027428124 0.025370919
+##  [7] 0.024289497 0.022991926 0.020876657 0.020060538 0.018651373 0.018011032
+## [13] 0.016299834 0.015668836 0.013928107 0.013046327 0.011403096 0.010763141
+## [19] 0.009210187 0.008421977 0.004167310</code></pre>
+<p>We can think of these values as the amount of “information” directed along those last 20 singular components. If we assume the noise in the image or data is uniformly distributed along each orthogonal component <span class="math inline">\(\mathbf{u}_i\mathbf{v}_i^T\)</span>, then there is just as much noise in the component <span class="math inline">\(\sigma_1\mathbf{u}_1\mathbf{v}_1^T\)</span> as there is in the component <span class="math inline">\(\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T\)</span>. But, as we’ve just shown, there is far less information in the component <span class="math inline">\(\sigma_{160}\mathbf{u}_{160}\mathbf{v}_{160}^T\)</span> than there is in the component <span class="math inline">\(\sigma_1\mathbf{u}_1\mathbf{v}_1^T\)</span>. This means that the later components are primarily noise. Let’s see if we can illustrate this using our image. We’ll construct the parts of the image that are represented on the last few singular components</p>
+
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="svdapp.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 25 components:</span></span>
+<span id="cb249-2"><a href="svdapp.html#cb249-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-3"><a href="svdapp.html#cb249-3" aria-hidden="true" tabindex="-1"></a>rappa_bad25<span class="ot">=</span>U[ ,<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">135</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb249-4"><a href="svdapp.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad25, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-125"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" alt="The last 25 components, or the sum of the last 25 terms in equation (15.2)" width="672" />
+<p class="caption">
+Figure 16.11: The last 25 components, or the sum of the last 25 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
+</p>
+</div>
+
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="svdapp.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 50 components:</span></span>
+<span id="cb250-2"><a href="svdapp.html#cb250-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-3"><a href="svdapp.html#cb250-3" aria-hidden="true" tabindex="-1"></a>rappa_bad50<span class="ot">=</span>U[ ,<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">110</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb250-4"><a href="svdapp.html#cb250-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad50, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-126"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-126-1.png" alt="The last 50 components, or the sum of the last 50 terms in equation (15.2)" width="672" />
+<p class="caption">
+Figure 16.12: The last 50 components, or the sum of the last 50 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
+</p>
+</div>
+
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="svdapp.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the last 100 components: (4 times as many components as it took us to recognize the face on the front end)</span></span>
+<span id="cb251-2"><a href="svdapp.html#cb251-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-3"><a href="svdapp.html#cb251-3" aria-hidden="true" tabindex="-1"></a>rappa_bad100<span class="ot">=</span>U[ ,<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>]<span class="sc">%*%</span><span class="fu">diag</span>(d[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>])<span class="sc">%*%</span>Vt[<span class="dv">61</span><span class="sc">:</span><span class="dv">160</span>, ]</span>
+<span id="cb251-4"><a href="svdapp.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(rappa_bad100, <span class="at">col=</span><span class="fu">grey</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">1000</span>)<span class="sc">/</span><span class="dv">1000</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-127"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-127-1.png" alt="The last 100 components, or the sum of the last 100 terms in equation (15.2)" width="672" />
+<p class="caption">
+Figure 16.13: The last 100 components, or the sum of the last 100 terms in equation <a href="svd.html#eq:svdsum">(15.2)</a>
+</p>
+</div>
+<p>Mostly noise. In the last of these images, we see the outline of Dr. Rappa. One of the first things to go when images are compressed are the crisp outlines of objects. This is something you may have witnessed in your own experience, particularly when changing the format of a picture to one that compresses the size.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="svd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/04-SVD.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/04-SVD.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": {
+"engine": "lunr"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

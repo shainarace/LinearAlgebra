@@ -64,9 +64,9 @@ Such a plane is a classic example - the set of points $(x,y,z)$ satisfying this 
 
 A linear function involves only multiplication by scalars and addition/subtraction, for example:
 $$2x+3y+6z=9 \quad \mbox{or} \quad 4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2.$$
-The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (fourth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, the 4+ dimensional lists of numbers maintain all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that we developed in 2- and 3-dimensional space.
+The second equation above brings us to an important point: we don't have to restrict ourselves to a  3-dimensional world. While the "flatness" of linear equations is evident when we can graph them in 2 and 3-dimensions, with 6 variables we can no longer conceptualize the "flatness" of our equation. We take on principal that the surface that contains all solutions to the equation $4x_1-3x_2+9x_3+x_4-x_5+2x_6 = 2$ is flat, without curvature, existing in a 6-dimensional space (or higher!). You may be asking now: _what is 6-dimensional space?_  We'll get to the the definition of $n$-space soon (Definition \@ref(def:nspace)), but it should satisfy your intuition to extend your basic notion of coordinate axes. If you have 3 variables of interest, say _height_, _weight_ and _circumference_, you can make a 3-d scatter plot because we have 3 physical dimensions to map to each characteristic. Add in a fourth variable, say _cost_, and suddenly we cannot _physically_ consider the plot (because our perception is limited to 3-dimensions) but we must to be able to expand our intuition and consider a "fourth axis" (fourth dimension) to represent _cost_. All the things we know about distance and similarity and location still apply when considering an "extra number in our list"; a vector is nothing more than a list of numbers.  More than that, these greater-than-3-dimensional lists of numbers easily maintain and extend all of the theorems about similarity, distance, angles, projections, area, volume, and everything else that humans discovered in 2- and 3-dimensional space.
 
-In some cases, this course will challenge you to think geometrically about data. Not in terms of the geometry you learned in high school regarding polygons and circles, but in terms of the layout and patterns of data. Linear algebra allows us to develop concepts of distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to declare "these two observations are far away from each other". 
+In some cases, this course will challenge you to think geometrically about data, in terms of its layout in space. Linear algebra gives us the tools that we need to explore distance and similarity when our data has more than 3 variables and we can no longer look at a scatter plot and use our eyeballs to draw conclusions like "there are two very distinct groups of customers in this data". 
 
 
 The second term in the phrase is, of course, **algebra.** While you are likely familiar with the term,  this course will challenge your initial familiarity. Linear Algebra deals with the algebra of matrices, which is likely different from any algebra you've experienced before. For example, when given an equation for an unknown value, like 
@@ -203,7 +203,7 @@ $$\bordermatrix{&&&&&}{\blue{\arow{1}} \\\vdots \\ \arow{i} \\ \vdots \\\arow{m}
 :::{.definition name='Rows and Columns of a Matrix' #rowcol}
 To refer to entire rows or columns, a placeholder $\star$ is often used to represent the idea that we take _all_ rows or columns after narrowing in on a given column or row respectively:
 
-- To refer to the $k^{th}$ row of $\A$ we will use the notation $\arow{k}$ ("$k^{th} row, _all_ columns") \
+- To refer to the $k^{th}$ row of $\A$ we will use the notation $\arow{k}$ ("$k^{th}$ row, _all_ columns") \
 
 - Similarly, to refer to the $k^{th}$ column of $\A$ we will use the notation $\acol{k}$.\
 
@@ -253,6 +253,8 @@ $$\mathbf{B}=
 Element $B_{42}=150$ corresponds to the _weight_ (second column) of _observation 4_ (fourth row).
 
 The column $$\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)$$ corresponds to the variable _age_ and the row $$\brow{6} = \left(\begin{matrix} 68&165&25 \end{matrix}\right)$$ corresponds to the measurements for _observation 6_.
+
+A key point here is that both the variables and observations are vectors belonging to a vector space. Variables live in the "sample space" where each axis identifies an observation. Thus, since we had 7 observations in this data, we could consider the vectors _age_, _weight_, and _height_ to be 3 lonely vectors in the _vastness_ of 7-dimensional space. If a 4th variable, say _height\_with\_shoes_ were to appear for these same observations, we could add a 4th vector to the crew. This vector would point in a direction very closer to _height_ because the measurements are correlated. The cosine of the angle between those vectors (assuming the data has been centered) is, precisely, correlation (Pearson's correlation, $\rho$).  
 :::
 
 :::{.exercise name='Rows, Columns, and Elements of a Matrix' #ijnot}
@@ -817,6 +819,7 @@ $$\mathbf{A}=\left(\begin{matrix} 1 & 3\\4&2 \end{matrix}\right) = 1\left(\begin
 When we multiply matrices, we do not perform the operation element-wise as we did with addition and scalar multiplication. Matrix multiplication is, in itself, a very powerful tool for summarizing information. In fact, many of the analytical tools we will focus on in this course, like Markov Chains, Principal Components Analysis, Factor Analysis, and the Singular Value Decomposition, can all be understood more clearly with a firm grasp on matrix multiplication. Because this operation is so important, we will spend a considerable amount of energy breaking it down in many ways. 
 
 ### The Inner Product
+
 We'll begin by defining the multiplication of a row vector times a column vector, known as an inner product (sometimes called the _dot product_ in applied sciences). For the remainder of this course, unless otherwise specified, we will consider vectors to be columns rather than rows. This makes the notation more simple because if $\x$ is a column vector,
 $$\x=\left(\begin{matrix} x_1\\x_2\\\vdots\\ x_n\end{matrix}\right)$$
 then we can automatically assume that $\x^T$ is a row vector:
@@ -1043,7 +1046,7 @@ Definition \@ref(def:matvecprodlincomb) extends to _any_ matrix product. If $\ma
 
 ## Vector Outer Products
 
-Whereas inner products were the product of a row vector with a column vector (think $\x^T\y$),  **outer products**  are the product of a *column* vector with a *row* vector (think $\x\y^T$).
+Inner products involved multiplying a row vector by a column vector on the right (think $\x^T\y$).  **Outer products**  occur when we multiply a *column* vector with a *row* vector on the right (think $\x\y^T$).
 Let's first consider the dimensions of the outcome:
 
 $$\underset{(m\times \red{1})}{\x} \underset{(\red{1} \times n)}{\y^T} = \bo{M}_{m\times n}$$
@@ -1054,6 +1057,44 @@ So the result is a matrix! We'll want to treat this product in the same way we t
 Let $\x = \left(\begin{matrix} 3\\4\\-2 \end{matrix}\right)$ and $\y=\left(\begin{matrix} 1\\5\\3 \end{matrix}\right)$. Then,
 $$\x\y^T = \left(\begin{matrix} \red{3}\\4\\-2 \end{matrix}\right) \left(\begin{matrix} \red{1}&5&3 \end{matrix}\right) = \left(\begin{matrix} \red{3}&15&9\\4&20&12\\-2&-10&-3\end{matrix}\right)$$
 As you can see by performing this calculation, a vector outer product will _always_ produce a matrix whose rows are multiples of each other!
+:::
+
+:::{.example name='Centering Data with an Outer Product' #centerouter}
+As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
+
+\begin{equation}\A=\begin{array}{cc} & \begin{array}{ccc} h & w & s \end{array} \\
+			\begin{array}{c} person_1 \\
+person_2 \\
+person_3 \\
+person_4 \\
+person_5 \end{array} & \left(\begin{array}{ccc}60 & 102 & 5.5 \cr 72 & 170 &  7.5 \cr 66 & 110 & 6.0\cr 69 & 128 & 6.5\cr 63 & 130 &  7.0\cr \end{array} \right)\end{array}\end{equation}
+			 
+			
+The average values for height, weight, and wrist size are as follows:
+\begin{eqnarray}
+\bar{h}&=&66\\
+\bar{w}&=&128\\
+\bar{s}&=&6.5
+\end{eqnarray}			
+
+To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:
+
+ $$\pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 & 128 & 6.5 \mp$$
+$$= \pm 60 & 102 & 5.5 \cr
+			 72 & 170 &  7.5 \cr
+			66 & 110 & 6.0\cr
+			69 & 128 & 6.5\cr
+			63 & 130 &  7.0\cr \mp - \pm  66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \mp$$
+
+$$= \pm    -6.0000 & -26.0000  & -1.0000\\
+    6.0000 &  42.0000   & 1.0000\\
+         0 & -18.0000 &  -0.5000\\
+    3.0000    &     0       &  0\\
+   -3.0000 &   2.0000 &   0.5000 \mp$$
 :::
 
 ## The Identity and the Matrix Inverse
@@ -1634,7 +1675,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.3456948 0.1659634
+## [1]  0.12031178 -0.07305812
 ```
 
 ```r
@@ -1644,7 +1685,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.0370001 0.2413738
+## [1] -0.01580071  0.10304462
 ```
 
 ```r
@@ -1654,7 +1695,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 0.9932477 1.0435680
+## [1] 1.0520451 0.8795927
 ```
 
 ```r
@@ -1664,7 +1705,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 2.39235513 0.35364825 1.40631278 2.87646632 0.06598339
+## [1] 1.530759 1.783182 4.150120 2.016247 1.890063
 ```
 
 ```r
@@ -1674,7 +1715,7 @@ colMeans(B)
 ```
 
 ```
-## [1]  1.269818e-17 -7.494005e-18
+## [1]  7.112366e-19 -4.718448e-18
 ```
 
 ```r
@@ -1720,12 +1761,12 @@ A[1:5, ]
 ```
 
 ```
-##            This       That
-## [1,]  0.7957881 -1.3263018
-## [2,] -0.4165894 -0.4243837
-## [3,]  0.8268829  0.8500456
-## [4,]  0.9495819  1.4052618
-## [5,]  0.1819480  0.1813237
+##            This        That
+## [1,] -0.3051990 -1.19900502
+## [2,] -0.5306476  1.22539584
+## [3,]  1.3424145  1.53233258
+## [4,] -1.0819213  0.91961564
+## [5,] -1.3740463 -0.04538589
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -2776,45 +2817,6 @@ $$\x\y^T = \pm 1\\2\\3\\4\mp \pm 2&1&3\mp = \pm 2&1&3\\4&2&6\\6&3&9\\8&4&12 \mp$
 which clearly has rank 1.  It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.
 :::
 
-:::{.example name='Centering Data with an Outer Product' #centerouter}
-As we've seen in previous examples, many statistical formulas involve the _centered_ data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals' heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:
-
-\begin{equation}\A=\begin{array}{cc} & \begin{array}{ccc} h & w & s \end{array} \\
-			\begin{array}{c} person_1 \\
-person_2 \\
-person_3 \\
-person_4 \\
-person_5 \end{array} & \left(\begin{array}{ccc}60 & 102 & 5.5 \cr 72 & 170 &  7.5 \cr 66 & 110 & 6.0\cr 69 & 128 & 6.5\cr 63 & 130 &  7.0\cr \end{array} \right)\end{array}\end{equation}
-			 
-			
-The average values for height, weight, and wrist size are as follows:
-\begin{eqnarray}
-\bar{h}&=&66\\
-\bar{w}&=&128\\
-\bar{s}&=&6.5
-\end{eqnarray}			
-
-To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:
-
- $$\pm 60 & 102 & 5.5 \cr
-			 72 & 170 &  7.5 \cr
-			66 & 110 & 6.0\cr
-			69 & 128 & 6.5\cr
-			63 & 130 &  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 & 128 & 6.5 \mp$$
-$$= \pm 60 & 102 & 5.5 \cr
-			 72 & 170 &  7.5 \cr
-			66 & 110 & 6.0\cr
-			69 & 128 & 6.5\cr
-			63 & 130 &  7.0\cr \mp - \pm  66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \\66 & 128 & 6.5 \mp$$
-
-$$= \pm    -6.0000 & -26.0000  & -1.0000\\
-    6.0000 &  42.0000   & 1.0000\\
-         0 & -18.0000 &  -0.5000\\
-    3.0000    &     0       &  0\\
-   -3.0000 &   2.0000 &   0.5000 \mp$$
-:::
-
-
 ## Exercises
 
 <ol>
@@ -3254,7 +3256,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preservedae10b15b213ff72
+preserveebf55b19a98d9de2
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -3856,7 +3858,7 @@ This projection we've just described is actually the projection of the data onto
 
 With this analogy in mind, we bring back to the interactive plot from Chapter \@ref(orthog) to ponder what these different projections of a data cloud would look like, and to locate the maximum variance projection of _this_ data.
 
-preserve013e556188ce3dbf
+preserve386dc4016b2b47f1
 
 ## PCA Details
 
@@ -4413,11 +4415,11 @@ cor(data)
 ```
 
 ```
-##              [,1]        [,2]         [,3]        [,4]
-## [1,]  1.000000000 -0.01461643 -0.002941924  0.03782764
-## [2,] -0.014616433  1.00000000  0.061684911 -0.03109253
-## [3,] -0.002941924  0.06168491  1.000000000 -0.02751044
-## [4,]  0.037827645 -0.03109253 -0.027510441  1.00000000
+##              [,1]         [,2]         [,3]        [,4]
+## [1,]  1.000000000 -0.009967626  0.068855926 -0.02441696
+## [2,] -0.009967626  1.000000000 -0.007364047  0.03752031
+## [3,]  0.068855926 -0.007364047  1.000000000 -0.04530404
+## [4,] -0.024416956  0.037520315 -0.045304040  1.00000000
 ```
 
 ```r
@@ -4427,10 +4429,10 @@ summary(pc)
 
 ```
 ## Importance of components:
-##                          PC1    PC2    PC3    PC4
-## Standard deviation     1.045 1.0066 0.9787 0.9680
-## Proportion of Variance 0.273 0.2533 0.2394 0.2343
-## Cumulative Proportion  0.273 0.5263 0.7657 1.0000
+##                           PC1    PC2    PC3    PC4
+## Standard deviation     1.0503 1.0057 0.9799 0.9620
+## Proportion of Variance 0.2758 0.2529 0.2401 0.2314
+## Cumulative Proportion  0.2758 0.5286 0.7687 1.0000
 ```
 
 ```r
@@ -4438,11 +4440,11 @@ pc$rotation
 ```
 
 ```
-##             PC1        PC2         PC3         PC4
-## [1,]  0.3154511 -0.7286246  0.58475781 -0.16629848
-## [2,] -0.5898229 -0.3146430 -0.27084921 -0.69263945
-## [3,] -0.5542911 -0.4478294 -0.06020782  0.69898876
-## [4,]  0.4953392 -0.4117705 -0.76228212  0.06332553
+##             PC1       PC2         PC3        PC4
+## [1,] -0.5512834 0.3968499 -0.45096955 -0.5789847
+## [2,]  0.2785073 0.7629914  0.55630310 -0.1755127
+## [3,] -0.6077191 0.3176669  0.09617732  0.7214673
+## [4,]  0.4991971 0.3993020 -0.69130547  0.3368337
 ```
 
 ```r
@@ -5065,7 +5067,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preservea5013ee50215e913
+preserveb74f36ab45364e69
 <p class="caption">(\#fig:unnamed-chunk-77)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10300,7 +10302,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preserve522b437cd823bfa4
+preserve055ee29b80efb671
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10323,7 +10325,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preserve22fb9832095a08d8
+preserve1f285e2d5dd468e3
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -11478,7 +11480,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserve16e3acba14916d81
+preservec5d6b4a0055e1249
 
 ### Saving your Interactive Visualization to .html
 

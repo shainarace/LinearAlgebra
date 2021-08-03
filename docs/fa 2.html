@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 17 Factor Analysis | Linear Algebra for Data Science</title>
+  <meta name="description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 17 Factor Analysis | Linear Algebra for Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  <meta name="github-repo" content="shainarace/linearalgebra" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 17 Factor Analysis | Linear Algebra for Data Science" />
+  
+  <meta name="twitter:description" content="A traditional textbook fused with a collection of data science case studies that was engineered to weave practicality and applied problem solving into a linear algebra curriculum" />
+  
+
+<meta name="author" content="Shaina Race Bennett, PhD" />
+
+
+<meta name="date" content="2021-08-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="svdapp.html"/>
+<link rel="next" href="otherdimred.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+<!DOCTYPE html>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  loader: {load: ['[tex]/cancel', '[tex]/systeme','[tex]/require']},
+  TeX: {
+    packages: {'[+]': ['cancel','systeme','boldsymbol','require']}
+  }
+});
+</script>
+
+
+<script type="text/javascript" id="MathJax-script"
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<span class="math" style="display:none">
+\(\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{amsmath}
+\usepackage{systeme}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{boldsymbol}
+\newenvironment{am}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\newcommand{\bordermatrix}[3]{\begin{matrix} ~ & \begin{matrix} #1 \end{matrix} \\ \begin{matrix} #2 \end{matrix}\hspace{-1em} & #3 \end{matrix}}
+\newcommand{\eref}[1]{Example~\ref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\sref}[1]{Section~\ref{#1}}
+\newcommand{\cref}[1]{Chapter~\ref{#1}}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{thm}{Theorem}
+\newtheorem{example}{Example}[section]
+\newcommand{\To}{\Rightarrow}
+\newcommand{\del}{\nabla}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\cont}{\Rightarrow \Leftarrow}
+\newcommand{\back}{\backslash}
+\newcommand{\norm}[1]{\|{#1}\|}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\ip}[1]{\langle{#1}\rangle}
+\newcommand{\bo}{\mathbf}
+\newcommand{\mean}{\boldsymbol\mu}
+\newcommand{\cov}{\boldsymbol\Sigma}
+\newcommand{\wt}{\widetilde}
+\newcommand{\p}{\textbf{p}}
+\newcommand{\ff}{\textbf{f}}
+\newcommand{\aj}{\textbf{a}_j}
+\newcommand{\ajhat}{\widehat{\textbf{a}_j}}
+\newcommand{\I}{\textbf{I}}
+\newcommand{\A}{\textbf{A}}
+\newcommand{\B}{\textbf{B}}
+\newcommand{\bL}{\textbf{L}}
+\newcommand{\bP}{\textbf{P}}
+\newcommand{\bD}{\textbf{D}}
+\newcommand{\bS}{\textbf{S}}
+\newcommand{\bW}{\textbf{W}}
+\newcommand{\id}{\textbf{I}}
+\newcommand{\M}{\textbf{M}}
+\renewcommand{\B}{\textbf{B}}
+\newcommand{\V}{\textbf{V}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\y}{\textbf{y}}
+\newcommand{\bv}{\textbf{v}}
+\renewcommand{\v}{\textbf{v}}
+\newcommand{\cC}{\mathscr{C}}
+\newcommand{\e}{\textbf{e}}
+\newcommand{\w}{\textbf{w}}
+\newcommand{\h}{\textbf{h}}
+\renewcommand{\b}{\textbf{b}}
+\renewcommand{\a}{\textbf{a}}
+\renewcommand{\u}{\textbf{u}}
+\newcommand{\C}{\textbf{C}}
+\newcommand{\D}{\textbf{D}}
+\newcommand{\cc}{\textbf{c}}
+\newcommand{\Q}{\textbf{Q}}
+\renewcommand{\S}{\textbf{S}}
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Z}{\textbf{Z}}
+\newcommand{\z}{\textbf{z}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\plane}{\textit{P}}
+\newcommand{\mxn}{$m\mbox{x}n$}
+\newcommand{\kmeans}{\textit{k}-means\,}
+\newcommand{\bbeta}{\boldsymbol\beta}
+\newcommand{\ssigma}{\boldsymbol\Sigma}
+\newcommand{\xrow}[1]{\mathbf{X}_{{#1}\star}}
+\newcommand{\xcol}[1]{\mathbf{X}_{\star{#1}}}
+\newcommand{\yrow}[1]{\mathbf{Y}_{{#1}\star}}
+\newcommand{\ycol}[1]{\mathbf{Y}_{\star{#1}}}
+\newcommand{\crow}[1]{\mathbf{C}_{{#1}\star}}
+\newcommand{\ccol}[1]{\mathbf{C}_{\star{#1}}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\arow}[1]{\mathbf{A}_{{#1}\star}}
+\newcommand{\acol}[1]{\mathbf{A}_{\star{#1}}}
+\newcommand{\brow}[1]{\mathbf{B}_{{#1}\star}}
+\newcommand{\bcol}[1]{\mathbf{B}_{\star{#1}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\t}{ \indent}
+\newcommand{\nt}{ \indent}
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\Y}{\mathbf{Y}}
+\newcommand{\ep}{\mathbf{\epsilon}}
+\renewcommand{\pm}{\left(\begin{matrix}}
+\renewcommand{\mp}{\end{matrix}\right)}
+\newcommand{\bm}{\bordermatrix}
+\usepackage{pdfpages,cancel}
+\newenvironment{code}{\Verbatim [formatcom=\color{blue}]}{\endVerbatim}
+\)
+</span>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center><img src="figs/matrixlogo.jpg" width="50"></center></li>
+<li><center><strong> Linear Algebra for Data Science </strong></center></li>
+<li><center><strong> with examples in R </strong></center></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#structure-of-the-book"><i class="fa fa-check"></i>Structure of the book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#what-is-linear-algebra"><i class="fa fa-check"></i><b>1.1</b> What is Linear Algebra?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-linear-algebra"><i class="fa fa-check"></i><b>1.2</b> Why Linear Algebra</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#describing-matrices-and-vectors"><i class="fa fa-check"></i><b>1.3</b> Describing Matrices and Vectors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#dimensionsize-of-a-matrix"><i class="fa fa-check"></i><b>1.3.1</b> Dimension/Size of a Matrix</a></li>
+<li class="chapter" data-level="1.3.2" data-path="intro.html"><a href="intro.html#ij-notation"><i class="fa fa-check"></i><b>1.3.2</b> <span class="math inline">\((i,j)\)</span> Notation</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#example-defining-social-networks"><i class="fa fa-check"></i>Example: Defining social networks</a></li>
+<li class="chapter" data-level="1.3.3" data-path="intro.html"><a href="intro.html#introcorr"><i class="fa fa-check"></i><b>1.3.3</b> Example: Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#vectors"><i class="fa fa-check"></i><b>1.4</b> Vectors</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#vector-geometry-n-space"><i class="fa fa-check"></i><b>1.4.1</b> Vector Geometry: <span class="math inline">\(n\)</span>-space</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#matrix-operations"><i class="fa fa-check"></i><b>1.5</b> Matrix Operations</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#transpose"><i class="fa fa-check"></i><b>1.5.1</b> Transpose</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#trace-of-a-matrix"><i class="fa fa-check"></i><b>1.5.2</b> Trace of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#special"><i class="fa fa-check"></i><b>1.6</b> Special Matrices and Vectors</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#summary-of-conventional-notation"><i class="fa fa-check"></i><b>1.7</b> Summary of Conventional Notation</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="mult.html"><a href="mult.html"><i class="fa fa-check"></i><b>2</b> Matrix Arithmetic</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="mult.html"><a href="mult.html#matrix-addition-subtraction-and-scalar-multiplication"><i class="fa fa-check"></i><b>2.1</b> Matrix Addition, Subtraction, and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.2" data-path="mult.html"><a href="mult.html#sec:vectoradd"><i class="fa fa-check"></i><b>2.2</b> Geometry of Vector Addition and Scalar Multiplication</a></li>
+<li class="chapter" data-level="2.3" data-path="mult.html"><a href="mult.html#linear-combinations"><i class="fa fa-check"></i><b>2.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="2.4" data-path="mult.html"><a href="mult.html#matrix-multiplication"><i class="fa fa-check"></i><b>2.4</b> Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="mult.html"><a href="mult.html#the-inner-product"><i class="fa fa-check"></i><b>2.4.1</b> The Inner Product</a></li>
+<li class="chapter" data-level="2.4.2" data-path="mult.html"><a href="mult.html#matrix-product"><i class="fa fa-check"></i><b>2.4.2</b> Matrix Product</a></li>
+<li class="chapter" data-level="2.4.3" data-path="mult.html"><a href="mult.html#matrix-vector-product"><i class="fa fa-check"></i><b>2.4.3</b> Matrix-Vector Product</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#linear-combination-view-of-matrix-products"><i class="fa fa-check"></i>Linear Combination view of Matrix Products</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="mult.html"><a href="mult.html#vector-outer-products"><i class="fa fa-check"></i><b>2.5</b> Vector Outer Products</a></li>
+<li class="chapter" data-level="2.6" data-path="mult.html"><a href="mult.html#the-identity-and-the-matrix-inverse"><i class="fa fa-check"></i><b>2.6</b> The Identity and the Matrix Inverse</a></li>
+<li class="chapter" data-level="2.7" data-path="mult.html"><a href="mult.html#exercises-1"><i class="fa fa-check"></i><b>2.7</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="mult.html"><a href="mult.html#list-of-key-terms"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multapp.html"><a href="multapp.html"><i class="fa fa-check"></i><b>3</b> Applications of Matrix Multiplication</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multapp.html"><a href="multapp.html#systems-of-equations"><i class="fa fa-check"></i><b>3.1</b> Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multapp.html"><a href="multapp.html#big-systems-of-equations"><i class="fa fa-check"></i><b>3.1.1</b> <em>Big</em> Systems of Equations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multapp.html"><a href="multapp.html#regression-analysis"><i class="fa fa-check"></i><b>3.2</b> Regression Analysis</a></li>
+<li class="chapter" data-level="3.3" data-path="multapp.html"><a href="multapp.html#linear-combinations-1"><i class="fa fa-check"></i><b>3.3</b> Linear Combinations</a></li>
+<li class="chapter" data-level="3.4" data-path="multapp.html"><a href="multapp.html#multapp-ex"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-programming-basics.html"><a href="r-programming-basics.html"><i class="fa fa-check"></i><b>4</b> R Programming Basics</a></li>
+<li class="chapter" data-level="5" data-path="solvesys.html"><a href="solvesys.html"><i class="fa fa-check"></i><b>5</b> Solving Systems of Equations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination"><i class="fa fa-check"></i><b>5.1</b> Gaussian Elimination</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="solvesys.html"><a href="solvesys.html#row-operations"><i class="fa fa-check"></i><b>5.1.1</b> Row Operations</a></li>
+<li class="chapter" data-level="5.1.2" data-path="solvesys.html"><a href="solvesys.html#the-augmented-matrix"><i class="fa fa-check"></i><b>5.1.2</b> The Augmented Matrix</a></li>
+<li class="chapter" data-level="5.1.3" data-path="solvesys.html"><a href="solvesys.html#gaussian-elimination-summary"><i class="fa fa-check"></i><b>5.1.3</b> Gaussian Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination"><i class="fa fa-check"></i><b>5.2</b> Gauss-Jordan Elimination</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-summary"><i class="fa fa-check"></i><b>5.2.1</b> Gauss-Jordan Elimination Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="solvesys.html"><a href="solvesys.html#three-types-of-systems"><i class="fa fa-check"></i><b>5.3</b> Three Types of Systems</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="solvesys.html"><a href="solvesys.html#uniquesol"><i class="fa fa-check"></i><b>5.3.1</b> The Unique Solution Case</a></li>
+<li class="chapter" data-level="5.3.2" data-path="solvesys.html"><a href="solvesys.html#inconsistent"><i class="fa fa-check"></i><b>5.3.2</b> The Inconsistent Case</a></li>
+<li class="chapter" data-level="5.3.3" data-path="solvesys.html"><a href="solvesys.html#infinitesol"><i class="fa fa-check"></i><b>5.3.3</b> The Infinite Solutions Case</a></li>
+<li class="chapter" data-level="5.3.4" data-path="solvesys.html"><a href="solvesys.html#matrix-rank"><i class="fa fa-check"></i><b>5.3.4</b> Matrix Rank</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="solvesys.html"><a href="solvesys.html#solving-matrix-equations"><i class="fa fa-check"></i><b>5.4</b> Solving Matrix Equations</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="solvesys.html"><a href="solvesys.html#solving-for-the-inverse-of-a-matrix"><i class="fa fa-check"></i><b>5.4.1</b> Solving for the Inverse of a Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="solvesys.html"><a href="solvesys.html#exercises-2"><i class="fa fa-check"></i><b>5.5</b> Exercises</a></li>
+<li class="chapter" data-level="5.6" data-path="solvesys.html"><a href="solvesys.html#list-of-key-terms-1"><i class="fa fa-check"></i><b>5.6</b> List of Key Terms</a></li>
+<li class="chapter" data-level="5.7" data-path="solvesys.html"><a href="solvesys.html#gauss-jordan-elimination-in-r"><i class="fa fa-check"></i><b>5.7</b> Gauss-Jordan Elimination in R</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="norms.html"><a href="norms.html"><i class="fa fa-check"></i><b>6</b> Norms, Similarity, and Distance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="norms.html"><a href="norms.html#sec-norms"><i class="fa fa-check"></i><b>6.1</b> Norms and Distances</a></li>
+<li class="chapter" data-level="6.2" data-path="norms.html"><a href="norms.html#other-useful-norms-and-distances"><i class="fa fa-check"></i><b>6.2</b> Other useful norms and distances</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="norms.html"><a href="norms.html#norm-star_1."><i class="fa fa-check"></i><b>6.2.1</b> 1-norm, <span class="math inline">\(\|\star\|_1\)</span>.</a></li>
+<li class="chapter" data-level="6.2.2" data-path="norms.html"><a href="norms.html#infty-norm-star_infty."><i class="fa fa-check"></i><b>6.2.2</b> <span class="math inline">\(\infty\)</span>-norm, <span class="math inline">\(\|\star\|_{\infty}\)</span>.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="norms.html"><a href="norms.html#inner-products"><i class="fa fa-check"></i><b>6.3</b> Inner Products</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="norms.html"><a href="norms.html#covariance"><i class="fa fa-check"></i><b>6.3.1</b> Covariance</a></li>
+<li class="chapter" data-level="6.3.2" data-path="norms.html"><a href="norms.html#mahalanobis-distance"><i class="fa fa-check"></i><b>6.3.2</b> Mahalanobis Distance</a></li>
+<li class="chapter" data-level="6.3.3" data-path="norms.html"><a href="norms.html#angular-distance"><i class="fa fa-check"></i><b>6.3.3</b> Angular Distance</a></li>
+<li class="chapter" data-level="6.3.4" data-path="norms.html"><a href="norms.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="norms.html"><a href="norms.html#outer-products"><i class="fa fa-check"></i><b>6.4</b> Outer Products</a></li>
+<li class="chapter" data-level="6.5" data-path="norms.html"><a href="norms.html#exercises-3"><i class="fa fa-check"></i><b>6.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linind.html"><a href="linind.html"><i class="fa fa-check"></i><b>7</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linind.html"><a href="linind.html#linear-independence"><i class="fa fa-check"></i><b>7.1</b> Linear Independence</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linind.html"><a href="linind.html#determining-linear-independence"><i class="fa fa-check"></i><b>7.1.1</b> Determining Linear Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linind.html"><a href="linind.html#span"><i class="fa fa-check"></i><b>7.2</b> Span of Vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="linind.html"><a href="linind.html#exercises-4"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="linind.html"><a href="linind.html#list-of-key-terms-2"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="basis.html"><a href="basis.html"><i class="fa fa-check"></i><b>8</b> Basis and Change of Basis</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="basis.html"><a href="basis.html#exercises-5"><i class="fa fa-check"></i><b>8.1</b> Exercises</a></li>
+<li class="chapter" data-level="" data-path="basis.html"><a href="basis.html#list-of-key-terms-3"><i class="fa fa-check"></i>List of Key Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="orthog.html"><a href="orthog.html"><i class="fa fa-check"></i><b>9</b> Orthogonality</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="orthog.html"><a href="orthog.html#orthonormal-basis"><i class="fa fa-check"></i><b>9.1</b> Orthonormal Basis</a></li>
+<li class="chapter" data-level="9.2" data-path="orthog.html"><a href="orthog.html#orthogonal-projection"><i class="fa fa-check"></i><b>9.2</b> Orthogonal Projection</a></li>
+<li class="chapter" data-level="9.3" data-path="orthog.html"><a href="orthog.html#why"><i class="fa fa-check"></i><b>9.3</b> Why??</a></li>
+<li class="chapter" data-level="9.4" data-path="orthog.html"><a href="orthog.html#exercises-6"><i class="fa fa-check"></i><b>9.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="leastsquares.html"><a href="leastsquares.html"><i class="fa fa-check"></i><b>10</b> Least Squares</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="leastsquares.html"><a href="leastsquares.html#introducing-error"><i class="fa fa-check"></i><b>10.1</b> Introducing Error</a></li>
+<li class="chapter" data-level="10.2" data-path="leastsquares.html"><a href="leastsquares.html#why-the-normal-equations"><i class="fa fa-check"></i><b>10.2</b> Why the normal equations?</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="leastsquares.html"><a href="leastsquares.html#geometrical-interpretation"><i class="fa fa-check"></i><b>10.2.1</b> Geometrical Interpretation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="leastsquares.html"><a href="leastsquares.html#calculus-derivation"><i class="fa fa-check"></i><b>10.2.2</b> Calculus Derivation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="lsapp.html"><a href="lsapp.html"><i class="fa fa-check"></i><b>11</b> Applications of Least Squares</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="lsapp.html"><a href="lsapp.html#simple-linear-regression"><i class="fa fa-check"></i><b>11.1</b> Simple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="lsapp.html"><a href="lsapp.html#cars-data"><i class="fa fa-check"></i><b>11.1.1</b> Cars Data</a></li>
+<li class="chapter" data-level="11.1.2" data-path="lsapp.html"><a href="lsapp.html#setting-up-the-normal-equations"><i class="fa fa-check"></i><b>11.1.2</b> Setting up the Normal Equations</a></li>
+<li class="chapter" data-level="11.1.3" data-path="lsapp.html"><a href="lsapp.html#solving-for-parameter-estimates-and-statistics"><i class="fa fa-check"></i><b>11.1.3</b> Solving for Parameter Estimates and Statistics</a></li>
+<li class="chapter" data-level="11.1.4" data-path="lsapp.html"><a href="lsapp.html#ols-in-r-via-lm"><i class="fa fa-check"></i><b>11.1.4</b> OLS in R via <code>lm()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="lsapp.html"><a href="lsapp.html#multiple-linear-regression"><i class="fa fa-check"></i><b>11.2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="lsapp.html"><a href="lsapp.html#bike-sharing-dataset"><i class="fa fa-check"></i><b>11.2.1</b> Bike Sharing Dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="eigen.html"><a href="eigen.html"><i class="fa fa-check"></i><b>12</b> Eigenvalues and Eigenvectors</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="eigen.html"><a href="eigen.html#diagonalization"><i class="fa fa-check"></i><b>12.1</b> Diagonalization</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen.html"><a href="eigen.html#geometric-interpretation-of-eigenvalues-and-eigenvectors"><i class="fa fa-check"></i><b>12.2</b> Geometric Interpretation of Eigenvalues and Eigenvectors</a></li>
+<li class="chapter" data-level="12.3" data-path="eigen.html"><a href="eigen.html#exercises-7"><i class="fa fa-check"></i><b>12.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="pca.html"><a href="pca.html"><i class="fa fa-check"></i><b>13</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="pca.html"><a href="pca.html#gods-flashlight"><i class="fa fa-check"></i><b>13.1</b> God’s Flashlight</a></li>
+<li class="chapter" data-level="13.2" data-path="pca.html"><a href="pca.html#pca-details"><i class="fa fa-check"></i><b>13.2</b> PCA Details</a></li>
+<li class="chapter" data-level="13.3" data-path="pca.html"><a href="pca.html#geometrical-comparison-with-least-squares"><i class="fa fa-check"></i><b>13.3</b> Geometrical comparison with Least Squares</a></li>
+<li class="chapter" data-level="13.4" data-path="pca.html"><a href="pca.html#covariance-or-correlation-matrix"><i class="fa fa-check"></i><b>13.4</b> Covariance or Correlation Matrix?</a></li>
+<li class="chapter" data-level="13.5" data-path="pca.html"><a href="pca.html#pca-in-r"><i class="fa fa-check"></i><b>13.5</b> PCA in R</a>
+<ul>
+<li class="chapter" data-level="13.5.1" data-path="pca.html"><a href="pca.html#covariance-pca"><i class="fa fa-check"></i><b>13.5.1</b> Covariance PCA</a></li>
+<li class="chapter" data-level="13.5.2" data-path="pca.html"><a href="pca.html#principal-components-loadings-and-variance-explained"><i class="fa fa-check"></i><b>13.5.2</b> Principal Components, Loadings, and Variance Explained</a></li>
+<li class="chapter" data-level="13.5.3" data-path="pca.html"><a href="pca.html#scores-and-pca-projection"><i class="fa fa-check"></i><b>13.5.3</b> Scores and PCA Projection</a></li>
+<li class="chapter" data-level="13.5.4" data-path="pca.html"><a href="pca.html#pca-functions-in-r"><i class="fa fa-check"></i><b>13.5.4</b> PCA functions in R</a></li>
+<li class="chapter" data-level="13.5.5" data-path="pca.html"><a href="pca.html#the-biplot"><i class="fa fa-check"></i><b>13.5.5</b> The Biplot</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="pca.html"><a href="pca.html#variable-clustering-with-pca"><i class="fa fa-check"></i><b>13.6</b> Variable Clustering with PCA</a>
+<ul>
+<li class="chapter" data-level="13.6.1" data-path="pca.html"><a href="pca.html#correlation-pca"><i class="fa fa-check"></i><b>13.6.1</b> Correlation PCA</a></li>
+<li class="chapter" data-level="13.6.2" data-path="pca.html"><a href="pca.html#which-projection-is-better"><i class="fa fa-check"></i><b>13.6.2</b> Which Projection is Better?</a></li>
+<li class="chapter" data-level="13.6.3" data-path="pca.html"><a href="pca.html#beware-of-biplots"><i class="fa fa-check"></i><b>13.6.3</b> Beware of biplots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="pcaapp.html"><a href="pcaapp.html"><i class="fa fa-check"></i><b>14</b> Applications of Principal Components</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="pcaapp.html"><a href="pcaapp.html#dimension-reduction"><i class="fa fa-check"></i><b>14.1</b> Dimension reduction</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="pcaapp.html"><a href="pcaapp.html#feature-selection"><i class="fa fa-check"></i><b>14.1.1</b> Feature Selection</a></li>
+<li class="chapter" data-level="14.1.2" data-path="pcaapp.html"><a href="pcaapp.html#feature-extraction"><i class="fa fa-check"></i><b>14.1.2</b> Feature Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="pcaapp.html"><a href="pcaapp.html#exploratory-analysis"><i class="fa fa-check"></i><b>14.2</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="pcaapp.html"><a href="pcaapp.html#uk-food-consumption"><i class="fa fa-check"></i><b>14.2.1</b> UK Food Consumption</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="pcaapp.html"><a href="pcaapp.html#fifa-soccer-players"><i class="fa fa-check"></i><b>14.3</b> FIFA Soccer Players</a></li>
+<li class="chapter" data-level="14.4" data-path="pcaapp.html"><a href="pcaapp.html#cancer-genetics"><i class="fa fa-check"></i><b>14.4</b> Cancer Genetics</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="pcaapp.html"><a href="pcaapp.html#computing-the-pca"><i class="fa fa-check"></i><b>14.4.1</b> Computing the PCA</a></li>
+<li class="chapter" data-level="14.4.2" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package"><i class="fa fa-check"></i><b>14.4.2</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.3" data-path="pcaapp.html"><a href="pcaapp.html#d-plot-with-package-1"><i class="fa fa-check"></i><b>14.4.3</b> 3D plot with  package</a></li>
+<li class="chapter" data-level="14.4.4" data-path="pcaapp.html"><a href="pcaapp.html#variance-explained"><i class="fa fa-check"></i><b>14.4.4</b> Variance explained</a></li>
+<li class="chapter" data-level="14.4.5" data-path="pcaapp.html"><a href="pcaapp.html#using-correlation-pca"><i class="fa fa-check"></i><b>14.4.5</b> Using Correlation PCA</a></li>
+<li class="chapter" data-level="14.4.6" data-path="pcaapp.html"><a href="pcaapp.html#range-standardization-as-an-alternative-to-covariance-pca"><i class="fa fa-check"></i><b>14.4.6</b> Range standardization as an alternative to covariance PCA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="svd.html"><a href="svd.html"><i class="fa fa-check"></i><b>15</b> The Singular Value Decomposition (SVD)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="svd.html"><a href="svd.html#resolving-a-matrix-into-components"><i class="fa fa-check"></i><b>15.1</b> Resolving a Matrix into Components</a></li>
+<li class="chapter" data-level="15.2" data-path="svd.html"><a href="svd.html#data-compression"><i class="fa fa-check"></i><b>15.2</b> Data Compression</a></li>
+<li class="chapter" data-level="15.3" data-path="svd.html"><a href="svd.html#noise-reduction"><i class="fa fa-check"></i><b>15.3</b> Noise Reduction</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="svdapp.html"><a href="svdapp.html"><i class="fa fa-check"></i><b>16</b> Applications of SVD</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="svdapp.html"><a href="svdapp.html#tm"><i class="fa fa-check"></i><b>16.1</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="svdapp.html"><a href="svdapp.html#note-about-rows-vs.-columns"><i class="fa fa-check"></i><b>16.1.1</b> Note About Rows vs. Columns</a></li>
+<li class="chapter" data-level="16.1.2" data-path="svdapp.html"><a href="svdapp.html#term-weighting"><i class="fa fa-check"></i><b>16.1.2</b> Term Weighting</a></li>
+<li class="chapter" data-level="16.1.3" data-path="svdapp.html"><a href="svdapp.html#other-considerations"><i class="fa fa-check"></i><b>16.1.3</b> Other Considerations</a></li>
+<li class="chapter" data-level="16.1.4" data-path="svdapp.html"><a href="svdapp.html#latent-semantic-indexing"><i class="fa fa-check"></i><b>16.1.4</b> Latent Semantic Indexing</a></li>
+<li class="chapter" data-level="16.1.5" data-path="svdapp.html"><a href="svdapp.html#example"><i class="fa fa-check"></i><b>16.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="svdapp.html"><a href="svdapp.html#rappasvd"><i class="fa fa-check"></i><b>16.2</b> Image Compression</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="svdapp.html"><a href="svdapp.html#image-data-in-r"><i class="fa fa-check"></i><b>16.2.1</b> Image data in R</a></li>
+<li class="chapter" data-level="16.2.2" data-path="svdapp.html"><a href="svdapp.html#computing-the-svd-of-dr.-rappa"><i class="fa fa-check"></i><b>16.2.2</b> Computing the SVD of Dr. Rappa</a></li>
+<li class="chapter" data-level="16.2.3" data-path="svdapp.html"><a href="svdapp.html#the-noise"><i class="fa fa-check"></i><b>16.2.3</b> The Noise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="fa.html"><a href="fa.html"><i class="fa fa-check"></i><b>17</b> Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="fa.html"><a href="fa.html#assumptions-of-factor-analysis"><i class="fa fa-check"></i><b>17.1</b> Assumptions of Factor Analysis</a></li>
+<li class="chapter" data-level="17.2" data-path="fa.html"><a href="fa.html#determining-factorability"><i class="fa fa-check"></i><b>17.2</b> Determining Factorability</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="fa.html"><a href="fa.html#visual-examination-of-correlation-matrix"><i class="fa fa-check"></i><b>17.2.1</b> Visual Examination of Correlation Matrix</a></li>
+<li class="chapter" data-level="17.2.2" data-path="fa.html"><a href="fa.html#barletts-sphericity-test"><i class="fa fa-check"></i><b>17.2.2</b> Barlett’s Sphericity Test</a></li>
+<li class="chapter" data-level="17.2.3" data-path="fa.html"><a href="fa.html#kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy"><i class="fa fa-check"></i><b>17.2.3</b> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</a></li>
+<li class="chapter" data-level="17.2.4" data-path="fa.html"><a href="fa.html#significant-factor-loadings"><i class="fa fa-check"></i><b>17.2.4</b> Significant factor loadings</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="fa.html"><a href="fa.html#communalities"><i class="fa fa-check"></i><b>17.3</b> Communalities</a></li>
+<li class="chapter" data-level="17.4" data-path="fa.html"><a href="fa.html#number-of-factors"><i class="fa fa-check"></i><b>17.4</b> Number of Factors</a></li>
+<li class="chapter" data-level="17.5" data-path="fa.html"><a href="fa.html#rotation-of-factors"><i class="fa fa-check"></i><b>17.5</b> Rotation of Factors</a></li>
+<li class="chapter" data-level="17.6" data-path="fa.html"><a href="fa.html#fa-apps"><i class="fa fa-check"></i><b>17.6</b> Methods of Factor Analysis</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="fa.html"><a href="fa.html#pca-rotations"><i class="fa fa-check"></i><b>17.6.1</b> PCA Rotations</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="fa.html"><a href="fa.html#case-study-personality-tests"><i class="fa fa-check"></i><b>17.7</b> Case Study: Personality Tests</a>
+<ul>
+<li class="chapter" data-level="17.7.1" data-path="fa.html"><a href="fa.html#raw-pca-factors"><i class="fa fa-check"></i><b>17.7.1</b> Raw PCA Factors</a></li>
+<li class="chapter" data-level="17.7.2" data-path="fa.html"><a href="fa.html#rotated-principal-components"><i class="fa fa-check"></i><b>17.7.2</b> Rotated Principal Components</a></li>
+<li class="chapter" data-level="17.7.3" data-path="fa.html"><a href="fa.html#visualizing-rotation-via-biplots"><i class="fa fa-check"></i><b>17.7.3</b> Visualizing Rotation via BiPlots</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="otherdimred.html"><a href="otherdimred.html"><i class="fa fa-check"></i><b>18</b> Dimension Reduction for Visualization</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="otherdimred.html"><a href="otherdimred.html#multidimensional-scaling"><i class="fa fa-check"></i><b>18.1</b> Multidimensional Scaling</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-iris-data"><i class="fa fa-check"></i><b>18.1.1</b> MDS of Iris Data</a></li>
+<li class="chapter" data-level="18.1.2" data-path="otherdimred.html"><a href="otherdimred.html#mds-of-leukemia-dataset"><i class="fa fa-check"></i><b>18.1.2</b> MDS of Leukemia dataset</a></li>
+<li class="chapter" data-level="" data-path="otherdimred.html"><a href="otherdimred.html#a-note-on-standardization"><i class="fa fa-check"></i>A note on standardization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="sna.html"><a href="sna.html"><i class="fa fa-check"></i><b>19</b> Social Network Analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="sna.html"><a href="sna.html#working-with-network-data"><i class="fa fa-check"></i><b>19.1</b> Working with Network Data</a></li>
+<li class="chapter" data-level="19.2" data-path="sna.html"><a href="sna.html#network-visualization---igraph-package"><i class="fa fa-check"></i><b>19.2</b> Network Visualization - <code>igraph</code> package</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="sna.html"><a href="sna.html#layout-algorithms-for-igraph-package"><i class="fa fa-check"></i><b>19.2.1</b> Layout algorithms for <code>igraph</code> package</a></li>
+<li class="chapter" data-level="19.2.2" data-path="sna.html"><a href="sna.html#adding-attribute-information-to-your-visualization"><i class="fa fa-check"></i><b>19.2.2</b> Adding attribute information to your visualization</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="sna.html"><a href="sna.html#package-networkd3"><i class="fa fa-check"></i><b>19.3</b> Package <code>networkD3</code></a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="sna.html"><a href="sna.html#preparing-the-data-for-networkd3"><i class="fa fa-check"></i><b>19.3.1</b> Preparing the data for <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.2" data-path="sna.html"><a href="sna.html#creating-an-interactive-visualization-with-networkd3"><i class="fa fa-check"></i><b>19.3.2</b> Creating an Interactive Visualization with <code>networkD3</code></a></li>
+<li class="chapter" data-level="19.3.3" data-path="sna.html"><a href="sna.html#saving-your-interactive-visualization-to-.html"><i class="fa fa-check"></i><b>19.3.3</b> Saving your Interactive Visualization to .html</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Clustering</b></span></li>
+<li class="chapter" data-level="20" data-path="clusintro.html"><a href="clusintro.html"><i class="fa fa-check"></i><b>20</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="clusintro.html"><a href="clusintro.html#mathematical-setup"><i class="fa fa-check"></i><b>20.1</b> Mathematical Setup</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="clusintro.html"><a href="clusintro.html#data"><i class="fa fa-check"></i><b>20.1.1</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="clusintro.html"><a href="clusintro.html#the-number-of-clusters-k"><i class="fa fa-check"></i><b>20.2</b> The Number of Clusters, <span class="math inline">\(k\)</span></a></li>
+<li class="chapter" data-level="20.3" data-path="clusintro.html"><a href="clusintro.html#partitioning-of-graphs-and-networks"><i class="fa fa-check"></i><b>20.3</b> Partitioning of Graphs and Networks</a></li>
+<li class="chapter" data-level="20.4" data-path="clusintro.html"><a href="clusintro.html#history-of-data-clustering"><i class="fa fa-check"></i><b>20.4</b> History of Data Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="clusteralgos.html"><a href="clusteralgos.html"><i class="fa fa-check"></i><b>21</b> Algorithms for Data Clustering</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="clusteralgos.html"><a href="clusteralgos.html#hc"><i class="fa fa-check"></i><b>21.1</b> Hierarchical Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="clusteralgos.html"><a href="clusteralgos.html#agglomerative-hierarchical-clustering"><i class="fa fa-check"></i><b>21.1.1</b> Agglomerative Hierarchical Clustering</a></li>
+<li class="chapter" data-level="21.1.2" data-path="clusteralgos.html"><a href="clusteralgos.html#principal-direction-divisive-partitioning-pddp"><i class="fa fa-check"></i><b>21.1.2</b> Principal Direction Divisive Partitioning (PDDP)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeanshistory"><i class="fa fa-check"></i><b>21.2</b> Iterative Partitional Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="clusteralgos.html"><a href="clusteralgos.html#early-partitional-algorithms"><i class="fa fa-check"></i><b>21.2.1</b> Early Partitional Algorithms</a></li>
+<li class="chapter" data-level="21.2.2" data-path="clusteralgos.html"><a href="clusteralgos.html#kmeans"><i class="fa fa-check"></i><b>21.2.2</b> <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="21.2.3" data-path="clusteralgos.html"><a href="clusteralgos.html#the-expectation-maximization-em-clustering-algorithm"><i class="fa fa-check"></i><b>21.2.3</b> The Expectation-Maximization (EM) Clustering Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="clusteralgos.html"><a href="clusteralgos.html#density-search-algorithms"><i class="fa fa-check"></i><b>21.3</b> Density Search Algorithms</a>
+<ul>
+<li class="chapter" data-level="21.3.1" data-path="clusteralgos.html"><a href="clusteralgos.html#density-based-spacial-clustering-of-applications-with-noise-dbscan"><i class="fa fa-check"></i><b>21.3.1</b> Density Based Spacial Clustering of Applications with Noise (DBSCAN)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="clusteralgos.html"><a href="clusteralgos.html#conclusion"><i class="fa fa-check"></i><b>21.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="chap1-5.html"><a href="chap1-5.html"><i class="fa fa-check"></i><b>22</b> Algorithms for Graph Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="chap1-5.html"><a href="chap1-5.html#spectral"><i class="fa fa-check"></i><b>22.1</b> Spectral Clustering</a></li>
+<li class="chapter" data-level="22.2" data-path="chap1-5.html"><a href="chap1-5.html#fiedler-partitioning"><i class="fa fa-check"></i><b>22.2</b> Fiedler Partitioning</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="chap1-5.html"><a href="chap1-5.html#linear-algebraic-motivation-for-the-fiedler-vector"><i class="fa fa-check"></i><b>22.2.1</b> Linear Algebraic Motivation for the Fiedler vector</a></li>
+<li class="chapter" data-level="22.2.2" data-path="chap1-5.html"><a href="chap1-5.html#graph-cuts"><i class="fa fa-check"></i><b>22.2.2</b> Graph Cuts</a></li>
+<li class="chapter" data-level="22.2.3" data-path="chap1-5.html"><a href="chap1-5.html#pic"><i class="fa fa-check"></i><b>22.2.3</b> Power Iteration Clustering</a></li>
+<li class="chapter" data-level="22.2.4" data-path="chap1-5.html"><a href="chap1-5.html#modularity"><i class="fa fa-check"></i><b>22.2.4</b> Clustering via Modularity Maximization</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering"><i class="fa fa-check"></i><b>22.3</b> Stochastic Clustering</a>
+<ul>
+<li class="chapter" data-level="22.3.1" data-path="chap1-5.html"><a href="chap1-5.html#stochastic-clustering-algorithm-sca"><i class="fa fa-check"></i><b>22.3.1</b> Stochastic Clustering Algorithm (SCA)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>23</b> Cluster Validation</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="validation.html"><a href="validation.html#internal-validity-metrics"><i class="fa fa-check"></i><b>23.1</b> Internal Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.1.1" data-path="validation.html"><a href="validation.html#common-measures-of-cohesion-and-separation"><i class="fa fa-check"></i><b>23.1.1</b> Common Measures of Cohesion and Separation</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="validation.html"><a href="validation.html#external"><i class="fa fa-check"></i><b>23.2</b> External Validity Metrics</a>
+<ul>
+<li class="chapter" data-level="23.2.1" data-path="validation.html"><a href="validation.html#accuracy"><i class="fa fa-check"></i><b>23.2.1</b> Accuracy</a></li>
+<li class="chapter" data-level="23.2.2" data-path="validation.html"><a href="validation.html#entropy"><i class="fa fa-check"></i><b>23.2.2</b> Entropy</a></li>
+<li class="chapter" data-level="23.2.3" data-path="validation.html"><a href="validation.html#purity"><i class="fa fa-check"></i><b>23.2.3</b> Purity</a></li>
+<li class="chapter" data-level="23.2.4" data-path="validation.html"><a href="validation.html#mutual-information-mi-and-normalized-mutual-information-nmi"><i class="fa fa-check"></i><b>23.2.4</b> Mutual Information (MI) and <br> Normalized Mutual Information (NMI)</a></li>
+<li class="chapter" data-level="23.2.5" data-path="validation.html"><a href="validation.html#other-external-measures-of-validity"><i class="fa fa-check"></i><b>23.2.5</b> Other External Measures of Validity</a></li>
+<li class="chapter" data-level="23.2.6" data-path="validation.html"><a href="validation.html#summary-table"><i class="fa fa-check"></i><b>23.2.6</b> Summary Table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="findk.html"><a href="findk.html"><i class="fa fa-check"></i><b>24</b> Determining the Number of Clusters <span class="math inline">\(k\)</span></a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="findk.html"><a href="findk.html#methods-based-on-cluster-validity-stopping-rules"><i class="fa fa-check"></i><b>24.1</b> Methods based on Cluster Validity (Stopping Rules)</a></li>
+<li class="chapter" data-level="24.2" data-path="findk.html"><a href="findk.html#sum-squared-error-sse-cohesion-plots"><i class="fa fa-check"></i><b>24.2</b> Sum Squared Error (SSE) Cohesion Plots</a>
+<ul>
+<li class="chapter" data-level="24.2.1" data-path="findk.html"><a href="findk.html#cosine-cohesion-plots-for-text-data"><i class="fa fa-check"></i><b>24.2.1</b> Cosine-Cohesion Plots for Text Data</a></li>
+<li class="chapter" data-level="24.2.2" data-path="findk.html"><a href="findk.html#ray-and-turis-method"><i class="fa fa-check"></i><b>24.2.2</b> Ray and Turi’s Method</a></li>
+<li class="chapter" data-level="24.2.3" data-path="findk.html"><a href="findk.html#the-gap-statistic"><i class="fa fa-check"></i><b>24.2.3</b> The Gap Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="24.3" data-path="findk.html"><a href="findk.html#perroncluster"><i class="fa fa-check"></i><b>24.3</b> Graph Methods Based on Eigenvalues <br> (Perron Cluster Analysis)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Linear Algebra for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fa" class="section level1" number="17">
+<h1><span class="header-section-number">Chapter 17</span> Factor Analysis</h1>
+<p>Factor Analysis is about looking for underlying <em>relationships</em> or <em>associations</em>. In that way, factor analysis is a correlational study of variables, aiming to group or cluster variables along dimensions. It may also be used to provide an estimate (factor score) of a latent construct which is a linear combination of variables. For example, a standardized test might ask hundreds of questions on a variety of quantitative and verbal subjects. Each of these questions could be viewed as a variable. However, the quantitative questions collectively are meant to measure some <em>latent</em> factor, that is the individual’s <em>quantitative reasoning</em>. A Factor Analysis might be able to reveal these two latent factors (quantitative reasoning and verbal ability) and then also provide an estimate (score) for each individual on each factor.</p>
+<p>Any attempt to use factor analysis to summarize or reduce a set to data should be based on a conceptual foundation or hypothesis. It should be remembered that factor analysis will produce factors for most sets of data. Thus, if you simply analyze a large number of variables in the hopes that the technique will “figure it out,” your results may look as though they are grasping at straws. The quality or meaning/interpretation of the derived factors is best when related to a conceptual foundation that existed prior to the analysis.</p>
+<div id="assumptions-of-factor-analysis" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Assumptions of Factor Analysis</h2>
+<ol>
+<li>
+No outliers in the data set
+<li>
+Adequate sample size
+<ul>
+<li>
+As a rule of thumb, maintain a ratio of variables to factors of at least 3 (some say 5). This depends on the application.
+<li>
+You should have at least 10 observations for each variable (some say 20). This often depends on what value of factor loading you want to declare as significant. See Table <a href="fa.html#tab:factorsig">17.2</a> for the details on this.
+</ul>
+<li>
+No perfect multicollinearity
+<li>
+Homoskedasticity <em>not</em> required between variables (all variances <em>not</em> required to be equal)
+<li>
+Linearity of variables desired - only models linear correlation between variables
+<li>
+Interval data (as opposed to nominal)
+<li>
+Measurement error on the variables/observations has constant variance and is, on average, 0
+<li>
+Normality is not required
+</ol>
+</div>
+<div id="determining-factorability" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> Determining Factorability</h2>
+<p>Before we even begin the process of factor analysis, we have to do some preliminary work to determine whether or not the data even lends itself to this technique. If none of our variables are correlated, then we cannot group them together in any meaningful way! Bartlett’s Sphericity Test and the KMO index are two statistical tests for whether or not a set of variables can be factored. These tests <em>do not</em> provide information about the appropriate number of factors, only whether or not such factors even exist.</p>
+<div id="visual-examination-of-correlation-matrix" class="section level3" number="17.2.1">
+<h3><span class="header-section-number">17.2.1</span> Visual Examination of Correlation Matrix</h3>
+<p>Depending on how many variables you are working with, you may be able to determine whether or not to proceed with factor analysis by simply examining the correlation matrix. With this examination, we are looking for two things:</p>
+<ol style="list-style-type: decimal">
+<li>Correlations that are significant at the 0.01 level of significance. At least half of the correlations should be significant in order to proceed to the next step.</li>
+<li>Correlations are “sufficient” to justify applying factor analysis. As a rule of thumb, at least half of the correlations should be greater than 0.30.</li>
+</ol>
+</div>
+<div id="barletts-sphericity-test" class="section level3" number="17.2.2">
+<h3><span class="header-section-number">17.2.2</span> Barlett’s Sphericity Test</h3>
+<p>Barlett’s sphericity test checks if the observed correlation matrix is significantly different from the identity matrix. Recall that the correlation of two variables is equal to 0 if and only if they are orthogonal (and thus completely uncorrelated). When this is the case, we cannot reduce the number of variables any further and neither PCA nor any other flavor of factor analysis will be able to compress the information reliably into fewer dimensions. For Barlett’s test, the null hypothesis is:
+<span class="math display">\[H_0 = \mbox{ The variables are orthogonal,} \]</span>
+which implies that there are no underlying factors to be uncovered. Obviously, we must be able to reject this hypothesis for a meaningful factor model.</p>
+</div>
+<div id="kaiser-meyer-olkin-kmo-measure-of-sampling-adequacy" class="section level3" number="17.2.3">
+<h3><span class="header-section-number">17.2.3</span> Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy</h3>
+<p>The goal of the Kaiser-Meyer-Olkin (KMO) measure of sampling adequacy is similar to that of Bartlett’s test in that it checks if we can factorize the original variables efficiently. However, the KMO measure is based on the idea of <em>partial correlation</em> <span class="citation"><a href="#ref-kmo" role="doc-biblioref">[1]</a></span>. The correlation matrix is always the starting point. We know that the variables are more or less correlated, but the correlation between two variables can be influenced by the others. So, we use the partial correlation in order to measure the relation between two variables by removing the effect of the remaining variables. The KMO index compares the raw values of correlations between variables and those of the partial correlations. If the KMO index is high (<span class="math inline">\(\approx 1\)</span>), then PCA can act efficiently; if the KMO index is low (<span class="math inline">\(\approx 0\)</span>), then PCA is not relevant. Generally a KMO index greater than 0.5 is considered acceptable to proceed with factor analysis. Table <a href="fa.html#tab:KMO">17.1</a> contains the information about interpretting KMO results that was provided in the original 1974 paper.</p>
+<table>
+<tr>
+<td>
+KMO value
+<td>
+Degree of <br> Common Variance
+</tr>
+<tr>
+<td>
+0.90 to 1.00
+<td>
+Marvelous
+</tr>
+<tr>
+<td>
+0.80 to 0.89
+<td>
+Middling
+</tr>
+<tr>
+<td>
+0.60 to 0.69
+<td>
+Mediocre
+</tr>
+<tr>
+<td>
+0.50 to 0.59
+<td>
+Miserable
+</tr>
+<tr>
+<td>
+0.00 to 0.49
+<td>
+Don’t Factor
+</tr>
+</table>
+<caption>
+<span id="tab:KMO">Table 17.1: </span> Interpretting the KMO value. <span class="citation"><a href="#ref-kmo" role="doc-biblioref">[1]</a></span>
+</caption>
+<p>So, for example, if you have a survey with 100 questions/variables and you obtained a KMO index of 0.61, this tells you that the degree of common variance between your variables is mediocre, on the border of being miserable. While factor analysis may still be appropriate in this case, you will find that such an analysis will not account for a substantial amount of variance in your data. It may still account for enough to draw some meaningful conclusions, however.</p>
+</div>
+<div id="significant-factor-loadings" class="section level3" number="17.2.4">
+<h3><span class="header-section-number">17.2.4</span> Significant factor loadings</h3>
+<p>When performing principal factor analysis on the correlation matrix, we have some clear guidelines for what kind of factor loadings will be deemed “significant” from a statistical viewpoint based on sample size. Table <a href="fa.html#tab:factorsig">17.2</a> provides those limits.</p>
+<table>
+<tr>
+<td>
+Sample Size<br> Needed for Significance
+<td>
+Factor Loading
+</tr>
+<tr>
+<td>
+350
+<td>
+.30
+</tr>
+<tr>
+<td>
+250
+<td>
+.35
+</tr>
+<tr>
+<td>
+200
+<td>
+.40
+</tr>
+<tr>
+<td>
+150
+<td>
+.45
+</tr>
+<tr>
+<td>
+120
+<td>
+.50
+</tr>
+<tr>
+<td>
+100
+<td>
+.55
+</tr>
+<tr>
+<td>
+85
+<td>
+.60
+</tr>
+<tr>
+<td>
+70
+<td>
+.65
+</tr>
+<tr>
+<td>
+60
+<td>
+.70
+</tr>
+<tr>
+<td>
+50
+<td>
+.75
+</tr>
+</table>
+<caption>
+<span id="tab:factorsig">Table 17.2: </span> For principal component factor analysis on the correlation matrix, the factor loadings provide the correlations of each variable with each factor. This table is a guide for the sample sizes necessary to consider a factor loading significant. For example, in a sample of 100, factor loadings of 0.55 are considered significant. In a sample size of 70, however, factor loadings must reach 0.65 to be considered significant. Significance based on 0.05 level, a power level of 80 percent. Source: <em>Computations made with SOLO Power Analysis, BMDP Statistical Software, Inc., 1993</em>
+</caption>
+</div>
+</div>
+<div id="communalities" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> Communalities</h2>
+<p>You can think of <strong>communalities</strong> as multiple <span class="math inline">\(R^2\)</span> values for regression models predicting the variables of interest from the factors (the reduced number of factors that your model uses). The communality for a given variable can be interpreted as the proportion of variation in that variable explained by the chosen factors.</p>
+<p>Take for example the SAS output for factor analysis on the Iris dataset shown in Figure <a href="#fig:factorOUT"><strong>??</strong></a>. The factor model (which settles on only one single factor) explains 98% of the variability in <em>petal length</em>. In other words, if you were to use this factor in a simple linear regression model to predict petal length, the associated <span class="math inline">\(R^2\)</span> value should be 0.98. Indeed you can verify that this is true. The results indicate that this single factor model will do the best job explaining variability in <em>petal length, petal width, and sepal length</em>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-128"></span>
+<img src="figs/factorOUT.png" alt="SAS output for PROC FACTOR using Iris Dataset" width="60%" />
+<p class="caption">
+Figure 17.1: SAS output for PROC FACTOR using Iris Dataset
+</p>
+</div>
+<p>One assessment of how well a factor model is doing can be obtained from the communalities. What you want to see is values that are close to one. This would indicate that the model explains most of the variation for those variables. In this case, the model does better for some variables than it does for others.</p>
+<p>If you take all of the communality values, <span class="math inline">\(c_i\)</span> and add them up you can get a total communality value:</p>
+<p><span class="math display">\[\sum_{i=1}^p \widehat{c_i} = \sum_{i=1}^k \widehat{\lambda_i}\]</span></p>
+<p>Here, the total communality is 2.918. The proportion of the total variation explained by the three factors is
+<span class="math display">\[\frac{2.918}{4}\approx 0.75.\]</span>
+The denominator in that fraction comes from the fact that the correlation matrix is used by default and our dataset has 4 variables. Standardized variables have variance of 1 so the total variance is 4. This gives us the percentage of variation explained in our model. This might be looked at as an overall assessment of the performance of the model. The individual communalities tell how well the model is working for the individual variables, and the total communality gives an overall assessment of performance.</p>
+</div>
+<div id="number-of-factors" class="section level2" number="17.4">
+<h2><span class="header-section-number">17.4</span> Number of Factors</h2>
+<p>A common rule of thumb for determining the number of factors in principal factor analysis on the correlation matrix is to only choose factors with associated eigenvalue (or variance) greater than 1. Since the correlation matrix implies the use of standardized data, each individual variable going in has a variance of 1. So this rule of thumb simply states that we want our factors to explain more variance than any individual variable from our dataset. If this rule of thumb produces too many factors, it is reasonable to raise that limiting condition only if the number of factors still explains a reasonable amount of the total variance.</p>
+</div>
+<div id="rotation-of-factors" class="section level2" number="17.5">
+<h2><span class="header-section-number">17.5</span> Rotation of Factors</h2>
+<p>The purpose of rotating factors is to make them more interpretable. If factor loadings are relatively constant across variables, they don’t help us find latent structure or clusters of variables. This will often happen in PCA when the goal is only to find directions of maximal variance. Thus, once the number of components/factors is fixed and a projection of the data onto a lower-dimensional subspace is done, we are free to rotate the axes of the result without losing any variance. The axes will no longer be principal components! The amount of variance explained by each factor will change, but the total amount of variance in the reduced data will stay the same because all we have done is rotate the basis. The goal is to rotate the factors in such a way that the loading matrix develops a more <em>sparse</em> structure. A sparse loading matrix (one with lots of very small entries and few large entries) is far easier to interpret in terms of finding latent variable groups.</p>
+<p>The two most common rotations are <strong>varimax</strong> and <strong>quartimax</strong>. The goal of <em>varimax</em> rotation is to maximize the squared factor loadings in each factor, i.e. to simplify the columns of the factor matrix. In each factor, the large loadings are increased and the small loadings are decreased so that each factor has only a few variables with large loadings. In contrast, the goal of <em>quartimax</em> rotation is to simply the rows of the factor matrix. In each variable the large loadings are increased and the small loadings are decreased so that each variable will only load on a few factors. Which of these factor rotations is appropriate</p>
+
+</div>
+<div id="fa-apps" class="section level2" number="17.6">
+<h2><span class="header-section-number">17.6</span> Methods of Factor Analysis</h2>
+<p>Factor Analysis is much like PCA in that it attempts to find some latent variables (linear combinations of original variables) which can describe large portions of the total variance in data. There are numerous ways to compute factors for factor analysis, the two most common methods are:</p>
+<ol style="list-style-type: decimal">
+<li>The <em>principal axis</em> method (i.e. PCA) and</li>
+<li>Maximum Likelihood Estimation.</li>
+</ol>
+<p>In fact, the default method for SAS’s PROC FACTOR with no additional options is merely PCA. For some reason, the scores and factors may be scaled differently, involving the standard deviations of each factor, but nonetheless, there is absolutely nothing different between PROC FACTOR defaults and PROC PRINCOMP.</p>
+<p>The difference between Factor Analysis and PCA is two-fold:</p>
+<ol style="list-style-type: decimal">
+<li>In factor analysis, the factors are usually rotated to obtain a more sparse (i.e. interpretable) structure <em>varimax</em> rotation is the most common rotation. Others include <em>promax</em>, and <em>quartimax</em>.)</li>
+<li>The factors try to only explain the “common variance” between variables. In other words, Factor Analysis tries to estimate how much of each variable’s variance is specific to that variable and not “covarying” (for lack of a better word) with any other variables. This specific variance is often subtracted from the diagonal of the covariance matrix before factors or components are found.</li>
+</ol>
+<p>We’ll talk more about the first difference than the second because it generally carries more advantages.</p>
+<div id="pca-rotations" class="section level3" number="17.6.1">
+<h3><span class="header-section-number">17.6.1</span> PCA Rotations</h3>
+<p>Let’s first talk about the motivation behind principal component rotations. Compare the following sets of (fabricated) factors, both using the variables from the iris dataset. Listed below are the loadings of each variable on two factors. Which set of factors is more easily interpretted?</p>
+<table>
+<tr>
+<td>
+Variable
+<td>
+P1
+<td>
+P2
+</tr>
+<tr>
+<td>
+Sepal.Length
+<td>
+-.3
+<td>
+.7
+</tr>
+–&gt;
+<tr>
+<td>
+Sepal.Width
+<td>
+-.5
+<td>
+.4
+</tr>
+–&gt;
+<tr>
+<td>
+Petal.Length
+<td>
+.7
+<td>
+.3
+</tr>
+–&gt;
+<tr>
+<td>
+Petal.Width
+<td>
+.4
+<td>
+-.5
+</tr>
+–&gt;
+</table>
+<caption>
+<span id="tab:irisone">Table 17.3: </span> Factor Loadings: Set 1
+</caption>
+<table>
+<tr>
+<td>
+Variable
+<td>
+F1
+<td>
+F2
+</tr>
+<tr>
+<td>
+Sepal.Length
+<td>
+0
+<td>
+.9
+</tr>
+<tr>
+<td>
+Sepal.Width
+<td>
+-.9
+<td>
+0
+</tr>
+<tr>
+<td>
+Petal.Length
+<td>
+.8
+<td>
+0
+</tr>
+<tr>
+<td>
+Petal.Width
+<td>
+.1
+<td>
+-.9
+</tr>
+</table>
+<caption>
+<span id="tab:iristwo">Table 17.4: </span> Factor Loadings: Set 2
+</caption>
+<p>The difference between these factors might be described as “sparsity.” Factor Set 2 has more zero loadings than Factor Set 1. It also has entries which are comparitively larger in magnitude. This makes Factor Set 2 much easier to interpret! Clearly F1 is dominated by the variables Sepal.Width (positively correlated) and Petal.Length (negatively correlated), whereas F2 is dominated by the variables Sepal.Length (positively) and Petal.Width (negatively). Factor interpretation doesn’t get much easier than that! With the first set of factors, the story is not so clear.</p>
+<p>This is the whole purpose of factor rotation, to increase the interpretability of factors by encouraging sparsity. Geometrically, factor rotation tries to rotate a given set of factors (like those derived from PCA) to be more closely aligned with the original variables once the dimensions of the space have been reduced and the variables have been pushed closer together in the factor space. Let’s take a look at the actual principal components from the iris data and then rotate them using a varimax rotation. In order to rotate the factors, we have to decide on some number of factors to use. If we rotated all 4 orthogonal components to find sparsity, we’d just end up with our original variables again!</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="fa.html#cb252-1" aria-hidden="true" tabindex="-1"></a>irispca <span class="ot">=</span> <span class="fu">princomp</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="at">scale=</span>T)</span></code></pre></div>
+<pre><code>## Warning: In princomp.default(iris[, 1:4], scale = T) :
+##  extra argument &#39;scale&#39; will be disregarded</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="fa.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(irispca)</span></code></pre></div>
+<pre><code>## Importance of components:
+##                           Comp.1     Comp.2     Comp.3      Comp.4
+## Standard deviation     2.0494032 0.49097143 0.27872586 0.153870700
+## Proportion of Variance 0.9246187 0.05306648 0.01710261 0.005212184
+## Cumulative Proportion  0.9246187 0.97768521 0.99478782 1.000000000</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="fa.html#cb256-1" aria-hidden="true" tabindex="-1"></a>irispca<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##              Comp.1 Comp.2 Comp.3 Comp.4
+## Sepal.Length  0.361  0.657  0.582  0.315
+## Sepal.Width          0.730 -0.598 -0.320
+## Petal.Length  0.857 -0.173        -0.480
+## Petal.Width   0.358        -0.546  0.754
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4
+## SS loadings      1.00   1.00   1.00   1.00
+## Proportion Var   0.25   0.25   0.25   0.25
+## Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="fa.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Since 2 components explain a large proportion of the variation, lets settle on those two:</span></span>
+<span id="cb258-2"><a href="fa.html#cb258-2" aria-hidden="true" tabindex="-1"></a>rotatedpca <span class="ot">=</span> <span class="fu">varimax</span>(irispca<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb258-3"><a href="fa.html#cb258-3" aria-hidden="true" tabindex="-1"></a>rotatedpca<span class="sc">$</span>loadings</span></code></pre></div>
+<pre><code>## 
+## Loadings:
+##              Comp.1 Comp.2
+## Sepal.Length  0.223  0.716
+## Sepal.Width  -0.229  0.699
+## Petal.Length  0.874       
+## Petal.Width   0.366       
+## 
+##                Comp.1 Comp.2
+## SS loadings      1.00   1.00
+## Proportion Var   0.25   0.25
+## Cumulative Var   0.25   0.50</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="fa.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Not a drastic amount of difference, but clearly an attempt has been made to encourage</span></span>
+<span id="cb260-2"><a href="fa.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sparsity in the vectors of loadings.</span></span>
+<span id="cb260-3"><a href="fa.html#cb260-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-4"><a href="fa.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: THE ROTATED FACTORS EXPLAIN THE SAME AMOUNT OF VARIANCE AS THE FIRST TWO PCS</span></span>
+<span id="cb260-5"><a href="fa.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="co"># AFTER PROJECTING THE DATA INTO TWO DIMENSIONS (THE BIPLOT) ALL WE DID WAS ROTATE THOSE</span></span>
+<span id="cb260-6"><a href="fa.html#cb260-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ORTHOGONAL AXIS. THIS CHANGES THE PROPORTION EXPLAINED BY *EACH* AXIS, BUT NOT THE TOTAL</span></span>
+<span id="cb260-7"><a href="fa.html#cb260-7" aria-hidden="true" tabindex="-1"></a><span class="co"># AMOUNT EXPLAINED BY THE TWO TOGETHER.</span></span>
+<span id="cb260-8"><a href="fa.html#cb260-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-9"><a href="fa.html#cb260-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The output from varimax can&#39;t tell you about proportion of variance in the original data</span></span>
+<span id="cb260-10"><a href="fa.html#cb260-10" aria-hidden="true" tabindex="-1"></a><span class="co"># because you didn&#39;t even tell it what the original data was!</span></span></code></pre></div>
+</div>
+</div>
+<div id="case-study-personality-tests" class="section level2" number="17.7">
+<h2><span class="header-section-number">17.7</span> Case Study: Personality Tests</h2>
+<p>In this example, we’ll use a publicly available dataset that describes personality traits of nearly
+Read in the Big5 Personality test dataset, which contains likert scale responses (five point scale where 1=Disagree, 3=Neutral, 5=Agree. 0 = missing) on 50 different questions in columns 8 through 57. The questions, labeled E1-E10 (E=extroversion), N1-N10 (N=neuroticism), A1-A10 (A=agreeableness), C1-C10 (C=conscientiousness), and O1-O10 (O=openness) all attempt to measure 5 key angles of human personality. The first 7 columns contain demographic information coded as follows:</p>
+<ol>
+<li>
+<strong>Race</strong> Chosen from a drop down menu.
+<ul>
+<li>
+1=Mixed Race
+<li>
+2=Arctic (Siberian, Eskimo)
+<li>
+3=Caucasian (European)
+<li>
+4=Caucasian (Indian)
+<li>
+5=Caucasian (Middle East)
+<li>
+6=Caucasian (North African, Other)
+<li>
+7=Indigenous Australian
+<li>
+8=Native American
+<li>
+9=North East Asian (Mongol, Tibetan, Korean Japanese, etc)
+<li>
+10=Pacific (Polynesian, Micronesian, etc)
+<li>
+11=South East Asian (Chinese, Thai, Malay, Filipino, etc)
+<li>
+12=West African, Bushmen, Ethiopian
+<li>
+13=Other (0=missed)
+</ul>
+<li>
+<strong>Age</strong> Entered as text (individuals reporting age &lt; 13 were not recorded)
+<li>
+<strong>Engnat</strong> Response to “is English your native language?”
+<ul>
+<li>
+1=yes
+<li>
+2=no
+<li>
+0=missing
+</ul>
+<li>
+<strong>Gender</strong> Chosen from a drop down menu
+<ul>
+<li>
+1=Male
+<li>
+2=Female
+<li>
+3=Other
+<li>
+0=missing
+</ul>
+<li>
+<strong>Hand</strong> “What hand do you use to write with?”
+<ul>
+<li>
+1=Right
+<li>
+2=Left
+<li>
+3=Both
+<li>
+0=missing
+</ul>
+</ol>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="fa.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">2</span>)</span>
+<span id="cb261-2"><a href="fa.html#cb261-2" aria-hidden="true" tabindex="-1"></a>big5 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/LinearAlgebra2021/Code/big5.csv&#39;</span>)</span></code></pre></div>
+<p>To perform the same analysis we did in SAS, we want to use Correlation PCA and rotate the axes with a varimax transformation. We will start by performing the PCA. We need to set the option <code>scale=T</code> to perform PCA on the correlation matrix rather than the default covariance matrix. We will only compute the first 5 principal components because we have 5 personality traits we are trying to measure. We could also compute more than 5 and take the number of components with eigenvalues &gt;1 to match the default output in SAS (without n=5 option).</p>
+<div id="raw-pca-factors" class="section level3" number="17.7.1">
+<h3><span class="header-section-number">17.7.1</span> Raw PCA Factors</h3>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="fa.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">5</span>)</span>
+<span id="cb262-2"><a href="fa.html#cb262-2" aria-hidden="true" tabindex="-1"></a>pca.out <span class="ot">=</span> <span class="fu">prcomp</span>(big5[,<span class="dv">8</span><span class="sc">:</span><span class="dv">57</span>], <span class="at">rank =</span> <span class="dv">5</span>, <span class="at">scale =</span> T)</span></code></pre></div>
+<p>Remember the only difference between the default PROC PRINCOMP output and the default PROC FACTOR output in SAS was the fact that the eigenvectors in PROC PRINCOMP were normalized to be unit vectors and the factor vectors in PROC FACTOR were those same eigenvectors scaled by the square roots of the eigenvalues. So we want to multiply each eigenvector column output in <code>pca.out$rotation</code> (recall this is the loading matrix or matrix of eigenvectors) by the square root of the corresponding eigenvalue given in <code>pca.out$sdev</code>. You’ll recall that multiplying a matrix by a diagonal matrix on the right has the effect of scaling the columns of the matrix. So we’ll just make a diagonal matrix, <span class="math inline">\(\textbf{S}\)</span> with diagonal elements from the <code>pca.out$sdev</code> vector and scale the columns of the <code>pca.out$rotation</code> matrix. Similarly, the coordinates of the data along each component then need to be <em>divided</em> by the standard deviation to cancel out this effect of lengthening the axis. So again we will multiply by a diagonal matrix to perform this scaling, but this time, we use the diagonal matrix <span class="math inline">\(\textbf{S}^{-1}=\)</span> <code>diag(1/(pca.out$sdev))</code>.<br />
+</p>
+<p>Matrix multiplication in R is performed with the <code>\%\*\%</code> operator.</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="fa.html#cb263-1" aria-hidden="true" tabindex="-1"></a>fact.loadings <span class="ot">=</span> pca.out<span class="sc">$</span>rotation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="sc">%*%</span> <span class="fu">diag</span>(pca.out<span class="sc">$</span>sdev[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb263-2"><a href="fa.html#cb263-2" aria-hidden="true" tabindex="-1"></a>fact.scores <span class="ot">=</span> pca.out<span class="sc">$</span>x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="sc">%*%</span><span class="fu">diag</span>(<span class="dv">1</span><span class="sc">/</span>pca.out<span class="sc">$</span>sdev[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb263-3"><a href="fa.html#cb263-3" aria-hidden="true" tabindex="-1"></a><span class="co"># PRINT OUT THE FIRST 5 ROWS OF EACH MATRIX FOR CONFIRMATION.</span></span>
+<span id="cb263-4"><a href="fa.html#cb263-4" aria-hidden="true" tabindex="-1"></a>fact.loadings[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##        [,1]     [,2]     [,3]     [,4]     [,5]
+## E1 -0.52057  0.27735 -0.29183  0.13456 -0.25072
+## E2  0.51025 -0.35942  0.26959 -0.14223  0.21649
+## E3 -0.70998  0.15791 -0.11623  0.21768 -0.11303
+## E4  0.58361 -0.20341  0.31433 -0.17833  0.22788
+## E5 -0.65751  0.31924 -0.16404  0.12496 -0.21810</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="fa.html#cb265-1" aria-hidden="true" tabindex="-1"></a>fact.scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]      [,4]      [,5]
+## [1,] -2.53286 -1.16617 0.276244  0.043229 -0.069518
+## [2,]  0.70216 -1.22761 1.095383  1.615919 -0.562371
+## [3,] -0.12575  1.33180 1.525208 -1.163062 -2.949501
+## [4,]  1.29926  1.17736 0.044168 -0.784411  0.148903
+## [5,] -0.37359  0.47716 0.292680  1.233652  0.406582</code></pre>
+<p>This should match the output from SAS and it does. Remember these columns are unique up to a sign, so you’ll see factor 4 does not have the same sign in both software outputs. This is not cause for concern.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-134"></span>
+<img src="factorOutput.png" alt="Default (Unrotated) Factor Loadings Output by SAS" width="60%" />
+<p class="caption">
+Figure 17.2: Default (Unrotated) Factor Loadings Output by SAS
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-135"></span>
+<img src="scoresOutput.png" alt="Default (Unrotated) Factor Scores Output by SAS" width="80%" />
+<p class="caption">
+Figure 17.3: Default (Unrotated) Factor Scores Output by SAS
+</p>
+</div>
+</div>
+<div id="rotated-principal-components" class="section level3" number="17.7.2">
+<h3><span class="header-section-number">17.7.2</span> Rotated Principal Components</h3>
+<p>The next task we may want to undertake is a rotation of the factor axes according to the varimax procedure. The most simple way to go about this is to use the <code>varimax()</code> function to find the optimal rotation of the eigenvectors in the matrix <code>pca.out$rotation</code>. The <code>varimax()</code> function outputs both the new set of axes in the matrix called <code>loadings</code> and the rotation matrix (<code>rotmat</code>) which performs the rotation from the original principal component axes to the new axes. (i.e. if <span class="math inline">\(\textbf{V}\)</span> contains the old axes as columns and <span class="math inline">\(\hat{\textbf{V}}\)</span> contains the new axes and <span class="math inline">\(\textbf{R}\)</span> is the rotation matrix then <span class="math inline">\(\hat{\textbf{V}} = \textbf{V}\textbf{R}\)</span>.) That rotation matrix can be used to perform the same rotation on the scores of the observations. If the matrix <span class="math inline">\(\textbf{U}\)</span> contains the scores for each observation, then the rotated scores <span class="math inline">\(\hat{\textbf{U}}\)</span> are found by <span class="math inline">\(\hat{\textbf{U}} = \textbf{U}\textbf{R}\)</span></p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="fa.html#cb267-1" aria-hidden="true" tabindex="-1"></a>varimax.out <span class="ot">=</span> <span class="fu">varimax</span>(fact.loadings)</span>
+<span id="cb267-2"><a href="fa.html#cb267-2" aria-hidden="true" tabindex="-1"></a>rotated.fact.loadings <span class="ot">=</span> fact.loadings <span class="sc">%*%</span> varimax.out<span class="sc">$</span>rotmat</span>
+<span id="cb267-3"><a href="fa.html#cb267-3" aria-hidden="true" tabindex="-1"></a>rotated.fact.scores <span class="ot">=</span> fact.scores <span class="sc">%*%</span> varimax.out<span class="sc">$</span>rotmat</span>
+<span id="cb267-4"><a href="fa.html#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="co"># PRINT OUT THE FIRST 5 ROWS OF EACH MATRIX FOR CONFIRMATION.</span></span>
+<span id="cb267-5"><a href="fa.html#cb267-5" aria-hidden="true" tabindex="-1"></a>rotated.fact.loadings[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<pre><code>##        [,1]       [,2]      [,3]        [,4]      [,5]
+## E1 -0.71232 -0.0489043  0.010596 -0.03206926  0.055858
+## E2  0.71592 -0.0031185  0.028946  0.03504236 -0.121241
+## E3 -0.66912 -0.2604049  0.131609  0.01704690  0.263679
+## E4  0.73332  0.1528552 -0.023367  0.00094685 -0.053219
+## E5 -0.74534 -0.0757539  0.100875 -0.07140722  0.218602</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="fa.html#cb269-1" aria-hidden="true" tabindex="-1"></a>rotated.fact.scores[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<pre><code>##          [,1]     [,2]     [,3]     [,4]       [,5]
+## [1,] -1.09083 -2.04516  1.40699 -0.38254  0.5998386
+## [2,]  0.85718 -0.19268  1.07708  2.03665 -0.2178616
+## [3,] -0.92344  2.58761  2.43566 -0.80840 -0.1833138
+## [4,]  0.61935  1.53087 -0.79225 -0.59901 -0.0064665
+## [5,] -0.39495 -0.10893 -0.24892  0.99744  0.9567712</code></pre>
+<p>And again we can see that these line up with our SAS Rotated output, <strong>however</strong> the order does not have to be the same! SAS conveniently reorders the columns according to the variance of the data along that new direction. Since we have not done that in R, the order of the columns is not the same! Factors 1 and 2 are the same in both outputs, but SAS Factor 3 = R Factor 4 and SAS Factor 5 = (-1)* R Factor 4. The coordinates are switched too so nothing changes in our interpretation. Remember, when you rotate factors, you no longer keep the notion that the “first vector” explains the most variance unless you reorder them so that is true (like SAS does).</p>
+<div class="figure" style="text-align: center"><span id="fig:rotloads"></span>
+<img src="RotatedLoadings.png" alt="Rotated Factor Loadings Output by SAS" width="60%" />
+<p class="caption">
+Figure 17.4: Rotated Factor Loadings Output by SAS
+</p>
+</div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="fa.html#cb271-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&#39;RotatedScores.png&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:rotscores"></span>
+<img src="RotatedScores.png" alt="Rotated Factor Scores Output by SAS" width="80%" />
+<p class="caption">
+Figure 17.5: Rotated Factor Scores Output by SAS
+</p>
+</div>
+</div>
+<div id="visualizing-rotation-via-biplots" class="section level3" number="17.7.3">
+<h3><span class="header-section-number">17.7.3</span> Visualizing Rotation via BiPlots</h3>
+<p>Let’s start with a peek at BiPlots of the first 2  of principal component loadings, prior to rotation. Notice that here I’m not going to bother with any scaling of the factor loadings as I’m not interested in forcing my output to look like SAS’s output. I’m also downsampling the observations because 20,000 is far to many to plot.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="fa.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
+<span id="cb272-2"><a href="fa.html#cb272-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb272-3"><a href="fa.html#cb272-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-137"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-137-1.png" alt="BiPlot of Projection onto PC1 and PC2" width="672" />
+<p class="caption">
+Figure 17.6: BiPlot of Projection onto PC1 and PC2
+</p>
+</div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="fa.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca.out<span class="sc">$</span>x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb273-2"><a href="fa.html#cb273-2" aria-hidden="true" tabindex="-1"></a>       pca.out<span class="sc">$</span>rotation[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb273-3"><a href="fa.html#cb273-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-138"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-138-1.png" alt="BiPlot of Projection onto PC3 and PC4" width="672" />
+<p class="caption">
+Figure 17.7: BiPlot of Projection onto PC3 and PC4
+</p>
+</div>
+<p>Let’s see what happens to these biplots after rotation:</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="fa.html#cb274-1" aria-hidden="true" tabindex="-1"></a>vmax <span class="ot">=</span> <span class="fu">varimax</span>(pca.out<span class="sc">$</span>rotation)</span>
+<span id="cb274-2"><a href="fa.html#cb274-2" aria-hidden="true" tabindex="-1"></a>newscores <span class="ot">=</span> pca.out<span class="sc">$</span>x<span class="sc">%*%</span>vmax<span class="sc">$</span>rotmat</span>
+<span id="cb274-3"><a href="fa.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(newscores[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
+<span id="cb274-4"><a href="fa.html#cb274-4" aria-hidden="true" tabindex="-1"></a>       vmax<span class="sc">$</span>loadings[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb274-5"><a href="fa.html#cb274-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
+<span id="cb274-6"><a href="fa.html#cb274-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 1&#39;</span>,</span>
+<span id="cb274-7"><a href="fa.html#cb274-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 2&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-139"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-139-1.png" alt="BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2" width="672" />
+<p class="caption">
+Figure 17.8: BiPlot of Projection onto Rotated Axes 1,2. Extroversion questions align with axis 1, Neuroticism with Axis 2
+</p>
+</div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="fa.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(newscores[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19719</span>,<span class="dv">1000</span>),<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb275-2"><a href="fa.html#cb275-2" aria-hidden="true" tabindex="-1"></a>       vmax<span class="sc">$</span>loadings[,<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb275-3"><a href="fa.html#cb275-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex=</span><span class="fu">c</span>(<span class="fl">0.2</span>,<span class="dv">1</span>),</span>
+<span id="cb275-4"><a href="fa.html#cb275-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&#39;Rotated Axis 3&#39;</span>,</span>
+<span id="cb275-5"><a href="fa.html#cb275-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">&#39;Rotated Axis 4&#39;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-140"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-140-1.png" alt="BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4." width="672" />
+<p class="caption">
+Figure 17.9: BiPlot of Projection onto Rotated Axes 3,4. Agreeableness questions align with axis 3, Openness with Axis 4.
+</p>
+</div>
+<p>After the rotation, we can see the BiPlots tell a more distinct story. The extroversion questions line up along rotated axes 1, neuroticism along rotated axes 2, and agreeableness and openness are reflected in rotated axes 3 and 4 respectively. The fifth rotated component can be confirmed to represent the last remaining category which is conscientiousness.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-kmo" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. F. Kaiser, <span>“An index of factorial simplicity,”</span> <em>Psychometrika</em>, 1974.</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="svdapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="otherdimred.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/shainarace/LinearAlgebra/edit/master/05-FA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/shainarace/LinearAlgebra/blob/master/05-FA.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"search": {
+"engine": "lunr"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -813,7 +813,7 @@ John\\ Sam\\ Elena\\ Jim\\ Eric\\ Helen
 <div class="definition">
 <p><span id="def:rowcol" class="definition"><strong>Definition 1.3  (Rows and Columns of a Matrix) </strong></span>To refer to entire rows or columns, a placeholder <span class="math inline">\(\star\)</span> is often used to represent the idea that we take <em>all</em> rows or columns after narrowing in on a given column or row respectively:</p>
 <ul>
-<li><p>To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span> (“$k^{th} row, <em>all</em> columns”)<br />
+<li><p>To refer to the <span class="math inline">\(k^{th}\)</span> row of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\arow{k}\)</span> (“<span class="math inline">\(k^{th}\)</span> row, <em>all</em> columns”)<br />
 </p></li>
 <li><p>Similarly, to refer to the <span class="math inline">\(k^{th}\)</span> column of <span class="math inline">\(\A\)</span> we will use the notation <span class="math inline">\(\acol{k}\)</span>.<br />
 </p></li>
@@ -916,6 +916,7 @@ Age
 70 &amp; 180 &amp; 21\end{matrix}\right)\]</span></p>
 <p>Element <span class="math inline">\(B_{42}=150\)</span> corresponds to the <em>weight</em> (second column) of <em>observation 4</em> (fourth row).</p>
 <p>The column <span class="math display">\[\bcol{3} = \left(\begin{matrix} 23\\30\\41\\27\\35\\25\\21 \end{matrix}\right)\]</span> corresponds to the variable <em>age</em> and the row <span class="math display">\[\brow{6} = \left(\begin{matrix} 68&amp;165&amp;25 \end{matrix}\right)\]</span> corresponds to the measurements for <em>observation 6</em>.</p>
+<p>A key point here is that both the variables and observations are vectors belonging to a vector space. Variables live in the “sample space” where each axis identifies an observation. Thus, since we had 7 observations in this data, we could consider the vectors <em>age</em>, <em>weight</em>, and <em>height</em> to be 3 lonely vectors in the <em>vastness</em> of 7-dimensional space. If a 4th variable, say <em>height_with_shoes</em> were to appear for these same observations, we could add a 4th vector to the crew. This vector would point in a direction very closer to <em>height</em> because the measurements are correlated. The cosine of the angle between those vectors (assuming the data has been centered) is, precisely, correlation (Pearson’s correlation, <span class="math inline">\(\rho\)</span>).</p>
 </div>
 <div class="exercise">
 <p><span id="exr:ijnot" class="exercise"><strong>Exercise 1.2  (Rows, Columns, and Elements of a Matrix) </strong></span>For the matrix
