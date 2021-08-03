@@ -52,6 +52,7 @@ fig:multlincombanim
 exm:diagmult
 exr:diagmultexer
 exm:outerprod
+exm:centerouter
 exm:dontcancel
 exm:syseq
 eq:hwmodel
@@ -86,7 +87,6 @@ thm:propcov
 def:cosine
 exm:cosinecorr
 fig:corrangle
-exm:centerouter
 def:lininddef
 eq:triv
 exm:lindep

@@ -847,37 +847,6 @@ Figure 6.2: Correlation Coefficient <span class="math inline">\(r\)</span> and A
 <span class="math display">\[\x\y^T = \pm 1\\2\\3\\4\mp \pm 2&amp;1&amp;3\mp = \pm 2&amp;1&amp;3\\4&amp;2&amp;6\\6&amp;3&amp;9\\8&amp;4&amp;12 \mp\]</span>
 which clearly has rank 1. It should be clear from this example that computing an outer product will always result in a matrix whose rows and columns are multiples of each other.</p>
 </div>
-<div class="example">
-<p><span id="exm:centerouter" class="example"><strong>Example 6.6  (Centering Data with an Outer Product) </strong></span>As we’ve seen in previous examples, many statistical formulas involve the <em>centered</em> data, that is, data from which the mean has been subtracted so that the new mean is zero. Suppose we have a matrix of data containing observations of individuals’ heights (h) in inches, weights (w), in pounds and wrist sizes (s), in inches:</p>
-<p><span class="math display">\[\begin{equation}\A=\begin{array}{cc} &amp; \begin{array}{ccc} h &amp; w &amp; s \end{array} \\
-            \begin{array}{c} person_1 \\
-person_2 \\
-person_3 \\
-person_4 \\
-person_5 \end{array} &amp; \left(\begin{array}{ccc}60 &amp; 102 &amp; 5.5 \cr 72 &amp; 170 &amp;  7.5 \cr 66 &amp; 110 &amp; 6.0\cr 69 &amp; 128 &amp; 6.5\cr 63 &amp; 130 &amp;  7.0\cr \end{array} \right)\end{array}\end{equation}\]</span></p>
-<p>The average values for height, weight, and wrist size are as follows:
-<span class="math display">\[\begin{eqnarray}
-\bar{h}&amp;=&amp;66\\
-\bar{w}&amp;=&amp;128\\
-\bar{s}&amp;=&amp;6.5
-\end{eqnarray}\]</span></p>
-<p>To center all of the variables in this data set simultaneously, we could compute an outer product using a vector containing the means and a vector of all ones:</p>
-<p><span class="math display">\[\pm 60 &amp; 102 &amp; 5.5 \cr
-             72 &amp; 170 &amp;  7.5 \cr
-            66 &amp; 110 &amp; 6.0\cr
-            69 &amp; 128 &amp; 6.5\cr
-            63 &amp; 130 &amp;  7.0\cr \mp - \pm 1\\1\\1\\1\\1 \mp \pm 66 &amp; 128 &amp; 6.5 \mp\]</span>
-<span class="math display">\[= \pm 60 &amp; 102 &amp; 5.5 \cr
-             72 &amp; 170 &amp;  7.5 \cr
-            66 &amp; 110 &amp; 6.0\cr
-            69 &amp; 128 &amp; 6.5\cr
-            63 &amp; 130 &amp;  7.0\cr \mp - \pm  66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \\66 &amp; 128 &amp; 6.5 \mp\]</span></p>
-<p><span class="math display">\[= \pm    -6.0000 &amp; -26.0000  &amp; -1.0000\\
-    6.0000 &amp;  42.0000   &amp; 1.0000\\
-         0 &amp; -18.0000 &amp;  -0.5000\\
-    3.0000    &amp;     0       &amp;  0\\
-   -3.0000 &amp;   2.0000 &amp;   0.5000 \mp\]</span></p>
-</div>
 </div>
 <div id="exercises-3" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> Exercises</h2>
@@ -902,7 +871,7 @@ Determine the Mahalanobis distance between <span class="math inline">\(\u\)</spa
 <p>Write a matrix expression for the correlation matrix, <span class="math inline">\(\C\)</span>, for a matrix of <em>centered</em> data, <span class="math inline">\(\X\)</span>, where <span class="math inline">\(\C_{ij}=r_{ij}\)</span> is Pearson’s correlation measure between variables <span class="math inline">\(\x_i\)</span> and <span class="math inline">\(\x_j\)</span>. To do this, we need more than an inner product, we need to normalize the rows and columns by
 the norms <span class="math inline">\(\|\x_i\|\)</span>. For a hint, revisit the exercises in Chapter <a href="mult.html#mult">2</a>.</p>
 <li>
-<p>Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Develop a matrix formula for the standardized data (where the mean of each variable should be subtracted from the corresponding column before dividing by the standard deviation). <em>Hint: use Exercises 1(f) and 4 from Chapter <a href="mult.html#mult">2</a> along with Example <a href="norms.html#exm:centerouter">6.6</a>.</em></p>
+<p>Suppose you have a matrix of data, <span class="math inline">\(\A_{n\times p}\)</span>, containing <span class="math inline">\(n\)</span> observations on <span class="math inline">\(p\)</span> variables. Develop a matrix formula for the standardized data (where the mean of each variable should be subtracted from the corresponding column before dividing by the standard deviation). <em>Hint: use Exercises 1(f) and 4 from Chapter <a href="mult.html#mult">2</a> along with Example <a href="mult.html#exm:centerouter">2.10</a>.</em></p>
 <li>
 <p>Explain why, for any norm or distance metric,
 <span class="math display">\[\|\x-\y\|=\|\y-\x\|\]</span></p>
