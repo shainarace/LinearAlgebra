@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-08-02" />
+<meta name="date" content="2021-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -666,19 +666,19 @@ and
 <div id="mds-of-iris-data" class="section level3" number="18.1.1">
 <h3><span class="header-section-number">18.1.1</span> MDS of Iris Data</h3>
 <p>Let’s take a dataset we’ve already worked with, like the iris dataset, and see how this is done. Recall that the iris data contains measurements of 150 flowers (50 each from 3 different species) on 4 variables: Sepal.Length, Sepal.Width, Petal.Length, and Petal.Width. To examine a 2-dimensional representation of this data via Multidimensional Scaling, we simply compute a distance matrix and run the MDS procedure:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="otherdimred.html#cb276-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">dist</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb276-2"><a href="otherdimred.html#cb276-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">cmdscale</span>(D, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>) <span class="co"># k is the number of dimensions desired</span></span>
-<span id="cb276-3"><a href="otherdimred.html#cb276-3" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># view first dozen eigenvalues</span></span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="otherdimred.html#cb275-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">=</span> <span class="fu">dist</span>(iris[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb275-2"><a href="otherdimred.html#cb275-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">cmdscale</span>(D, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>) <span class="co"># k is the number of dimensions desired</span></span>
+<span id="cb275-3"><a href="otherdimred.html#cb275-3" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>] <span class="co"># view first dozen eigenvalues</span></span></code></pre></div>
 <pre><code>##  [1] 6.3001e+02 3.6158e+01 1.1653e+01 3.5514e+00 3.4866e-13 3.1863e-13
 ##  [7] 2.0112e-13 1.3770e-13 7.7470e-14 3.2881e-14 3.0740e-14 2.1786e-14</code></pre>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="otherdimred.html#cb278-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF <span class="co"># view the Goodness of Fit measures</span></span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="otherdimred.html#cb277-1" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF <span class="co"># view the Goodness of Fit measures</span></span></code></pre></div>
 <pre><code>## [1] 0.97769 0.97769</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="otherdimred.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the solution, colored by iris species:</span></span>
-<span id="cb280-2"><a href="otherdimred.html#cb280-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
-<span id="cb280-3"><a href="otherdimred.html#cb280-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
-<span id="cb280-4"><a href="otherdimred.html#cb280-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
-<span id="cb280-5"><a href="otherdimred.html#cb280-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
-<span id="cb280-6"><a href="otherdimred.html#cb280-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="otherdimred.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the solution, colored by iris species:</span></span>
+<span id="cb279-2"><a href="otherdimred.html#cb279-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb279-3"><a href="otherdimred.html#cb279-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb279-4"><a href="otherdimred.html#cb279-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The pch= option controls the symbol output. 16=filled circles.</span></span>
+<span id="cb279-5"><a href="otherdimred.html#cb279-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;blue&quot;</span>)[iris<span class="sc">$</span>Species], <span class="at">pch=</span><span class="dv">16</span>,</span>
+<span id="cb279-6"><a href="otherdimred.html#cb279-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-141"></span>
 <img src="bookdownproj_files/figure-html/unnamed-chunk-141-1.png" alt="Multidimensional Scaling of the Iris Data" width="672" />
 <p class="caption">
@@ -690,32 +690,32 @@ Figure 18.1: Multidimensional Scaling of the Iris Data
 <div id="mds-of-leukemia-dataset" class="section level3" number="18.1.2">
 <h3><span class="header-section-number">18.1.2</span> MDS of Leukemia dataset</h3>
 <p>Let’s take a look at another example, this time using the Leukemia dataset which has 5000 variables. It is unreasonable to expect that we can get as good of a fit of this data using only two dimensions! There will obviously be much more error. However, we can still get a visualization that should at least show us which observations are close to each other and which are far away.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="otherdimred.html#cb281-1" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/Code/leukemia.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="otherdimred.html#cb280-1" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">&#39;http://birch.iaa.ncsu.edu/~slrace/Code/leukemia.csv&#39;</span>)</span></code></pre></div>
 <p>As you may recall, this data has some variables with 0 variance; those entire columns are constant. To determine which ones, we first remove the last column which is a character vector that identifies the type of leukemia.</p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="otherdimred.html#cb282-1" aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> leuk[ , <span class="dv">5001</span>]</span>
-<span id="cb282-2"><a href="otherdimred.html#cb282-2" aria-hidden="true" tabindex="-1"></a>leuk <span class="ot">=</span> leuk[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
-<span id="cb282-3"><a href="otherdimred.html#cb282-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, could supply names of columns that have 0 variance with</span></span>
-<span id="cb282-4"><a href="otherdimred.html#cb282-4" aria-hidden="true" tabindex="-1"></a><span class="co"># names(leuk[, sapply(leuk, function(v) var(v, na.rm=TRUE)==0)])</span></span>
-<span id="cb282-5"><a href="otherdimred.html#cb282-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The na.rm=T would allow us to keep any missing information and still compute</span></span>
-<span id="cb282-6"><a href="otherdimred.html#cb282-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the variance using the non-missing values. In this instance, it is not necessary</span></span>
-<span id="cb282-7"><a href="otherdimred.html#cb282-7" aria-hidden="true" tabindex="-1"></a><span class="co"># because we have no missing values.</span></span>
-<span id="cb282-8"><a href="otherdimred.html#cb282-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-9"><a href="otherdimred.html#cb282-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We can remove these columns from the data with:</span></span>
-<span id="cb282-10"><a href="otherdimred.html#cb282-10" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span>leuk[,<span class="fu">apply</span>(leuk, <span class="dv">2</span>, var, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">0</span>]</span>
-<span id="cb282-11"><a href="otherdimred.html#cb282-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-12"><a href="otherdimred.html#cb282-12" aria-hidden="true" tabindex="-1"></a><span class="co"># compute distances matrix</span></span>
-<span id="cb282-13"><a href="otherdimred.html#cb282-13" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="fu">dist</span>(leuk)</span>
-<span id="cb282-14"><a href="otherdimred.html#cb282-14" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">=</span><span class="fu">cmdscale</span>(t,<span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
-<span id="cb282-15"><a href="otherdimred.html#cb282-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb282-16"><a href="otherdimred.html#cb282-16" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="otherdimred.html#cb281-1" aria-hidden="true" tabindex="-1"></a>type <span class="ot">=</span> leuk[ , <span class="dv">5001</span>]</span>
+<span id="cb281-2"><a href="otherdimred.html#cb281-2" aria-hidden="true" tabindex="-1"></a>leuk <span class="ot">=</span> leuk[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>]</span>
+<span id="cb281-3"><a href="otherdimred.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, could supply names of columns that have 0 variance with</span></span>
+<span id="cb281-4"><a href="otherdimred.html#cb281-4" aria-hidden="true" tabindex="-1"></a><span class="co"># names(leuk[, sapply(leuk, function(v) var(v, na.rm=TRUE)==0)])</span></span>
+<span id="cb281-5"><a href="otherdimred.html#cb281-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The na.rm=T would allow us to keep any missing information and still compute</span></span>
+<span id="cb281-6"><a href="otherdimred.html#cb281-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the variance using the non-missing values. In this instance, it is not necessary</span></span>
+<span id="cb281-7"><a href="otherdimred.html#cb281-7" aria-hidden="true" tabindex="-1"></a><span class="co"># because we have no missing values.</span></span>
+<span id="cb281-8"><a href="otherdimred.html#cb281-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-9"><a href="otherdimred.html#cb281-9" aria-hidden="true" tabindex="-1"></a><span class="co"># We can remove these columns from the data with:</span></span>
+<span id="cb281-10"><a href="otherdimred.html#cb281-10" aria-hidden="true" tabindex="-1"></a>leuk<span class="ot">=</span>leuk[,<span class="fu">apply</span>(leuk, <span class="dv">2</span>, var, <span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">!=</span> <span class="dv">0</span>]</span>
+<span id="cb281-11"><a href="otherdimred.html#cb281-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-12"><a href="otherdimred.html#cb281-12" aria-hidden="true" tabindex="-1"></a><span class="co"># compute distances matrix</span></span>
+<span id="cb281-13"><a href="otherdimred.html#cb281-13" aria-hidden="true" tabindex="-1"></a>t<span class="ot">=</span><span class="fu">dist</span>(leuk)</span>
+<span id="cb281-14"><a href="otherdimred.html#cb281-14" aria-hidden="true" tabindex="-1"></a>fit<span class="ot">=</span><span class="fu">cmdscale</span>(t,<span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb281-15"><a href="otherdimred.html#cb281-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-16"><a href="otherdimred.html#cb281-16" aria-hidden="true" tabindex="-1"></a>fit<span class="sc">$</span>GOF</span></code></pre></div>
 <pre><code>## [1] 0.35822 0.35822</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="otherdimred.html#cb284-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
-<span id="cb284-2"><a href="otherdimred.html#cb284-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
-<span id="cb284-3"><a href="otherdimred.html#cb284-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
-<span id="cb284-4"><a href="otherdimred.html#cb284-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
-<span id="cb284-5"><a href="otherdimred.html#cb284-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
-<span id="cb284-6"><a href="otherdimred.html#cb284-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
-<span id="cb284-7"><a href="otherdimred.html#cb284-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="otherdimred.html#cb283-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb283-2"><a href="otherdimred.html#cb283-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> fit<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb283-3"><a href="otherdimred.html#cb283-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb283-4"><a href="otherdimred.html#cb283-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb283-5"><a href="otherdimred.html#cb283-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb283-6"><a href="otherdimred.html#cb283-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Raw Leukemia Data&#39;</span>)</span>
+<span id="cb283-7"><a href="otherdimred.html#cb283-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x,y,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-144"></span>
 <img src="bookdownproj_files/figure-html/unnamed-chunk-144-1.png" alt="Multidimensional Scaling of the Leukemia Data" width="672" />
 <p class="caption">
@@ -723,21 +723,21 @@ Figure 18.2: Multidimensional Scaling of the Leukemia Data
 </p>
 </div>
 <p>What if we standardize our data before running the MDS procedure? Will that effect our results? Let’s see how it looks on the standardized version of the leukemia data.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="otherdimred.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can experiment with standardization to see how it</span></span>
-<span id="cb285-2"><a href="otherdimred.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="co"># effects our results:</span></span>
-<span id="cb285-3"><a href="otherdimred.html#cb285-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-4"><a href="otherdimred.html#cb285-4" aria-hidden="true" tabindex="-1"></a>leuk2<span class="ot">=</span><span class="fu">scale</span>(leuk,<span class="at">center=</span><span class="cn">TRUE</span>, <span class="at">scale=</span><span class="cn">TRUE</span>)</span>
-<span id="cb285-5"><a href="otherdimred.html#cb285-5" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">dist</span>(leuk2)</span>
-<span id="cb285-6"><a href="otherdimred.html#cb285-6" aria-hidden="true" tabindex="-1"></a>fit2<span class="ot">=</span><span class="fu">cmdscale</span>(t2,<span class="at">eig=</span><span class="cn">TRUE</span>,<span class="at">k=</span><span class="dv">2</span>)</span>
-<span id="cb285-7"><a href="otherdimred.html#cb285-7" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span>GOF</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="otherdimred.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We can experiment with standardization to see how it</span></span>
+<span id="cb284-2"><a href="otherdimred.html#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="co"># effects our results:</span></span>
+<span id="cb284-3"><a href="otherdimred.html#cb284-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-4"><a href="otherdimred.html#cb284-4" aria-hidden="true" tabindex="-1"></a>leuk2<span class="ot">=</span><span class="fu">scale</span>(leuk,<span class="at">center=</span><span class="cn">TRUE</span>, <span class="at">scale=</span><span class="cn">TRUE</span>)</span>
+<span id="cb284-5"><a href="otherdimred.html#cb284-5" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">dist</span>(leuk2)</span>
+<span id="cb284-6"><a href="otherdimred.html#cb284-6" aria-hidden="true" tabindex="-1"></a>fit2<span class="ot">=</span><span class="fu">cmdscale</span>(t2,<span class="at">eig=</span><span class="cn">TRUE</span>,<span class="at">k=</span><span class="dv">2</span>)</span>
+<span id="cb284-7"><a href="otherdimred.html#cb284-7" aria-hidden="true" tabindex="-1"></a>fit2<span class="sc">$</span>GOF</span></code></pre></div>
 <pre><code>## [1] 0.21287 0.21287</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="otherdimred.html#cb287-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
-<span id="cb287-2"><a href="otherdimred.html#cb287-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
-<span id="cb287-3"><a href="otherdimred.html#cb287-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
-<span id="cb287-4"><a href="otherdimred.html#cb287-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y2,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
-<span id="cb287-5"><a href="otherdimred.html#cb287-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
-<span id="cb287-6"><a href="otherdimred.html#cb287-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
-<span id="cb287-7"><a href="otherdimred.html#cb287-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="otherdimred.html#cb286-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">1</span>]</span>
+<span id="cb286-2"><a href="otherdimred.html#cb286-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">=</span> fit2<span class="sc">$</span>points[,<span class="dv">2</span>]</span>
+<span id="cb286-3"><a href="otherdimred.html#cb286-3" aria-hidden="true" tabindex="-1"></a><span class="co">#The cex= controls the size of the circles in the plot function.</span></span>
+<span id="cb286-4"><a href="otherdimred.html#cb286-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2,y2,<span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;blue&quot;</span>)[<span class="fu">factor</span>(type)], <span class="at">cex=</span><span class="dv">3</span>,</span>
+<span id="cb286-5"><a href="otherdimred.html#cb286-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&#39;Coordinate 1&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Coordinate 2&#39;</span>,</span>
+<span id="cb286-6"><a href="otherdimred.html#cb286-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&#39;Multidimensional Scaling of Standardized Leukemia Data&#39;</span>)</span>
+<span id="cb286-7"><a href="otherdimred.html#cb286-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x2,y2,<span class="at">labels=</span><span class="fu">row.names</span>(leuk))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-145-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="a-note-on-standardization" class="section level3 unnumbered">

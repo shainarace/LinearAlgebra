@@ -24,7 +24,7 @@
 <meta name="author" content="Shaina Race Bennett, PhD" />
 
 
-<meta name="date" content="2021-08-02" />
+<meta name="date" content="2021-08-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -711,23 +711,23 @@ div.csl-indent {
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="r-programming-basics.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start by generating random ~N(0,1) data:</span></span>
 <span id="cb17-2"><a href="r-programming-basics.html#cb17-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">5</span>))</span>
 <span id="cb17-3"><a href="r-programming-basics.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1]  0.12031178 -0.07305812</code></pre>
+<pre><code>## [1] -0.4377597 -0.3869969</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="r-programming-basics.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (Why aren&#39;t the means close to zero?)</span></span>
 <span id="cb19-2"><a href="r-programming-basics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">replicate</span>(<span class="dv">2</span>,<span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
 <span id="cb19-3"><a href="r-programming-basics.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(A)</span></code></pre></div>
-<pre><code>## [1] -0.01580071  0.10304462</code></pre>
+<pre><code>## [1]  0.2390982 -0.1395814</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-programming-basics.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LawOfLargeNumbers.</span></span>
 <span id="cb21-2"><a href="r-programming-basics.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="r-programming-basics.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A,<span class="dv">2</span>,sd)</span></code></pre></div>
-<pre><code>## [1] 1.0520451 0.8795927</code></pre>
+<pre><code>## [1] 1.0482379 0.9529708</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-programming-basics.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To apply a &quot;homemade function&quot; you must create it as a function</span></span>
 <span id="cb23-2"><a href="r-programming-basics.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we apply a sum of squares function for the first 5 rows of A:</span></span>
 <span id="cb23-3"><a href="r-programming-basics.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ],<span class="dv">1</span>,<span class="cf">function</span>(x) x<span class="sc">%*%</span>x)</span></code></pre></div>
-<pre><code>## [1] 1.530759 1.783182 4.150120 2.016247 1.890063</code></pre>
+<pre><code>## [1] 1.4797792 4.5370003 0.1255823 0.3736681 6.5193211</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-programming-basics.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we center the data by subtracting the mean vector:</span></span>
 <span id="cb25-2"><a href="r-programming-basics.html#cb25-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">=</span><span class="fu">apply</span>(A,<span class="dv">2</span>,<span class="cf">function</span>(x) x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
 <span id="cb25-3"><a href="r-programming-basics.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B)</span></code></pre></div>
-<pre><code>## [1]  7.112366e-19 -4.718448e-18</code></pre>
+<pre><code>## [1] -1.193490e-17 -1.804112e-18</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-programming-basics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R doesn&#39;t tell you when things are zero to machine precision. &quot;Machine zero&quot; in</span></span>
 <span id="cb27-2"><a href="r-programming-basics.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># R is given by the internal variable .Machine$double.eps</span></span>
 <span id="cb27-3"><a href="r-programming-basics.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(B) <span class="sc">&lt;</span> .Machine<span class="sc">$</span>double.eps</span></code></pre></div>
@@ -749,12 +749,12 @@ div.csl-indent {
 <span id="cb33-2"><a href="r-programming-basics.html#cb33-2" aria-hidden="true" tabindex="-1"></a>ncols<span class="ot">=</span><span class="fu">dim</span>(A)[<span class="dv">2</span>]</span>
 <span id="cb33-3"><a href="r-programming-basics.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(A)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;This&quot;</span>,<span class="st">&quot;That&quot;</span>)</span>
 <span id="cb33-4"><a href="r-programming-basics.html#cb33-4" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
-<pre><code>##            This        That
-## [1,] -0.3051990 -1.19900502
-## [2,] -0.5306476  1.22539584
-## [3,]  1.3424145  1.53233258
-## [4,] -1.0819213  0.91961564
-## [5,] -1.3740463 -0.04538589</code></pre>
+<pre><code>##            This       That
+## [1,]  1.0977837  0.5240708
+## [2,] -1.5927275 -1.4142911
+## [3,]  0.2828920 -0.2134348
+## [4,]  0.5842448  0.1797947
+## [5,] -2.4468140 -0.7296727</code></pre>
 <ul>
 <li>Most arithmetic functions you apply to a vector act elementwise. In R, <span class="math inline">\(\x^2\)</span> will be a vector containing the square of the elements in <span class="math inline">\(\x\)</span>. You can add a column to a matrix (or a data frame) by using the <code>cbind()</code> function.</li>
 </ul>
