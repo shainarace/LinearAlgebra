@@ -237,6 +237,7 @@ $$\B=\acol{1}\X_{1\star}+\acol{2}\X_{2\star}+\acol{3}\X_{3\star}.$$
 Example \@ref(exm:matmat) turns out to have important implications for our interpretation of matrix factorizations. In this context we'd call $\A\X$ a _factorization_ of the matrix $\B$. We will see how to use these expressions to our advantage in later chapters. 
 
 ## Exercises {#multapp-ex}
+
 <ol type='1'>
 <li>  A florist offers three sizes of flower arrangements (small, medium, large) containing three types of flowers (roses, daisies, and chrysanthemums). The number of each type of flower in each size arrangement is given in the table below, along with the selling price of each arrangement and the cost of each individual flower.
 
@@ -261,13 +262,58 @@ Let $$\A = \pm 1 &3 & 3\\2& 4& 6\\4& 8&6 \mp \quad \bo{p}= \pm 10\\15\\20 \mp \q
     <li> Suppose that an order came in for 2 small arrangements and 2 large arrangements. Let $$\bo{v} = \pm 2\\0\\2 \mp$$
 Using matrix arithmetic (and writing out the formula) determine both the price of this order and the total profit to the florist. </ol>
 
+<li> In an effort to learn more about visitors to social media websites, you've collected data on whether or not individuals have visited certain sites in the past week. These are binary variables indicating if the website has been visited ("1") or not ("0").   Using the following dataset, answer the questions below.
+
+<table>
+<tr><td>__Name__ <td> __FB__<td>__Insta__ <td> __Link__<td> __Twit__ <td> __TikTk__<td>__YuTube__ <td>__GoogPlus__ </tr>
+<tr><td>Tito <td>  1	 <td> 1    <td>  0    <td>  0   <td>  0  <td>   0	 <td> 0  </tr>
+<tr><td>Jojo <td>  0	 <td>  1   <td>   0   <td>   0  <td>  0  <td>  1	 <td> 1  </tr>
+<tr><td>Loki <td>   0	 <td>  1	 <td>    1  <td>    1 <td>  1  <td>  1	 <td>  1 </tr>
+<tr><td>Niko <td>  	0	 <td>  0	 <td>     1 <td>   1  <td>   1 <td>   1	 <td>   1</tr>
+<tr><td>Yaya <td>   1	 <td>  0	 <td>     0 <td>   1  <td>  0  <td>   1	 <td>  1 </tr>
+<tr><td>Kujo <td>   1	 <td>  1   <td>    1  <td>   0  <td>  0  <td>   0	 <td> 1  </tr>
+<tr><td>Arod <td>   0	 <td>  0   <td>    0  <td>    0 <td>  1  <td>  	0  <td> 0  </tr>
+<tr><td>Park <td>   1  <td>  1   <td>    1  <td>    1 <td>  0  <td>   1  <td> 1  </tr>
+<tr><td>Yorp <td>   0  <td>  1   <td>    0  <td>    1 <td>  0  <td>   0  <td> 0  </tr>
+<tr><td>Hoki <td>   0  <td>  0   <td>    1  <td>    1 <td>  0  <td>   1  <td> 1  </tr>
+<table>
+
+<ol type='a'>
+<li> Suppose we were interested to know how many social media sites two users have in common - we intend to use this as a sort of _similarity score_ to inform us which users might have similar preferences. What matrix operation might be useful to compute this similarity score? In particular, let $\bo{t}$ represent the data for Tito so that 
+$$\mathbf{t} = [t_1 \,\, t_2\,\, \dots \,\, t_7] = [1\,\,1\,\,0\,\,0\,\,0\,\,0\,\,0].$$
+Likewise, let $\bo{j}$ represent the data for Jojo:
+$$\mathbf{j} = [j_1 \,\, j_2\,\, \dots \,\, j_7] = [0\,\,1\,\,0\,\,0\,\,0\,\,1\,\,1].$$
+ Write down an arithmetic expression using $\mathbf{t}$ and $\mathbf{j}$ that will compute the number of social media sites that Tito and Jojo have in common.
+<li> Repeat the same exercise from part (a) with the users Hoki and Yorp. 
+<li> Consider using the information from parts (a) and (b) to come up with a formula to compute ALL of the pairwise similarity scores in one matrix. What information do the diagonal entries of this matrix provide? _Note: a similarity matrix has rows and columns corresponding to the same entities (in this case, the users) and the $(i,j)^{TH}$-entry in the matrix would tell us the similarity score of user $i$ and user $j$._
+<li> What if our goal was not to examine similar users, but to examine similarities between social media sites? Reframe the above analysis to pertain to the similarity between websites, so the similarity score between Facebook (FB) and Instagram (Insta) is computed to be the number of users in the dataset using both sites. What information do the diagonal entries of this matrix provide?
+<li> What words describe the similarity matrices found in part (c) and (d)?  Rectangular? Square? Symmetric? Diagonal? Upper Triangular? Identity? 
+</ol>
 
 <li> Write the following system of equations as a matrix-vector product $\A\x=\b$:
-\begin{eqnarray}
-2x_2 +3x_3&=& 8,
-2x_1+3x_2+1x_3 &=& 5,
+\begin{eqnarray*}
+2x_2 +3x_3&=& 8 \\
+2x_1+3x_2+1x_3 &=& 5 \\
 x_1-x_2-2x_3 &=&-5
-\end{eqnarray}
+\end{eqnarray*}
+
+<li>  Linear regression involves a system of equations of the form $\X\boldsymbol\beta = \y$. For the following data and regression model, write out each piece of the equation ($\X,\boldsymbol\beta, \y$), whether it is known or unknown. Note that you are not asked to solve this system of equations. Is this system of equations likely to have an exact solution? Justify your answer. Again you don't have to perform any calculations, this problem is only for discussion.
+
+<table>
+<tr><td>__group__ <td> __age__ <td> $\mathbf{VO_2}$ __max__ <td> __mile pace (min)__ </tr>
+
+<tr> <td> A <td> 32 <td> 55 <td> 8.3 </tr>
+<tr> <td> A <td> 23 <td> 45 <td> 8.3 </tr>
+<tr> <td> B <td> 41 <td> 44 <td> 7.9 </tr>
+<tr> <td> B <td> 19 <td> 31 <td> 9.9 </tr>
+<tr> <td> B <td> 27 <td> 41 <td> 6.9 </tr>
+<tr> <td> B <td> 25 <td> 60 <td> 5.3 </tr>
+<tr> <td> A <td> 21 <td> 45 <td> 7.5 </tr>
+<tr> <td> B <td> 45 <td> 43 <td> 7.1 </tr>
+<tr> <td> C <td> 22 <td> 49 <td> 6.6 </tr>
+</table>
+
+$$ mile\_pace = \beta_0 + \beta_1 (group_A)+ \beta_2 (group_B) + \beta_3 (age) + \beta_4 (VO_2\_max) $$
 
 
 <li> A model is being developed to predict a student's SAT score based upon some numeric attributes. The data being used for this model is provided below:
@@ -325,12 +371,12 @@ by defining the matrices/vectors $\X, \bbeta, \mbox{ and } \y$.
   <li>  Show how you could use matrix addition to compute the total weekly sales and revenue of each product.
   <li>  Now suppose you find out that both the sales and the revenue numbers in the table above were listed in hundreds (i.e. that 100 widgets were sold on Monday, bringing in \$19,500 in revenue). Using your answer from part a. show how you would use scalar multiplication to represent the exact weekly numbers for revenue and units sold.
 </ol>
-<li> Let 
+<!-- <li> Let  -->
 
-$$\A=\pm 3 & 2 & 9\\4 & 2 & 3\\2 &7&1\mp \quad$$
+<!-- $$\A=\pm 3 & 2 & 9\\4 & 2 & 3\\2 &7&1\mp \quad$$ -->
 
 
-<li> For a general matrix $\A_{m\times n}$ describe what the following products will provide.  Also give the size of the result (i.e. "$n\times 1$ vector" or "scalar").
+<li> For a general matrix $\A_{m\times n}$ describe what the following products will provide. Also give the size of the result (i.e. "$n\times 1$ vector" or "scalar"). Recall that $\e$ denotes the vector of all ones, and $\e_i$ denotes the $i^{th}$ column of the identity matrix.  
 <ol style="list-style-type:lower-alpha">
   <li> $\A\e_j$  
   <li> $\e_i^T\A$  

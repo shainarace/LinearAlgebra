@@ -137,6 +137,43 @@ $$\A\B=\C.$$
   <li> Show that the zero vector, $\pm 0\\0\\0 \mp$ is in the $span(\a,\b)$. 
   <li> Determine whether or not the vector $\pm 1\\0\\1 \mp$ is in the $span(\a,\b)$.
 </ol>
+
+<li> Which of the following sets of variables has a clear problem with linear dependence? Explain your reasoning.
+
+<ol type='a'>
+<li> A garden center that stocks products on hundreds of hand-built rectangular display tables, all in varying sizes, has data that contains: 
+<ul>
+<li> _Table Number_
+<li> _Length of table_
+<li> _Width of Table_
+<li> _Table Perimeter_
+<li> _Area of Table_
+</ul>
+<li> Apple farmer tracking his product has data containing:
+<ul>
+<li> _Truck number_
+<li> _Number of pallets on truck_
+<li> _Number of boxes per pallet_
+<li> _Total number of boxes on truck_
+</ul>
+<li> A triathlon race company collects the following information from each participant:
+<ul>
+<li> _Name_
+<li> _Swim time_
+<li> _Bike time_
+<li> _Run time_
+<li> _Total race time_
+</ul>
+<li> A software company keeps the following payroll data for its salaried employees:
+<ul>
+<li>  _Employee ID_
+<li>  _Annual Salary (sans bonus)_
+<li>  _Tenure at company_
+<li>  _Gross monthly pay_
+<li>  _Bonus amount_
+</ul>
+</ol>
+
 <li> Describe the span of one vector in $\Re^3$.
 <li> Describe the span of two linearly _independent_ vectors in $\Re^3$.
 <li> Describe the span of two linearly _dependent_ vectors in $\Re^3$.
@@ -152,10 +189,17 @@ $$\A\B=\C.$$
   <li> If $\A\x=\b$ has a solution then $\b$ can be written as a linear combination of the columns of $\A$.
   <li> If $\A\x=\b$ has a solution then $\b$ is in the span of the columns of $\A$.
   <li> If  $\v_1$ is in the $span(\v_2,\v_3)$, then $\v_1, \v_2, \,\mbox{ and},\v_3$ form a linearly independent set.
-</ol>
-<li> Two vectors are linearly independent only if they are not perfectly correlated, $-1<\rho<1$, where $\rho$ is Pearson's correlation coefficient.
+  <li> Two vectors are linearly independent only if they are not perfectly correlated, $-1<\rho<1$, where $\rho$ is Pearson's correlation coefficient.
 </ol>
 
+<li> Let $\x = \left(\begin{array}{c} 2\\0\\1 \end{array}\right)$, $\y = \left(\begin{array}{c} 1\\1\\2 \end{array}\right)$, and $\z = \left(\begin{array}{c} 3\\-1\\0 \end{array}\right)$. 
+<ol type='a'>
+<li>Are the vectors $\x, \y, \z$ linearly independent?
+<li> What is the rank of the matrix that contains these 3 vectors as columns?
+<li> What is the rank of the matrix that contains these 3 vectors as rows?
+</ol>
+
+</ol>
 
 ## List of Key Terms {-}
 

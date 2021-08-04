@@ -70,10 +70,11 @@ knitr::include_graphics("figs/introexg.png")
 ```
 
 In much of the literature on graph partitioning, it is suggested that the data clustering problem can be transformed into a graph partitioning problem by means of a similarity matrix [@minmax,@spectraltutorial,@pothen,@poweriteration]. A __similarity matrix__ $\bo{S}$ is an $n \times n$ symmetric matrix where $\bo{S}_{ij}$ measures some notion of similarity between data points $\x_i$ and $\x_j$. There are a wealth of metrics available to gauge similarity or dissimilarity, see for example [@dcebook]. Common measures of similarity rely on Euclidean or angular distance measures. Two of the most popular similarity functions in the literature are the following:
-\begin{itemize}
-\item \textbf{Gaussian Similarity:} $$\bo{S}_{ij} =\mbox{exp}(-\frac{\|\x_i-\x_j\|^2}{2\alpha^2})$$ where $\alpha$ is a tuning parameter.
-\item \textbf{Cosine Similarity:} $$\bo{S}_{ij}=\cos (\x_i,\x_j) = \frac{\x_i^T\x_j}{\|\x_i\|\|\x_j\|}$$
-\end{itemize}
+
+<ol>
+<li> __Gaussian Similarity:__ $$\bo{S}_{ij} =\mbox{exp}(-\frac{\|\x_i-\x_j\|^2}{2\alpha^2})$$ where $\alpha$ is a tuning parameter.
+<li> __Cosine Similarity:__ $$\bo{S}_{ij}=\cos (\x_i,\x_j) = \frac{\x_i^T\x_j}{\|\x_i\|\|\x_j\|}$$
+</ol>
 
 Any similarity matrix can be considered an adjacency matrix for a graph, thus transforming the original data clustering problem into a graph partitioning problem. Several algorithms for data clustering and graph partitioning are provided in Section \@ref(clusteralgos). Regardless of the method chosen for clustering, similarity matrices can be a useful tool for visualizing cluster results in light of the block diagonal structure shown in Figure \@ref(fig:introexg). This block diagonal structure can be visualized using a heat map of a similarity matrix. A _matrix heat map_ represents each value in a matrix by a colored pixel indicating the magnitude of the value. Figure \@ref(fig:heatmapex) is an example of a heat map using real data. The data are a collection of news articles (documents) from the web containing seven different topics of discussion. The rows and columns of the cosine similarity matrix for these documents have been reordered according to some cluster solution. White pixels represent negligible values of similarity.  Some of these topics are closely related, which can be seen by the heightened level of similarities between blocks.
 

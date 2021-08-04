@@ -239,6 +239,32 @@ $$\cov=\pm 2&0&0&0\\0&1&0&0\\0&0&2&0\\0&0&0&1 \mp$$
 Determine the Mahalanobis distance between $\u$ and $\v$.
 </ol>
 
+<li> Suppose you have survey data where individuals scored 10 statements about travel preferences on a Likert scale from 1 to 10 where 1='strongly disagree' and 10= 'strongly agree'. Let the vector $\a$ contain the numerical responses from person A and vector $\b$ contain the numerical responses from person B (So $\a,\b \in \Re^{10}$). 
+
+<ol "list-style-type:lower-alpha">
+<li> Explain in words how to interpret the quantity $$\|\a-\b\|_{\infty}$$. 
+<li> Explain in words how to interpret the quantity $$\|\a-\b\|_{1}$$.
+</ol>
+
+<li> __Statistical Formulas Using Linear Algebra Notation.__  Almost every statistical formula can be written in a more compact fashion using linear algebra. Most of the elementary formulas involve vector inner products or the Euclidean norm. To begin, we'll recall the concept of _centering_ the data from Example \@ref(exm:centering).  _Centering_ the data means that the mean of a variable is subtracted from each observation. For example, if we have some variable, $\x$, and 3 observations on that variable:
+$$\x = \pm 2\\3\\4 \mp$$
+then obviously, $\bar{x} = 3$. The _centered_ version of $\x$ would then be $$\x-\bar{x}\e =\pm 2\\3\\4 \mp - 3\pm 1\\1\\1 \mp= \pm 2\\3\\4 \mp - \pm 3\\3\\3 \mp = \pm -1\\0\\1 \mp.$$
+We simply subtract the mean from every observation so that the new mean of the variable is 0. 
+Most multivariate textbooks start by saying "all column vectors in this textbook are assumed to be centered to have mean zero unless otherwise specified". Looking at the most common statistical formulas helps us see why. \
+
+Re-write the following formulas using linear algebra notation, using the vectors $\x$ and $\y$ to represent centered data:
+$$\x = \pm x_1 - \bar{x} \\ x_2 - \bar{x} \\ x_3 - \bar{x} \\ \vdots \\ x_n-\bar{x} \mp, \quad \y = \pm y_1 - \bar{y} \\ y_2 - \bar{y} \\ y_3 - \bar{y} \\ \vdots \\ y_n-\bar{y} \mp $$
+For this exercise, you'll use the following linear algebra operations, with which you should be familiar by now:
+$$\|\a\|=\sqrt{a_1^2+a_2^2+a_3^2+\dots+a_n^2}$$
+$$\a^T\b = a_1b_1+a_2b_2+a_3b_3+\dots+a_nb_n$$
+
+<ol type='a'>
+<li> Sample standard deviation: $$s=\frac{\displaystyle\sqrt{\sum_{i=1}^n(x_i-\bar{x})^2}}{\sqrt{n-1}}$$ 
+<li>Sample covariance: $$covariance(\x,\y) = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})\qquad $$
+<li> Correlation coefficient:  $$r_{xy}=\frac{\displaystyle\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\displaystyle\sum_{i=1}^n (x_i-\bar{x})^2\sum_{i=1}^n (y_i-\bar{y})^2 }}$$
+</ol>
+
+
 <li>  Write a matrix expression for the correlation matrix, $\C$,  for a matrix of _centered_ data, $\X$, where $\C_{ij}=r_{ij}$ is Pearson's correlation measure between variables $\x_i$ and $\x_j$. To do this, we need more than an inner product, we need to normalize the rows and columns by
 the norms $\|\x_i\|$. For a hint, revisit the exercises in Chapter \@ref(mult).
 
@@ -246,6 +272,12 @@ the norms $\|\x_i\|$. For a hint, revisit the exercises in Chapter \@ref(mult).
 
 <li>  Explain why, for any norm or distance metric,
 $$\|\x-\y\|=\|\y-\x\|$$
+<li> Compute the outer product $\x\y^T$ where 
+$$\x=\pm 3\\4\\5 \mp \quad \y= \pm 1\\1\\-1\\1 \mp$$
+$$\x\y^T = $$
+<ol type='a'>
+<li> Can you say anything about the rank of an outer product in general? Explain your answer.
+</ol>
 
 </ol>
 

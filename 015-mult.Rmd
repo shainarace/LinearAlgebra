@@ -510,6 +510,22 @@ $$\acol{1}\brow{1} + \acol{2}\brow{2} = \C$$ (_Matrix multiplication can be view
 <li> Since $\mathbf{A}\mathbf{B}_{\star 1}$ is the first column of $\C$, show how $\C_{\star 1}$ can be written as a linear combination of columns of $\mathbf{A}$. (_Matrix multiplication can be viewed as a collection of linear combinations of columns of the first matrix._)
 <li> Finally, note that $\arow{1}\mathbf{B}$ will give the first row of $\C$. (_This amounts to a linear combination of rows - can you see that?_)
 </ol>
+
+<li> For the matrix $\bo{H} = \X(\X^T\cov^{-1}\X)^{-1}\X^T\cov^{-1}$, use the properties of matrix arithmetic to show that
+<ol type='a'>
+<li> $\bo{H}^2 = \bo{H}$
+<li> $\bo{H}(\I-\bo{H}) = \bo{0}$
+</ol>
+
+<li>  Suppose we measure the heights of 10 people, $person_1, person_2, \dots, person_{10}$. 
+<ol type='a'>
+<li> If we create a matrix $\S$ where
+$$S_{ij} = height(person_i) - height(person_j)$$
+is the matrix $\S$ symmetric? What is the trace($\S$)?
+<li> If instead we create a matrix $\bo{G}$ where
+$$G_{ij} = [height(person_i) - height(person_j)]^2$$
+is the matrix $\bo{G}$ symmetric? What is the trace($\bo{G}$)?
+</ol>
 </ol>
 
 ## List of Key Terms {-}

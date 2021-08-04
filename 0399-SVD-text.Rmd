@@ -59,6 +59,7 @@ Rather than store the entire matrix, we can store an approximation to the matrix
 This is the basis of image compression. An approximated photo will not be as crisp as the original - some information will be lost - but most of the time we can store much less than the original matrix and still get a good depiction of the image.
 
 ## Noise Reduction
+
 Many applications arise where the relevant information contained in a matrix is contaminated by a certain level of noise. This is particularly common with video and audio signals, but also arises in text data and other types of (usually high dimensional) data. The __truncated SVD__ (Equation \@ref(eq:truncsvd)) can actually reduce the amount of noise in data and increase the overall __signal-to-noise__ ratio under certain conditions.
 
 Let's suppose, for instance, that our matrix $\A_{m\times n}$ contains data which is contaminated by noise.  If that noise is assumed to be random (or nondirectional) in the sense that the noise is distributed more or less uniformly across the components $\Z_i$, then there is just as much noise "in the direction" of one $\Z_i$ as there is in the other. If the amount of noise along each direction is approximately the same, and the $\sigma_i$'s tell us how much (relevant) information in $\A$ is directed along each component $\Z_i$, then it must be that the ratio of "signal" (relevant information) to noise is decreasing across the ordered components, since

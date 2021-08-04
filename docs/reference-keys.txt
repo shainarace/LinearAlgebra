@@ -107,6 +107,7 @@ fig:coordplaneB2
 fig:coordplaneB2rotate
 thm:changebasedef
 def:basisdef
+fig:documents
 def:orthogdef
 def:orthsetdef
 def:orthmatdef
@@ -271,6 +272,7 @@ trace-of-a-matrix
 special
 summary-of-conventional-notation
 exercises
+list-of-key-terms
 mult
 matrix-addition-subtraction-and-scalar-multiplication
 sec:vectoradd
@@ -304,9 +306,9 @@ infinitesol
 matrix-rank
 solving-matrix-equations
 solving-for-the-inverse-of-a-matrix
-exercises-2
-list-of-key-terms-1
 gauss-jordan-elimination-in-r
+exercises-2
+list-of-key-terms-2
 norms
 sec-norms
 other-useful-norms-and-distances
@@ -325,6 +327,7 @@ determining-linear-independence
 span
 exercises-4
 basis
+vector-space-models
 exercises-5
 orthog
 orthonormal-basis

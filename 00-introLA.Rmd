@@ -587,9 +587,8 @@ is the matrix $\mathbf{G}$ symmetric? What is the trace($\mathbf{G}$)?
 </ol>
 
 
-<li> Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge has a certain {weight} (perhaps reflecting some level of association between the vertices) which is given as a number.
+<li> Refer to the network/graph shown below. This particular network has 6 numbered vertices (the circles) and edges which connect the vertices. Each edge is labeled with a _weight_ (perhaps reflecting some level of association between the vertices).
 
-<li> Use the network shown below to answer the following questions.  
 ```{r fig.align='center', fig.cap = 'Graph (Network) for exercise 11', echo=F, out.width="60%"}
 knitr::include_graphics('figs/graphex.jpg')
 ```
@@ -599,30 +598,30 @@ knitr::include_graphics('figs/graphex.jpg')
 </ol>
 
 
-<!-- ## List of Key Terms  -->
+## List of Key Terms
 
-<!-- - linear -->
-<!-- - matrix -->
-<!-- - vector -->
-<!-- - scalar -->
-<!-- - $A_{ij}$ -->
-<!-- - $\A_{\star j}$ -->
-<!-- - $\A_{i \star}$ -->
-<!-- - dimensions -->
-<!-- - diagonal element -->
-<!-- - square matrix -->
-<!-- - rectangular matrix -->
-<!-- - network -->
-<!-- - graph -->
-<!-- - adjacency matrix -->
-<!-- - correlation matrix -->
-<!-- - transpose -->
-<!-- - symmetric matrix -->
-<!-- - trace -->
-<!-- - diagonal matrix -->
-<!-- - identity matrix -->
-<!-- - upper triangular matrix -->
-<!-- - lower triangular matrix -->
+- linear
+- matrix
+- vector
+- scalar
+- $A_{ij}$
+- $\A_{\star j}$
+- $\A_{i \star}$
+- dimensions
+- diagonal element
+- square matrix
+- rectangular matrix
+- network
+- graph
+- adjacency matrix
+- correlation matrix
+- transpose
+- symmetric matrix
+- trace
+- diagonal matrix
+- identity matrix
+- upper triangular matrix
+- lower triangular matrix
 
 
 

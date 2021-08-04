@@ -103,7 +103,103 @@ $r$ is said to be the __dimension__ of the vector space $\Re^n$.
 A __basis__ for the vector space $\Re^n$ is then any set of $n$ linearly independent vectors in $\Re^n$; $n$ is said to be the __dimension__ of the vector space $\Re^n$. When the basis vectors are orthonormal (as in our prior examples), the set is called an __orthonormal basis__. 
 :::
 
-The preceding discussion dealt entirely with bases for $\Re^n$ (our example was for points in $\Re^2$). However, we will need to consider bases for _subspaces_ of $\Re^n$. Recall that the span of two linearly independent vectors in $\Re^3$ is a plane. This plane is a 2-dimensional subspace of $\Re^3$. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from $\Re^3$ can be written in this basis - only those points which exist on the plane. Chapter, we will discuss how to proceed in a situation where the point we'd like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.
+The preceding discussion dealt entirely with bases for $\Re^n$ (our example was for points in $\Re^2$). However, we will need to consider bases for _subspaces_ of $\Re^n$. Recall that the span of two linearly independent vectors in $\Re^3$ is a plane. This plane is a 2-dimensional subspace of $\Re^3$. Its dimension is 2 because 2 basis vectors are required to represent this space. However, not all points from $\Re^3$ can be written in this basis - only those points which exist on the plane. In Chapter \@ref(leastsquares) we discuss how to proceed in a situation where the point we'd like to represent does not actually belong to the subspace we are interested in. This is the foundation for Least Squares.
+
+## Vector Space Models
+
+The knowledge of coordinates and bases in data science allows us to explore the data using a _vector space model_. In a vector space model, the objects/observations of interest are considered vectors in a vector space and then often the dimensionality of that vector space is reduced in some way - yielding a new set of basis vectors (a smaller set) and coordinates of the data along those new basis vectors. Let's take a look at such a model using some text data as an example. The finer details of the text-mining process can be found in Chapter \@ref(svdapp). Figure \@ref(fig:documents) shows 4 short "documents". The words highlighted in red are the words that appear in at least two documents. We'll use those red-highlighted words as the variables in our analysis, and the documents as the observations. 
+
+```{r label='documents', fig.align='center', fig.cap = 'Four Short Documents', echo=F, out.width="100%"}
+knitr::include_graphics("figs/documents.jpg")
+```
+
+We'll create a matrix, called a term-document matrix, where the $(i,j)^{th}$ is the number of times that term $i$ appeared in document $j$. Why put our documents/observations along the columns? Simply because we're exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure \@ref(fig:multlincombanim), which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print. 
+
+\begin{equation*}
+    \begin{array}{cc}
+         & \begin{array}{cccc} \;doc_1\; & \;doc_2\;& \;doc_3\;& \;doc_4 \end{array}\\
+          \begin{array}{c}
+            \hbox{cat} \\
+            \hbox{dog}\\
+            \hbox{tired} \\
+            \hbox{injured} \\
+            \hbox{ankle} \\
+            \hbox{sprained} \\
+        \end{array} &
+\left(
+\begin{array}{cccc}
+\quad 1\quad   &  \quad 2\quad      &  \quad 0\quad   &  \quad 0\quad    \\
+\quad 2\quad   &  \quad 3\quad      &  \quad 0\quad   &  \quad 0\quad    \\
+\quad 0\quad   &  \quad 1\quad      &  \quad 0\quad   &  \quad 1\quad    \\
+\quad 0\quad   &  \quad 0\quad      &  \quad 1\quad   &  \quad 1\quad    \\
+\quad 0\quad   &  \quad 0\quad      &  \quad 1\quad   &  \quad 1\quad    \\
+\quad 0\quad   &  \quad 0\quad      &  \quad 1\quad   &  \quad 1\quad    \\
+\end{array}\right)
+\end{array}
+\end{equation*}
+
+These documents, upon formulation of the term-document matrix above, live in the 6-dimensional term space. We could expand each document in a coordinate-basis representation where each of the elementary axes represents a single term, for instance:
+
+\begin{equation*}
+doc_1 = 1 \begin{array}{c} dog \\ \pm 1\\0\\0\\0\\0\\0 \mp \end{array} + 2 \begin{array}{c} cat \\ \pm 0\\1\\0\\0\\0\\0 \mp \end{array}
+\end{equation*}
+
+Now, we will _change the basis_ and create _new_ basis vectors that attempt to approximate this data in only 2 dimensions using a matrix factorization. Matrix factorizations are extremely powerful for data analysis, but we are not presently concerned with how they are created or chosen to solve a problem. Our goal in this section is merely to interpret the output and catch a glimpse of their utility. Below we examine one such matrix factorization, which was created using a Nonnegative Matrix Factorization (NMF) algorithm [@leeseung].
+
+\begin{equation*}
+    \begin{array}{cc}
+         & \begin{array}{cc} \;factor_1\; & \;factor_2\end{array}\\
+          \begin{array}{c}
+            \hbox{cat} \\
+            \hbox{dog}\\
+            \hbox{tired} \\
+            \hbox{injured} \\
+            \hbox{ankle} \\
+            \hbox{sprained} \\
+        \end{array} &
+\left(
+\begin{array}{cc}
+\quad 1.0\quad   &  \quad 0\quad       \\
+\quad 1.6\quad   &  \quad 0\quad       \\
+\quad 0.4\quad   &  \quad 0.4\quad       \\
+\quad 0\quad   &  \quad 0.8\quad       \\
+\quad 0\quad   &  \quad 0.8\quad       \\
+\quad 0\quad   &  \quad 0.8\quad       \\
+\end{array}\right)
+\end{array} 
+\begin{array}{c}
+         \begin{array}{cccc} \;doc_1\; & \;doc_2\;& \;doc_3\;& \;doc_4\end{array}\\
+         \left(
+\begin{array}{cccc}
+\quad 1.0  \quad & \quad 1.7 \quad & \quad  0    \quad &0   \quad \\
+\quad 0    \quad & \quad 0.1 \quad & \quad   0.9 \quad &1.1 \quad     \\
+
+\end{array}\right) \end{array}
+\end{equation*}
+
+The "factors" in the left matrix live in the term space. The factors can be considered as linear combinations of our original term vectors:
+
+\begin{eqnarray*}
+factor_1 &=& 1 \begin{array}{c} dog \\ \pm 1\\0\\0\\0\\0\\0 \mp \end{array} + 1.6 \begin{array}{c} cat \\ \pm 0\\1\\0\\0\\0\\0 \mp \end{array} +0.4 \begin{array}{c} tired \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array} +0 \begin{array}{c} injured \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array} +0 \begin{array}{c} ankle \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array}+0 \begin{array}{c} sprained \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array} \\
+
+factor_2 &=& 0 \begin{array}{c} dog \\ \pm 1\\0\\0\\0\\0\\0 \mp \end{array} + 0 \begin{array}{c} cat \\ \pm 0\\1\\0\\0\\0\\0 \mp \end{array} +0.4 \begin{array}{c} tired \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array} +0.8 \begin{array}{c} injured \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array} +0.8 \begin{array}{c} ankle \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array}+0.8 \begin{array}{c} sprained \\ \pm 0\\0\\1\\0\\0\\0 \mp \end{array}
+\end{eqnarray*}
+
+Thus, these "factors" can be thought of almost like documents: they are merely a collection of terms. In particular, it seems as though $factor_1$ is a generic document about _pets_ and $factor_2$ is a generic document about _injuries_. Thus we might choose call these factors "topics" and give them names based upon the interpretation of their __loadings__, which are the coefficients in the above coordinate-basis expansion. 
+
+Furthermore, the "scores" in the right matrix provide information about how each document relates to each of these topics:
+
+\begin{eqnarray*}
+doc_2 &=& 1.7 factor_1 + 0.1 factor_2\\
+doc_4 &=& 0.0 factor_1 + 1.1 factor_2
+\end{eqnarray*}
+
+The above representation allows us to conclude that document 2 is _mostly_ about factor/topic 1 ("pets") and document 2 is _mostly_ about factor/topic 2 ("injuries") just by identifying the largest coordinate for each document.
+
+A matrix factorization gives us information about both the rows and columns of the matrix of interest. Here, we saw both the terms and documents collected into two topics according to the loadings (left matrix) and the scores (right matrix).
+
+We strongly encourage the reader to convince themselves of our conclusions and to replicate this analysis by completing the related question in the exercises.
+
 
 ## Exercises
 <ol>
@@ -113,7 +209,62 @@ The preceding discussion dealt entirely with bases for $\Re^n$ (our example was 
 <li> Write the orthonormal basis vectors from exercise 1 as linear combinations of the original elementary basis vectors.
 <li> What is the length of the orthogonal projection of $\a_1$ onto $\v_1$?
 
+<li> Interpret the following Nonnegative Factor Output for a term-document matrix of a small collection of text documents, answering the following questions:
+<ol type='a'>
+<li> What meaning (theme/topic) would you give to each of the three factors?
+<li> What is the dominant factor (theme/topic) for each document?
+<li> What is the loading of the word _baseball_ on Factor 2?
+<li> What is the coordinate/score of document 5 along Factor 3?
 </ol>
+
+\begin{equation*}
+ \begin{array}{rc} & \begin{array}{ccc} Factor1 & Factor2 & Factor 3\end{array} \\
+					\begin{array}{c}
+						baseball \\
+						pitcher  \\
+						mound    \\
+						player   \\
+						coach    \\
+						soccer   \\
+						world    \\
+						fifa     \\
+						cup      \\
+						canada   \\
+						womens   \\
+						USA      \\
+						olympics \\
+						medal    \\
+						gold     	\\	
+						phelps   \end{array} & \left( \begin{array}{ccc}
+						
+\quad 1.9  \quad  &\quad 0 		\quad &\quad  0\quad \cr
+\quad 2.6  \quad  	&\quad 0 		\quad &\quad 0.1\quad  \cr
+\quad 1.1  \quad 	&\quad 0.0 		\quad &\quad 0\quad  \cr
+\quad 1.5  \quad  	&\quad 0.1 	\quad 	& \quad 0\quad \cr
+\quad 1.3  \quad 	&\quad 0.8 	\quad 	&\quad 0.8 \quad \cr
+\quad 0 	  \quad &\quad 2.2 	\quad 	&\quad 0 \quad \cr
+\quad 0.1  \quad  	&\quad 1.7 	\quad 	&\quad 0.5 \quad \cr
+\quad 0 	  \quad 	&\quad 2.3 	\quad 	&\quad 0 \quad \cr
+\quad 0 	  \quad 	&\quad 1.6 	\quad 	&\quad 0.1\quad  \cr
+\quad 0.2  \quad  	&\quad 1.9 	\quad 	&\quad 0.5 \quad \cr
+\quad 0 	  \quad 	&\quad 1.8 	\quad 	&\quad 0.7\quad  \cr
+\quad 0.1  \quad 		&\quad 2.0 	\quad 	&\quad 2.3 \quad \cr
+\quad 0 	  \quad &\quad 0.2 	\quad 	&\quad 2.8 \quad \cr
+\quad  0	  \quad 	&\quad 0.1 	\quad 	&\quad 2.2 \quad \cr
+\quad 0 	  \quad 	&\quad 0 	\quad 	&\quad 1.8 \quad \cr				
+\quad 0 	  \quad &\quad 0 	\quad 	&\quad 1.6 \quad \end{array}\right)	\end{array}
+						
+						\begin{array}{c} \begin{array}{ccccc} doc1 & doc2 & doc3 & doc4 & doc5 \end{array} \\
+						\left( \begin{array}{ccccc}
+					\; 	3.2\;  &\; 2.7 \;  &\; 0   \;  &\; 0.2 \; & \; 0.1\; \cr
+					\; 	0.1\;  &\; 0.1 \;  &\; 2.5 \;  &\; 2.1 \; & \; 0.3\; \cr
+					\; 	0.2\;  &\; 0 	 \;  &\; 0.2 \;  &\; 0.1 \; & \; 2.9\; \end{array}\right) \end{array}	
+\end{equation*}
+
+
+
+</ol>
+
 
 ## List of Key Terms {-}
 
