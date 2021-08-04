@@ -1736,7 +1736,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.7834131 0.1528227
+## [1] -0.4884781  0.2465562
 ```
 
 ```r
@@ -1746,7 +1746,7 @@ colMeans(A)
 ```
 
 ```
-## [1] 0.085179681 0.008162305
+## [1] -0.14709807  0.05484491
 ```
 
 ```r
@@ -1756,7 +1756,7 @@ apply(A,2,sd)
 ```
 
 ```
-## [1] 1.0112932 0.9516299
+## [1] 0.9951114 0.9658601
 ```
 
 ```r
@@ -1766,7 +1766,7 @@ apply(A[1:5, ],1,function(x) x%*%x)
 ```
 
 ```
-## [1] 0.9951211 0.2640751 0.6170144 0.7324704 2.4046654
+## [1] 1.7102525 1.0398961 4.1784246 3.9187167 0.5713711
 ```
 
 ```r
@@ -1776,7 +1776,7 @@ colMeans(B)
 ```
 
 ```
-## [1] -2.095546e-17 -2.373102e-17
+## [1]  1.804112e-18 -1.713907e-17
 ```
 
 ```r
@@ -1822,12 +1822,12 @@ A[1:5, ]
 ```
 
 ```
-##            This        That
-## [1,]  0.9246893 -0.37426034
-## [2,]  0.5046553  0.09694409
-## [3,] -0.7853468  0.01564535
-## [4,] -0.7824866  0.34667727
-## [5,]  0.8935031 -1.26740582
+##            This       That
+## [1,] -1.2985084  0.1553331
+## [2,]  0.9521460 -0.3651220
+## [3,]  1.8559421  0.8566817
+## [4,] -1.8959629 -0.5692463
+## [5,]  0.4465415  0.6098949
 ```
 
 - Most arithmetic functions you apply to a vector act elementwise. In R, $\x^2$ will be a vector containing the square of the elements in $\x$. You can add a column to a matrix (or a data frame) by using the ```  cbind()``` function.
@@ -3332,7 +3332,7 @@ The knowledge of coordinates and bases in data science allows us to explore the 
 <p class="caption">(\#fig:documents)Four Short Documents</p>
 </div>
 
-We'll create a matrix, called a term-document matrix, where the $(i,j)^{th}$ is the number of times that term $i$ appeared in document $j$. Why put our documents/observations along the columns? Simply because we're exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure \@ref(fig:multlincombanim), which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print. 
+We'll create a matrix, called a term-document matrix, where the $(i,j)^{th}$ entry is the number of times that term $i$ appeared in document $j$. Why put our documents/observations along the columns? Simply because we're exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure \@ref(fig:multlincombanim), which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print. 
 
 \begin{equation*}
     \begin{array}{cc}
@@ -3413,7 +3413,7 @@ doc_2 &=& 1.7 factor_1 + 0.1 factor_2\\
 doc_4 &=& 0.0 factor_1 + 1.1 factor_2
 \end{eqnarray*}
 
-The above representation allows us to conclude that document 2 is _mostly_ about factor/topic 1 ("pets") and document 2 is _mostly_ about factor/topic 2 ("injuries") just by identifying the largest coordinate for each document.
+The above representation allows us to conclude that document 2 is _mostly_ about factor/topic 1 ("pets") and document 4 is _mostly_ about factor/topic 2 ("injuries") just by identifying the largest coordinate for each document.
 
 A matrix factorization gives us information about both the rows and columns of the matrix of interest. Here, we saw both the terms and documents collected into two topics according to the loadings (left matrix) and the scores (right matrix).
 
@@ -3576,7 +3576,7 @@ When we have a cloud of data and we "drop" one of our variables, geometrically t
 My favorite question. "Whyyy do we have to learn this?!" It's time to build some intuition toward that question. Consider the following 3-D scatter plot, which is interactive. Turn it around with your mouse and see what you notice.
 
 <div class="figure" style="text-align: center">
-preserve7401b5d2b4528bb6
+preserve0340f776b7f52ea0
 <p class="caption">(\#fig:pcafig)3-Dimensional data cloud that suffers from severe multicollinearity.</p>
 </div>
 Does it look like this data is 3-dimensional in nature? It appears that it could be well-summarized if it existed on a plane. However, what _is_ that plane? We can't merely drop a variable in this instance, as doing so is quite likely to destroy a good proportion of the information from the data. Still, it seems clear that by rotating the data to the _right_ set of axes, we could then squish it down and use 2 coordinates to describe the data without losing much of the information at all. What do we mean by "information"? In this context, using the word "variance" works well. We want to keep as much of the original variance as possible when we squish the cloud down to a plane with an orthogonal projection. Can you find the (approximate) rotation that gives you the _best_ view of the data points? 
@@ -4178,7 +4178,7 @@ This projection we've just described is actually the projection of the data onto
 
 With this analogy in mind, we bring back to the interactive plot from Chapter \@ref(orthog) to ponder what these different projections of a data cloud would look like, and to locate the maximum variance projection of _this_ data.
 
-preserve0e51f351e6efc6c0
+preserve74ece7da5c08c11f
 
 ## PCA Details
 
@@ -4728,11 +4728,11 @@ cor(data)
 ```
 
 ```
-##             [,1]        [,2]        [,3]        [,4]
-## [1,]  1.00000000  0.04531165  0.06299122 -0.03799538
-## [2,]  0.04531165  1.00000000 -0.03285224 -0.09659859
-## [3,]  0.06299122 -0.03285224  1.00000000  0.03449194
-## [4,] -0.03799538 -0.09659859  0.03449194  1.00000000
+##             [,1]        [,2]         [,3]         [,4]
+## [1,]  1.00000000 -0.00301237  0.053142703  0.123924125
+## [2,] -0.00301237  1.00000000 -0.023528385 -0.029730772
+## [3,]  0.05314270 -0.02352838  1.000000000 -0.009356552
+## [4,]  0.12392412 -0.02973077 -0.009356552  1.000000000
 ```
 
 ```r
@@ -4743,9 +4743,9 @@ summary(pc)
 ```
 ## Importance of components:
 ##                           PC1    PC2    PC3    PC4
-## Standard deviation     1.0618 1.0307 0.9531 0.9497
-## Proportion of Variance 0.2818 0.2656 0.2271 0.2255
-## Cumulative Proportion  0.2818 0.5474 0.7745 1.0000
+## Standard deviation     1.0664 1.0066 0.9961 0.9259
+## Proportion of Variance 0.2843 0.2533 0.2480 0.2143
+## Cumulative Proportion  0.2843 0.5376 0.7857 1.0000
 ```
 
 ```r
@@ -4753,11 +4753,11 @@ pc$rotation
 ```
 
 ```
-##             PC1         PC2         PC3        PC4
-## [1,]  0.3397407 -0.65988458  0.58348151  0.3296633
-## [2,]  0.6580191  0.05179203  0.09635975 -0.7450123
-## [3,] -0.1771963 -0.74417496 -0.57851506 -0.2830644
-## [4,] -0.6482196 -0.08985301  0.56176903 -0.5061159
+##             PC1        PC2        PC3        PC4
+## [1,] -0.6888797 -0.1088649  0.2437045  0.6739446
+## [2,]  0.1995146 -0.5361096  0.8018612 -0.1726242
+## [3,] -0.2568194  0.7601069  0.5028666 -0.3215688
+## [4,] -0.6478290 -0.3506744 -0.2115465 -0.6423341
 ```
 
 ```r
@@ -5380,7 +5380,7 @@ graph
 ```
 
 <div class="figure" style="text-align: center">
-preserveb0b6e30a89fcbad0
+preserve58d5672f131a913d
 <p class="caption">(\#fig:unnamed-chunk-77)Projection of the FIFA players' skill data into 3 dimensions. Player positions are evident.</p>
 </div>
 
@@ -10616,7 +10616,7 @@ $$\text{factor}_2 = -0.048\text{cat}-0.066\text{dog}-0.039\text{eat}+ 0.167\text
 However, circling back to factor 1 then leaves us wanting to see different signs for the two groups of words. Nevertheless, the information separating the words is most certainly present. Take a look at the plot of the words' loadings along the first two factors in Figure \@ref(fig:lsiwords).
 
 <div class="figure" style="text-align: center">
-preservea5c8041cb22b563a
+preserve7e0da1f78d40903f
 <p class="caption">(\#fig:lsiwords)Projection of the Terms onto First two Singular Dimensions</p>
 </div>
 
@@ -10639,7 +10639,7 @@ out$v
 In fact, the ability to separate the documents with the first two singular vectors is rather magical here, as shown visually in Figure \@ref(fig:lsidocs). 
 
 <div class="figure" style="text-align: center">
-preserveb3f88ff9d7d71f83
+preservef9d305e1b9eedeb7
 <p class="caption">(\#fig:lsidocs)Projection of the Docuemnts onto First two Singular Dimensions</p>
 </div>
 
@@ -11794,7 +11794,7 @@ forceNetwork(Links=edges, Nodes=nodes, Source = "source",
              charge=-100,fontSize=12, opacity = 0.8, zoom=F, legend=T)
 ```
 
-preserved20153d1fd49b9ee
+preserve13ad87548675358a
 
 ### Saving your Interactive Visualization to .html
 

@@ -754,7 +754,7 @@ where <span class="math inline">\(\X\)</span> and <span class="math inline">\(\V
 Figure 8.5: Four Short Documents
 </p>
 </div>
-<p>We’ll create a matrix, called a term-document matrix, where the <span class="math inline">\((i,j)^{th}\)</span> is the number of times that term <span class="math inline">\(i\)</span> appeared in document <span class="math inline">\(j\)</span>. Why put our documents/observations along the columns? Simply because we’re exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure <a href="mult.html#fig:multlincombanim">2.7</a>, which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print.</p>
+<p>We’ll create a matrix, called a term-document matrix, where the <span class="math inline">\((i,j)^{th}\)</span> entry is the number of times that term <span class="math inline">\(i\)</span> appeared in document <span class="math inline">\(j\)</span>. Why put our documents/observations along the columns? Simply because we’re exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure <a href="mult.html#fig:multlincombanim">2.7</a>, which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print.</p>
 <p><span class="math display">\[\begin{equation*}
     \begin{array}{cc}
          &amp; \begin{array}{cccc} \;doc_1\; &amp; \;doc_2\;&amp; \;doc_3\;&amp; \;doc_4 \end{array}\\
@@ -824,7 +824,7 @@ factor_2 &amp;=&amp; 0 \begin{array}{c} dog \\ \pm 1\\0\\0\\0\\0\\0 \mp \end{arr
 doc_2 &amp;=&amp; 1.7 factor_1 + 0.1 factor_2\\
 doc_4 &amp;=&amp; 0.0 factor_1 + 1.1 factor_2
 \end{eqnarray*}\]</span></p>
-<p>The above representation allows us to conclude that document 2 is <em>mostly</em> about factor/topic 1 (“pets”) and document 2 is <em>mostly</em> about factor/topic 2 (“injuries”) just by identifying the largest coordinate for each document.</p>
+<p>The above representation allows us to conclude that document 2 is <em>mostly</em> about factor/topic 1 (“pets”) and document 4 is <em>mostly</em> about factor/topic 2 (“injuries”) just by identifying the largest coordinate for each document.</p>
 <p>A matrix factorization gives us information about both the rows and columns of the matrix of interest. Here, we saw both the terms and documents collected into two topics according to the loadings (left matrix) and the scores (right matrix).</p>
 <p>We strongly encourage the reader to convince themselves of our conclusions and to replicate this analysis by completing the related question in the exercises.</p>
 </div>

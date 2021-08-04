@@ -113,7 +113,7 @@ The knowledge of coordinates and bases in data science allows us to explore the 
 knitr::include_graphics("figs/documents.jpg")
 ```
 
-We'll create a matrix, called a term-document matrix, where the $(i,j)^{th}$ is the number of times that term $i$ appeared in document $j$. Why put our documents/observations along the columns? Simply because we're exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure \@ref(fig:multlincombanim), which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print. 
+We'll create a matrix, called a term-document matrix, where the $(i,j)^{th}$ entry is the number of times that term $i$ appeared in document $j$. Why put our documents/observations along the columns? Simply because we're exposing the linear combinations involved in our interpretation and we want that intuition to come easily from the animation in Figure \@ref(fig:multlincombanim), which might be helpful to revisit at this time. Everything works the same if we put the documents on the columns, the translation is simply a linear combination of rows, which is too wide for print. 
 
 \begin{equation*}
     \begin{array}{cc}
@@ -194,7 +194,7 @@ doc_2 &=& 1.7 factor_1 + 0.1 factor_2\\
 doc_4 &=& 0.0 factor_1 + 1.1 factor_2
 \end{eqnarray*}
 
-The above representation allows us to conclude that document 2 is _mostly_ about factor/topic 1 ("pets") and document 2 is _mostly_ about factor/topic 2 ("injuries") just by identifying the largest coordinate for each document.
+The above representation allows us to conclude that document 2 is _mostly_ about factor/topic 1 ("pets") and document 4 is _mostly_ about factor/topic 2 ("injuries") just by identifying the largest coordinate for each document.
 
 A matrix factorization gives us information about both the rows and columns of the matrix of interest. Here, we saw both the terms and documents collected into two topics according to the loadings (left matrix) and the scores (right matrix).
 
