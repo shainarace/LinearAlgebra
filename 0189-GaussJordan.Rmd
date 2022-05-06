@@ -6,8 +6,6 @@ excounter=0
 cid='solvesys'
 ```
 
-
-
 In this section we will learn about solving the systems of equations that were presented in Chapter \@ref(multapp). There are three general situations we may find ourselves in when attempting to solve systems of equations:
 
 1. The system could have one unique solution.
@@ -20,6 +18,8 @@ Luckily, no matter what type of system we are dealing with, the method to arrivi
 ## Gaussian Elimination
 
 Gauss-Jordan Elimination is essentially the same process of elimination you may have used in an Algebra class in primary school. Suppose, for example, we have the following simple system of equations:
+
+
 $$
 \begin{cases}
   \begin{eqnarray}
@@ -36,11 +36,7 @@ $$
     &  x_1 & + & 2x_2  \\
   - & (x_1 & + &  x_2) \\
   \hline &  &  &  x_2  \\
-\end{array}\right)
-
-=
-
-\left(\begin{array}{r}
+\end{array}\right) = \left(\begin{array}{r}
          11 \\
          -6 \\
   \hline 5  \\
@@ -82,31 +78,54 @@ $$
   margin-right: auto; border:none;" >
 <tr>
 <td style="text-align:center; vertical-align:center">
- \begin{cases}\begin{align}
-x_1+2x_2 &= 11\\
-x_1+x_2 &= 6\end{align}\end{cases}
+
+$$ 
+\begin{cases}
+  \begin{align}
+    x_1 +2x_2 & = 11 \\
+    x_1 +x_2  & = 6  \\
+  \end{align}
+\end{cases}
+$$
 <td style="text-align:center; vertical-align:center; width:10px">
- $\Leftrightarrow$ 
- <td style="text-align:center; vertical-align:center">
- \begin{cases}\begin{align}
-x_1+x_2 =& 6\\
-x_1+2x_2 =& 11\end{align}\end{cases}
+$\Leftrightarrow$ 
+<td style="text-align:center; vertical-align:center">
+
+$$
+\begin{cases}
+  \begin{align}
+    x_1 +x_2  = & 6  \\
+    x_1 +2x_2 = & 11 \\
+  \end{align}
+\end{cases}
+$$
+
 </tr>
 </table>
 2. Multiplying both sides of one equation by a constant. _(Multiply the second equation by -1)_.
-<table style="width:auto; margin-left: auto; 
-  margin-right: auto; border:none;" >
+<table style="width:auto; margin-left: auto; margin-right: auto; border:none;" >
 <tr>
 <td style="text-align:center; vertical-align:center">
-\begin{cases}\begin{align}
-x_1+2x_2 &=& 11\\
-x_1+x_2 &=& 6\end{align}\end{cases}
+
+$$
+\begin{cases}
+  \begin{align}
+    x_1 +2x_2 & = & 11 \\
+    x_1 +x_2  & = & 6  \\
+  \end{align}
+\end{cases}
+$$
 <td style="text-align:center; vertical-align:center; width:10px">
- $\Leftrightarrow$ 
- <td style="text-align:center; vertical-align:center">
- \begin{cases}\begin{align}
-x_1+2x_2 &=& 11\\
--1x_1-1x_2 &=& -6\end{align}\end{cases}
+$\Leftrightarrow$ 
+<td style="text-align:center; vertical-align:center">
+$$
+\begin{cases}
+  \begin{align}
+    x_1   +2x_2 & = & 11 \\
+    -1x_1 -1x_2 & = & -6 \\
+  \end{align}
+\end{cases}
+$$
 </tr>
 </table>
 
@@ -116,15 +135,29 @@ x_1+2x_2 &=& 11\\
   margin-right: auto; border:none;" >
 <tr>
 <td style="text-align:center; vertical-align:center">
-\begin{cases}\begin{eqnarray}
-x_1+2x_2 &=& 11\\
-x_1+x_2 &=& 6\end{eqnarray}\end{cases}
+
+$$
+\begin{cases}
+  \begin{eqnarray}
+    x_1 +2x_2 & = & 11 \\
+    x_1 +x_2  & = & 6  \\
+  \end{eqnarray}
+\end{cases}
+$$
+
 <td style="text-align:center; vertical-align:center; width:10px">
- $\Leftrightarrow$ 
- <td style="text-align:center; vertical-align:center">
- \begin{cases}\begin{eqnarray}
-x_1+2x_2 &=& 11\\
-x_2 &=& 5\end{eqnarray}\end{cases}
+$\Leftrightarrow$ 
+<td style="text-align:center; vertical-align:center">
+
+$$
+\begin{cases}
+  \begin{eqnarray}
+    x_1 +2x_2 & = & 11 \\
+    x_2 &       = & 5  \\
+  \end{eqnarray}
+\end{cases}
+$$
+
 </tr>
 </table>
 
@@ -297,9 +330,7 @@ $$
     1 & -2 &  2 & 4 \\
     1 &  2 & -1 & 2 \\
   \end{array}\right)
-
   \xrightarrow{Current Pivot}
-
   \left(\begin{array}{rrr|r}
     \fbox{1}                                            &  1 &  1 & 1 \\
     \enclose{circle}[mathcolor="red"]{\color{black}{1}} & -2 &  2 & 4 \\
@@ -318,7 +349,6 @@ $$
     \color{red}{0}                                      & \color{red}{-3} & \color{red}{1} & \color{red}{3} \\
     \enclose{circle}[mathcolor="red"]{\color{black}{1}} &       2         &       -1       &         2      \\
   \end{array}\right)
-  
   \xrightarrow{R3'=R3-R1}
   \left(\begin{array}{rrr|r}
     \fbox{1}       &         1      &        1        &     1          \\
@@ -328,7 +358,7 @@ $$
 \end{equation*}
 $$
 
- Now that we have eliminated each of the circled elements below the current pivot, we will continue on to the next pivot, which is -3. Looking into the future, we can either do the operation $R3'=R3+\frac{1}{3}R2$ or we can interchange rows 2 and 3 to avoid fractions in our next calculation. To keep things neat, we will do the latter. (_note: either way you proceed will lead you to the same solution!_)
+Now that we have eliminated each of the circled elements below the current pivot, we will continue on to the next pivot, which is -3. Looking into the future, we can either do the operation $R3'=R3+\frac{1}{3}R2$ or we can interchange rows 2 and 3 to avoid fractions in our next calculation. To keep things neat, we will do the latter. (_note: either way you proceed will lead you to the same solution!_)
 
 $$
 \begin{equation*}
@@ -338,45 +368,37 @@ $$
     0        & \fbox{-3}                                           &  1 & 3 \\
     0        & \enclose{circle}[mathcolor="red"]{\color{black}{1}} & -2 & 1 \\
   \end{array}\right)
-  
   \xrightarrow{R2 \leftrightarrow R3}
-  
   \left(\begin{array}{rrr|r}
     \fbox{1} & 1                                                    &  1 & 1 \\
     0        & \fbox{1}                                             & -2 & 1 \\
     0        & \enclose{circle}[mathcolor="red"]{\color{black}{-3}} &  1 & 3 \\
   \end{array}\right)
-  
 \end{equation*}
 $$
-
 Now that the current pivot is equal to 1, we can easily eliminate the circled entries below it by replacing rows with combinations using the pivot row. We finish the process once the last pivot is identified (the final pivot has no eliminations to make below it).
 
 $$
 \begin{equation*}
   \xrightarrow{R3' = R3 + 3R2}
-  
   \left(\begin{array}{rrr|r}
     \fbox{1}       & 1              &  1                     & 1              \\
     0              & \fbox{1}       & -2                     & 1              \\
     \color{red}{0} & \color{red}{0} & \color{red}{\fbox{-5}} & \color{red}{6} \\
   \end{array}\right)
-  
 \end{equation*} 
 $$
 
 At this point, when all the pivots have been reached, the augmented matrix is said to be in **row-echelon form**. This simply means that all of the entries below the pivots are equal to 0. The augmented matrix can be transformed back into equation form now that it is in a triangular form:
 
 $$
-\begin{equation*}
-  \begin{cases}
-    \begin{align}
-      x_1  +x_2 +x_3 = 1  \\
-      x_2  -2x_3     = 1  \\
-      5x_3           = -6 \\
-    \end{align}
-  \end{cases}
-\end{equation*}
+\begin{cases}
+  \begin{align}
+    x_1  +x_2 +x_3 = 1  \\
+    x_2  -2x_3     = 1  \\
+    5x_3           = -6 \\
+  \end{align}
+\end{cases}
 $$
 
 Which is the same system we finally solved in Example \@ref(exm:rowopeq) to get the final solution:
@@ -437,9 +459,7 @@ $$
     -2x_1 +5x_2 -4x_3 = -2 \\
   \end{align}
 \end{cases}
-
 \Longrightarrow 
-
 \left(\begin{array}{rrr|r}
    0 & 1 & -1 &  3 \\
   -2 & 4 & -1 &  1 \\
@@ -454,9 +474,7 @@ $$
   -2 & 4 & -1 &  1 \\
   -2 & 5 & -4 & -2 \\
 \end{array}\right)
-
 \xrightarrow{R1\leftrightarrow R2}
-
 \left(\begin{array}{rrr|r}
   \fbox{-2} & 4 & -1 &  1 \\
   0         & 1 & -1 &  3 \\
@@ -475,9 +493,7 @@ $$
   0         & 1 & -1 &  3 \\
   -2        & 5 & -4 & -2 \\
 \end{array}\right)
-  
 \xrightarrow{R3'=R3-R1} 
-  
 \left(\begin{array}{rrr|r}
   \fbox{-2}      & 4              & -1              & 1               \\
   0              & 1              & -1              & 3               \\
@@ -491,9 +507,7 @@ $$
   0         & 1 & -1 &  3 \\
   0         & 1 & -3 & -3 \\
 \end{array}\right)
-
 \xrightarrow{R1'=-\frac{1}{2} R1}
-
 \left(\begin{array}{rrr|r}
   \color{red}{\fbox{1}} & \color{red}{-2} & \color{red}{\frac{1}{2}} & \color{red}{-\frac{1}{2}} \\
   0                     & 1               & -1                       &  3                        \\
@@ -508,9 +522,7 @@ $$
   0 & \fbox{1} & -1          & 3            \\
   0 & 1        & -3          & -3           \\
 \end{array}\right)
-
 \xrightarrow{R3' = R3 - R2}
-
 \left(\begin{array}{rrr|r}
   1              & -2             & \frac{1}{2}     & -\frac{1}{2}    \\
   0              & \fbox{1}       & -1              & 3               \\
@@ -525,9 +537,7 @@ $$
   0 &  1 & -1          & 3            \\
   0 &  0 & \fbox{-2}   & -6           \\
 \end{array}\right)
-
 \xrightarrow{R3' = -\frac{1}{2}R3}
-
 \left(\begin{array}{rrr|r}
   1              & -2             & \frac{1}{2}         & -\frac{1}{2}     \\
   0              &  1             & -1                  & 3                \\
@@ -544,9 +554,7 @@ $$
   0 &  1 & -1          & 3            \\
   0 &  0 & \fbox{1}    & 3            \\
 \end{array}\right)
-
 \xrightarrow{R2' = R2 + R3}
-
 \left(\begin{array}{rrr|r} 
   1              & -2             & \frac{1}{2}    & -\frac{1}{2}   \\
   \color{red}{0} & \color{red}{1} & \color{red}{0} & \color{red}{6} \\
@@ -560,9 +568,7 @@ $$
   0 &  1 & 0           & 6            \\
   0 &  0 & \fbox{1}    & 3            \\
 \end{array}\right)
-
 \xrightarrow{R1' = R1 -\frac{1}{2}R3}
-
 \left(\begin{array}{rrr|r}
   \color{red}{1} & \color{red}{-2} & \color{red}{0} & \color{red}{-2} \\
   0              & 1               & 0              & 6               \\
@@ -577,9 +583,7 @@ $$
   0 & \fbox{1} & 0 &  6 \\
   0 & 0        & 1 &  3 \\
 \end{array}\right)
-  
 \xrightarrow{R1' = R1 +2R2}
-  
 \left(\begin{array}{rrr|r}
   \color{red}{1} & \color{red}{0} & \color{red}{0} & \color{red}{10} \\
   0              & \fbox{1}       & 0              & 6               \\
@@ -650,13 +654,13 @@ Based on our earlier examples, we already have a sense for systems which fall in
 (ref:case1title) Case 1: Unique solution
 
 :::{.theorem name='(ref:case1title)' #case1}
-A system of equations $\\A\\x=\\b$ has a unique solution if and only if _both_ of the following conditions hold:
+A system of equations $\mathbf{A} \mathbf{x} = \mathbf{b}$ has a unique solution if and only if _both_ of the following conditions hold:
 
-1. The number of equations is equal to the number of variables (i.e. the coefficient matrix $\A$ is _square_).
+1. The number of equations is equal to the number of variables (i.e. the coefficient matrix $\mathbf{A}$ is _square_).
 2. The number of pivots is equal to the number of rows/columns. In other words, under Gauss-Jordan elimination, the coefficient matrix is transformed into the identity matrix:
-$$\\A \xrightarrow{Gauss-Jordan} I$$
+$$\mathbf{A} \xrightarrow{Gauss-Jordan} \mathbf{I}$$
 
-In this case, we say that the matrix $\\A$ is **invertible** because it is full-rank (the rank of a matrix is the number of pivots after Gauss-Jordan elimination) _and_ square. 
+In this case, we say that the matrix $\mathbf{A}$ is **invertible** because it is full-rank (the rank of a matrix is the number of pivots after Gauss-Jordan elimination) _and_ square. 
 :::
 
 ### The Inconsistent Case {#inconsistent}
@@ -694,9 +698,7 @@ $$
   1 &  1 & -1 & 3 \\
   1 &  1 &  1 & 4 \\
 \end{array}\right)
-
 \xrightarrow{\substack{R2'=R2-R1 \\ R3'=R3-R1 \\ R4'=R4-R1}}
-
 \left(\begin{array}{rrr|r}
   1 & -1 &  1 & 1 \\
   0 &  0 & -2 & 1 \\
@@ -712,9 +714,7 @@ $$
  0 &  2 & -2 & 2 \\
  0 &  0 & -2 & 1 \\
 \end{array}\right)
-
 \xrightarrow{R3'=R3-R2}
-
 \left(\begin{array}{rrr|r}
   1 & -1 &  1 &  1 \\
   0 &  2 &  0 &  3 \\
@@ -748,9 +748,7 @@ $$
   2 & 1 & 3 & 0 \\
   1 & 1 & 2 & 0 \\
 \end{array}\right)
-
 \xrightarrow{Gauss-Jordan}
-
 \left(\begin{array}{rrr|r}
   1 & 0 & 1 & 0 \\
   0 & 1 & 1 & 0 \\
@@ -781,16 +779,21 @@ $$
 Our convention here is to __parameterize__ the solution and simply declare that $x_3=s$ (or any other placeholder variable for a constant). Then our solution becomes:
 
 $$
-\pm x_1\\x_2\\x_3 \mp = \pm -s \\ -s \\ s \mp = s \pm -1\\-1\\1 \mp
+\begin{pmatrix}
+  x_1 \\ x_2 \\ x_3 
+\end{pmatrix} = \begin{pmatrix}
+  -s \\ -s \\ s 
+\end{pmatrix} = s \begin{pmatrix}
+  -1 \\ -1 \\ 1 
+\end{pmatrix}
 $$
-What this means is that any scalar multiple of the vector $\pm -1\\-1\\1 \mp$ is a solution to the system. Thus there are infinitely many solutions!
-
+What this means is that any scalar multiple of the vector $\begin{pmatrix} -1 \\ -1 \\ 1 \end{pmatrix}$ is a solution to the system. Thus there are infinitely many solutions!
 
 
 (ref:case3title) Case 3: Infinitely Many Solutions
 
 :::{.theorem name='(ref:case3title)' #case3}
-A system of equations $\A\x=\b$ has infinitely many solutions if the system is consistent and _any_ of the following conditions hold:
+A system of equations $\mathbf{A}\mathbf{x}=\mathbf{b}$ has infinitely many solutions if the system is consistent and _any_ of the following conditions hold:
 
 1. The number of variables is greater than the number of equations.
 2. There is at least one _free variable_ presented in the reduced row echelon form.
@@ -817,10 +820,9 @@ $$
     x_2 +x_3 -x_4  = 0 \\
   \end{align}
 \end{cases}
-
-\xrightarrow{}
 $$
 
+$$\Longrightarrow$$
 $$
 \begin{cases}
   \begin{align}
@@ -884,7 +886,7 @@ The **rank** of a matrix is the number of linearly independent rows or columns i
 ## Solving Matrix Equations
 
 One final piece to the puzzle is what happens when we have a matrix equation like 
-$$AX=B$$
+$$\mathbf{A}\mathbf{X}=\mathbf{B}$$
 This situation is an easy extension of our previous problem because we are essentially solving the same system of equation with several different right-hand-side vectors (the columns of $\B$).
 
 Let's look at a $2\times 2$ example to get a feel for this! We'll dissect the following matrix equation into two different systems of equations:
@@ -917,9 +919,7 @@ $$
   3 \\
   4 
 \end{pmatrix} 
-
 \quad \mbox{and}\quad 
-
 \begin{pmatrix}
   1 & 1 \\
   2 & 1 \\
@@ -939,9 +939,7 @@ $$
   1 & 1 & 3 \\
   2 & 1 & 4 \\
 \end{array}\right)
-
 \quad\mbox{and}\quad 
-
 \left(\begin{array}{rr|r}
   1 & 1 & 3 \\
   2 & 1 & 5 \\
@@ -968,9 +966,7 @@ $$
     2 & 1 & 4 & 5 \\
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{R2' = R2 -2R1}
-
 \begin{pmatrix}
   \begin{array}{cc|cc}
     1 &  1 &  3 &  3 \\
@@ -987,9 +983,7 @@ $$
     0 & 1 & 2 & 1 \\
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{R1' = R1 -R2}
-
 \begin{pmatrix}
   \begin{array}{cc|cc}
     1 & 0 & 1 & 2 \\
@@ -1028,20 +1022,18 @@ and we have solved our system. This method is particularly useful when finding t
 
 ### Solving for the Inverse of a Matrix
 
-For any square matrix $\A$, we know the inverse matrix ($A^{-1}$), if it exists, satisfies the following matrix equation,
-$$AA^{-1} = I.$$
+For any square matrix $\A$, we know the inverse matrix ($\mathbf{A}^{-1}$), if it exists, satisfies the following matrix equation,
+$$\mathbf{A}\mathbf{A}^{-1} = \mathbf{I}.$$
 
 Using the Gauss-Jordan method with multiple right hand sides, we can solve for the inverse of any matrix. We simply start with an augmented matrix with $\A$ on the left and the identity on the right, and then use Gauss-Jordan elimination to transform the matrix $\A$ into the identity matrix.
 
 $$
 \left(\begin{array}{r|r}
-  \boldsymbol{A} & I
+  \mathbf{A} & I
 \end{array}\right)
-
 \xrightarrow{Gauss-Jordan}
-
 \left(\begin{array}{r|r}
-  \boldsymbol{I} & A^{-1}
+  \mathbf{I} & A^{-1}
 \end{array}\right)
 $$
  If this is possible then the matrix on the right is the inverse of $\A$. If this is not possible then $\A$ does not have an inverse. Let's see a quick example of this.
@@ -1049,7 +1041,7 @@ $$
 :::{.example name='Finding a Matrix Inverse' #findinverse}
   Find the inverse of 
 $$
-A = \begin{pmatrix}
+\mathbf{A} = \begin{pmatrix}
   -1  &  2 & -1 \\
    0  & -1 &  1 \\
    2  & -1 &  0 \\ 
@@ -1057,7 +1049,7 @@ A = \begin{pmatrix}
 $$
 using Gauss-Jordan Elimination.
  
- Since $AA^{-1} = I$, we set up the augmented matrix as $\left(\begin{array}{r|r} \boldsymbol{A} & I\end{array}\right)$:
+ Since $\mathbf{A}\mathbf{A}^{-1} = \mathbf{I}$, we set up the augmented matrix as $\left(\begin{array}{r|r} \mathbf{A} & I\end{array}\right)$:
  
 $$
 \begin{pmatrix}
@@ -1067,9 +1059,7 @@ $$
      2 & -1 &  0 & 0 & 0 & 1 \\
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{R3' = R3 +2R1}
-
 \begin{pmatrix}
   \begin{array}{ccc|ccc}
     -1 &  2 & -1 & 1 & 0 & 0 \\
@@ -1087,12 +1077,10 @@ $$
      0 &  3 & -2 & 2 & 0 & 1 \\ 
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{\substack{
   R1' = -1R1 \\
   R3'=R3+3R2
 }}
-
 \begin{pmatrix}
   \begin{array}{ccc|ccc} 
     1 & -2 & 1 & -1 & 0 & 0 \\
@@ -1111,9 +1099,7 @@ $$
     0 &  0 & 1 &  2 & 3 & 1 \\
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{\substack{R1'=R1-R3\\R2'=R2-R3}}
-
 \begin{pmatrix}
   \begin{array}{ccc|ccc}
     1 & -2 & 0 & -3 & -3 & -1 \\
@@ -1131,12 +1117,10 @@ $$
     0 &  0 & 1 &  2 &  3 &  1 \\ 
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{\substack{
   R2' = -1R2    \\
   R1' = R1 +2R2 \\ 
 }}
-
 \begin{pmatrix}
   \begin{array}{ccc|ccc}
     1 & 0 & 0 & 1 & 1 & 1 \\
@@ -1146,9 +1130,9 @@ $$
 \end{pmatrix}
 $$
 
-Finally, we have completed our task. The inverse of $\A$ is the matrix on the right hand side of the augmented matrix!
+Finally, we have completed our task. The inverse of $\mathbf{A}$ is the matrix on the right hand side of the augmented matrix!
 $$
-A^{-1} = \begin{pmatrix}
+\mathbf{A}^{-1} = \begin{pmatrix}
   1 & 1 & 1 \\
   2 & 2 & 1 \\
   2 & 3 & 1 \\
@@ -1161,7 +1145,7 @@ $$
 Use the same method to determine the inverse of
 
 $$
-B = \begin{pmatrix}
+\mathbf{B} = \begin{pmatrix}
   1 & 1 & 1 \\
   2 & 2 & 1 \\
   2 & 3 & 1 \\
@@ -1173,9 +1157,9 @@ $$
 
 
 :::{.example name='Inverse of a Diagonal Matrix' #diaginverse}
-A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix $D$,
+A full rank diagonal matrix (one with no zero diagonal elements) has a particularly neat and tidy inverse. Here we motivate the definition by working through an example. Find the inverse of the digaonal matrix $\mathbf{D}$,
 $$
-D = \begin{pmatrix} 
+\mathbf{D} = \begin{pmatrix} 
   3 &  0 & 0        \\
   0 & -2 & 0        \\
   0 &  0 & \sqrt{5} \\
@@ -1191,13 +1175,11 @@ $$
     0 &  0 & \sqrt{5} & 0 & 0 & 1 \\
   \end{array}
 \end{pmatrix}
-
 \xrightarrow{\substack{
   R1' =  \frac{1}{3}        R1 \\
   R2' = -\frac{1}{2}        R2 \\
   R3' =  \frac{1}{\sqrt{5}} R3 \\
 }}
-
 \begin{pmatrix}
   \begin{array}{ccc|ccc}
     1 & 0 & 0 & \frac{1}{3} & 0            & 0                  \\
@@ -1207,10 +1189,10 @@ $$
 \end{pmatrix}
 $$
 
-Thus, the inverse of $D$ is:
+Thus, the inverse of $\mathbf{D}$ is:
 
 $$
-D^{-1} = \begin{pmatrix} 
+\mathbf{D}^{-1} = \begin{pmatrix} 
   \frac{1}{3} & 0            & 0                  \\
   0           & -\frac{1}{2} & 0                  \\
   0           & 0            & \frac{1}{\sqrt{5}} \\
@@ -1222,10 +1204,10 @@ As you can see, all we had to do is take the scalar inverse of each diagonal ele
 
 
 :::{.definition name='Inverse of a Diagonal Matrix' #diaginverse}
-An $n\times n$ diagonal matrix $D = diag\{d_{11},d_{22},\dots,d_{nn}\}$ with no nonzero diagonal elements is invertible with inverse
+An $n\times n$ diagonal matrix $\mathbf{D} = diag\{d_{11},d_{22},\dots,d_{nn}\}$ with no nonzero diagonal elements is invertible with inverse
 
 $$
-\\D^{-1} = diag\{\frac{1}{d_{11}},\frac{1}{d_{22}},\dots,\frac{1}{d_{nn}}\}
+\mathbf{D}^{-1} = diag\{\frac{1}{d_{11}},\frac{1}{d_{22}},\dots,\frac{1}{d_{nn}}\}
 $$
 :::
 
@@ -1260,7 +1242,7 @@ A
 rref(A)
 ```
 And we have the reduced row echelon form for one of the problems from the worksheets! You can see this system of equations is inconsistent because the bottom row amounts to the equation
-$$0x_1+0x_2+0x_3 = 1.$$
+$$0\mathbf{x}_1+0\mathbf{x}_2+0\mathbf{x}_3 = 1.$$
 This should save you some time and energy by skipping the arithmetic steps in Gauss-Jordan Elimination.
   
   
@@ -1277,15 +1259,19 @@ This should save you some time and energy by skipping the arithmetic steps in Ga
 <li> For the following two systems of equations, draw both equations on the same plane. Comment on what you find and what it means about the system of equations.
 <ol type='a'>
 <li>
+$$
 \begin{eqnarray*}
-x_1 + x_2 &=& 10 \\
--x_1 + x_2 &=& 0
+   x_1 + x_2 & = & 10 \\
+  -x_1 + x_2 & = & 0  \\
 \end{eqnarray*}
+$$
 <li>
+$$
 \begin{eqnarray*}
-x_1 - 2x_2 &=& -3 \\
-2x_1 - 4x_2 &=& 8
+   x_1 - 2x_2 & = & -3 \\
+  2x_1 - 4x_2 & = &  8 \\
 \end{eqnarray*}
+$$
 <li> We've drawn 2 of the 3 possible outcomes for systems of equations. Give an example of the 3rd possible outcome and draw the accompanying picture.
 </ol>
 
@@ -1299,17 +1285,31 @@ x_1 - 2x_2 &=& -3 \\
 
 <li> Using Gaussian Elimination on the augmented matrices, reduce each system of equations to a triangular form and solve using back-substitution.
 <ol style="list-style-type:lower-alpha">
- <li>$$\begin{cases}
-x_1 +2x_2= 3\\
--x_1+x_2=0\end{cases}$$
-  <li>$$\begin{cases}
-x_1+x_2 +2x_3= 7\\
-x_1+x_3 = 4\\
--2x_1-2x_2 =-6\end{cases}$$
-  <li>$$\begin{cases}\begin{align}
-2x_1-x_2 +x_3= 1\\
--x_1+2x_2+3x_3 = 6\\
-x_2+4x_3 =6 \end{align}\end{cases}$$
+<li>
+$$
+\begin{cases}
+   x_1 + 2x_2 = 3 \\
+  -x_1 + x_2  = 0 \\
+\end{cases}
+$$
+<li>
+$$
+\begin{cases}
+  x_1 +x_2 +2x_3 =  7 \\
+  x_1 +x_3       =  4 \\
+  -2x_1 -2x_2    = -6 \\
+\end{cases}
+$$
+<li>
+$$
+\begin{cases}
+  \begin{align}
+    2x_1 -x_2  +x_3  = 1 \\
+    -x_1 +2x_2 +3x_3 = 6 \\
+     x_2 +4x_3       = 6 \\
+  \end{align}
+\end{cases}
+$$
 </ol>
 
 <li> Using Gauss-Jordan Elimination on the augmented matrices, reduce each system of equations from the previous exercise to reduced row-echelon form and give the solution as a vector.
@@ -1346,24 +1346,24 @@ x_1+2x_2+2x_3+3x_4=0\\
 
 <li> For the following augmented matrices, circle the pivot elements and give the rank of the coefficient matrix along with the number of free variables.
 <ol type='a'>
-<li> $\left(\begin{array}{cccc|c} 3&2&1&1&2\\0&2&0&0&1\\0&0&1&0&5 \end{array}\right)$
-<li> $\left(\begin{array}{ccc|c} 1&1&0&2\\0&0&1&1\\0&0&0&0 \end{array}\right)$
-<li> $\left(\begin{array}{ccccc|c} 1&2&0&1&0&2\\0&1&1&1&0&1\\0&0&0&1&1&2\\0&0&0&0&0&0 \end{array}\right)$
+<li> $\left(\begin{array}{cccc|c} 3&2&1&1&2 \\ 0&2&0&0&1 \\ 0&0&1&0&5 \end{array}\right)$
+<li> $\left(\begin{array}{ccc|c} 1&1&0&2 \\ 0&0&1&1 \\ 0&0&0&0 \end{array}\right)$
+<li> $\left(\begin{array}{ccccc|c} 1&2&0&1&0&2 \\ 0&1&1&1&0&1 \\ 0&0&0&1&1&2 \\ 0&0&0&0&0&0 \end{array}\right)$
 </ol>
 
 <li> Use Gauss-Jordan Elimination to find the inverse of the following matrices, if possible.
 <ol style="list-style-type:lower-alpha">
-<li> $\A=\pm 2&3\\2&2\mp$
-<li> $\B=\pm 1&2\\2&4\mp$
-<li> $\C=\pm 1&2&3\\4&5&6\\7&8&9\mp$
-<li> $\D=\pm 4&0&0\\0&-4&0\\0&0&2 \mp$
+<li> $\mathbf{A} = \begin{pmatrix} 2&3 \\ 2&2 \end{pmatrix}$
+<li> $\mathbf{B} = \begin{pmatrix} 1&2 \\ 2&4 \end{pmatrix}$
+<li> $\mathbf{C} = \begin{pmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{pmatrix}$
+<li> $\mathbf{D} = \begin{pmatrix} 4&0&0 \\ 0&-4&0 \\ 0&0&2 \end{pmatrix}$
 </ol>
 
 <li> What is the inverse of a diagonal matrix, $\bo{D}=diag\{\sigma_{1},\sigma_{2},
 \dots,\sigma_{n}\}$?
 
-<li> Suppose you have a matrix of data, $A_{n\times p}$, containing $n$ observations on $p$ variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
-$$\boldsymbol{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.$$ Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. _Hint: This problem connects Text Exercise \@ref(exr:diagmultexer) and Example \@ref(exm:diaginverse)_. 
+<li> Suppose you have a matrix of data, $\mathbf{A}_{n\times p}$, containing $n$ observations on $p$ variables. Suppose the standard deviations of these variables are contained in a diagonal matrix
+$$\mathbf{S}= diag\{\sigma_1, \sigma_2,\dots,\sigma_p\}.$$ Give a formula for a matrix that contains the same data but with each variable divided by its standard deviation. _Hint: This problem connects Text Exercise \@ref(exr:diagmultexer) and Example \@ref(exm:diaginverse)_. 
 </ol>
 
 ## List of Key Terms
